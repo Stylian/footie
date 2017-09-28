@@ -28,5 +28,10 @@
 	    <version>10.13.1.1</version>
 	    <scope>test</scope>
 	</dependency>
+	<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.2.11.Final</version>
+	</dependency>
   </dependencies>
 </project>
