@@ -10,42 +10,24 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
+import main.java.DataAccessObject;
 import main.java.dtos.Team;
 
 public class SayHi {
 
 	@Test
-	public void test() {
+	public void testDaoCreate() throws Exception {
 		
-		SessionFactory factory;
+		try(DataAccessObject<Team> dao = new DataAccessObject<>()) {
 		
-	  try{
-	    factory = new Configuration().configure().buildSessionFactory();
-	  }catch (Throwable ex) { 
-	  	System.err.println("Failed to create sessionFactory object." + ex);
-	    throw new ExceptionInInitializerError(ex); 
-	  }
-    
-		Session session = factory.openSession();
-		Transaction tx = null;
-		Integer teamID = null;
-		
-		try{
-			tx = session.beginTransaction();
-			
 			Team team = new Team();
-			team.setName("testteam");
+			team.setName("test team 1");
 			
-			teamID = (Integer) session.save(team); // STRANGE ids !!!
-			tx.commit();
-		}catch (HibernateException e) {
-      if (tx!=null) tx.rollback();
-      e.printStackTrace(); 
-   }finally {
-      session.close(); 
-   }
+			long id = dao.create(team);
+			
+			System.out.println(id);
 		
-		System.out.println(teamID);
+		}
 		
 	}
 
