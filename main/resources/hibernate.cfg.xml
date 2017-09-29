@@ -34,6 +34,7 @@
         <property name="hbm2ddl.auto">update</property>
  
         <mapping class="main.java.dtos.Team" />
+        <mapping class="main.java.dtos.Stats" />
  
     </session-factory>
  

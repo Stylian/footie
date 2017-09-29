@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import main.java.DataAccessObject;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
@@ -18,19 +19,45 @@ public class SayHi {
 	@Test
 	public void testDaoCreate() throws Exception {
 		
-		try(DataAccessObject<Team> dao = new DataAccessObject<>()) {
+		DataAccessObject<Team> dao = new DataAccessObject<>();
 		
-			Team team = new Team();
-			team.setName("test team 1");
-			
-			long id = dao.create(team);
-			
-			System.out.println(id);
+		Team team = new Team();
+		team.setName("test team 1");
 		
-		}
+		long id = dao.create(team);
+		
+		System.out.println(id);
 		
 	}
+		
 
+	@Test
+	public void testStatsManyToOne() throws Exception {
+		
+		DataAccessObject<Team> dao = new DataAccessObject<>();
+		
+		Team team = new Team();
+		team.setName("test team 2");
+		
+		long id = dao.create(team);
+		
+		System.out.println(id);
+		
+		DataAccessObject<Stats> dao2 = new DataAccessObject<>();
+
+		Stats stats = new Stats();
+		stats.setDraws(4);
+		stats.setGoalsScored(2);
+	
+		stats.setTeam(team);
+			
+		long id2 =	dao2.create(stats);
+		
+		System.out.println(id2);
+			
+	}
+
+	
 	@Test
 	public void test2() {
 		

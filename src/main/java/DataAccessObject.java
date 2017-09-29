@@ -2,27 +2,13 @@ package main.java;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-public class DataAccessObject<T> implements AutoCloseable {
+public class DataAccessObject<T> {
 
-	private SessionFactory factory;
-	private Session session;
-	
-	public DataAccessObject() {
-	  try{
-	    factory = new Configuration().configure().buildSessionFactory();
-	    session = factory.openSession();
-	  }catch (Throwable ex) { 
-	  	System.err.println("Failed to create sessionFactory object." + ex);
-	    throw new ExceptionInInitializerError(ex); 
-	  }
-	}
-	
 	public int create(T t) {
 
+		Session session = SessionHolder.getInstance();
 		Integer id = null;
     
 		Transaction tx = null;
@@ -39,11 +25,6 @@ public class DataAccessObject<T> implements AutoCloseable {
 		
 		return id;
 		
-	}
-
-	@Override
-	public void close() throws Exception {
-		session.close();
 	}
 	
 }

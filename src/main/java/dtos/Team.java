@@ -10,12 +10,12 @@ public class Team {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "ID")
 	private int id;
-	
-	@Column(name = "name")
+
+	@Column(name = "NAME")
 	private String name;
-	
+
 	public Team() {
 	}
 

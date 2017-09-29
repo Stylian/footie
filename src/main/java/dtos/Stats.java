@@ -1,23 +1,49 @@
 package main.java.dtos;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "STATS")
 public class Stats {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
 	private int id;
+
+	@Column(name = "POINTS")
 	private int points;
+
+	@Column(name = "WINS")
 	private int wins;
+
+	@Column(name = "DRAWS")
 	private int draws;
+
+	@Column(name = "LOSSES")
 	private int losses;
+
+	@Column(name = "GOALS_SCORED")
 	private int goalsScored;
+
+	@Column(name = "GOALS_CONCEDED")
 	private int goalsConceded;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team team;
 
 	public int getMatchesPlayed() {
 		return wins + draws + losses;
 	}
-	
+
 	public int getGoalDifference() {
 		return goalsScored - goalsConceded;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -72,6 +98,14 @@ public class Stats {
 
 	public void setGoalsConceded(int goalsConceded) {
 		this.goalsConceded = goalsConceded;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 }
