@@ -4,6 +4,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import main.java.dtos.Team;
+
 public class DataAccessObject<T> {
 
 	private Session session;
@@ -31,5 +33,12 @@ public class DataAccessObject<T> {
 		return id;
 		
 	}
+	
+//	public T getById(int id) {
+//		
+//		T t = (T) session.get(Team.class, id);
+//		
+//		return t;
+//	}
 	
 }
