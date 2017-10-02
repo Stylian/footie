@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
@@ -19,7 +20,10 @@ public class SayHi {
 	@Test
 	public void testDaoCreate() throws Exception {
 		
-		DataAccessObject<Team> dao = new DataAccessObject<>();
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
 		
 		Team team = new Team();
 		team.setName("test team 1");
@@ -28,13 +32,17 @@ public class SayHi {
 		
 		System.out.println(id);
 		
+		session.close();
+		
 	}
 		
 
 	@Test
 	public void testStatsManyToOne() throws Exception {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		
-		DataAccessObject<Team> dao = new DataAccessObject<>();
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
 		
 		Team team = new Team();
 		team.setName("test team 2");
@@ -43,7 +51,7 @@ public class SayHi {
 		
 		System.out.println(id);
 		
-		DataAccessObject<Stats> dao2 = new DataAccessObject<>();
+		DataAccessObject<Stats> dao2 = new DataAccessObject<>(session);
 
 		Stats stats = new Stats();
 		stats.setDraws(4);
@@ -55,6 +63,7 @@ public class SayHi {
 		
 		System.out.println(id2);
 			
+		session.close();
 	}
 	
 	@Test

@@ -6,9 +6,14 @@ import org.hibernate.Transaction;
 
 public class DataAccessObject<T> {
 
+	private Session session;
+	
+	public DataAccessObject(Session session) {
+		this.session = session;
+	}
+	
 	public int create(T t) {
 
-		Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 		Integer id = null;
     
 		Transaction tx = null;
