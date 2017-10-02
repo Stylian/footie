@@ -8,7 +8,7 @@ public class DataAccessObject<T> {
 
 	public int create(T t) {
 
-		Session session = SessionHolder.getInstance();
+		Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 		Integer id = null;
     
 		Transaction tx = null;

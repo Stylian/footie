@@ -56,7 +56,6 @@ public class SayHi {
 		System.out.println(id2);
 			
 	}
-
 	
 	@Test
 	public void test2() {
