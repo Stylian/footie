@@ -69,10 +69,8 @@ public class SayHi {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
-		Team team = (Team) session.get(Team.class, 101);
-
-//		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-//		Team team = (Team) dao.getById(101);
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
+		Team team = (Team) dao.getById(101, Team.class);
 		
 		System.out.println(team.getName() + "  " + team.getId());
 

@@ -34,11 +34,10 @@ public class DataAccessObject<T> {
 		
 	}
 	
-//	public T getById(int id) {
-//		
-//		T t = (T) session.get(Team.class, id);
-//		
-//		return t;
-//	}
+	public T getById(int id, Class<T> clazz) {
+		
+		return (T) session.get(clazz, id);
+		
+	}
 	
 }
