@@ -17,10 +17,10 @@ public class Group {
 	@Column(name = "ID")
 	private int id;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Team> teams;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
 	public int getId() {
