@@ -10,27 +10,56 @@ import org.junit.Test;
 
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
+import main.java.dtos.Game;
+import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
 
 	@Test
-	public void testDaoCreate() throws Exception {
+	public void addGame() throws Exception {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
-		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-
-		Team team = new Team();
-		team.setName("test team 1");
-
-		long id = dao.save(team);
+		DataAccessObject<Team> teamDAO = new DataAccessObject<>(session);
+		Team team1 = (Team) teamDAO.getById(1, Team.class);
+		Team team2 = (Team) teamDAO.getById(101, Team.class);
+		
+		Result result = new Result();
+		result.setGoalsMadeByAwayTeam(1);
+		result.setGoalsMadeByHomeTeam(2);
+		
+		Game game = new Game();
+		game.setAwayTeam(team2);
+		game.setHomeTeam(team1);
+		game.setResult(result);
+		
+		DataAccessObject<Game> gameDAO = new DataAccessObject<>(session);
+		long id = gameDAO.save(game);
 
 		System.out.println(id);
 
 		session.close();
 
+	}
+	
+	@Test
+	public void testDaoCreate() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
+		
+		Team team = new Team();
+		team.setName("test team 1");
+		
+		long id = dao.save(team);
+		
+		System.out.println(id);
+		
+		session.close();
+		
 	}
 
 	@Test
@@ -149,6 +178,33 @@ public class SayHi {
 			for (Iterator iterator = stats.iterator(); iterator.hasNext();) {
 				Stats stat = (Stats) iterator.next();
 				System.out.println(stat);
+			}
+			
+			tx.commit();
+			
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		}
+		
+		session.close();
+		
+	}
+
+	@Test
+	public void test4() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			List games = session.createQuery("FROM GAME").list();
+			
+			for (Iterator iterator = games.iterator(); iterator.hasNext();) {
+				Game game = (Game) iterator.next();
+				System.out.println(game);
 			}
 			
 			tx.commit();

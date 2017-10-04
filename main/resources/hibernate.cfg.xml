@@ -35,6 +35,8 @@
  
         <mapping class="main.java.dtos.Team" />
         <mapping class="main.java.dtos.Stats" />
+        <mapping class="main.java.dtos.Result" />
+        <mapping class="main.java.dtos.Game" />
  
     </session-factory>
  
