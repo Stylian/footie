@@ -2,10 +2,25 @@ package main.java.dtos;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity(name = "GROUPS")
 public class Group {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
 	private int id;
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Team> teams;
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
 	public int getId() {
@@ -30,6 +45,11 @@ public class Group {
 
 	public void setGames(List<Game> games) {
 		this.games = games;
+	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", teams=" + teams + ", games=" + games + "]";
 	}
 
 }

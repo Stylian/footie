@@ -1,5 +1,6 @@
 package test.java;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.junit.Test;
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
+import main.java.dtos.Group;
 import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
@@ -18,10 +20,48 @@ import main.java.dtos.Team;
 public class SayHi {
 
 	@Test
-	public void addGame() throws Exception {
+	public void addGroup() throws Exception {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
+		Team t1 = new Team("Arsenal");
+		Team t2 = new Team("Chelsea");
+		Team t3 = new Team("Leeds");
+		Team t4 = new Team("Man U");
+		
+		Game game1 = new Game();
+		game1.setAwayTeam(t1);
+		game1.setHomeTeam(t2);
+
+		Game game2 = new Game();
+		game2.setAwayTeam(t3);
+		game2.setHomeTeam(t2);
+
+		Game game3 = new Game();
+		game3.setAwayTeam(t4);
+		game3.setHomeTeam(t1);
+		
+		Group group = new Group();
+		
+		group.setTeams(Arrays.asList(t1, t2, t3, t4));
+		group.setGames(Arrays.asList(game1, game2, game3));
+		
+		
+		DataAccessObject<Group> dao = new DataAccessObject<>(session);
+		long id = dao.save(group);
+
+		System.out.println(group);
+		System.out.println(id);
+
+		session.close();
+
+	}
+	
+	@Test
+	public void addGame() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
 		DataAccessObject<Team> teamDAO = new DataAccessObject<>(session);
 		Team team1 = (Team) teamDAO.getById(1, Team.class);
 		Team team2 = (Team) teamDAO.getById(101, Team.class);
@@ -37,11 +77,11 @@ public class SayHi {
 		
 		DataAccessObject<Game> gameDAO = new DataAccessObject<>(session);
 		long id = gameDAO.save(game);
-
+		
 		System.out.println(id);
-
+		
 		session.close();
-
+		
 	}
 	
 	@Test
