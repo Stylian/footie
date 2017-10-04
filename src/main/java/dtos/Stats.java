@@ -108,4 +108,10 @@ public class Stats {
 		this.team = team;
 	}
 
+	@Override
+	public String toString() {
+		return "Stats [id=" + id + ", points=" + points + ", wins=" + wins + ", draws=" + draws + ", losses=" + losses
+				+ ", goalsScored=" + goalsScored + ", goalsConceded=" + goalsConceded + ", team=" + team + "]";
+	}
+
 }

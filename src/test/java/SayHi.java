@@ -94,6 +94,20 @@ public class SayHi {
 		session.close();
 		
 	}
+	
+	@Test
+	public void testDaoDelete() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		DataAccessObject<Stats> dao = new DataAccessObject<>(session);
+		Stats stats = (Stats) dao.getById(202, Stats.class);
+		
+		dao.delete(stats);
+		
+		session.close();
+		
+	}
 
 	@Test
 	public void test2() {
@@ -120,6 +134,33 @@ public class SayHi {
 
 		session.close();
 
+	}
+	
+	@Test
+	public void test3() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			List stats = session.createQuery("FROM STATS").list();
+			
+			for (Iterator iterator = stats.iterator(); iterator.hasNext();) {
+				Stats stat = (Stats) iterator.next();
+				System.out.println(stat);
+			}
+			
+			tx.commit();
+			
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		}
+		
+		session.close();
+		
 	}
 
 }

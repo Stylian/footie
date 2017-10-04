@@ -26,7 +26,9 @@ public class DataAccessObject<T> {
 			id = (Integer) session.save(t);
 			tx.commit();
 		}catch (HibernateException e) {
-      if (tx!=null) tx.rollback();
+      if (tx!=null) {
+      	tx.rollback();
+      }
       e.printStackTrace(); 
 		}
 		
@@ -37,6 +39,31 @@ public class DataAccessObject<T> {
 	public T getById(int id, Class<T> clazz) {
 		
 		return (T) session.get(clazz, id);
+		
+	}
+
+	public void delete(int id, Class<Team> class1) {
+
+		
+		
+	}
+
+	public void delete(T t){
+	
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.delete(t);
+			
+			tx.commit();
+		}catch (HibernateException e) {
+      if (tx!=null) {
+      	tx.rollback();
+      }
+      e.printStackTrace(); 
+		}
 		
 	}
 	

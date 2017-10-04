@@ -57,4 +57,9 @@ public class Team {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Team [id=" + id + ", name=" + name + "]";
+	}
+
 }
