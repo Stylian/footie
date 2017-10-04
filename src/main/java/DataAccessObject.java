@@ -14,7 +14,7 @@ public class DataAccessObject<T> {
 		this.session = session;
 	}
 	
-	public int create(T t) {
+	public int save(T t) {
 
 		Integer id = null;
     

@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import main.java.DataAccessObject;
@@ -27,7 +25,7 @@ public class SayHi {
 		Team team = new Team();
 		team.setName("test team 1");
 
-		long id = dao.create(team);
+		long id = dao.save(team);
 
 		System.out.println(id);
 
@@ -45,7 +43,7 @@ public class SayHi {
 		Team team = new Team();
 		team.setName("test team 2");
 
-		long id = dao.create(team);
+		long id = dao.save(team);
 
 		System.out.println(id);
 
@@ -57,7 +55,7 @@ public class SayHi {
 
 		stats.setTeam(team);
 
-		long id2 = dao2.create(stats);
+		long id2 = dao2.save(stats);
 
 		System.out.println(id2);
 
@@ -65,17 +63,36 @@ public class SayHi {
 	}
 
 	@Test
-	public void getById() {
+	public void testDaoGetById() {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
 		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-		Team team = (Team) dao.getById(101, Team.class);
+		Team team = (Team) dao.getById(1, Team.class);
 		
 		System.out.println(team.getName() + "  " + team.getId());
 
 		session.close();
 
+	}
+	
+	@Test
+	public void testDaoUpdate() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
+		Team team = (Team) dao.getById(1, Team.class);
+		
+		team.setName("team 3 actually");
+		
+		long id = dao.save(team);
+
+		System.out.println(id);
+		
+		
+		session.close();
+		
 	}
 
 	@Test
