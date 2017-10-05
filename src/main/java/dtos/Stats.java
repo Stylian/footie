@@ -10,6 +10,14 @@ import javax.persistence.ManyToOne;
 @Entity(name = "STATS")
 public class Stats {
 
+	public Stats() {
+	}
+		
+	public Stats(Group group, Team team) {
+		this.group = group;
+		this.team = team;
+	}
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -35,6 +43,9 @@ public class Stats {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team team;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Group group;
 
 	public int getMatchesPlayed() {
 		return wins + draws + losses;
@@ -108,10 +119,18 @@ public class Stats {
 		this.team = team;
 	}
 
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
 	@Override
 	public String toString() {
 		return "Stats [id=" + id + ", points=" + points + ", wins=" + wins + ", draws=" + draws + ", losses=" + losses
-				+ ", goalsScored=" + goalsScored + ", goalsConceded=" + goalsConceded + ", team=" + team + "]";
+				+ ", goalsScored=" + goalsScored + ", goalsConceded=" + goalsConceded + "]";
 	}
 
 }

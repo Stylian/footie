@@ -11,7 +11,6 @@ import main.java.services.GameService;
 
 public class GameServiceTest {
 
-
 	@Test
 	public void testAddResult() throws Exception {
 

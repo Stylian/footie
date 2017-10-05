@@ -1,7 +1,9 @@
 package test.java;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.junit.Test;
@@ -10,6 +12,7 @@ import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
 import main.java.dtos.Group;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
@@ -46,6 +49,15 @@ public class SayHi {
 		
 		group.setTeams(Arrays.asList(t1, t2, t3, t4));
 		group.setGames(Arrays.asList(game1, game2, game3));
+
+		Map<Team, Stats> teamsStats = new HashMap<>();
+		
+		teamsStats.put(t1, new Stats(group, t1));
+		teamsStats.put(t2, new Stats(group, t2));
+		teamsStats.put(t3, new Stats(group, t3));
+		teamsStats.put(t4, new Stats(group, t4));
+		
+		group.setTeamsStats(teamsStats);
 		
 		
 		DataAccessObject<Group> dao = new DataAccessObject<>(session);
