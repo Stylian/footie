@@ -1,5 +1,9 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,9 +46,31 @@ public class DataAccessObject<T> {
 		
 	}
 
-	public void delete(int id, Class<Team> class1) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<T> list(String table) {
 
+		List<T> list = new ArrayList<>();
 		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			List teams = session.createQuery("FROM " + table).list();
+
+			for (Iterator iterator = teams.iterator(); iterator.hasNext();) {
+			
+				list.add( (T) iterator.next() );
+
+			}
+
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		}
+		
+		return list;
 		
 	}
 
