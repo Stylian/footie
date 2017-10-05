@@ -19,6 +19,14 @@ public class Result {
 	@Column(name = "AWAY_GOALS")
 	private int goalsMadeByAwayTeam;
 
+	public Result() {
+	}
+	
+	public Result(int goalsMadeByHomeTeam, int goalsMadeByAwayTeam) {
+		this.goalsMadeByHomeTeam = goalsMadeByHomeTeam;
+		this.goalsMadeByAwayTeam = goalsMadeByAwayTeam;
+	}
+	
 	public int getId() {
 		return id;
 	}

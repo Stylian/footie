@@ -1,20 +1,15 @@
 package test.java;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.Test;
 
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
 import main.java.dtos.Group;
-import main.java.dtos.Result;
-import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
