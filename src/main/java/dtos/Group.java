@@ -1,5 +1,6 @@
 package main.java.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,8 @@ public class Group {
 	private List<Game> games;
 
 	public Group() {
-		this.teamsStats = new HashMap<>();
+		teamsStats = new HashMap<>();
+		games = new ArrayList<>();
 	}
 	
 	public int getId() {
@@ -44,8 +46,12 @@ public class Group {
 		return games;
 	}
 
-	public void setGames(List<Game> games) {
-		this.games = games;
+	public void addGame(Game game) {
+		games.add(game);
+	}
+
+	public void addGames(List<Game> newGames) {
+		games.addAll(newGames);
 	}
 
 	public Map<Team, Stats> getTeamsStats() {
@@ -66,7 +72,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats + ", games=" + games + "]";
+		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats.size() + ", games=" + games.size() + "]";
 	}
 
 }
