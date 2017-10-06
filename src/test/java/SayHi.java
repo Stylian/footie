@@ -57,7 +57,7 @@ public class SayHi {
 		teamsStats.put(t3, new Stats(group, t3));
 		teamsStats.put(t4, new Stats(group, t4));
 		
-		group.setTeamsStats(teamsStats);
+		group.setTeamsWithStats(teamsStats);
 		
 		
 		DataAccessObject<Group> dao = new DataAccessObject<>(session);

@@ -17,12 +17,9 @@ public class Group {
 	@GeneratedValue
 	@Column(name = "ID")
 	private int id;
-//
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	private List<Team> teams;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Map<Team, Stats> teamsStats;
+	private Map<Team, Stats> teamsWithStats;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
@@ -35,14 +32,6 @@ public class Group {
 		this.id = id;
 	}
 
-//	public List<Team> getTeams() {
-//		return teams;
-//	}
-//
-//	public void setTeams(List<Team> teams) {
-//		this.teams = teams;
-//	}
-
 	public List<Game> getGames() {
 		return games;
 	}
@@ -51,17 +40,17 @@ public class Group {
 		this.games = games;
 	}
 
-	public Map<Team, Stats> getTeamsStats() {
-		return teamsStats;
+	public Map<Team, Stats> getTeamsWithStats() {
+		return teamsWithStats;
 	}
 
-	public void setTeamsStats(Map<Team, Stats> teamsStats) {
-		this.teamsStats = teamsStats;
+	public void setTeamsWithStats(Map<Team, Stats> teamsStats) {
+		this.teamsWithStats = teamsStats;
 	}
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", teamsStats=" + teamsStats + ", games=" + games + "]";
+		return "Group [id=" + id + ", teamsStats=" + teamsWithStats + ", games=" + games + "]";
 	}
 
 }
