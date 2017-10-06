@@ -26,7 +26,7 @@ public class GroupService {
 		
 	public List<Team> getTeams(Group group, OrderingStrategy orderingStrategy) {
 		
-		Map<Team,Stats> teamsWithStats = group.getTeamsWithStats();
+		Map<Team,Stats> teamsWithStats = group.getTeamsStats();
 		
 		List<Team> teams = new ArrayList<>();
 		
@@ -55,7 +55,7 @@ public class GroupService {
 	
 	public Stats getStatsForTeam(Group group, Team team) {
 	
-		Map<Team,Stats> teamsWithStats = group.getTeamsWithStats();
+		Map<Team,Stats> teamsWithStats = group.getTeamsStats();
 		
 		return teamsWithStats.get(team);
 

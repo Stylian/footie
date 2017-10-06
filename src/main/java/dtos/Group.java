@@ -19,7 +19,7 @@ public class Group {
 	private int id;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Map<Team, Stats> teamsWithStats;
+	private Map<Team, Stats> teamsStats;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
@@ -40,17 +40,17 @@ public class Group {
 		this.games = games;
 	}
 
-	public Map<Team, Stats> getTeamsWithStats() {
-		return teamsWithStats;
+	public Map<Team, Stats> getTeamsStats() {
+		return teamsStats;
 	}
 
-	public void setTeamsWithStats(Map<Team, Stats> teamsStats) {
-		this.teamsWithStats = teamsStats;
+	public void setTeamsStats(Map<Team, Stats> teamsStats) {
+		this.teamsStats = teamsStats;
 	}
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", teamsStats=" + teamsWithStats + ", games=" + games + "]";
+		return "Group [id=" + id + ", teamsStats=" + teamsStats + ", games=" + games + "]";
 	}
 
 }

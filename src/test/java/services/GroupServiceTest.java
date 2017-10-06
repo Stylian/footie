@@ -28,7 +28,8 @@ public class GroupServiceTest {
 		
 		System.out.println("name           W   D   L   GS   GC");
 		for(Team t : teams) {
-			Stats stats = groupService.getStatsForTeam(group, t);
+//			Stats stats = groupService.getStatsForTeam(group, t);
+			Stats stats = t.getGroupStats().get(group);
 			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() 
 				+ " " + stats.getGoalsScored()  + " " + stats.getGoalsConceded());
 		}

@@ -1,9 +1,13 @@
 package main.java.dtos;
 
+import java.util.Map;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity(name = "TEAMS")
 public class Team {
@@ -16,6 +20,9 @@ public class Team {
 	@Column(name = "NAME", unique=true)
 	private String name;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Map<Group, Stats> groupStats;
+	
 	public Team() {
 	}
 
@@ -37,6 +44,14 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Map<Group, Stats> getGroupStats() {
+		return groupStats;
+	}
+
+	public void setGroupStats(Map<Group, Stats> groupStats) {
+		this.groupStats = groupStats;
 	}
 
 	@Override

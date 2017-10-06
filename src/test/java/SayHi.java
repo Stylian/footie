@@ -46,12 +46,33 @@ public class SayHi {
 
 		Map<Team, Stats> teamsStats = new HashMap<>();
 		
-		teamsStats.put(t1, new Stats(group, t1));
-		teamsStats.put(t2, new Stats(group, t2));
-		teamsStats.put(t3, new Stats(group, t3));
-		teamsStats.put(t4, new Stats(group, t4));
+		Stats s1 =  new Stats(group, t1);
+		Stats s2 =  new Stats(group, t2);
+		Stats s3 =  new Stats(group, t3);
+		Stats s4 =  new Stats(group, t4);
+
+		Map<Group, Stats> gs1 = new HashMap<>();
+		gs1.put(group, s1);
+		t1.setGroupStats(gs1);
 		
-		group.setTeamsWithStats(teamsStats);
+		Map<Group, Stats> gs2 = new HashMap<>();
+		gs2.put(group, s2);
+		t2.setGroupStats(gs2);
+		
+		Map<Group, Stats> gs3 = new HashMap<>();
+		gs3.put(group, s3);
+		t3.setGroupStats(gs3);
+		
+		Map<Group, Stats> gs4 = new HashMap<>();
+		gs4.put(group, s4);
+		t4.setGroupStats(gs4);
+		
+		teamsStats.put(t1, s1);
+		teamsStats.put(t2, s2);
+		teamsStats.put(t3, s3);
+		teamsStats.put(t4, s4);
+		
+		group.setTeamsStats(teamsStats);
 		
 		
 		DataAccessObject<Group> dao = new DataAccessObject<>(session);
