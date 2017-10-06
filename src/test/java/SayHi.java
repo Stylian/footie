@@ -16,12 +16,6 @@ import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
-
-	@Test
-	public void laa() throws Exception {
-
-		
-	}
 	
 	@Test
 	public void addGroup() throws Exception {
