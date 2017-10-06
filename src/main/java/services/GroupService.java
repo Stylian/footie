@@ -3,11 +3,13 @@ package main.java.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
 
+import main.java.DataAccessObject;
 import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
@@ -43,12 +45,25 @@ public class GroupService {
 		
 	}
 	
-	public Stats getStatsForTeam(Group group, Team team) {
-	
-		Map<Team,Stats> teamsWithStats = group.getTeamsStats();
+	public long createGroup(List<Team> teams) {
 		
-		return teamsWithStats.get(team);
+		//TODO set games
 
+		Group group = new Group();
+		
+		for (Team team : teams) {
+			
+			Stats stats =  new Stats(group, team);
+			group.addTeamStats(team, stats);
+			team.addGroupStats(group, stats);
+			
+		}
+		
+		DataAccessObject<Group> dao = new DataAccessObject<>(session);
+		long id = dao.save(group);
+		
+		return id;
+		
 	}
 	
 }

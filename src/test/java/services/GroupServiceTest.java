@@ -1,5 +1,6 @@
 package test.java.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -40,4 +41,27 @@ public class GroupServiceTest {
 		session.close();
 
 	}
+
+	@Test
+	public void testCreateGroup() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		GroupService groupService = new GroupService(session);
+		
+		List<Team> teams = new ArrayList<>();
+		
+		teams.add(new Team("Arsenal"));
+		teams.add(new Team("Leeds"));
+		teams.add(new Team("Chelsea"));
+		teams.add(new Team("Man U"));
+		
+		long id = groupService.createGroup(teams);
+		
+		System.out.println(id);
+		
+		session.close();
+		
+	}
+	
 }

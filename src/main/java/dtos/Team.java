@@ -1,5 +1,6 @@
 package main.java.dtos;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -17,16 +18,20 @@ public class Team {
 	@Column(name = "ID")
 	private int id;
 
-	@Column(name = "NAME", unique=true)
+	@Column(name = "NAME", unique = true)
 	private String name;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Map<Group, Stats> groupStats;
-	
+
 	public Team() {
+
+		groupStats = new HashMap<>();
+
 	}
 
 	public Team(String name) {
+		this();
 		this.name = name;
 	}
 
@@ -50,8 +55,8 @@ public class Team {
 		return groupStats;
 	}
 
-	public void setGroupStats(Map<Group, Stats> groupStats) {
-		this.groupStats = groupStats;
+	public void addGroupStats(Group group, Stats stats) {
+		groupStats.put(group, stats);
 	}
 
 	@Override

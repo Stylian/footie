@@ -1,5 +1,6 @@
 package main.java.dtos;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,10 @@ public class Group {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
+	public Group() {
+		this.teamsStats = new HashMap<>();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -47,8 +52,8 @@ public class Group {
 		return teamsStats;
 	}
 
-	public void setTeamsStats(Map<Team, Stats> teamsStats) {
-		this.teamsStats = teamsStats;
+	public void addTeamStats(Team team, Stats stats) {
+		teamsStats.put(team, stats);
 	}
 
 	public String getName() {
