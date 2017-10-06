@@ -2,6 +2,7 @@ package main.java.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import org.hibernate.Session;
 import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
-import main.java.tools.OrderingStrategy;
+import main.java.tools.Ordering;
 
 public class GroupService {
 	
@@ -24,7 +25,7 @@ public class GroupService {
 		return getTeams(group, null);
 	}
 		
-	public List<Team> getTeams(Group group, OrderingStrategy orderingStrategy) {
+	public List<Team> getTeams(Group group, Ordering orderingStrategy) {
 		
 		Map<Team,Stats> teamsWithStats = group.getTeamsStats();
 		
@@ -35,18 +36,7 @@ public class GroupService {
 		}
 		
 		if (orderingStrategy != null) {
-			Collections.sort(teams,
-				(Team t1, Team t2) -> {
-					
-					Stats s1 = getStatsForTeam(group, t1);
-					Stats s2 = getStatsForTeam(group, t2);
-					
-					// ? terrible ???
-					
-					return 1;
-				
-				}
-			);
+			Collections.sort(teams, orderingStrategy);
 		}
 		
 		return teams;

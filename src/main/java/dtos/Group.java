@@ -18,6 +18,9 @@ public class Group {
 	@Column(name = "ID")
 	private int id;
 
+	@Column(name = "NAME")
+	private String name;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
 
@@ -48,9 +51,17 @@ public class Group {
 		this.teamsStats = teamsStats;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", teamsStats=" + teamsStats + ", games=" + games + "]";
+		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats + ", games=" + games + "]";
 	}
 
 }

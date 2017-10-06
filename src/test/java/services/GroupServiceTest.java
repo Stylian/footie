@@ -11,30 +11,33 @@ import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.services.GroupService;
+import main.java.tools.AlphabeticalOrdering;
 
 public class GroupServiceTest {
-	
+
 	@Test
 	public void testGetTeamsInGroup() {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		
+
 		GroupService groupService = new GroupService(session);
 
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
 		Group group = (Group) groupDao.getById(1, Group.class); // to fix
-		
-		List<Team> teams = groupService.getTeams(group);
-		
+
+		List<Team> teams = groupService.getTeams(group, new AlphabeticalOrdering(group));
+
 		System.out.println("name           W   D   L   GS   GC");
-		for(Team t : teams) {
-//			Stats stats = groupService.getStatsForTeam(group, t);
+
+		for (Team t : teams) {
+
 			Stats stats = t.getGroupStats().get(group);
-			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() 
-				+ " " + stats.getGoalsScored()  + " " + stats.getGoalsConceded());
+			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() + " "
+					+ stats.getGoalsScored() + " " + stats.getGoalsConceded());
+
 		}
-		
+
 		session.close();
-		
+
 	}
 }

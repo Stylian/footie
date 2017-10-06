@@ -130,7 +130,8 @@ public class Stats {
 	@Override
 	public String toString() {
 		return "Stats [id=" + id + ", points=" + points + ", wins=" + wins + ", draws=" + draws + ", losses=" + losses
-				+ ", goalsScored=" + goalsScored + ", goalsConceded=" + goalsConceded + "]";
+				+ ", goalsScored=" + goalsScored + ", goalsConceded=" + goalsConceded + ", team=" + team + ", group=" + group
+				+ "]";
 	}
 
 }
