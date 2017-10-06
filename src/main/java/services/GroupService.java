@@ -13,6 +13,7 @@ import main.java.DataAccessObject;
 import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.tools.GameMaker;
 import main.java.tools.Ordering;
 
 public class GroupService {
@@ -46,10 +47,16 @@ public class GroupService {
 	}
 	
 	public long createGroup(List<Team> teams) {
+		return createGroup(teams, null);
+	}
+	
+	public long createGroup(List<Team> teams, GameMaker gameMaker) {
 		
-		//TODO set games
-
 		Group group = new Group();
+
+		if(gameMaker != null) {
+			group.addGames(gameMaker.createGames(teams));
+		}
 		
 		for (Team team : teams) {
 			
