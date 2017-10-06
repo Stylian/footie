@@ -17,9 +17,9 @@ public class Group {
 	@GeneratedValue
 	@Column(name = "ID")
 	private int id;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Team> teams;
+//
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	private List<Team> teams;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
@@ -35,13 +35,13 @@ public class Group {
 		this.id = id;
 	}
 
-	public List<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
-	}
+//	public List<Team> getTeams() {
+//		return teams;
+//	}
+//
+//	public void setTeams(List<Team> teams) {
+//		this.teams = teams;
+//	}
 
 	public List<Game> getGames() {
 		return games;
@@ -61,7 +61,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", teams=" + teams + ", teamsStats=" + teamsStats + ", games=" + games + "]";
+		return "Group [id=" + id + ", teamsStats=" + teamsStats + ", games=" + games + "]";
 	}
 
 }

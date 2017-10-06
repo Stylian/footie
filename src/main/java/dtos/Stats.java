@@ -12,12 +12,12 @@ public class Stats {
 
 	public Stats() {
 	}
-		
+
 	public Stats(Group group, Team team) {
 		this.group = group;
 		this.team = team;
 	}
-	
+
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -43,7 +43,7 @@ public class Stats {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team team;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Group group;
 

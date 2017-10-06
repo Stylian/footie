@@ -47,7 +47,7 @@ public class SayHi {
 		
 		Group group = new Group();
 		
-		group.setTeams(Arrays.asList(t1, t2, t3, t4));
+//		group.setTeams(Arrays.asList(t1, t2, t3, t4));
 		group.setGames(Arrays.asList(game1, game2, game3));
 
 		Map<Team, Stats> teamsStats = new HashMap<>();
