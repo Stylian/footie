@@ -41,15 +41,21 @@ public class TeamsLoaderService {
 			teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
 			DataAccessObject<Team> teamDao = new DataAccessObject<>(session);
-			for (String team : teams) {
 
-				String t = team.trim();
-				logger.info("adding " + t);
+			for (String tt : teams) {
 				
-				teamDao.save(new Team(t));
+				String team = tt.trim();
 
+				List<Team> existingRows = teamDao.listByField("TEAMS", "NAME", team);
+				
+				if(existingRows.size() == 0) {
+				
+					logger.info("adding " + team);
+					teamDao.save(new Team(team));
+
+				}
+				
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
