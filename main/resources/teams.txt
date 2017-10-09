@@ -9,3 +9,6 @@ Netherlands
 Portugal
 Poland
 Brazil
+Argentina
+Colombia
+Chile
