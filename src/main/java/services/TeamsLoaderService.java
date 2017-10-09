@@ -2,9 +2,9 @@ package main.java.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -38,7 +38,7 @@ public class TeamsLoaderService {
 
 			List<String> teams;
 
-			teams = FileUtils.readLines(file, Charsets.ISO_8859_1);
+			teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
 			DataAccessObject<Team> teamDao = new DataAccessObject<>(session);
 			for (String team : teams) {
