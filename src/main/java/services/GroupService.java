@@ -2,11 +2,10 @@ package main.java.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
@@ -17,6 +16,8 @@ import main.java.tools.GameMaker;
 import main.java.tools.Ordering;
 
 public class GroupService {
+	
+	final static Logger logger = Logger.getLogger(GroupService.class);
 	
 	private Session session;
 	
@@ -51,6 +52,7 @@ public class GroupService {
 	}
 	
 	public long createGroup(List<Team> teams, GameMaker gameMaker) {
+		logger.info("creating group...");
 		
 		Group group = new Group();
 
