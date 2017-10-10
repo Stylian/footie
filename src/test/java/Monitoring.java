@@ -11,41 +11,10 @@ import main.java.dtos.Game;
 import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.services.GroupService;
+import main.java.tools.AlphabeticalOrdering;
 
-public class SayHi {
-	
-	@Test
-	public void testDaoGetById() {
-
-		Session session = HibernateUtils.getSessionFactory().openSession();
-
-		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-		Team team = (Team) dao.getById(1, Team.class);
-		
-		System.out.println(team.getName() + "  " + team.getId());
-
-		session.close();
-
-	}
-	
-	@Test
-	public void testDaoUpdate() {
-		
-		Session session = HibernateUtils.getSessionFactory().openSession();
-		
-		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-		Team team = (Team) dao.getById(1, Team.class);
-		
-		team.setName("team 3 actually");
-		
-		long id = dao.save(team);
-
-		System.out.println(id);
-		
-		
-		session.close();
-		
-	}
+public class Monitoring {
 
 	@Test
 	public void testListTable() {
@@ -80,4 +49,30 @@ public class SayHi {
 
 	}
 
+	@Test
+	public void testGetTeamsInMasterGroup() {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		GroupService groupService = new GroupService(session);
+
+		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
+		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
+
+		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
+
+		System.out.println("name           W   D   L   GS   GC");
+
+		for (Team t : teams) {
+
+			Stats stats = t.getGroupStats().get(master);
+			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() + " "
+					+ stats.getGoalsScored() + " " + stats.getGoalsConceded());
+
+		}
+
+		session.close();
+
+	}
+	
 }

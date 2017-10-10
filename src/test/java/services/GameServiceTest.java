@@ -9,6 +9,7 @@ import main.java.dtos.Game;
 import main.java.dtos.Result;
 import main.java.services.GameService;
 
+// to remove
 public class GameServiceTest {
 
 	@Test
