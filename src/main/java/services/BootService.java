@@ -36,7 +36,7 @@ public class BootService {
 		
 	}
 
-	public void registerTeams() {
+	public void registerTeamsFromFile() {
 		
 		logger.info("loading teams from file");
 

@@ -31,8 +31,13 @@ public class SeasonService {
 		DataAccessObject<Team> dao = new DataAccessObject<>(session);
 		List<Team> teams = dao.list("TEAMS");
 		
-		GroupService groupService = new GroupService(session);
-		groupService.createGroup(group, teams);
+		TeamsService teamService = new TeamsService(session);
+
+		for(Team team : teams) {
+			
+			teamService.addTeamToGroup(group, team);
+		
+		}
 		
 	}
 	

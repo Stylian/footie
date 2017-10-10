@@ -75,4 +75,30 @@ public class Monitoring {
 
 	}
 	
+	@Test
+	public void testGetTeamsInSeason1() {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		GroupService groupService = new GroupService(session);
+		
+		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
+		Group master = groupDao.listByField("GROUPS", "NAME", "season-1").get(0);
+		
+		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
+		
+		System.out.println("name           W   D   L   GS   GC");
+		
+		for (Team t : teams) {
+			
+			Stats stats = t.getGroupStats().get(master);
+			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() + " "
+					+ stats.getGoalsScored() + " " + stats.getGoalsConceded());
+			
+		}
+		
+		session.close();
+		
+	}
+	
 }

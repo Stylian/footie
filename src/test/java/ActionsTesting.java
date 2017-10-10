@@ -27,7 +27,7 @@ public class ActionsTesting {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
 		BootService service = new BootService(session);
-		service.registerTeams();
+		service.registerTeamsFromFile();
 		
 		session.close();
 		
