@@ -46,19 +46,9 @@ public class GroupService {
 		return teams;
 		
 	}
-	
-	public long createGroup(List<Team> teams) {
-		return createGroup(teams, null);
-	}
-	
-	public long createGroup(List<Team> teams, GameMaker gameMaker) {
-		logger.info("creating group...");
-		
-		Group group = new Group();
 
-		if(gameMaker != null) {
-			group.addGames(gameMaker.createGames(teams));
-		}
+	public long createGroup(Group group, List<Team> teams) {
+		logger.info("creating group...");
 		
 		for (Team team : teams) {
 			

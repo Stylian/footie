@@ -12,8 +12,6 @@ public class TeamsService {
 
 	final static Logger logger = Logger.getLogger(TeamsService.class);
 
-	private static final String TEAMS_FILE = "main/resources/teams.txt";
-
 	private Session session;
 
 	public TeamsService(Session session) {
