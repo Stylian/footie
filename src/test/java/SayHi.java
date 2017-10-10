@@ -9,6 +9,7 @@ import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
 import main.java.dtos.Group;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class SayHi {
@@ -55,6 +56,12 @@ public class SayHi {
 		List<Team> items = dao.list("TEAMS");
 		
 		for(Team t : items)
+			System.out.println(t);
+		
+		DataAccessObject<Stats> dao8 = new DataAccessObject<>(session);
+		List<Stats> items8 = dao8.list("STATS");
+		
+		for(Stats t : items8)
 			System.out.println(t);
 		
 		DataAccessObject<Game> dao2 = new DataAccessObject<>(session);

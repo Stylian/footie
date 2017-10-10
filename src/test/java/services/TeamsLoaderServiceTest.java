@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import main.java.HibernateUtils;
-import main.java.services.TeamsLoaderService;
+import main.java.services.TeamsService;
 
 public class TeamsLoaderServiceTest {
 
@@ -13,7 +13,7 @@ public class TeamsLoaderServiceTest {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
-		TeamsLoaderService teamsLoaderService = new TeamsLoaderService(session);
+		TeamsService teamsLoaderService = new TeamsService(session);
 		teamsLoaderService.loadTeams();
 		
 		session.close();
