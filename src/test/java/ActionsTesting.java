@@ -9,7 +9,6 @@ import main.java.services.SeasonService;
 
 public class ActionsTesting {
 	
-
 	@Test
 	public void testBoot() throws Exception {
 		
@@ -17,30 +16,6 @@ public class ActionsTesting {
 		
 		BootService service = new BootService(session);
 		service.start();
-		
-		session.close();
-		
-	}
-	
-	@Test
-	public void testCreateMasterGroup() throws Exception {
-
-		Session session = HibernateUtils.getSessionFactory().openSession();
-		
-		BootService service = new BootService(session);
-		service.createMasterGroup();
-		
-		session.close();
-		
-	}
-	
-	@Test
-	public void testRegisterTeams() throws Exception {
-		
-		Session session = HibernateUtils.getSessionFactory().openSession();
-		
-		BootService service = new BootService(session);
-		service.registerTeamsFromFile();
 		
 		session.close();
 		

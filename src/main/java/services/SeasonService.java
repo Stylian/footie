@@ -1,11 +1,13 @@
 package main.java.services;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.PropertyUtils;
 import main.java.dtos.Group;
 import main.java.dtos.Team;
 
@@ -21,7 +23,12 @@ public class SeasonService {
 
 	public void createSeason() {
 		
-		int year = 1; // todo
+		Properties properties = PropertyUtils.load();
+		String strSeasonNum = properties.getProperty("season");
+
+		int year = Integer.parseInt(strSeasonNum) + 1;
+		properties.setProperty("season", Integer.toString(year));
+		PropertyUtils.save(properties);
 		
 		logger.info("creating season " + year);
 

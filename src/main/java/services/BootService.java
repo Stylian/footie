@@ -1,8 +1,6 @@
 package main.java.services;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -29,7 +27,7 @@ public class BootService {
 		this.session = session;
 	}
 	
-	public void start() throws IOException {
+	public void start() {
 
 		Properties properties = PropertyUtils.load();
 	
@@ -42,7 +40,7 @@ public class BootService {
 		
 	}
 	
-	public void createMasterGroup() {
+	private void createMasterGroup() {
 		logger.info("creating master group...");
 
 		Group group = new Group();
@@ -53,7 +51,7 @@ public class BootService {
 		
 	}
 
-	public void registerTeamsFromFile() {
+	private void registerTeamsFromFile() {
 		
 		logger.info("loading teams from file");
 
