@@ -9,6 +9,19 @@ import main.java.services.SeasonService;
 
 public class ActionsTesting {
 	
+
+	@Test
+	public void testBoot() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		BootService service = new BootService(session);
+		service.start();
+		
+		session.close();
+		
+	}
+	
 	@Test
 	public void testCreateMasterGroup() throws Exception {
 

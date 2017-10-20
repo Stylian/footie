@@ -1,15 +1,19 @@
 package main.java.services;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.PropertyUtils;
 import main.java.dtos.Group;
 import main.java.dtos.Team;
 
@@ -23,6 +27,19 @@ public class BootService {
 
 	public BootService(Session session) {
 		this.session = session;
+	}
+	
+	public void start() throws IOException {
+
+		Properties properties = PropertyUtils.load();
+	
+		if(properties.getProperty("first_boot").equals("0")) {
+			createMasterGroup();
+			registerTeamsFromFile();
+			properties.setProperty("first_boot", "1");
+			PropertyUtils.save(properties);
+		}
+		
 	}
 	
 	public void createMasterGroup() {
