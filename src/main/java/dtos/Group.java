@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity(name = "GROUPS")
 public class Group {
@@ -23,10 +24,10 @@ public class Group {
 	@Column(name = "NAME")
 	private String name;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
 	public Group() {

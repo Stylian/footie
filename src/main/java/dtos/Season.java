@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import main.java.dtos.rounds.GroupsRound;
+import main.java.dtos.rounds.PlayoffsRound;
+
 @Entity(name = "SEASON")
 public class Season {
 

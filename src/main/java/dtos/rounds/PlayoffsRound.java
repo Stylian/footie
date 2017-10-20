@@ -1,6 +1,8 @@
-package main.java.dtos;
+package main.java.dtos.rounds;
 
 import java.util.List;
+
+import main.java.dtos.PlayoffEntry;
 
 public class PlayoffsRound extends Round {
 	
