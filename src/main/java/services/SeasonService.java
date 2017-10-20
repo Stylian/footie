@@ -47,6 +47,18 @@ public class SeasonService {
 		}
 		
 	}
+		
+	public Season loadCurrentSeason() {
+		
+		Properties properties = PropertyUtils.load();
+		String strSeasonNum = properties.getProperty("season");
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(session);
+		Season season = dao.listByField("SEASONS", "YEAR", strSeasonNum).get(0);
+		
+		return season;
+		
+	}
 	
 	public void createQualsRound() {
 		
