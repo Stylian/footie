@@ -34,7 +34,8 @@ public class SeasonService {
 		logger.info("creating season " + year);
 
 		Season season = new Season();
-		season.setName("season-" + year);
+		season.setSeasonYear(year);
+		season.setName("Season " + year);
 		
 		DataAccessObject<Team> dao = new DataAccessObject<>(session);
 		List<Team> teams = dao.list("TEAMS");
@@ -55,7 +56,7 @@ public class SeasonService {
 		String strSeasonNum = properties.getProperty("season");
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
-		Season season = dao.listByField("SEASONS", "YEAR", strSeasonNum).get(0);
+		Season season = dao.listByField("SEASONS", "SEASON_YEAR", strSeasonNum).get(0);
 		
 		return season;
 		

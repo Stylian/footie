@@ -10,31 +10,18 @@ import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.PlayoffsRound;
 
 @Entity(name = "SEASONS")
-@DiscriminatorValue(value="S")
+@DiscriminatorValue(value = "S")
 public class Season extends Group {
-
-//	@Id
-//	@GeneratedValue
-//	@Column(name = "ID")
-//	private int id;
 
 	@Column(name = "SEASON_YEAR", unique = true)
 	private int seasonYear;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
-	
+
 	// temp transient
 	private transient GroupsRound groupsRound;
 	private transient PlayoffsRound playoffsRound;
-//
-//	public int getId() {
-//		return id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 
 	public int getSeasonYear() {
 		return seasonYear;
@@ -66,6 +53,11 @@ public class Season extends Group {
 
 	public void setWinner(Team winner) {
 		this.winner = winner;
+	}
+
+	@Override
+	public String toString() {
+		return "Season [seasonYear=" + seasonYear + ", winner=" + winner + "]";
 	}
 
 }

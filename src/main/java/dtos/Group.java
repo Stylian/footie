@@ -17,11 +17,8 @@ import javax.persistence.OneToMany;
 
 @Entity(name = "GROUPS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name="discriminator",
-    discriminatorType=DiscriminatorType.STRING
-)
-@DiscriminatorValue(value="G")
+@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "G")
 public class Group {
 
 	@Id
@@ -32,19 +29,19 @@ public class Group {
 	// must send to subclass for RoundGroups
 	@Column(name = "NAME")
 	private String name;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
 
 	// must send to subclass for RoundGroups
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private List<Game> games;
+	// @OneToMany(cascade = CascadeType.ALL)
+	// private List<Game> games;
 
 	public Group() {
 		teamsStats = new HashMap<>();
-//		games = new ArrayList<>();
+		// games = new ArrayList<>();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -53,17 +50,17 @@ public class Group {
 		this.id = id;
 	}
 
-//	public List<Game> getGames() {
-//		return games;
-//	}
-//
-//	public void addGame(Game game) {
-//		games.add(game);
-//	}
-//
-//	public void addGames(List<Game> newGames) {
-//		games.addAll(newGames);
-//	}
+	// public List<Game> getGames() {
+	// return games;
+	// }
+	//
+	// public void addGame(Game game) {
+	// games.add(game);
+	// }
+	//
+	// public void addGames(List<Game> newGames) {
+	// games.addAll(newGames);
+	// }
 
 	public Map<Team, Stats> getTeamsStats() {
 		return teamsStats;
