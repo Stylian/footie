@@ -21,12 +21,14 @@ public class Group {
 	@Column(name = "ID")
 	private int id;
 
+	// must send to subclass for RoundGroups
 	@Column(name = "NAME")
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
 
+	// must send to subclass for RoundGroups
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
