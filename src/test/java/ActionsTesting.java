@@ -34,19 +34,16 @@ public class ActionsTesting {
 		
 	}
 	
-	
 	@Test
-	public void testLoadCreateSeason() throws Exception {
+	public void testCreateQuals() throws Exception {
+		
 		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
 		SeasonService service = new SeasonService(session);
-		Season season = service.loadCurrentSeason();
-		
-		System.out.println(season);
+		service.createQualsRound();
 		
 		session.close();
-		
 	}
 	
 }

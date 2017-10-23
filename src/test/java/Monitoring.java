@@ -9,9 +9,11 @@ import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
 import main.java.dtos.Group;
+import main.java.dtos.Season;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.services.GroupService;
+import main.java.services.SeasonService;
 import main.java.tools.AlphabeticalOrdering;
 
 public class Monitoring {
@@ -76,26 +78,14 @@ public class Monitoring {
 	}
 	
 	@Test
-	public void testGetTeamsInSeason1() {
+	public void testLoadCreateSeason() throws Exception {
 		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
-		GroupService groupService = new GroupService(session);
+		SeasonService service = new SeasonService(session);
+		Season season = service.loadCurrentSeason();
 		
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-		Group master = groupDao.listByField("GROUPS", "NAME", "season-1").get(0);
-		
-		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
-		
-		System.out.println("name           W   D   L   GS   GC");
-		
-		for (Team t : teams) {
-			
-			Stats stats = t.getGroupStats().get(master);
-			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() + " "
-					+ stats.getGoalsScored() + " " + stats.getGoalsConceded());
-			
-		}
+		System.out.println(season);
 		
 		session.close();
 		

@@ -8,7 +8,6 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
-import main.java.dtos.Group;
 import main.java.dtos.Season;
 import main.java.dtos.Team;
 
@@ -62,9 +61,9 @@ public class SeasonService {
 		
 	}
 	
-//	public void createQualsRound() {
-//		
-//		//load team TODO
+	public void createQualsRound() {
+		
+		//load team TODO
 //		
 //		Properties properties = PropertyUtils.load();
 //		String strSeasonNum = properties.getProperty("season");
@@ -88,7 +87,7 @@ public class SeasonService {
 //			teamService.addTeamToGroup(group, team);
 //			
 //		}
-//		
-//	}
+		
+	}
 	
 }
