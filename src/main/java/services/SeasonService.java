@@ -33,8 +33,8 @@ public class SeasonService {
 		
 		logger.info("creating season " + year);
 
-		Group group = new Group();
-		group.setName("season-" + year);
+		Season season = new Season();
+		season.setName("season-" + year);
 		
 		DataAccessObject<Team> dao = new DataAccessObject<>(session);
 		List<Team> teams = dao.list("TEAMS");
@@ -43,7 +43,7 @@ public class SeasonService {
 
 		for(Team team : teams) {
 			
-			teamService.addTeamToGroup(group, team);
+			teamService.addTeamToGroup(season, team);
 		
 		}
 		

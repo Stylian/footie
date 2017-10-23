@@ -2,23 +2,23 @@ package main.java.dtos;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.PlayoffsRound;
 
-@Entity(name = "SEASON")
-public class Season {
+@Entity(name = "SEASONS")
+@DiscriminatorValue(value="S")
+public class Season extends Group {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private int id;
+//	@Id
+//	@GeneratedValue
+//	@Column(name = "ID")
+//	private int id;
 
-	@Column(name = "YEAR", unique = true)
+	@Column(name = "SEASON_YEAR", unique = true)
 	private int seasonYear;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -27,14 +27,14 @@ public class Season {
 	// temp transient
 	private transient GroupsRound groupsRound;
 	private transient PlayoffsRound playoffsRound;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+//
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 
 	public int getSeasonYear() {
 		return seasonYear;

@@ -1,19 +1,27 @@
 package main.java.dtos;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity(name = "GROUPS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="discriminator",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="G")
 public class Group {
 
 	@Id
@@ -29,12 +37,12 @@ public class Group {
 	private Map<Team, Stats> teamsStats;
 
 	// must send to subclass for RoundGroups
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Game> games;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Game> games;
 
 	public Group() {
 		teamsStats = new HashMap<>();
-		games = new ArrayList<>();
+//		games = new ArrayList<>();
 	}
 	
 	public int getId() {
@@ -45,17 +53,17 @@ public class Group {
 		this.id = id;
 	}
 
-	public List<Game> getGames() {
-		return games;
-	}
-
-	public void addGame(Game game) {
-		games.add(game);
-	}
-
-	public void addGames(List<Game> newGames) {
-		games.addAll(newGames);
-	}
+//	public List<Game> getGames() {
+//		return games;
+//	}
+//
+//	public void addGame(Game game) {
+//		games.add(game);
+//	}
+//
+//	public void addGames(List<Game> newGames) {
+//		games.addAll(newGames);
+//	}
 
 	public Map<Team, Stats> getTeamsStats() {
 		return teamsStats;
@@ -75,7 +83,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats.size() + ", games=" + games.size() + "]";
+		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats.size() + "";
 	}
 
 }
