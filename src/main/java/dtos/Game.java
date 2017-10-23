@@ -22,6 +22,7 @@ public class Game {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team awayTeam;
 
+	// could change to manyToOne and make the result combination to unique
 	@OneToOne(cascade = CascadeType.ALL)
 	private Result result;
 
