@@ -1,4 +1,4 @@
 #Properties File
 #Fri Oct 20 11:57:07 BST 2017
-first_boot=1
-season=2
+first_boot=0
+season=0
