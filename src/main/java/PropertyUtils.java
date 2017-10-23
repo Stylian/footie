@@ -12,7 +12,7 @@ public abstract class PropertyUtils {
 
 	final static Logger logger = Logger.getLogger(PropertyUtils.class);
 	
-	private static final String PROPERTIES_FILE = "main/resources/properties.txt";
+	private static final String PROPERTIES_FILE = "properties.txt";
 	
 	public static void save(Properties prop) {
 
