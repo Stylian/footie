@@ -17,7 +17,9 @@ public class Matchup {
 	@Column(name = "ID")
 	private int id;
 
+	// one to many right? to fix
 	@ManyToOne(cascade = CascadeType.ALL)
 	private List<Game> games;
 
+	// to add equality rules, replayability by adding games etc.
 }
