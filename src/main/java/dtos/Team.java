@@ -90,7 +90,7 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + "]";
+		return name;
 	}
 
 }
