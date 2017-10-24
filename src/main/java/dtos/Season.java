@@ -22,20 +22,18 @@ public class Season extends Group {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Round> rounds;
 
-	public Season() {
+	public Season(int year) {
+		super("Season " + year);
+		this.seasonYear = year;
+		
 		rounds = new ArrayList<>();
 	}
-	
+
 	public int getSeasonYear() {
 		return seasonYear;
-	}
-
-	public void setSeasonYear(int seasonYear) {
-		this.seasonYear = seasonYear;
 	}
 
 	public Team getWinner() {
@@ -49,7 +47,7 @@ public class Season extends Group {
 	public void addRound(Round round) {
 		rounds.add(round);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Season [seasonYear=" + seasonYear + ", winner=" + winner + "]";

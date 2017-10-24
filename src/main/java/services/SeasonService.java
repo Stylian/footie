@@ -23,58 +23,54 @@ public class SeasonService {
 	}
 
 	public void createSeason() {
-		
+
 		Properties properties = PropertyUtils.load();
 		String strSeasonNum = properties.getProperty("season");
 
 		int year = Integer.parseInt(strSeasonNum) + 1;
 		properties.setProperty("season", Integer.toString(year));
 		PropertyUtils.save(properties);
-		
+
 		logger.info("creating season " + year);
 
-		Season season = new Season();
-		season.setSeasonYear(year);
-		season.setName("Season " + year);
-		
+		Season season = new Season(year);
+
 		TeamsService teamService = new TeamsService(session);
 
 		List<Team> teams = teamService.listAll();
-		
-		for(Team team : teams) {
-			
+
+		for (Team team : teams) {
+
 			teamService.addTeamToGroup(season, team);
-		
+
 		}
-		
+
 	}
-		
+
 	public Season loadCurrentSeason() {
-		
+
 		Properties properties = PropertyUtils.load();
 		String strSeasonNum = properties.getProperty("season");
-		
+
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
 		Season season = dao.listByField("GROUPS", "SEASON_YEAR", strSeasonNum).get(0);
-		
+
 		return season;
-		
+
 	}
-	
+
 	public void createQualsRound() {
-		
+
 		TeamsService teamService = new TeamsService(session);
 		List<Team> teams = teamService.listAll();
-		
+
 		Season season = loadCurrentSeason();
 
 		QualsRound qualsRound = new QualsRound(season);
-		
-		season.addRound(qualsRound);
-		
+
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
-		
+
 	}
-	
+
 }

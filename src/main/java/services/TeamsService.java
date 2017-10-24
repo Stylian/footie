@@ -28,12 +28,6 @@ public class TeamsService {
 	public void addTeamToGroup(Group group, Team team) {
 		
 		Stats stats = new Stats(group, team);
-		stats.setGroup(group);
-		stats.setTeam(team);
-		
-		group.addTeamStats(team, stats);
-		
-		team.addGroupStats(group, stats);
 
 		DataAccessObject<Stats> statsDao = new DataAccessObject<>(session);
 		statsDao.save(stats);

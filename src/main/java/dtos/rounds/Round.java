@@ -33,6 +33,7 @@ public class Round {
 
 	public Round(Season season) {
 		this.season = season;
+		season.addRound(this);
 	}
 	
 	public int getId() {

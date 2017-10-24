@@ -16,6 +16,9 @@ public class Stats {
 	public Stats(Group group, Team team) {
 		this.group = group;
 		this.team = team;
+
+		this.group.addTeamStats(this.team, this);
+		this.team.addGroupStats(this.group, this);
 	}
 
 	@Id
@@ -115,16 +118,8 @@ public class Stats {
 		return team;
 	}
 
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
 	public Group getGroup() {
 		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
 	}
 
 	@Override

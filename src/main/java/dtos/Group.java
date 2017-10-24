@@ -28,7 +28,7 @@ public class Group {
 
 	// must send to subclass for RoundGroups
 	@Column(name = "NAME")
-	private String name;
+	protected String name;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private Map<Team, Stats> teamsStats;
@@ -37,7 +37,9 @@ public class Group {
 	// @OneToMany(cascade = CascadeType.ALL)
 	// private List<Game> games;
 
-	public Group() {
+	public Group(String name) {
+		this.name = name;
+		
 		teamsStats = new HashMap<>();
 		// games = new ArrayList<>();
 	}
@@ -72,10 +74,6 @@ public class Group {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override
