@@ -39,6 +39,8 @@
         <mapping class="main.java.dtos.Game" />
         <mapping class="main.java.dtos.Group" />
         <mapping class="main.java.dtos.Season" />
+        <mapping class="main.java.dtos.rounds.Round" />
+        <mapping class="main.java.dtos.rounds.QualsRound" />
  
     </session-factory>
  

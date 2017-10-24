@@ -1,5 +1,7 @@
 package main.java.services;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
@@ -18,6 +20,11 @@ public class TeamsService {
 		this.session = session;
 	}
 
+	public List<Team> listAll() {
+		DataAccessObject<Team> dao = new DataAccessObject<>(session);
+		return dao.list("TEAMS");
+	}
+	
 	public void addTeamToGroup(Group group, Team team) {
 		
 		Stats stats = new Stats(group, team);

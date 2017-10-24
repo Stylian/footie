@@ -3,9 +3,15 @@ package main.java.dtos.rounds;
 import java.util.List;
 
 import main.java.dtos.PlayoffEntry;
+import main.java.dtos.Season;
 
 public class PlayoffsRound extends Round {
 	
+	public PlayoffsRound(Season season) {
+		super(season);
+		// TODO Auto-generated constructor stub
+	}
+
 	private List<PlayoffEntry> entries;
 
 	public List<PlayoffEntry> getEntries() {

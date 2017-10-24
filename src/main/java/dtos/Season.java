@@ -1,13 +1,16 @@
 package main.java.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import main.java.dtos.rounds.GroupsRound;
-import main.java.dtos.rounds.PlayoffsRound;
+import main.java.dtos.rounds.Round;
 
 @Entity
 @DiscriminatorValue(value = "S")
@@ -19,32 +22,20 @@ public class Season extends Group {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
-	// temp transient
-	private transient GroupsRound groupsRound;
-	private transient PlayoffsRound playoffsRound;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Round> rounds;
+
+	public Season() {
+		rounds = new ArrayList<>();
+	}
+	
 	public int getSeasonYear() {
 		return seasonYear;
 	}
 
 	public void setSeasonYear(int seasonYear) {
 		this.seasonYear = seasonYear;
-	}
-
-	public PlayoffsRound getPlayoffsRound() {
-		return playoffsRound;
-	}
-
-	public void setPlayoffsRound(PlayoffsRound playoffsRound) {
-		this.playoffsRound = playoffsRound;
-	}
-
-	public GroupsRound getGroupsRound() {
-		return groupsRound;
-	}
-
-	public void setGroupsRound(GroupsRound groupsRound) {
-		this.groupsRound = groupsRound;
 	}
 
 	public Team getWinner() {
@@ -55,6 +46,10 @@ public class Season extends Group {
 		this.winner = winner;
 	}
 
+	public void addRound(Round round) {
+		rounds.add(round);
+	}
+	
 	@Override
 	public String toString() {
 		return "Season [seasonYear=" + seasonYear + ", winner=" + winner + "]";

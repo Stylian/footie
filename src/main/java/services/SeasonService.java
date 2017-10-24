@@ -10,6 +10,7 @@ import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.rounds.QualsRound;
 
 public class SeasonService {
 
@@ -36,11 +37,10 @@ public class SeasonService {
 		season.setSeasonYear(year);
 		season.setName("Season " + year);
 		
-		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-		List<Team> teams = dao.list("TEAMS");
-		
 		TeamsService teamService = new TeamsService(session);
 
+		List<Team> teams = teamService.listAll();
+		
 		for(Team team : teams) {
 			
 			teamService.addTeamToGroup(season, team);
@@ -63,30 +63,17 @@ public class SeasonService {
 	
 	public void createQualsRound() {
 		
-		//load team TODO
-//		
-//		Properties properties = PropertyUtils.load();
-//		String strSeasonNum = properties.getProperty("season");
-//		
-//		int year = Integer.parseInt(strSeasonNum) + 1;
-//		properties.setProperty("season", Integer.toString(year));
-//		PropertyUtils.save(properties);
-//		
-//		logger.info("creating season " + year);
-//		
-//		Group group = new Group();
-//		group.setName("season-" + year);
-//		
-//		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-//		List<Team> teams = dao.list("TEAMS");
-//		
-//		TeamsService teamService = new TeamsService(session);
-//		
-//		for(Team team : teams) {
-//			
-//			teamService.addTeamToGroup(group, team);
-//			
-//		}
+		TeamsService teamService = new TeamsService(session);
+		List<Team> teams = teamService.listAll();
+		
+		Season season = loadCurrentSeason();
+
+		QualsRound qualsRound = new QualsRound(season);
+		
+		season.addRound(qualsRound);
+		
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
+		seasonDao.save(season);
 		
 	}
 	
