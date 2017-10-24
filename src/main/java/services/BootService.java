@@ -43,8 +43,7 @@ public class BootService {
 	private void createMasterGroup() {
 		logger.info("creating master group...");
 
-		Group group = new Group();
-		group.setName("master");
+		Group group = new Group("master");
 		
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
 		groupDao.save(group);

@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.dtos.Season;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.rounds.QualsRound;
 
@@ -41,10 +42,13 @@ public class SeasonService {
 
 		for (Team team : teams) {
 
-			teamService.addTeamToGroup(season, team);
+			new Stats(season, team);
 
 		}
 
+		DataAccessObject<Season> dao = new DataAccessObject<>(session);
+		dao.save(season);
+		
 	}
 
 	public Season loadCurrentSeason() {
@@ -68,6 +72,9 @@ public class SeasonService {
 
 		QualsRound qualsRound = new QualsRound(season);
 
+		
+		
+		
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
 

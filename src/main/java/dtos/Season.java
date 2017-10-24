@@ -25,6 +25,9 @@ public class Season extends Group {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Round> rounds;
 
+	public Season() {
+	}
+	
 	public Season(int year) {
 		super("Season " + year);
 		this.seasonYear = year;

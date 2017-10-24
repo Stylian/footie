@@ -37,6 +37,9 @@ public class Group {
 	// @OneToMany(cascade = CascadeType.ALL)
 	// private List<Game> games;
 
+	public Group() {
+	}
+	
 	public Group(String name) {
 		this.name = name;
 		
