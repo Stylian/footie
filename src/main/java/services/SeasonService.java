@@ -55,7 +55,7 @@ public class SeasonService {
 		String strSeasonNum = properties.getProperty("season");
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
-		Season season = dao.listByField("SEASONS", "SEASON_YEAR", strSeasonNum).get(0);
+		Season season = dao.listByField("GROUPS", "SEASON_YEAR", strSeasonNum).get(0);
 		
 		return season;
 		

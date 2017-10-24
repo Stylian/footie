@@ -78,7 +78,7 @@ public class Monitoring {
 	}
 	
 	@Test
-	public void testLoadCreateSeason() throws Exception {
+	public void testLoadCurrentSeason() throws Exception {
 		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		

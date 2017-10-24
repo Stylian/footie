@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.PlayoffsRound;
 
-@Entity(name = "SEASONS")
+@Entity
 @DiscriminatorValue(value = "S")
 public class Season extends Group {
 
