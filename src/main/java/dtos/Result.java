@@ -65,8 +65,7 @@ public class Result {
 
 	@Override
 	public String toString() {
-		return "Result [id=" + id + ", goalsMadeByHomeTeam=" + goalsMadeByHomeTeam + ", goalsMadeByAwayTeam="
-				+ goalsMadeByAwayTeam + "]";
+		return goalsMadeByHomeTeam + " - " + goalsMadeByAwayTeam;
 	}
 
 }
