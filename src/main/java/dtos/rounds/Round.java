@@ -31,7 +31,10 @@ public class Round {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Season season;
 
-	public Round(Season season) {
+	public Round() {
+	}
+			
+	public Round(Season season, String name) {
 		this.season = season;
 		season.addRound(this);
 	}
@@ -46,10 +49,6 @@ public class Round {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Season getSeason() {

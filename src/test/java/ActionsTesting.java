@@ -37,7 +37,6 @@ public class ActionsTesting {
 	@Test
 	public void testCreateQuals() throws Exception {
 		
-		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
 		SeasonService service = new SeasonService(session);

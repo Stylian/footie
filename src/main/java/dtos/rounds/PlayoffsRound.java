@@ -7,8 +7,8 @@ import main.java.dtos.Season;
 
 public class PlayoffsRound extends Round {
 	
-	public PlayoffsRound(Season season) {
-		super(season);
+	public PlayoffsRound(Season season, String name) {
+		super(season, name);
 		// TODO Auto-generated constructor stub
 	}
 
