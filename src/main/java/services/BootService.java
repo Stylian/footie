@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.dtos.Group;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
 public class BootService {
@@ -72,8 +73,6 @@ public class BootService {
 				logger.error("master group does not exist");
 				return;
 			}
-			
-			TeamsService teamService = new TeamsService(session);
 
 			for (String tt : teams) {
 				
@@ -83,9 +82,12 @@ public class BootService {
 
 				Team team = new Team(teamName);
 				
-				teamService.addTeamToGroup(master, team);
+				new Stats(master, team);
 				
 			}
+			
+			groupDao.save(master);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

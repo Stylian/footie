@@ -1,4 +1,4 @@
 #Properties File
-#Tue Oct 24 15:38:03 BST 2017
+#Tue Oct 24 15:44:57 BST 2017
 first_boot=1
-season=2
+season=1

@@ -37,6 +37,7 @@
         <mapping class="main.java.dtos.Stats" />
         <mapping class="main.java.dtos.Result" />
         <mapping class="main.java.dtos.Game" />
+        <mapping class="main.java.dtos.Matchup" />
         <mapping class="main.java.dtos.Group" />
         <mapping class="main.java.dtos.Season" />
         <mapping class="main.java.dtos.rounds.Round" />

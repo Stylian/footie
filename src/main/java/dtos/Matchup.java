@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "MATCHUPS")
 public class Matchup {
@@ -17,8 +17,7 @@ public class Matchup {
 	@Column(name = "ID")
 	private int id;
 
-	// one to many right? to fix
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
 	// to add equality rules, replayability by adding games etc.
