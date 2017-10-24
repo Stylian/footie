@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import main.java.dtos.Matchup;
 import main.java.dtos.Season;
@@ -18,7 +18,7 @@ public class QualsRound extends Round {
 		super(season);
 	}
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	private List<Matchup> matchups;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Matchup> matchups;
 	
 }
