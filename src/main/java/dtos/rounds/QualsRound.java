@@ -37,5 +37,12 @@ public class QualsRound extends Round {
 		this.teams = teams;
 	}
 
+	public void addMatchup(Matchup matchup) {
+		this.matchups.add(matchup);
+	}
+
+	public List<Matchup> getMatchups() {
+		return matchups;
+	}
 	
 }

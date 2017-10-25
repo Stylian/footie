@@ -40,5 +40,10 @@ public class Matchup {
 		return teamAway;
 	}
 
+	@Override
+	public String toString() {
+		return "Matchup [teamHome=" + teamHome + ", teamAway=" + teamAway + "]";
+	}
+
 	// to add equality rules, replayability by adding games etc.
 }

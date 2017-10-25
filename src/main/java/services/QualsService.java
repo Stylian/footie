@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import main.java.DataAccessObject;
 import main.java.Utils;
 import main.java.dtos.Group;
+import main.java.dtos.Matchup;
 import main.java.dtos.Season;
 import main.java.dtos.Team;
 import main.java.dtos.rounds.QualsRound;
@@ -52,6 +53,18 @@ public class QualsService {
 		
 		System.out.println("strong: " + Utils.toString(strong));
 		System.out.println("weak: " + Utils.toString(weak));
+		
+		Collections.shuffle(strong);
+		Collections.shuffle(weak);
+		
+		while(strong.size() > 0) {
+			
+			roundQuals1.addMatchup(new Matchup(strong.remove(0), weak.remove(0)));
+			
+		}
+		
+		System.out.println("matchups " + Utils.toString(roundQuals1.getMatchups()));
+		// TODO create games
 		
 	}
 	
