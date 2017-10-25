@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -31,9 +33,14 @@ public class Matchup {
 	private List<Game> games;
 
 	@Column(name = "FORMAT")
+//	@Enumerated(EnumType.ORDINAL)  todo ?
 	private MatchupFormat format;
-
+	
+	@Column(name = "TIE_STRATEGY")
 	private MatchupTieStrategy tieStrategy;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team winner;
 
 	public Matchup() {
 	}
@@ -51,14 +58,14 @@ public class Matchup {
 
 		switch (format) {
 		case FORMAT_IN_OUT_SINGLE:
-			new Game(teamHome, teamAway);
-			new Game(teamAway, teamHome);
+			games.add(new Game(teamHome, teamAway));
+			games.add(new Game(teamAway, teamHome));
 			break;
 		case FORMAT_IN_OUT_DOUBLE:
-			new Game(teamHome, teamAway);
-			new Game(teamAway, teamHome);
-			new Game(teamAway, teamHome);
-			new Game(teamHome, teamAway);
+			games.add(new Game(teamHome, teamAway));
+			games.add(new Game(teamAway, teamHome));
+			games.add(new Game(teamAway, teamHome));
+			games.add(new Game(teamHome, teamAway));
 			break;
 		}
 

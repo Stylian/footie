@@ -3,11 +3,13 @@ package main.java.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Group;
 import main.java.dtos.Matchup;
@@ -28,16 +30,12 @@ public class QualsService {
 		this.session = session;
 	}
 	
-	public void setUpQualsRound1() {
-		
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+	public void setUpQualsRound(QualsRound qualsRound) {
 
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-		List<Team> teams = roundQuals1.getTeams();
+		List<Team> teams = qualsRound.getTeams();
 		
-		DataAccessObject<Group> dao = new DataAccessObject<>(session);
-		Group master = dao.listByField("GROUPS", "NAME", "master").get(0);
+		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
+		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
 		
 		Collections.sort(teams, new CoefficientsOrdering(master));
 		
@@ -61,7 +59,7 @@ public class QualsService {
 		
 		while(strong.size() > 0) {
 			
-			roundQuals1.addMatchup(new Matchup(
+			qualsRound.addMatchup(new Matchup(
 					strong.remove(0),
 					weak.remove(0),
 					MatchupFormat.FORMAT_IN_OUT_SINGLE,
@@ -70,7 +68,10 @@ public class QualsService {
 			
 		}
 		
-		System.out.println("matchups " + Utils.toString(roundQuals1.getMatchups()));
+		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
+		
+		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(qualsRound);
 		
 	}
 	

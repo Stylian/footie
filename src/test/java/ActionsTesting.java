@@ -1,10 +1,14 @@
 package test.java;
 
+import java.util.Properties;
+
 import org.hibernate.Session;
 import org.junit.Test;
 
 import main.java.HibernateUtils;
+import main.java.PropertyUtils;
 import main.java.dtos.Season;
+import main.java.dtos.rounds.QualsRound;
 import main.java.services.BootService;
 import main.java.services.QualsService;
 import main.java.services.SeasonService;
@@ -51,8 +55,18 @@ public class ActionsTesting {
 		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		
 		QualsService service = new QualsService(session);
-		service.setUpQualsRound1();
+		service.setUpQualsRound(roundQuals1);
+		
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("round", "1");
+		PropertyUtils.save(properties);
 		
 		session.close();
 	}
