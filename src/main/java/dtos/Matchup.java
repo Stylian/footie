@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import main.java.dtos.enums.MatchupFormat;
+import main.java.dtos.enums.MatchupTieStrategy;
+
 @Entity(name = "MATCHUPS")
 public class Matchup {
 
@@ -27,11 +30,26 @@ public class Matchup {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
-	public Matchup(Team home, Team away) {
+	@Column(name = "FORMAT")
+	private MatchupFormat format;
+
+	private MatchupTieStrategy tieStrategy;
+	
+	public Matchup(Team home, Team away, MatchupFormat format, MatchupTieStrategy tieStrategy) {
 		this.teamHome = home;
 		this.teamAway = away;
+		this.format = format;
+		this.tieStrategy = tieStrategy;
+		
+		createGames();
 	}
 	
+	private void createGames() {
+
+		
+		
+	}
+
 	public Team getTeamHome() {
 		return teamHome;
 	}
@@ -45,5 +63,4 @@ public class Matchup {
 		return "Matchup [teamHome=" + teamHome + ", teamAway=" + teamAway + "]";
 	}
 
-	// to add equality rules, replayability by adding games etc.
 }

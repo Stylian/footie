@@ -13,6 +13,8 @@ import main.java.dtos.Group;
 import main.java.dtos.Matchup;
 import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.enums.MatchupFormat;
+import main.java.dtos.enums.MatchupTieStrategy;
 import main.java.dtos.rounds.QualsRound;
 import main.java.tools.CoefficientsOrdering;
 
@@ -59,7 +61,12 @@ public class QualsService {
 		
 		while(strong.size() > 0) {
 			
-			roundQuals1.addMatchup(new Matchup(strong.remove(0), weak.remove(0)));
+			roundQuals1.addMatchup(new Matchup(
+					strong.remove(0),
+					weak.remove(0),
+					MatchupFormat.FORMAT_IN_OUT_SINGLE,
+					MatchupTieStrategy.REPLAY_GAMES
+				));
 			
 		}
 		
