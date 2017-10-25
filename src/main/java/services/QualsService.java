@@ -30,6 +30,21 @@ public class QualsService {
 		this.session = session;
 	}
 	
+	public void setUpQualsRound1() {
+
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		
+		setUpQualsRound(roundQuals1);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("round", "1");
+		PropertyUtils.save(properties);
+		
+	}
+	
 	public void setUpQualsRound(QualsRound qualsRound) {
 
 		List<Team> teams = qualsRound.getTeams();
@@ -39,7 +54,7 @@ public class QualsService {
 		
 		Collections.sort(teams, new CoefficientsOrdering(master));
 		
-		System.out.println("1st quals " + Utils.toString(teams));
+		System.out.println("quals " + Utils.toString(teams));
 		
 		List<Team> strong = new ArrayList<>();
 		List<Team> weak = new ArrayList<>();

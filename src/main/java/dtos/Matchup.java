@@ -1,5 +1,6 @@
 package main.java.dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,9 +44,11 @@ public class Matchup {
 	private Team winner;
 
 	public Matchup() {
+		games = new ArrayList<>();
 	}
 
 	public Matchup(Team home, Team away, MatchupFormat format, MatchupTieStrategy tieStrategy) {
+		this();
 		this.teamHome = home;
 		this.teamAway = away;
 		this.format = format;
