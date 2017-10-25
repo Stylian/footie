@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
+import main.java.Utils;
 import main.java.dtos.Season;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
@@ -65,7 +66,7 @@ public class SeasonService {
 
 	}
 
-	public void createQualsRound() {
+	public void setUpQualsRounds() {
 
 		TeamsService teamService = new TeamsService(session);
 		List<Team> teams = teamService.listAll();
@@ -87,8 +88,10 @@ public class SeasonService {
 				quals1.add(teams.remove(0));
 			}
 			
+			logger.info("seeded teams to 1st quals round: " + Utils.toString(quals1));
 			qualsRound1.setTeams(quals1);
 			
+			logger.info("seeded teams to 2nd quals round: " + Utils.toString(teams));
 			qualsRound2.setTeams(teams);
 			
 		}else { // needs more work

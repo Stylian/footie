@@ -35,12 +35,12 @@ public class ActionsTesting {
 	}
 	
 	@Test
-	public void testCreateQuals() throws Exception {
+	public void testCreateQualRounds() throws Exception {
 		
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		
 		SeasonService service = new SeasonService(session);
-		service.createQualsRound();
+		service.setUpQualsRounds();
 		
 		session.close();
 	}
