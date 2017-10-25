@@ -26,7 +26,7 @@ public class Matchup {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team teamAway;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> games;
 
@@ -34,20 +34,34 @@ public class Matchup {
 	private MatchupFormat format;
 
 	private MatchupTieStrategy tieStrategy;
-	
+
+	public Matchup() {
+	}
+
 	public Matchup(Team home, Team away, MatchupFormat format, MatchupTieStrategy tieStrategy) {
 		this.teamHome = home;
 		this.teamAway = away;
 		this.format = format;
 		this.tieStrategy = tieStrategy;
-		
+
 		createGames();
 	}
-	
+
 	private void createGames() {
 
-		
-		
+		switch (format) {
+		case FORMAT_IN_OUT_SINGLE:
+			new Game(teamHome, teamAway);
+			new Game(teamAway, teamHome);
+			break;
+		case FORMAT_IN_OUT_DOUBLE:
+			new Game(teamHome, teamAway);
+			new Game(teamAway, teamHome);
+			new Game(teamAway, teamHome);
+			new Game(teamHome, teamAway);
+			break;
+		}
+
 	}
 
 	public Team getTeamHome() {

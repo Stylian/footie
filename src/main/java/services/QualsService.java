@@ -71,7 +71,6 @@ public class QualsService {
 		}
 		
 		System.out.println("matchups " + Utils.toString(roundQuals1.getMatchups()));
-		// TODO create games
 		
 	}
 	

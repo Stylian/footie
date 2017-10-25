@@ -26,6 +26,14 @@ public class Game {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Result result;
 
+	public Game() {
+	}
+
+	public Game(Team homeTeam, Team awayTeam) {
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;
+	}
+
 	public int getId() {
 		return id;
 	}
