@@ -51,6 +51,10 @@ public class Season extends Group {
 		rounds.add(round);
 	}
 
+	public List<Round> getRounds() {
+		return rounds;
+	}
+
 	@Override
 	public String toString() {
 		return "Season [seasonYear=" + seasonYear + ", winner=" + winner + "]";

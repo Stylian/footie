@@ -6,6 +6,7 @@ import org.junit.Test;
 import main.java.HibernateUtils;
 import main.java.dtos.Season;
 import main.java.services.BootService;
+import main.java.services.QualsService;
 import main.java.services.SeasonService;
 
 public class ActionsTesting {
@@ -41,6 +42,17 @@ public class ActionsTesting {
 		
 		SeasonService service = new SeasonService(session);
 		service.setUpQualsRounds();
+		
+		session.close();
+	}
+	
+	@Test
+	public void testSetQualsRound1() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		QualsService service = new QualsService(session);
+		service.setUpQualsRound1();
 		
 		session.close();
 	}
