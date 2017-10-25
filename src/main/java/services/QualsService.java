@@ -1,11 +1,19 @@
 package main.java.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
+import main.java.DataAccessObject;
 import main.java.Utils;
+import main.java.dtos.Group;
 import main.java.dtos.Season;
+import main.java.dtos.Team;
 import main.java.dtos.rounds.QualsRound;
+import main.java.tools.CoefficientsOrdering;
 
 public class QualsService {
 
@@ -23,7 +31,27 @@ public class QualsService {
 		Season season = seasonService.loadCurrentSeason();
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-		System.out.println("1st quals " + Utils.toString(roundQuals1.getTeams()));
+		List<Team> teams = roundQuals1.getTeams();
+		
+		DataAccessObject<Group> dao = new DataAccessObject<>(session);
+		Group master = dao.listByField("GROUPS", "NAME", "master").get(0);
+		
+		Collections.sort(teams, new CoefficientsOrdering(master));
+		
+		System.out.println("1st quals " + Utils.toString(teams));
+		
+		List<Team> strong = new ArrayList<>();
+		List<Team> weak = new ArrayList<>();
+		
+		while(teams.size() > 0) {
+			
+			strong.add(teams.remove(0));
+			weak.add(teams.remove(teams.size() - 1));
+			
+		}
+		
+		System.out.println("strong: " + Utils.toString(strong));
+		System.out.println("weak: " + Utils.toString(weak));
 		
 	}
 	
