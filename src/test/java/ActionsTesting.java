@@ -2,12 +2,14 @@ package test.java;
 
 import java.util.Properties;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.hibernate.Session;
 import org.junit.Test;
 
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.dtos.Game;
+import main.java.dtos.Result;
 import main.java.services.BootService;
 import main.java.services.GameService;
 import main.java.services.QualsService;
@@ -28,6 +30,8 @@ public class ActionsTesting {
 		testCreateSeason();
 		testCreateQualRounds();
 		testSetQualsRound1();
+		fillUpRemainingGames();
+		
 	}
 
 	@Test
@@ -75,17 +79,31 @@ public class ActionsTesting {
 
 		session.close();
 	}
-	
+
 	@Test
-	public void testS() throws Exception {
-		
+	public void fillUpRemainingGames() throws Exception {
+
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		
+
 		GameService service = new GameService(session);
-		Game next  = service.getNextGame();
-		
-		System.out.println(next);
-		
+
+		while (true) {
+
+			Game next = service.getNextGame();
+
+			if (next == null) {
+				break;
+			}
+
+			next.setResult(new Result(
+					RandomUtils.nextInt(0, 5),
+					RandomUtils.nextInt(0, 5))
+				);
+
+			System.out.println(next);
+
+		}
+
 		session.close();
 	}
 
