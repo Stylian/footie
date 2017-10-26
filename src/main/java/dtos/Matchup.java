@@ -34,10 +34,11 @@ public class Matchup {
 	private List<Game> games;
 
 	@Column(name = "FORMAT")
-//	@Enumerated(EnumType.ORDINAL)  todo ?
+	@Enumerated(EnumType.ORDINAL)
 	private MatchupFormat format;
 	
 	@Column(name = "TIE_STRATEGY")
+	@Enumerated(EnumType.ORDINAL)
 	private MatchupTieStrategy tieStrategy;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
