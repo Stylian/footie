@@ -27,6 +27,7 @@ public class ActionsTesting {
 		testBoot();
 		testCreateSeason();
 		testCreateQualRounds();
+		testSetQualsRound1();
 	}
 
 	@Test
