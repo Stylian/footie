@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;
-import main.java.dtos.Season;
-import main.java.dtos.rounds.QualsRound;
+import main.java.dtos.Game;
 import main.java.services.BootService;
+import main.java.services.GameService;
 import main.java.services.QualsService;
 import main.java.services.SeasonService;
 
@@ -73,6 +73,19 @@ public class ActionsTesting {
 		QualsService service = new QualsService(session);
 		service.setUpQualsRound1();
 
+		session.close();
+	}
+	
+	@Test
+	public void testS() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		GameService service = new GameService(session);
+		Game next  = service.getNextGame();
+		
+		System.out.println(next);
+		
 		session.close();
 	}
 

@@ -1,5 +1,8 @@
 package main.java.services;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
@@ -23,6 +26,24 @@ public class GameService {
 		this.session = session;
 	}
 
+	public Game getNextGame() {
+		logger.info("retrieving next game...");
+		
+		List results = session.createQuery("from GAMES").list();
+
+		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
+
+			Game game0 = (Game) iterator.next();
+			if(game0.getResult() == null) {
+				return game0;
+			}
+
+		}
+		
+		return null;
+		
+	}
+	
 	public void addResult(Game game, Result result) {
 
 		addScoreToGame(game, result);
