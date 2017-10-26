@@ -1,0 +1,17 @@
+1. To fix seeding proccess.
+2. to add quals 2 round seeds, sets, properties, and playing games   
+
+
+
+List<Account> accounts = entityManager.createQuery(
+        "select a from Account a", Account.class)
+        
+   to fix selects
+
+ @Where( clause = "account_type = 'DEBIT'")
+    @OneToMany(mappedBy = "client")
+    private List<Account> debitAccounts = new ArrayList<>( );
+
+keep in mind where annotation
+
+
