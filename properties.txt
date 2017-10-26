@@ -1,5 +1,5 @@
 #Properties File
-#Thu Oct 26 14:53:27 BST 2017
-round=1
+#Thu Oct 26 15:34:24 BST 2017
+round_quals_1=0
 first_boot=1
 season=1

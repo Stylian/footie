@@ -30,22 +30,37 @@ public class QualsService {
 		this.session = session;
 	}
 	
-	public void setUpQualsRound1() {
+	public void seedUpQualsRound1() {
 
 		SeasonService seasonService = new SeasonService(session);
 		Season season = seasonService.loadCurrentSeason();
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
-		setUpQualsRound(roundQuals1);
+		seedQualsRound(roundQuals1);
 		
 		Properties properties = PropertyUtils.load();
-		properties.setProperty("round", "1");
+		properties.setProperty("round_quals_1", "1");
 		PropertyUtils.save(properties);
 		
 	}
 	
-	public void setUpQualsRound(QualsRound qualsRound) {
+//	public void setUpQualsRound1() {
+//		
+//		SeasonService seasonService = new SeasonService(session);
+//		Season season = seasonService.loadCurrentSeason();
+//		
+//		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+//		
+//		setUpQualsRound(roundQuals1);
+//		
+//		Properties properties = PropertyUtils.load();
+//		properties.setProperty("round_quals_1", "2");
+//		PropertyUtils.save(properties);
+//		
+//	}
+	
+	public void seedQualsRound(QualsRound qualsRound) {
 
 		List<Team> teams = qualsRound.getTeams();
 		
@@ -68,26 +83,39 @@ public class QualsService {
 		
 		System.out.println("strong: " + Utils.toString(strong));
 		System.out.println("weak: " + Utils.toString(weak));
-		
-		Collections.shuffle(strong);
-		Collections.shuffle(weak);
-		
-		while(strong.size() > 0) {
-			
-			qualsRound.addMatchup(new Matchup(
-					strong.remove(0),
-					weak.remove(0),
-					MatchupFormat.FORMAT_IN_OUT_SINGLE,
-					MatchupTieStrategy.REPLAY_GAMES
-				));
-			
-		}
-		
-		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
+
+//		qualsRound.setStrongTeams(strong);
+//		qualsRound.setWeakTeams(weak);
 		
 		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(qualsRound);
 		
 	}
+	
+//	public void setUpQualsRound(QualsRound qualsRound) {
+//	
+//		List<Team> strong = qualsRound.getStrongTeams();
+//		List<Team> weak = qualsRound.getWeakTeams();
+//		
+//		Collections.shuffle(strong);
+//		Collections.shuffle(weak);
+//		
+//		while(strong.size() > 0) {
+//			
+//			qualsRound.addMatchup(new Matchup(
+//					strong.remove(0),
+//					weak.remove(0),
+//					MatchupFormat.FORMAT_IN_OUT_SINGLE,
+//					MatchupTieStrategy.REPLAY_GAMES
+//				));
+//			
+//		}
+//		
+//		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
+//		
+//		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
+//		roundDao.save(qualsRound);
+//		
+//	}
 	
 }
