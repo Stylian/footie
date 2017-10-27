@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -23,11 +24,13 @@ public class QualsRound extends Round {
 	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Team> teams;
 	
-//	@ManyToMany(fetch=FetchType.LAZY)
-//	private List<Team> strongTeams;
-//	
-//	@ManyToMany(fetch=FetchType.LAZY)
-//	private List<Team> weakTeams;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="QUALS_STRONG_TEAMS")
+	private List<Team> strongTeams;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="QUALS_WEAK_TEAMS")
+	private List<Team> weakTeams;
 	
 	public QualsRound() {
 	}
@@ -53,20 +56,20 @@ public class QualsRound extends Round {
 		return matchups;
 	}
 
-//	public List<Team> getStrongTeams() {
-//		return strongTeams;
-//	}
-//
-//	public void setStrongTeams(List<Team> strongTeams) {
-//		this.strongTeams = strongTeams;
-//	}
-//
-//	public List<Team> getWeakTeams() {
-//		return weakTeams;
-//	}
-//
-//	public void setWeakTeams(List<Team> weakTeams) {
-//		this.weakTeams = weakTeams;
-//	}
+	public List<Team> getStrongTeams() {
+		return strongTeams;
+	}
+
+	public void setStrongTeams(List<Team> strongTeams) {
+		this.strongTeams = strongTeams;
+	}
+
+	public List<Team> getWeakTeams() {
+		return weakTeams;
+	}
+
+	public void setWeakTeams(List<Team> weakTeams) {
+		this.weakTeams = weakTeams;
+	}
 	
 }

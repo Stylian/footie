@@ -31,7 +31,8 @@ public class QualsService {
 	}
 	
 	public void seedUpQualsRound1() {
-
+		logger.info("seed quals round 1");
+		
 		SeasonService seasonService = new SeasonService(session);
 		Season season = seasonService.loadCurrentSeason();
 
@@ -45,20 +46,21 @@ public class QualsService {
 		
 	}
 	
-//	public void setUpQualsRound1() {
-//		
-//		SeasonService seasonService = new SeasonService(session);
-//		Season season = seasonService.loadCurrentSeason();
-//		
-//		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-//		
-//		setUpQualsRound(roundQuals1);
-//		
-//		Properties properties = PropertyUtils.load();
-//		properties.setProperty("round_quals_1", "2");
-//		PropertyUtils.save(properties);
-//		
-//	}
+	public void setUpQualsRound1() {
+		logger.info("set up quals round 1");
+		
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+		
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		
+		setUpQualsRound(roundQuals1);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("round_quals_1", "2");
+		PropertyUtils.save(properties);
+		
+	}
 	
 	public void seedQualsRound(QualsRound qualsRound) {
 
@@ -74,48 +76,50 @@ public class QualsService {
 		List<Team> strong = new ArrayList<>();
 		List<Team> weak = new ArrayList<>();
 		
-		while(teams.size() > 0) {
+		List<Team> teamsQueue = new ArrayList<>(teams);
+		
+		while(teamsQueue.size() > 0) {
 			
-			strong.add(teams.remove(0));
-			weak.add(teams.remove(teams.size() - 1));
+			strong.add(teamsQueue.remove(0));
+			weak.add(teamsQueue.remove(teamsQueue.size() - 1));
 			
 		}
 		
 		System.out.println("strong: " + Utils.toString(strong));
 		System.out.println("weak: " + Utils.toString(weak));
 
-//		qualsRound.setStrongTeams(strong);
-//		qualsRound.setWeakTeams(weak);
+		qualsRound.setStrongTeams(strong);
+		qualsRound.setWeakTeams(weak);
 		
 		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(qualsRound);
 		
 	}
 	
-//	public void setUpQualsRound(QualsRound qualsRound) {
-//	
-//		List<Team> strong = qualsRound.getStrongTeams();
-//		List<Team> weak = qualsRound.getWeakTeams();
-//		
-//		Collections.shuffle(strong);
-//		Collections.shuffle(weak);
-//		
-//		while(strong.size() > 0) {
-//			
-//			qualsRound.addMatchup(new Matchup(
-//					strong.remove(0),
-//					weak.remove(0),
-//					MatchupFormat.FORMAT_IN_OUT_SINGLE,
-//					MatchupTieStrategy.REPLAY_GAMES
-//				));
-//			
-//		}
-//		
-//		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
-//		
-//		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
-//		roundDao.save(qualsRound);
-//		
-//	}
+	public void setUpQualsRound(QualsRound qualsRound) {
+	
+		List<Team> strong = qualsRound.getStrongTeams();
+		List<Team> weak = qualsRound.getWeakTeams();
+		
+		Collections.shuffle(strong);
+		Collections.shuffle(weak);
+		
+		while(strong.size() > 0) {
+			
+			qualsRound.addMatchup(new Matchup(
+					strong.remove(0),
+					weak.remove(0),
+					MatchupFormat.FORMAT_IN_OUT_SINGLE,
+					MatchupTieStrategy.REPLAY_GAMES
+				));
+			
+		}
+		
+		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
+		
+		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(qualsRound);
+		
+	}
 	
 }

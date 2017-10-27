@@ -29,8 +29,8 @@ public class ActionsTesting {
 		testBoot();
 		testCreateSeason();
 		testCreateQualRounds();
-//		testSeedQualsRound1();
-//		testSetQualsRound1();
+		testSeedQualsRound1();
+		testSetQualsRound1();
 //		fillUpRemainingGames();
 		
 	}
@@ -81,16 +81,16 @@ public class ActionsTesting {
 		session.close();
 	}
 	
-//	@Test
-//	public void testSetQualsRound1() throws Exception {
-//		
-//		Session session = HibernateUtils.getSessionFactory().openSession();
-//		
-//		QualsService service = new QualsService(session);
-//		service.setUpQualsRound1();
-//		
-//		session.close();
-//	}
+	@Test
+	public void testSetQualsRound1() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		QualsService service = new QualsService(session);
+		service.setUpQualsRound1();
+		
+		session.close();
+	}
 
 	@Test
 	public void fillUpRemainingGames() throws Exception {
