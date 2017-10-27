@@ -33,8 +33,9 @@ public class ActionsTesting {
 		testSeedQualsRound1();
 		testSetQualsRound1();
 		fillUpRemainingGames();
-//		testSeedQualsRound2();
-//		testSetUpQualsRound2();
+		 testSeedQualsRound2();
+		 testSetUpQualsRound2();
+		 fillUpRemainingGames();
 	}
 
 	@Test
@@ -82,15 +83,15 @@ public class ActionsTesting {
 
 		session.close();
 	}
-	
+
 	@Test
 	public void testSetQualsRound1() throws Exception {
-		
+
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		
+
 		QualsService service = new QualsService(session);
 		service.setUpQualsRound1();
-		
+
 		session.close();
 	}
 
@@ -109,10 +110,7 @@ public class ActionsTesting {
 				break;
 			}
 
-			next.setResult(new Result(
-					RandomUtils.nextInt(0, 5),
-					RandomUtils.nextInt(0, 5))
-				);
+			service.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 5)));
 
 			System.out.println(next);
 
@@ -131,16 +129,16 @@ public class ActionsTesting {
 
 		session.close();
 	}
-	
+
 	@Test
 	public void testSetUpQualsRound2() throws Exception {
-		
+
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		
+
 		QualsService service = new QualsService(session);
 		service.setUpQualsRound2();
-		
+
 		session.close();
 	}
-	
+
 }
