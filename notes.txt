@@ -1,17 +1,11 @@
-1. To fix seeding proccess.
-2. to add quals 2 round seeds, sets, properties, and playing games   
-
+1. determining winner of matchup is hacked to home team for now
+2. games do not yet provide coefficients
+3. promotions also
+4. 2nd season plus set up season todo
 
 
 List<Account> accounts = entityManager.createQuery(
         "select a from Account a", Account.class)
         
    to fix selects
-
- @Where( clause = "account_type = 'DEBIT'")
-    @OneToMany(mappedBy = "client")
-    private List<Account> debitAccounts = new ArrayList<>( );
-
-keep in mind where annotation
-
 

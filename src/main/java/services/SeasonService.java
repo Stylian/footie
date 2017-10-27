@@ -14,6 +14,7 @@ import main.java.Utils;
 import main.java.dtos.Season;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 
 public class SeasonService {
@@ -66,7 +67,7 @@ public class SeasonService {
 
 	}
 
-	public void setUpQualsRounds() {
+	public void setUpSeason() {
 
 		TeamsService teamService = new TeamsService(session);
 		List<Team> teams = teamService.listAll();
@@ -75,6 +76,7 @@ public class SeasonService {
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
 		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
+		GroupsRound groupsRound12 = new GroupsRound(season, "Groups Round of 12");
 
 		if(season.getSeasonYear() == 1) {
 			
@@ -93,6 +95,9 @@ public class SeasonService {
 			
 			logger.info("unseeded teams to 2nd quals round: " + Utils.toString(teams));
 			qualsRound2.setTeams(teams);
+			
+			logger.info("1st season no teams go directly to groups");
+			groupsRound12.setTeams(new ArrayList<>());
 			
 		}else { // needs more work
 			

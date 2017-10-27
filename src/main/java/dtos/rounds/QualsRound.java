@@ -22,9 +22,6 @@ public class QualsRound extends Round {
 	private List<Matchup> matchups;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Team> teams;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="QUALS_STRONG_TEAMS")
 	private List<Team> strongTeams;
 	
@@ -37,15 +34,6 @@ public class QualsRound extends Round {
 			
 	public QualsRound(Season season, String name) {
 		super(season, name);
-	}
-	
-
-	public List<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
 	}
 
 	public void addMatchup(Matchup matchup) {

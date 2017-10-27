@@ -1,18 +1,23 @@
 package main.java.dtos.rounds;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import main.java.dtos.Season;
+import main.java.dtos.Team;
 
 @Entity(name = "ROUNDS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -31,14 +36,17 @@ public class Round {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Season season;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Team> teams;
+
 	public Round() {
 	}
-			
+
 	public Round(Season season, String name) {
 		this.season = season;
 		season.addRound(this);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -59,4 +67,11 @@ public class Round {
 		this.season = season;
 	}
 
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
 }
