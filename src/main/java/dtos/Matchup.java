@@ -62,25 +62,41 @@ public class Matchup {
 
 		switch (format) {
 		case FORMAT_IN_OUT_SINGLE:
-			games.add(new Game(teamHome, teamAway));
-			games.add(new Game(teamAway, teamHome));
+			games.add(new Game(teamHome, teamAway, this));
+			games.add(new Game(teamAway, teamHome, this));
 			break;
 		case FORMAT_IN_OUT_DOUBLE:
-			games.add(new Game(teamHome, teamAway));
-			games.add(new Game(teamAway, teamHome));
-			games.add(new Game(teamAway, teamHome));
-			games.add(new Game(teamHome, teamAway));
+			games.add(new Game(teamHome, teamAway, this));
+			games.add(new Game(teamAway, teamHome, this));
+			games.add(new Game(teamAway, teamHome, this));
+			games.add(new Game(teamHome, teamAway, this));
 			break;
 		}
 
 	}
 
+	public void setUpWinner() {
+
+		// todo , home always winner for now
+		
+		this.winner = teamHome;
+		
+	}
+	
 	public Team getTeamHome() {
 		return teamHome;
 	}
 
 	public Team getTeamAway() {
 		return teamAway;
+	}
+
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public Team getWinner() {
+		return winner;
 	}
 
 	@Override

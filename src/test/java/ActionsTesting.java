@@ -24,6 +24,7 @@ public class ActionsTesting {
 		properties.setProperty("first_boot", "0");
 		properties.setProperty("season", "0");
 		properties.setProperty("round_quals_1", "0");
+		properties.setProperty("round_quals_2", "0");
 		PropertyUtils.save(properties);
 
 		testBoot();
@@ -31,8 +32,9 @@ public class ActionsTesting {
 		testCreateQualRounds();
 		testSeedQualsRound1();
 		testSetQualsRound1();
-//		fillUpRemainingGames();
-		
+		fillUpRemainingGames();
+//		testSeedQualsRound2();
+//		testSetUpQualsRound2();
 	}
 
 	@Test
@@ -119,4 +121,26 @@ public class ActionsTesting {
 		session.close();
 	}
 
+	@Test
+	public void testSeedQualsRound2() throws Exception {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		QualsService service = new QualsService(session);
+		service.seedUpQualsRound2();
+
+		session.close();
+	}
+	
+	@Test
+	public void testSetUpQualsRound2() throws Exception {
+		
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		
+		QualsService service = new QualsService(session);
+		service.setUpQualsRound2();
+		
+		session.close();
+	}
+	
 }

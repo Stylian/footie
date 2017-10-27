@@ -45,6 +45,36 @@ public class QualsService {
 		PropertyUtils.save(properties);
 		
 	}
+
+	public void seedUpQualsRound2() {
+		logger.info("seed quals round 2");
+		
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+		
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+		
+		// must add winners from roundQuals1
+		List<Matchup> matchups = roundQuals1.getMatchups();
+		
+		List<Team> round1Winners = new ArrayList<>();
+		
+		for(Matchup matchup : matchups) {
+			
+			round1Winners.add(matchup.getWinner());
+			
+		}
+		
+		roundQuals2.getTeams().addAll(round1Winners);
+		
+		seedQualsRound(roundQuals2);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("round_quals_2", "1");
+		PropertyUtils.save(properties);
+		
+	}
 	
 	public void setUpQualsRound1() {
 		logger.info("set up quals round 1");
@@ -58,6 +88,23 @@ public class QualsService {
 		
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("round_quals_1", "2");
+		PropertyUtils.save(properties);
+		
+	}
+	
+	
+	public void setUpQualsRound2() {
+		logger.info("set up quals round 2");
+		
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+		
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+		
+		setUpQualsRound(roundQuals2);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("round_quals_2", "2");
 		PropertyUtils.save(properties);
 		
 	}
