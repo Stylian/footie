@@ -111,12 +111,21 @@ public class GroupsRoundService {
 		
 		// create groups and add teams
 		RobinGroup groupA = new RobinGroup("GROUP A");
-		
 		groupA.addTeam(strongTeams.get(0));
-		
+		// blah balh
+		// groupA.build?Games
+		// or in constructor all this, consturct by list
 		
 		groupsRoundOf12.addGroup(groupA);
 		
+		
+		
+		
+		
+		
+		
+		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(groupsRoundOf12);
 		
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("groups_round_12", "2");
