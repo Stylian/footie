@@ -11,9 +11,9 @@ import org.hibernate.Session;
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.Utils;
-import main.java.dtos.Season;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 
@@ -46,7 +46,7 @@ public class SeasonService {
 
 		for (Team team : teams) {
 
-			new Stats(season, team);
+			season.addTeam(team);
 
 		}
 

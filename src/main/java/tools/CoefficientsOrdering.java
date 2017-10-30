@@ -1,7 +1,7 @@
 package main.java.tools;
 
-import main.java.dtos.Group;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Group;
 
 public class CoefficientsOrdering extends Ordering {
 	

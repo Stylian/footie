@@ -16,8 +16,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Season;
 
 @Entity(name = "ROUNDS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

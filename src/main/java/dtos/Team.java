@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import main.java.dtos.groups.Group;
+
 @Entity(name = "TEAMS")
 public class Team {
 

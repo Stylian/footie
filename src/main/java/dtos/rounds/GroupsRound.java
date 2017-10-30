@@ -8,12 +8,17 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Group;
+import main.java.dtos.groups.RobinGroup;
+import main.java.dtos.groups.Season;
 
 @Entity
 @DiscriminatorValue(value = "G")
 public class GroupsRound extends Round {
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<RobinGroup> groups;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "GROUPS_STRONG_TEAMS")
@@ -56,6 +61,14 @@ public class GroupsRound extends Round {
 
 	public void setWeakTeams(List<Team> weakTeams) {
 		this.weakTeams = weakTeams;
+	}
+
+	public List<RobinGroup> getGroups() {
+		return groups;
+	}
+
+	public void addGroup(RobinGroup group) {
+		this.groups.add(group);
 	}
 
 }

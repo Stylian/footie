@@ -11,8 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import main.java.dtos.Matchup;
-import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Season;
 
 @Entity
 @DiscriminatorValue(value = "Q")

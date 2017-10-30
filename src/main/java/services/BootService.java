@@ -12,9 +12,9 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
-import main.java.dtos.Group;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Group;
 
 public class BootService {
 
@@ -82,7 +82,7 @@ public class BootService {
 
 				Team team = new Team(teamName);
 				
-				new Stats(master, team);
+				master.addTeam(team);
 				
 			}
 			

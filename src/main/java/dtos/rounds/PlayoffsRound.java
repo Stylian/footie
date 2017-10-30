@@ -3,7 +3,7 @@ package main.java.dtos.rounds;
 import java.util.List;
 
 import main.java.dtos.PlayoffEntry;
-import main.java.dtos.Season;
+import main.java.dtos.groups.Season;
 
 public class PlayoffsRound extends Round {
 	

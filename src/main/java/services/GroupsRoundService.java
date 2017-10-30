@@ -12,8 +12,9 @@ import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Matchup;
-import main.java.dtos.Season;
 import main.java.dtos.Team;
+import main.java.dtos.groups.RobinGroup;
+import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 
@@ -71,7 +72,7 @@ public class GroupsRoundService {
 			
 		}else {
 			
-			
+			// TODO
 			
 		}
 		
@@ -92,11 +93,34 @@ public class GroupsRoundService {
 		
 	}
 	
-
 	public void setUpGroupsRoundOf12() {
+		logger.info("set up groups round of 12");
+		
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+		
+		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
+		
+		List<Team> strongTeams = groupsRoundOf12.getStrongTeams();
+		List<Team> mediumTeams = groupsRoundOf12.getMediumTeams();
+		List<Team> weakTeams = groupsRoundOf12.getWeakTeams();
+		
+		Collections.shuffle(strongTeams);
+		Collections.shuffle(mediumTeams);
+		Collections.shuffle(weakTeams);
+		
+		// create groups and add teams
+		RobinGroup groupA = new RobinGroup("GROUP A");
+		
+		groupA.addTeam(strongTeams.get(0));
 		
 		
+		groupsRoundOf12.addGroup(groupA);
 		
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("groups_round_12", "2");
+		PropertyUtils.save(properties);
 		
 	}
 	

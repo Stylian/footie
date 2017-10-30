@@ -1,4 +1,4 @@
-package main.java.dtos;
+package main.java.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import main.java.dtos.Team;
 import main.java.dtos.rounds.Round;
 
 @Entity

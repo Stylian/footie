@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import main.java.dtos.groups.Group;
+
 @Entity(name = "STATS")
 public class Stats {
 
@@ -17,7 +19,6 @@ public class Stats {
 		this.group = group;
 		this.team = team;
 
-		this.group.addTeamStats(this.team, this);
 		this.team.addGroupStats(this.group, this);
 	}
 
