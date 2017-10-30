@@ -38,7 +38,7 @@ public class QualsService {
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
-		seedQualsRound(roundQuals1);
+		seedQualsRound(season, roundQuals1);
 		
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("round_quals_1", "1");
@@ -68,7 +68,7 @@ public class QualsService {
 		
 		roundQuals2.getTeams().addAll(round1Winners);
 		
-		seedQualsRound(roundQuals2);
+		seedQualsRound(season, roundQuals2);
 		
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("round_quals_2", "1");
@@ -109,16 +109,24 @@ public class QualsService {
 		
 	}
 	
-	public void seedQualsRound(QualsRound qualsRound) {
+	public void seedQualsRound(Season season, QualsRound qualsRound) {
 
 		List<Team> teams = qualsRound.getTeams();
 		
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
 		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
 		
-		Collections.sort(teams, new CoefficientsOrdering(master));
+		if(season.getSeasonYear() == 1) {
+			
+			Collections.shuffle(teams);
+			
+		}else {
 		
-		System.out.println("quals " + Utils.toString(teams));
+			Collections.sort(teams, new CoefficientsOrdering(master));
+		
+		}
+		
+		logger.info("quals participants: " + Utils.toString(teams));
 		
 		List<Team> strong = new ArrayList<>();
 		List<Team> weak = new ArrayList<>();
@@ -132,8 +140,8 @@ public class QualsService {
 			
 		}
 		
-		System.out.println("strong: " + Utils.toString(strong));
-		System.out.println("weak: " + Utils.toString(weak));
+		logger.info("strong: " + Utils.toString(strong));
+		logger.info("weak: " + Utils.toString(weak));
 
 		qualsRound.setStrongTeams(strong);
 		qualsRound.setWeakTeams(weak);
@@ -162,7 +170,7 @@ public class QualsService {
 			
 		}
 		
-		System.out.println("matchups " + Utils.toString(qualsRound.getMatchups()));
+		logger.info("matchups " + Utils.toString(qualsRound.getMatchups()));
 		
 		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(qualsRound);

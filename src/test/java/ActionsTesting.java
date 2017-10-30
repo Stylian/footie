@@ -155,4 +155,15 @@ public class ActionsTesting {
 		session.close();
 	}
 
+	@Test
+	public void testSetUpGroupsRound12() throws Exception {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		GroupsRoundService service = new GroupsRoundService(session);
+		service.setUpGroupsRoundOf12();
+
+		session.close();
+	}
+	
 }

@@ -1,6 +1,7 @@
 package main.java.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
+import main.java.Utils;
 import main.java.dtos.Matchup;
 import main.java.dtos.Season;
 import main.java.dtos.Team;
@@ -47,9 +49,39 @@ public class GroupsRoundService {
 		
 		groupsRoundOf12.getTeams().addAll(round2Winners);
 		
-		// TODO seed
+		logger.info("groups round participants: " + Utils.toString(groupsRoundOf12.getTeams()));
 		
+		List<Team> strongTeams = new ArrayList<>();
+		List<Team> mediumTeams = new ArrayList<>();
+		List<Team> weakTeams = new ArrayList<>();		
 		
+		if(season.getSeasonYear() == 1) {
+			
+			List<Team> teamsCopy = new ArrayList<>(groupsRoundOf12.getTeams());
+			
+			Collections.shuffle(teamsCopy);
+			
+			while(!teamsCopy.isEmpty()) {
+				
+				strongTeams.add(teamsCopy.remove(0));
+				mediumTeams.add(teamsCopy.remove(0));
+				weakTeams.add(teamsCopy.remove(0));
+				
+			}
+			
+		}else {
+			
+			
+			
+		}
+		
+		logger.info("strong: " + Utils.toString(strongTeams));
+		logger.info("medium: " + Utils.toString(mediumTeams));
+		logger.info("weak: " + Utils.toString(weakTeams));
+		
+		groupsRoundOf12.setStrongTeams(strongTeams);
+		groupsRoundOf12.setMediumTeams(mediumTeams);
+		groupsRoundOf12.setWeakTeams(weakTeams);
 		
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(groupsRoundOf12);
@@ -60,6 +92,12 @@ public class GroupsRoundService {
 		
 	}
 	
-	
+
+	public void setUpGroupsRoundOf12() {
+		
+		
+		
+		
+	}
 	
 }
