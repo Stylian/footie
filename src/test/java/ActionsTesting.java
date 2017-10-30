@@ -39,6 +39,7 @@ public class ActionsTesting {
 		testSetUpQualsRound2();
 		fillUpRemainingGames();
 		testSeedGroupsRound12();
+		testSetUpGroupsRound12();
 	}
 
 	@Test

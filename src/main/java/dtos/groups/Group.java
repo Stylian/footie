@@ -2,6 +2,7 @@ package main.java.dtos.groups;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import main.java.Utils;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 
@@ -67,9 +69,14 @@ public class Group {
 		
 	}
 	
+	public Set<Team> getTeams() {
+		return teamsStats.keySet();
+	}
+
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", teamsStats=" + teamsStats.size() + "";
+		return "Group [name=" + name + ", teams=" + Utils.toString(getTeams()) + "]";
 	}
+
 
 }

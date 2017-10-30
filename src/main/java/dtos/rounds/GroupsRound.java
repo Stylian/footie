@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import main.java.dtos.Team;
-import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
 
@@ -17,7 +17,7 @@ import main.java.dtos.groups.Season;
 @DiscriminatorValue(value = "G")
 public class GroupsRound extends Round {
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<RobinGroup> groups;
 
 	@ManyToMany(fetch = FetchType.LAZY)

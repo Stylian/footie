@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import main.java.dtos.Game;
@@ -14,7 +15,7 @@ import main.java.dtos.Game;
 @DiscriminatorValue(value = "R")
 public class RobinGroup extends Group {
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Game> games;
 
 	public RobinGroup() {
@@ -35,6 +36,11 @@ public class RobinGroup extends Group {
 
 	public void addGames(List<Game> newGames) {
 		games.addAll(newGames);
+	}
+	
+	public void buildGames() {
+		// TODO
+		
 	}
 
 }

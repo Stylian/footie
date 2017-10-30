@@ -34,12 +34,11 @@ public class GroupsRoundService {
 		SeasonService seasonService = new SeasonService(session);
 		Season season = seasonService.loadCurrentSeason();
 		
-		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
 		
 		// must add winners from roundQuals2
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 		List<Matchup> matchups = roundQuals2.getMatchups();
-		
 		List<Team> round2Winners = new ArrayList<>();
 		
 		for(Matchup matchup : matchups) {
@@ -112,17 +111,37 @@ public class GroupsRoundService {
 		// create groups and add teams
 		RobinGroup groupA = new RobinGroup("GROUP A");
 		groupA.addTeam(strongTeams.get(0));
-		// blah balh
-		// groupA.build?Games
-		// or in constructor all this, consturct by list
+		groupA.addTeam(mediumTeams.get(0));
+		groupA.addTeam(weakTeams.get(0));
+		groupA.buildGames();
+
+		RobinGroup groupB = new RobinGroup("GROUP B");
+		groupB.addTeam(strongTeams.get(1));
+		groupB.addTeam(mediumTeams.get(1));
+		groupB.addTeam(weakTeams.get(1));
+		groupB.buildGames();
+		
+		RobinGroup groupC = new RobinGroup("GROUP C");
+		groupC.addTeam(strongTeams.get(2));
+		groupC.addTeam(mediumTeams.get(2));
+		groupC.addTeam(weakTeams.get(2));
+		groupC.buildGames();
+		
+		RobinGroup groupD = new RobinGroup("GROUP D");
+		groupD.addTeam(strongTeams.get(3));
+		groupD.addTeam(mediumTeams.get(3));
+		groupD.addTeam(weakTeams.get(3));
+		groupD.buildGames();
 		
 		groupsRoundOf12.addGroup(groupA);
+		groupsRoundOf12.addGroup(groupB);
+		groupsRoundOf12.addGroup(groupC);
+		groupsRoundOf12.addGroup(groupD);
 		
-		
-		
-		
-		
-		
+		logger.info(groupA);
+		logger.info(groupB);
+		logger.info(groupC);
+		logger.info(groupD);
 		
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(groupsRoundOf12);
