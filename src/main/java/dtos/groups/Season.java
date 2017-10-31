@@ -18,7 +18,7 @@ import main.java.dtos.rounds.Round;
 @DiscriminatorValue(value = "S")
 public class Season extends Group {
 
-	@Column(name = "SEASON_YEAR", unique = true)
+	@Column(name = "SEASON_YEAR")
 	private int seasonYear;
 
 	@ManyToOne(cascade = CascadeType.ALL)
