@@ -98,12 +98,21 @@ public class GameService {
 		
 		
 		
-		
-		DataAccessObject<Team> teamDao = new DataAccessObject<>(session);
-		teamDao.save(team);
-		
 		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
 		game.setResult(result);
+		
+		// promotion points
+		if(game.getMatchup().getWinner() != null) {
+			
+			Team teamW = game.getMatchup().getWinner();
+			Stats masterStatsW = teamW.getStatsForGroup(master);
+			Stats seasonStatsW = teamW.getStatsForGroup(season);
+			
+			masterStatsW.addPoints(1000);
+			seasonStatsW.addPoints(1000);
+			
+		}
+		
 		gameDao.save(game);
 		
 	}

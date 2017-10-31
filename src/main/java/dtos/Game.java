@@ -25,7 +25,7 @@ public class Game {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Matchup matchup;
-	
+
 	// could change to manyToOne and make the result combination to unique
 	@OneToOne(cascade = CascadeType.ALL)
 	private Result result;
@@ -69,19 +69,23 @@ public class Game {
 
 	public void setResult(Result result) {
 		this.result = result;
-		
+
 		// if it is the last game of the matchup mark the matchup with the winner
-		for(Game game : matchup.getGames()) {
-			
-			if(game.getResult() == null) {
+		for (Game game : matchup.getGames()) {
+
+			if (game.getResult() == null) {
 				return; // unfinished matchup
 			}
-			
+
 		}
 
 		// finished matchup , so set up winner
 		matchup.setUpWinner();
-		
+
+	}
+
+	public Matchup getMatchup() {
+		return matchup;
 	}
 
 	@Override

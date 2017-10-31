@@ -13,12 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.apache.log4j.Logger;
+
 import main.java.dtos.enums.MatchupFormat;
 import main.java.dtos.enums.MatchupTieStrategy;
+import main.java.services.QualsService;
 
 @Entity(name = "MATCHUPS")
 public class Matchup {
 
+	final static Logger logger = Logger.getLogger(Matchup.class);
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -62,8 +67,8 @@ public class Matchup {
 
 		switch (format) {
 		case FORMAT_IN_OUT_SINGLE:
-			games.add(new Game(teamHome, teamAway, this));
 			games.add(new Game(teamAway, teamHome, this));
+			games.add(new Game(teamHome, teamAway, this));
 			break;
 		case FORMAT_IN_OUT_DOUBLE:
 			games.add(new Game(teamHome, teamAway, this));
@@ -77,9 +82,27 @@ public class Matchup {
 
 	public void setUpWinner() {
 
-		// todo , home always winner for now
+		int homeGoals = 0;
+		int awayGoals = 0;
+
+		awayGoals += games.get(0).getResult().getGoalsMadeByHomeTeam();
+		homeGoals += games.get(0).getResult().getGoalsMadeByAwayTeam();
+		homeGoals += games.get(1).getResult().getGoalsMadeByHomeTeam();
+		awayGoals += games.get(1).getResult().getGoalsMadeByAwayTeam();
 		
-		this.winner = teamHome;
+		logger.info("determining matchup winner with aggregate score " + homeGoals + " - " + awayGoals);
+		
+		if(homeGoals > awayGoals) {
+			this.winner = teamHome;
+			
+		}else if( homeGoals < awayGoals) {
+			this.winner = teamAway;
+
+		}else {
+			
+			this.winner = teamHome; // TODO
+		}
+			
 		
 	}
 	
