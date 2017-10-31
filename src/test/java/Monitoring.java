@@ -12,7 +12,9 @@ import main.java.dtos.Matchup;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.groups.Group;
+import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
+import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
@@ -29,6 +31,8 @@ public class Monitoring {
 		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class).getSingleResult();
 		
 		System.out.println(season);
+		System.out.println("");
+		System.out.println("");
 		
 		List<Round> rounds = season.getRounds();
 		
@@ -73,6 +77,39 @@ public class Monitoring {
 			for(Game g: m.getGames())
 				System.out.println(g);
 		}
+		
+		GroupsRound groupsRound12 = (GroupsRound) rounds.get(2);
+		
+		System.out.println(groupsRound12.getName());
+		System.out.println("----------------------");
+		System.out.println("");
+		
+		System.out.println("-----strong seeds ---------");
+		for(Team t : groupsRound12.getStrongTeams())
+			System.out.println(t);
+
+		System.out.println("-----medium seeds ---------");
+		for(Team t : groupsRound12.getMediumTeams())
+			System.out.println(t);
+		
+		System.out.println("-----weak seeds ---------");
+		for(Team t : groupsRound12.getWeakTeams())
+			System.out.println(t);
+
+		for(RobinGroup robinGroup : groupsRound12.getGroups()) {
+			System.out.println("-----------------------");
+			System.out.println(robinGroup.getName());
+			
+			for(Team t : robinGroup.getTeams())
+				System.out.println(t);
+			
+			for(Game g : robinGroup.getGames())
+				System.out.println(g);
+			
+		}
+		
+		
+		
 		
 		
 		
