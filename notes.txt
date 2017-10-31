@@ -1,3 +1,5 @@
-1. determining winner of matchup is hacked to home team for now for draws
+1. test script? gradle?
+2. rules file ?
+3. further refactoring
 4. 2nd season plus set up season todo
 5. 2nd season groups12 todo

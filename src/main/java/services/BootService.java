@@ -66,8 +66,7 @@ public class BootService {
 
 			List<String> teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
-			DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-			Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
+			Group master = ServiceUtils.getMasterGroup(session);
 			
 			if(master == null) {
 				logger.error("master group does not exist");
@@ -86,6 +85,7 @@ public class BootService {
 				
 			}
 			
+			DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
 			groupDao.save(master);
 			
 		} catch (IOException e) {

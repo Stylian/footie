@@ -53,11 +53,8 @@ public class GameService {
 		logger.info("adding game result to game " + game.getHomeTeam() + " - " + game.getAwayTeam() + "  "
 				+ result.getGoalsMadeByHomeTeam() + " - " + result.getGoalsMadeByAwayTeam());
 
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
-
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Group master = ServiceUtils.getMasterGroup(session);
+		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		// add stats to teams
 		Team team = game.getHomeTeam();

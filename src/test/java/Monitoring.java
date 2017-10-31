@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
 import main.java.dtos.Matchup;
@@ -18,7 +17,7 @@ import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
-import main.java.services.SeasonService;
+import main.java.services.ServiceUtils;
 import main.java.tools.CoefficientsOrdering;
 
 public class Monitoring {
@@ -30,11 +29,8 @@ public class Monitoring {
 
 		GroupService groupService = new GroupService(session);
 
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
-
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Group master = ServiceUtils.getMasterGroup(session);
+		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering(master));
 		List<Team> teams2 = groupService.getTeams(season, new CoefficientsOrdering(season));

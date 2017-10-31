@@ -33,8 +33,7 @@ public class QualsService {
 	public void seedUpQualsRound1() {
 		logger.info("seed quals round 1");
 		
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Season season = ServiceUtils.loadCurrentSeason(session);
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
@@ -49,8 +48,7 @@ public class QualsService {
 	public void seedUpQualsRound2() {
 		logger.info("seed quals round 2");
 		
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
@@ -79,8 +77,7 @@ public class QualsService {
 	public void setUpQualsRound1() {
 		logger.info("set up quals round 1");
 		
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
@@ -96,8 +93,7 @@ public class QualsService {
 	public void setUpQualsRound2() {
 		logger.info("set up quals round 2");
 		
-		SeasonService seasonService = new SeasonService(session);
-		Season season = seasonService.loadCurrentSeason();
+		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 		
@@ -113,8 +109,7 @@ public class QualsService {
 
 		List<Team> teams = qualsRound.getTeams();
 		
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
+		Group master = ServiceUtils.getMasterGroup(session);
 		
 		if(season.getSeasonYear() == 1) {
 			

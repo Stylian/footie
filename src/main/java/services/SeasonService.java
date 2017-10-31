@@ -55,24 +55,12 @@ public class SeasonService {
 
 	}
 
-	public Season loadCurrentSeason() {
-
-		Properties properties = PropertyUtils.load();
-		String strSeasonNum = properties.getProperty("season");
-
-		DataAccessObject<Season> dao = new DataAccessObject<>(session);
-		Season season = dao.listByField("GROUPS", "SEASON_YEAR", strSeasonNum).get(0);
-
-		return season;
-
-	}
-
 	public void setUpSeason() {
 
 		TeamsService teamService = new TeamsService(session);
 		List<Team> teams = teamService.listAll();
 
-		Season season = loadCurrentSeason();
+		Season season = ServiceUtils.loadCurrentSeason(session);
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
 		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
