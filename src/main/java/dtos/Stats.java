@@ -71,48 +71,48 @@ public class Stats {
 		return points;
 	}
 
-	public void setPoints(int points) {
-		this.points = points;
+	public void addPoints(int points) {
+		this.points += points;
 	}
 
 	public int getWins() {
 		return wins;
 	}
 
-	public void setWins(int wins) {
-		this.wins = wins;
+	public void addWins(int wins) {
+		this.wins += wins;
 	}
 
 	public int getDraws() {
 		return draws;
 	}
 
-	public void setDraws(int draws) {
-		this.draws = draws;
+	public void addDraws(int draws) {
+		this.draws += draws;
 	}
 
 	public int getLosses() {
 		return losses;
 	}
 
-	public void setLosses(int losses) {
-		this.losses = losses;
+	public void addLosses(int losses) {
+		this.losses += losses;
 	}
 
 	public int getGoalsScored() {
 		return goalsScored;
 	}
 
-	public void setGoalsScored(int goalsScored) {
-		this.goalsScored = goalsScored;
+	public void addGoalsScored(int goalsScored) {
+		this.goalsScored += goalsScored;
 	}
 
 	public int getGoalsConceded() {
 		return goalsConceded;
 	}
 
-	public void setGoalsConceded(int goalsConceded) {
-		this.goalsConceded = goalsConceded;
+	public void addGoalsConceded(int goalsConceded) {
+		this.goalsConceded += goalsConceded;
 	}
 
 	public Team getTeam() {

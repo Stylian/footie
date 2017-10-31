@@ -18,7 +18,8 @@ import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
-import main.java.tools.AlphabeticalOrdering;
+import main.java.services.SeasonService;
+import main.java.tools.CoefficientsOrdering;
 
 public class Monitoring {
 
@@ -32,9 +33,21 @@ public class Monitoring {
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
 		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
 
-		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
+		SeasonService seasonService = new SeasonService(session);
+		Season season = seasonService.loadCurrentSeason();
+		
+		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering(master));
+		List<Team> teams2 = groupService.getTeams(season, new CoefficientsOrdering(season));
 
-		System.out.println("name                     coeff W   D   L   GS   GC");
+		displayGroup(master, teams1);
+		displayGroup(season, teams2);
+
+		session.close();
+
+	}
+
+	private void displayGroup(Group master, List<Team> teams) {
+		System.out.println("name                              coeff W   D   L   GS   GC");
 
 		for (Team t : teams) {
 
@@ -48,9 +61,6 @@ public class Monitoring {
 					+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
 
 		}
-
-		session.close();
-
 	}
 	
 	@Test

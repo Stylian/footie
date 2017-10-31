@@ -11,6 +11,6 @@ public class CoefficientsOrdering extends Ordering {
 
 	@Override
 	public int compare(Team o1, Team o2) {
-		return o1.getStatsForGroup(group).getPoints() - o2.getStatsForGroup(group).getPoints();
+		return o2.getStatsForGroup(group).getPoints() - o1.getStatsForGroup(group).getPoints();
 	}
 }
