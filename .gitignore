@@ -2,4 +2,4 @@
 /target/
 /BD/
 /data/
-derby.log
+*.log
