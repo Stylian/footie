@@ -5,3 +5,4 @@
 5. 2nd season groups12 todo
 
 
+fix logging
