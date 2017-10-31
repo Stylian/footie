@@ -8,10 +8,13 @@ import org.junit.Test;
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.dtos.Game;
+import main.java.dtos.Matchup;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.groups.Group;
 import main.java.dtos.groups.Season;
+import main.java.dtos.rounds.QualsRound;
+import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
 import main.java.services.SeasonService;
 import main.java.tools.AlphabeticalOrdering;
@@ -19,33 +22,59 @@ import main.java.tools.AlphabeticalOrdering;
 public class Monitoring {
 
 	@Test
-	public void testListTable() {
+	public void displaySeason1() {
 
 		Session session = HibernateUtils.getSessionFactory().openSession();
 
-		DataAccessObject<Team> dao = new DataAccessObject<>(session);
-		List<Team> items = dao.list("TEAMS");
+		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class).getSingleResult();
 		
-		for(Team t : items)
+		System.out.println(season);
+		
+		List<Round> rounds = season.getRounds();
+		
+		QualsRound qualsRound1 = (QualsRound) rounds.get(0);
+		
+		System.out.println(qualsRound1.getName());
+		System.out.println("----------------------");
+		System.out.println("");
+		
+		System.out.println("-----strong seeds ---------");
+		for(Team t : qualsRound1.getStrongTeams())
+			System.out.println(t);
+
+		System.out.println("");
+		System.out.println("-----weak seeds ---------");
+		for(Team t : qualsRound1.getWeakTeams())
 			System.out.println(t);
 		
-		DataAccessObject<Stats> dao8 = new DataAccessObject<>(session);
-		List<Stats> items8 = dao8.list("STATS");
+		for(Matchup m : qualsRound1.getMatchups()) {
+			System.out.println("#########################");
+			for(Game g: m.getGames())
+				System.out.println(g);
+		}
 		
-		for(Stats t : items8)
+		QualsRound qualsRound2 = (QualsRound) rounds.get(1);
+		
+		System.out.println(qualsRound2.getName());
+		System.out.println("----------------------");
+		System.out.println("");
+		
+		System.out.println("-----strong seeds ---------");
+		for(Team t : qualsRound2.getStrongTeams())
+			System.out.println(t);
+
+		System.out.println("");
+		System.out.println("-----weak seeds ---------");
+		for(Team t : qualsRound2.getWeakTeams())
 			System.out.println(t);
 		
-		DataAccessObject<Game> dao2 = new DataAccessObject<>(session);
-		List<Game> items2 = dao2.list("GAMES");
+		for(Matchup m : qualsRound2.getMatchups()) {
+			System.out.println("#########################");
+			for(Game g: m.getGames())
+				System.out.println(g);
+		}
 		
-		for(Game t : items2)
-			System.out.println(t);
 		
-		DataAccessObject<Group> dao3 = new DataAccessObject<>(session);
-		List<Group> items3 = dao3.list("GROUPS");
-		
-		for(Group t : items3)
-			System.out.println(t);
 		
 		session.close();
 

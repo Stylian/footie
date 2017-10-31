@@ -156,14 +156,17 @@ public class QualsService {
 		List<Team> strong = qualsRound.getStrongTeams();
 		List<Team> weak = qualsRound.getWeakTeams();
 		
-		Collections.shuffle(strong);
-		Collections.shuffle(weak);
+		List<Team> strongQueue = new ArrayList<>(strong);
+		List<Team> weakQueue = new ArrayList<>(weak);
 		
-		while(strong.size() > 0) {
+		Collections.shuffle(strongQueue);
+		Collections.shuffle(weakQueue);
+		
+		while(strongQueue.size() > 0) {
 			
 			qualsRound.addMatchup(new Matchup(
-					strong.remove(0),
-					weak.remove(0),
+					strongQueue.remove(0),
+					weakQueue.remove(0),
 					MatchupFormat.FORMAT_IN_OUT_SINGLE,
 					MatchupTieStrategy.REPLAY_GAMES
 				));
