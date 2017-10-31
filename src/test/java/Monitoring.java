@@ -18,11 +18,41 @@ import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
 import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
-import main.java.services.SeasonService;
 import main.java.tools.AlphabeticalOrdering;
 
 public class Monitoring {
 
+	@Test
+	public void displayCoefficients() {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		GroupService groupService = new GroupService(session);
+
+		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
+		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
+
+		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
+
+		System.out.println("name                     coeff W   D   L   GS   GC");
+
+		for (Team t : teams) {
+
+			Stats stats = t.getGroupStats().get(master);
+			int padding = 30 - t.getName().length();
+			String pad = "";
+			for(int count=0; count < padding; count++)
+				pad += " ";
+			
+			System.out.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws() + "   " + stats.getLosses() + "   "
+					+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+
+		}
+
+		session.close();
+
+	}
+	
 	@Test
 	public void displaySeason1() {
 
@@ -117,44 +147,4 @@ public class Monitoring {
 
 	}
 
-	@Test
-	public void testGetTeamsInMasterGroup() {
-
-		Session session = HibernateUtils.getSessionFactory().openSession();
-
-		GroupService groupService = new GroupService(session);
-
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(session);
-		Group master = groupDao.listByField("GROUPS", "NAME", "master").get(0);
-
-		List<Team> teams = groupService.getTeams(master, new AlphabeticalOrdering(master));
-
-		System.out.println("name           W   D   L   GS   GC");
-
-		for (Team t : teams) {
-
-			Stats stats = t.getGroupStats().get(master);
-			System.out.println(t.getName() + "   " + stats.getWins() + " " + stats.getDraws() + " " + stats.getLosses() + " "
-					+ stats.getGoalsScored() + " " + stats.getGoalsConceded());
-
-		}
-
-		session.close();
-
-	}
-	
-	@Test
-	public void testLoadCurrentSeason() throws Exception {
-		
-		Session session = HibernateUtils.getSessionFactory().openSession();
-		
-		SeasonService service = new SeasonService(session);
-		Season season = service.loadCurrentSeason();
-		
-		System.out.println(season);
-		
-		session.close();
-		
-	}
-	
 }
