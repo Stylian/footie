@@ -144,10 +144,21 @@ public class GameService {
 		int homeGoals = 0;
 		int awayGoals = 0;
 
-		awayGoals += games.get(0).getResult().getGoalsMadeByHomeTeam();
-		homeGoals += games.get(0).getResult().getGoalsMadeByAwayTeam();
-		homeGoals += games.get(1).getResult().getGoalsMadeByHomeTeam();
-		awayGoals += games.get(1).getResult().getGoalsMadeByAwayTeam();
+		for(Game game : games) {
+			
+			if(game.getHomeTeam().equals(teamHome)) {
+				
+				homeGoals += game.getResult().getGoalsMadeByHomeTeam();
+				awayGoals += game.getResult().getGoalsMadeByAwayTeam();
+				
+			}else if(game.getHomeTeam().equals(teamAway)) {
+				
+				homeGoals += game.getResult().getGoalsMadeByAwayTeam();
+				awayGoals += game.getResult().getGoalsMadeByHomeTeam();
+				
+			}
+			
+		}
 		
 		logger.info("determining matchup winner with aggregate score " + homeGoals + " - " + awayGoals);
 		
@@ -158,7 +169,9 @@ public class GameService {
 			matchup.setWinner(teamAway);
 
 		}else {
-			matchup.setWinner(teamAway); // TODO
+			
+			games.add(new Game(teamAway, teamHome, matchup));
+			games.add(new Game(teamHome, teamAway, matchup));
 			
 		}
 			
