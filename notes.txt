@@ -5,8 +5,3 @@
 5. 2nd season groups12 todo
 
 
-List<Account> accounts = entityManager.createQuery(
-        "select a from Account a", Account.class)
-        
-   to fix selects
-
