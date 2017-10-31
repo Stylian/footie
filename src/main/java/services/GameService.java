@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.dtos.Game;
+import main.java.dtos.Matchup;
 import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
@@ -96,10 +97,11 @@ public class GameService {
 			
 		}
 		
-		
-		
-		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
+		// set Result for Matchup todo for groups later
 		game.setResult(result);
+		ifMatchupIsFinishedDecideTheWinner(game.getMatchup());
+
+		
 		
 		// promotion points
 		if(game.getMatchup().getWinner() != null) {
@@ -113,8 +115,53 @@ public class GameService {
 			
 		}
 		
+		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
 		gameDao.save(game);
 		
 	}
 
+	public void ifMatchupIsFinishedDecideTheWinner(Matchup matchup) {
+		
+		// if it is the last game of the matchup mark the matchup with the winner
+		for (Game game : matchup.getGames()) {
+
+			if (game.getResult() == null) {
+				return; // unfinished matchup
+			}
+
+		}
+
+		// finished matchup , so set up winner
+		setUpWinner(matchup);
+	}
+
+	private void setUpWinner(Matchup matchup) {
+
+		List<Game> games = matchup.getGames();
+		Team teamHome = matchup.getTeamHome();
+		Team teamAway = matchup.getTeamAway();
+		
+		int homeGoals = 0;
+		int awayGoals = 0;
+
+		awayGoals += games.get(0).getResult().getGoalsMadeByHomeTeam();
+		homeGoals += games.get(0).getResult().getGoalsMadeByAwayTeam();
+		homeGoals += games.get(1).getResult().getGoalsMadeByHomeTeam();
+		awayGoals += games.get(1).getResult().getGoalsMadeByAwayTeam();
+		
+		logger.info("determining matchup winner with aggregate score " + homeGoals + " - " + awayGoals);
+		
+		if(homeGoals > awayGoals) {
+			matchup.setWinner(teamHome);
+			
+		}else if( homeGoals < awayGoals) {
+			matchup.setWinner(teamAway);
+
+		}else {
+			matchup.setWinner(teamAway); // TODO
+			
+		}
+			
+	}
+	
 }

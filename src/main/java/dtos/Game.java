@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity(name = "GAMES")
@@ -69,19 +68,6 @@ public class Game {
 
 	public void setResult(Result result) {
 		this.result = result;
-
-		// if it is the last game of the matchup mark the matchup with the winner
-		for (Game game : matchup.getGames()) {
-
-			if (game.getResult() == null) {
-				return; // unfinished matchup
-			}
-
-		}
-
-		// finished matchup , so set up winner
-		matchup.setUpWinner();
-
 	}
 
 	public Matchup getMatchup() {
