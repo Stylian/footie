@@ -12,7 +12,7 @@ public abstract class PropertyUtils {
 
 	final static Logger logger = Logger.getLogger(PropertyUtils.class);
 	
-	private static final String PROPERTIES_FILE = "properties.txt";
+	private static final String PROPERTIES_FILE = "main/resources/properties.txt";
 	
 	public static void save(Properties prop) {
 
@@ -35,9 +35,7 @@ public abstract class PropertyUtils {
 			
 			Properties props = new Properties();
 			File file = new File(PROPERTIES_FILE);
-			FileInputStream fileInput;
-	
-			fileInput = new FileInputStream(file);
+			FileInputStream fileInput = new FileInputStream(file);
 	
 			props.load(fileInput);
 		

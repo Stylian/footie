@@ -1,0 +1,5 @@
+promotion_from_1st_quals_round=1000
+promotion_from_2nd_quals_round=1000
+win=1000
+draw=500
+goals_scored=100

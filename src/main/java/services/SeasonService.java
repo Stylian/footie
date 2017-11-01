@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
+import main.java.Rules;
 import main.java.Utils;
 import main.java.dtos.Game;
 import main.java.dtos.Matchup;
@@ -132,14 +133,7 @@ public class SeasonService {
 		seasonDao.save(season);
 
 	}
-
-	// TODO to move somewhere
-	int PROMOTION_POINTS_QUALS_1 = 1000;
-	int PROMOTION_POINTS_QUALS_2 = 2000;
-	int WIN_POINTS = 1000;
-	int DRAW_POINTS = 500;
-	int GOALS_POINTS = 100;
-
+	
 	public void endCurrentSeason() {
 		logger.info("closing down season, calculating coefficients");
 		// maybe set up winner later
@@ -151,7 +145,7 @@ public class SeasonService {
 		// add coeffs to quals1 winners
 		for (Matchup matchup : roundQuals1.getMatchups()) {
 
-			matchup.getWinner().getStatsForGroup(season).addPoints(PROMOTION_POINTS_QUALS_1);
+			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_1);
 
 			// average out points per matchup
 			addGamePointsForMatchup(season, matchup);
@@ -163,7 +157,7 @@ public class SeasonService {
 		// add coeffs to quals2 winners
 		for (Matchup matchup : roundQuals2.getMatchups()) {
 
-			matchup.getWinner().getStatsForGroup(season).addPoints(PROMOTION_POINTS_QUALS_2);
+			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_2);
 
 			// average out points per matchup
 			addGamePointsForMatchup(season, matchup);
@@ -178,7 +172,7 @@ public class SeasonService {
 		for (Team team : teams) {
 
 			int goalsScored = team.getStatsForGroup(season).getGoalsScored();
-			team.getStatsForGroup(season).addPoints(goalsScored * GOALS_POINTS);
+			team.getStatsForGroup(season).addPoints(goalsScored * Rules.GOALS_POINTS);
 
 		}
 
@@ -209,17 +203,17 @@ public class SeasonService {
 			if (game.getResult().homeTeamWon()) {
 
 				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
-					matchPointsHome += WIN_POINTS;
+					matchPointsHome += Rules.WIN_POINTS;
 				} else {
-					matchPointsAway += WIN_POINTS;
+					matchPointsAway += Rules.WIN_POINTS;
 				}
 
 			} else if (game.getResult().tie()) {
 
 				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
-					matchPointsHome += DRAW_POINTS;
+					matchPointsHome += Rules.DRAW_POINTS;
 				} else {
-					matchPointsAway += DRAW_POINTS;
+					matchPointsAway += Rules.DRAW_POINTS;
 				}
 
 			}
