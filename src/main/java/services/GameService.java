@@ -53,15 +53,10 @@ public class GameService {
 		logger.info("adding game result to game " + game.getHomeTeam() + " - " + game.getAwayTeam() + "  "
 				+ result.getGoalsMadeByHomeTeam() + " - " + result.getGoalsMadeByAwayTeam());
 
-		Group master = ServiceUtils.getMasterGroup(session);
 		Season season = ServiceUtils.loadCurrentSeason(session);
 		
 		// add stats to teams
 		Team team = game.getHomeTeam();
-		
-		Stats masterStats = team.getStatsForGroup(master);
-		masterStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
-		masterStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
 		
 		Stats seasonStats = team.getStatsForGroup(season);
 		seasonStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
@@ -69,17 +64,14 @@ public class GameService {
 		
 		if(result.homeTeamWon()) {
 		
-			masterStats.addWins(1);
 			seasonStats.addWins(1);
 		
 		}else if(result.awayTeamWon()) {
 			
-			masterStats.addLosses(1);
 			seasonStats.addLosses(1);
 			
 		}else if(result.tie()) {
 			
-			masterStats.addDraws(1);
 			seasonStats.addDraws(1);
 			
 		}

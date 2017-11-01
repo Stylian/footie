@@ -1,7 +1,7 @@
 #Properties File
-#Wed Nov 01 14:37:20 GMT 2017
+#Wed Nov 01 14:48:40 GMT 2017
 round_quals_2=2
-groups_round_12=2
 round_quals_1=2
+groups_round_12=2
 first_boot=1
 season=1

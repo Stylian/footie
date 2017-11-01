@@ -51,6 +51,15 @@ public class Stats {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Group group;
 
+	public void addStats(Stats stats) {
+		addPoints(stats.getPoints());
+		addWins(stats.getWins());
+		addDraws(stats.getDraws());
+		addLosses(stats.getLosses());
+		addGoalsScored(stats.getGoalsScored());
+		addGoalsConceded(stats.getGoalsConceded());
+	}
+	
 	public int getMatchesPlayed() {
 		return wins + draws + losses;
 	}
