@@ -62,55 +62,31 @@ public class GameService {
 		Stats masterStats = team.getStatsForGroup(master);
 		masterStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
 		masterStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
-		masterStats.addPoints(result.getGoalsMadeByHomeTeam() * 100);
 		
 		Stats seasonStats = team.getStatsForGroup(season);
 		seasonStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
 		seasonStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
-		seasonStats.addPoints(result.getGoalsMadeByHomeTeam() * 100);
-		
 		
 		if(result.homeTeamWon()) {
 		
 			masterStats.addWins(1);
-			masterStats.addPoints(1000);
-			
 			seasonStats.addWins(1);
-			seasonStats.addPoints(1000);
 		
 		}else if(result.awayTeamWon()) {
 			
 			masterStats.addLosses(1);
-
 			seasonStats.addLosses(1);
 			
 		}else if(result.tie()) {
 			
 			masterStats.addDraws(1);
-			masterStats.addPoints(500);
-			
 			seasonStats.addDraws(1);
-			seasonStats.addPoints(500);
 			
 		}
 		
 		// set Result for Matchup todo for groups later
 		game.setResult(result);
 		ifMatchupIsFinishedDecideTheWinner(game.getMatchup());
-
-		
-		
-		// promotion points
-		if(game.getMatchup().getWinner() != null) {
-			
-			Team teamW = game.getMatchup().getWinner();
-			Stats masterStatsW = teamW.getStatsForGroup(master);
-			Stats seasonStatsW = teamW.getStatsForGroup(season);
-			
-			masterStatsW.addPoints(1000);
-			seasonStatsW.addPoints(1000);
-			
-		}
 		
 		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
 		gameDao.save(game);

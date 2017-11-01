@@ -166,5 +166,17 @@ public class ActionsTesting {
 
 		session.close();
 	}
+
+	@Test
+	public void testEndCurrentSeason() throws Exception {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		SeasonService service = new SeasonService(session);
+		service.endCurrentSeason();
+
+		session.close();
+
+	}
 	
 }

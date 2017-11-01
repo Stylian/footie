@@ -11,8 +11,10 @@ import org.hibernate.Session;
 import main.java.DataAccessObject;
 import main.java.PropertyUtils;
 import main.java.Utils;
-import main.java.dtos.Stats;
+import main.java.dtos.Game;
+import main.java.dtos.Matchup;
 import main.java.dtos.Team;
+import main.java.dtos.groups.Group;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
@@ -40,9 +42,7 @@ public class SeasonService {
 
 		Season season = new Season(year);
 
-		TeamsService teamService = new TeamsService(session);
-
-		List<Team> teams = teamService.listAll();
+		List<Team> teams = ServiceUtils.loadTeams(session);
 
 		for (Team team : teams) {
 
@@ -57,8 +57,7 @@ public class SeasonService {
 
 	public void setUpSeason() {
 
-		TeamsService teamService = new TeamsService(session);
-		List<Team> teams = teamService.listAll();
+		List<Team> teams = ServiceUtils.loadTeams(session);
 
 		Season season = ServiceUtils.loadCurrentSeason(session);
 
@@ -133,6 +132,101 @@ public class SeasonService {
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
 
+	}
+	
+	// TODO to move somewhere
+	int PROMOTION_POINTS_QUALS_1 = 1000;
+	int PROMOTION_POINTS_QUALS_2 = 2000;
+	int WIN_POINTS = 1000;
+	int DRAW_POINTS = 500;
+	int GOALS_POINTS = 100;
+	
+	public void endCurrentSeason() {
+		logger.info("closing down season, calculating coefficients");
+		// maybe set up winner later
+		
+		Group master = ServiceUtils.getMasterGroup(session);
+		Season season = ServiceUtils.loadCurrentSeason(session);
+		
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		
+		// add coeffs to quals1 winners
+		for(Matchup matchup : roundQuals1.getMatchups()) {
+			
+			matchup.getWinner().getStatsForGroup(master).addPoints(PROMOTION_POINTS_QUALS_1);
+			matchup.getWinner().getStatsForGroup(season).addPoints(PROMOTION_POINTS_QUALS_1);
+			
+			// average out points per matchup
+			addGamePointsForMatchup(master, season, matchup);
+			
+		}
+		
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+		
+		// add coeffs to quals2 winners
+		for(Matchup matchup : roundQuals2.getMatchups()) {
+			
+			matchup.getWinner().getStatsForGroup(master).addPoints(PROMOTION_POINTS_QUALS_2);
+			matchup.getWinner().getStatsForGroup(season).addPoints(PROMOTION_POINTS_QUALS_2);
+			
+			// average out points per matchup
+			addGamePointsForMatchup(master, season, matchup);
+			
+		}
+		
+		// TODO for more rounds
+		
+		
+		// add points for goals scored
+		List<Team> teams = ServiceUtils.loadTeams(session);
+		
+		for(Team team : teams) {
+			
+			int goalsScored = team.getStatsForGroup(season).getGoalsScored();
+			team.getStatsForGroup(season).addPoints(goalsScored * GOALS_POINTS);
+			
+		}
+		
+		// hope it is enough, seems so
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
+		seasonDao.save(season);
+		
+	}
+
+	private void addGamePointsForMatchup(Group master, Season season, Matchup matchup) {
+		int matchPointsHome = 0;
+		int matchPointsAway = 0;
+		int numberOfGames = 0;
+		
+		for(Game game : matchup.getGames()) {
+		
+			numberOfGames ++;
+			
+			if(game.getResult().homeTeamWon()) {
+				
+				if(game.getHomeTeam().equals(matchup.getTeamHome())) {
+					matchPointsHome += WIN_POINTS;
+				}else {
+					matchPointsAway += WIN_POINTS;
+				}
+				
+			}else if(game.getResult().tie()) {
+				
+				if(game.getHomeTeam().equals(matchup.getTeamHome())) {
+					matchPointsHome += DRAW_POINTS;
+				}else {
+					matchPointsAway += DRAW_POINTS;
+				}
+				
+			}
+			
+		}
+		
+		matchup.getTeamHome().getStatsForGroup(master).addPoints(2 * matchPointsHome / numberOfGames);
+		matchup.getTeamHome().getStatsForGroup(season).addPoints(2 * matchPointsHome / numberOfGames);
+		
+		matchup.getTeamAway().getStatsForGroup(master).addPoints(2 * matchPointsAway / numberOfGames);
+		matchup.getTeamAway().getStatsForGroup(season).addPoints(2 * matchPointsAway / numberOfGames);
 	}
 
 }
