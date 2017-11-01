@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// not used, good to keep around for reference for now
 public class ConnectionManager {
 
 	private static Connection conn;
