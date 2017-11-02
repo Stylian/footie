@@ -40,7 +40,7 @@ public class ActionsTesting {
 		fillUpRemainingGames();
 		testSeedGroupsRound12();
 		testSetUpGroupsRound12();
-		
+		fillUpRemainingGames();
 		
 		testEndCurrentSeason();
 	}

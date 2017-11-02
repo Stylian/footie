@@ -13,6 +13,7 @@ import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Matchup;
 import main.java.dtos.Team;
+import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.RobinGroup12;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
@@ -107,25 +108,25 @@ public class GroupsRoundService {
 		Collections.shuffle(weakTeams);
 		
 		// create groups and add teams
-		RobinGroup12 groupA = new RobinGroup12("GROUP A");
+		RobinGroup groupA = new RobinGroup12("GROUP A");
 		groupA.addTeam(strongTeams.get(0));
 		groupA.addTeam(mediumTeams.get(0));
 		groupA.addTeam(weakTeams.get(0));
 		groupA.buildGames();
 
-		RobinGroup12 groupB = new RobinGroup12("GROUP B");
+		RobinGroup groupB = new RobinGroup12("GROUP B");
 		groupB.addTeam(strongTeams.get(1));
 		groupB.addTeam(mediumTeams.get(1));
 		groupB.addTeam(weakTeams.get(1));
 		groupB.buildGames();
 		
-		RobinGroup12 groupC = new RobinGroup12("GROUP C");
+		RobinGroup groupC = new RobinGroup12("GROUP C");
 		groupC.addTeam(strongTeams.get(2));
 		groupC.addTeam(mediumTeams.get(2));
 		groupC.addTeam(weakTeams.get(2));
 		groupC.buildGames();
 		
-		RobinGroup12 groupD = new RobinGroup12("GROUP D");
+		RobinGroup groupD = new RobinGroup12("GROUP D");
 		groupD.addTeam(strongTeams.get(3));
 		groupD.addTeam(mediumTeams.get(3));
 		groupD.addTeam(weakTeams.get(3));

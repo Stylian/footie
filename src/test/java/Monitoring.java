@@ -10,6 +10,7 @@ import main.java.dtos.Matchup;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.games.Game;
+import main.java.dtos.games.GroupGame;
 import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
@@ -147,7 +148,7 @@ public class Monitoring {
 						+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
 			}
 			
-			for(Game g : robinGroup.getGames())
+			for(GroupGame g : robinGroup.getGames())
 				System.out.println(g);
 			
 		}

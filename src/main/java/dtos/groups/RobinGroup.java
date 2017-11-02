@@ -38,4 +38,8 @@ public class RobinGroup extends Group {
 		games.addAll(newGames);
 	}
 
+	public void buildGames() {
+		// to extend
+	};
+	
 }
