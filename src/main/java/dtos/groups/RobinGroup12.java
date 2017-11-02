@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import main.java.dtos.Team;
-import main.java.dtos.games.Game;
+import main.java.dtos.games.GroupGame;
 
 @Entity
 @DiscriminatorValue(value = "R12")
@@ -24,7 +24,7 @@ public class RobinGroup12 extends RobinGroup {
 
 		List<Team> teams = new ArrayList<>(getTeams());
 		
-		addGame(new Game());
+		addGame(new GroupGame());
 		
 	}
 	

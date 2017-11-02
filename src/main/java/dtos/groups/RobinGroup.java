@@ -9,14 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import main.java.dtos.games.Game;
+import main.java.dtos.games.GroupGame;
 
 @Entity
 @DiscriminatorValue(value = "R")
 public class RobinGroup extends Group {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Game> games;
+	private List<GroupGame> games;
 
 	public RobinGroup() {
 	}
@@ -26,15 +26,15 @@ public class RobinGroup extends Group {
 		games = new ArrayList<>();
 	}
 
-	public List<Game> getGames() {
+	public List<GroupGame> getGames() {
 		return games;
 	}
 
-	public void addGame(Game game) {
+	public void addGame(GroupGame game) {
 		games.add(game);
 	}
 
-	public void addGames(List<Game> newGames) {
+	public void addGames(List<GroupGame> newGames) {
 		games.addAll(newGames);
 	}
 
