@@ -32,12 +32,15 @@ public class ActionsTesting {
 		testBoot();
 		testCreateSeason();
 		testSetUpSeason();
+		
 		testSeedQualsRound1();
 		testSetQualsRound1();
 		fillUpRemainingGames();
+		
 		testSeedQualsRound2();
 		testSetUpQualsRound2();
 		fillUpRemainingGames();
+		
 		testSeedGroupsRound12();
 		testSetUpGroupsRound12();
 		fillUpRemainingGames();

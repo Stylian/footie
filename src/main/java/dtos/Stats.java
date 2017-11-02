@@ -12,16 +12,6 @@ import main.java.dtos.groups.Group;
 @Entity(name = "STATS")
 public class Stats {
 
-	public Stats() {
-	}
-
-	public Stats(Group group, Team team) {
-		this.group = group;
-		this.team = team;
-
-		this.team.addGroupStats(this.group, this);
-	}
-
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -51,15 +41,44 @@ public class Stats {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Group group;
 
+	public Stats() {
+	}
+
+	public Stats(Group group, Team team) {
+		this.group = group;
+		this.team = team;
+
+		this.team.addGroupStats(this.group, this);
+	}
+
+	/**
+	 * clone constructor, ignores references
+	 * 
+	 * @param st
+	 *          the stats to use
+	 */
+	public Stats(Stats st) {
+
+		points = st.getPoints();
+		wins = st.getWins();
+		draws = st.getDraws();
+		losses = st.getLosses();
+		goalsScored = st.getGoalsScored();
+		goalsConceded = st.getGoalsConceded();
+
+	}
+
 	public void addStats(Stats stats) {
+		
 		addPoints(stats.getPoints());
 		addWins(stats.getWins());
 		addDraws(stats.getDraws());
 		addLosses(stats.getLosses());
 		addGoalsScored(stats.getGoalsScored());
 		addGoalsConceded(stats.getGoalsConceded());
+		
 	}
-	
+
 	public int getMatchesPlayed() {
 		return wins + draws + losses;
 	}

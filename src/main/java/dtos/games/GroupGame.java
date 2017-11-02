@@ -23,8 +23,9 @@ public class GroupGame extends Game {
 		super(homeTeam, awayTeam);
 		this.robinGroup = robinGroup;
 	}
-	
-	
-	
+
+	public RobinGroup getRobinGroup() {
+		return robinGroup;
+	}
 	
 }

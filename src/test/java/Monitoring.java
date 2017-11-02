@@ -137,7 +137,7 @@ public class Monitoring {
 			System.out.println("-----------------------");
 			System.out.println(robinGroup.getName());
 			
-			System.out.println("name                     coeff W   D   L   GS   GC");
+			System.out.println("name                            coeff W   D   L   GS   GC");
 			for(Team t : robinGroup.getTeams()) {
 				Stats stats = t.getGroupStats().get(robinGroup);
 				int padding = 30 - t.getName().length();

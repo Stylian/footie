@@ -12,8 +12,8 @@ import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.games.Game;
+import main.java.dtos.games.GroupGame;
 import main.java.dtos.games.MatchupGame;
-import main.java.dtos.groups.Group;
 import main.java.dtos.groups.Season;
 
 /**
@@ -59,30 +59,50 @@ public class GameService {
 		// add stats to teams
 		Team team = game.getHomeTeam();
 		
-		Stats seasonStats = team.getStatsForGroup(season);
-		seasonStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
-		seasonStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
+		Stats thisGameStats = new Stats();
+		thisGameStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
+		thisGameStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
 		
 		if(result.homeTeamWon()) {
 		
-			seasonStats.addWins(1);
+			thisGameStats.addWins(1);
 		
 		}else if(result.awayTeamWon()) {
 			
-			seasonStats.addLosses(1);
+			thisGameStats.addLosses(1);
 			
 		}else if(result.tie()) {
 			
-			seasonStats.addDraws(1);
+			thisGameStats.addDraws(1);
 			
 		}
+		
+		Stats toAddToSeasonStats = new Stats(thisGameStats);
 		
 		game.setResult(result);
 		
 		if(game instanceof MatchupGame){
 			MatchupGame matchupGame = (MatchupGame) game;
 			ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
+		}else if(game instanceof GroupGame) {
+			
+			if(result.homeTeamWon()) {
+				
+				thisGameStats.addPoints(3);
+				
+			}else if(result.tie()) {
+				
+				thisGameStats.addPoints(1);
+				
+			}
+			
+			GroupGame groupGame = (GroupGame) game;
+			team.getStatsForGroup(groupGame.getRobinGroup()).addStats(thisGameStats);
+			
 		}
+
+		Stats seasonStats = team.getStatsForGroup(season);
+		seasonStats.addStats(toAddToSeasonStats);
 		
 		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
 		gameDao.save(game);
