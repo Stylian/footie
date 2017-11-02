@@ -12,7 +12,6 @@ import main.java.dtos.groups.RobinGroup;
 @DiscriminatorValue(value = "GG")
 public class GroupGame extends Game {
 
-
 	@ManyToOne(cascade = CascadeType.ALL)
 	private RobinGroup robinGroup;
 	

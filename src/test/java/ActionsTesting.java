@@ -19,7 +19,7 @@ import main.java.services.SeasonService;
 public class ActionsTesting {
 
 	@Test
-	public void settest() throws Exception {
+	public void simulateSeason() throws Exception {
 
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("first_boot", "0");
@@ -27,6 +27,7 @@ public class ActionsTesting {
 		properties.setProperty("round_quals_1", "0");
 		properties.setProperty("round_quals_2", "0");
 		properties.setProperty("groups_round_12", "0");
+		properties.setProperty("groups_round_8", "0");
 		PropertyUtils.save(properties);
 
 		testBoot();
@@ -44,6 +45,8 @@ public class ActionsTesting {
 		testSeedGroupsRound12();
 		testSetUpGroupsRound12();
 		fillUpRemainingGames();
+		
+		testSeedAndSetGroupsRound8();
 		
 		testEndCurrentSeason();
 	}
@@ -169,6 +172,17 @@ public class ActionsTesting {
 
 		GroupsRoundService service = new GroupsRoundService(session);
 		service.setUpGroupsRoundOf12();
+
+		session.close();
+	}
+
+	@Test
+	public void testSeedAndSetGroupsRound8() throws Exception {
+
+		Session session = HibernateUtils.getSessionFactory().openSession();
+
+		GroupsRoundService service = new GroupsRoundService(session);
+		service.seedAndSetGroupsRoundOf8();
 
 		session.close();
 	}

@@ -15,6 +15,7 @@ import main.java.dtos.Matchup;
 import main.java.dtos.Team;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.RobinGroup12;
+import main.java.dtos.groups.RobinGroup8;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
@@ -107,7 +108,7 @@ public class GroupsRoundService {
 		Collections.shuffle(mediumTeams);
 		Collections.shuffle(weakTeams);
 		
-		// create groups and add teams
+		// create groups and add teams and games
 		RobinGroup groupA = new RobinGroup12("GROUP A");
 		groupA.addTeam(strongTeams.get(0));
 		groupA.addTeam(mediumTeams.get(0));
@@ -147,6 +148,62 @@ public class GroupsRoundService {
 		
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("groups_round_12", "2");
+		PropertyUtils.save(properties);
+		
+	}
+
+	public void seedAndSetGroupsRoundOf8() {
+		logger.info("seed and set groups round of 8");
+		
+		Season season = ServiceUtils.loadCurrentSeason(session);
+		
+		// must add winners from groups round of 12
+		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
+		RobinGroup r12gA = groupsRoundOf12.getGroups().get(0);
+		RobinGroup r12gB = groupsRoundOf12.getGroups().get(1);
+		RobinGroup r12gC = groupsRoundOf12.getGroups().get(2);
+		RobinGroup r12gD = groupsRoundOf12.getGroups().get(3);
+		
+		// create groups and add teams and games
+		RobinGroup groupA = new RobinGroup8("GROUP A");
+		groupA.addTeam(r12gA.getTeams().get(0));
+		groupA.addTeam(r12gA.getTeams().get(1));
+		groupA.addTeam(r12gB.getTeams().get(0));
+		groupA.addTeam(r12gB.getTeams().get(1));
+		groupA.buildGames();
+
+		RobinGroup groupB = new RobinGroup8("GROUP B");
+		groupA.addTeam(r12gC.getTeams().get(0));
+		groupA.addTeam(r12gC.getTeams().get(1));
+		groupA.addTeam(r12gD.getTeams().get(0));
+		groupA.addTeam(r12gD.getTeams().get(1));
+		groupA.buildGames();
+		
+		// build round of 8
+		GroupsRound groupsRoundOf8 = new GroupsRound(season, "Groups Round of 8");
+		groupsRoundOf8.addGroup(groupA);
+		groupsRoundOf8.addGroup(groupB);
+		
+		// CHALLENGING design
+		// add stats from round of 12
+//		for(RobinGroup group : groupsRoundOf8.getGroups()) {
+//			
+//			for(Team team : group.getTeams()) {
+//			
+//				team.getStatsForGroup(group);
+//				
+//			}
+//			
+//		}
+		
+		logger.info(groupA);
+		logger.info(groupB);
+		
+		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(groupsRoundOf8);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("groups_round_8", "2");
 		PropertyUtils.save(properties);
 		
 	}
