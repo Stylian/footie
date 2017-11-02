@@ -1,6 +1,8 @@
 package main.java.dtos.groups;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -69,8 +71,8 @@ public class Group {
 		
 	}
 	
-	public Set<Team> getTeams() {
-		return teamsStats.keySet();
+	public List<Team> getTeams() {
+		return new ArrayList<>(teamsStats.keySet());
 	}
 
 	@Override

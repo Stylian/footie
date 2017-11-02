@@ -1,6 +1,5 @@
 package main.java.dtos.groups;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -22,7 +21,7 @@ public class RobinGroup12 extends RobinGroup {
 	
 	public void buildGames() {
 
-		List<Team> teams = new ArrayList<>(getTeams());
+		List<Team> teams = getTeams();
 		
 		addGame(new GroupGame(teams.get(0), teams.get(2), this));
 		addGame(new GroupGame(teams.get(1), teams.get(0), this));
