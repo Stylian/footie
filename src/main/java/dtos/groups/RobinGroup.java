@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import main.java.dtos.Game;
+import main.java.dtos.games.Game;
 
 @Entity
 @DiscriminatorValue(value = "R")
@@ -36,11 +36,6 @@ public class RobinGroup extends Group {
 
 	public void addGames(List<Game> newGames) {
 		games.addAll(newGames);
-	}
-	
-	public void buildGames() {
-		// TODO
-		
 	}
 
 }

@@ -1,14 +1,26 @@
-package main.java.dtos;
+package main.java.dtos.games;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import main.java.dtos.Matchup;
+import main.java.dtos.Result;
+import main.java.dtos.Team;
+
 @Entity(name = "GAMES")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "G")
 public class Game {
 
 	@Id
@@ -22,9 +34,6 @@ public class Game {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team awayTeam;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Matchup matchup;
-
 	// could change to manyToOne and make the result combination to unique
 	@OneToOne(cascade = CascadeType.ALL)
 	private Result result;
@@ -32,10 +41,9 @@ public class Game {
 	public Game() {
 	}
 
-	public Game(Team homeTeam, Team awayTeam, Matchup matchup) {
+	public Game(Team homeTeam, Team awayTeam) {
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
-		this.matchup = matchup;
 	}
 
 	public int getId() {
@@ -68,10 +76,6 @@ public class Game {
 
 	public void setResult(Result result) {
 		this.result = result;
-	}
-
-	public Matchup getMatchup() {
-		return matchup;
 	}
 
 	@Override

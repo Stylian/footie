@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
-import main.java.dtos.Game;
 import main.java.dtos.Result;
+import main.java.dtos.games.Game;
 import main.java.services.GameService;
 
 // to remove

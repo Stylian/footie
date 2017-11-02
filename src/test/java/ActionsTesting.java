@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;
-import main.java.dtos.Game;
 import main.java.dtos.Result;
+import main.java.dtos.games.Game;
 import main.java.services.BootService;
 import main.java.services.GameService;
 import main.java.services.GroupsRoundService;

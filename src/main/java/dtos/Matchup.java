@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import main.java.dtos.enums.MatchupFormat;
 import main.java.dtos.enums.MatchupTieStrategy;
+import main.java.dtos.games.Game;
+import main.java.dtos.games.MatchupGame;
 
 @Entity(name = "MATCHUPS")
 public class Matchup {
@@ -62,14 +64,14 @@ public class Matchup {
 
 		switch (format) {
 		case FORMAT_IN_OUT_SINGLE:
-			games.add(new Game(teamAway, teamHome, this));
-			games.add(new Game(teamHome, teamAway, this));
+			games.add(new MatchupGame(teamAway, teamHome, this));
+			games.add(new MatchupGame(teamHome, teamAway, this));
 			break;
 		case FORMAT_IN_OUT_DOUBLE:
-			games.add(new Game(teamHome, teamAway, this));
-			games.add(new Game(teamAway, teamHome, this));
-			games.add(new Game(teamAway, teamHome, this));
-			games.add(new Game(teamHome, teamAway, this));
+			games.add(new MatchupGame(teamHome, teamAway, this));
+			games.add(new MatchupGame(teamAway, teamHome, this));
+			games.add(new MatchupGame(teamAway, teamHome, this));
+			games.add(new MatchupGame(teamHome, teamAway, this));
 			break;
 		}
 

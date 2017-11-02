@@ -6,10 +6,10 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import main.java.HibernateUtils;
-import main.java.dtos.Game;
 import main.java.dtos.Matchup;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.dtos.games.Game;
 import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;

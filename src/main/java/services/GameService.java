@@ -7,11 +7,12 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
-import main.java.dtos.Game;
 import main.java.dtos.Matchup;
 import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
+import main.java.dtos.games.Game;
+import main.java.dtos.games.MatchupGame;
 import main.java.dtos.groups.Group;
 import main.java.dtos.groups.Season;
 
@@ -76,9 +77,12 @@ public class GameService {
 			
 		}
 		
-		// set Result for Matchup todo for groups later
 		game.setResult(result);
-		ifMatchupIsFinishedDecideTheWinner(game.getMatchup());
+		
+		if(game instanceof MatchupGame){
+			MatchupGame matchupGame = (MatchupGame) game;
+			ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
+		}
 		
 		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
 		gameDao.save(game);
@@ -135,8 +139,8 @@ public class GameService {
 
 		}else {
 			
-			games.add(new Game(teamAway, teamHome, matchup));
-			games.add(new Game(teamHome, teamAway, matchup));
+			games.add(new MatchupGame(teamAway, teamHome, matchup));
+			games.add(new MatchupGame(teamHome, teamAway, matchup));
 			
 		}
 			
