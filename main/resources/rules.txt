@@ -1,5 +1,12 @@
 promotion_from_1st_quals_round=1000
 promotion_from_2nd_quals_round=1000
+groups12_1st_place=1000
+groups12_2nd_place=500
+groups8_1st_place=2000
+groups8_2nd_place=500
+groups8_3rd_place=250
+promotion_to_final=1000
+winning_the_league=2000
 win=1000
 draw=500
 goals_scored=100
