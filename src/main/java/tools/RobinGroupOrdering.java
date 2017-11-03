@@ -43,7 +43,7 @@ public class RobinGroupOrdering extends Ordering {
 		}
 		
 		// RULE 5
-		Group master = ServiceUtils.getMasterGroup(HibernateUtils.getSession());
+		Group master = ServiceUtils.getMasterGroup();
 		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
 			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
 		}

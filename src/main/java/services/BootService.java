@@ -63,7 +63,7 @@ public class BootService {
 
 			List<String> teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
-			Group master = ServiceUtils.getMasterGroup(session);
+			Group master = ServiceUtils.getMasterGroup();
 			
 			if(master == null) {
 				logger.error("master group does not exist");

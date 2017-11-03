@@ -30,7 +30,7 @@ public class GroupsRoundService {
 	public void seedGroupsRoundOf12() {
 		logger.info("seed groups round of 12");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
 		
@@ -93,7 +93,7 @@ public class GroupsRoundService {
 	public void setUpGroupsRoundOf12() {
 		logger.info("set up groups round of 12");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
 		
@@ -152,7 +152,7 @@ public class GroupsRoundService {
 	public void seedAndSetGroupsRoundOf8() {
 		logger.info("seed and set groups round of 8");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		// must add winners from groups round of 12
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);

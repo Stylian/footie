@@ -30,8 +30,8 @@ public class Monitoring {
 
 		GroupService groupService = new GroupService(session);
 
-		Group master = ServiceUtils.getMasterGroup(session);
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Group master = ServiceUtils.getMasterGroup();
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering(master));
 		List<Team> teams2 = groupService.getTeams(season, new CoefficientsOrdering(season));

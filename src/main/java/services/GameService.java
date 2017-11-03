@@ -51,7 +51,7 @@ public class GameService {
 		logger.info("adding game result to game " + game.getHomeTeam() + " - " + game.getAwayTeam() + "  "
 				+ result.getGoalsMadeByHomeTeam() + " - " + result.getGoalsMadeByAwayTeam());
 
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		// add stats to teams
 		Team team = game.getHomeTeam();

@@ -41,7 +41,7 @@ public class SeasonService {
 
 		Season season = new Season(year);
 
-		List<Team> teams = ServiceUtils.loadTeams(session);
+		List<Team> teams = ServiceUtils.loadTeams();
 
 		for (Team team : teams) {
 
@@ -56,9 +56,9 @@ public class SeasonService {
 
 	public void setUpSeason() {
 
-		List<Team> teams = ServiceUtils.loadTeams(session);
+		List<Team> teams = ServiceUtils.loadTeams();
 
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
 		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
@@ -136,7 +136,7 @@ public class SeasonService {
 		logger.info("closing down season, calculating coefficients");
 		// maybe set up winner later
 
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 
 		// add coeffs to quals1 winners
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
@@ -187,7 +187,7 @@ public class SeasonService {
 
 		
 		// add points for goals scored
-		List<Team> teams = ServiceUtils.loadTeams(session);
+		List<Team> teams = ServiceUtils.loadTeams();
 
 		for (Team team : teams) {
 
@@ -197,7 +197,7 @@ public class SeasonService {
 		}
 
 		// add season stats to master group
-		Group master = ServiceUtils.getMasterGroup(session);
+		Group master = ServiceUtils.getMasterGroup();
 
 		for (Team team : teams) {
 

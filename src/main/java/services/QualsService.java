@@ -30,7 +30,7 @@ public class QualsService {
 	public void seedUpQualsRound1() {
 		logger.info("seed quals round 1");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
@@ -45,7 +45,7 @@ public class QualsService {
 	public void seedUpQualsRound2() {
 		logger.info("seed quals round 2");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
@@ -74,7 +74,7 @@ public class QualsService {
 	public void setUpQualsRound1() {
 		logger.info("set up quals round 1");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
@@ -90,7 +90,7 @@ public class QualsService {
 	public void setUpQualsRound2() {
 		logger.info("set up quals round 2");
 		
-		Season season = ServiceUtils.loadCurrentSeason(session);
+		Season season = ServiceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 		
@@ -106,7 +106,7 @@ public class QualsService {
 
 		List<Team> teams = qualsRound.getTeams();
 		
-		Group master = ServiceUtils.getMasterGroup(session);
+		Group master = ServiceUtils.getMasterGroup();
 		
 		if(season.getSeasonYear() == 1) {
 			
