@@ -1,5 +1,6 @@
 package main.java.dtos.rounds;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -18,7 +19,7 @@ import main.java.dtos.groups.Season;
 public class GroupsRound extends Round {
 
 	@OneToMany(fetch = FetchType.LAZY)
-	private List<RobinGroup> groups;
+	private List<RobinGroup> groups = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "GROUPS_STRONG_TEAMS")

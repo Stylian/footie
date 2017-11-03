@@ -1,5 +1,6 @@
 package main.java.dtos.rounds;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,7 @@ import main.java.dtos.groups.Season;
 public class QualsRound extends Round {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Matchup> matchups;
+	private List<Matchup> matchups = new ArrayList<>();
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="QUALS_STRONG_TEAMS")

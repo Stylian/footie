@@ -46,72 +46,69 @@ public class ActionsTesting {
 		testSetUpGroupsRound12();
 		fillUpRemainingGames();
 		
-		testSeedAndSetGroupsRound8();
+//		testSeedAndSetGroupsRound8();
+//		fillUpRemainingGames();
 		
 		testEndCurrentSeason();
+		
+		HibernateUtils.closeSession();
+		
 	}
 
 	@Test
 	public void testBoot() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		BootService service = new BootService(session);
 		service.start();
-
-		session.close();
 
 	}
 
 	@Test
 	public void testCreateSeason() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		SeasonService service = new SeasonService(session);
 		service.createSeason();
-
-		session.close();
 
 	}
 
 	@Test
 	public void testSetUpSeason() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		SeasonService service = new SeasonService(session);
 		service.setUpSeason();
 
-		session.close();
 	}
 
 	@Test
 	public void testSeedQualsRound1() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		QualsService service = new QualsService(session);
 		service.seedUpQualsRound1();
 
-		session.close();
 	}
 
 	@Test
 	public void testSetQualsRound1() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		QualsService service = new QualsService(session);
 		service.setUpQualsRound1();
 
-		session.close();
 	}
 
 	@Test
 	public void fillUpRemainingGames() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		GameService service = new GameService(session);
 
@@ -129,24 +126,22 @@ public class ActionsTesting {
 
 		}
 
-		session.close();
 	}
 
 	@Test
 	public void testSeedQualsRound2() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		QualsService service = new QualsService(session);
 		service.seedUpQualsRound2();
 
-		session.close();
 	}
 
 	@Test
 	public void testSetUpQualsRound2() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		QualsService service = new QualsService(session);
 		service.setUpQualsRound2();
@@ -157,45 +152,40 @@ public class ActionsTesting {
 	@Test
 	public void testSeedGroupsRound12() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		GroupsRoundService service = new GroupsRoundService(session);
 		service.seedGroupsRoundOf12();
 
-		session.close();
 	}
 
 	@Test
 	public void testSetUpGroupsRound12() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		GroupsRoundService service = new GroupsRoundService(session);
 		service.setUpGroupsRoundOf12();
 
-		session.close();
 	}
 
 	@Test
 	public void testSeedAndSetGroupsRound8() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		GroupsRoundService service = new GroupsRoundService(session);
 		service.seedAndSetGroupsRoundOf8();
 
-		session.close();
 	}
 
 	@Test
 	public void testEndCurrentSeason() throws Exception {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		SeasonService service = new SeasonService(session);
 		service.endCurrentSeason();
-
-		session.close();
 
 	}
 	

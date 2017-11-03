@@ -1,13 +1,15 @@
 package main.java;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
 
 	private static SessionFactory sessionFactory;
-
+	private static Session session;
+	
 	static {
 		try {
 			sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -30,4 +32,18 @@ public class HibernateUtils {
 			}
 		}
 	}
+	
+	public static Session getSession() {
+		
+		if(session == null || !session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		
+		return session;
+	}
+	
+	public static void closeSession() {
+		session.close();
+	}
+	
 }

@@ -43,12 +43,12 @@ public class RobinGroupOrdering extends Ordering {
 		}
 		
 		// RULE 5
-		Group master = ServiceUtils.getMasterGroup(HibernateUtils.getSessionFactory().getCurrentSession());
+		Group master = ServiceUtils.getMasterGroup(HibernateUtils.getSession());
 		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
 			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
 		}
 		
 		// RULE 6
-		return RandomUtils.nextInt(-1, 1);
+		return RandomUtils.nextInt(0, 2) - 1;
 	}
 }
