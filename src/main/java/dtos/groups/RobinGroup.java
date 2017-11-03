@@ -42,7 +42,7 @@ public class RobinGroup extends Group {
 	}
 
 	/**
-	 * teams in robin group come ordered
+	 * teams in robin group come sorted
 	 */
 	@Override
 	public List<Team> getTeams() {

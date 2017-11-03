@@ -16,6 +16,7 @@ import main.java.dtos.Matchup;
 import main.java.dtos.Team;
 import main.java.dtos.games.Game;
 import main.java.dtos.groups.Group;
+import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
@@ -140,9 +141,9 @@ public class SeasonService {
 
 		Season season = ServiceUtils.loadCurrentSeason(session);
 
+		// add coeffs to quals1 winners
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 
-		// add coeffs to quals1 winners
 		for (Matchup matchup : roundQuals1.getMatchups()) {
 
 			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_1);
@@ -152,9 +153,9 @@ public class SeasonService {
 
 		}
 
+		// add coeffs to quals2 winners
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 
-		// add coeffs to quals2 winners
 		for (Matchup matchup : roundQuals2.getMatchups()) {
 
 			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_2);
@@ -164,8 +165,30 @@ public class SeasonService {
 
 		}
 
+		// add coeffs for groups12 positions
+		GroupsRound groupsOf12Round = (GroupsRound) season.getRounds().get(2);
+		
+		for(RobinGroup robinGroup : groupsOf12Round.getGroups() ) {
+			
+			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
+			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
+			
+		}
+		
+		// add coeffs for groups8 positions
+		GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(3);
+		
+		for(RobinGroup robinGroup : groupsOf8Round.getGroups() ) {
+			
+			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
+			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
+			robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
+			
+		}
+
 		// TODO for more rounds
 
+		
 		// add points for goals scored
 		List<Team> teams = ServiceUtils.loadTeams(session);
 
