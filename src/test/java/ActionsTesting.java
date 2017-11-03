@@ -29,6 +29,8 @@ public class ActionsTesting {
 		properties.setProperty("groups_round_12", "0");
 		properties.setProperty("groups_round_8", "0");
 		properties.setProperty("quarterfinals", "0");
+		properties.setProperty("semifinals", "0");
+		properties.setProperty("finals", "0");
 		PropertyUtils.save(properties);
 
 		testBoot();
@@ -53,9 +55,13 @@ public class ActionsTesting {
 		testSeedAndSetQuarterfinals();
 		fillUpRemainingGames();
 		
-//		testSeedAndSetSemifinals();
-
-//		testEndCurrentSeason();
+		testSeedAndSetSemifinals();
+		fillUpRemainingGames();
+		
+		testSeedAndSetfinals();
+		fillUpRemainingGames();
+		
+		testEndCurrentSeason();
 		
 		HibernateUtils.closeSession();
 		
@@ -167,6 +173,23 @@ public class ActionsTesting {
 		
 		PlayoffsRoundService service = new PlayoffsRoundService();
 		service.seedAndSetQuarterfinals();
+		
+	}
+	
+	@Test
+	public void testSeedAndSetSemifinals() throws Exception {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		service.seedAndSetSemifinals();
+		
+	
+	}
+
+	@Test
+	public void testSeedAndSetfinals() throws Exception {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		service.seedAndSetfinals();
 		
 	}
 	

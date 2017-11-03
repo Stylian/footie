@@ -72,10 +72,39 @@ public class PlayoffsRound extends Round {
 				gA3,
 				MatchupFormat.FORMAT_IN_OUT_SINGLE,
 				MatchupTieStrategy.REPLAY_GAMES
+			));
+		
+	}
+
+	public void buildSemisMatchups() {
+	
+		semisMatchups.add(new Matchup(
+				gA1,
+				quarterMatchups.get(1).getWinner(),
+				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
+				MatchupTieStrategy.REPLAY_GAMES
+			));
+		
+		semisMatchups.add(new Matchup(
+				gB1,
+				quarterMatchups.get(0).getWinner(),
+				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
+				MatchupTieStrategy.REPLAY_GAMES
 				));
 		
 	}
 	
+	public void buildFinalsMatchup() {
+		
+		finalsMatchup = new Matchup(
+				semisMatchups.get(0).getWinner(),
+				semisMatchups.get(1).getWinner(),
+				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
+				MatchupTieStrategy.REPLAY_GAMES
+			);
+		
+	}
+		
 	public Team getgA1() {
 		return gA1;
 	}

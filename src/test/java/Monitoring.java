@@ -184,7 +184,16 @@ public class Monitoring {
 			for(Game g: m.getGames())
 				System.out.println(g);
 		}
-		
+		for(Matchup m : playoffsRound.getSemisMatchups()) {
+			System.out.println("#########################");
+			for(Game g: m.getGames())
+				System.out.println(g);
+		}
+
+		Matchup fm = playoffsRound.getFinalsMatchup();
+		System.out.println("#########################");
+			for(Game g: fm.getGames())
+				System.out.println(g);
 		
 		session.close();
 

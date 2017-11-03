@@ -47,7 +47,6 @@ public class PlayoffsRoundService {
 		logger.info("building quarterfinals ");
 		playoffsRound.buildQuarterMatchups();
 		
-		
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(playoffsRound);
 		
@@ -56,5 +55,38 @@ public class PlayoffsRoundService {
 		PropertyUtils.save(properties);
 		
 	}
+	
+	public void seedAndSetSemifinals() {
+		logger.info("seed and set semifinals");
+	
+		Season season = ServiceUtils.loadCurrentSeason();
 
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		playoffsRound.buildSemisMatchups();
+		
+		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(playoffsRound);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("semifinals", "2");
+		PropertyUtils.save(properties);
+		
+	}
+	
+	public void seedAndSetfinals() {
+		logger.info("seed and set finals");
+		
+		Season season = ServiceUtils.loadCurrentSeason();
+
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		playoffsRound.buildFinalsMatchup();
+		
+		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
+		roundDao.save(playoffsRound);
+		
+		Properties properties = PropertyUtils.load();
+		properties.setProperty("finals", "2");
+		PropertyUtils.save(properties);
+	}
+	
 }
