@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
@@ -22,11 +23,7 @@ public class BootService {
 
 	final static Logger logger = Logger.getLogger(BootService.class);
 	
-	private Session session;
-
-	public BootService(Session session) {
-		this.session = session;
-	}
+	private Session session = HibernateUtils.getSession();
 	
 	public void start() {
 

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.Rules;
 import main.java.Utils;
@@ -25,11 +26,7 @@ public class SeasonService {
 
 	final static Logger logger = Logger.getLogger(SeasonService.class);
 
-	private Session session;
-
-	public SeasonService(Session session) {
-		this.session = session;
-	}
+	private Session session = HibernateUtils.getSession();
 
 	public void createSeason() {
 

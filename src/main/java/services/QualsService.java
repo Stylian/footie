@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Matchup;
@@ -24,11 +25,7 @@ public class QualsService {
 
 	final static Logger logger = Logger.getLogger(QualsService.class);
 
-	private Session session;
-
-	public QualsService(Session session) {
-		this.session = session;
-	}
+	private Session session = HibernateUtils.getSession();
 	
 	public void seedUpQualsRound1() {
 		logger.info("seed quals round 1");

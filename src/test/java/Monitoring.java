@@ -26,7 +26,7 @@ public class Monitoring {
 	@Test
 	public void displayCoefficients() {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		GroupService groupService = new GroupService(session);
 
@@ -63,7 +63,7 @@ public class Monitoring {
 	@Test
 	public void displaySeason1() {
 
-		Session session = HibernateUtils.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSession();
 
 		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class).getSingleResult();
 		

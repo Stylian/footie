@@ -58,9 +58,7 @@ public class ActionsTesting {
 	@Test
 	public void testBoot() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		BootService service = new BootService(session);
+		BootService service = new BootService();
 		service.start();
 
 	}
@@ -68,9 +66,7 @@ public class ActionsTesting {
 	@Test
 	public void testCreateSeason() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		SeasonService service = new SeasonService(session);
+		SeasonService service = new SeasonService();
 		service.createSeason();
 
 	}
@@ -78,9 +74,7 @@ public class ActionsTesting {
 	@Test
 	public void testSetUpSeason() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		SeasonService service = new SeasonService(session);
+		SeasonService service = new SeasonService();
 		service.setUpSeason();
 
 	}
@@ -88,9 +82,7 @@ public class ActionsTesting {
 	@Test
 	public void testSeedQualsRound1() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		QualsService service = new QualsService(session);
+		QualsService service = new QualsService();
 		service.seedUpQualsRound1();
 
 	}
@@ -98,9 +90,7 @@ public class ActionsTesting {
 	@Test
 	public void testSetQualsRound1() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		QualsService service = new QualsService(session);
+		QualsService service = new QualsService();
 		service.setUpQualsRound1();
 
 	}
@@ -108,9 +98,7 @@ public class ActionsTesting {
 	@Test
 	public void fillUpRemainingGames() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		GameService service = new GameService(session);
+		GameService service = new GameService();
 
 		while (true) {
 
@@ -131,9 +119,7 @@ public class ActionsTesting {
 	@Test
 	public void testSeedQualsRound2() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		QualsService service = new QualsService(session);
+		QualsService service = new QualsService();
 		service.seedUpQualsRound2();
 
 	}
@@ -141,20 +127,15 @@ public class ActionsTesting {
 	@Test
 	public void testSetUpQualsRound2() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		QualsService service = new QualsService(session);
+		QualsService service = new QualsService();
 		service.setUpQualsRound2();
 
-		session.close();
 	}
 
 	@Test
 	public void testSeedGroupsRound12() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		GroupsRoundService service = new GroupsRoundService(session);
+		GroupsRoundService service = new GroupsRoundService();
 		service.seedGroupsRoundOf12();
 
 	}
@@ -162,9 +143,7 @@ public class ActionsTesting {
 	@Test
 	public void testSetUpGroupsRound12() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		GroupsRoundService service = new GroupsRoundService(session);
+		GroupsRoundService service = new GroupsRoundService();
 		service.setUpGroupsRoundOf12();
 
 	}
@@ -172,9 +151,7 @@ public class ActionsTesting {
 	@Test
 	public void testSeedAndSetGroupsRound8() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		GroupsRoundService service = new GroupsRoundService(session);
+		GroupsRoundService service = new GroupsRoundService();
 		service.seedAndSetGroupsRoundOf8();
 
 	}
@@ -182,9 +159,7 @@ public class ActionsTesting {
 	@Test
 	public void testEndCurrentSeason() throws Exception {
 
-		Session session = HibernateUtils.getSession();
-
-		SeasonService service = new SeasonService(session);
+		SeasonService service = new SeasonService();
 		service.endCurrentSeason();
 
 	}

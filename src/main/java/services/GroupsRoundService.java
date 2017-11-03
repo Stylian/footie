@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Matchup;
@@ -24,11 +25,7 @@ public class GroupsRoundService {
 	
 	final static Logger logger = Logger.getLogger(GroupsRoundService.class);
 
-	private Session session;
-
-	public GroupsRoundService(Session session) {
-		this.session = session;
-	}
+	private Session session = HibernateUtils.getSession();
 
 	public void seedGroupsRoundOf12() {
 		logger.info("seed groups round of 12");

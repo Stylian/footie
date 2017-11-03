@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import main.java.DataAccessObject;
+import main.java.HibernateUtils;
 import main.java.dtos.Matchup;
 import main.java.dtos.Result;
 import main.java.dtos.Stats;
@@ -26,11 +27,7 @@ public class GameService {
 
 	final static Logger logger = Logger.getLogger(GameService.class);
 
-	private Session session;
-
-	public GameService(Session session) {
-		this.session = session;
-	}
+	private Session session = HibernateUtils.getSession();
 
 	public Game getNextGame() {
 		logger.info("retrieving next game...");
