@@ -15,6 +15,7 @@ import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
+import main.java.dtos.rounds.PlayoffsRound;
 import main.java.dtos.rounds.QualsRound;
 import main.java.dtos.rounds.Round;
 import main.java.services.GroupService;
@@ -175,9 +176,14 @@ public class Monitoring {
 			
 		}
 		
-		
-		
-		
+		PlayoffsRound playoffsRound = (PlayoffsRound) rounds.get(4);
+
+		System.out.println(playoffsRound.getName());
+		for(Matchup m : playoffsRound.getQuarterMatchups()) {
+			System.out.println("#########################");
+			for(Game g: m.getGames())
+				System.out.println(g);
+		}
 		
 		
 		session.close();

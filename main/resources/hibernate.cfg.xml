@@ -48,6 +48,7 @@
         <mapping class="main.java.dtos.rounds.Round" />
         <mapping class="main.java.dtos.rounds.QualsRound" />
         <mapping class="main.java.dtos.rounds.GroupsRound" />
+        <mapping class="main.java.dtos.rounds.PlayoffsRound" />
  
     </session-factory>
  

@@ -1,8 +1,9 @@
 #Properties File
-#Fri Nov 03 10:52:20 GMT 2017
+#Fri Nov 03 13:52:21 GMT 2017
 groups_round_8=2
+quarterfinals=2
 round_quals_2=2
-groups_round_12=2
 round_quals_1=2
+groups_round_12=2
 first_boot=1
 season=1

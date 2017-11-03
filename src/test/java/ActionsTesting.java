@@ -3,10 +3,7 @@ package test.java;
 import java.util.Properties;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.hibernate.Session;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;
@@ -15,6 +12,7 @@ import main.java.dtos.games.Game;
 import main.java.services.BootService;
 import main.java.services.GameService;
 import main.java.services.GroupsRoundService;
+import main.java.services.PlayoffsRoundService;
 import main.java.services.QualsService;
 import main.java.services.SeasonService;
 
@@ -30,6 +28,7 @@ public class ActionsTesting {
 		properties.setProperty("round_quals_2", "0");
 		properties.setProperty("groups_round_12", "0");
 		properties.setProperty("groups_round_8", "0");
+		properties.setProperty("quarterfinals", "0");
 		PropertyUtils.save(properties);
 
 		testBoot();
@@ -51,6 +50,11 @@ public class ActionsTesting {
 		testSeedAndSetGroupsRound8();
 		fillUpRemainingGames();
 		
+		testSeedAndSetQuarterfinals();
+		fillUpRemainingGames();
+		
+//		testSeedAndSetSemifinals();
+
 		testEndCurrentSeason();
 		
 		HibernateUtils.closeSession();
@@ -110,7 +114,7 @@ public class ActionsTesting {
 				break;
 			}
 
-			service.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 5)));
+			service.addResult(next, new Result(RandomUtils.nextInt(0, 3), RandomUtils.nextInt(0, 2)));
 
 			System.out.println(next);
 
@@ -157,7 +161,15 @@ public class ActionsTesting {
 		service.seedAndSetGroupsRoundOf8();
 
 	}
-
+	
+	@Test
+	public void testSeedAndSetQuarterfinals() throws Exception {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		service.seedAndSetQuarterfinals();
+		
+	}
+	
 	@Test
 	public void testEndCurrentSeason() throws Exception {
 
