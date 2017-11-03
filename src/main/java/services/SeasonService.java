@@ -233,6 +233,8 @@ public class SeasonService {
 			 
 		}
 
+		season.setWinner(finalsMatchup.getWinner());
+		
 		// hope it is enough, seems so
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
