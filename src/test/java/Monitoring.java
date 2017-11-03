@@ -138,7 +138,29 @@ public class Monitoring {
 			System.out.println(robinGroup.getName());
 			
 			System.out.println("name                            coeff W   D   L   GS   GC");
-			for(Team t : robinGroup.getTeams()) {
+			for(Team t : robinGroup.getTeamsOrdered()) {
+				Stats stats = t.getGroupStats().get(robinGroup);
+				int padding = 30 - t.getName().length();
+				String pad = "";
+				for(int count=0; count < padding; count++)
+					pad += " ";
+				System.out.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws() + "   " + stats.getLosses() + "   "
+						+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+			}
+			
+			for(GroupGame g : robinGroup.getGames())
+				System.out.println(g);
+			
+		}
+		
+		GroupsRound groupsRound8 = (GroupsRound) rounds.get(3);
+		
+		for(RobinGroup robinGroup : groupsRound8.getGroups()) {
+			System.out.println("-----------------------");
+			System.out.println(robinGroup.getName());
+			
+			System.out.println("name                            coeff W   D   L   GS   GC");
+			for(Team t : robinGroup.getTeamsOrdered()) {
 				Stats stats = t.getGroupStats().get(robinGroup);
 				int padding = 30 - t.getName().length();
 				String pad = "";

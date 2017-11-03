@@ -3,8 +3,6 @@ package main.java.services;
 import java.util.List;
 import java.util.Properties;
 
-import org.hibernate.Session;
-
 import main.java.DataAccessObject;
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;

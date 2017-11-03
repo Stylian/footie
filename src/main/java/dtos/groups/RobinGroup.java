@@ -44,8 +44,7 @@ public class RobinGroup extends Group {
 	/**
 	 * teams in robin group come sorted
 	 */
-	@Override
-	public List<Team> getTeams() {
+	public List<Team> getTeamsOrdered() {
 		
 		List<Team> teams = super.getTeams();
 

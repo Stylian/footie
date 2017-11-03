@@ -163,18 +163,18 @@ public class GroupsRoundService {
 		
 		// create groups and add teams and games
 		RobinGroup groupA = new RobinGroup8("GROUP A");
-		groupA.addTeam(r12gA.getTeams().get(0));
-		groupA.addTeam(r12gA.getTeams().get(1));
-		groupA.addTeam(r12gB.getTeams().get(0));
-		groupA.addTeam(r12gB.getTeams().get(1));
+		groupA.addTeam(r12gA.getTeamsOrdered().get(0));
+		groupA.addTeam(r12gA.getTeamsOrdered().get(1));
+		groupA.addTeam(r12gB.getTeamsOrdered().get(0));
+		groupA.addTeam(r12gB.getTeamsOrdered().get(1));
 		groupA.buildGames();
 
 		RobinGroup groupB = new RobinGroup8("GROUP B");
-		groupA.addTeam(r12gC.getTeams().get(0));
-		groupA.addTeam(r12gC.getTeams().get(1));
-		groupA.addTeam(r12gD.getTeams().get(0));
-		groupA.addTeam(r12gD.getTeams().get(1));
-		groupA.buildGames();
+		groupB.addTeam(r12gC.getTeamsOrdered().get(0));
+		groupB.addTeam(r12gC.getTeamsOrdered().get(1));
+		groupB.addTeam(r12gD.getTeamsOrdered().get(0));
+		groupB.addTeam(r12gD.getTeamsOrdered().get(1));
+		groupB.buildGames();
 		
 		// build round of 8
 		GroupsRound groupsRoundOf8 = new GroupsRound(season, "Groups Round of 8");

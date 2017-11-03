@@ -4,7 +4,9 @@ import java.util.Properties;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.hibernate.Session;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import main.java.HibernateUtils;
 import main.java.PropertyUtils;
@@ -46,8 +48,8 @@ public class ActionsTesting {
 		testSetUpGroupsRound12();
 		fillUpRemainingGames();
 		
-//		testSeedAndSetGroupsRound8();
-//		fillUpRemainingGames();
+		testSeedAndSetGroupsRound8();
+		fillUpRemainingGames();
 		
 		testEndCurrentSeason();
 		

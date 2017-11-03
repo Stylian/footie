@@ -167,21 +167,21 @@ public class SeasonService {
 		
 		for(RobinGroup robinGroup : groupsOf12Round.getGroups() ) {
 			
-			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
-			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
+			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
+			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 			
 		}
 		
 		// add coeffs for groups8 positions
-//		GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(3);
-//		
-//		for(RobinGroup robinGroup : groupsOf8Round.getGroups() ) {
-//			
-//			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
-//			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
-//			robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
-//			
-//		}
+		GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(3);
+		
+		for(RobinGroup robinGroup : groupsOf8Round.getGroups() ) {
+			
+			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
+			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
+			robinGroup.getTeamsOrdered().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
+			
+		}
 
 		// TODO for more rounds
 
