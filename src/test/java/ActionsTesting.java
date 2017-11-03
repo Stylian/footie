@@ -55,7 +55,7 @@ public class ActionsTesting {
 		
 //		testSeedAndSetSemifinals();
 
-		testEndCurrentSeason();
+//		testEndCurrentSeason();
 		
 		HibernateUtils.closeSession();
 		

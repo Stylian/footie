@@ -20,6 +20,7 @@ import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
+import main.java.dtos.rounds.PlayoffsRound;
 import main.java.dtos.rounds.QualsRound;
 
 public class SeasonService {
@@ -183,8 +184,35 @@ public class SeasonService {
 			
 		}
 
-		// TODO for more rounds
+		// add coeffs to playoffs
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		
+		for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
 
+			// average out points per matchup
+			addGamePointsForMatchup(season, matchup);
+
+		}
+		
+		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
+			
+			// average out points per matchup
+			addGamePointsForMatchup(season, matchup);
+			
+		}
+		
+		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
+		
+		finalsMatchup.getWinner().getStatsForGroup(season).addPoints(Rules.POINTS_WINNING_THE_LEAGUE);
+		
+		if(!finalsMatchup.getTeamHome().equals(finalsMatchup.getWinner())) {
+			finalsMatchup.getTeamHome().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
+		}else {
+			finalsMatchup.getTeamAway().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
+		}
+		
+		// average out points per matchup
+		addGamePointsForMatchup(season, finalsMatchup);
 		
 		// add points for goals scored
 		List<Team> teams = ServiceUtils.loadTeams();

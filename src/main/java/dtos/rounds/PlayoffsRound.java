@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import main.java.dtos.Matchup;
 import main.java.dtos.Team;
@@ -42,6 +43,13 @@ public class PlayoffsRound extends Round {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="QUARTER_MATCHUPS_ROUNDS")
 	private List<Matchup> quarterMatchups = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name="SEMISMATCHUPS_ROUNDS")
+	private List<Matchup> semisMatchups = new ArrayList<>();
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Matchup finalsMatchup;
 
 	public PlayoffsRound() {
 	}
@@ -118,6 +126,14 @@ public class PlayoffsRound extends Round {
 
 	public List<Matchup> getQuarterMatchups() {
 		return quarterMatchups;
+	}
+
+	public List<Matchup> getSemisMatchups() {
+		return semisMatchups;
+	}
+
+	public Matchup getFinalsMatchup() {
+		return finalsMatchup;
 	}
 
 }
