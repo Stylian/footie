@@ -13,6 +13,7 @@ import main.java.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.Utils;
 import main.java.dtos.Matchup;
+import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.RobinGroup12;
@@ -181,17 +182,18 @@ public class GroupsRoundService {
 		groupsRoundOf8.addGroup(groupA);
 		groupsRoundOf8.addGroup(groupB);
 		
-		// CHALLENGING design
 		// add stats from round of 12
-//		for(RobinGroup group : groupsRoundOf8.getGroups()) {
-//			
-//			for(Team team : group.getTeams()) {
-//			
-//				team.getStatsForGroup(group);
-//				
-//			}
-//			
-//		}
+		for(RobinGroup group : groupsRoundOf8.getGroups()) {
+			
+			for(Team team : group.getTeams()) {
+
+				Stats stats12 = getStatsFromRoundOf12(groupsRoundOf12, team);
+				
+				team.getStatsForGroup(group).addStats(stats12);
+				
+			}
+			
+		}
 		
 		logger.info(groupA);
 		logger.info(groupB);
@@ -202,6 +204,29 @@ public class GroupsRoundService {
 		Properties properties = PropertyUtils.load();
 		properties.setProperty("groups_round_8", "2");
 		PropertyUtils.save(properties);
+		
+	}
+
+	private Stats getStatsFromRoundOf12(GroupsRound groupsRoundOf12, Team team) {
+
+		//iterate through groups to find the team
+		for(RobinGroup group : groupsRoundOf12.getGroups()) {
+			
+			for(Team t : group.getTeams()) {
+				
+				// found team
+				if(t.equals(team)) {
+					
+					return t.getStatsForGroup(group);
+					
+				}
+				
+			}
+			
+		}
+		
+		// should never reach
+		return null;
 		
 	}
 	
