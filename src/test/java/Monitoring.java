@@ -25,6 +25,14 @@ import main.java.tools.CoefficientsOrdering;
 public class Monitoring {
 
 	@Test
+	public void displayMetastats() {
+
+		
+		
+		
+	}
+
+	@Test
 	public void displayCoefficients() {
 
 		Session session = HibernateUtils.getSession();
@@ -33,7 +41,7 @@ public class Monitoring {
 
 		Group master = ServiceUtils.getMasterGroup();
 		Season season = ServiceUtils.loadCurrentSeason();
-		
+
 		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering(master));
 		List<Team> teams2 = groupService.getTeams(season, new CoefficientsOrdering(season));
 
@@ -52,149 +60,153 @@ public class Monitoring {
 			Stats stats = t.getGroupStats().get(master);
 			int padding = 30 - t.getName().length();
 			String pad = "";
-			for(int count=0; count < padding; count++)
+			for (int count = 0; count < padding; count++)
 				pad += " ";
-			
-			System.out.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws() + "   " + stats.getLosses() + "   "
-					+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+
+			System.out
+					.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
+							+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
 
 		}
 	}
-	
+
 	@Test
 	public void displaySeason1() {
 
 		Session session = HibernateUtils.getSession();
 
-		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class).getSingleResult();
-		
+		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class)
+				.getSingleResult();
+
 		System.out.println(season);
 		System.out.println("");
 		System.out.println("");
-		
+
 		List<Round> rounds = season.getRounds();
-		
+
 		QualsRound qualsRound1 = (QualsRound) rounds.get(0);
-		
+
 		System.out.println(qualsRound1.getName());
 		System.out.println("----------------------");
 		System.out.println("");
-		
+
 		System.out.println("-----strong seeds ---------");
-		for(Team t : qualsRound1.getStrongTeams())
+		for (Team t : qualsRound1.getStrongTeams())
 			System.out.println(t);
 
 		System.out.println("");
 		System.out.println("-----weak seeds ---------");
-		for(Team t : qualsRound1.getWeakTeams())
+		for (Team t : qualsRound1.getWeakTeams())
 			System.out.println(t);
-		
-		for(Matchup m : qualsRound1.getMatchups()) {
+
+		for (Matchup m : qualsRound1.getMatchups()) {
 			System.out.println("#########################");
-			for(Game g: m.getGames())
+			for (Game g : m.getGames())
 				System.out.println(g);
 		}
-		
+
 		QualsRound qualsRound2 = (QualsRound) rounds.get(1);
-		
+
 		System.out.println(qualsRound2.getName());
 		System.out.println("----------------------");
 		System.out.println("");
-		
+
 		System.out.println("-----strong seeds ---------");
-		for(Team t : qualsRound2.getStrongTeams())
+		for (Team t : qualsRound2.getStrongTeams())
 			System.out.println(t);
 
 		System.out.println("");
 		System.out.println("-----weak seeds ---------");
-		for(Team t : qualsRound2.getWeakTeams())
+		for (Team t : qualsRound2.getWeakTeams())
 			System.out.println(t);
-		
-		for(Matchup m : qualsRound2.getMatchups()) {
+
+		for (Matchup m : qualsRound2.getMatchups()) {
 			System.out.println("#########################");
-			for(Game g: m.getGames())
+			for (Game g : m.getGames())
 				System.out.println(g);
 		}
-		
+
 		GroupsRound groupsRound12 = (GroupsRound) rounds.get(2);
-		
+
 		System.out.println(groupsRound12.getName());
 		System.out.println("----------------------");
 		System.out.println("");
-		
+
 		System.out.println("-----strong seeds ---------");
-		for(Team t : groupsRound12.getStrongTeams())
+		for (Team t : groupsRound12.getStrongTeams())
 			System.out.println(t);
 
 		System.out.println("-----medium seeds ---------");
-		for(Team t : groupsRound12.getMediumTeams())
-			System.out.println(t);
-		
-		System.out.println("-----weak seeds ---------");
-		for(Team t : groupsRound12.getWeakTeams())
+		for (Team t : groupsRound12.getMediumTeams())
 			System.out.println(t);
 
-		for(RobinGroup robinGroup : groupsRound12.getGroups()) {
+		System.out.println("-----weak seeds ---------");
+		for (Team t : groupsRound12.getWeakTeams())
+			System.out.println(t);
+
+		for (RobinGroup robinGroup : groupsRound12.getGroups()) {
 			System.out.println("-----------------------");
 			System.out.println(robinGroup.getName());
-			
+
 			System.out.println("name                            coeff W   D   L   GS   GC");
-			for(Team t : robinGroup.getTeamsOrdered()) {
+			for (Team t : robinGroup.getTeamsOrdered()) {
 				Stats stats = t.getGroupStats().get(robinGroup);
 				int padding = 30 - t.getName().length();
 				String pad = "";
-				for(int count=0; count < padding; count++)
+				for (int count = 0; count < padding; count++)
 					pad += " ";
-				System.out.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws() + "   " + stats.getLosses() + "   "
-						+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+				System.out
+						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
+								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
 			}
-			
-			for(GroupGame g : robinGroup.getGames())
+
+			for (GroupGame g : robinGroup.getGames())
 				System.out.println(g);
-			
+
 		}
-		
+
 		GroupsRound groupsRound8 = (GroupsRound) rounds.get(3);
-		
-		for(RobinGroup robinGroup : groupsRound8.getGroups()) {
+
+		for (RobinGroup robinGroup : groupsRound8.getGroups()) {
 			System.out.println("-----------------------");
 			System.out.println(robinGroup.getName());
-			
+
 			System.out.println("name                            coeff W   D   L   GS   GC");
-			for(Team t : robinGroup.getTeamsOrdered()) {
+			for (Team t : robinGroup.getTeamsOrdered()) {
 				Stats stats = t.getGroupStats().get(robinGroup);
 				int padding = 30 - t.getName().length();
 				String pad = "";
-				for(int count=0; count < padding; count++)
+				for (int count = 0; count < padding; count++)
 					pad += " ";
-				System.out.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws() + "   " + stats.getLosses() + "   "
-						+ stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+				System.out
+						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
+								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
 			}
-			
-			for(GroupGame g : robinGroup.getGames())
+
+			for (GroupGame g : robinGroup.getGames())
 				System.out.println(g);
-			
+
 		}
-		
+
 		PlayoffsRound playoffsRound = (PlayoffsRound) rounds.get(4);
 
 		System.out.println(playoffsRound.getName());
-		for(Matchup m : playoffsRound.getQuarterMatchups()) {
+		for (Matchup m : playoffsRound.getQuarterMatchups()) {
 			System.out.println("#########################");
-			for(Game g: m.getGames())
+			for (Game g : m.getGames())
 				System.out.println(g);
 		}
-		for(Matchup m : playoffsRound.getSemisMatchups()) {
+		for (Matchup m : playoffsRound.getSemisMatchups()) {
 			System.out.println("#########################");
-			for(Game g: m.getGames())
+			for (Game g : m.getGames())
 				System.out.println(g);
 		}
 
 		Matchup fm = playoffsRound.getFinalsMatchup();
 		System.out.println("#########################");
-			for(Game g: fm.getGames())
-				System.out.println(g);
-		
+		for (Game g : fm.getGames())
+			System.out.println(g);
+
 		session.close();
 
 	}

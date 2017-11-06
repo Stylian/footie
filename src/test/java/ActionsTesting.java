@@ -63,6 +63,10 @@ public class ActionsTesting {
 		
 		testEndCurrentSeason();
 		
+		Monitoring monitoring = new Monitoring();
+		monitoring.displaySeason1();
+		monitoring.displayCoefficients();
+		
 		HibernateUtils.closeSession();
 		
 	}

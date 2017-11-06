@@ -16,6 +16,7 @@ import main.java.Utils;
 import main.java.dtos.Matchup;
 import main.java.dtos.Team;
 import main.java.dtos.games.Game;
+import main.java.dtos.games.GroupGame;
 import main.java.dtos.groups.Group;
 import main.java.dtos.groups.RobinGroup;
 import main.java.dtos.groups.Season;
@@ -171,6 +172,17 @@ public class SeasonService {
 			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
 			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 			
+			for(GroupGame groupGame : robinGroup.getGames()) {
+			
+				Team homeTeam = groupGame.getHomeTeam();
+				if(groupGame.getResult().homeTeamWon()) {
+					homeTeam.getStatsForGroup(season).addPoints(Rules.WIN_POINTS);
+				}else if(groupGame.getResult().tie()) {
+					homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
+				}
+				
+			}
+			
 		}
 		
 		// add coeffs for groups8 positions
@@ -181,6 +193,17 @@ public class SeasonService {
 			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
 			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
 			robinGroup.getTeamsOrdered().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
+			
+			for(GroupGame groupGame : robinGroup.getGames()) {
+			
+				Team homeTeam = groupGame.getHomeTeam();
+				if(groupGame.getResult().homeTeamWon()) {
+					homeTeam.getStatsForGroup(season).addPoints(Rules.WIN_POINTS);
+				}else if(groupGame.getResult().tie()) {
+					homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
+				}
+				
+			}
 			
 		}
 

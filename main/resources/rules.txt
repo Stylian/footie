@@ -1,7 +1,7 @@
-promotion_from_1st_quals_round=1000
-promotion_from_2nd_quals_round=1000
-groups12_1st_place=1000
-groups12_2nd_place=500
+promotion_from_1st_quals_round=500
+promotion_from_2nd_quals_round=500
+groups12_1st_place=500
+groups12_2nd_place=250
 groups8_1st_place=2000
 groups8_2nd_place=500
 groups8_3rd_place=250
