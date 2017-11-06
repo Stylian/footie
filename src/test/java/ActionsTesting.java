@@ -33,6 +33,18 @@ public class ActionsTesting {
 		properties.setProperty("finals", "0");
 		PropertyUtils.save(properties);
 
+		runSeason();
+		
+		Monitoring monitoring = new Monitoring();
+		monitoring.displaySeason1();
+		monitoring.displayCoefficients();
+		monitoring.displayMetastats();
+		
+		HibernateUtils.closeSession();
+		
+	}
+
+	private void runSeason() throws Exception {
 		testBoot();
 		testCreateSeason();
 		testSetUpSeason();
@@ -62,13 +74,6 @@ public class ActionsTesting {
 		fillUpRemainingGames();
 		
 		testEndCurrentSeason();
-		
-		Monitoring monitoring = new Monitoring();
-		monitoring.displaySeason1();
-		monitoring.displayCoefficients();
-		
-		HibernateUtils.closeSession();
-		
 	}
 
 	@Test
@@ -124,7 +129,7 @@ public class ActionsTesting {
 				break;
 			}
 
-			service.addResult(next, new Result(RandomUtils.nextInt(0, 3), RandomUtils.nextInt(0, 2)));
+			service.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
 
 			System.out.println(next);
 

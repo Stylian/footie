@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import main.java.HibernateUtils;
 import main.java.dtos.Matchup;
+import main.java.dtos.Result;
 import main.java.dtos.Stats;
 import main.java.dtos.Team;
 import main.java.dtos.games.Game;
@@ -27,8 +28,16 @@ public class Monitoring {
 	@Test
 	public void displayMetastats() {
 
+		Session session = HibernateUtils.getSession();
 		
+		List<Result> results = session.createQuery("from RESULTS", Result.class).list();
 		
+		System.out.println("number of games played: " + results.size());
+		System.out.println("average goals scored: " + results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble());
+		System.out.println("average goals conceded: " + results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble());
+		System.out.println("wins " + results.stream().filter(Result::homeTeamWon).count());
+		System.out.println("ties " + results.stream().filter(Result::tie).count());
+		System.out.println("losses " + results.stream().filter(Result::awayTeamWon).count());
 		
 	}
 
