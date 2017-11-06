@@ -21,6 +21,7 @@ import main.java.dtos.groups.RobinGroup8;
 import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.QualsRound;
+import main.java.tools.CoefficientsOrdering;
 
 public class GroupsRoundService {
 	
@@ -54,9 +55,10 @@ public class GroupsRoundService {
 		List<Team> mediumTeams = new ArrayList<>();
 		List<Team> weakTeams = new ArrayList<>();		
 		
+		List<Team> teamsCopy = new ArrayList<>(groupsRoundOf12.getTeams());
+
 		if(season.getSeasonYear() == 1) {
 			
-			List<Team> teamsCopy = new ArrayList<>(groupsRoundOf12.getTeams());
 			
 			Collections.shuffle(teamsCopy);
 			
@@ -70,7 +72,19 @@ public class GroupsRoundService {
 			
 		}else {
 			
-			// TODO
+			strongTeams.add(teamsCopy.remove(0)); // the champion
+			
+			Collections.sort(teamsCopy, new CoefficientsOrdering());
+			
+			for(int i=0; i<3; i++) {
+				strongTeams.add(teamsCopy.remove(0));
+			}
+			
+			for(int i=0; i<4; i++) {
+				mediumTeams.add(teamsCopy.remove(0));
+			}
+			
+			weakTeams = teamsCopy;
 			
 		}
 		
