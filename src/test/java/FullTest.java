@@ -16,7 +16,7 @@ import main.java.services.PlayoffsRoundService;
 import main.java.services.QualsService;
 import main.java.services.SeasonService;
 
-public class ActionsTesting {
+public class FullTest {
 
 	@Test
 	public void simulateSeason() throws Exception {
@@ -84,7 +84,6 @@ public class ActionsTesting {
 		testEndCurrentSeason();
 	}
 
-	@Test
 	public void testBoot() throws Exception {
 
 		BootService service = new BootService();
@@ -92,7 +91,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testCreateSeason() throws Exception {
 
 		SeasonService service = new SeasonService();
@@ -100,7 +98,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSetUpSeason() throws Exception {
 
 		SeasonService service = new SeasonService();
@@ -108,7 +105,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSeedQualsRound1() throws Exception {
 
 		QualsService service = new QualsService();
@@ -116,7 +112,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSetQualsRound1() throws Exception {
 
 		QualsService service = new QualsService();
@@ -124,7 +119,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void fillUpRemainingGames() throws Exception {
 
 		GameService service = new GameService();
@@ -145,7 +139,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSeedQualsRound2() throws Exception {
 
 		QualsService service = new QualsService();
@@ -153,7 +146,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSetUpQualsRound2() throws Exception {
 
 		QualsService service = new QualsService();
@@ -161,7 +153,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSeedGroupsRound12() throws Exception {
 
 		GroupsRoundService service = new GroupsRoundService();
@@ -169,7 +160,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSetUpGroupsRound12() throws Exception {
 
 		GroupsRoundService service = new GroupsRoundService();
@@ -177,7 +167,6 @@ public class ActionsTesting {
 
 	}
 
-	@Test
 	public void testSeedAndSetGroupsRound8() throws Exception {
 
 		GroupsRoundService service = new GroupsRoundService();
@@ -185,7 +174,6 @@ public class ActionsTesting {
 
 	}
 	
-	@Test
 	public void testSeedAndSetQuarterfinals() throws Exception {
 		
 		PlayoffsRoundService service = new PlayoffsRoundService();
@@ -193,7 +181,6 @@ public class ActionsTesting {
 		
 	}
 	
-	@Test
 	public void testSeedAndSetSemifinals() throws Exception {
 		
 		PlayoffsRoundService service = new PlayoffsRoundService();
@@ -202,7 +189,6 @@ public class ActionsTesting {
 	
 	}
 
-	@Test
 	public void testSeedAndSetfinals() throws Exception {
 		
 		PlayoffsRoundService service = new PlayoffsRoundService();
@@ -210,7 +196,6 @@ public class ActionsTesting {
 		
 	}
 	
-	@Test
 	public void testEndCurrentSeason() throws Exception {
 
 		SeasonService service = new SeasonService();
