@@ -33,19 +33,27 @@ public class ActionsTesting {
 		properties.setProperty("finals", "0");
 		PropertyUtils.save(properties);
 
+		testBoot();
+		
 		runSeason();
 		
 		Monitoring monitoring = new Monitoring();
-		monitoring.displaySeason1();
+		monitoring.displaySeason(1);
 		monitoring.displayCoefficients();
 		monitoring.displayMetastats();
+
+		runSeason();
 		
+		monitoring.displaySeason(2);
+		monitoring.displayCoefficients();
+		monitoring.displayMetastats();
+
 		HibernateUtils.closeSession();
 		
 	}
 
 	private void runSeason() throws Exception {
-		testBoot();
+
 		testCreateSeason();
 		testSetUpSeason();
 		

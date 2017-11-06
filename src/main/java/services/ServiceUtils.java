@@ -29,7 +29,15 @@ public class ServiceUtils {
 		return dao.listByField("GROUPS", "SEASON_YEAR", strSeasonNum).get(0);
 
 	}
+	
+	public static Season loadSeason(int year) {
+		
+		return (Season) HibernateUtils.getSession().createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year, Group.class)
+				.getSingleResult();
+		
+	}
 
+	
 	public static List<Team> loadTeams() {
 
 		DataAccessObject<Team> dao = new DataAccessObject<>(HibernateUtils.getSession());

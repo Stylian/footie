@@ -23,6 +23,7 @@ import main.java.dtos.groups.Season;
 import main.java.dtos.rounds.GroupsRound;
 import main.java.dtos.rounds.PlayoffsRound;
 import main.java.dtos.rounds.QualsRound;
+import main.java.tools.CoefficientsOrdering;
 
 public class SeasonService {
 
@@ -37,6 +38,13 @@ public class SeasonService {
 
 		int year = Integer.parseInt(strSeasonNum) + 1;
 		properties.setProperty("season", Integer.toString(year));
+		properties.setProperty("round_quals_1", "0");
+		properties.setProperty("round_quals_2", "0");
+		properties.setProperty("groups_round_12", "0");
+		properties.setProperty("groups_round_8", "0");
+		properties.setProperty("quarterfinals", "0");
+		properties.setProperty("semifinals", "0");
+		properties.setProperty("finals", "0");
 		PropertyUtils.save(properties);
 
 		logger.info("creating season " + year);
@@ -87,45 +95,42 @@ public class SeasonService {
 			logger.info("1st season no teams go directly to groups");
 			groupsRound12.setTeams(new ArrayList<>());
 
-		} else { // needs more work
+		} else {
+			
+			List<Team> teamsClone = new ArrayList<>(teams);
+			Collections.sort(teamsClone, new CoefficientsOrdering());
+			
+			List<Team> groupsTeams = new ArrayList<>();
+			
+			// former champion promotes directly
+			Team formerChampion = ServiceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
+			groupsTeams.add(formerChampion);
+			teamsClone.remove(formerChampion);
 
-			// former champion promotes directly , to add later to groups round
-			Team formerChampion = teams.remove(0); // TODO
-
-			// top 3 seeded teams promote directly excluding champion, to add later to
-			// groups round
-			List<Team> top3Seeders = new ArrayList<>();
-			top3Seeders.add(teams.remove(0)); // TODO
-			top3Seeders.add(teams.remove(0));
-			top3Seeders.add(teams.remove(0));
+			// top 3 seeded teams promote directly to groups round excluding champion
+			groupsTeams.add(teamsClone.remove(0));
+			groupsTeams.add(teamsClone.remove(0));
+			groupsTeams.add(teamsClone.remove(0));
 
 			// 2nd round needs 16 teams so
-			int diff = teams.size() - 16;
+			int diff = teamsClone.size() - 16;
 
 			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
-			List<Team> quals1 = new ArrayList<>();
+			List<Team> quals1Teams = new ArrayList<>();
 			for (int index = 0; index < 2 * diff; index++) {
-				quals1.add(teams.remove(0)); // TODO
+				quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
 			}
 
-			// remaining go to 2nd quals
-			List<Team> quals2 = teams;
-
-			for (Team t : quals1)
-				System.out.println(t);
-
+			logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
+			groupsRound12.setTeams(groupsTeams);
 			System.out.println("---------------");
 
-			for (Team t : quals2)
-				System.out.println(t);
-
+			logger.info("teams go directly to 2nd quals: " + Utils.toString(teamsClone));
+			qualsRound2.setTeams(teamsClone);
 			System.out.println("---------------");
 
-			for (Team t : top3Seeders)
-				System.out.println(t);
-
-			System.out.println("---------------");
-			System.out.println(formerChampion);
+			logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
+			qualsRound1.setTeams(quals1Teams);
 
 		}
 

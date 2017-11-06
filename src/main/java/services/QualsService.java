@@ -106,15 +106,13 @@ public class QualsService {
 
 		List<Team> teams = qualsRound.getTeams();
 		
-		Group master = ServiceUtils.getMasterGroup();
-		
 		if(season.getSeasonYear() == 1) {
 			
 			Collections.shuffle(teams);
 			
 		}else {
 		
-			Collections.sort(teams, new CoefficientsOrdering(master));
+			Collections.sort(teams, new CoefficientsOrdering());
 		
 		}
 		

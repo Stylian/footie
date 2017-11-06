@@ -44,6 +44,7 @@ public class Round {
 
 	public Round(Season season, String name) {
 		this.season = season;
+		this.name = name;
 		season.addRound(this);
 	}
 

@@ -1,14 +1,12 @@
 package main.java.tools;
 
 import main.java.dtos.Team;
-import main.java.dtos.groups.Group;
+import main.java.services.ServiceUtils;
 
-// todo, this is not coeffs ordering, coeffs will not need to set the master group.
-// todo group ordering as well
 public class CoefficientsOrdering extends Ordering {
 	
-	public CoefficientsOrdering(Group group) {
-		super(group);
+	public CoefficientsOrdering() {
+		super(ServiceUtils.getMasterGroup());
 	}
 
 	@Override

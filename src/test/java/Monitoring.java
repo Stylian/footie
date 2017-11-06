@@ -51,11 +51,9 @@ public class Monitoring {
 		Group master = ServiceUtils.getMasterGroup();
 		Season season = ServiceUtils.loadCurrentSeason();
 
-		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering(master));
-		List<Team> teams2 = groupService.getTeams(season, new CoefficientsOrdering(season));
+		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering());
 
 		displayGroup(master, teams1);
-		displayGroup(season, teams2);
 
 		session.close();
 
@@ -80,12 +78,18 @@ public class Monitoring {
 	}
 
 	@Test
-	public void displaySeason1() {
-
+	public void displaySeason(int year) {
+		
 		Session session = HibernateUtils.getSession();
-
-		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=1", Group.class)
+		
+		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year, Group.class)
 				.getSingleResult();
+
+		displaySeason(season);
+		
+	}
+	
+	public void displaySeason(Season season) {
 
 		System.out.println(season);
 		System.out.println("");
@@ -93,6 +97,21 @@ public class Monitoring {
 
 		List<Round> rounds = season.getRounds();
 
+		displayQuals1(rounds);
+
+		displayQuals2(rounds);
+
+		displayRoundOf12(rounds);
+
+		displayRoundOf8(rounds);
+
+		displayPlayoffs(rounds);
+
+		System.out.println("season winner: " + season.getWinner());
+		
+	}
+
+	private void displayQuals1(List<Round> rounds) {
 		QualsRound qualsRound1 = (QualsRound) rounds.get(0);
 
 		System.out.println(qualsRound1.getName());
@@ -113,7 +132,9 @@ public class Monitoring {
 			for (Game g : m.getGames())
 				System.out.println(g);
 		}
+	}
 
+	private void displayQuals2(List<Round> rounds) {
 		QualsRound qualsRound2 = (QualsRound) rounds.get(1);
 
 		System.out.println(qualsRound2.getName());
@@ -134,7 +155,9 @@ public class Monitoring {
 			for (Game g : m.getGames())
 				System.out.println(g);
 		}
+	}
 
+	private void displayRoundOf12(List<Round> rounds) {
 		GroupsRound groupsRound12 = (GroupsRound) rounds.get(2);
 
 		System.out.println(groupsRound12.getName());
@@ -173,7 +196,9 @@ public class Monitoring {
 				System.out.println(g);
 
 		}
+	}
 
+	private void displayRoundOf8(List<Round> rounds) {
 		GroupsRound groupsRound8 = (GroupsRound) rounds.get(3);
 
 		for (RobinGroup robinGroup : groupsRound8.getGroups()) {
@@ -196,7 +221,9 @@ public class Monitoring {
 				System.out.println(g);
 
 		}
+	}
 
+	private void displayPlayoffs(List<Round> rounds) {
 		PlayoffsRound playoffsRound = (PlayoffsRound) rounds.get(4);
 
 		System.out.println(playoffsRound.getName());
@@ -215,9 +242,6 @@ public class Monitoring {
 		System.out.println("#########################");
 		for (Game g : fm.getGames())
 			System.out.println(g);
-
-		session.close();
-
 	}
 
 }

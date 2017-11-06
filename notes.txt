@@ -1,3 +1,2 @@
-1. coefficients not calculating correctly
 4. 2nd season plus set up season todo
 5. 2nd season groups12 todo
