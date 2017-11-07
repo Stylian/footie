@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.matchups;
+package service.peristence.dtos.matchups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.games.Game;
-import main.java.service.peristence.dtos.games.MatchupGame;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.games.Game;
+import service.peristence.dtos.games.MatchupGame;
 
 @Entity(name = "MATCHUPS")
 public class Matchup {

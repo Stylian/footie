@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.rounds;
+package service.peristence.dtos.rounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.RobinGroup;
-import main.java.service.peristence.dtos.groups.Season;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.RobinGroup;
+import service.peristence.dtos.groups.Season;
 
 @Entity
 @DiscriminatorValue(value = "G")

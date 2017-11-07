@@ -1,4 +1,4 @@
-package main.java.service.services;
+package service.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,20 +8,20 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.service.PropertyUtils;
-import main.java.service.Utils;
-import main.java.service.peristence.DataAccessObject;
-import main.java.service.peristence.HibernateUtils;
-import main.java.service.peristence.dtos.Stats;
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.RobinGroup;
-import main.java.service.peristence.dtos.groups.RobinGroup12;
-import main.java.service.peristence.dtos.groups.RobinGroup8;
-import main.java.service.peristence.dtos.groups.Season;
-import main.java.service.peristence.dtos.matchups.Matchup;
-import main.java.service.peristence.dtos.rounds.GroupsRound;
-import main.java.service.peristence.dtos.rounds.QualsRound;
-import main.java.service.tools.CoefficientsOrdering;
+import service.PropertyUtils;
+import service.Utils;
+import service.peristence.DataAccessObject;
+import service.peristence.HibernateUtils;
+import service.peristence.dtos.Stats;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.RobinGroup;
+import service.peristence.dtos.groups.RobinGroup12;
+import service.peristence.dtos.groups.RobinGroup8;
+import service.peristence.dtos.groups.Season;
+import service.peristence.dtos.matchups.Matchup;
+import service.peristence.dtos.rounds.GroupsRound;
+import service.peristence.dtos.rounds.QualsRound;
+import service.tools.CoefficientsOrdering;
 
 public class GroupsRoundService {
 	

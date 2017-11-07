@@ -1,4 +1,4 @@
-package main.java.service.services;
+package service.services;
 
 import java.util.Iterator;
 import java.util.List;
@@ -6,16 +6,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.service.peristence.DataAccessObject;
-import main.java.service.peristence.HibernateUtils;
-import main.java.service.peristence.dtos.Stats;
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.games.Game;
-import main.java.service.peristence.dtos.games.GroupGame;
-import main.java.service.peristence.dtos.games.MatchupGame;
-import main.java.service.peristence.dtos.games.Result;
-import main.java.service.peristence.dtos.groups.Season;
-import main.java.service.peristence.dtos.matchups.Matchup;
+import service.peristence.DataAccessObject;
+import service.peristence.HibernateUtils;
+import service.peristence.dtos.Stats;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.games.Game;
+import service.peristence.dtos.games.GroupGame;
+import service.peristence.dtos.games.MatchupGame;
+import service.peristence.dtos.games.Result;
+import service.peristence.dtos.groups.Season;
+import service.peristence.dtos.matchups.Matchup;
 
 /**
  * manages adding game results

@@ -1,9 +1,9 @@
-package main.java.service.tools;
+package service.tools;
 
 import java.util.Comparator;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.Group;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.Group;
 
 public abstract class Ordering implements Comparator<Team> {
 

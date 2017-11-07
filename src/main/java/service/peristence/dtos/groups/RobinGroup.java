@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.groups;
+package service.peristence.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.games.GroupGame;
-import main.java.service.tools.RobinGroupOrdering;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.games.GroupGame;
+import service.tools.RobinGroupOrdering;
 
 @Entity
 @DiscriminatorValue(value = "R")

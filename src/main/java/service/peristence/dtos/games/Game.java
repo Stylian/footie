@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.games;
+package service.peristence.dtos.games;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,8 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.matchups.Matchup;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.matchups.Matchup;
 
 @Entity(name = "GAMES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

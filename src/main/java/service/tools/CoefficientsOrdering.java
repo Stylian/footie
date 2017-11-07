@@ -1,7 +1,7 @@
-package main.java.service.tools;
+package service.tools;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.services.ServiceUtils;
+import service.peristence.dtos.Team;
+import service.services.ServiceUtils;
 
 public class CoefficientsOrdering extends Ordering {
 	

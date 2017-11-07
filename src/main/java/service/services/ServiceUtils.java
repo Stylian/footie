@@ -1,14 +1,14 @@
-package main.java.service.services;
+package service.services;
 
 import java.util.List;
 import java.util.Properties;
 
-import main.java.service.PropertyUtils;
-import main.java.service.peristence.DataAccessObject;
-import main.java.service.peristence.HibernateUtils;
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.Group;
-import main.java.service.peristence.dtos.groups.Season;
+import service.PropertyUtils;
+import service.peristence.DataAccessObject;
+import service.peristence.HibernateUtils;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.Group;
+import service.peristence.dtos.groups.Season;
 
 public class ServiceUtils {
 

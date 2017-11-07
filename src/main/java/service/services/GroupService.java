@@ -1,4 +1,4 @@
-package main.java.service.services;
+package service.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,10 +8,10 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.service.peristence.dtos.Stats;
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.Group;
-import main.java.service.tools.Ordering;
+import service.peristence.dtos.Stats;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.Group;
+import service.tools.Ordering;
 
 public class GroupService {
 

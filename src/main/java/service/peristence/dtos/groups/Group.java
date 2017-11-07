@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.groups;
+package service.peristence.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,9 +19,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-import main.java.service.Utils;
-import main.java.service.peristence.dtos.Stats;
-import main.java.service.peristence.dtos.Team;
+import service.Utils;
+import service.peristence.dtos.Stats;
+import service.peristence.dtos.Team;
 
 @Entity(name = "GROUPS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

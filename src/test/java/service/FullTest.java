@@ -1,20 +1,20 @@
-package test.java;
+package service;
 
 import java.util.Properties;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
-import main.java.service.PropertyUtils;
-import main.java.service.peristence.HibernateUtils;
-import main.java.service.peristence.dtos.games.Game;
-import main.java.service.peristence.dtos.games.Result;
-import main.java.service.services.BootService;
-import main.java.service.services.GameService;
-import main.java.service.services.GroupsRoundService;
-import main.java.service.services.PlayoffsRoundService;
-import main.java.service.services.QualsService;
-import main.java.service.services.SeasonService;
+import service.PropertyUtils;
+import service.peristence.HibernateUtils;
+import service.peristence.dtos.games.Game;
+import service.peristence.dtos.games.Result;
+import service.services.BootService;
+import service.services.GameService;
+import service.services.GroupsRoundService;
+import service.services.PlayoffsRoundService;
+import service.services.QualsService;
+import service.services.SeasonService;
 
 public class FullTest {
 

@@ -1,7 +1,7 @@
-package main.java.service.tools;
+package service.tools;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.Group;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.Group;
 
 public class AlphabeticalOrdering extends Ordering {
 

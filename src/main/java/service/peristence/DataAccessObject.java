@@ -1,4 +1,4 @@
-package main.java.service.peristence;
+package service.peristence;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import main.java.service.peristence.dtos.Team;
+import service.peristence.dtos.Team;
 
 public class DataAccessObject<T> {
 

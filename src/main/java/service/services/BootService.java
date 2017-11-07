@@ -1,4 +1,4 @@
-package main.java.service.services;
+package service.services;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.service.PropertyUtils;
-import main.java.service.peristence.DataAccessObject;
-import main.java.service.peristence.HibernateUtils;
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.groups.Group;
+import service.PropertyUtils;
+import service.peristence.DataAccessObject;
+import service.peristence.HibernateUtils;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.groups.Group;
 
 public class BootService {
 

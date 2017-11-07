@@ -1,4 +1,4 @@
-package main.java.service.peristence.dtos.groups;
+package service.peristence.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import main.java.service.peristence.dtos.Team;
-import main.java.service.peristence.dtos.rounds.Round;
+import service.peristence.dtos.Team;
+import service.peristence.dtos.rounds.Round;
 
 @Entity
 @DiscriminatorValue(value = "S")
