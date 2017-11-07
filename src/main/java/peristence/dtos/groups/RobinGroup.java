@@ -1,4 +1,4 @@
-package main.java.dtos.groups;
+package main.java.peristence.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import main.java.dtos.Team;
-import main.java.dtos.games.GroupGame;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.games.GroupGame;
 import main.java.tools.RobinGroupOrdering;
 
 @Entity

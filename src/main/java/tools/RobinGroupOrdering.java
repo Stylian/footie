@@ -2,10 +2,10 @@ package main.java.tools;
 
 import org.apache.commons.lang3.RandomUtils;
 
-import main.java.HibernateUtils;
-import main.java.dtos.Stats;
-import main.java.dtos.Team;
-import main.java.dtos.groups.Group;
+import main.java.peristence.HibernateUtils;
+import main.java.peristence.dtos.Stats;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.groups.Group;
 import main.java.services.ServiceUtils;
 
 public class RobinGroupOrdering extends Ordering {

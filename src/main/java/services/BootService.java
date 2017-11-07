@@ -10,11 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.DataAccessObject;
-import main.java.HibernateUtils;
+import main.java.peristence.DataAccessObject;
+import main.java.peristence.HibernateUtils;
 import main.java.PropertyUtils;
-import main.java.dtos.Team;
-import main.java.dtos.groups.Group;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.groups.Group;
 
 public class BootService {
 

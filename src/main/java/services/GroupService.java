@@ -8,9 +8,9 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.dtos.Stats;
-import main.java.dtos.Team;
-import main.java.dtos.groups.Group;
+import main.java.peristence.dtos.Stats;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.groups.Group;
 import main.java.tools.Ordering;
 
 public class GroupService {

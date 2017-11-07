@@ -1,12 +1,12 @@
-package main.java.dtos.games;
+package main.java.peristence.dtos.games;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import main.java.dtos.Team;
-import main.java.dtos.groups.RobinGroup;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.groups.RobinGroup;
 
 @Entity
 @DiscriminatorValue(value = "GG")

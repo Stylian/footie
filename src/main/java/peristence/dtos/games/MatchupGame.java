@@ -1,12 +1,12 @@
-package main.java.dtos.games;
+package main.java.peristence.dtos.games;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import main.java.dtos.Matchup;
-import main.java.dtos.Team;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.matchups.Matchup;
 
 @Entity
 @DiscriminatorValue(value = "MG")

@@ -1,4 +1,4 @@
-package main.java.dtos.groups;
+package main.java.peristence.dtos.groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import main.java.dtos.Team;
-import main.java.dtos.games.GroupGame;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.games.GroupGame;
 
 @Entity
 @DiscriminatorValue(value = "R8")

@@ -33,22 +33,26 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
  
-        <mapping class="main.java.dtos.Team" />
-        <mapping class="main.java.dtos.Stats" />
-        <mapping class="main.java.dtos.Result" />
-        <mapping class="main.java.dtos.games.Game" />
-        <mapping class="main.java.dtos.games.MatchupGame" />
-        <mapping class="main.java.dtos.games.GroupGame" />
-        <mapping class="main.java.dtos.Matchup" />
-        <mapping class="main.java.dtos.groups.Group" />
-        <mapping class="main.java.dtos.groups.RobinGroup" />
-        <mapping class="main.java.dtos.groups.RobinGroup12" />
-        <mapping class="main.java.dtos.groups.RobinGroup8" />
-        <mapping class="main.java.dtos.groups.Season" />
-        <mapping class="main.java.dtos.rounds.Round" />
-        <mapping class="main.java.dtos.rounds.QualsRound" />
-        <mapping class="main.java.dtos.rounds.GroupsRound" />
-        <mapping class="main.java.dtos.rounds.PlayoffsRound" />
+        <mapping class="main.java.peristence.dtos.Team" />
+        <mapping class="main.java.peristence.dtos.Stats" />
+        
+        <mapping class="main.java.peristence.dtos.games.Result" />
+        <mapping class="main.java.peristence.dtos.games.Game" />
+        <mapping class="main.java.peristence.dtos.games.MatchupGame" />
+        <mapping class="main.java.peristence.dtos.games.GroupGame" />
+        
+        <mapping class="main.java.peristence.dtos.matchups.Matchup" />
+        
+        <mapping class="main.java.peristence.dtos.groups.Group" />
+        <mapping class="main.java.peristence.dtos.groups.RobinGroup" />
+        <mapping class="main.java.peristence.dtos.groups.RobinGroup12" />
+        <mapping class="main.java.peristence.dtos.groups.RobinGroup8" />
+        <mapping class="main.java.peristence.dtos.groups.Season" />
+        
+        <mapping class="main.java.peristence.dtos.rounds.Round" />
+        <mapping class="main.java.peristence.dtos.rounds.QualsRound" />
+        <mapping class="main.java.peristence.dtos.rounds.GroupsRound" />
+        <mapping class="main.java.peristence.dtos.rounds.PlayoffsRound" />
  
     </session-factory>
  

@@ -6,16 +6,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.DataAccessObject;
-import main.java.HibernateUtils;
-import main.java.dtos.Matchup;
-import main.java.dtos.Result;
-import main.java.dtos.Stats;
-import main.java.dtos.Team;
-import main.java.dtos.games.Game;
-import main.java.dtos.games.GroupGame;
-import main.java.dtos.games.MatchupGame;
-import main.java.dtos.groups.Season;
+import main.java.peristence.DataAccessObject;
+import main.java.peristence.HibernateUtils;
+import main.java.peristence.dtos.Stats;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.games.Game;
+import main.java.peristence.dtos.games.GroupGame;
+import main.java.peristence.dtos.games.MatchupGame;
+import main.java.peristence.dtos.games.Result;
+import main.java.peristence.dtos.groups.Season;
+import main.java.peristence.dtos.matchups.Matchup;
 
 /**
  * manages adding game results

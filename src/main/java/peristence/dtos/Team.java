@@ -1,4 +1,4 @@
-package main.java.dtos;
+package main.java.peristence.dtos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import main.java.dtos.groups.Group;
+import main.java.peristence.dtos.groups.Group;
 
 @Entity(name = "TEAMS")
 public class Team {

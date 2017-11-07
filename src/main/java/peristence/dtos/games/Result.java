@@ -1,4 +1,4 @@
-package main.java.dtos;
+package main.java.peristence.dtos.games;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package main.java.dtos.rounds;
+package main.java.peristence.dtos.rounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import main.java.dtos.Matchup;
-import main.java.dtos.Team;
-import main.java.dtos.enums.MatchupFormat;
-import main.java.dtos.enums.MatchupTieStrategy;
-import main.java.dtos.groups.Season;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.groups.Season;
+import main.java.peristence.dtos.matchups.Matchup;
+import main.java.peristence.dtos.matchups.MatchupFormat;
+import main.java.peristence.dtos.matchups.MatchupTieStrategy;
 
 @Entity
 @DiscriminatorValue(value = "PR")

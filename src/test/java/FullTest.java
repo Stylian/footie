@@ -5,10 +5,10 @@ import java.util.Properties;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
-import main.java.HibernateUtils;
 import main.java.PropertyUtils;
-import main.java.dtos.Result;
-import main.java.dtos.games.Game;
+import main.java.peristence.HibernateUtils;
+import main.java.peristence.dtos.games.Game;
+import main.java.peristence.dtos.games.Result;
 import main.java.services.BootService;
 import main.java.services.GameService;
 import main.java.services.GroupsRoundService;

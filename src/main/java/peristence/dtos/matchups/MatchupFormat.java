@@ -1,4 +1,4 @@
-package main.java.dtos.enums;
+package main.java.peristence.dtos.matchups;
 
 public enum MatchupFormat {
 	FORMAT_IN_OUT_SINGLE,

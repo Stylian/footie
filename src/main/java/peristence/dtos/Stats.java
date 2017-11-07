@@ -1,4 +1,4 @@
-package main.java.dtos;
+package main.java.peristence.dtos;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import main.java.dtos.groups.Group;
+import main.java.peristence.dtos.groups.Group;
 
 @Entity(name = "STATS")
 public class Stats {

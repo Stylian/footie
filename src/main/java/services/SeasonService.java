@@ -8,21 +8,21 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import main.java.DataAccessObject;
-import main.java.HibernateUtils;
+import main.java.peristence.DataAccessObject;
+import main.java.peristence.HibernateUtils;
 import main.java.PropertyUtils;
 import main.java.Rules;
 import main.java.Utils;
-import main.java.dtos.Matchup;
-import main.java.dtos.Team;
-import main.java.dtos.games.Game;
-import main.java.dtos.games.GroupGame;
-import main.java.dtos.groups.Group;
-import main.java.dtos.groups.RobinGroup;
-import main.java.dtos.groups.Season;
-import main.java.dtos.rounds.GroupsRound;
-import main.java.dtos.rounds.PlayoffsRound;
-import main.java.dtos.rounds.QualsRound;
+import main.java.peristence.dtos.Team;
+import main.java.peristence.dtos.games.Game;
+import main.java.peristence.dtos.games.GroupGame;
+import main.java.peristence.dtos.groups.Group;
+import main.java.peristence.dtos.groups.RobinGroup;
+import main.java.peristence.dtos.groups.Season;
+import main.java.peristence.dtos.matchups.Matchup;
+import main.java.peristence.dtos.rounds.GroupsRound;
+import main.java.peristence.dtos.rounds.PlayoffsRound;
+import main.java.peristence.dtos.rounds.QualsRound;
 import main.java.tools.CoefficientsOrdering;
 
 public class SeasonService {
