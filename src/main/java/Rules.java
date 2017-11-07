@@ -11,7 +11,7 @@ public class Rules {
 
 	final static Logger logger = Logger.getLogger(Rules.class);
 	
-	private static final String RULES_FILE = "main/resources/rules.txt";
+	private static final String RULES_FILE = "src/main/resources/rules.txt";
 
 	public static final int PROMOTION_POINTS_QUALS_1;
 	public static final int PROMOTION_POINTS_QUALS_2;

@@ -18,7 +18,7 @@ import main.java.dtos.groups.Group;
 
 public class BootService {
 
-	private static final String TEAMS_FILE = "main/resources/teams.txt";
+	private static final String TEAMS_FILE = "src/main/resources/teams.txt";
 
 	final static Logger logger = Logger.getLogger(BootService.class);
 	
