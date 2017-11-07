@@ -1,2 +1,4 @@
 upgrade to java 9 ? problems
 to add spring and json services
+
+mvn install clean
