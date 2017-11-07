@@ -5,23 +5,23 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import main.java.peristence.HibernateUtils;
-import main.java.peristence.dtos.Stats;
-import main.java.peristence.dtos.Team;
-import main.java.peristence.dtos.games.Game;
-import main.java.peristence.dtos.games.GroupGame;
-import main.java.peristence.dtos.games.Result;
-import main.java.peristence.dtos.groups.Group;
-import main.java.peristence.dtos.groups.RobinGroup;
-import main.java.peristence.dtos.groups.Season;
-import main.java.peristence.dtos.matchups.Matchup;
-import main.java.peristence.dtos.rounds.GroupsRound;
-import main.java.peristence.dtos.rounds.PlayoffsRound;
-import main.java.peristence.dtos.rounds.QualsRound;
-import main.java.peristence.dtos.rounds.Round;
-import main.java.services.GroupService;
-import main.java.services.ServiceUtils;
-import main.java.tools.CoefficientsOrdering;
+import main.java.service.peristence.HibernateUtils;
+import main.java.service.peristence.dtos.Stats;
+import main.java.service.peristence.dtos.Team;
+import main.java.service.peristence.dtos.games.Game;
+import main.java.service.peristence.dtos.games.GroupGame;
+import main.java.service.peristence.dtos.games.Result;
+import main.java.service.peristence.dtos.groups.Group;
+import main.java.service.peristence.dtos.groups.RobinGroup;
+import main.java.service.peristence.dtos.groups.Season;
+import main.java.service.peristence.dtos.matchups.Matchup;
+import main.java.service.peristence.dtos.rounds.GroupsRound;
+import main.java.service.peristence.dtos.rounds.PlayoffsRound;
+import main.java.service.peristence.dtos.rounds.QualsRound;
+import main.java.service.peristence.dtos.rounds.Round;
+import main.java.service.services.GroupService;
+import main.java.service.services.ServiceUtils;
+import main.java.service.tools.CoefficientsOrdering;
 
 public class Monitoring {
 

@@ -5,16 +5,16 @@ import java.util.Properties;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
-import main.java.PropertyUtils;
-import main.java.peristence.HibernateUtils;
-import main.java.peristence.dtos.games.Game;
-import main.java.peristence.dtos.games.Result;
-import main.java.services.BootService;
-import main.java.services.GameService;
-import main.java.services.GroupsRoundService;
-import main.java.services.PlayoffsRoundService;
-import main.java.services.QualsService;
-import main.java.services.SeasonService;
+import main.java.service.PropertyUtils;
+import main.java.service.peristence.HibernateUtils;
+import main.java.service.peristence.dtos.games.Game;
+import main.java.service.peristence.dtos.games.Result;
+import main.java.service.services.BootService;
+import main.java.service.services.GameService;
+import main.java.service.services.GroupsRoundService;
+import main.java.service.services.PlayoffsRoundService;
+import main.java.service.services.QualsService;
+import main.java.service.services.SeasonService;
 
 public class FullTest {
 
