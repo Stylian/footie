@@ -3,16 +3,15 @@ package core.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import core.PropertyUtils;
 import core.Rules;
 import core.Utils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.games.Game;
 import core.peristence.dtos.games.GroupGame;
@@ -33,23 +32,13 @@ public class SeasonService {
 
 	public void createSeason() {
 
-		Properties properties = PropertyUtils.load();
-		String strSeasonNum = properties.getProperty("season");
+		League league = ServiceUtils.getLeague();
+		league.resetStages();
+		league.addSeason();
 
-		int year = Integer.parseInt(strSeasonNum) + 1;
-		properties.setProperty("season", Integer.toString(year));
-		properties.setProperty("round_quals_1", "0");
-		properties.setProperty("round_quals_2", "0");
-		properties.setProperty("groups_round_12", "0");
-		properties.setProperty("groups_round_8", "0");
-		properties.setProperty("quarterfinals", "0");
-		properties.setProperty("semifinals", "0");
-		properties.setProperty("finals", "0");
-		PropertyUtils.save(properties);
+		logger.info("creating season " + league.getSeasonNum());
 
-		logger.info("creating season " + year);
-
-		Season season = new Season(year);
+		Season season = new Season(league.getSeasonNum());
 
 		List<Team> teams = ServiceUtils.loadTeams();
 
@@ -61,6 +50,9 @@ public class SeasonService {
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
 		dao.save(season);
+		
+		DataAccessObject<League> dao2 = new DataAccessObject<>(session);
+		dao2.save(league);
 
 	}
 

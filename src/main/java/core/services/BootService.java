@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import core.PropertyUtils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
 
@@ -26,13 +25,18 @@ public class BootService {
 	
 	public void start() {
 
-		Properties properties = PropertyUtils.load();
-	
-		if(properties.getProperty("first_boot").equals("0")) {
+		League league = ServiceUtils.getLeague();
+		
+		if(league == null) {
+			
 			createMasterGroup();
 			registerTeamsFromFile();
-			properties.setProperty("first_boot", "1");
-			PropertyUtils.save(properties);
+			
+			league = new League();
+			
+			DataAccessObject<League> dao = new DataAccessObject<>(session);
+			dao.save(league);
+			
 		}
 		
 	}

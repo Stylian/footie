@@ -33,6 +33,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
  
+        <mapping class="core.peristence.dtos.League" />
         <mapping class="core.peristence.dtos.Team" />
         <mapping class="core.peristence.dtos.Stats" />
 

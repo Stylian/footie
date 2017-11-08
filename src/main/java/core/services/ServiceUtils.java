@@ -6,27 +6,37 @@ import java.util.Properties;
 import core.PropertyUtils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.Season;
 
 public class ServiceUtils {
 
-	public static Group getMasterGroup() {
+	public static League getLeague() {
 
+		DataAccessObject<League> groupDao = new DataAccessObject<>(HibernateUtils.getSession());
+		
+		List<League> ls = groupDao.list("LEAGUES");
+		
+		return ls.size() > 0 ? groupDao.list("LEAGUES").get(0) : null;
+
+	}
+	
+	public static Group getMasterGroup() {
+		
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(HibernateUtils.getSession());
 		return groupDao.listByField("GROUPS", "NAME", "master").get(0);
-
+		
 	}
 
 	public static Season loadCurrentSeason() {
 
-		Properties properties = PropertyUtils.load();
-		String strSeasonNum = properties.getProperty("season");
-
+		League league = getLeague();
+		
 		DataAccessObject<Season> dao = new DataAccessObject<>(HibernateUtils.getSession());
 
-		return dao.listByField("GROUPS", "SEASON_YEAR", strSeasonNum).get(0);
+		return dao.listByField("GROUPS", "SEASON_YEAR", "" + league.getSeasonNum()).get(0);
 
 	}
 	
