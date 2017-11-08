@@ -1,5 +1,5 @@
 #Properties File
-#Tue Nov 07 14:43:40 GMT 2017
+#Wed Nov 08 10:31:30 GMT 2017
 semifinals=2
 groups_round_12=2
 groups_round_8=2
