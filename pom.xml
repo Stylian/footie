@@ -5,7 +5,7 @@
 	<artifactId>footie</artifactId>
 	<version>1.0</version>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
