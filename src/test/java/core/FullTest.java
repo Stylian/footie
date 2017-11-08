@@ -1,11 +1,8 @@
 package core;
 
-import java.util.Properties;
-
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
-import core.PropertyUtils;
 import core.peristence.HibernateUtils;
 import core.peristence.dtos.games.Game;
 import core.peristence.dtos.games.Result;
@@ -20,18 +17,6 @@ public class FullTest {
 
 	@Test
 	public void simulateSeason() throws Exception {
-
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("first_boot", "0");
-		properties.setProperty("season", "0");
-		properties.setProperty("round_quals_1", "0");
-		properties.setProperty("round_quals_2", "0");
-		properties.setProperty("groups_round_12", "0");
-		properties.setProperty("groups_round_8", "0");
-		properties.setProperty("quarterfinals", "0");
-		properties.setProperty("semifinals", "0");
-		properties.setProperty("finals", "0");
-		PropertyUtils.save(properties);
 
 		testBoot();
 		

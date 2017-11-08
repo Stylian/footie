@@ -3,15 +3,15 @@ package core.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import core.PropertyUtils;
 import core.Utils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
+import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.RobinGroup;
@@ -99,9 +99,9 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(groupsRoundOf12);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("groups_round_12", "1");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setGroups12(LeagueStage.ON_PREVIEW);
+		league.save();
 		
 	}
 	
@@ -158,9 +158,9 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(groupsRoundOf12);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("groups_round_12", "2");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setGroups12(LeagueStage.PLAYING);
+		league.save();
 		
 	}
 
@@ -215,10 +215,9 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(groupsRoundOf8);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("groups_round_8", "2");
-		PropertyUtils.save(properties);
-		
+		League league = ServiceUtils.getLeague();
+		league.setGroups8(LeagueStage.PLAYING);
+		league.save();
 	}
 
 	private Stats getStatsFromRoundOf12(GroupsRound groupsRoundOf12, Team team) {

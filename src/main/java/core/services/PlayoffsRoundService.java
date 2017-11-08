@@ -1,15 +1,15 @@
 package core.services;
 
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import core.PropertyUtils;
 import core.Utils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
+import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
@@ -50,9 +50,9 @@ public class PlayoffsRoundService {
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(playoffsRound);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("quarterfinals", "2");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setQuarterfinals(LeagueStage.PLAYING);
+		league.save();
 		
 	}
 	
@@ -66,11 +66,10 @@ public class PlayoffsRoundService {
 		
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(playoffsRound);
-		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("semifinals", "2");
-		PropertyUtils.save(properties);
-		
+
+		League league = ServiceUtils.getLeague();
+		league.setSemifinals(LeagueStage.PLAYING);
+		league.save();
 	}
 	
 	public void seedAndSetfinals() {
@@ -84,9 +83,9 @@ public class PlayoffsRoundService {
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(session);
 		roundDao.save(playoffsRound);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("finals", "2");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setFinals(LeagueStage.PLAYING);
+		league.save();
 	}
 	
 }

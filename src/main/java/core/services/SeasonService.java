@@ -35,7 +35,8 @@ public class SeasonService {
 		League league = ServiceUtils.getLeague();
 		league.resetStages();
 		league.addSeason();
-
+		league.save();
+		
 		logger.info("creating season " + league.getSeasonNum());
 
 		Season season = new Season(league.getSeasonNum());
@@ -50,9 +51,6 @@ public class SeasonService {
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
 		dao.save(season);
-		
-		DataAccessObject<League> dao2 = new DataAccessObject<>(session);
-		dao2.save(league);
 
 	}
 

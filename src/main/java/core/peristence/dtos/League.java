@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import core.peristence.DataAccessObject;
+import core.peristence.HibernateUtils;
+
 @Entity(name = "LEAGUES")
 public class League {
 
@@ -56,6 +59,13 @@ public class League {
 		
 	}
 
+	public void save() {
+		
+		DataAccessObject<League> dao2 = new DataAccessObject<>(HibernateUtils.getSession());
+		dao2.save(this);
+	
+	}
+	
 	public int getSeasonNum() {
 		return seasonNum;
 	}

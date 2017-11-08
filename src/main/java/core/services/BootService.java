@@ -33,9 +33,7 @@ public class BootService {
 			registerTeamsFromFile();
 			
 			league = new League();
-			
-			DataAccessObject<League> dao = new DataAccessObject<>(session);
-			dao.save(league);
+			league.save();
 			
 		}
 		

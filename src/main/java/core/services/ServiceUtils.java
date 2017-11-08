@@ -1,9 +1,7 @@
 package core.services;
 
 import java.util.List;
-import java.util.Properties;
 
-import core.PropertyUtils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;

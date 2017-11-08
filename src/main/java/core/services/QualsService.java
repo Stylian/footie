@@ -3,17 +3,16 @@ package core.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import core.PropertyUtils;
 import core.Utils;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
+import core.peristence.dtos.League;
+import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Team;
-import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.matchups.Matchup;
 import core.peristence.dtos.matchups.MatchupFormat;
@@ -36,9 +35,9 @@ public class QualsService {
 		
 		seedQualsRound(season, roundQuals1);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("round_quals_1", "1");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setQuals1(LeagueStage.ON_PREVIEW);
+		league.save();
 		
 	}
 
@@ -65,9 +64,9 @@ public class QualsService {
 		
 		seedQualsRound(season, roundQuals2);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("round_quals_2", "1");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setQuals2(LeagueStage.ON_PREVIEW);
+		league.save();
 		
 	}
 	
@@ -80,9 +79,9 @@ public class QualsService {
 		
 		setUpQualsRound(roundQuals1);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("round_quals_1", "2");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setQuals1(LeagueStage.PLAYING);
+		league.save();
 		
 	}
 	
@@ -96,9 +95,9 @@ public class QualsService {
 		
 		setUpQualsRound(roundQuals2);
 		
-		Properties properties = PropertyUtils.load();
-		properties.setProperty("round_quals_2", "2");
-		PropertyUtils.save(properties);
+		League league = ServiceUtils.getLeague();
+		league.setQuals2(LeagueStage.PLAYING);
+		league.save();
 		
 	}
 	
