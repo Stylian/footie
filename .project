@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>footie1</name>
-	<comment></comment>
+	<name>footie</name>
+	<comment>a football league games management</comment>
 	<projects>
 	</projects>
 	<buildSpec>
