@@ -25,7 +25,6 @@ import core.tools.CoefficientsOrdering;
 
 public class Monitoring {
 
-	@Test
 	public void displayMetastats() {
 
 		Session session = HibernateUtils.getSession();
@@ -41,7 +40,6 @@ public class Monitoring {
 		
 	}
 
-	@Test
 	public void displayCoefficients() {
 
 		Session session = HibernateUtils.getSession();
@@ -77,7 +75,6 @@ public class Monitoring {
 		}
 	}
 
-	@Test
 	public void displaySeason(int year) {
 		
 		Session session = HibernateUtils.getSession();
