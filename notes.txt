@@ -1,5 +1,3 @@
 
-to add spring and json services
 to use teams.txt file to add/remove teams in later seasons if needed.
 
-mvn install clean
