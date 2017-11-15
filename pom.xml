@@ -24,6 +24,8 @@
 					<filesets>
 						<fileset>
 							<directory>data</directory>
+						</fileset>
+						<fileset>
 							<directory>logs</directory>
 						</fileset>
 						<fileset>
