@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.services.LeagueService;
+import core.peristence.dtos.League;
 
 @RestController
 @RequestMapping("/rest")
@@ -14,8 +15,13 @@ public class LeagueController {
   private LeagueService myService;
 	
   @RequestMapping("/league")
-  public String redirToList(){
-      return "hello";
+  public League getLeague(){
+      return myService.getLeague();
+  }
+  
+  @RequestMapping("/league/create")
+  public League createLeague(){
+  	return myService.createLeague();
   }
   
   
