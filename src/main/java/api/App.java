@@ -2,13 +2,10 @@ package api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-//(scanBasePackages={
-//		"core.services",
-//		"core.peristence.dtos",
-//		"api"
-//})
+@EntityScan("core.peristence.dtos")
 public class App {
 
 	public static void main(String[] args) {

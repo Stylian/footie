@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import core.peristence.DataAccessObject;
 import core.peristence.HibernateUtils;
 
-@Entity(name = "LEAGUES")
+@Entity //(name = "LEAGUES")
 public class League {
 
 	@Id

@@ -6,6 +6,6 @@ import core.peristence.dtos.League;
 
 
 
-public interface LeagueRepository { // extends CrudRepository<League, Long>{
+public interface LeagueRepository extends CrudRepository<League, Long>{
 
 }
