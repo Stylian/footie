@@ -1,14 +1,16 @@
-package api;
+package api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import api.services.LeagueService;
+
 @Controller
-public class MyController {
+public class PagesController {
 
   @Autowired
-  private MyService myService;
+  private LeagueService myService;
 	
   @RequestMapping("data/league")
   public String redirToList(){
