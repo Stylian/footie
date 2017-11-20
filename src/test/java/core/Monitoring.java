@@ -29,7 +29,7 @@ public class Monitoring {
 
 		Session session = HibernateUtils.getSession();
 		
-		List<Result> results = session.createQuery("from RESULTS", Result.class).list();
+		List<Result> results = session.createQuery("from RESULTS").list();
 		
 		System.out.println("number of games played: " + results.size());
 		System.out.println("average goals scored: " + results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble());
@@ -79,8 +79,7 @@ public class Monitoring {
 		
 		Session session = HibernateUtils.getSession();
 		
-		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year, Group.class)
-				.getSingleResult();
+		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
 
 		displaySeason(season);
 		

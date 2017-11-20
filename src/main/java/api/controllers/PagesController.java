@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import api.services.MainService;
+import api.services.OperationsService;
 
 @Controller
 public class PagesController {
 
   @Autowired
-  private MainService myService;
+  private OperationsService myService;
 	
   @RequestMapping("data/league")
   public String redirToList(){

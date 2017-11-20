@@ -56,7 +56,7 @@ public class SeasonService {
 		
 	}
 
-	public void setUpSeason() {
+	public Season setUpSeason() {
 
 		List<Team> teams = ServiceUtils.loadTeams();
 
@@ -129,6 +129,8 @@ public class SeasonService {
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
 
+		return season;
+		
 	}
 	
 	public void endCurrentSeason() {

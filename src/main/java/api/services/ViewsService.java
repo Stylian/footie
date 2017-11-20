@@ -1,5 +1,7 @@
 package api.services;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -10,12 +12,10 @@ import org.springframework.stereotype.Service;
 import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
-import core.services.BootService;
-import core.services.QualsService;
-import core.services.SeasonService;
+import core.services.ServiceUtils;
 
 @Service
-public class MainService {
+public class ViewsService {
 	
   @Autowired
   private SessionFactory sessionFactory;
@@ -24,51 +24,22 @@ public class MainService {
 	public void initIt() {
 		HibernateUtils.setSessionFactory(sessionFactory);
 	}
-
+	
 	public League getLeague() {
-		
-		BootService bs = new BootService();
-		return bs.loadLeague();
-
+		return ServiceUtils.getLeague();
 	}
-
-	public Season createSeason() {
-
-		SeasonService service = new SeasonService();
-		return service.createSeason();
-
+	
+	public List<Season> getAllSeasons() {
+		return null;
 	}
-
-	public void setUpSeasion() throws Exception {
-
-		SeasonService service = new SeasonService();
-		service.setUpSeason();
-
+	
+	public Season getCurrentSeason() {
+		return ServiceUtils.loadCurrentSeason();
 	}
-
-	public void seedQualsRound1() throws Exception {
-
-		QualsService service = new QualsService();
-		service.seedUpQualsRound1();
-
+	
+	public Season getSeason(int year) {
+		return ServiceUtils.loadSeason(year);
 	}
-
-	public void setQualsRound1() throws Exception {
-
-		QualsService service = new QualsService();
-		service.setUpQualsRound1();
-
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

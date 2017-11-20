@@ -72,7 +72,7 @@ public class FullTest {
 	public void testBoot() throws Exception {
 
 		BootService service = new BootService();
-		service.start();
+		service.loadLeague();
 
 	}
 
