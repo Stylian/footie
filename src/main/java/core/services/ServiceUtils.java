@@ -40,8 +40,7 @@ public class ServiceUtils {
 	
 	public static Season loadSeason(int year) {
 		
-		return (Season) HibernateUtils.getSession().createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year, Group.class)
-				.getSingleResult();
+		return (Season) HibernateUtils.getSession().createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
 		
 	}
 

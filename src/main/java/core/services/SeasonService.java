@@ -30,7 +30,7 @@ public class SeasonService {
 
 	private Session session = HibernateUtils.getSession();
 
-	public void createSeason() {
+	public Season createSeason() {
 
 		League league = ServiceUtils.getLeague();
 		league.resetStages();
@@ -52,6 +52,8 @@ public class SeasonService {
 		DataAccessObject<Season> dao = new DataAccessObject<>(session);
 		dao.save(season);
 
+		return season;
+		
 	}
 
 	public void setUpSeason() {
