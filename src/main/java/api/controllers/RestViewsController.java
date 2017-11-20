@@ -6,7 +6,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.services.ViewsService;
@@ -28,19 +27,19 @@ public class RestViewsController {
   
   // season
   @RequestMapping("/season")
-  public Season getSeasonCurrent(){
-  	return service.getCurrentSeason();
+  public String getSeasonCurrent(){
+  	return service.getCurrentSeason().toString();
   }
-  
+//  
 //  @RequestMapping("/seasons")
 //  public List<Season> getSeasons(){
 //  	return service.getAllSeasons();
 //  }
-//  
-//  @RequestMapping("/seasons/{year}")
-//  public Season getSeason(@PathVariable String year){
-//  	return service.getSeason(NumberUtils.toInt(year));
-//  }
+  
+  @RequestMapping("/seasons/{year}")
+  public String getSeason(@PathVariable String year){
+  	return service.getSeason(NumberUtils.toInt(year)).toString();
+  }
 
   // TODO
   
