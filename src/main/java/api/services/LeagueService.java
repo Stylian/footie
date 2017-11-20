@@ -1,29 +1,26 @@
 package api.services;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import api.repositories.LeagueRepository;
+import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
-
+import core.services.BootService;
 
 @Service
 public class LeagueService {
 	
   @Autowired
-  private LeagueRepository leagueRepository;
+  private SessionFactory sessionFactory;
   
 	public League getLeague() {
-		return leagueRepository.findAll().iterator().next();
-	}
-
-	public League createLeague() {
-
-		League league = new League();
 		
-		leagueRepository.save(league);
+		HibernateUtils.setSessionFactory(sessionFactory);
 		
-		return league;
+		BootService bs = new BootService();
+		return bs.loadLeague();
+
 	}
 	
 }

@@ -3,20 +3,14 @@ package core.peristence;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
 
 	private static SessionFactory sessionFactory;
 	private static Session session;
 	
-	static {
-		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
+	public static void setSessionFactory(SessionFactory sf) {
+		sessionFactory = sf;
 	}
 
 	public static SessionFactory getSessionFactory() {

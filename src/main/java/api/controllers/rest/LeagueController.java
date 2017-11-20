@@ -19,10 +19,5 @@ public class LeagueController {
       return myService.getLeague();
   }
   
-  @RequestMapping("/league/create")
-  public League createLeague(){
-  	return myService.createLeague();
-  }
-  
   
 }

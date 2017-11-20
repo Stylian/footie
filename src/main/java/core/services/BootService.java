@@ -23,7 +23,7 @@ public class BootService {
 	
 	private Session session = HibernateUtils.getSession();
 	
-	public void start() {
+	public League loadLeague() {
 
 		League league = ServiceUtils.getLeague();
 		
@@ -36,6 +36,8 @@ public class BootService {
 			league.save();
 			
 		}
+		
+		return league;
 		
 	}
 	
