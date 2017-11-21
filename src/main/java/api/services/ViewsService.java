@@ -30,7 +30,7 @@ public class ViewsService {
 	}
 	
 	public List<Season> getAllSeasons() {
-		return null;
+		return ServiceUtils.loadAllSeasons();
 	}
 	
 	public Season getCurrentSeason() {

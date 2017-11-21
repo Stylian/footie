@@ -30,15 +30,15 @@ public class RestViewsController {
   public Season getSeasonCurrent(){
   	return service.getCurrentSeason();
   }
-//  
-//  @RequestMapping("/seasons")
-//  public List<Season> getSeasons(){
-//  	return service.getAllSeasons();
-//  }
+  
+  @RequestMapping("/seasons")
+  public List<Season> getSeasons(){
+  	return service.getAllSeasons();
+  }
   
   @RequestMapping("/seasons/{year}")
-  public String getSeason(@PathVariable String year){
-  	return service.getSeason(NumberUtils.toInt(year)).toString();
+  public Season getSeason(@PathVariable String year){
+  	return service.getSeason(NumberUtils.toInt(year));
   }
 
   // TODO

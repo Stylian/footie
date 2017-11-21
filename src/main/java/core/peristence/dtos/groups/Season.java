@@ -23,11 +23,9 @@ public class Season extends Group {
 	@Column(name = "SEASON_YEAR")
 	private int seasonYear;
 
-	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
-	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Round> rounds;
 
@@ -57,6 +55,7 @@ public class Season extends Group {
 		rounds.add(round);
 	}
 
+	@JsonIgnore
 	public List<Round> getRounds() {
 		return rounds;
 	}

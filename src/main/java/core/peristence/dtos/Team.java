@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import core.peristence.dtos.groups.Group;
 
 @Entity(name = "TEAMS")
@@ -54,6 +56,7 @@ public class Team {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public Map<Group, Stats> getGroupStats() {
 		return groupStats;
 	}

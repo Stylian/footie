@@ -43,6 +43,13 @@ public class ServiceUtils {
 		return (Season) HibernateUtils.getSession().createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Season> loadAllSeasons() {
+		
+		return HibernateUtils.getSession().createQuery("from GROUPS where discriminator='S' ").list();
+		
+	}
 
 	
 	public static List<Team> loadTeams() {
