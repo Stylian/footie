@@ -31,24 +31,19 @@ public class SpringAppTest {
 	@SuppressWarnings("rawtypes")
 	public void testAll() throws Exception {
 		
-		ResponseEntity<Map> entity1 = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/rest/ops/league", Map.class);
-		then(entity1.getStatusCode()).isEqualTo(HttpStatus.OK);
+		checkURL("/rest/ops/league", "{status=success, message=created league}");
+		checkURL("/rest/ops/season/create", "{status=success, message=created Season 1}");
+		checkURL("/rest/ops/season/setup", "{status=success, message=set Season 1}");
+		checkURL("/rest/ops/quals/1/seed", "{status=success, message=seeded 1st Qualifying Round}");
+		checkURL("/rest/ops/quals/1/set", "{status=success, message=set 1st Qualifying Round}");
 		
-		assertEquals("{status=success, message=created league}", entity1.getBody().toString());
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 		
-		ResponseEntity<Map> entity2 = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/rest/ops/season/create", Map.class);
-		then(entity2.getStatusCode()).isEqualTo(HttpStatus.OK);
+		checkURL("/rest/ops/quals/2/seed", "{status=success, message=seeded 2nd Qualifying Round}");
+		checkURL("/rest/ops/quals/2/set", "{status=success, message=set 2nd Qualifying Round}");
 
-		assertEquals("{status=success, message=created league}", entity1.getBody().toString());
-		
-		ResponseEntity<Map> entity3 = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/rest/ops/season/setup", Map.class);
-		then(entity3.getStatusCode()).isEqualTo(HttpStatus.OK);
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		assertEquals("{status=success, message=created league}", entity1.getBody().toString());
-		
 		// TODO
 		
 	}
@@ -70,6 +65,14 @@ public class SpringAppTest {
 
 		System.out.println(entity4.getBody());
 		
+	}
+
+	private void checkURL(String path, String expected) {
+		ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(
+				"http://localhost:" + this.port + path, Map.class);
+		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+		
+		assertEquals(expected, entity.getBody().toString());
 	}
 	
 }

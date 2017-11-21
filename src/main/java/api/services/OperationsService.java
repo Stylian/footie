@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
+import core.peristence.dtos.rounds.QualsRound;
 import core.services.BootService;
 import core.services.QualsService;
 import core.services.SeasonService;
@@ -46,18 +47,32 @@ public class OperationsService {
 
 	}
 
-	public void seedQualsRound1() throws Exception {
+	public QualsRound seedQualsRound1() {
 
 		QualsService service = new QualsService();
-		service.seedUpQualsRound1();
+		return service.seedUpQualsRound1();
 
 	}
 
-	public void setQualsRound1() throws Exception {
+	public QualsRound setQualsRound1() {
 
 		QualsService service = new QualsService();
-		service.setUpQualsRound1();
+		return service.setUpQualsRound1();
 
+	}
+	
+	public QualsRound seedQualsRound2() {
+		
+		QualsService service = new QualsService();
+		return service.seedUpQualsRound2();
+		
+	}
+	
+	public QualsRound setQualsRound2() {
+		
+		QualsService service = new QualsService();
+		return service.setUpQualsRound2();
+		
 	}
 
 	

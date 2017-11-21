@@ -26,7 +26,7 @@ public class QualsService {
 
 	private Session session = HibernateUtils.getSession();
 	
-	public void seedUpQualsRound1() {
+	public QualsRound seedUpQualsRound1() {
 		logger.info("seed quals round 1");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -39,9 +39,11 @@ public class QualsService {
 		league.setQuals1(LeagueStage.ON_PREVIEW);
 		league.save();
 		
+		return roundQuals1;
+		
 	}
 
-	public void seedUpQualsRound2() {
+	public QualsRound seedUpQualsRound2() {
 		logger.info("seed quals round 2");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -68,9 +70,11 @@ public class QualsService {
 		league.setQuals2(LeagueStage.ON_PREVIEW);
 		league.save();
 		
+		return roundQuals2;
+		
 	}
 	
-	public void setUpQualsRound1() {
+	public QualsRound setUpQualsRound1() {
 		logger.info("set up quals round 1");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -82,11 +86,13 @@ public class QualsService {
 		League league = ServiceUtils.getLeague();
 		league.setQuals1(LeagueStage.PLAYING);
 		league.save();
-		
+
+		return roundQuals1;
+
 	}
 	
 	
-	public void setUpQualsRound2() {
+	public QualsRound setUpQualsRound2() {
 		logger.info("set up quals round 2");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -98,6 +104,8 @@ public class QualsService {
 		League league = ServiceUtils.getLeague();
 		league.setQuals2(LeagueStage.PLAYING);
 		league.save();
+		
+		return roundQuals2;
 		
 	}
 	
