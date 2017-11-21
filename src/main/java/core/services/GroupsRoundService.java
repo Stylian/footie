@@ -29,7 +29,7 @@ public class GroupsRoundService {
 
 	private Session session = HibernateUtils.getSession();
 
-	public void seedGroupsRoundOf12() {
+	public GroupsRound seedGroupsRoundOf12() {
 		logger.info("seed groups round of 12");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -103,9 +103,11 @@ public class GroupsRoundService {
 		league.setGroups12(LeagueStage.ON_PREVIEW);
 		league.save();
 		
+		return groupsRoundOf12;
+		
 	}
 	
-	public void setUpGroupsRoundOf12() {
+	public GroupsRound setUpGroupsRoundOf12() {
 		logger.info("set up groups round of 12");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -162,9 +164,11 @@ public class GroupsRoundService {
 		league.setGroups12(LeagueStage.PLAYING);
 		league.save();
 		
+		return groupsRoundOf12;
+		
 	}
 
-	public void seedAndSetGroupsRoundOf8() {
+	public GroupsRound seedAndSetGroupsRoundOf8() {
 		logger.info("seed and set groups round of 8");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -218,6 +222,9 @@ public class GroupsRoundService {
 		League league = ServiceUtils.getLeague();
 		league.setGroups8(LeagueStage.PLAYING);
 		league.save();
+		
+		return groupsRoundOf8;
+				
 	}
 
 	private Stats getStatsFromRoundOf12(GroupsRound groupsRoundOf12, Team team) {

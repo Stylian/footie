@@ -44,6 +44,15 @@ public class SpringAppTest {
 
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
+		checkURL("/rest/ops/groups/12/seed", "{status=success, message=seeded Groups Round of 12}");
+		checkURL("/rest/ops/groups/12/set", "{status=success, message=set Groups Round of 12}");
+		
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+
+		checkURL("/rest/ops/groups/8/seedAndSet", "{status=success, message=seeded and set Groups Round of 8}");
+
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+		
 		// TODO
 		
 	}

@@ -14,6 +14,7 @@ import core.peristence.dtos.League;
 import core.peristence.dtos.games.Game;
 import core.peristence.dtos.games.Result;
 import core.peristence.dtos.groups.Season;
+import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.services.GameService;
 
@@ -69,6 +70,41 @@ public class RestOperationsController {
 		return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
 		
 	}
+	
+	@RequestMapping("/groups/12/seed")
+	public RestResponse seedGroupsRoundOf12() {
+		
+		GroupsRound round = myService.seedGroupsRoundOf12();
+		return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
+		
+	}
+	
+	@RequestMapping("/groups/12/set")
+	public RestResponse setGroupsRoundOf12() {
+		
+		GroupsRound round = myService.setGroupsRoundOf12();
+		return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
+		
+	}
+	
+	@RequestMapping("/groups/8/seedAndSet")
+	public RestResponse seedAndSetGroupsRoundOf8() {
+		
+		GroupsRound round = myService.seedAndSetGroupsRoundOf8();
+		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/fillGames")
 	public RestResponse fillGamesTEST() {
