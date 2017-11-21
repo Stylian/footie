@@ -19,9 +19,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.Utils;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
+
 
 @Entity(name = "GROUPS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -57,6 +61,7 @@ public class Group {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public Map<Team, Stats> getTeamsStats() {
 		return teamsStats;
 	}
@@ -71,6 +76,7 @@ public class Group {
 		
 	}
 	
+	@JsonIgnore
 	public List<Team> getTeams() {
 		return new ArrayList<>(teamsStats.keySet());
 	}
