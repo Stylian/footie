@@ -11,9 +11,11 @@ import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
+import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.services.BootService;
 import core.services.GroupsRoundService;
+import core.services.PlayoffsRoundService;
 import core.services.QualsService;
 import core.services.SeasonService;
 
@@ -95,6 +97,34 @@ public class OperationsService {
 
 		GroupsRoundService service = new GroupsRoundService();
 		return service.seedAndSetGroupsRoundOf8();
+		
+	}
+	
+	public PlayoffsRound seedAndSetQuarterfinals() {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		return service.seedAndSetQuarterfinals();
+		
+	}
+	
+	public PlayoffsRound seedAndSetSemifinals() {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		return service.seedAndSetSemifinals();
+		
+	}
+	
+	public PlayoffsRound seedAndSetFinals() {
+		
+		PlayoffsRoundService service = new PlayoffsRoundService();
+		return service.seedAndSetfinals();
+		
+	}
+	
+	public Season endSeason() {
+		
+		SeasonService service = new SeasonService();
+		return service.endCurrentSeason();
 		
 	}
 	

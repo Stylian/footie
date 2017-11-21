@@ -15,7 +15,6 @@ import core.services.SeasonService;
 
 public class FullTest {
 
-//	@Test
 	public void simulateSeason() throws Exception {
 
 		testBoot();

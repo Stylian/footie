@@ -133,7 +133,7 @@ public class SeasonService {
 		
 	}
 	
-	public void endCurrentSeason() {
+	public Season endCurrentSeason() {
 		logger.info("closing down season, calculating coefficients");
 		// maybe set up winner later
 
@@ -260,6 +260,8 @@ public class SeasonService {
 		// hope it is enough, seems so
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
+		
+		return season;
 
 	}
 

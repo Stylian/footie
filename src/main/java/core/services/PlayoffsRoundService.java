@@ -21,7 +21,7 @@ public class PlayoffsRoundService {
 
 	private Session session = HibernateUtils.getSession();
 
-	public void seedAndSetQuarterfinals() {
+	public PlayoffsRound seedAndSetQuarterfinals() {
 		logger.info("seed and set quarterfinals");
 
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -54,9 +54,11 @@ public class PlayoffsRoundService {
 		league.setQuarterfinals(LeagueStage.PLAYING);
 		league.save();
 		
+		return playoffsRound;
+		
 	}
 	
-	public void seedAndSetSemifinals() {
+	public PlayoffsRound seedAndSetSemifinals() {
 		logger.info("seed and set semifinals");
 	
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -70,9 +72,12 @@ public class PlayoffsRoundService {
 		League league = ServiceUtils.getLeague();
 		league.setSemifinals(LeagueStage.PLAYING);
 		league.save();
+		
+		return playoffsRound;
+		
 	}
 	
-	public void seedAndSetfinals() {
+	public PlayoffsRound seedAndSetfinals() {
 		logger.info("seed and set finals");
 		
 		Season season = ServiceUtils.loadCurrentSeason();
@@ -86,6 +91,9 @@ public class PlayoffsRoundService {
 		League league = ServiceUtils.getLeague();
 		league.setFinals(LeagueStage.PLAYING);
 		league.save();
+		
+		return playoffsRound;
+		
 	}
 	
 }

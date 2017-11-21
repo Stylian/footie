@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import core.Monitoring;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {"management.port=0"})
@@ -28,51 +30,65 @@ public class SpringAppTest {
 	private TestRestTemplate testRestTemplate;
 	
 	@Test
-	@SuppressWarnings("rawtypes")
-	public void testAll() throws Exception {
+	public void testOps() throws Exception {
 		
 		checkURL("/rest/ops/league", "{status=success, message=created league}");
-		checkURL("/rest/ops/season/create", "{status=success, message=created Season 1}");
-		checkURL("/rest/ops/season/setup", "{status=success, message=set Season 1}");
+
+		for(int n=1; n < 3; n++)
+			runSeason(n);
+		
+		displayResults();
+		
+	}
+
+	private void runSeason(int seasonNum) {
+		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");
+		checkURL("/rest/ops/season/setup", "{status=success, message=set Season " + seasonNum + "}");
 		checkURL("/rest/ops/quals/1/seed", "{status=success, message=seeded 1st Qualifying Round}");
 		checkURL("/rest/ops/quals/1/set", "{status=success, message=set 1st Qualifying Round}");
-		
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 		
 		checkURL("/rest/ops/quals/2/seed", "{status=success, message=seeded 2nd Qualifying Round}");
 		checkURL("/rest/ops/quals/2/set", "{status=success, message=set 2nd Qualifying Round}");
-
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
 		checkURL("/rest/ops/groups/12/seed", "{status=success, message=seeded Groups Round of 12}");
 		checkURL("/rest/ops/groups/12/set", "{status=success, message=set Groups Round of 12}");
-		
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
 		checkURL("/rest/ops/groups/8/seedAndSet", "{status=success, message=seeded and set Groups Round of 8}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
+		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 		
-		// TODO
+		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 		
+		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+		
+		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
 	}
 
-	@Test
-	@SuppressWarnings("rawtypes")
-	public void testView() throws Exception {
+	public void displayResults() throws Exception {
 
-		ResponseEntity<String> entity2 = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/rest/views/league", String.class);
-		then(entity2.getStatusCode()).isEqualTo(HttpStatus.OK);
+		Monitoring monitoring = new Monitoring();
+		monitoring.displayCoefficients();
+		monitoring.displayMetastats();
 		
-		System.out.println(entity2.getBody());
-
-		ResponseEntity<String> entity4 = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/rest/views/season", String.class);
-		then(entity4.getStatusCode()).isEqualTo(HttpStatus.OK);
-		
-
-		System.out.println(entity4.getBody());
+//		ResponseEntity<String> entity2 = this.testRestTemplate.getForEntity(
+//				"http://localhost:" + this.port + "/rest/views/league", String.class);
+//		then(entity2.getStatusCode()).isEqualTo(HttpStatus.OK);
+//		
+//		System.out.println(entity2.getBody());
+//
+//		ResponseEntity<String> entity4 = this.testRestTemplate.getForEntity(
+//				"http://localhost:" + this.port + "/rest/views/season", String.class);
+//		then(entity4.getStatusCode()).isEqualTo(HttpStatus.OK);
+//		
+//
+//		System.out.println(entity4.getBody());
 		
 	}
 
