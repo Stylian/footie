@@ -134,27 +134,6 @@ public class RestOperationsController {
 	
 	
 	
-	
-	@RequestMapping("/fillGames")
-	public RestResponse fillGamesTEST() {
 
-		GameService service = new GameService();
-
-		while (true) {
-
-			Game next = service.getNextGame();
-
-			if (next == null) {
-				break;
-			}
-
-			service.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
-
-			System.out.println(next);
-
-		}
-		
-		return new RestResponse(RestResponse.SUCCESS, "games added");
-	}
 
 }

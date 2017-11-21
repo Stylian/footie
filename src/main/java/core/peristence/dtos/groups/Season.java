@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.rounds.Round;
 
@@ -21,9 +23,11 @@ public class Season extends Group {
 	@Column(name = "SEASON_YEAR")
 	private int seasonYear;
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Round> rounds;
 
@@ -33,7 +37,7 @@ public class Season extends Group {
 	public Season(int year) {
 		super("Season " + year);
 		this.seasonYear = year;
-		
+
 		rounds = new ArrayList<>();
 	}
 

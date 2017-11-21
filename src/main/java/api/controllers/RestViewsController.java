@@ -27,8 +27,8 @@ public class RestViewsController {
   
   // season
   @RequestMapping("/season")
-  public String getSeasonCurrent(){
-  	return service.getCurrentSeason().toString();
+  public Season getSeasonCurrent(){
+  	return service.getCurrentSeason();
   }
 //  
 //  @RequestMapping("/seasons")
