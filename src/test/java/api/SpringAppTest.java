@@ -76,6 +76,7 @@ public class SpringAppTest {
 		Monitoring monitoring = new Monitoring();
 		monitoring.displayCoefficients();
 		monitoring.displayMetastats();
+		monitoring.displaySeason(1);
 		
 //		ResponseEntity<String> entity2 = this.testRestTemplate.getForEntity(
 //				"http://localhost:" + this.port + "/rest/views/league", String.class);

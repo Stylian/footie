@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.games.GroupGame;
 import core.tools.RobinGroupOrdering;
@@ -29,6 +32,7 @@ public class RobinGroup extends Group {
 		games = new ArrayList<>();
 	}
 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<GroupGame> getGames() {
 		return games;
 	}
@@ -44,6 +48,7 @@ public class RobinGroup extends Group {
 	/**
 	 * teams in robin group come sorted
 	 */
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Team> getTeamsOrdered() {
 		
 		List<Team> teams = super.getTeams();

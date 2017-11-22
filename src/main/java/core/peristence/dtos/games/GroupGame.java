@@ -5,6 +5,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.RobinGroup;
 
@@ -23,6 +26,7 @@ public class GroupGame extends Game {
 		this.robinGroup = robinGroup;
 	}
 
+	@JsonIgnore
 	public RobinGroup getRobinGroup() {
 		return robinGroup;
 	}
