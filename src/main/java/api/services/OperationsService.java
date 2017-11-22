@@ -131,24 +131,6 @@ public class OperationsService {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**
-	 * not nessesary but keep around
-	 * @throws Exception
-	 */
-	@PreDestroy
-	public void cleanUp() throws Exception {
-		HibernateUtils.closeSession();
-		HibernateUtils.closeFactory();
-	}
+
   
 }

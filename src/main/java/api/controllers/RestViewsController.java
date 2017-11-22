@@ -53,12 +53,8 @@ public class RestViewsController {
   	if (qr < 1 || qr > 2) {
   		throw new NoSuchElementException("there are only 2 qualification rounds");
   	}
-  	
-  	Season season = service.getSeason(NumberUtils.toInt(year));
-		List<Round> rounds = season.getRounds();
-		QualsRound qualsRound1 = (QualsRound) rounds.get(qr - 1);
 		
-  	return qualsRound1;
+  	return service.getQualRound(NumberUtils.toInt(year), qr);
   }
 
   // TODO
