@@ -44,7 +44,6 @@ public class QualsRound extends Round {
 		this.matchups.add(matchup);
 	}
 
-	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Matchup> getMatchups() {
 		return matchups;

@@ -13,6 +13,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.matchups.Matchup;
 
@@ -52,7 +55,8 @@ public class Game {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	@JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Team getHomeTeam() {
 		return homeTeam;
 	}
@@ -60,7 +64,8 @@ public class Game {
 	public void setHomeTeam(Team homeTeam) {
 		this.homeTeam = homeTeam;
 	}
-
+	@JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Team getAwayTeam() {
 		return awayTeam;
 	}
@@ -69,6 +74,8 @@ public class Game {
 		this.awayTeam = awayTeam;
 	}
 
+	@JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Result getResult() {
 		return result;
 	}
