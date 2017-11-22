@@ -93,7 +93,6 @@ public class Matchup {
 		return teamAway;
 	}
 	
-	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Game> getGames() {
 		return games;
