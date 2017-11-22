@@ -16,6 +16,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
 
@@ -60,6 +63,7 @@ public class Round {
 		return name;
 	}
 
+	@JsonIgnore
 	public Season getSeason() {
 		return season;
 	}
@@ -68,6 +72,7 @@ public class Round {
 		this.season = season;
 	}
 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Team> getTeams() {
 		return teams;
 	}

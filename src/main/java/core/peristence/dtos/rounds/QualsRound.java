@@ -11,6 +11,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.matchups.Matchup;
@@ -41,10 +44,13 @@ public class QualsRound extends Round {
 		this.matchups.add(matchup);
 	}
 
+	@JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Matchup> getMatchups() {
 		return matchups;
 	}
 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Team> getStrongTeams() {
 		return strongTeams;
 	}
@@ -53,6 +59,7 @@ public class QualsRound extends Round {
 		this.strongTeams = strongTeams;
 	}
 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public List<Team> getWeakTeams() {
 		return weakTeams;
 	}

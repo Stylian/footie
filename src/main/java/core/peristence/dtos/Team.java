@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import core.peristence.dtos.groups.Group;
+import core.services.ServiceUtils;
 
 @Entity(name = "TEAMS")
 public class Team {
@@ -61,6 +62,11 @@ public class Team {
 		return groupStats;
 	}
 
+	// interesting ? but how about old coeffs ?
+	public int getCoefficients() {
+		return getStatsForGroup(ServiceUtils.getMasterGroup()).getPoints();
+	}
+	
 	public void addGroupStats(Group group, Stats stats) {
 		groupStats.put(group, stats);
 	}
