@@ -56,7 +56,6 @@ public class Game {
 		this.id = id;
 	}
 	
-	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Team getHomeTeam() {
 		return homeTeam;
@@ -65,7 +64,7 @@ public class Game {
 	public void setHomeTeam(Team homeTeam) {
 		this.homeTeam = homeTeam;
 	}
-	@JsonIgnore
+
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Team getAwayTeam() {
 		return awayTeam;
@@ -74,7 +73,7 @@ public class Game {
 	public void setAwayTeam(Team awayTeam) {
 		this.awayTeam = awayTeam;
 	}
-	@JsonIgnore
+
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public Result getResult() {
 		return result;
