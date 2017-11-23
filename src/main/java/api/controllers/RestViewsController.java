@@ -13,6 +13,7 @@ import api.services.ViewsService;
 import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
+import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.peristence.dtos.rounds.Round;
 
@@ -69,6 +70,14 @@ public class RestViewsController {
   	}
   	
   	return service.getGroupRound(NumberUtils.toInt(year), qr);
+  }
+  
+  // rounds
+  @RequestMapping("/seasons/{year}/playoffs")
+  public PlayoffsRound getPlayoffsRound(@PathVariable String year){
+  	
+  	
+  	return service.getPlayoffsRound(NumberUtils.toInt(year));
   }
 
   // TODO

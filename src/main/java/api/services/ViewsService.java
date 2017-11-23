@@ -14,6 +14,7 @@ import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
+import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.peristence.dtos.rounds.Round;
 import core.services.ServiceUtils;
@@ -70,6 +71,19 @@ public class ViewsService {
 		Season season = getSeason(year);
 		List<Round> rounds = season.getRounds();
 		return (GroupsRound) rounds.get(round + 1);
+		
+	}
+	
+	/**
+	 * 
+	 * @param year season number
+	 * @return
+	 */
+	public PlayoffsRound getPlayoffsRound(int year) {
+		
+		Season season = getSeason(year);
+		List<Round> rounds = season.getRounds();
+		return (PlayoffsRound) rounds.get(4);
 		
 	}
 	
