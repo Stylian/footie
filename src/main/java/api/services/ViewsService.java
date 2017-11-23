@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
+import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.Season;
@@ -99,20 +100,38 @@ public class ViewsService {
 
 	}
 
-	public Map<Team, Integer> getTeamsTotalCoefficients() {
+	public Map<Team, Stats> getTeamsTotalStats() {
 
-		 Map<Team, Integer> coeffs = new LinkedHashMap<>();
-		
+		Map<Team, Stats> statsTotal = new LinkedHashMap<>();
+
 		List<Team> teams = ServiceUtils.loadTeams();
 		Group master = ServiceUtils.getMasterGroup();
-		
+
 		Collections.sort(teams, new CoefficientsOrdering());
-		
+
 		for (Team team : teams) {
-			coeffs.put(team, team.getStatsForGroup(master).getPoints());
+			statsTotal.put(team, team.getStatsForGroup(master));
 		}
-		
-		return coeffs;
+
+		return statsTotal;
+
+	}
+
+	public Map<Team, Integer> getTeamsTotalCoefficients() {
+
+		Map<Team, Integer> coeffsTotal = new LinkedHashMap<>();
+
+		List<Team> teams = ServiceUtils.loadTeams();
+		Group master = ServiceUtils.getMasterGroup();
+
+		Collections.sort(teams, new CoefficientsOrdering());
+
+		for (Team team : teams) {
+			coeffsTotal.put(team, team.getStatsForGroup(master).getPoints());
+		}
+
+		return coeffsTotal;
+
 	}
 
 }

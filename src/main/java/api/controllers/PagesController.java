@@ -30,6 +30,14 @@ public class PagesController {
 		
 		return "coefficients";
 	}
+	
+	@RequestMapping("stats")
+	public String stats(Model model) {
+		
+		model.addAttribute("teamsStats", viewsService.getTeamsTotalStats());
+		
+		return "stats";
+	}
 
 //	@RequestMapping("/greeting")
 //	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
