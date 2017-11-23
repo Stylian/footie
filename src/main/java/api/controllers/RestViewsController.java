@@ -80,6 +80,4 @@ public class RestViewsController {
   	return service.getPlayoffsRound(NumberUtils.toInt(year));
   }
 
-  // TODO
-  
 }

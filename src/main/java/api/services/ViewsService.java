@@ -86,8 +86,5 @@ public class ViewsService {
 		return (PlayoffsRound) rounds.get(4);
 		
 	}
-	
-	
-
   
 }

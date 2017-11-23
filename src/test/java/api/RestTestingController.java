@@ -1,4 +1,4 @@
-package api.controllers;
+package api;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
