@@ -1,13 +1,23 @@
 package api.controllers;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import api.services.OperationsService;
 import api.services.ViewsService;
+import core.peristence.dtos.Stats;
+import core.peristence.dtos.Team;
+import core.peristence.dtos.groups.Season;
+import core.services.ServiceUtils;
+import core.tools.CoefficientsOrdering;
 
 @Controller
 public class PagesController {
@@ -38,12 +48,25 @@ public class PagesController {
 		
 		return "stats";
 	}
-
-//	@RequestMapping("/greeting")
-//	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-//			Model model) {
-//		model.addAttribute("name", name);
-//		return "greeting";
-//	}
+	
+	@RequestMapping("seasons/{year}/preview")
+	public String seasonPreview(@PathVariable(value = "year", required = true) String year, Model model) {
+		
+		Season season = viewsService.getSeason(NumberUtils.toInt(year));
+		List<Team> teams = ServiceUtils.loadTeams();
+		
+		Collections.sort(teams, new CoefficientsOrdering(season));
+		
+		Map<Team, Integer> pastCoeffs = new LinkedHashMap<>();
+		
+		for (Team team : teams) {
+			pastCoeffs.put(team, team.getStatsForGroup(season).getPoints());
+		}
+		
+		model.addAttribute("season", season);
+		model.addAttribute("pastCoeffs", pastCoeffs);
+		
+		return "season_preview";
+	}
 
 }

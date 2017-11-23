@@ -1,4 +1,2 @@
 
 to use teams.txt file to add/remove teams in later seasons if needed.
-
-season should get the master coeffs on end season

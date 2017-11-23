@@ -69,6 +69,10 @@ public class Team {
 	public Stats getStatsForGroup(Group group) {
 		return groupStats.get(group);
 	}
+	
+	public Stats setStatsForGroup(Group group, Stats stats) {
+		return groupStats.put(group, stats);
+	}
 
 	@Override
 	public int hashCode() {

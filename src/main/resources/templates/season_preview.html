@@ -13,25 +13,18 @@
 	th:href="@{css/spring-core.css}" rel="stylesheet" media="screen" />
 </head>
 <body>
+
+	<h3 th:text="${season.name}" />
+
 	<table>
 		<tbody>
 			<tr>
-				<th>Team</th>
-				<th>W</th>
-				<th>D</th>
-				<th>L</th>
-				<th>PS</th>
-				<th>PC</th>
-				<th>+/-</th>
+				<th>team</th>
+				<th>coefficients</th>
 			</tr>
-			<tr th:each="teamStat: ${teamsStats}">
-				<td th:text="${teamStat['key'].name}" />
-				<td th:text="${teamStat['value'].wins}" />
-				<td th:text="${teamStat['value'].draws}" />
-				<td th:text="${teamStat['value'].losses}" />
-				<td th:text="${teamStat['value'].goalsScored}" />
-				<td th:text="${teamStat['value'].goalsConceded}" />
-				<td th:text="${teamStat['value'].goalsScored - teamStat['value'].goalsConceded}" />
+			<tr th:each="teamCoeff: ${pastCoeffs}">
+				<td th:text="${teamCoeff['key'].name}" />
+				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
 			</tr>
 		</tbody>
 	</table>
