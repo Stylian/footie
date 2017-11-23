@@ -61,11 +61,6 @@ public class Team {
 	public Map<Group, Stats> getGroupStats() {
 		return groupStats;
 	}
-
-	// interesting ? but how about old coeffs ?
-	public int getCoefficients() {
-		return getStatsForGroup(ServiceUtils.getMasterGroup()).getPoints();
-	}
 	
 	public void addGroupStats(Group group, Stats stats) {
 		groupStats.put(group, stats);

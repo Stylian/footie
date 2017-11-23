@@ -7,22 +7,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import api.services.OperationsService;
+import api.services.ViewsService;
 
 @Controller
 public class PagesController {
 
-  @Autowired
-  private OperationsService myService;
+	@Autowired
+	private ViewsService viewsService;
+
+	@RequestMapping("past_winners")
+	public String league(Model model) {
+
+		model.addAttribute("seasons", viewsService.getAllSeasons());
+
+		return "past_winners";
+	}
 	
-  @RequestMapping("data/league")
-  public String redirToList(){
-      return "data/league";
-  }
-  
-  @RequestMapping("/greeting")
-  public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-      model.addAttribute("name", name);
-      return "greeting";
-  }
-  
+	@RequestMapping("coefficients")
+	public String coefficients(Model model) {
+		
+		model.addAttribute("teamsCoeffs", viewsService.getTeamsTotalCoefficients());
+		
+		return "coefficients";
+	}
+
+//	@RequestMapping("/greeting")
+//	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
+//			Model model) {
+//		model.addAttribute("name", name);
+//		return "greeting";
+//	}
+
 }
