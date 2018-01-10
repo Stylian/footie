@@ -16,6 +16,7 @@ import api.services.ViewsService;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
+import core.peristence.dtos.rounds.QualsRound;
 import core.services.ServiceUtils;
 import core.tools.CoefficientsOrdering;
 
@@ -55,18 +56,57 @@ public class PagesController {
 		Season season = viewsService.getSeason(NumberUtils.toInt(year));
 		List<Team> teams = ServiceUtils.loadTeams();
 		
-		Collections.sort(teams, new CoefficientsOrdering(season));
-		
-		Map<Team, Integer> pastCoeffs = new LinkedHashMap<>();
-		
-		for (Team team : teams) {
-			pastCoeffs.put(team, team.getStatsForGroup(season).getPoints());
-		}
+		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
 		
 		model.addAttribute("season", season);
-		model.addAttribute("pastCoeffs", pastCoeffs);
+		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
 		
 		return "season_preview";
 	}
 
+  @RequestMapping("/seasons/{year}/quals/{round}/preview")
+  public String quals1Preview(@PathVariable(value = "year", required = true) String year,
+  		@PathVariable(value = "round", required = true) String round, Model model) {
+  	
+		Season season = viewsService.getSeason(NumberUtils.toInt(year));
+  	QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
+  	
+  	boolean seeded = false;
+  	
+  	// post seeding case for round
+  	if( "2".equals(round) && qr.getStrongTeams() != null ) { 
+  		
+  		seeded = true;
+  		
+  	}
+  	
+		List<Team> teams = qr.getTeams();
+		List<Team> teamsStrong = qr.getStrongTeams();
+		List<Team> teamsWeak = qr.getWeakTeams();
+		
+		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
+		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+		
+		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
+		model.addAttribute("teamsStrongWithCoeffs", teamsStrongWithCoeffs);
+		model.addAttribute("teamsWeakWithCoeffs", teamsWeakWithCoeffs);
+		model.addAttribute("seeded", seeded);
+  	
+  	return "quals_preview";
+  }
+
+  
+
+	private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
+		Collections.sort(teams, new CoefficientsOrdering(season));
+		
+		Map<Team, Integer> teamsWithCoeffs = new LinkedHashMap<>();
+		
+		for (Team team : teams) {
+			teamsWithCoeffs.put(team, team.getStatsForGroup(season).getPoints());
+		}
+		return teamsWithCoeffs;
+	}
+	
 }

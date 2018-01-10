@@ -22,7 +22,7 @@
 				<th>team</th>
 				<th>coefficients</th>
 			</tr>
-			<tr th:each="teamCoeff: ${pastCoeffs}">
+			<tr th:each="teamCoeff: ${teamsWithCoeffs}">
 				<td th:text="${teamCoeff['key'].name}" />
 				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
 			</tr>

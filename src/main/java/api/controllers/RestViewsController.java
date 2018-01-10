@@ -46,7 +46,6 @@ public class RestViewsController {
   	return service.getSeason(NumberUtils.toInt(year));
   }
   
-  // rounds
   @RequestMapping("/seasons/{year}/quals/{round}")
   public QualsRound getQualsRound(@PathVariable String year, @PathVariable String round){
 
@@ -59,7 +58,6 @@ public class RestViewsController {
   	return service.getQualRound(NumberUtils.toInt(year), qr);
   }
 
-  // rounds
   @RequestMapping("/seasons/{year}/groups/{round}")
   public GroupsRound getGroupsRound(@PathVariable String year, @PathVariable String round){
   	
@@ -72,7 +70,6 @@ public class RestViewsController {
   	return service.getGroupRound(NumberUtils.toInt(year), qr);
   }
   
-  // rounds
   @RequestMapping("/seasons/{year}/playoffs")
   public PlayoffsRound getPlayoffsRound(@PathVariable String year){
   	
