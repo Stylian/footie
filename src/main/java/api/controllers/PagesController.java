@@ -1,5 +1,7 @@
 package api.controllers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import api.services.ViewsService;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
+import core.peristence.dtos.groups.Group;
+import core.peristence.dtos.groups.RobinGroup;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.matchups.Matchup;
+import core.peristence.dtos.rounds.GroupsRound;
+import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.services.ServiceUtils;
 import core.tools.CoefficientsOrdering;
+import core.tools.RobinGroupOrdering;
 
 @Controller
 public class PagesController {
@@ -101,7 +108,6 @@ public class PagesController {
   public String quals1Postview(@PathVariable(value = "year", required = true) String year,
   		@PathVariable(value = "round", required = true) String round, Model model) {
   	
-  	Season season = viewsService.getSeason(NumberUtils.toInt(year));
   	QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
 
   	List<Matchup> matchups = qr.getMatchups();
@@ -110,8 +116,72 @@ public class PagesController {
   	
   	return "quals_postview";
   }
-
   
+  // only group of 12 has a preview
+  @RequestMapping("/seasons/{year}/groups/{round}/preview")
+  public String groupsPreview(@PathVariable(value = "year", required = true) String year,
+  		@PathVariable(value = "round", required = true) String round, Model model) {
+  	
+		Season season = viewsService.getSeason(NumberUtils.toInt(year));
+  	GroupsRound gr = viewsService.getGroupRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
+  	
+  	boolean seeded = false;
+  	
+  	// post seeding case for round
+  	if( gr.getStrongTeams() != null ) { 
+  		
+  		seeded = true;
+  		
+  	}
+  	
+		List<Team> teams = gr.getTeams();
+		List<Team> teamsStrong = gr.getStrongTeams();
+		List<Team> teamsMedium = gr.getMediumTeams();
+		List<Team> teamsWeak = gr.getWeakTeams();
+		
+		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
+		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+		Map<Team, Integer> teamsMediumWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsMedium);
+		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+		
+		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
+		model.addAttribute("teamsStrongWithCoeffs", teamsStrongWithCoeffs);
+		model.addAttribute("teamsMediumWithCoeffs", teamsMediumWithCoeffs);
+		model.addAttribute("teamsWeakWithCoeffs", teamsWeakWithCoeffs);
+		model.addAttribute("seeded", seeded);
+  	
+  	return "groups_preview";
+  }
+
+  @RequestMapping("/seasons/{year}/groups/{round}/postview")
+  public String groupsPostview(@PathVariable(value = "year", required = true) String year,
+  		@PathVariable(value = "round", required = true) String round, Model model) {
+  	
+  	GroupsRound gr = viewsService.getGroupRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
+  	
+  	List<RobinGroup> groups = gr.getGroups();
+  	
+  	// does not work
+  	for(Group group : groups) {
+  		
+  		Collections.sort(group.getTeams(), new RobinGroupOrdering(group));
+  		
+  	}
+  	
+  	model.addAttribute("groups", groups);
+  	
+  	return "groups_postview";
+  }
+  
+  @RequestMapping("/seasons/{year}/playoffs")
+  public String playoffs(@PathVariable(value = "year", required = true) String year, Model model) {
+  	
+  	PlayoffsRound playoffs = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
+  	
+  	model.addAttribute("playoffs", playoffs);
+  	
+  	return "playoffs";
+  }
 
 	private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
 		Collections.sort(teams, new CoefficientsOrdering(season));
