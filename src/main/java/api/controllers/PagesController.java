@@ -16,6 +16,7 @@ import api.services.ViewsService;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
+import core.peristence.dtos.matchups.Matchup;
 import core.peristence.dtos.rounds.QualsRound;
 import core.services.ServiceUtils;
 import core.tools.CoefficientsOrdering;
@@ -94,6 +95,20 @@ public class PagesController {
 		model.addAttribute("seeded", seeded);
   	
   	return "quals_preview";
+  }
+  
+  @RequestMapping("/seasons/{year}/quals/{round}/postview")
+  public String quals1Postview(@PathVariable(value = "year", required = true) String year,
+  		@PathVariable(value = "round", required = true) String round, Model model) {
+  	
+  	Season season = viewsService.getSeason(NumberUtils.toInt(year));
+  	QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
+
+  	List<Matchup> matchups = qr.getMatchups();
+  	
+  	model.addAttribute("matchups", matchups);
+  	
+  	return "quals_postview";
   }
 
   
