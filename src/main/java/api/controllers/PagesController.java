@@ -1,7 +1,5 @@
 package api.controllers;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import api.services.ViewsService;
-import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.RobinGroup;
