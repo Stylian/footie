@@ -15,48 +15,29 @@
 <body>
 
 	<div>Quarter-finals</div>
+	<br/>
 
 	<div th:each="matchup: ${playoffs.quarterMatchups}">
-		<div th:text="${matchup.teamHome}"> </div>
-		<div th:text="${matchup.teamAway}"> </div>
-		
 		<div th:each="game: ${matchup.games}">
-			<div th:text="${game.homeTeam}"> </div>
-			<div th:text="${game.awayTeam}"> </div>
-			<div th:text="${game.result}"> </div>
+			<div th:text="${game.homeTeam} + ' ' + ${game.result} + ' ' + ${game.awayTeam}"> </div>
 		</div>
-		
-		<div>----------</div>
 	</div>
 
 	<div>Semi-finals</div>
+	<br/>
 
 	<div th:each="matchup: ${playoffs.semisMatchups}">
-		<div th:text="${matchup.teamHome}"> </div>
-		<div th:text="${matchup.teamAway}"> </div>
-		
 		<div th:each="game: ${matchup.games}">
-			<div th:text="${game.homeTeam}"> </div>
-			<div th:text="${game.awayTeam}"> </div>
-			<div th:text="${game.result}"> </div>
+			<div th:text="${game.homeTeam} + ' ' + ${game.result} + ' ' + ${game.awayTeam}"> </div>
 		</div>
-		
-		<div>----------</div>
 	</div>
 
 	<div>Finals</div>
 
 	<div>
-		<div th:text="${playoffs.finalsMatchup.teamHome}"> </div>
-		<div th:text="${playoffs.finalsMatchup.teamAway}"> </div>
-		
 		<div th:each="game: ${playoffs.finalsMatchup.games}">
-			<div th:text="${game.homeTeam}"> </div>
-			<div th:text="${game.awayTeam}"> </div>
-			<div th:text="${game.result}"> </div>
+			<div th:text="${game.homeTeam} + ' ' + ${game.result} + ' ' + ${game.awayTeam}"> </div>
 		</div>
-		
-		<div>----------</div>
 	</div>
 	
 </body>
