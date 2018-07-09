@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * TODO could be made unique goals pair
+ * @author stylianos.chatzimano
+ *
+ */
 @Entity(name = "RESULTS")
 public class Result {
 

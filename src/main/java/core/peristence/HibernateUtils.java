@@ -4,6 +4,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+/**
+ * TODO replace connection with depedency injection
+ * @author stylianos.chatzimano
+ *
+ */
 public class HibernateUtils {
 
 	private static SessionFactory sessionFactory;

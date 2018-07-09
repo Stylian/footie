@@ -22,59 +22,58 @@ import core.peristence.dtos.rounds.Round;
 public class RestViewsController {
 
 	@Autowired
-  private ViewsService service;
-	
+	private ViewsService service;
+
 	// league
-  @RequestMapping("/league")
-  public League getLeague(){
-      return service.getLeague();
-  }
-  
-  // season
-  @RequestMapping("/season")
-  public Season getSeasonCurrent(){
-  	return service.getCurrentSeason();
-  }
-  
-  @RequestMapping("/seasons")
-  public List<Season> getSeasons(){
-  	return service.getAllSeasons();
-  }
-  
-  @RequestMapping("/seasons/{year}")
-  public Season getSeason(@PathVariable String year){
-  	return service.getSeason(NumberUtils.toInt(year));
-  }
-  
-  @RequestMapping("/seasons/{year}/quals/{round}")
-  public QualsRound getQualsRound(@PathVariable String year, @PathVariable String round){
+	@RequestMapping("/league")
+	public League getLeague() {
+		return service.getLeague();
+	}
 
-  	int qr = NumberUtils.toInt(round);
-  	
-  	if (qr < 1 || qr > 2) {
-  		throw new NoSuchElementException("there are only 2 qualification rounds");
-  	}
-		
-  	return service.getQualRound(NumberUtils.toInt(year), qr);
-  }
+	// season
+	@RequestMapping("/season")
+	public Season getSeasonCurrent() {
+		return service.getCurrentSeason();
+	}
 
-  @RequestMapping("/seasons/{year}/groups/{round}")
-  public GroupsRound getGroupsRound(@PathVariable String year, @PathVariable String round){
-  	
-  	int qr = NumberUtils.toInt(round);
-  	
-  	if (qr < 1 || qr > 2) {
-  		throw new NoSuchElementException("there are only 2 group rounds");
-  	}
-  	
-  	return service.getGroupRound(NumberUtils.toInt(year), qr);
-  }
-  
-  @RequestMapping("/seasons/{year}/playoffs")
-  public PlayoffsRound getPlayoffsRound(@PathVariable String year){
-  	
-  	
-  	return service.getPlayoffsRound(NumberUtils.toInt(year));
-  }
+	@RequestMapping("/seasons")
+	public List<Season> getSeasons() {
+		return service.getAllSeasons();
+	}
+
+	@RequestMapping("/seasons/{year}")
+	public Season getSeason(@PathVariable String year) {
+		return service.getSeason(NumberUtils.toInt(year));
+	}
+
+	@RequestMapping("/seasons/{year}/quals/{round}")
+	public QualsRound getQualsRound(@PathVariable String year, @PathVariable String round) {
+
+		int qr = NumberUtils.toInt(round);
+
+		if (qr < 1 || qr > 2) {
+			throw new NoSuchElementException("there are only 2 qualification rounds");
+		}
+
+		return service.getQualRound(NumberUtils.toInt(year), qr);
+	}
+
+	@RequestMapping("/seasons/{year}/groups/{round}")
+	public GroupsRound getGroupsRound(@PathVariable String year, @PathVariable String round) {
+
+		int qr = NumberUtils.toInt(round);
+
+		if (qr < 1 || qr > 2) {
+			throw new NoSuchElementException("there are only 2 group rounds");
+		}
+
+		return service.getGroupRound(NumberUtils.toInt(year), qr);
+	}
+
+	@RequestMapping("/seasons/{year}/playoffs")
+	public PlayoffsRound getPlayoffsRound(@PathVariable String year) {
+
+		return service.getPlayoffsRound(NumberUtils.toInt(year));
+	}
 
 }

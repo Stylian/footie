@@ -59,6 +59,9 @@ public class League {
 		
 	}
 
+	/**
+	 * TODO this should not be here
+	 */
 	public void save() {
 		
 		DataAccessObject<League> dao2 = new DataAccessObject<>(HibernateUtils.getSession());

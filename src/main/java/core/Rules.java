@@ -7,6 +7,11 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+/**
+ * TODO there is a spring way to load properties, to do that
+ * @author stylianos.chatzimano
+ *
+ */
 public class Rules {
 
 	final static Logger logger = Logger.getLogger(Rules.class);

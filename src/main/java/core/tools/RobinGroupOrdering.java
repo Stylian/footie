@@ -42,7 +42,7 @@ public class RobinGroupOrdering extends Ordering {
 			return s2.getWins() - s1.getWins();
 		}
 		
-		// RULE 5
+		// RULE 5 coefficients
 		Group master = ServiceUtils.getMasterGroup();
 		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
 			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
