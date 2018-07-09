@@ -29,14 +29,16 @@
 				</tr>
 			</tbody>
 		</table>
-		
+
+		<br/>
+				
 		<div th:each="game: ${group.games}">
-			<div th:text="${game.homeTeam}"> </div>
-			<div th:text="${game.awayTeam}"> </div>
-			<div th:text="${game.result}"> </div>
+			<div th:text="${game.homeTeam} + ' ' + ${game.result} + ' ' + ${game.awayTeam}"> </div>
 		</div>
 		
-		<div>----------</div>
+		<br/>
+		<br/>
+
 	</div>
 
 </body>

@@ -15,16 +15,15 @@
 <body>
 
 	<div th:each="matchup: ${matchups}">
+	<!-- note needed?
 		<div th:text="${matchup.teamHome}"> </div>
 		<div th:text="${matchup.teamAway}"> </div>
-		
+	-->
 		<div th:each="game: ${matchup.games}">
-			<div th:text="${game.homeTeam}"> </div>
-			<div th:text="${game.awayTeam}"> </div>
-			<div th:text="${game.result}"> </div>
+			<div th:text="${game.homeTeam} + ' ' + ${game.result} + ' ' + ${game.awayTeam}"> </div>
 		</div>
 		
-		<div>----------</div>
+		<br/>
 	</div>
 
 </body>
