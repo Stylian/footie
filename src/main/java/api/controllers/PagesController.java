@@ -156,16 +156,7 @@ public class PagesController {
 
 		GroupsRound gr = viewsService.getGroupRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
 
-		List<RobinGroup> groups = gr.getGroups();
-
-		// does not work
-		for (Group group : groups) {
-
-			Collections.sort(group.getTeams(), new RobinGroupOrdering(group));
-
-		}
-
-		model.addAttribute("groups", groups);
+		model.addAttribute("groups", gr.getGroups());
 
 		return "groups_postview";
 	}

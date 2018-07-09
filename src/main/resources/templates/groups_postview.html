@@ -22,10 +22,22 @@
 				<tr>
 					<th>team</th>
 					<th>points</th>
+					<th>W</th>
+					<th>D</th>
+					<th>L</th>
+					<th>GS</th>
+					<th>GC</th>
+					<th>+/-</th>
 				</tr>
-				<tr th:each="teamStat: ${group.teamsStats}">
-					<td th:text="${teamStat['key'].name}" />
-					<td th:text="${teamStat['value'].points}" />
+				<tr th:each="team: ${group.teamsOrdered}">
+					<td th:text="${team.name}" />
+					<td th:text="${group.teamsStats.get(team).points}" />
+					<td th:text="${group.teamsStats.get(team).wins}" />
+					<td th:text="${group.teamsStats.get(team).draws}" />
+					<td th:text="${group.teamsStats.get(team).losses}" />
+					<td th:text="${group.teamsStats.get(team).goalsScored}" />
+					<td th:text="${group.teamsStats.get(team).goalsConceded}" />
+					<td th:text="${group.teamsStats.get(team).goalsScored} - ${group.teamsStats.get(team).goalsConceded}" />
 				</tr>
 			</tbody>
 		</table>
