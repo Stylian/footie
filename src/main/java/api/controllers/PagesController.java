@@ -60,6 +60,11 @@ public class PagesController {
 		return "stats";
 	}
 
+	@RequestMapping("/seasons/{year}")
+	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
+		return "season";
+	}
+	
 	@RequestMapping("seasons/{year}/preview")
 	public String seasonPreview(@PathVariable(value = "year", required = true) String year, Model model) {
 
@@ -72,6 +77,11 @@ public class PagesController {
 		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
 
 		return "season_preview";
+	}
+	
+	@RequestMapping("/seasons/{year}/quals/{round}")
+	public String qualsTotalDisplay(@PathVariable(value = "round", required = true) String round, Model model) {
+		return "quals";
 	}
 
 	@RequestMapping("/seasons/{year}/quals/{round}/preview")
@@ -119,6 +129,11 @@ public class PagesController {
 		return "quals_postview";
 	}
 
+	@RequestMapping("/seasons/{year}/groups/{round}")
+	public String groupsTotalDisplay(@PathVariable(value = "round", required = true) String round, Model model) {
+		return "groups";
+	}
+	
 	// only group of 12 has a preview
 	@RequestMapping("/seasons/{year}/groups/{round}/preview")
 	public String groupsPreview(@PathVariable(value = "year", required = true) String year,

@@ -14,14 +14,23 @@
 </head>
 <body>
 
-	<h2>Footie</h2>
+	<h2>Season</h2>
 
-	<a href='past_winners' >Past Winners</a>
-	<br/>
-	<a href='coefficients' >Coefficients</a>
-	<br/>
-	<a href='stats' >Stats</a>
-	<br/>
+	<div th:with="currentUrl=${#httpServletRequest.requestURI}">
+   		<a th:href="@{${currentUrl} + '/preview'}">Preview</a>
+		<br/>
+   		<a th:href="@{${currentUrl} + '/quals/1'}">1st qualification round</a>
+ 		<br/>
+   		<a th:href="@{${currentUrl} + '/quals/2'}">2nd qualification round</a>
+		<br/>
+   		<a th:href="@{${currentUrl} + '/groups/1'}">1st groups Round</a>
+		<br/>
+   		<a th:href="@{${currentUrl} + '/groups/2'}">2nd groups round</a>
+		<br/>
+   		<a th:href="@{${currentUrl} + '/playoffs'}">Playofs</a>
+		<br/>
+	</div>
+
 
 </body>
 </html>

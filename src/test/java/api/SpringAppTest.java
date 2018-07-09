@@ -34,12 +34,12 @@ public class SpringAppTest {
 	@Test
 	public void testOps() throws Exception {
 		
-//		checkURL("/rest/ops/league", "{status=success, message=created league}");
-//
-//		for(int n=1; n < 5; n++)
-//			runSeason(n);
-//		
-//		displayResults();
+		checkURL("/rest/ops/league", "{status=success, message=created league}");
+
+		for(int n=1; n < 5; n++)
+			runSeason(n);
+		
+		displayResults();
 		
 	}
 

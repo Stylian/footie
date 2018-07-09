@@ -14,14 +14,17 @@
 </head>
 <body>
 
-	<h2>Footie</h2>
+	<h2>Groups</h2>
 
-	<a href='past_winners' >Past Winners</a>
-	<br/>
-	<a href='coefficients' >Coefficients</a>
-	<br/>
-	<a href='stats' >Stats</a>
-	<br/>
+	<div th:with="currentUrl=${#httpServletRequest.requestURI}">
+ 		<br/>
+   		<a th:href="@{${currentUrl} + '/preview'}">Preview</a>
+   		<a th:href="@{${currentUrl} + '/postview'}">Post View</a>
+		<br/>
+	
+	
+	</div>
+
 
 </body>
 </html>
