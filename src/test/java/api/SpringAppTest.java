@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import core.Monitoring;
 
@@ -94,8 +96,11 @@ public class SpringAppTest {
 	}
 
 	private void checkURL(String path, String expected) {
-		ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + path, Map.class);
+		
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+		
+		ResponseEntity<Map> entity = this.testRestTemplate.postForEntity(
+				"http://localhost:" + this.port + path, parts, Map.class);
 		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		
 		assertEquals(expected, entity.getBody().toString());

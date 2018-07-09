@@ -31,11 +31,16 @@ public class PagesController {
 	@Autowired
 	private ViewsService viewsService;
 
+	@RequestMapping("/")
+	public String landingPage(Model model) {
+		return "landing_page";
+	}
+	
 	@RequestMapping("past_winners")
 	public String league(Model model) {
-
+		
 		model.addAttribute("seasons", viewsService.getAllSeasons());
-
+		
 		return "past_winners";
 	}
 
