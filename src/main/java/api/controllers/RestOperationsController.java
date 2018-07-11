@@ -3,14 +3,13 @@ package api.controllers;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.RestResponse;
 import api.services.OperationsService;
-import core.peristence.dtos.League;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.PlayoffsRound;
@@ -23,28 +22,28 @@ public class RestOperationsController {
 	@Autowired
 	private OperationsService myService;
 
-	@RequestMapping(value = "/league", method = RequestMethod.POST)
+	@PostMapping("/league")
 	@ResponseBody
 	public RestResponse createLeague() {
-		League league = myService.createLeague();
+		myService.createLeague();
 		return new RestResponse(RestResponse.SUCCESS, "created league");
 	}
 
-	@RequestMapping(value = "/season/create", method = RequestMethod.POST)
+	@PostMapping("/season/create")
 	@ResponseBody
 	public RestResponse createSeason() {
 		Season season = myService.createSeason();
 		return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
 	}
 
-	@RequestMapping(value = "/season/setup", method = RequestMethod.POST)
+	@PostMapping("/season/setup")
 	@ResponseBody
 	public RestResponse setUpSeason() {
 		Season season = myService.setUpSeason();
 		return new RestResponse(RestResponse.SUCCESS, "set " + season.getName());
 	}
 
-	@RequestMapping(value = "/quals/{num}/seed", method = RequestMethod.POST)
+	@PostMapping("/quals/{num}/seed")
 	@ResponseBody
 	public RestResponse seedQualsRound(@PathVariable String num) {
 
@@ -59,7 +58,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/quals/{num}/set", method = RequestMethod.POST)
+	@PostMapping("/quals/{num}/set")
 	@ResponseBody
 	public RestResponse setQualsRound(@PathVariable String num) {
 
@@ -74,7 +73,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/groups/12/seed", method = RequestMethod.POST)
+	@PostMapping("/groups/12/seed")
 	@ResponseBody
 	public RestResponse seedGroupsRoundOf12() {
 
@@ -83,7 +82,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/groups/12/set", method = RequestMethod.POST)
+	@PostMapping("/groups/12/set")
 	@ResponseBody
 	public RestResponse setGroupsRoundOf12() {
 
@@ -92,7 +91,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/groups/8/seedAndSet", method = RequestMethod.POST)
+	@PostMapping("/groups/8/seedAndSet")
 	@ResponseBody
 	public RestResponse seedAndSetGroupsRoundOf8() {
 
@@ -101,7 +100,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/playoffs/quarterfinals/seedAndSet", method = RequestMethod.POST)
+	@PostMapping("/playoffs/quarterfinals/seedAndSet")
 	@ResponseBody
 	public RestResponse seedAndSetQuarterfinals() {
 
@@ -110,16 +109,16 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/playoffs/semifinals/seedAndSet", method = RequestMethod.POST)
+	@PostMapping("/playoffs/semifinals/seedAndSet")
 	@ResponseBody
-	public RestResponse seedAndSetSemirfinals() {
+	public RestResponse seedAndSetSemifinals() {
 
 		PlayoffsRound round = myService.seedAndSetSemifinals();
 		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
 
 	}
 
-	@RequestMapping(value = "/playoffs/finals/seedAndSet", method = RequestMethod.POST)
+	@PostMapping("/playoffs/finals/seedAndSet")
 	@ResponseBody
 	public RestResponse seedAndSetFinals() {
 
@@ -128,7 +127,7 @@ public class RestOperationsController {
 
 	}
 
-	@RequestMapping(value = "/season/end", method = RequestMethod.POST)
+	@PostMapping("/season/end")
 	@ResponseBody
 	public RestResponse endSeason() {
 		Season season = myService.endSeason();

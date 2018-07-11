@@ -106,7 +106,7 @@ public class SeasonService {
 			groupsTeams.add(teamsClone.remove(0));
 
 			// 2nd round needs 16 teams so
-			int diff = teamsClone.size() - 16;
+			int diff = teamsClone.size() - 16; // cannot support more than 36 teams, probably no less than 22 as well
 
 			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
 			List<Team> quals1Teams = new ArrayList<>();
