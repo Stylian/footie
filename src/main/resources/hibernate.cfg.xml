@@ -33,27 +33,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
  
-        <mapping class="core.peristence.dtos.League" />
-        <mapping class="core.peristence.dtos.Team" />
-        <mapping class="core.peristence.dtos.Stats" />
-
-        <mapping class="core.peristence.dtos.games.Result" />
-        <mapping class="core.peristence.dtos.games.Game" />
-        <mapping class="core.peristence.dtos.games.MatchupGame" />
-        <mapping class="core.peristence.dtos.games.GroupGame" />
-
-        <mapping class="core.peristence.dtos.matchups.Matchup" />
-
-        <mapping class="core.peristence.dtos.groups.Group" />
-        <mapping class="core.peristence.dtos.groups.RobinGroup" />
-        <mapping class="core.peristence.dtos.groups.RobinGroup12" />
-        <mapping class="core.peristence.dtos.groups.RobinGroup8" />
-        <mapping class="core.peristence.dtos.groups.Season" />
-
-        <mapping class="core.peristence.dtos.rounds.Round" />
-        <mapping class="core.peristence.dtos.rounds.QualsRound" />
-        <mapping class="core.peristence.dtos.rounds.GroupsRound" />
-        <mapping class="core.peristence.dtos.rounds.PlayoffsRound" />
+ 		<property name="packagesToScan">core.peristence.dtos</property>
  
     </session-factory>
  

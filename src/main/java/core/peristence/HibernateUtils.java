@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
- * TODO replace connection with depedency injection
+ * TODO replace connection with dependency injection
  * @author stylianos.chatzimano
  *
  */
