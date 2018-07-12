@@ -14,8 +14,7 @@
 		</div>
 		
 		 <div class="row">
-	
-			<table>
+			<table class="table" >
 				<tbody>
 					<tr>
 						<th>Team</th>
@@ -25,6 +24,7 @@
 						<th>PS</th>
 						<th>PC</th>
 						<th>+/-</th>
+						<th>Coefficients</th>
 					</tr>
 					<tr th:each="teamStat: ${teamsStats}">
 						<td th:text="${teamStat['key'].name}" />
@@ -34,6 +34,7 @@
 						<td th:text="${teamStat['value'].goalsScored}" />
 						<td th:text="${teamStat['value'].goalsConceded}" />
 						<td th:text="${teamStat['value'].goalsScored - teamStat['value'].goalsConceded}" />
+						<td th:text="${teamStat['value'].points}" />
 					</tr>
 				</tbody>
 			</table>

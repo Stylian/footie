@@ -9,24 +9,25 @@
 
 	<div class="container" >
 	
-	 <div class="row">
-		<div th:replace="navbar :: navbar" ></div>
-	</div>
-		
-	 <div class="row">
+		 <div class="row">
+			<div th:replace="navbar :: navbar" ></div>
+		</div>
+			
+		 <div class="row">
+			<table class="table" >
+				<tbody>
+					<tr>
+						<th>year</th>
+						<th>winner</th>
+					</tr>
+					<tr th:each="season: ${seasons}">
+						<td th:text="${season.seasonYear}" />
+						<td th:text="${season.winner.name}" />
+					</tr>
+				</tbody>
+			</table>
 	
-		<table>
-			<tbody>
-				<tr>
-					<th>year</th>
-					<th>winner</th>
-				</tr>
-				<tr th:each="season: ${seasons}">
-					<td th:text="${season.seasonYear}" />
-					<td th:text="${season.winner.name}" />
-				</tr>
-			</tbody>
-		</table>
+		</div>
 
 	</div>
 
