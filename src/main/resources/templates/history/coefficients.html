@@ -7,20 +7,28 @@
 
 <body>
 
-	<div th:replace="navbar :: navbar" ></div>
-
-	<table>
-		<tbody>
-			<tr>
-				<th>team</th>
-				<th>coefficients</th>
-			</tr>
-			<tr th:each="teamCoeff: ${teamsCoeffs}">
-				<td th:text="${teamCoeff['key'].name}" />
-				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
-			</tr>
-		</tbody>
-	</table>
+	<div class="container" >
+	
+		 <div class="row">
+			<div th:replace="navbar :: navbar" ></div>
+		</div>
+		
+		 <div class="row">
+			<table>
+				<tbody>
+					<tr>
+						<th>team</th>
+						<th>coefficients</th>
+					</tr>
+					<tr th:each="teamCoeff: ${teamsCoeffs}">
+						<td th:text="${teamCoeff['key'].name}" />
+						<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+	</div>
 	
 </body>
 </html>

@@ -1,5 +1,6 @@
 package api.services;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
+import core.peristence.dtos.games.Result;
 import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
@@ -134,4 +137,26 @@ public class ViewsService {
 
 	}
 
+	public Map<String, Object> gameStats() {
+
+		// TODO hacked in the keys as displayed names
+		Map<String, Object> gamestats = new LinkedHashMap<>();
+		 
+		DecimalFormat numberFormat = new DecimalFormat("0.00");
+		
+		Session session = HibernateUtils.getSession();
+
+		@SuppressWarnings("unchecked")
+		List<Result> results = session.createQuery("from RESULTS").list();
+		
+		gamestats.put("number of games played", results.size() );
+		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());
+		gamestats.put("draws", results.stream().filter(Result::tie).count());
+		gamestats.put("losses", results.stream().filter(Result::awayTeamWon).count());
+		gamestats.put("avg goals scored", numberFormat.format(results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
+		gamestats.put("avg goals conceded", numberFormat.format(results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
+		
+		return gamestats;
+	}
+	
 }

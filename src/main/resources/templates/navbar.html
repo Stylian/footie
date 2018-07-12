@@ -9,24 +9,26 @@
 
 	<div th:fragment="navbar">
 
-		<nav class="navbar navbar-expand-sm bg-light">
+		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
-			<div class="dropdown">
-				<button class="btn dropdown-toggle" type="button"
-					data-toggle="dropdown">
+			<button class="btn" type="button" >
+				<a href="/">Home</a>
+			</button>
+	
+			 <div class="btn-group" role="group">
+				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
 					Management <span class="caret"></span>
 				</button>
 
 				<ul class="dropdown-menu">
 					<li><a href='#'>Start new Season</a></li>
-					<li><a href='#'>Total Game Stats</a></li>
+					<li><a href='/management/game_stats'>Game Stats</a></li>
 				</ul>
 
 			</div>
 
-			<div class="dropdown">
-				<button class="btn dropdown-toggle" type="button"
-					data-toggle="dropdown">
+			 <div class="btn-group" role="group">
+				<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
 					History <span class="caret"></span>
 				</button>
 
@@ -39,7 +41,9 @@
 
 			</div>
 
-		</nav>
+
+		</div>
+
 
 	</div>
 

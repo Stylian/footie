@@ -14,7 +14,6 @@ public class HistoryDropdownController {
 	@Autowired
 	private ViewsService viewsService;
 	
-	
 	@RequestMapping("/past_winners")
 	public String league(Model model) {
 		

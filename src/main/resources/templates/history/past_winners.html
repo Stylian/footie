@@ -7,20 +7,28 @@
 
 <body>
 
-	<div th:replace="navbar :: navbar" ></div>
+	<div class="container" >
 	
-	<table>
-		<tbody>
-			<tr>
-				<th>year</th>
-				<th>winner</th>
-			</tr>
-			<tr th:each="season: ${seasons}">
-				<td th:text="${season.seasonYear}" />
-				<td th:text="${season.winner.name}" />
-			</tr>
-		</tbody>
-	</table>
+	 <div class="row">
+		<div th:replace="navbar :: navbar" ></div>
+	</div>
+		
+	 <div class="row">
+	
+		<table>
+			<tbody>
+				<tr>
+					<th>year</th>
+					<th>winner</th>
+				</tr>
+				<tr th:each="season: ${seasons}">
+					<td th:text="${season.seasonYear}" />
+					<td th:text="${season.winner.name}" />
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 
 </body>
 </html>
