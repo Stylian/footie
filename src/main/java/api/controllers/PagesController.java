@@ -35,30 +35,6 @@ public class PagesController {
 	public String landingPage(Model model) {
 		return "landing_page";
 	}
-	
-	@RequestMapping("past_winners")
-	public String league(Model model) {
-		
-		model.addAttribute("seasons", viewsService.getAllSeasons());
-		
-		return "past_winners";
-	}
-
-	@RequestMapping("coefficients")
-	public String coefficients(Model model) {
-
-		model.addAttribute("teamsCoeffs", viewsService.getTeamsTotalCoefficients());
-
-		return "coefficients";
-	}
-
-	@RequestMapping("stats")
-	public String stats(Model model) {
-
-		model.addAttribute("teamsStats", viewsService.getTeamsTotalStats());
-
-		return "stats";
-	}
 
 	@RequestMapping("/seasons/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {

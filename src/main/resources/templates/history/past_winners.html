@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <object th:include="head :: head" th:remove="tag" ></object>
+</head>
+
+<body>
+
+	<div th:replace="navbar :: navbar" ></div>
+	
+	<table>
+		<tbody>
+			<tr>
+				<th>year</th>
+				<th>winner</th>
+			</tr>
+			<tr th:each="season: ${seasons}">
+				<td th:text="${season.seasonYear}" />
+				<td th:text="${season.winner.name}" />
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

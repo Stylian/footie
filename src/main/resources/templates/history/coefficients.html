@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <object th:include="head :: head" th:remove="tag" ></object>
+</head>
+
+<body>
+
+	<div th:replace="navbar :: navbar" ></div>
+
+	<table>
+		<tbody>
+			<tr>
+				<th>team</th>
+				<th>coefficients</th>
+			</tr>
+			<tr th:each="teamCoeff: ${teamsCoeffs}">
+				<td th:text="${teamCoeff['key'].name}" />
+				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>
