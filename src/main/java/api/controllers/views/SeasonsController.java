@@ -47,7 +47,6 @@ public class SeasonsController {
 		model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
 		model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));
 		
-		
 		return "seasons/season";
 	}
 
