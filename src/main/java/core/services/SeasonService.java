@@ -1,6 +1,7 @@
 package core.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +149,7 @@ public class SeasonService {
 			quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
 		}
 
+		map.put("champion", Arrays.asList(formerChampion));
 		map.put("toGroups", groupsTeams);
 		map.put("toQuals1", quals1Teams);
 		map.put("toQuals2", teamsClone);

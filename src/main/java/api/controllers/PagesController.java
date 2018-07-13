@@ -35,25 +35,6 @@ public class PagesController {
 	public String landingPage(Model model) {
 		return "landing_page";
 	}
-
-	@RequestMapping("/seasons/{year}")
-	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
-		return "season";
-	}
-	
-	@RequestMapping("seasons/{year}/preview")
-	public String seasonPreview(@PathVariable(value = "year", required = true) String year, Model model) {
-
-		Season season = viewsService.getSeason(NumberUtils.toInt(year));
-		List<Team> teams = ServiceUtils.loadTeams();
-
-		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
-
-		model.addAttribute("season", season);
-		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
-
-		return "season_preview";
-	}
 	
 	@RequestMapping("/seasons/{year}/quals/{round}")
 	public String qualsTotalDisplay(@PathVariable(value = "round", required = true) String round, Model model) {

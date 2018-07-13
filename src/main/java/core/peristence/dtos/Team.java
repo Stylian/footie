@@ -14,7 +14,6 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import core.peristence.dtos.groups.Group;
-import core.services.ServiceUtils;
 
 @Entity(name = "TEAMS")
 public class Team {

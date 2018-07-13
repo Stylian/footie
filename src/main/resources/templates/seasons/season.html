@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <object th:include="head :: head" th:remove="tag" ></object>
+</head>
+
+<body>
+
+	<div class="container" >
+	
+		 <div class="row">
+			<div th:replace="navbar :: navbar" ></div>
+		</div>
+		
+		 <div class="row">
+
+			<ul class="nav nav-tabs" >
+		   		<li class="active"><a data-toggle="tab" href="#preview" >Preview</a></li>
+		   		<li><a data-toggle="tab" href="#quals1" >1st Qualification Round</a></li>
+		   		<li><a data-toggle="tab" href="#quals2" >2nd Qualification Round</a></li>
+
+			</ul>
+
+			<div class="tab-content">
+				<div id="preview" class="tab-pane active">
+					<div th:replace="/seasons/season_fragments :: season_preview" ></div>
+				</div>
+				<div id="quals1" class="tab-pane">
+					<div th:replace="/seasons/season_fragments :: quals1" ></div>
+				</div>
+				<div id="quals2" class="tab-pane">
+					<div th:replace="/seasons/season_fragments :: quals2" ></div>
+				</div>
+				
+			</div>
+
+<!-- 
+		   		<li class="active"><a th:href="@{${currentUrl} + '/preview'}">Preview</a></li>
+		   		<li><a th:href="@{${currentUrl} + '/quals/1'}">1st qualification round</a></li>
+		   		<li><a th:href="@{${currentUrl} + '/quals/2'}">2nd qualification round</a></li>
+		   		<li><a th:href="@{${currentUrl} + '/groups/1'}">1st groups Round</a></li>
+		   		<li><a th:href="@{${currentUrl} + '/groups/2'}">2nd groups round</a></li>
+		   		<li><a th:href="@{${currentUrl} + '/playoffs'}">Playofs</a></li>
+ -->
+			
+		</div>
+
+	</div>
+
+</body>
+</html>
