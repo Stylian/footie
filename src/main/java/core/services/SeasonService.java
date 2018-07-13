@@ -62,54 +62,27 @@ public class SeasonService {
 
 	public Season setUpSeason() {
 
-		List<Team> teams = ServiceUtils.loadTeams();
-
 		Season season = ServiceUtils.loadCurrentSeason();
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
 		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
 		GroupsRound groupsRound12 = new GroupsRound(season, "Groups Round of 12");
 
-		if (season.getSeasonYear() == 1) {
+		Map<String, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
 
-			// 2nd round needs 24 teams so
-			int diff = teams.size() - 24;
+		List<Team> groupsTeams = teamsSeeded.get("toGroups");
+		logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
+		groupsRound12.setTeams(groupsTeams);
+		System.out.println("---------------");
 
-			Collections.shuffle(teams);
+		List<Team> quals2Teams = teamsSeeded.get("toQuals2");
+		logger.info("teams go directly to 2nd quals: " + Utils.toString(quals2Teams));
+		qualsRound2.setTeams(quals2Teams);
+		System.out.println("---------------");
 
-			List<Team> quals1 = new ArrayList<>();
-			for (int index = 0; index < 2 * diff; index++) {
-				quals1.add(teams.remove(0));
-			}
-
-			logger.info("unseeded teams to 1st quals round: " + Utils.toString(quals1));
-			qualsRound1.setTeams(quals1);
-
-			logger.info("unseeded teams to 2nd quals round: " + Utils.toString(teams));
-			qualsRound2.setTeams(teams);
-
-			logger.info("1st season no teams go directly to groups");
-			groupsRound12.setTeams(new ArrayList<>());
-
-		} else {
-
-			Map<String, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
-
-			List<Team> groupsTeams = teamsSeeded.get("toGroups");
-			logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
-			groupsRound12.setTeams(groupsTeams);
-			System.out.println("---------------");
-
-			List<Team> quals2Teams = teamsSeeded.get("toQuals2");
-			logger.info("teams go directly to 2nd quals: " + Utils.toString(quals2Teams));
-			qualsRound2.setTeams(quals2Teams);
-			System.out.println("---------------");
-
-			List<Team> quals1Teams = teamsSeeded.get("toQuals1");
-			logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
-			qualsRound1.setTeams(quals1Teams);
-
-		}
+		List<Team> quals1Teams = teamsSeeded.get("toQuals1");
+		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
+		qualsRound1.setTeams(quals1Teams);
 
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
 		seasonDao.save(season);
@@ -123,32 +96,52 @@ public class SeasonService {
 	 */
 	public Map<String, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
 
+		List<Team> teams = ServiceUtils.loadTeams();
+		
 		Map<String, List<Team>> map = new HashMap<>();
 
-		List<Team> teamsClone = new ArrayList<>(ServiceUtils.loadTeams());
+		List<Team> teamsClone = new ArrayList<>(teams);
 		Collections.sort(teamsClone, new CoefficientsOrdering());
 
 		List<Team> groupsTeams = new ArrayList<>();
-
-		// former champion promotes directly
-		Team formerChampion = ServiceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
-		groupsTeams.add(formerChampion);
-		teamsClone.remove(formerChampion);
-
-		// top 3 seeded teams promote directly to groups round excluding champion
-		groupsTeams.add(teamsClone.remove(0));
-		groupsTeams.add(teamsClone.remove(0));
-		groupsTeams.add(teamsClone.remove(0));
-
-		// 2nd round needs 16 teams so
-		int diff = teamsClone.size() - 16; // cannot support more than 36 teams, probably no less than 22 as well
-
-		// so bottom 2*diff go to 1st quals, others directly to 2nd quals
+		Team formerChampion = null;
 		List<Team> quals1Teams = new ArrayList<>();
-		for (int index = 0; index < 2 * diff; index++) {
-			quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
-		}
 
+		if (season.getSeasonYear() == 1) {
+			
+			// 2nd round needs 24 teams so
+			int diff = teamsClone.size() - 24;
+
+			Collections.shuffle(teamsClone);
+
+			for (int index = 0; index < 2 * diff; index++) {
+				quals1Teams.add(teamsClone.remove(0));
+			}
+			
+			logger.info("1st season no teams go directly to groups");
+			
+		}else {
+			
+			// former champion promotes directly
+			formerChampion = ServiceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
+			groupsTeams.add(formerChampion);
+			teamsClone.remove(formerChampion);
+	
+			// top 3 seeded teams promote directly to groups round excluding champion
+			groupsTeams.add(teamsClone.remove(0));
+			groupsTeams.add(teamsClone.remove(0));
+			groupsTeams.add(teamsClone.remove(0));
+	
+			// 2nd round needs 16 teams so
+			int diff = teamsClone.size() - 16; // cannot support more than 36 teams, probably no less than 22 as well
+	
+			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
+			for (int index = 0; index < 2 * diff; index++) {
+				quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
+			}
+
+		}
+		
 		map.put("champion", Arrays.asList(formerChampion));
 		map.put("toGroups", groupsTeams);
 		map.put("toQuals1", quals1Teams);
