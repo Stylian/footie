@@ -17,14 +17,16 @@
 			<table class="table" >
 				<tbody>
 					<tr>
-						<th>team</th>
-						<th>coefficients</th>
+						<th>Pos</th>
+						<th>Team</th>
+						<th>Coefficients</th>
 					</tr>
-					
-					<!-- https://stackoverflow.com/questions/51305513/thymeleaf-conditions-with-iterator -->
-					<tr th:each="teamCoeff,iter : ${teamsCoeffs}" th:class="${iter == 1} ? 'info' : '' " >
+
+					<tr th:each="teamCoeff,iter : ${teamsCoeffs}" th:class="${iter.count &lt; 4} ? 'info' : (${iter.count &lt; 8} ? 'success' : '') ">
+						<td th:text="${iter.index + 1} + '.' " />
 						<td th:text="${teamCoeff['key'].name}" />
-						<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+						<td
+							th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
 					</tr>
 				</tbody>
 			</table>

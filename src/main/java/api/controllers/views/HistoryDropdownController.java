@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import api.services.ViewsService;
+import core.services.SeasonService;
+import core.services.ServiceUtils;
 
 @Controller
 @RequestMapping("/history")
@@ -13,7 +15,7 @@ public class HistoryDropdownController {
 
 	@Autowired
 	private ViewsService viewsService;
-	
+
 	@RequestMapping("/past_winners")
 	public String league(Model model) {
 		
@@ -24,9 +26,9 @@ public class HistoryDropdownController {
 
 	@RequestMapping("/coefficients")
 	public String coefficients(Model model) {
-
+		
 		model.addAttribute("teamsCoeffs", viewsService.getTeamsTotalCoefficients());
-
+		
 		return "history/coefficients";
 	}
 
