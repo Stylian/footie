@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<!-- quals preview fragment -->
+	<div th:fragment="quals_preview">
+		
+		<h3>pot 1</h3>
+	
+		<table>
+			<tbody>
+				<tr>
+					<th>team</th>
+					<th>coefficients</th>
+				</tr>
+				<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).strong}">
+					<td th:text="${teamCoeff['key'].name}" />
+					<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+				</tr>
+			</tbody>
+		</table>
+	
+		<h3>pot 2</h3>
+	
+		<table>
+			<tbody>
+				<tr>
+					<th>team</th>
+					<th>coefficients</th>
+				</tr>
+				<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).weak}">
+					<td th:text="${teamCoeff['key'].name}" />
+					<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+				</tr>
+			</tbody>
+		</table>
+	
+	
+	</div>
+
+
+
+</html>

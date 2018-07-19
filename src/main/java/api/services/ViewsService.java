@@ -54,17 +54,8 @@ public class ViewsService {
 		return ServiceUtils.loadSeason(year);
 	}
 
-	/**
-	 * 
-	 * @param year
-	 *          season number
-	 * @param round
-	 *          1 for 1st quals round , 2 for 2nd quals round
-	 * @return
-	 */
-	public QualsRound getQualRound(int year, int round) {
+	public QualsRound getQualRound(Season season, int round) {
 
-		Season season = getSeason(year);
 		List<Round> rounds = season.getRounds();
 		return (QualsRound) rounds.get(round - 1);
 

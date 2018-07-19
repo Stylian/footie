@@ -1,6 +1,8 @@
 package api.controllers.views;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import api.services.ViewsService;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Season;
+import core.peristence.dtos.rounds.QualsRound;
 import core.services.SeasonService;
 import core.services.ServiceUtils;
 import core.tools.CoefficientsOrdering;
@@ -35,11 +38,11 @@ public class SeasonsController {
 		SeasonService seasonService = new SeasonService();  // FIX ME
 		
 		Season season = viewsService.getSeason(NumberUtils.toInt(year));
+		
+		// season preview
 		List<Team> teams = ServiceUtils.loadTeams();
-
 		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
 		Map<String, List<Team>> teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
-		
 		model.addAttribute("season", season);
 		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
 		model.addAttribute("champion", teamsInRounds.get("champion").get(0));
@@ -47,10 +50,40 @@ public class SeasonsController {
 		model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
 		model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));
 		
+		// quals previews
+		List<Map<String, Map<Team, Integer>>> qualsPreviews = new ArrayList<>();
+		qualsPreviews.add(qualsPreview(season, 1, model));
+		qualsPreviews.add(qualsPreview(season, 2, model));
+		model.addAttribute("qualsPreviews", qualsPreviews);
+		
 		return "seasons/season";
 	}
 
+	private Map<String, Map<Team, Integer>> qualsPreview(Season season, int round, Model model) {
 
+		QualsRound qr = viewsService.getQualRound(season, round);
+
+//		boolean seeded = false;
+//
+//		// post seeding case for round
+//		if ("2".equals(round) && qr.getStrongTeams() != null) {
+//
+//			seeded = true;
+//
+//		}
+
+		List<Team> teamsStrong = qr.getStrongTeams();
+		List<Team> teamsWeak = qr.getWeakTeams();
+
+		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+
+		Map<String, Map<Team, Integer>> qualsTeams = new HashMap<>();
+		qualsTeams.put("strong", teamsStrongWithCoeffs);
+		qualsTeams.put("weak", teamsWeakWithCoeffs);
+		
+		return qualsTeams;
+	}
 	
 	private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
 		Collections.sort(teams, new CoefficientsOrdering(season));
