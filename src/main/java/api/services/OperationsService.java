@@ -24,6 +24,9 @@ public class OperationsService {
 	
   @Autowired
   private SessionFactory sessionFactory;
+
+  @Autowired
+  private BootService bootService;
   
 	@PostConstruct
 	public void initIt() {
@@ -31,10 +34,7 @@ public class OperationsService {
 	}
 
 	public League createLeague() {
-		
-		BootService bs = new BootService();
-		return bs.loadLeague();
-
+		return bootService.loadLeague();
 	}
 
 	public Season createSeason() {

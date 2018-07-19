@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 @SpringBootApplication
 @EntityScan("core.peristence.dtos")
+@ComponentScan("core.services, api")
 public class App {
 
 	public static void main(String[] args) {
