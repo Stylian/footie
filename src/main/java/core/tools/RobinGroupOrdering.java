@@ -8,8 +8,11 @@ import core.peristence.dtos.groups.Group;
 
 public class RobinGroupOrdering extends Ordering {
 	
-	public RobinGroupOrdering(Group group) {
+	private Group master;
+	
+	public RobinGroupOrdering(Group group, Group master) {
 		super(group);
+		this.master = master;
 	}
 
 	@Override
@@ -41,10 +44,9 @@ public class RobinGroupOrdering extends Ordering {
 		}
 		
 		// RULE 5 coefficients
-//		Group master = ServiceUtils.getMasterGroup();
-//		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
-//			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
-//		}
+		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
+			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
+		}
 		
 		// RULE 6
 		return RandomUtils.nextInt(0, 2) - 1;

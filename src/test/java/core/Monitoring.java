@@ -149,69 +149,69 @@ public class Monitoring {
 	}
 
 	private void displayRoundOf12(List<Round> rounds) {
-		GroupsRound groupsRound12 = (GroupsRound) rounds.get(2);
-
-		System.out.println(groupsRound12.getName());
-		System.out.println("----------------------");
-		System.out.println("");
-
-		System.out.println("-----strong seeds ---------");
-		for (Team t : groupsRound12.getStrongTeams())
-			System.out.println(t);
-
-		System.out.println("-----medium seeds ---------");
-		for (Team t : groupsRound12.getMediumTeams())
-			System.out.println(t);
-
-		System.out.println("-----weak seeds ---------");
-		for (Team t : groupsRound12.getWeakTeams())
-			System.out.println(t);
-
-		for (RobinGroup robinGroup : groupsRound12.getGroups()) {
-			System.out.println("-----------------------");
-			System.out.println(robinGroup.getName());
-
-			System.out.println("name                            coeff W   D   L   GS   GC");
-			for (Team t : robinGroup.getTeamsOrdered()) {
-				Stats stats = t.getGroupStats().get(robinGroup);
-				int padding = 30 - t.getName().length();
-				String pad = "";
-				for (int count = 0; count < padding; count++)
-					pad += " ";
-				System.out
-						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
-								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
-			}
-
-			for (GroupGame g : robinGroup.getGames())
-				System.out.println(g);
-
-		}
+//		GroupsRound groupsRound12 = (GroupsRound) rounds.get(2);
+//
+//		System.out.println(groupsRound12.getName());
+//		System.out.println("----------------------");
+//		System.out.println("");
+//
+//		System.out.println("-----strong seeds ---------");
+//		for (Team t : groupsRound12.getStrongTeams())
+//			System.out.println(t);
+//
+//		System.out.println("-----medium seeds ---------");
+//		for (Team t : groupsRound12.getMediumTeams())
+//			System.out.println(t);
+//
+//		System.out.println("-----weak seeds ---------");
+//		for (Team t : groupsRound12.getWeakTeams())
+//			System.out.println(t);
+//
+//		for (RobinGroup robinGroup : groupsRound12.getGroups()) {
+//			System.out.println("-----------------------");
+//			System.out.println(robinGroup.getName());
+//
+//			System.out.println("name                            coeff W   D   L   GS   GC");
+//			for (Team t : robinGroup.getTeamsOrdered()) {
+//				Stats stats = t.getGroupStats().get(robinGroup);
+//				int padding = 30 - t.getName().length();
+//				String pad = "";
+//				for (int count = 0; count < padding; count++)
+//					pad += " ";
+//				System.out
+//						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
+//								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+//			}
+//
+//			for (GroupGame g : robinGroup.getGames())
+//				System.out.println(g);
+//
+//		}
 	}
 
 	private void displayRoundOf8(List<Round> rounds) {
-		GroupsRound groupsRound8 = (GroupsRound) rounds.get(3);
-
-		for (RobinGroup robinGroup : groupsRound8.getGroups()) {
-			System.out.println("-----------------------");
-			System.out.println(robinGroup.getName());
-
-			System.out.println("name                            coeff W   D   L   GS   GC");
-			for (Team t : robinGroup.getTeamsOrdered()) {
-				Stats stats = t.getGroupStats().get(robinGroup);
-				int padding = 30 - t.getName().length();
-				String pad = "";
-				for (int count = 0; count < padding; count++)
-					pad += " ";
-				System.out
-						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
-								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
-			}
-
-			for (GroupGame g : robinGroup.getGames())
-				System.out.println(g);
-
-		}
+//		GroupsRound groupsRound8 = (GroupsRound) rounds.get(3);
+//
+//		for (RobinGroup robinGroup : groupsRound8.getGroups()) {
+//			System.out.println("-----------------------");
+//			System.out.println(robinGroup.getName());
+//
+//			System.out.println("name                            coeff W   D   L   GS   GC");
+//			for (Team t : robinGroup.getTeamsOrdered()) {
+//				Stats stats = t.getGroupStats().get(robinGroup);
+//				int padding = 30 - t.getName().length();
+//				String pad = "";
+//				for (int count = 0; count < padding; count++)
+//					pad += " ";
+//				System.out
+//						.println(t.getName() + "   " + pad + stats.getPoints() + "   " + stats.getWins() + "   " + stats.getDraws()
+//								+ "   " + stats.getLosses() + "   " + stats.getGoalsScored() + "   " + stats.getGoalsConceded());
+//			}
+//
+//			for (GroupGame g : robinGroup.getGames())
+//				System.out.println(g);
+//
+//		}
 	}
 
 	private void displayPlayoffs(List<Round> rounds) {

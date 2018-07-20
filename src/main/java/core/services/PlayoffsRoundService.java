@@ -14,6 +14,7 @@ import core.peristence.DataAccessObject;
 import core.peristence.dtos.League;
 import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Team;
+import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.PlayoffsRound;
@@ -34,20 +35,21 @@ public class PlayoffsRoundService {
 		logger.info("seed and set quarterfinals");
 
 		Season season = serviceUtils.loadCurrentSeason();
-
+		Group master = serviceUtils.getMasterGroup();
+		
 		// build playoffs round
 		PlayoffsRound playoffsRound = new PlayoffsRound(season, "Playoffs");
 
 		// add winners from roundof8
 		GroupsRound groupsRoundOf8 = (GroupsRound) season.getRounds().get(3);
 
-		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeamsOrdered();
+		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeamsOrdered(master);
 		logger.info("teams from group A:" + Utils.toString(teamsA));
 		playoffsRound.setgA1(teamsA.get(0));
 		playoffsRound.setgA2(teamsA.get(1));
 		playoffsRound.setgA3(teamsA.get(2));
 
-		List<Team> teamsB = groupsRoundOf8.getGroups().get(1).getTeamsOrdered();
+		List<Team> teamsB = groupsRoundOf8.getGroups().get(1).getTeamsOrdered(master);
 		logger.info("teams from group B:" + Utils.toString(teamsB));
 		playoffsRound.setgB1(teamsB.get(0));
 		playoffsRound.setgB2(teamsB.get(1));

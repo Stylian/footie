@@ -165,6 +165,7 @@ public class SeasonService {
 		// maybe set up winner later
 
 		Season season = serviceUtils.loadCurrentSeason();
+		Group master = serviceUtils.getMasterGroup();
 
 		// add coeffs to quals1 winners
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
@@ -195,8 +196,8 @@ public class SeasonService {
 
 		for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
 
-			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
-			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
+			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
+			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 
 			for (GroupGame groupGame : robinGroup.getGames()) {
 
@@ -216,9 +217,9 @@ public class SeasonService {
 
 		for (RobinGroup robinGroup : groupsOf8Round.getGroups()) {
 
-			robinGroup.getTeamsOrdered().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
-			robinGroup.getTeamsOrdered().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
-			robinGroup.getTeamsOrdered().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
+			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
+			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
+			robinGroup.getTeamsOrdered(master).get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
 
 			for (GroupGame groupGame : robinGroup.getGames()) {
 
@@ -274,7 +275,6 @@ public class SeasonService {
 		}
 
 		// add season stats to master group
-		Group master = serviceUtils.getMasterGroup();
 
 		for (Team team : teams) {
 
