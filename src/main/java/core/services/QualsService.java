@@ -33,18 +33,18 @@ public class QualsService {
 	private SessionFactory sessionFactory;
 
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 	
 	public QualsRound seedUpQualsRound1() {
 		logger.info("seed quals round 1");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
 		seedQualsRound(season, roundQuals1);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setQuals1(LeagueStage.ON_PREVIEW);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -56,7 +56,7 @@ public class QualsService {
 	public QualsRound seedUpQualsRound2() {
 		logger.info("seed quals round 2");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
@@ -76,7 +76,7 @@ public class QualsService {
 		
 		seedQualsRound(season, roundQuals2);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setQuals2(LeagueStage.ON_PREVIEW);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -88,13 +88,13 @@ public class QualsService {
 	public QualsRound setUpQualsRound1() {
 		logger.info("set up quals round 1");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
 		
 		setUpQualsRound(roundQuals1);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setQuals1(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -107,13 +107,13 @@ public class QualsService {
 	public QualsRound setUpQualsRound2() {
 		logger.info("set up quals round 2");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
 		
 		setUpQualsRound(roundQuals2);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setQuals2(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -132,7 +132,7 @@ public class QualsService {
 			
 		}else {
 		
-			Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
+			Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
 		
 		}
 		

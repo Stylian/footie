@@ -36,7 +36,7 @@ public class GameService {
 	private SessionFactory sessionFactory;
 
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 	
 	public Game getNextGame() {
 		logger.info("retrieving next game...");
@@ -60,7 +60,7 @@ public class GameService {
 		logger.info("adding game result to game " + game.getHomeTeam() + " - " + game.getAwayTeam() + "  "
 				+ result.getGoalsMadeByHomeTeam() + " - " + result.getGoalsMadeByAwayTeam());
 
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		// add stats to teams
 		Team team = game.getHomeTeam();

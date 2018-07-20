@@ -33,7 +33,7 @@ public class SeasonsController {
 //	private SeasonService seasonService;
 	
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 	
 	@RequestMapping("/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
@@ -43,7 +43,7 @@ public class SeasonsController {
 		Season season = viewsService.getSeason(NumberUtils.toInt(year));
 		
 		// season preview
-		List<Team> teams = ServiceUtils.loadTeams();
+		List<Team> teams = serviceUtils.loadTeams();
 		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
 		Map<String, List<Team>> teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
 		model.addAttribute("season", season);

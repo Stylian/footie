@@ -41,11 +41,11 @@ public class SeasonService {
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 
 	public Season createSeason() {
 
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.resetStages();
 		league.addSeason();
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -55,7 +55,7 @@ public class SeasonService {
 
 		Season season = new Season(league.getSeasonNum());
 
-		List<Team> teams = ServiceUtils.loadTeams();
+		List<Team> teams = serviceUtils.loadTeams();
 
 		for (Team team : teams) {
 
@@ -72,7 +72,7 @@ public class SeasonService {
 
 	public Season setUpSeason() {
 
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
 		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
@@ -106,7 +106,7 @@ public class SeasonService {
 	 */
 	public Map<String, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
 
-		List<Team> teams = ServiceUtils.loadTeams();
+		List<Team> teams = serviceUtils.loadTeams();
 		
 		Map<String, List<Team>> map = new HashMap<>();
 
@@ -133,7 +133,7 @@ public class SeasonService {
 		}else {
 			
 			// former champion promotes directly
-			formerChampion = ServiceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
+			formerChampion = serviceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
 			groupsTeams.add(formerChampion);
 			teamsClone.remove(formerChampion);
 	
@@ -164,7 +164,7 @@ public class SeasonService {
 		logger.info("closing down season, calculating coefficients");
 		// maybe set up winner later
 
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 
 		// add coeffs to quals1 winners
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
@@ -264,7 +264,7 @@ public class SeasonService {
 		addGamePointsForMatchup(season, finalsMatchup);
 
 		// add points for goals scored
-		List<Team> teams = ServiceUtils.loadTeams();
+		List<Team> teams = serviceUtils.loadTeams();
 
 		for (Team team : teams) {
 
@@ -274,7 +274,7 @@ public class SeasonService {
 		}
 
 		// add season stats to master group
-		Group master = ServiceUtils.getMasterGroup();
+		Group master = serviceUtils.getMasterGroup();
 
 		for (Team team : teams) {
 

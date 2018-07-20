@@ -30,11 +30,11 @@ public class BootService {
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 
 	public League loadLeague() {
 
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 
 		if (league == null) {
 
@@ -75,7 +75,7 @@ public class BootService {
 
 			List<String> teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
-			Group master = ServiceUtils.getMasterGroup();
+			Group master = serviceUtils.getMasterGroup();
 
 			if (master == null) {
 				logger.error("master group does not exist");

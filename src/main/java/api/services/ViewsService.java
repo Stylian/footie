@@ -32,22 +32,22 @@ public class ViewsService {
 	private SessionFactory sessionFactory;
 
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 	
 	public League getLeague() {
-		return ServiceUtils.getLeague();
+		return serviceUtils.getLeague();
 	}
 
 	public List<Season> getAllSeasons() {
-		return ServiceUtils.loadAllSeasons();
+		return serviceUtils.loadAllSeasons();
 	}
 
 	public Season getCurrentSeason() {
-		return ServiceUtils.loadCurrentSeason();
+		return serviceUtils.loadCurrentSeason();
 	}
 
 	public Season getSeason(int year) {
-		return ServiceUtils.loadSeason(year);
+		return serviceUtils.loadSeason(year);
 	}
 
 	public QualsRound getQualRound(Season season, int round) {
@@ -91,10 +91,10 @@ public class ViewsService {
 
 		Map<Team, Stats> statsTotal = new LinkedHashMap<>();
 
-		List<Team> teams = ServiceUtils.loadTeams();
-		Group master = ServiceUtils.getMasterGroup();
+		List<Team> teams = serviceUtils.loadTeams();
+		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
+		Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
 
 		for (Team team : teams) {
 			statsTotal.put(team, team.getStatsForGroup(master));
@@ -108,10 +108,10 @@ public class ViewsService {
 
 		Map<Team, Integer> coeffsTotal = new LinkedHashMap<>();
 
-		List<Team> teams = ServiceUtils.loadTeams();
-		Group master = ServiceUtils.getMasterGroup();
+		List<Team> teams = serviceUtils.loadTeams();
+		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
+		Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
 
 		for (Team team : teams) {
 			coeffsTotal.put(team, team.getStatsForGroup(master).getPoints());

@@ -36,12 +36,12 @@ public class GroupsRoundService {
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private ServiceUtils ServiceUtils;
+	private ServiceUtils serviceUtils;
 	
 	public GroupsRound seedGroupsRoundOf12() {
 		logger.info("seed groups round of 12");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
 		
@@ -83,7 +83,7 @@ public class GroupsRoundService {
 			
 			strongTeams.add(teamsCopy.remove(0)); // the champion
 			
-			Collections.sort(teamsCopy, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
+			Collections.sort(teamsCopy, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
 			
 			for(int i=0; i<3; i++) {
 				strongTeams.add(teamsCopy.remove(0));
@@ -108,7 +108,7 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf12);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setGroups12(LeagueStage.ON_PREVIEW);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -120,7 +120,7 @@ public class GroupsRoundService {
 	public GroupsRound setUpGroupsRoundOf12() {
 		logger.info("set up groups round of 12");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
 		
@@ -170,7 +170,7 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf12);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setGroups12(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -182,7 +182,7 @@ public class GroupsRoundService {
 	public GroupsRound seedAndSetGroupsRoundOf8() {
 		logger.info("seed and set groups round of 8");
 		
-		Season season = ServiceUtils.loadCurrentSeason();
+		Season season = serviceUtils.loadCurrentSeason();
 		
 		// must add winners from groups round of 12
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
@@ -230,7 +230,7 @@ public class GroupsRoundService {
 		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf8);
 		
-		League league = ServiceUtils.getLeague();
+		League league = serviceUtils.getLeague();
 		league.setGroups8(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
