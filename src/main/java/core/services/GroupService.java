@@ -5,23 +5,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
 import core.tools.Ordering;
 
+@Service
+@Transactional
 public class GroupService {
 
 	final static Logger logger = Logger.getLogger(GroupService.class);
 
-	private Session session;
-
-	public GroupService(Session session) {
-		this.session = session;
-	}
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public List<Team> getTeams(Group group) {
 		return getTeams(group, null);

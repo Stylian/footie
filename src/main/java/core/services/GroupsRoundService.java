@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import core.Utils;
 import core.peristence.DataAccessObject;
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Stats;
@@ -23,12 +26,18 @@ import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.tools.CoefficientsOrdering;
 
+@Service
+@Transactional
 public class GroupsRoundService {
 	
 	final static Logger logger = Logger.getLogger(GroupsRoundService.class);
 
-	private Session session = HibernateUtils.getSession();
-
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private ServiceUtils ServiceUtils;
+	
 	public GroupsRound seedGroupsRoundOf12() {
 		logger.info("seed groups round of 12");
 		
@@ -74,7 +83,7 @@ public class GroupsRoundService {
 			
 			strongTeams.add(teamsCopy.remove(0)); // the champion
 			
-			Collections.sort(teamsCopy, new CoefficientsOrdering());
+			Collections.sort(teamsCopy, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
 			
 			for(int i=0; i<3; i++) {
 				strongTeams.add(teamsCopy.remove(0));
@@ -96,12 +105,13 @@ public class GroupsRoundService {
 		groupsRoundOf12.setMediumTeams(mediumTeams);
 		groupsRoundOf12.setWeakTeams(weakTeams);
 		
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
+		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf12);
 		
 		League league = ServiceUtils.getLeague();
 		league.setGroups12(LeagueStage.ON_PREVIEW);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return groupsRoundOf12;
 		
@@ -157,12 +167,13 @@ public class GroupsRoundService {
 		logger.info(groupC);
 		logger.info(groupD);
 		
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
+		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf12);
 		
 		League league = ServiceUtils.getLeague();
 		league.setGroups12(LeagueStage.PLAYING);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return groupsRoundOf12;
 		
@@ -216,12 +227,13 @@ public class GroupsRoundService {
 		logger.info(groupA);
 		logger.info(groupB);
 		
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(session);
+		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(groupsRoundOf8);
 		
 		League league = ServiceUtils.getLeague();
 		league.setGroups8(LeagueStage.PLAYING);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return groupsRoundOf8;
 				

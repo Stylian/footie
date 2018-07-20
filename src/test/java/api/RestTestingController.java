@@ -1,6 +1,7 @@
 package api;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,27 +13,28 @@ import core.services.GameService;
 @RestController
 @RequestMapping("/rest/test")
 public class RestTestingController {
-	
+
+	@Autowired
+	private GameService gameService;
+
 	@RequestMapping("/fillGames")
 	public RestResponse fillGamesTEST() {
 
-		GameService service = new GameService();
-
 		while (true) {
 
-			Game next = service.getNextGame();
+			Game next = gameService.getNextGame();
 
 			if (next == null) {
 				break;
 			}
 
-			service.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
+			gameService.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
 
 			System.out.println(next);
 
 		}
-		
+
 		return new RestResponse(RestResponse.SUCCESS, "games added");
 	}
-	
+
 }

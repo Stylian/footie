@@ -6,14 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
@@ -33,11 +31,9 @@ public class ViewsService {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@PostConstruct
-	public void initIt() {
-		HibernateUtils.setSessionFactory(sessionFactory);
-	}
-
+	@Autowired
+	private ServiceUtils ServiceUtils;
+	
 	public League getLeague() {
 		return ServiceUtils.getLeague();
 	}
@@ -98,7 +94,7 @@ public class ViewsService {
 		List<Team> teams = ServiceUtils.loadTeams();
 		Group master = ServiceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering());
+		Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
 
 		for (Team team : teams) {
 			statsTotal.put(team, team.getStatsForGroup(master));
@@ -115,7 +111,7 @@ public class ViewsService {
 		List<Team> teams = ServiceUtils.loadTeams();
 		Group master = ServiceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering());
+		Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
 
 		for (Team team : teams) {
 			coeffsTotal.put(team, team.getStatsForGroup(master).getPoints());
@@ -132,10 +128,8 @@ public class ViewsService {
 		 
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
 		
-		Session session = HibernateUtils.getSession();
-
 		@SuppressWarnings("unchecked")
-		List<Result> results = session.createQuery("from RESULTS").list();
+		List<Result> results = sessionFactory.getCurrentSession().createQuery("from RESULTS").list();
 		
 		gamestats.put("number of games played", results.size() );
 		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());

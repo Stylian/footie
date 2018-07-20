@@ -1,9 +1,7 @@
 package core;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.Test;
 
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.games.Game;
 import core.peristence.dtos.games.Result;
 import core.services.BootService;
@@ -32,8 +30,6 @@ public class FullTest {
 		monitoring.displayCoefficients();
 		monitoring.displayMetastats();
 
-		HibernateUtils.closeSession();
-		
 	}
 
 	private void runSeason() throws Exception {

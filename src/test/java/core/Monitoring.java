@@ -3,14 +3,12 @@ package core;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.junit.Test;
+import org.springframework.data.jpa.provider.HibernateUtils;
 
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.games.Game;
 import core.peristence.dtos.games.GroupGame;
-import core.peristence.dtos.games.Result;
 import core.peristence.dtos.groups.Group;
 import core.peristence.dtos.groups.RobinGroup;
 import core.peristence.dtos.groups.Season;
@@ -19,42 +17,39 @@ import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.peristence.dtos.rounds.Round;
-import core.services.GroupService;
-import core.services.ServiceUtils;
-import core.tools.CoefficientsOrdering;
 
 public class Monitoring {
 
 	public void displayMetastats() {
 
-		Session session = HibernateUtils.getSession();
-		
-		List<Result> results = session.createQuery("from RESULTS").list();
-		
-		System.out.println("number of games played: " + results.size());
-		System.out.println("average goals scored: " + results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble());
-		System.out.println("average goals conceded: " + results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble());
-		System.out.println("wins " + results.stream().filter(Result::homeTeamWon).count());
-		System.out.println("ties " + results.stream().filter(Result::tie).count());
-		System.out.println("losses " + results.stream().filter(Result::awayTeamWon).count());
+//		Session session = HibernateUtils.getSession();
+//		
+//		List<Result> results = session.createQuery("from RESULTS").list();
+//		
+//		System.out.println("number of games played: " + results.size());
+//		System.out.println("average goals scored: " + results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble());
+//		System.out.println("average goals conceded: " + results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble());
+//		System.out.println("wins " + results.stream().filter(Result::homeTeamWon).count());
+//		System.out.println("ties " + results.stream().filter(Result::tie).count());
+//		System.out.println("losses " + results.stream().filter(Result::awayTeamWon).count());
 		
 	}
 
 	public void displayCoefficients() {
-
-		Session session = HibernateUtils.getSession();
-
-		GroupService groupService = new GroupService(session);
-
-		Group master = ServiceUtils.getMasterGroup();
-		Season season = ServiceUtils.loadCurrentSeason();
-
-		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering());
-
-		displayGroup(master, teams1);
-
-		session.close();
-
+//
+//		Session session = HibernateUtils.getSession();
+//
+//		GroupService groupService = new GroupService();
+//
+//		Group master = ServiceUtils.getMasterGroup();
+//		Season season = ServiceUtils.loadCurrentSeason();
+//
+//		List<Team> teams1 = groupService.getTeams(master, new CoefficientsOrdering());
+//
+//		displayGroup(master, teams1);
+//
+//		session.close();
+//
 	}
 
 	private void displayGroup(Group master, List<Team> teams) {
@@ -77,11 +72,11 @@ public class Monitoring {
 
 	public void displaySeason(int year) {
 		
-		Session session = HibernateUtils.getSession();
-		
-		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
-
-		displaySeason(season);
+//		Session session = HibernateUtils.getSession();
+//		
+//		Season season = (Season) session.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
+//
+//		displaySeason(season);
 		
 	}
 	

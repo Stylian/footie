@@ -31,7 +31,10 @@ public class SeasonsController {
 //	
 //	@Autowired
 //	private SeasonService seasonService;
-
+	
+	@Autowired
+	private ServiceUtils ServiceUtils;
+	
 	@RequestMapping("/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
 		

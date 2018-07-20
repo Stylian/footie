@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import core.Utils;
 import core.peristence.DataAccessObject;
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.LeagueStage;
 import core.peristence.dtos.Team;
@@ -20,11 +23,17 @@ import core.peristence.dtos.matchups.MatchupTieStrategy;
 import core.peristence.dtos.rounds.QualsRound;
 import core.tools.CoefficientsOrdering;
 
+@Service
+@Transactional
 public class QualsService {
 
 	final static Logger logger = Logger.getLogger(QualsService.class);
 
-	private Session session = HibernateUtils.getSession();
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Autowired
+	private ServiceUtils ServiceUtils;
 	
 	public QualsRound seedUpQualsRound1() {
 		logger.info("seed quals round 1");
@@ -37,7 +46,8 @@ public class QualsService {
 		
 		League league = ServiceUtils.getLeague();
 		league.setQuals1(LeagueStage.ON_PREVIEW);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return roundQuals1;
 		
@@ -68,7 +78,8 @@ public class QualsService {
 		
 		League league = ServiceUtils.getLeague();
 		league.setQuals2(LeagueStage.ON_PREVIEW);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return roundQuals2;
 		
@@ -85,7 +96,8 @@ public class QualsService {
 		
 		League league = ServiceUtils.getLeague();
 		league.setQuals1(LeagueStage.PLAYING);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 
 		return roundQuals1;
 
@@ -103,7 +115,8 @@ public class QualsService {
 		
 		League league = ServiceUtils.getLeague();
 		league.setQuals2(LeagueStage.PLAYING);
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 		
 		return roundQuals2;
 		
@@ -119,7 +132,7 @@ public class QualsService {
 			
 		}else {
 		
-			Collections.sort(teams, new CoefficientsOrdering());
+			Collections.sort(teams, new CoefficientsOrdering(ServiceUtils.getMasterGroup()));
 		
 		}
 		
@@ -143,7 +156,7 @@ public class QualsService {
 		qualsRound.setStrongTeams(strong);
 		qualsRound.setWeakTeams(weak);
 		
-		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
+		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(qualsRound);
 		
 	}
@@ -172,7 +185,7 @@ public class QualsService {
 		
 		logger.info("matchups " + Utils.toString(qualsRound.getMatchups()));
 		
-		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(session);
+		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(qualsRound);
 		
 	}

@@ -134,4 +134,11 @@ public class RestOperationsController {
 		return new RestResponse(RestResponse.SUCCESS, "ended " + season.getName());
 	}
 
+
+	@PostMapping("/fillGames")
+	public RestResponse fillGamesTEST() {
+
+		return myService.fillGamesTEST();
+	}
+	
 }

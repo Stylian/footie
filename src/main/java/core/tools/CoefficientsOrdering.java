@@ -9,10 +9,6 @@ public class CoefficientsOrdering extends Ordering {
 	public CoefficientsOrdering(Group group) {
 		super(group);
 	}
-	
-	public CoefficientsOrdering() {
-		super(ServiceUtils.getMasterGroup());
-	}
 
 	@Override
 	public int compare(Team o1, Team o2) {

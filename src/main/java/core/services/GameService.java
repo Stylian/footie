@@ -3,11 +3,14 @@ package core.services;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import core.peristence.DataAccessObject;
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.games.Game;
@@ -23,16 +26,22 @@ import core.peristence.dtos.matchups.Matchup;
  * @author stylian
  *
  */
+@Service
+@Transactional
 public class GameService {
 
 	final static Logger logger = Logger.getLogger(GameService.class);
 
-	private Session session = HibernateUtils.getSession();
+	@Autowired
+	private SessionFactory sessionFactory;
 
+	@Autowired
+	private ServiceUtils ServiceUtils;
+	
 	public Game getNextGame() {
 		logger.info("retrieving next game...");
 
-		List results = session.createQuery("from GAMES").list();
+		List results = sessionFactory.getCurrentSession().createQuery("from GAMES").list();
 
 		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
 
@@ -101,7 +110,7 @@ public class GameService {
 		Stats seasonStats = team.getStatsForGroup(season);
 		seasonStats.addStats(toAddToSeasonStats);
 		
-		DataAccessObject<Game> gameDao = new DataAccessObject<>(session);
+		DataAccessObject<Game> gameDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		gameDao.save(game);
 		
 	}

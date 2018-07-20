@@ -1,136 +1,121 @@
 package api.services;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import core.peristence.HibernateUtils;
+import api.RestResponse;
 import core.peristence.dtos.League;
+import core.peristence.dtos.games.Game;
+import core.peristence.dtos.games.Result;
 import core.peristence.dtos.groups.Season;
 import core.peristence.dtos.rounds.GroupsRound;
 import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.services.BootService;
+import core.services.GameService;
 import core.services.GroupsRoundService;
 import core.services.PlayoffsRoundService;
 import core.services.QualsService;
 import core.services.SeasonService;
 
 @Service
+@Transactional
 public class OperationsService {
 	
   @Autowired
-  private SessionFactory sessionFactory;
+  private BootService bootService;
 
   @Autowired
-  private BootService bootService;
+  private SeasonService seasonService;
   
-	@PostConstruct
-	public void initIt() {
-		HibernateUtils.setSessionFactory(sessionFactory);
-	}
+  @Autowired
+  private QualsService qualsService;
+  
+  @Autowired
+  private GroupsRoundService groupsRoundService;
+
+  @Autowired
+  private PlayoffsRoundService playoffsRoundService;
+  
+  @Autowired
+  private GameService gameService;
 
 	public League createLeague() {
 		return bootService.loadLeague();
 	}
 
 	public Season createSeason() {
-
-		SeasonService service = new SeasonService();
-		return service.createSeason();
-
+		return seasonService.createSeason();
 	}
 
 	public Season setUpSeason() {
-
-		SeasonService service = new SeasonService();
-		return service.setUpSeason();
-
+		return seasonService.setUpSeason();
 	}
 
 	public QualsRound seedQualsRound1() {
-
-		QualsService service = new QualsService();
-		return service.seedUpQualsRound1();
-
+		return qualsService.seedUpQualsRound1();
 	}
 
 	public QualsRound setQualsRound1() {
-
-		QualsService service = new QualsService();
-		return service.setUpQualsRound1();
-
+		return qualsService.setUpQualsRound1();
 	}
 	
 	public QualsRound seedQualsRound2() {
-		
-		QualsService service = new QualsService();
-		return service.seedUpQualsRound2();
-		
+		return qualsService.seedUpQualsRound2();
 	}
 	
 	public QualsRound setQualsRound2() {
-		
-		QualsService service = new QualsService();
-		return service.setUpQualsRound2();
-		
+		return qualsService.setUpQualsRound2();
 	}
 	
 	public GroupsRound seedGroupsRoundOf12() {
-		
-		GroupsRoundService service = new GroupsRoundService();
-		return service.seedGroupsRoundOf12();
-		
+		return groupsRoundService.seedGroupsRoundOf12();
 	}
 	
 	public GroupsRound setGroupsRoundOf12() {
-		
-		GroupsRoundService service = new GroupsRoundService();
-		return service.setUpGroupsRoundOf12();
-		
+		return groupsRoundService.setUpGroupsRoundOf12();
 	}
 	
 	public GroupsRound seedAndSetGroupsRoundOf8() {
-
-		GroupsRoundService service = new GroupsRoundService();
-		return service.seedAndSetGroupsRoundOf8();
-		
+		return groupsRoundService.seedAndSetGroupsRoundOf8();
 	}
 	
 	public PlayoffsRound seedAndSetQuarterfinals() {
-		
-		PlayoffsRoundService service = new PlayoffsRoundService();
-		return service.seedAndSetQuarterfinals();
-		
+		return playoffsRoundService.seedAndSetQuarterfinals();
 	}
 	
 	public PlayoffsRound seedAndSetSemifinals() {
-		
-		PlayoffsRoundService service = new PlayoffsRoundService();
-		return service.seedAndSetSemifinals();
-		
+		return playoffsRoundService.seedAndSetSemifinals();
 	}
 	
 	public PlayoffsRound seedAndSetFinals() {
-		
-		PlayoffsRoundService service = new PlayoffsRoundService();
-		return service.seedAndSetfinals();
-		
+		return playoffsRoundService.seedAndSetfinals();
 	}
 	
 	public Season endSeason() {
-		
-		SeasonService service = new SeasonService();
-		return service.endCurrentSeason();
-		
+		return seasonService.endCurrentSeason();
+	}
+ 
+	public RestResponse fillGamesTEST() {
+
+		while (true) {
+
+			Game next = gameService.getNextGame();
+
+			if (next == null) {
+				break;
+			}
+
+			gameService.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
+
+			System.out.println(next);
+
+		}
+
+		return new RestResponse(RestResponse.SUCCESS, "games added");
 	}
 	
-
-	
-	
-
-  
 }

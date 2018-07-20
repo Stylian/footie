@@ -7,13 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import core.Rules;
 import core.Utils;
 import core.peristence.DataAccessObject;
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.League;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
@@ -28,18 +31,25 @@ import core.peristence.dtos.rounds.PlayoffsRound;
 import core.peristence.dtos.rounds.QualsRound;
 import core.tools.CoefficientsOrdering;
 
+@Service
+@Transactional
 public class SeasonService {
 
 	final static Logger logger = Logger.getLogger(SeasonService.class);
 
-	private Session session = HibernateUtils.getSession();
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private ServiceUtils ServiceUtils;
 
 	public Season createSeason() {
 
 		League league = ServiceUtils.getLeague();
 		league.resetStages();
 		league.addSeason();
-		league.save();
+		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao2.save(league);
 
 		logger.info("creating season " + league.getSeasonNum());
 
@@ -53,7 +63,7 @@ public class SeasonService {
 
 		}
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(session);
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao.save(season);
 
 		return season;
@@ -84,7 +94,7 @@ public class SeasonService {
 		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
 		qualsRound1.setTeams(quals1Teams);
 
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
 
 		return season;
@@ -279,7 +289,7 @@ public class SeasonService {
 		season.setWinner(finalsMatchup.getWinner());
 
 		// hope it is enough, seems so
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(session);
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
 
 		return season;

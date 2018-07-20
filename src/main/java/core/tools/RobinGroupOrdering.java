@@ -2,11 +2,9 @@ package core.tools;
 
 import org.apache.commons.lang3.RandomUtils;
 
-import core.peristence.HibernateUtils;
 import core.peristence.dtos.Stats;
 import core.peristence.dtos.Team;
 import core.peristence.dtos.groups.Group;
-import core.services.ServiceUtils;
 
 public class RobinGroupOrdering extends Ordering {
 	
@@ -43,10 +41,10 @@ public class RobinGroupOrdering extends Ordering {
 		}
 		
 		// RULE 5 coefficients
-		Group master = ServiceUtils.getMasterGroup();
-		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
-			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
-		}
+//		Group master = ServiceUtils.getMasterGroup();
+//		if(o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
+//			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
+//		}
 		
 		// RULE 6
 		return RandomUtils.nextInt(0, 2) - 1;
