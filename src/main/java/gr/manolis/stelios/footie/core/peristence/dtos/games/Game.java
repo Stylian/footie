@@ -13,11 +13,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 
 @Entity(name = "GAMES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -55,8 +53,8 @@ public class Game {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getHomeTeam() {
 		return homeTeam;
 	}
@@ -65,7 +63,7 @@ public class Game {
 		this.homeTeam = homeTeam;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getAwayTeam() {
 		return awayTeam;
 	}
@@ -74,7 +72,7 @@ public class Game {
 		this.awayTeam = awayTeam;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Result getResult() {
 		return result;
 	}

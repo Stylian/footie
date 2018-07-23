@@ -25,13 +25,13 @@ public class RobinGroup extends Group {
 
 	public RobinGroup() {
 	}
-	
+
 	public RobinGroup(String name) {
 		super(name);
 		games = new ArrayList<>();
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<GroupGame> getGames() {
 		return games;
 	}
@@ -47,20 +47,19 @@ public class RobinGroup extends Group {
 	/**
 	 * teams in robin group come sorted
 	 */
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Team> getTeamsOrdered(Group master) {
-		
+
 		List<Team> teams = super.getTeams();
 
 		Collections.sort(teams, new RobinGroupOrdering(this, master));
-	
-		return teams;
-		
-	}
 
+		return teams;
+
+	}
 
 	public void buildGames() {
 		// to extend
 	};
-	
+
 }

@@ -28,20 +28,20 @@ public class SeasonsController {
 
 	@Autowired
 	private ViewsService viewsService;
-//	
-//	@Autowired
-//	private SeasonService seasonService;
-	
+	//
+	// @Autowired
+	// private SeasonService seasonService;
+
 	@Autowired
 	private ServiceUtils serviceUtils;
-	
+
 	@RequestMapping("/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
-		
-		SeasonService seasonService = new SeasonService();  // FIX ME
-		
+
+		SeasonService seasonService = new SeasonService(); // FIX ME
+
 		Season season = viewsService.getSeason(NumberUtils.toInt(year));
-		
+
 		// season preview
 		List<Team> teams = serviceUtils.loadTeams();
 		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
@@ -52,13 +52,13 @@ public class SeasonsController {
 		model.addAttribute("toGroups", teamsInRounds.get("toGroups"));
 		model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
 		model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));
-		
+
 		// quals previews
 		List<Map<String, Map<Team, Integer>>> qualsPreviews = new ArrayList<>();
 		qualsPreviews.add(qualsPreview(season, 1, model));
 		qualsPreviews.add(qualsPreview(season, 2, model));
 		model.addAttribute("qualsPreviews", qualsPreviews);
-		
+
 		return "seasons/season";
 	}
 
@@ -66,14 +66,14 @@ public class SeasonsController {
 
 		QualsRound qr = viewsService.getQualRound(season, round);
 
-//		boolean seeded = false;
-//
-//		// post seeding case for round
-//		if ("2".equals(round) && qr.getStrongTeams() != null) {
-//
-//			seeded = true;
-//
-//		}
+		// boolean seeded = false;
+		//
+		// // post seeding case for round
+		// if ("2".equals(round) && qr.getStrongTeams() != null) {
+		//
+		// seeded = true;
+		//
+		// }
 
 		List<Team> teamsStrong = qr.getStrongTeams();
 		List<Team> teamsWeak = qr.getWeakTeams();
@@ -84,10 +84,10 @@ public class SeasonsController {
 		Map<String, Map<Team, Integer>> qualsTeams = new HashMap<>();
 		qualsTeams.put("strong", teamsStrongWithCoeffs);
 		qualsTeams.put("weak", teamsWeakWithCoeffs);
-		
+
 		return qualsTeams;
 	}
-	
+
 	private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
 		Collections.sort(teams, new CoefficientsOrdering(season));
 
@@ -99,5 +99,4 @@ public class SeasonsController {
 		return teamsWithCoeffs;
 	}
 
-	
 }

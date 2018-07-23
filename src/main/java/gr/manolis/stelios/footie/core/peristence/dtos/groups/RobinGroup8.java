@@ -12,10 +12,10 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 @Entity
 @DiscriminatorValue(value = "R8")
 public class RobinGroup8 extends RobinGroup {
-	
+
 	// keeps order for game buildings
 	private transient List<Team> teamsInserted = new ArrayList<>();
-	
+
 	public RobinGroup8() {
 	}
 
@@ -27,18 +27,18 @@ public class RobinGroup8 extends RobinGroup {
 		super.addTeam(team);
 		teamsInserted.add(team);
 	}
-	
+
 	public void buildGames() {
 
-		 addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(2), this));
-		 addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(3), this));
-		 addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(0), this));
-		 addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(1), this));
-		 addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(2), this));
-		 addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(1), this));
-		 addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(0), this));
-		 addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(3), this));
-		
+		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(2), this));
+		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(3), this));
+		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(0), this));
+		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(1), this));
+		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(2), this));
+		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(1), this));
+		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(0), this));
+		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(3), this));
+
 	}
 
 }

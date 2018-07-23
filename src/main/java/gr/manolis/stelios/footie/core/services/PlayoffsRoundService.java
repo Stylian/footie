@@ -27,7 +27,7 @@ public class PlayoffsRoundService {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	private ServiceUtils serviceUtils;
 
@@ -36,7 +36,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 		Group master = serviceUtils.getMasterGroup();
-		
+
 		// build playoffs round
 		PlayoffsRound playoffsRound = new PlayoffsRound(season, "Playoffs");
 
@@ -57,27 +57,27 @@ public class PlayoffsRoundService {
 
 		logger.info("building quarterfinals ");
 		playoffsRound.buildQuarterMatchups();
-		
+
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(playoffsRound);
-		
+
 		League league = serviceUtils.getLeague();
 		league.setQuarterfinals(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
-		
+
 		return playoffsRound;
-		
+
 	}
-	
+
 	public PlayoffsRound seedAndSetSemifinals() {
 		logger.info("seed and set semifinals");
-	
+
 		Season season = serviceUtils.loadCurrentSeason();
 
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		playoffsRound.buildSemisMatchups();
-		
+
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(playoffsRound);
 
@@ -85,29 +85,29 @@ public class PlayoffsRoundService {
 		league.setSemifinals(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
-		
+
 		return playoffsRound;
-		
+
 	}
-	
+
 	public PlayoffsRound seedAndSetfinals() {
 		logger.info("seed and set finals");
-		
+
 		Season season = serviceUtils.loadCurrentSeason();
 
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		playoffsRound.buildFinalsMatchup();
-		
+
 		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		roundDao.save(playoffsRound);
-		
+
 		League league = serviceUtils.getLeague();
 		league.setFinals(LeagueStage.PLAYING);
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
-		
+
 		return playoffsRound;
-		
+
 	}
-	
+
 }

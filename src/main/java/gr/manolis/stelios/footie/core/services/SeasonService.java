@@ -39,7 +39,7 @@ public class SeasonService {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	private ServiceUtils serviceUtils;
 
@@ -107,7 +107,7 @@ public class SeasonService {
 	public Map<String, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
 
 		List<Team> teams = serviceUtils.loadTeams();
-		
+
 		Map<String, List<Team>> map = new HashMap<>();
 
 		List<Team> teamsClone = new ArrayList<>(teams);
@@ -118,7 +118,7 @@ public class SeasonService {
 		List<Team> quals1Teams = new ArrayList<>();
 
 		if (season.getSeasonYear() == 1) {
-			
+
 			// 2nd round needs 24 teams so
 			int diff = teamsClone.size() - 24;
 
@@ -127,31 +127,31 @@ public class SeasonService {
 			for (int index = 0; index < 2 * diff; index++) {
 				quals1Teams.add(teamsClone.remove(0));
 			}
-			
+
 			logger.info("1st season no teams go directly to groups");
-			
-		}else {
-			
+
+		} else {
+
 			// former champion promotes directly
 			formerChampion = serviceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
 			groupsTeams.add(formerChampion);
 			teamsClone.remove(formerChampion);
-	
+
 			// top 3 seeded teams promote directly to groups round excluding champion
 			groupsTeams.add(teamsClone.remove(0));
 			groupsTeams.add(teamsClone.remove(0));
 			groupsTeams.add(teamsClone.remove(0));
-	
+
 			// 2nd round needs 16 teams so
 			int diff = teamsClone.size() - 16; // cannot support more than 36 teams, probably no less than 22 as well
-	
+
 			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
 			for (int index = 0; index < 2 * diff; index++) {
 				quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
 			}
 
 		}
-		
+
 		map.put("champion", Arrays.asList(formerChampion));
 		map.put("toGroups", groupsTeams);
 		map.put("toQuals1", quals1Teams);
@@ -196,8 +196,10 @@ public class SeasonService {
 
 		for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
 
-			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
-			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
+			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season)
+					.addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
+			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season)
+					.addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 
 			for (GroupGame groupGame : robinGroup.getGames()) {
 

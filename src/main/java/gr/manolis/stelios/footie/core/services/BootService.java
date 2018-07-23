@@ -28,7 +28,7 @@ public class BootService {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	private ServiceUtils serviceUtils;
 
@@ -54,7 +54,7 @@ public class BootService {
 		logger.info("creating master group...");
 
 		Group group = new Group("master");
-		
+
 		DataAccessObject<Group> groupDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		groupDao.save(group);
 

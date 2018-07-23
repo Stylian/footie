@@ -37,7 +37,7 @@ public class GameService {
 
 	@Autowired
 	private ServiceUtils serviceUtils;
-	
+
 	public Game getNextGame() {
 		logger.info("retrieving next game...");
 
@@ -61,62 +61,62 @@ public class GameService {
 				+ result.getGoalsMadeByHomeTeam() + " - " + result.getGoalsMadeByAwayTeam());
 
 		Season season = serviceUtils.loadCurrentSeason();
-		
+
 		// add stats to teams
 		Team team = game.getHomeTeam();
-		
+
 		Stats thisGameStats = new Stats();
 		thisGameStats.addGoalsScored(result.getGoalsMadeByHomeTeam());
 		thisGameStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
-		
-		if(result.homeTeamWon()) {
-		
+
+		if (result.homeTeamWon()) {
+
 			thisGameStats.addWins(1);
-		
-		}else if(result.awayTeamWon()) {
-			
+
+		} else if (result.awayTeamWon()) {
+
 			thisGameStats.addLosses(1);
-			
-		}else if(result.tie()) {
-			
+
+		} else if (result.tie()) {
+
 			thisGameStats.addDraws(1);
-			
+
 		}
-		
+
 		Stats toAddToSeasonStats = new Stats(thisGameStats);
-		
+
 		game.setResult(result);
-		
-		if(game instanceof MatchupGame){
+
+		if (game instanceof MatchupGame) {
 			MatchupGame matchupGame = (MatchupGame) game;
 			ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
-		}else if(game instanceof GroupGame) {
-			
-			if(result.homeTeamWon()) {
-				
+		} else if (game instanceof GroupGame) {
+
+			if (result.homeTeamWon()) {
+
 				thisGameStats.addPoints(3);
-				
-			}else if(result.tie()) {
-				
+
+			} else if (result.tie()) {
+
 				thisGameStats.addPoints(1);
-				
+
 			}
-			
+
 			GroupGame groupGame = (GroupGame) game;
 			team.getStatsForGroup(groupGame.getRobinGroup()).addStats(thisGameStats);
-			
+
 		}
 
 		Stats seasonStats = team.getStatsForGroup(season);
 		seasonStats.addStats(toAddToSeasonStats);
-		
+
 		DataAccessObject<Game> gameDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		gameDao.save(game);
-		
+
 	}
 
 	public void ifMatchupIsFinishedDecideTheWinner(Matchup matchup) {
-		
+
 		// if it is the last game of the matchup mark the matchup with the winner
 		for (Game game : matchup.getGames()) {
 
@@ -135,41 +135,41 @@ public class GameService {
 		List<Game> games = matchup.getGames();
 		Team teamHome = matchup.getTeamHome();
 		Team teamAway = matchup.getTeamAway();
-		
+
 		int homeGoals = 0;
 		int awayGoals = 0;
 
-		for(Game game : games) {
-			
-			if(game.getHomeTeam().equals(teamHome)) {
-				
+		for (Game game : games) {
+
+			if (game.getHomeTeam().equals(teamHome)) {
+
 				homeGoals += game.getResult().getGoalsMadeByHomeTeam();
 				awayGoals += game.getResult().getGoalsMadeByAwayTeam();
-				
-			}else if(game.getHomeTeam().equals(teamAway)) {
-				
+
+			} else if (game.getHomeTeam().equals(teamAway)) {
+
 				homeGoals += game.getResult().getGoalsMadeByAwayTeam();
 				awayGoals += game.getResult().getGoalsMadeByHomeTeam();
-				
+
 			}
-			
+
 		}
-		
+
 		logger.info("determining matchup winner with aggregate score " + homeGoals + " - " + awayGoals);
-		
-		if(homeGoals > awayGoals) {
+
+		if (homeGoals > awayGoals) {
 			matchup.setWinner(teamHome);
-			
-		}else if( homeGoals < awayGoals) {
+
+		} else if (homeGoals < awayGoals) {
 			matchup.setWinner(teamAway);
 
-		}else {
-			
+		} else {
+
 			games.add(new MatchupGame(teamAway, teamHome, matchup));
 			games.add(new MatchupGame(teamHome, teamAway, matchup));
-			
+
 		}
-			
+
 	}
-	
+
 }

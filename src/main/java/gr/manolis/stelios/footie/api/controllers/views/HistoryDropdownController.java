@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.manolis.stelios.footie.api.services.ViewsService;
-import gr.manolis.stelios.footie.core.services.SeasonService;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
 
 @Controller
 @RequestMapping("/history")
@@ -18,17 +16,17 @@ public class HistoryDropdownController {
 
 	@RequestMapping("/past_winners")
 	public String league(Model model) {
-		
+
 		model.addAttribute("seasons", viewsService.getAllSeasons());
-		
+
 		return "history/past_winners";
 	}
 
 	@RequestMapping("/coefficients")
 	public String coefficients(Model model) {
-		
+
 		model.addAttribute("teamsCoeffs", viewsService.getTeamsTotalCoefficients());
-		
+
 		return "history/coefficients";
 	}
 

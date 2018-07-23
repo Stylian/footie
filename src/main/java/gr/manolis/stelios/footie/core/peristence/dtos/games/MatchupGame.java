@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
@@ -17,10 +16,10 @@ public class MatchupGame extends Game {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Matchup matchup;
-	
+
 	public MatchupGame() {
 	}
-	
+
 	public MatchupGame(Team homeTeam, Team awayTeam, Matchup matchup) {
 		super(homeTeam, awayTeam);
 		this.matchup = matchup;
@@ -30,5 +29,5 @@ public class MatchupGame extends Game {
 	public Matchup getMatchup() {
 		return matchup;
 	}
-	
+
 }

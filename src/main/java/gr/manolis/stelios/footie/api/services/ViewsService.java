@@ -6,10 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
@@ -33,7 +31,7 @@ public class ViewsService {
 
 	@Autowired
 	private ServiceUtils serviceUtils;
-	
+
 	public League getLeague() {
 		return serviceUtils.getLeague();
 	}
@@ -60,9 +58,9 @@ public class ViewsService {
 	/**
 	 * 
 	 * @param year
-	 *          season number
+	 *            season number
 	 * @param round
-	 *          1 for round of 12, 2 for round of 8
+	 *            1 for round of 12, 2 for round of 8
 	 * @return
 	 */
 	public GroupsRound getGroupRound(int year, int round) {
@@ -76,7 +74,7 @@ public class ViewsService {
 	/**
 	 * 
 	 * @param year
-	 *          season number
+	 *            season number
 	 * @return
 	 */
 	public PlayoffsRound getPlayoffsRound(int year) {
@@ -125,20 +123,22 @@ public class ViewsService {
 
 		// TODO hacked in the keys as displayed names
 		Map<String, Object> gamestats = new LinkedHashMap<>();
-		 
+
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
-		
+
 		@SuppressWarnings("unchecked")
 		List<Result> results = sessionFactory.getCurrentSession().createQuery("from RESULTS").list();
-		
-		gamestats.put("number of games played", results.size() );
+
+		gamestats.put("number of games played", results.size());
 		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());
 		gamestats.put("draws", results.stream().filter(Result::tie).count());
 		gamestats.put("losses", results.stream().filter(Result::awayTeamWon).count());
-		gamestats.put("avg goals scored", numberFormat.format(results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
-		gamestats.put("avg goals conceded", numberFormat.format(results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
-		
+		gamestats.put("avg goals scored", numberFormat
+				.format(results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
+		gamestats.put("avg goals conceded", numberFormat
+				.format(results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
+
 		return gamestats;
 	}
-	
+
 }

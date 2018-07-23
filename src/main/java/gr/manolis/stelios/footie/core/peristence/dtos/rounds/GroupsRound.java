@@ -10,7 +10,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -43,7 +42,7 @@ public class GroupsRound extends Round {
 		super(season, name);
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Team> getStrongTeams() {
 		return strongTeams;
 	}
@@ -52,7 +51,7 @@ public class GroupsRound extends Round {
 		this.strongTeams = strongTeams;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Team> getMediumTeams() {
 		return mediumTeams;
 	}
@@ -61,7 +60,7 @@ public class GroupsRound extends Round {
 		this.mediumTeams = mediumTeams;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Team> getWeakTeams() {
 		return weakTeams;
 	}
@@ -70,7 +69,7 @@ public class GroupsRound extends Round {
 		this.weakTeams = weakTeams;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<RobinGroup> getGroups() {
 		return groups;
 	}

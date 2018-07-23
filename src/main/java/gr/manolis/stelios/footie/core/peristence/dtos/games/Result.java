@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 /**
  * TODO could be made unique goals pair
+ * 
  * @author stylianos.chatzimano
  *
  */
@@ -26,12 +27,12 @@ public class Result {
 
 	public Result() {
 	}
-	
+
 	public Result(int goalsMadeByHomeTeam, int goalsMadeByAwayTeam) {
 		this.goalsMadeByHomeTeam = goalsMadeByHomeTeam;
 		this.goalsMadeByAwayTeam = goalsMadeByAwayTeam;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

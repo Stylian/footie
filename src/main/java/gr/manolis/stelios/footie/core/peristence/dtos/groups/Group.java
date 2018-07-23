@@ -24,7 +24,6 @@ import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 
-
 @Entity(name = "GROUPS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
@@ -44,10 +43,10 @@ public class Group {
 
 	public Group() {
 	}
-	
+
 	public Group(String name) {
 		this.name = name;
-		
+
 		teamsStats = new HashMap<>();
 	}
 
@@ -69,11 +68,11 @@ public class Group {
 	}
 
 	public void addTeam(Team team) {
-		
+
 		teamsStats.put(team, new Stats(this, team));
-		
+
 	}
-	
+
 	@JsonIgnore
 	public List<Team> getTeams() {
 		return new ArrayList<>(teamsStats.keySet());
@@ -83,6 +82,5 @@ public class Group {
 	public String toString() {
 		return "Group [name=" + name + ", teams=" + Utils.toString(getTeams()) + "]";
 	}
-
 
 }

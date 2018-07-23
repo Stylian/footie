@@ -43,13 +43,13 @@ public class PlayoffsRound extends Round {
 	private Team gB3;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name="QUARTER_MATCHUPS_ROUNDS")
+	@JoinTable(name = "QUARTER_MATCHUPS_ROUNDS")
 	private List<Matchup> quarterMatchups = new ArrayList<>();
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name="SEMISMATCHUPS_ROUNDS")
+	@JoinTable(name = "SEMISMATCHUPS_ROUNDS")
 	private List<Matchup> semisMatchups = new ArrayList<>();
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Matchup finalsMatchup;
 
@@ -61,53 +61,31 @@ public class PlayoffsRound extends Round {
 	}
 
 	public void buildQuarterMatchups() {
-		
-		quarterMatchups.add(new Matchup(
-				gA2,
-				gB3,
-				MatchupFormat.FORMAT_IN_OUT_SINGLE,
-				MatchupTieStrategy.REPLAY_GAMES
-			));
-		
-		quarterMatchups.add(new Matchup(
-				gB2,
-				gA3,
-				MatchupFormat.FORMAT_IN_OUT_SINGLE,
-				MatchupTieStrategy.REPLAY_GAMES
-			));
-		
+
+		quarterMatchups.add(new Matchup(gA2, gB3, MatchupFormat.FORMAT_IN_OUT_SINGLE, MatchupTieStrategy.REPLAY_GAMES));
+
+		quarterMatchups.add(new Matchup(gB2, gA3, MatchupFormat.FORMAT_IN_OUT_SINGLE, MatchupTieStrategy.REPLAY_GAMES));
+
 	}
 
 	public void buildSemisMatchups() {
-	
-		semisMatchups.add(new Matchup(
-				gA1,
-				quarterMatchups.get(1).getWinner(),
-				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
-				MatchupTieStrategy.REPLAY_GAMES
-			));
-		
-		semisMatchups.add(new Matchup(
-				gB1,
-				quarterMatchups.get(0).getWinner(),
-				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
-				MatchupTieStrategy.REPLAY_GAMES
-				));
-		
+
+		semisMatchups.add(new Matchup(gA1, quarterMatchups.get(1).getWinner(), MatchupFormat.FORMAT_IN_OUT_DOUBLE,
+				MatchupTieStrategy.REPLAY_GAMES));
+
+		semisMatchups.add(new Matchup(gB1, quarterMatchups.get(0).getWinner(), MatchupFormat.FORMAT_IN_OUT_DOUBLE,
+				MatchupTieStrategy.REPLAY_GAMES));
+
 	}
-	
+
 	public void buildFinalsMatchup() {
-		
-		finalsMatchup = new Matchup(
-				semisMatchups.get(0).getWinner(),
-				semisMatchups.get(1).getWinner(),
-				MatchupFormat.FORMAT_IN_OUT_DOUBLE,
-				MatchupTieStrategy.REPLAY_GAMES
-			);
-		
+
+		finalsMatchup = new Matchup(semisMatchups.get(0).getWinner(), semisMatchups.get(1).getWinner(),
+				MatchupFormat.FORMAT_IN_OUT_DOUBLE, MatchupTieStrategy.REPLAY_GAMES);
+
 	}
-		
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA1() {
 		return gA1;
 	}
@@ -116,7 +94,7 @@ public class PlayoffsRound extends Round {
 		this.gA1 = gA1;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA2() {
 		return gA2;
 	}
@@ -125,7 +103,7 @@ public class PlayoffsRound extends Round {
 		this.gA2 = gA2;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA3() {
 		return gA3;
 	}
@@ -134,7 +112,7 @@ public class PlayoffsRound extends Round {
 		this.gA3 = gA3;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB1() {
 		return gB1;
 	}
@@ -143,7 +121,7 @@ public class PlayoffsRound extends Round {
 		this.gB1 = gB1;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB2() {
 		return gB2;
 	}
@@ -152,7 +130,7 @@ public class PlayoffsRound extends Round {
 		this.gB2 = gB2;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB3() {
 		return gB3;
 	}
@@ -161,17 +139,17 @@ public class PlayoffsRound extends Round {
 		this.gB3 = gB3;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Matchup> getQuarterMatchups() {
 		return quarterMatchups;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Matchup> getSemisMatchups() {
 		return semisMatchups;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Matchup getFinalsMatchup() {
 		return finalsMatchup;
 	}

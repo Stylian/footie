@@ -36,16 +36,16 @@ public class League {
 
 	@Column(name = "FINALS")
 	private LeagueStage finals;
-	
+
 	public League() {
-		
+
 		seasonNum = 0;
 		resetStages();
-	
+
 	}
 
 	public void resetStages() {
-		
+
 		quals1 = LeagueStage.NOT_STARTED;
 		quals2 = LeagueStage.NOT_STARTED;
 		groups12 = LeagueStage.NOT_STARTED;
@@ -53,7 +53,7 @@ public class League {
 		quarterfinals = LeagueStage.NOT_STARTED;
 		semifinals = LeagueStage.NOT_STARTED;
 		finals = LeagueStage.NOT_STARTED;
-		
+
 	}
 
 	public int getSeasonNum() {

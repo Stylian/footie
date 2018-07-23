@@ -14,14 +14,13 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 
-
 @Service
 @Transactional
 public class ServiceUtils {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public League getLeague() {
 
 		DataAccessObject<League> groupDao = new DataAccessObject<>(sessionFactory.getCurrentSession());

@@ -8,8 +8,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-
 public class DataAccessObject<T> {
 
 	private Session session;

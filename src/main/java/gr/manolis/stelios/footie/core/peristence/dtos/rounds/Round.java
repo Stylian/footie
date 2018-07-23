@@ -72,7 +72,7 @@ public class Round {
 		this.season = season;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Team> getTeams() {
 		return teams;
 	}

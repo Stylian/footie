@@ -60,15 +60,15 @@ public class Team {
 	public Map<Group, Stats> getGroupStats() {
 		return groupStats;
 	}
-	
+
 	public void addGroupStats(Group group, Stats stats) {
 		groupStats.put(group, stats);
 	}
-	
+
 	public Stats getStatsForGroup(Group group) {
 		return groupStats.get(group);
 	}
-	
+
 	public Stats setStatsForGroup(Group group, Stats stats) {
 		return groupStats.put(group, stats);
 	}

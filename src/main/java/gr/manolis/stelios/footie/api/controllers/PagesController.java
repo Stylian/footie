@@ -14,16 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
-import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
-import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 
 @Controller
 public class PagesController {
@@ -35,62 +29,68 @@ public class PagesController {
 	public String landingPage(Model model) {
 		return "landing_page";
 	}
-	
+
 	@RequestMapping("/seasons/{year}/quals/{round}")
 	public String qualsTotalDisplay(@PathVariable(value = "round", required = true) String round, Model model) {
 		return "quals";
 	}
 
-//	@RequestMapping("/seasons/{year}/quals/{round}/preview")
-//	public String quals1Preview(@PathVariable(value = "year", required = true) String year,
-//			@PathVariable(value = "round", required = true) String round, Model model) {
-//
-//		Season season = viewsService.getSeason(NumberUtils.toInt(year));
-//		QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
-//
-//		boolean seeded = false;
-//
-//		// post seeding case for round
-//		if ("2".equals(round) && qr.getStrongTeams() != null) {
-//
-//			seeded = true;
-//
-//		}
-//
-//		List<Team> teams = qr.getTeams();
-//		List<Team> teamsStrong = qr.getStrongTeams();
-//		List<Team> teamsWeak = qr.getWeakTeams();
-//
-//		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
-//		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
-//		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
-//
-//		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
-//		model.addAttribute("teamsStrongWithCoeffs", teamsStrongWithCoeffs);
-//		model.addAttribute("teamsWeakWithCoeffs", teamsWeakWithCoeffs);
-//		model.addAttribute("seeded", seeded);
-//
-//		return "quals_preview";
-//	}
+	// @RequestMapping("/seasons/{year}/quals/{round}/preview")
+	// public String quals1Preview(@PathVariable(value = "year", required = true)
+	// String year,
+	// @PathVariable(value = "round", required = true) String round, Model model) {
+	//
+	// Season season = viewsService.getSeason(NumberUtils.toInt(year));
+	// QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year),
+	// NumberUtils.toInt(round));
+	//
+	// boolean seeded = false;
+	//
+	// // post seeding case for round
+	// if ("2".equals(round) && qr.getStrongTeams() != null) {
+	//
+	// seeded = true;
+	//
+	// }
+	//
+	// List<Team> teams = qr.getTeams();
+	// List<Team> teamsStrong = qr.getStrongTeams();
+	// List<Team> teamsWeak = qr.getWeakTeams();
+	//
+	// Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
+	// Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season,
+	// teamsStrong);
+	// Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season,
+	// teamsWeak);
+	//
+	// model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
+	// model.addAttribute("teamsStrongWithCoeffs", teamsStrongWithCoeffs);
+	// model.addAttribute("teamsWeakWithCoeffs", teamsWeakWithCoeffs);
+	// model.addAttribute("seeded", seeded);
+	//
+	// return "quals_preview";
+	// }
 
-//	@RequestMapping("/seasons/{year}/quals/{round}/postview")
-//	public String quals1Postview(@PathVariable(value = "year", required = true) String year,
-//			@PathVariable(value = "round", required = true) String round, Model model) {
-//
-//		QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year), NumberUtils.toInt(round));
-//
-//		List<Matchup> matchups = qr.getMatchups();
-//
-//		model.addAttribute("matchups", matchups);
-//
-//		return "quals_postview";
-//	}
+	// @RequestMapping("/seasons/{year}/quals/{round}/postview")
+	// public String quals1Postview(@PathVariable(value = "year", required = true)
+	// String year,
+	// @PathVariable(value = "round", required = true) String round, Model model) {
+	//
+	// QualsRound qr = viewsService.getQualRound(NumberUtils.toInt(year),
+	// NumberUtils.toInt(round));
+	//
+	// List<Matchup> matchups = qr.getMatchups();
+	//
+	// model.addAttribute("matchups", matchups);
+	//
+	// return "quals_postview";
+	// }
 
 	@RequestMapping("/seasons/{year}/groups/{round}")
 	public String groupsTotalDisplay(@PathVariable(value = "round", required = true) String round, Model model) {
 		return "groups";
 	}
-	
+
 	// only group of 12 has a preview
 	@RequestMapping("/seasons/{year}/groups/{round}/preview")
 	public String groupsPreview(@PathVariable(value = "year", required = true) String year,

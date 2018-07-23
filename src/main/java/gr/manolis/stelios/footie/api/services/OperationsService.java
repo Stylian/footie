@@ -24,24 +24,24 @@ import gr.manolis.stelios.footie.core.services.SeasonService;
 @Service
 @Transactional
 public class OperationsService {
-	
-  @Autowired
-  private BootService bootService;
 
-  @Autowired
-  private SeasonService seasonService;
-  
-  @Autowired
-  private QualsService qualsService;
-  
-  @Autowired
-  private GroupsRoundService groupsRoundService;
+	@Autowired
+	private BootService bootService;
 
-  @Autowired
-  private PlayoffsRoundService playoffsRoundService;
-  
-  @Autowired
-  private GameService gameService;
+	@Autowired
+	private SeasonService seasonService;
+
+	@Autowired
+	private QualsService qualsService;
+
+	@Autowired
+	private GroupsRoundService groupsRoundService;
+
+	@Autowired
+	private PlayoffsRoundService playoffsRoundService;
+
+	@Autowired
+	private GameService gameService;
 
 	public League createLeague() {
 		return bootService.loadLeague();
@@ -62,43 +62,43 @@ public class OperationsService {
 	public QualsRound setQualsRound1() {
 		return qualsService.setUpQualsRound1();
 	}
-	
+
 	public QualsRound seedQualsRound2() {
 		return qualsService.seedUpQualsRound2();
 	}
-	
+
 	public QualsRound setQualsRound2() {
 		return qualsService.setUpQualsRound2();
 	}
-	
+
 	public GroupsRound seedGroupsRoundOf12() {
 		return groupsRoundService.seedGroupsRoundOf12();
 	}
-	
+
 	public GroupsRound setGroupsRoundOf12() {
 		return groupsRoundService.setUpGroupsRoundOf12();
 	}
-	
+
 	public GroupsRound seedAndSetGroupsRoundOf8() {
 		return groupsRoundService.seedAndSetGroupsRoundOf8();
 	}
-	
+
 	public PlayoffsRound seedAndSetQuarterfinals() {
 		return playoffsRoundService.seedAndSetQuarterfinals();
 	}
-	
+
 	public PlayoffsRound seedAndSetSemifinals() {
 		return playoffsRoundService.seedAndSetSemifinals();
 	}
-	
+
 	public PlayoffsRound seedAndSetFinals() {
 		return playoffsRoundService.seedAndSetfinals();
 	}
-	
+
 	public Season endSeason() {
 		return seasonService.endCurrentSeason();
 	}
- 
+
 	public RestResponse fillGamesTEST() {
 
 		while (true) {
@@ -117,5 +117,5 @@ public class OperationsService {
 
 		return new RestResponse(RestResponse.SUCCESS, "games added");
 	}
-	
+
 }

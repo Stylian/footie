@@ -40,11 +40,11 @@ public class Matchup {
 	@Column(name = "FORMAT")
 	@Enumerated(EnumType.ORDINAL)
 	private MatchupFormat format;
-	
+
 	@Column(name = "TIE_STRATEGY")
 	@Enumerated(EnumType.ORDINAL)
 	private MatchupTieStrategy tieStrategy;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
@@ -78,27 +78,27 @@ public class Matchup {
 		}
 
 	}
-	
+
 	public int getId() {
 		return id;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getTeamHome() {
 		return teamHome;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getTeamAway() {
 		return teamAway;
 	}
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Game> getGames() {
 		return games;
 	}
-	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getWinner() {
 		return winner;
 	}

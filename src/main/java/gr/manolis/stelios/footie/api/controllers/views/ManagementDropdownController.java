@@ -13,12 +13,12 @@ public class ManagementDropdownController {
 
 	@Autowired
 	private ViewsService viewsService;
-	
+
 	@RequestMapping("/game_stats")
 	public String gameStats(Model model) {
 
 		model.addAttribute("gameStats", viewsService.gameStats());
 		return "management/game_stats";
 	}
-	
+
 }

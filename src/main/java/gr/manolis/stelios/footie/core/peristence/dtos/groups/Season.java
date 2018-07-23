@@ -31,7 +31,7 @@ public class Season extends Group {
 
 	public Season() {
 	}
-	
+
 	public Season(int year) {
 		super("Season " + year);
 		this.seasonYear = year;

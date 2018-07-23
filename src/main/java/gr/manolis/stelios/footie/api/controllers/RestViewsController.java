@@ -14,8 +14,6 @@ import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 
 @RestController
 @RequestMapping("/rest/views")
@@ -46,17 +44,18 @@ public class RestViewsController {
 		return service.getSeason(NumberUtils.toInt(year));
 	}
 
-//	@RequestMapping("/seasons/{year}/quals/{round}")
-//	public QualsRound getQualsRound(@PathVariable String year, @PathVariable String round) {
-//
-//		int qr = NumberUtils.toInt(round);
-//
-//		if (qr < 1 || qr > 2) {
-//			throw new NoSuchElementException("there are only 2 qualification rounds");
-//		}
-//
-//		return service.getQualRound(NumberUtils.toInt(year), qr);
-//	}
+	// @RequestMapping("/seasons/{year}/quals/{round}")
+	// public QualsRound getQualsRound(@PathVariable String year, @PathVariable
+	// String round) {
+	//
+	// int qr = NumberUtils.toInt(round);
+	//
+	// if (qr < 1 || qr > 2) {
+	// throw new NoSuchElementException("there are only 2 qualification rounds");
+	// }
+	//
+	// return service.getQualRound(NumberUtils.toInt(year), qr);
+	// }
 
 	@RequestMapping("/seasons/{year}/groups/{round}")
 	public GroupsRound getGroupsRound(@PathVariable String year, @PathVariable String round) {
