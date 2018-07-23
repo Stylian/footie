@@ -2,14 +2,14 @@ package core;
 
 import org.apache.commons.lang3.RandomUtils;
 
-import core.peristence.dtos.games.Game;
-import core.peristence.dtos.games.Result;
-import core.services.BootService;
-import core.services.GameService;
-import core.services.GroupsRoundService;
-import core.services.PlayoffsRoundService;
-import core.services.QualsService;
-import core.services.SeasonService;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
+import gr.manolis.stelios.footie.core.services.BootService;
+import gr.manolis.stelios.footie.core.services.GameService;
+import gr.manolis.stelios.footie.core.services.GroupsRoundService;
+import gr.manolis.stelios.footie.core.services.PlayoffsRoundService;
+import gr.manolis.stelios.footie.core.services.QualsService;
+import gr.manolis.stelios.footie.core.services.SeasonService;
 
 public class FullTest {
 

@@ -19,6 +19,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import core.Monitoring;
+import gr.manolis.stelios.footie.api.App;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

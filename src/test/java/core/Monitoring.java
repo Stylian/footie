@@ -5,18 +5,18 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.data.jpa.provider.HibernateUtils;
 
-import core.peristence.dtos.Stats;
-import core.peristence.dtos.Team;
-import core.peristence.dtos.games.Game;
-import core.peristence.dtos.games.GroupGame;
-import core.peristence.dtos.groups.Group;
-import core.peristence.dtos.groups.RobinGroup;
-import core.peristence.dtos.groups.Season;
-import core.peristence.dtos.matchups.Matchup;
-import core.peristence.dtos.rounds.GroupsRound;
-import core.peristence.dtos.rounds.PlayoffsRound;
-import core.peristence.dtos.rounds.QualsRound;
-import core.peristence.dtos.rounds.Round;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 
 public class Monitoring {
 

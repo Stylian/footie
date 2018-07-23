@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.RestResponse;
-import core.peristence.dtos.games.Game;
-import core.peristence.dtos.games.Result;
-import core.services.GameService;
+import gr.manolis.stelios.footie.api.RestResponse;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
+import gr.manolis.stelios.footie.core.services.GameService;
 
 @RestController
 @RequestMapping("/rest/test")

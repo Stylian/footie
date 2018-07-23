@@ -33,7 +33,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
  
- 		<property name="packagesToScan">core.peristence.dtos</property>
+ 		<property name="packagesToScan">gr.manolis.stelios.footie.core.peristence.dtos</property>
  
     </session-factory>
  
