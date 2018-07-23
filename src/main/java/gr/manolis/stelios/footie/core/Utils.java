@@ -2,29 +2,16 @@ package gr.manolis.stelios.footie.core;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Utils {
 
 	public static String toString(List<?> lsObj) {
-
-		String ls = "";
-
-		for (Object obj : lsObj) {
-			ls += obj.toString() + ", ";
-		}
-
-		return ls;
+		return lsObj.stream().map(Object::toString).collect(Collectors.joining(","));
 	}
 
 	public static String toString(Set<?> lsObj) {
-
-		String ls = "";
-
-		for (Object obj : lsObj) {
-			ls += obj.toString() + ", ";
-		}
-
-		return ls;
+		return lsObj.stream().map(Object::toString).collect(Collectors.joining(","));
 	}
 
 }
