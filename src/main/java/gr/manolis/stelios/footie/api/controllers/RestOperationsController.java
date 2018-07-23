@@ -23,28 +23,24 @@ public class RestOperationsController {
 	private OperationsService myService;
 
 	@PostMapping("/league")
-	@ResponseBody
 	public RestResponse createLeague() {
 		myService.createLeague();
 		return new RestResponse(RestResponse.SUCCESS, "created league");
 	}
 
 	@PostMapping("/season/create")
-	@ResponseBody
 	public RestResponse createSeason() {
 		Season season = myService.createSeason();
 		return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
 	}
 
 	@PostMapping("/season/setup")
-	@ResponseBody
 	public RestResponse setUpSeason() {
 		Season season = myService.setUpSeason();
 		return new RestResponse(RestResponse.SUCCESS, "set " + season.getName());
 	}
 
 	@PostMapping("/quals/{num}/seed")
-	@ResponseBody
 	public RestResponse seedQualsRound(@PathVariable String num) {
 
 		int qn = NumberUtils.toInt(num);
@@ -59,7 +55,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/quals/{num}/set")
-	@ResponseBody
 	public RestResponse setQualsRound(@PathVariable String num) {
 
 		int qn = NumberUtils.toInt(num);
@@ -74,7 +69,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/groups/12/seed")
-	@ResponseBody
 	public RestResponse seedGroupsRoundOf12() {
 
 		GroupsRound round = myService.seedGroupsRoundOf12();
@@ -83,7 +77,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/groups/12/set")
-	@ResponseBody
 	public RestResponse setGroupsRoundOf12() {
 
 		GroupsRound round = myService.setGroupsRoundOf12();
@@ -92,7 +85,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/groups/8/seedAndSet")
-	@ResponseBody
 	public RestResponse seedAndSetGroupsRoundOf8() {
 
 		GroupsRound round = myService.seedAndSetGroupsRoundOf8();
@@ -101,7 +93,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/playoffs/quarterfinals/seedAndSet")
-	@ResponseBody
 	public RestResponse seedAndSetQuarterfinals() {
 
 		PlayoffsRound round = myService.seedAndSetQuarterfinals();
@@ -110,7 +101,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/playoffs/semifinals/seedAndSet")
-	@ResponseBody
 	public RestResponse seedAndSetSemifinals() {
 
 		PlayoffsRound round = myService.seedAndSetSemifinals();
@@ -119,7 +109,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/playoffs/finals/seedAndSet")
-	@ResponseBody
 	public RestResponse seedAndSetFinals() {
 
 		PlayoffsRound round = myService.seedAndSetFinals();
@@ -128,7 +117,6 @@ public class RestOperationsController {
 	}
 
 	@PostMapping("/season/end")
-	@ResponseBody
 	public RestResponse endSeason() {
 		Season season = myService.endSeason();
 		return new RestResponse(RestResponse.SUCCESS, "ended " + season.getName());
