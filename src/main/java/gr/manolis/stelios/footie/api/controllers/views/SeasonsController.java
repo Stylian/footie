@@ -43,6 +43,9 @@ public class SeasonsController {
 
 		Season season = serviceUtils.loadSeason(NumberUtils.toInt(year));
 
+		// TODO , not optimised
+		model.addAttribute("numberOfSeasons", serviceUtils.loadAllSeasons().size());
+		
 		// season preview
 		List<Team> teams = serviceUtils.loadTeams();
 		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
