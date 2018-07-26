@@ -57,6 +57,12 @@ public class ServiceUtils {
 
 	}
 
+	public int getNumberOfSeasons() {
+
+		return getLeague().getSeasonNum();
+
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Season> loadAllSeasons() {
 
