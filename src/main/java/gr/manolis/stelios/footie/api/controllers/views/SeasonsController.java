@@ -28,9 +28,9 @@ public class SeasonsController {
 
 	@Autowired
 	private ViewsService viewsService;
-	//
-	// @Autowired
-	// private SeasonService seasonService;
+
+	@Autowired
+	private SeasonService seasonService;
 
 	@Autowired
 	private ServiceUtils serviceUtils;
@@ -38,9 +38,7 @@ public class SeasonsController {
 	@RequestMapping("/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
 
-		SeasonService seasonService = new SeasonService(); // FIX ME
-
-		Season season = viewsService.getSeason(NumberUtils.toInt(year));
+		Season season = serviceUtils.loadSeason(NumberUtils.toInt(year));
 
 		// season preview
 		List<Team> teams = serviceUtils.loadTeams();
@@ -64,7 +62,7 @@ public class SeasonsController {
 
 	private Map<String, Map<Team, Integer>> qualsPreview(Season season, int round, Model model) {
 
-		QualsRound qr = viewsService.getQualRound(season, round);
+		QualsRound qr = serviceUtils.getQualRound(season, round);
 
 		// boolean seeded = false;
 		//

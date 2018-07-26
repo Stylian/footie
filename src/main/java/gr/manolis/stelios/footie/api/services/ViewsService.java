@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 
 @Service
+@Transactional
 public class ViewsService {
 
 	@Autowired
@@ -92,7 +95,7 @@ public class ViewsService {
 		List<Team> teams = serviceUtils.loadTeams();
 		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
+		Collections.sort(teams, new CoefficientsOrdering(master));
 
 		for (Team team : teams) {
 			statsTotal.put(team, team.getStatsForGroup(master));
@@ -109,7 +112,7 @@ public class ViewsService {
 		List<Team> teams = serviceUtils.loadTeams();
 		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
+		Collections.sort(teams, new CoefficientsOrdering(master));
 
 		for (Team team : teams) {
 			coeffsTotal.put(team, team.getStatsForGroup(master).getPoints());

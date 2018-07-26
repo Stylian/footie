@@ -13,6 +13,8 @@ import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 
 @Service
 @Transactional
@@ -66,6 +68,13 @@ public class ServiceUtils {
 
 		DataAccessObject<Team> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		return dao.list("TEAMS");
+
+	}
+
+	public QualsRound getQualRound(Season season, int round) {
+
+		List<Round> rounds = season.getRounds();
+		return (QualsRound) rounds.get(round - 1);
 
 	}
 
