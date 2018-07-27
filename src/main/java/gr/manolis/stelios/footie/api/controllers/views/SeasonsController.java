@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
@@ -28,9 +27,6 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 @Transactional
 @RequestMapping("/seasons")
 public class SeasonsController {
-
-	@Autowired
-	private ViewsService viewsService;
 
 	@Autowired
 	private SeasonService seasonService;
@@ -62,6 +58,12 @@ public class SeasonsController {
 		qualsPreviews.add(qualsPreview(season, 2, model));
 		model.addAttribute("qualsPreviews", qualsPreviews);
 
+		// quals rounds
+		List<QualsRound> qualsRounds = new ArrayList<>();
+		qualsRounds.add(serviceUtils.getQualRound(season, 1));
+		qualsRounds.add(serviceUtils.getQualRound(season, 2));
+		model.addAttribute("qualsRounds", qualsRounds);
+		
 		return "seasons/season";
 	}
 

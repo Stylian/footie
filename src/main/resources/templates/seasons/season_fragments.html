@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-	<!-- season preview fragment -->
-	<div th:fragment="season_preview">
-	
-		<table class="table" >
-			<tbody>
-				<tr>
-					<th>Pos</th>
-					<th>team</th>
-					<th>coefficients</th>
-				</tr>
-				<tr th:each="teamCoeff,iter : ${teamsWithCoeffs}" th:class="${#lists.contains(toGroups, teamCoeff['key'])} ? 'info' : (${ #lists.contains(toQuals2, teamCoeff['key']) } ? 'success' : '') " >
-					<td th:text="${iter.index + 1} + '.' " />
-					<td>
-						<i th:if="${teamCoeff['key'] == champion}" class="fa fa-diamond"></i>
-						<span th:text="${teamCoeff['key'].name}"></span>
-					</td>
-					<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
-				</tr>
-			</tbody>
-		</table>
-	
-	</div>
-	
-	<!-- quals1 fragment -->
-	<div th:fragment="quals1">
+<!-- season preview fragment -->
+<div th:fragment="season_preview">
 
-		<ul class="nav nav-tabs" >
-	   		<li class="active"><a data-toggle="tab" href="#quals1_preview" >Preview</a></li>
-	   		<li><a data-toggle="tab" href="#quals1_round" >Round</a></li>
-		</ul>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Pos</th>
+				<th>team</th>
+				<th>coefficients</th>
+			</tr>
+			<tr th:each="teamCoeff,iter : ${teamsWithCoeffs}"
+				th:class="${#lists.contains(toGroups, teamCoeff['key'])} ? 'info' : (${ #lists.contains(toQuals2, teamCoeff['key']) } ? 'success' : '') ">
+				<td th:text="${iter.index + 1} + '.' " />
+				<td><i th:if="${teamCoeff['key'] == champion}" class="fa fa-diamond"></i> <span
+					th:text="${teamCoeff['key'].name}"></span></td>
+				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+			</tr>
+		</tbody>
+	</table>
 
-		<div class="tab-content">
-			<div id="quals1_preview" class="tab-pane active">
-				<div th:replace="/seasons/quals_fragments :: quals_preview(round='1')" ></div>
-			</div>
-			<div id="quals1_round" class="tab-pane">
-				BBBBBBBBBBBBBBB
-			</div>
+</div>
+
+<!-- quals1 fragment -->
+<div th:fragment="quals1">
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#quals1_preview">Preview</a></li>
+		<li><a data-toggle="tab" href="#quals1_round">Round</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div id="quals1_preview" class="tab-pane active">
+			<div th:replace="/seasons/quals_fragments :: quals_preview(round='1')"></div>
 		</div>
-
-	
-	</div>
-	
-	<!-- quals2 fragment -->
-	<div th:fragment="quals2">
-
-		<ul class="nav nav-tabs" >
-	   		<li class="active"><a data-toggle="tab" href="#quals2_preview" >Preview</a></li>
-	   		<li><a data-toggle="tab" href="#quals2_round" >Round</a></li>
-		</ul>
-
-		<div class="tab-content">
-			<div id="quals2_preview" class="tab-pane active">
-				<div th:replace="/seasons/quals_fragments :: quals_preview(round='2')" ></div>
-			</div>
-			<div id="quals2_round" class="tab-pane">
-				BBBBBBBBBBBBBBB
-			</div>
+		<div id="quals1_round" class="tab-pane">
+			<div th:replace="/seasons/quals_fragments :: quals_round(round='1')"></div>
 		</div>
-
-	
 	</div>
+
+
+</div>
+
+<!-- quals2 fragment -->
+<div th:fragment="quals2">
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#quals2_preview">Preview</a></li>
+		<li><a data-toggle="tab" href="#quals2_round">Round</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div id="quals2_preview" class="tab-pane active">
+			<div th:replace="/seasons/quals_fragments :: quals_preview(round='2')"></div>
+		</div>
+		<div id="quals2_round" class="tab-pane">
+			<div th:replace="/seasons/quals_fragments :: quals_round(round='2')"></div>
+		</div>
+	</div>
+
+
+</div>
 
 
 

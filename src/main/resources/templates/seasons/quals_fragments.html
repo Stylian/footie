@@ -1,42 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-	<!-- quals preview fragment -->
-	<div th:fragment="quals_preview">
-		
-		<h3>pot 1</h3>
-	
-		<table>
-			<tbody>
-				<tr>
-					<th>team</th>
-					<th>coefficients</th>
-				</tr>
-				<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).strong}">
-					<td th:text="${teamCoeff['key'].name}" />
-					<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
-				</tr>
-			</tbody>
-		</table>
-	
-		<h3>pot 2</h3>
-	
-		<table>
-			<tbody>
-				<tr>
-					<th>team</th>
-					<th>coefficients</th>
-				</tr>
-				<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).weak}">
-					<td th:text="${teamCoeff['key'].name}" />
-					<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
-				</tr>
-			</tbody>
-		</table>
-	
-	
+<!-- quals preview fragment -->
+<div th:fragment="quals_preview">
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+
+				<div class="panel-heading">Pot 1</div>
+
+				<div class="panel-body">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>team</th>
+								<th>coefficients</th>
+							</tr>
+							<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).strong}">
+								<td th:text="${teamCoeff['key'].name}" />
+								<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-md-4">
+
+			<div class="panel panel-default">
+
+				<div class="panel-heading">Pot 2</div>
+
+				<div class="panel-body">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>team</th>
+								<th>coefficients</th>
+							</tr>
+							<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).weak}">
+								<td th:text="${teamCoeff['key'].name}" />
+								<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 
+</div>
 
+<!-- quals round fragment -->
+<div th:fragment="quals_round">
+
+	<table class="table col-md-4" th:each="matchup: ${qualsRounds.get(round-1).matchups}" >
+		<tr th:each="game: ${matchup.games}" >
+			<td class="col-md-2" th:text="${game.homeTeam}" ></td>
+			<td class="col-md-1" th:text="${game.result.goalsMadeByHomeTeam}" ></td>
+			<td class="col-md-1" > - </td>
+			<td class="col-md-1" th:text="${game.result.goalsMadeByAwayTeam}" ></td>
+			<td class="col-md-2" th:text="${game.awayTeam}" ></td>
+		</tr>
+	</table>
+
+</div>
 
 </html>

@@ -14,18 +14,16 @@
 		</div>
 
 
-		<ul class="pagination" th:each="i : ${#numbers.sequence(1, numberOfSeasons/1)}" >
-			<li th:classappend="${season.seasonYear == i} ? 'active' : ''" ><a th:href="@{ ${i} }" th:text="${i}" ></a></li>
+		<ul class="pagination" th:each="i : ${#numbers.sequence(1, numberOfSeasons/1)}">
+			<li th:classappend="${season.seasonYear == i} ? 'active' : ''"><a th:href="@{ ${i} }" th:text="${i}"></a></li>
 		</ul>
 
 		<div class="row">
 
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#preview">Preview</a></li>
-				<li><a data-toggle="tab" href="#quals1">1st Qualification
-						Round</a></li>
-				<li><a data-toggle="tab" href="#quals2">2nd Qualification
-						Round</a></li>
+				<li><a data-toggle="tab" href="#quals1">1st Qualification Round</a></li>
+				<li><a data-toggle="tab" href="#quals2">2nd Qualification Round</a></li>
 
 			</ul>
 
