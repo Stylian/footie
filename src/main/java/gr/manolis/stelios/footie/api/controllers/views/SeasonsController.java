@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 @RequestMapping("/seasons")
 public class SeasonsController {
 
+	final static Logger logger = Logger.getLogger(SeasonsController.class);
+	
 	@Autowired
 	private SeasonService seasonService;
 
@@ -36,15 +39,23 @@ public class SeasonsController {
 
 	@RequestMapping("/{year}")
 	public String seasonTotalDisplay(@PathVariable(value = "year", required = true) String year, Model model) {
-
+		logger.info("season total display starting");
+		
 		Season season = serviceUtils.loadSeason(NumberUtils.toInt(year));
+		logger.info("loaded season: " + season);
 
 		model.addAttribute("numberOfSeasons", serviceUtils.getNumberOfSeasons());
 		
 		// season preview
 		List<Team> teams = serviceUtils.loadTeams();
+		logger.info("loaded teams: " + teams);
+
 		Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
+		logger.info("teamsWithCoeffs: " + teamsWithCoeffs);
+		
 		Map<String, List<Team>> teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
+		logger.info("teamsInRounds: " + teamsInRounds);
+		
 		model.addAttribute("season", season);
 		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
 		model.addAttribute("champion", teamsInRounds.get("champion").get(0));
@@ -56,12 +67,14 @@ public class SeasonsController {
 		List<Map<String, Map<Team, Integer>>> qualsPreviews = new ArrayList<>();
 		qualsPreviews.add(qualsPreview(season, 1, model));
 		qualsPreviews.add(qualsPreview(season, 2, model));
+		logger.info("qualsPreviews: " + qualsPreviews);
 		model.addAttribute("qualsPreviews", qualsPreviews);
 
 		// quals rounds
 		List<QualsRound> qualsRounds = new ArrayList<>();
 		qualsRounds.add(serviceUtils.getQualRound(season, 1));
 		qualsRounds.add(serviceUtils.getQualRound(season, 2));
+		logger.info("qualsRounds: " + qualsRounds);
 		model.addAttribute("qualsRounds", qualsRounds);
 		
 		return "seasons/season";

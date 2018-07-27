@@ -23,40 +23,40 @@
 
 </div>
 
-<!-- quals1 fragment -->
-<div th:fragment="quals1">
+<!-- quals fragment -->
+<div th:fragment="quals">
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#quals1_preview">Preview</a></li>
-		<li><a data-toggle="tab" href="#quals1_round">Round</a></li>
+		<li class="active"><a data-toggle="tab"  th:href="${'#quals_preview_' + round}" >Preview</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_round_' + round}"  >Round</a></li>
 	</ul>
 
 	<div class="tab-content">
-		<div id="quals1_preview" class="tab-pane active">
-			<div th:replace="/seasons/quals_fragments :: quals_preview(round='1')"></div>
+		<div th:id="${'quals_preview_' + round}" class="tab-pane active">
+			<div th:replace="/seasons/quals_fragments :: quals_preview(round=${round})"></div>
 		</div>
-		<div id="quals1_round" class="tab-pane">
-			<div th:replace="/seasons/quals_fragments :: quals_round(round='1')"></div>
+		<div  th:id="${'quals_round_' + round}"  class="tab-pane">
+			<div th:replace="/seasons/quals_fragments :: quals_round(round=${round})"></div>
 		</div>
 	</div>
 
 
 </div>
 
-<!-- quals2 fragment -->
-<div th:fragment="quals2">
+<!-- groups fragment -->
+<div th:fragment="groups">
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#quals2_preview">Preview</a></li>
-		<li><a data-toggle="tab" href="#quals2_round">Round</a></li>
+		<li class="active"><a data-toggle="tab" th:href="${'#groups_preview_' + round}">Preview</a></li>
+		<li><a data-toggle="tab" th:href="${'#groups_round_' + round}" >Round</a></li>
 	</ul>
 
 	<div class="tab-content">
-		<div id="quals2_preview" class="tab-pane active">
-			<div th:replace="/seasons/quals_fragments :: quals_preview(round='2')"></div>
+		<div th:id="${'groups_preview_' + round}"  class="tab-pane active">
+			<div th:replace="/seasons/groups_fragments :: groups_preview(round=${round})"></div>
 		</div>
-		<div id="quals2_round" class="tab-pane">
-			<div th:replace="/seasons/quals_fragments :: quals_round(round='2')"></div>
+		<div th:id="${'groups_round_' + round}"  class="tab-pane">
+			<div th:replace="/seasons/groups_fragments :: groups_round(round=${round})"></div>
 		</div>
 	</div>
 

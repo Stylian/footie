@@ -66,4 +66,9 @@ public class QualsRound extends Round {
 		this.weakTeams = weakTeams;
 	}
 
+	@Override
+	public String toString() {
+		return "QualsRound [matchups=" + matchups.size() + ", strongTeams=" + strongTeams.size() +", weakTeams=" + weakTeams.size()  + "]";
+	}
+
 }
