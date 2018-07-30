@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- season preview fragment -->
+<div th:fragment="season_preview">
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Pos</th>
+				<th>team</th>
+				<th>coefficients</th>
+			</tr>
+			<tr th:each="teamCoeff,iter : ${teamsWithCoeffs}"
+				th:class="${#lists.contains(toGroups, teamCoeff['key'])} ? 'info' : (${ #lists.contains(toQuals2, teamCoeff['key']) } ? 'success' : '') ">
+				<td th:text="${iter.index + 1} + '.' " />
+				<td><i th:if="${teamCoeff['key'] == champion}" class="fa fa-diamond"></i> <span
+					th:text="${teamCoeff['key'].name}"></span></td>
+				<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+</html>

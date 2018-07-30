@@ -26,24 +26,36 @@
 				<li><a data-toggle="tab" href="#quals2">2nd Qualification Round</a></li>
 				<li><a data-toggle="tab" href="#groups1">1st Groups Round</a></li>
 				<li><a data-toggle="tab" href="#groups2">2nd Groups Round</a></li>
+				<li><a data-toggle="tab" href="#playoffs_quarters">1/4 Finals</a></li>
+				<li><a data-toggle="tab" href="#playoffs_semis">1/2 Finals</a></li>
+				<li><a data-toggle="tab" href="#playoffs_finals">Finals</a></li>
 
 			</ul>
 
 			<div class="tab-content">
 				<div id="preview" class="tab-pane active">
-					<div th:replace="/seasons/season_fragments :: season_preview"></div>
+					<div th:replace="/season/season_fragments :: season_preview"></div>
 				</div>
 				<div id="quals1" class="tab-pane">
-					<div th:replace="/seasons/season_fragments :: quals(round='1')"></div>
+					<div th:replace="/season/quals_fragments :: quals(round='1')"></div>
 				</div>
 				<div id="quals2" class="tab-pane">
-					<div th:replace="/seasons/season_fragments :: quals(round='2')"></div>
+					<div th:replace="/season/quals_fragments :: quals(round='2')"></div>
 				</div>
 				<div id="groups1" class="tab-pane">
-					<div th:replace="/seasons/season_fragments :: groups(round='1')"></div>
+					<div th:replace="/season/groups_fragments :: groups(round='1')"></div>
 				</div>
 				<div id="groups2" class="tab-pane">
-					<div th:replace="/seasons/season_fragments :: groups(round='2')"></div>
+					<div th:replace="/season/groups_fragments :: groups(round='2')"></div>
+				</div>
+				<div id="playoffs_quarters" class="tab-pane">
+					<div th:replace="/season/playoffs_fragments :: playoffs_quarters"></div>
+				</div>
+				<div id="playoffs_semis" class="tab-pane">
+					<div th:replace="/season/playoffs_fragments :: playoffs_semis"></div>
+				</div>
+				<div id="playoffs_finals" class="tab-pane">
+					<div th:replace="/season/playoffs_fragments :: playoffs_finals"></div>
 				</div>
 
 			</div>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
@@ -76,8 +77,22 @@ public class SeasonsController {
 		qualsRounds.add(serviceUtils.getQualRound(season, 2));
 		logger.info("qualsRounds: " + qualsRounds);
 		model.addAttribute("qualsRounds", qualsRounds);
+
+		// quals previews
+		List<Map<String, Map<Team, Integer>>> groupsPreviews = new ArrayList<>();
+		groupsPreviews.add(groupsPreview(season, 1, model));
+		groupsPreviews.add(groupsPreview(season, 2, model));
+		logger.info("groupsPreviews: " + groupsPreviews);
+		model.addAttribute("groupsPreviews", groupsPreviews);
 		
-		return "seasons/season";
+		// groups rounds
+		List<GroupsRound> groupsRounds = new ArrayList<>();
+		groupsRounds.add(serviceUtils.getGroupsRound(season, 1));
+		groupsRounds.add(serviceUtils.getGroupsRound(season, 2));
+		logger.info("groupsRounds: " + groupsRounds);
+		model.addAttribute("groupsRounds", groupsRounds);
+		
+		return "season/season";
 	}
 
 	private Map<String, Map<Team, Integer>> qualsPreview(Season season, int round, Model model) {
@@ -104,6 +119,35 @@ public class SeasonsController {
 		qualsTeams.put("weak", teamsWeakWithCoeffs);
 
 		return qualsTeams;
+	}
+	
+	private Map<String, Map<Team, Integer>> groupsPreview(Season season, int round, Model model) {
+		
+		GroupsRound qr = serviceUtils.getGroupsRound(season, round);
+		
+		// boolean seeded = false;
+		//
+		// // post seeding case for round
+		// if ("2".equals(round) && qr.getStrongTeams() != null) {
+		//
+		// seeded = true;
+		//
+		// }
+		
+		List<Team> teamsStrong = qr.getStrongTeams();
+		List<Team> teamsMedium = qr.getMediumTeams();
+		List<Team> teamsWeak = qr.getWeakTeams();
+		
+		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+		Map<Team, Integer> teamsMediumWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsMedium);
+		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+		
+		Map<String, Map<Team, Integer>> groupsTeams = new HashMap<>();
+		groupsTeams.put("strong", teamsStrongWithCoeffs);
+		groupsTeams.put("medium", teamsMediumWithCoeffs);
+		groupsTeams.put("weak", teamsWeakWithCoeffs);
+		
+		return groupsTeams;
 	}
 
 	private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {

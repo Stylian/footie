@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+
+<!-- quals fragment -->
+<div th:fragment="quals">
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab"  th:href="${'#quals_preview_' + round}" >Preview</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_round_' + round}"  >Round</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div th:id="${'quals_preview_' + round}" class="tab-pane active">
+			<div th:replace="/season/quals_fragments :: quals_preview(round=${round})"></div>
+		</div>
+		<div  th:id="${'quals_round_' + round}"  class="tab-pane">
+			<div th:replace="/season/quals_fragments :: quals_round(round=${round})"></div>
+		</div>
+	</div>
+
+
+</div>
+
 <!-- quals preview fragment -->
 <div th:fragment="quals_preview">
 
