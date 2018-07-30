@@ -10,7 +10,7 @@
 		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Games</a></li>
 	</ul>
 
-	<div class="tab-content">
+	<div id="quals_content" class="tab-content" >
 		<div th:id="${'quals_seeding_' + round}" class="tab-pane active">
 			<div th:replace="/season/quals_fragments :: quals_seeding(round=${round})"></div>
 		</div>

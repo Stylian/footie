@@ -11,7 +11,7 @@
 		<li><a data-toggle="tab" th:href="${'#groups_games_' + round}">Games</a></li>
 	</ul>
 
-	<div class="tab-content">
+	<div id="groups_content" class="tab-content">
 		<div th:id="${'groups_seeding_' + round}" class="tab-pane active">
 			<div th:replace="/season/groups_fragments :: groups_seeding(round=${round})"></div>
 		</div>
