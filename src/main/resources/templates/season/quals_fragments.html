@@ -6,30 +6,30 @@
 <div th:fragment="quals">
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab"  th:href="${'#quals_preview_' + round}" >Preview</a></li>
-		<li><a data-toggle="tab"  th:href="${'#quals_round_' + round}"  >Round</a></li>
+		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round}" >Seeding</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Games</a></li>
 	</ul>
 
 	<div class="tab-content">
-		<div th:id="${'quals_preview_' + round}" class="tab-pane active">
-			<div th:replace="/season/quals_fragments :: quals_preview(round=${round})"></div>
+		<div th:id="${'quals_seeding_' + round}" class="tab-pane active">
+			<div th:replace="/season/quals_fragments :: quals_seeding(round=${round})"></div>
 		</div>
-		<div  th:id="${'quals_round_' + round}"  class="tab-pane">
-			<div th:replace="/season/quals_fragments :: quals_round(round=${round})"></div>
+		<div  th:id="${'quals_games_' + round}"  class="tab-pane">
+			<div th:replace="/season/quals_fragments :: quals_games(round=${round})"></div>
 		</div>
 	</div>
 
 
 </div>
 
-<!-- quals preview fragment -->
-<div th:fragment="quals_preview">
+<!-- quals seeding fragment -->
+<div th:fragment="quals_seeding">
 
 	<div class="row">
 		<div class="col-md-4">
 			<div class="panel panel-default">
 
-				<div class="panel-heading">Pot 1</div>
+				<div class="panel-heading">Seeded</div>
 
 				<div class="panel-body">
 					<table class="table">
@@ -53,7 +53,7 @@
 
 			<div class="panel panel-default">
 
-				<div class="panel-heading">Pot 2</div>
+				<div class="panel-heading">Unseeded</div>
 
 				<div class="panel-body">
 					<table class="table">
@@ -78,7 +78,7 @@
 </div>
 
 <!-- quals round fragment -->
-<div th:fragment="quals_round">
+<div th:fragment="quals_games">
 
 	<table class="table col-md-4" th:each="matchup: ${qualsRounds.get(round-1).matchups}" >
 		<tr th:each="game: ${matchup.games}" >

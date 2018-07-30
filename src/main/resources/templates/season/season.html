@@ -21,7 +21,7 @@
 		<div class="row">
 
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#preview">Preview</a></li>
+				<li class="active"><a data-toggle="tab" href="#preview">Seeding</a></li>
 				<li><a data-toggle="tab" href="#quals1">1st Qualification Round</a></li>
 				<li><a data-toggle="tab" href="#quals2">2nd Qualification Round</a></li>
 				<li><a data-toggle="tab" href="#groups1">1st Groups Round</a></li>
@@ -34,7 +34,7 @@
 
 			<div class="tab-content">
 				<div id="preview" class="tab-pane active">
-					<div th:replace="/season/season_fragments :: season_preview"></div>
+					<div th:replace="/season/season_fragments :: season_seeding"></div>
 				</div>
 				<div id="quals1" class="tab-pane">
 					<div th:replace="/season/quals_fragments :: quals(round='1')"></div>
