@@ -48,11 +48,11 @@ public class RobinGroup extends Group {
 	 * teams in robin group come sorted
 	 */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	public List<Team> getTeamsOrdered(Group master) {
+	@Override
+	public List<Team> getTeams() {
 
 		List<Team> teams = super.getTeams();
-
-		Collections.sort(teams, new RobinGroupOrdering(this, master));
+		Collections.sort(teams, new RobinGroupOrdering(this));
 
 		return teams;
 

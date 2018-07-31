@@ -35,7 +35,6 @@ public class PlayoffsRoundService {
 		logger.info("seed and set quarterfinals");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		// build playoffs round
 		PlayoffsRound playoffsRound = new PlayoffsRound(season, "Playoffs");
@@ -43,13 +42,13 @@ public class PlayoffsRoundService {
 		// add winners from roundof8
 		GroupsRound groupsRoundOf8 = (GroupsRound) season.getRounds().get(3);
 
-		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeamsOrdered(master);
+		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeams();
 		logger.info("teams from group A:" + Utils.toString(teamsA));
 		playoffsRound.setgA1(teamsA.get(0));
 		playoffsRound.setgA2(teamsA.get(1));
 		playoffsRound.setgA3(teamsA.get(2));
 
-		List<Team> teamsB = groupsRoundOf8.getGroups().get(1).getTeamsOrdered(master);
+		List<Team> teamsB = groupsRoundOf8.getGroups().get(1).getTeams();
 		logger.info("teams from group B:" + Utils.toString(teamsB));
 		playoffsRound.setgB1(teamsB.get(0));
 		playoffsRound.setgB2(teamsB.get(1));

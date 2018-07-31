@@ -17,7 +17,6 @@ import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.LeagueStage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup12;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup8;
@@ -183,7 +182,6 @@ public class GroupsRoundService {
 		logger.info("seed and set groups round of 8");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		// must add winners from groups round of 12
 		GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
@@ -194,17 +192,17 @@ public class GroupsRoundService {
 
 		// create groups and add teams and games
 		RobinGroup groupA = new RobinGroup8("GROUP A");
-		groupA.addTeam(r12gA.getTeamsOrdered(master).get(0));
-		groupA.addTeam(r12gA.getTeamsOrdered(master).get(1));
-		groupA.addTeam(r12gB.getTeamsOrdered(master).get(0));
-		groupA.addTeam(r12gB.getTeamsOrdered(master).get(1));
+		groupA.addTeam(r12gA.getTeams().get(0));
+		groupA.addTeam(r12gA.getTeams().get(1));
+		groupA.addTeam(r12gB.getTeams().get(0));
+		groupA.addTeam(r12gB.getTeams().get(1));
 		groupA.buildGames();
 
 		RobinGroup groupB = new RobinGroup8("GROUP B");
-		groupB.addTeam(r12gC.getTeamsOrdered(master).get(0));
-		groupB.addTeam(r12gC.getTeamsOrdered(master).get(1));
-		groupB.addTeam(r12gD.getTeamsOrdered(master).get(0));
-		groupB.addTeam(r12gD.getTeamsOrdered(master).get(1));
+		groupB.addTeam(r12gC.getTeams().get(0));
+		groupB.addTeam(r12gC.getTeams().get(1));
+		groupB.addTeam(r12gD.getTeams().get(0));
+		groupB.addTeam(r12gD.getTeams().get(1));
 		groupB.buildGames();
 
 		// build round of 8

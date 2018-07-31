@@ -106,8 +106,9 @@
 <!-- groups round fragment -->
 <div th:fragment=" groups_round">
 
-	BBBBBBBBBBBBBB
-	<div th:text="${round}"></div>
+	<div th:each="group: ${groupsRounds.get(round-1).groups}">
+		<div th:replace="/season/groups_fragments :: group_view(group=${group})"></div>
+	</div>
 
 </div>
 
@@ -118,4 +119,43 @@
 	<div th:text="${round}"></div>
 
 </div>
+
+<!-- group vew fragment -->
+<div th:fragment="group_view">
+	<div th:text="${group.name}"></div>
+	<div class="panel panel-default">
+
+		<div class="panel-heading" th:text="${group.name}"></div>
+
+		<div class="panel-body">
+			<table>
+				<tbody>
+					<tr>
+						<th>team</th>
+						<th>points</th>
+						<th>W</th>
+						<th>D</th>
+						<th>L</th>
+						<th>GS</th>
+						<th>GC</th>
+						<th>+/-</th>
+					</tr>
+					<tr th:each="team: ${group.teams}">
+						<td th:text="${team.name}" />
+						<td th:text="${group.teamsStats.get(team).points}" />
+						<td th:text="${group.teamsStats.get(team).wins}" />
+						<td th:text="${group.teamsStats.get(team).draws}" />
+						<td th:text="${group.teamsStats.get(team).losses}" />
+						<td th:text="${group.teamsStats.get(team).goalsScored}" />
+						<td th:text="${group.teamsStats.get(team).goalsConceded}" />
+						<td th:text="${group.teamsStats.get(team).goalsScored} - ${group.teamsStats.get(team).goalsConceded}" />
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</div>
+
 </html>

@@ -196,9 +196,9 @@ public class SeasonService {
 
 		for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
 
-			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season)
+			robinGroup.getTeams().get(0).getStatsForGroup(season)
 					.addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
-			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season)
+			robinGroup.getTeams().get(1).getStatsForGroup(season)
 					.addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 
 			for (GroupGame groupGame : robinGroup.getGames()) {
@@ -219,9 +219,9 @@ public class SeasonService {
 
 		for (RobinGroup robinGroup : groupsOf8Round.getGroups()) {
 
-			robinGroup.getTeamsOrdered(master).get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
-			robinGroup.getTeamsOrdered(master).get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
-			robinGroup.getTeamsOrdered(master).get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
+			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
+			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
+			robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
 
 			for (GroupGame groupGame : robinGroup.getGames()) {
 

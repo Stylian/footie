@@ -61,12 +61,6 @@ public class RobinGroupOrderingTest {
 	@Mock
 	Stats statsT6;
 	
-	@Mock
-	Stats statsT5Master;
-	
-	@Mock
-	Stats statsT6Master;
-
 	@Test
 	public void testCompare() {
 
@@ -84,9 +78,6 @@ public class RobinGroupOrderingTest {
 		when(t5.getStatsForGroup(group)).thenReturn(statsT5);
 		when(t6.getStatsForGroup(group)).thenReturn(statsT6);
 
-		when(t5.getStatsForGroup(master)).thenReturn(statsT5Master);
-		when(t6.getStatsForGroup(master)).thenReturn(statsT6Master);
-		
 		// RULE 1
 		when(statsT1.getPoints()).thenReturn(5);
 		when(statsT2.getPoints()).thenReturn(7);
@@ -112,10 +103,6 @@ public class RobinGroupOrderingTest {
 		when(statsT3.getWins()).thenReturn(1);
 		when(statsT5.getWins()).thenReturn(7);
 		when(statsT6.getWins()).thenReturn(7);
-		
-		// RULE 5
-		when(statsT5Master.getPoints()).thenReturn(7);
-		when(statsT6Master.getPoints()).thenReturn(9);
 
 		List<Team> list = new ArrayList<>();
 		list.add(t1);
@@ -125,10 +112,8 @@ public class RobinGroupOrderingTest {
 		list.add(t5);
 		list.add(t6);
 
-		Collections.sort(list, new RobinGroupOrdering(group, master));
+		Collections.sort(list, new RobinGroupOrdering(group));
 
-		assertEquals("t6", list.get(0).getName());
-		assertEquals("t5", list.get(1).getName());
 		assertEquals("t3", list.get(2).getName());
 		assertEquals("t4", list.get(3).getName());
 		assertEquals("t2", list.get(4).getName());

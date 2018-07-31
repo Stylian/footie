@@ -7,12 +7,9 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 
 public class RobinGroupOrdering extends Ordering {
-
-	private Group master;
-
-	public RobinGroupOrdering(Group group, Group master) {
+	
+	public RobinGroupOrdering(Group group) {
 		super(group);
-		this.master = master;
 	}
 
 	@Override
@@ -43,12 +40,7 @@ public class RobinGroupOrdering extends Ordering {
 			return s2.getWins() - s1.getWins();
 		}
 
-		// RULE 5 coefficients
-		if (o1.getStatsForGroup(master).getPoints() != o2.getStatsForGroup(master).getPoints()) {
-			return o2.getStatsForGroup(master).getPoints() - o1.getStatsForGroup(master).getPoints();
-		}
-
-		// RULE 6
+		// RULE 5
 		return RandomUtils.nextInt(0, 2) - 1;
 	}
 }
