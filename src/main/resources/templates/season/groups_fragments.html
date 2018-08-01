@@ -6,16 +6,19 @@
 <div th:fragment="groups">
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" th:href="${'#groups_seeding_' + round}">Seeding</a></li>
-		<li><a data-toggle="tab" th:href="${'#groups_round_' + round}">Round</a></li>
+		<li ><a data-toggle="tab" th:href="${'#groups_seeding_' + round}"
+			th:if="${round == 1}">Seeding</a></li>
+		<!-- no seeding for 2nd groups round -->
+		<li class="active" ><a data-toggle="tab" th:href="${'#groups_round_' + round}">Round</a></li>
 		<li><a data-toggle="tab" th:href="${'#groups_games_' + round}">Games</a></li>
 	</ul>
 
 	<div id="groups_content" class="tab-content">
-		<div th:id="${'groups_seeding_' + round}" class="tab-pane active">
+		<div th:id="${'groups_seeding_' + round}" class="tab-pane" th:if="${round == 1}">
+			<!-- no seeding for 2nd groups round -->
 			<div th:replace="/season/groups_fragments :: groups_seeding(round=${round})"></div>
 		</div>
-		<div th:id="${'groups_round_' + round}" class="tab-pane">
+		<div th:id="${'groups_round_' + round}" class="tab-pane active">
 			<div th:replace="/season/groups_fragments :: groups_round(round=${round})"></div>
 		</div>
 		<div th:id="${'groups_games_' + round}" class="tab-pane">
@@ -128,9 +131,10 @@
 		<div class="panel-heading" th:text="${group.name}"></div>
 
 		<div class="panel-body">
-			<table>
+			<table class="table">
 				<tbody>
 					<tr>
+						<th>Pos</th>
 						<th>team</th>
 						<th>points</th>
 						<th>W</th>
@@ -140,7 +144,12 @@
 						<th>GC</th>
 						<th>+/-</th>
 					</tr>
-					<tr th:each="team: ${group.teams}">
+					<tr th:each="team,iter : ${group.teams}"
+						th:class="${round == 1} ? 
+						(${iter.index &lt; 2} ? 'info' : 'danger' ) :
+						(${iter.index &lt; 1} ? 'info' : 
+							(${iter.index &lt; 3} ? 'warning' : 'danger'))">
+						<td th:text="${iter.index + 1} + '.' " />
 						<td th:text="${team.name}" />
 						<td th:text="${group.teamsStats.get(team).points}" />
 						<td th:text="${group.teamsStats.get(team).wins}" />
