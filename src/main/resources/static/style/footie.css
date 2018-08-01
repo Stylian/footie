@@ -8,7 +8,9 @@
 	padding: 1.5em;
 }
 
-
-#coefficients_panel {
+#coefficients_panel,
+#past_winners_panel,
+#game_stats_panel,
+#stats_panel {
 	margin: 1.5em;
 }

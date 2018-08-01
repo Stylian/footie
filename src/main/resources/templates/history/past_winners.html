@@ -8,25 +8,33 @@
 <body>
 
 	<div class="container" >
-	
-		 <div class="row">
-			<div th:replace="navbar :: navbar" ></div>
+
+		<div class="row">
+			<div th:replace="navbar :: navbar"></div>
 		</div>
-			
-		 <div class="row">
-			<table class="table" >
-				<tbody>
-					<tr>
-						<th>year</th>
-						<th>winner</th>
-					</tr>
-					<tr th:each="season: ${seasons}">
-						<td th:text="${season.seasonYear}" />
-						<td th:text="${season.winner.name}" />
-					</tr>
-				</tbody>
-			</table>
-	
+
+		<div id="past_winners_panel" class="panel panel-default">
+
+			<div class="panel-heading">Total Stats</div>
+
+			<div class="panel-body">
+
+				<div class="row">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>year</th>
+								<th>winner</th>
+							</tr>
+							<tr th:each="season: ${seasons}">
+								<td th:text="${season.seasonYear}" />
+								<td th:text="${season.winner.name}" />
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
 		</div>
 
 	</div>
