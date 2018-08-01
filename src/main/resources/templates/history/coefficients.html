@@ -12,26 +12,57 @@
 		 <div class="row">
 			<div th:replace="navbar :: navbar" ></div>
 		</div>
-		
-		 <div class="row">
-			<table class="table" >
-				<tbody>
-					<tr>
-						<th>Pos</th>
-						<th>Team</th>
-						<th>Coefficients</th>
-					</tr>
 
-					<tr th:each="teamCoeff,iter : ${teamsCoeffs}" th:class="${iter.count &lt; 4} ? 'info' : (${iter.count &lt; 8} ? 'success' : '') ">
-						<td th:text="${iter.index + 1} + '.' " />
-						<td th:text="${teamCoeff['key'].name}" />
-						<td
-							th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
-					</tr>
-				</tbody>
-			</table>
+		<div id="coefficients_panel" class="panel panel-default">
+
+			<div class="panel-heading">Coefficients</div>
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6">
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>Pos</th>
+									<th>Team</th>
+									<th>Coefficients</th>
+								</tr>
+
+								<tr th:each="teamCoeff,iter : ${teamsCoeffs}"
+									th:class="${iter.count &lt; 4} ? 'info' : (${iter.count &lt; 8} ? 'success' : '') "
+									th:if="${iter.index &lt; #maps.size(teamsCoeffs)/2}">
+									<td th:text="${iter.index + 1} + '.' " />
+									<td th:text="${teamCoeff['key'].name}" />
+									<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-md-6">
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>Pos</th>
+									<th>Team</th>
+									<th>Coefficients</th>
+								</tr>
+
+								<tr th:each="teamCoeff,iter : ${teamsCoeffs}"
+									th:class="${iter.count &lt; 4} ? 'info' : (${iter.count &lt; 8} ? 'success' : '') "
+									th:if="${iter.index &gt;= #maps.size(teamsCoeffs)/2}">
+									<td th:text="${iter.index + 1} + '.' " />
+									<td th:text="${teamCoeff['key'].name}" />
+									<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
 		</div>
-	
+
 	</div>
 	
 </body>
