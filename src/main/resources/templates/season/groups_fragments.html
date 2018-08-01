@@ -6,10 +6,9 @@
 <div th:fragment="groups">
 
 	<ul class="nav nav-tabs">
-		<li ><a data-toggle="tab" th:href="${'#groups_seeding_' + round}"
-			th:if="${round == 1}">Seeding</a></li>
+		<li><a data-toggle="tab" th:href="${'#groups_seeding_' + round}" th:if="${round == 1}">Seeding</a></li>
 		<!-- no seeding for 2nd groups round -->
-		<li class="active" ><a data-toggle="tab" th:href="${'#groups_round_' + round}">Round</a></li>
+		<li class="active"><a data-toggle="tab" th:href="${'#groups_round_' + round}">Round</a></li>
 		<li><a data-toggle="tab" th:href="${'#groups_games_' + round}">Games</a></li>
 	</ul>
 
@@ -109,8 +108,36 @@
 <!-- groups round fragment -->
 <div th:fragment=" groups_round">
 
-	<div th:each="group: ${groupsRounds.get(round-1).groups}">
-		<div th:replace="/season/groups_fragments :: group_view(group=${group})"></div>
+	<!-- round of 12 groups view -->
+	<div th:if="${round == 1}" >
+		<div class="row">
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(0)})"></div>
+			</div>
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(1)})"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(2)})"></div>
+			</div>
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(3)})"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- round of 8 groups view -->
+	<div th:if="${round == 2}" >
+		<div class="row">
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(0)})"></div>
+			</div>
+			<div class="col-md-6">
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(1)})"></div>
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -125,7 +152,7 @@
 
 <!-- group vew fragment -->
 <div th:fragment="group_view">
-	<div th:text="${group.name}"></div>
+
 	<div class="panel panel-default">
 
 		<div class="panel-heading" th:text="${group.name}"></div>
