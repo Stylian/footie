@@ -165,8 +165,8 @@ public class GameService {
 
 		} else {
 
-			games.add(new MatchupGame(teamAway, teamHome, matchup));
-			games.add(new MatchupGame(teamHome, teamAway, matchup));
+			games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
+			games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
 
 		}
 

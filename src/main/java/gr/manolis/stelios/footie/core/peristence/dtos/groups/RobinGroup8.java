@@ -30,14 +30,14 @@ public class RobinGroup8 extends RobinGroup {
 
 	public void buildGames() {
 
-		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(2), this));
-		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(3), this));
-		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(0), this));
-		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(1), this));
-		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(2), this));
-		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(1), this));
-		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(0), this));
-		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(3), this));
+		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(2), 1, this));
+		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(3), 1, this));
+		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(0), 2, this));
+		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(1), 2, this));
+		addGame(new GroupGame(teamsInserted.get(1), teamsInserted.get(2), 3, this));
+		addGame(new GroupGame(teamsInserted.get(0), teamsInserted.get(3), 3, this));
+		addGame(new GroupGame(teamsInserted.get(3), teamsInserted.get(1), 4, this));
+		addGame(new GroupGame(teamsInserted.get(2), teamsInserted.get(0), 4, this));
 
 	}
 

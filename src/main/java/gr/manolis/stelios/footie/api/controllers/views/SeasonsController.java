@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
@@ -87,8 +89,20 @@ public class SeasonsController {
 		
 		// groups rounds
 		List<GroupsRound> groupsRounds = new ArrayList<>();
-		groupsRounds.add(serviceUtils.getGroupsRound(season, 1));
-		groupsRounds.add(serviceUtils.getGroupsRound(season, 2));
+		GroupsRound groupsRound1 = serviceUtils.getGroupsRound(season, 1);
+		GroupsRound groupsRound2 = serviceUtils.getGroupsRound(season, 2);
+		
+		List<Game> groupsRound1Games = new ArrayList<>();
+		groupsRound1.getGroups().stream().forEach( g -> groupsRound1Games.addAll(g.getGames())); 
+		Collections.sort(groupsRound1Games, (g1, g2) -> g1.getDay() - g2.getDay());
+		model.addAttribute("groupsRound1Games", groupsRound1Games);
+		
+		List<Game> groupsRound2Games = new ArrayList<>();
+		groupsRound2.getGroups().stream().forEach( g -> groupsRound2Games.addAll(g.getGames())); 
+		model.addAttribute("groupsRound2Games", groupsRound2Games);
+		
+		groupsRounds.add(groupsRound1);
+		groupsRounds.add(groupsRound2);
 		logger.info("groupsRounds: " + groupsRounds);
 		model.addAttribute("groupsRounds", groupsRounds);
 		

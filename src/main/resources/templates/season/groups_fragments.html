@@ -9,7 +9,7 @@
 		<li><a data-toggle="tab" th:href="${'#groups_seeding_' + round}" th:if="${round == 1}">Seeding</a></li>
 		<!-- no seeding for 2nd groups round -->
 		<li class="active"><a data-toggle="tab" th:href="${'#groups_round_' + round}">Round</a></li>
-		<li><a data-toggle="tab" th:href="${'#groups_games_' + round}">Games</a></li>
+		<li><a data-toggle="tab" th:href="${'#groups_games_' + round}">Matches</a></li>
 	</ul>
 
 	<div id="groups_content" class="tab-content">
@@ -109,7 +109,7 @@
 <div th:fragment=" groups_round">
 
 	<!-- round of 12 groups view -->
-	<div th:if="${round == 1}" >
+	<div th:if="${round == 1}">
 		<div class="row">
 			<div class="col-md-6">
 				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(0)})"></div>
@@ -129,7 +129,7 @@
 	</div>
 
 	<!-- round of 8 groups view -->
-	<div th:if="${round == 2}" >
+	<div th:if="${round == 2}">
 		<div class="row">
 			<div class="col-md-6">
 				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round-1).groups.get(0)})"></div>
@@ -145,8 +145,7 @@
 <!-- groups games fragment -->
 <div th:fragment=" groups_games">
 
-	games here
-	<div th:text="${round}"></div>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRound1Games}))"></div>
 
 </div>
 

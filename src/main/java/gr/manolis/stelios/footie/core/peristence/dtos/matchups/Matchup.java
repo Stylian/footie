@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -66,14 +65,14 @@ public class Matchup {
 
 		switch (format) {
 		case FORMAT_IN_OUT_SINGLE:
-			games.add(new MatchupGame(teamAway, teamHome, this));
-			games.add(new MatchupGame(teamHome, teamAway, this));
+			games.add(new MatchupGame(teamAway, teamHome, 1, this));
+			games.add(new MatchupGame(teamHome, teamAway, 1, this));
 			break;
 		case FORMAT_IN_OUT_DOUBLE:
-			games.add(new MatchupGame(teamHome, teamAway, this));
-			games.add(new MatchupGame(teamAway, teamHome, this));
-			games.add(new MatchupGame(teamAway, teamHome, this));
-			games.add(new MatchupGame(teamHome, teamAway, this));
+			games.add(new MatchupGame(teamHome, teamAway, 1, this));
+			games.add(new MatchupGame(teamAway, teamHome, 1, this));
+			games.add(new MatchupGame(teamAway, teamHome, 2, this));
+			games.add(new MatchupGame(teamHome, teamAway, 2, this));
 			break;
 		}
 

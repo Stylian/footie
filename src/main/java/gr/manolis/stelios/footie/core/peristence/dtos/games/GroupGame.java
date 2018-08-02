@@ -20,8 +20,8 @@ public class GroupGame extends Game {
 	public GroupGame() {
 	}
 
-	public GroupGame(Team homeTeam, Team awayTeam, RobinGroup robinGroup) {
-		super(homeTeam, awayTeam);
+	public GroupGame(Team homeTeam, Team awayTeam, int day, RobinGroup robinGroup) {
+		super(homeTeam, awayTeam, day);
 		this.robinGroup = robinGroup;
 	}
 

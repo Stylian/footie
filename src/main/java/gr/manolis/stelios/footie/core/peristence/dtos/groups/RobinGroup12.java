@@ -23,12 +23,12 @@ public class RobinGroup12 extends RobinGroup {
 
 		List<Team> teams = getTeams();
 
-		addGame(new GroupGame(teams.get(0), teams.get(2), this));
-		addGame(new GroupGame(teams.get(1), teams.get(0), this));
-		addGame(new GroupGame(teams.get(2), teams.get(1), this));
-		addGame(new GroupGame(teams.get(1), teams.get(2), this));
-		addGame(new GroupGame(teams.get(0), teams.get(1), this));
-		addGame(new GroupGame(teams.get(2), teams.get(0), this));
+		addGame(new GroupGame(teams.get(0), teams.get(2), 1, this));
+		addGame(new GroupGame(teams.get(1), teams.get(0), 1, this));
+		addGame(new GroupGame(teams.get(2), teams.get(1), 2, this));
+		addGame(new GroupGame(teams.get(1), teams.get(2), 2, this));
+		addGame(new GroupGame(teams.get(0), teams.get(1), 3, this));
+		addGame(new GroupGame(teams.get(2), teams.get(0), 3, this));
 
 	}
 

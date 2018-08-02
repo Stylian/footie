@@ -20,8 +20,8 @@ public class MatchupGame extends Game {
 	public MatchupGame() {
 	}
 
-	public MatchupGame(Team homeTeam, Team awayTeam, Matchup matchup) {
-		super(homeTeam, awayTeam);
+	public MatchupGame(Team homeTeam, Team awayTeam, int day, Matchup matchup) {
+		super(homeTeam, awayTeam, day);
 		this.matchup = matchup;
 	}
 

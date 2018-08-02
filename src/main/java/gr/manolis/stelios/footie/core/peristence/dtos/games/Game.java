@@ -23,6 +23,8 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 @DiscriminatorValue(value = "G")
 public class Game {
 
+	public static final int EXTRA_GAME = -1;
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -38,12 +40,16 @@ public class Game {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Result result;
 
+	@Column(name = "DAY")
+	private int day;
+
 	public Game() {
 	}
 
-	public Game(Team homeTeam, Team awayTeam) {
+	public Game(Team homeTeam, Team awayTeam, int day) {
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
+		this.day = day;
 	}
 
 	public int getId() {
@@ -79,6 +85,14 @@ public class Game {
 
 	public void setResult(Result result) {
 		this.result = result;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	@Override

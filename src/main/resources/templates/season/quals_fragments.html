@@ -7,7 +7,7 @@
 
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round}" >Seeding</a></li>
-		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Games</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Matches</a></li>
 	</ul>
 
 	<div id="quals_content" class="tab-content" >
@@ -80,6 +80,9 @@
 <!-- quals round fragment -->
 <div th:fragment="quals_games">
 
+	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).matchups.get(0).games})"></div>
+
+<!-- 
 	<table class="table col-md-4" th:each="matchup: ${qualsRounds.get(round-1).matchups}" >
 		<tr th:each="game: ${matchup.games}" >
 			<td class="col-md-2" th:text="${game.homeTeam}" ></td>
@@ -89,7 +92,9 @@
 			<td class="col-md-2" th:text="${game.awayTeam}" ></td>
 		</tr>
 	</table>
-	
+	 -->
+	 
+	 
 </div>
 
 </html>
