@@ -8,6 +8,8 @@
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round}" >Seeding</a></li>
 		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Matches</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_games_replays' + round}"
+			th:unless="${#lists.isEmpty(qualsRounds.get(round-1).gamesPerDay.get(-1))}" >Match Replays</a></li>
 	</ul>
 
 	<div id="quals_content" class="tab-content" >
@@ -16,6 +18,10 @@
 		</div>
 		<div  th:id="${'quals_games_' + round}"  class="tab-pane">
 			<div th:replace="/season/quals_fragments :: quals_games(round=${round})"></div>
+		</div>
+		<div  th:id="${'quals_games_replays' + round}"  class="tab-pane">
+			<div th:replace="/season/quals_fragments :: quals_games_replays(round=${round})"
+				th:unless="${#lists.isEmpty(qualsRounds.get(round-1).gamesPerDay.get(-1))}"></div>
 		</div>
 	</div>
 
@@ -79,22 +85,12 @@
 
 <!-- quals round fragment -->
 <div th:fragment="quals_games">
+	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).gamesPerDay.get(1)})"></div>
+</div>
 
-	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).matchups.get(0).games})"></div>
-
-<!-- 
-	<table class="table col-md-4" th:each="matchup: ${qualsRounds.get(round-1).matchups}" >
-		<tr th:each="game: ${matchup.games}" >
-			<td class="col-md-2" th:text="${game.homeTeam}" ></td>
-			<td class="col-md-1" th:text="${game.result.goalsMadeByHomeTeam}" ></td>
-			<td class="col-md-1" > - </td>
-			<td class="col-md-1" th:text="${game.result.goalsMadeByAwayTeam}" ></td>
-			<td class="col-md-2" th:text="${game.awayTeam}" ></td>
-		</tr>
-	</table>
-	 -->
-	 
-	 
+<!-- quals round fragment -->
+<div th:fragment="quals_games_replays">
+	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).gamesPerDay.get(-1)})"></div>
 </div>
 
 </html>

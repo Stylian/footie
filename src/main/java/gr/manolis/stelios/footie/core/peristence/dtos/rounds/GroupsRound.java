@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.core.peristence.dtos.rounds;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 
@@ -76,6 +78,13 @@ public class GroupsRound extends Round {
 
 	public void addGroup(RobinGroup group) {
 		this.groups.add(group);
+	}
+
+	@Override
+	public List<Game> getGames() {
+		List<Game> games = new ArrayList<>();
+		groups.stream().forEach( g -> games.addAll(g.getGames())); 
+		return games;
 	}
 
 }

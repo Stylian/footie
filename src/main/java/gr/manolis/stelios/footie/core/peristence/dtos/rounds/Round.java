@@ -1,12 +1,13 @@
 package gr.manolis.stelios.footie.core.peristence.dtos.rounds;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,13 +21,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 
 @Entity(name = "ROUNDS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "R")
-public class Round {
+public abstract class Round {
 
 	@Id
 	@GeneratedValue
@@ -80,4 +81,11 @@ public class Round {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
+	
+	public abstract List<Game> getGames();
+	
+	public Map<Integer, List<Game>> getGamesPerDay() {
+		return getGames().stream().collect(Collectors.groupingBy(Game::getDay));
+	}
+	
 }

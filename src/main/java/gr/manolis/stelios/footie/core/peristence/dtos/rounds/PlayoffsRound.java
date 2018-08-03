@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupFormat;
@@ -152,6 +153,12 @@ public class PlayoffsRound extends Round {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Matchup getFinalsMatchup() {
 		return finalsMatchup;
+	}
+
+	@Override
+	public List<Game> getGames() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

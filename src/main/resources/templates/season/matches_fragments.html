@@ -6,7 +6,6 @@
 
 	<table class="table col-md-4" >
 		<tr th:each="game: ${games}" >
-			<td class="col-md-2" th:text="${game.day}" ></td>
 			<td class="col-md-2" th:text="${game.homeTeam}" ></td>
 			<td class="col-md-1" th:text="${game.result.goalsMadeByHomeTeam}" ></td>
 			<td class="col-md-1" > - </td>

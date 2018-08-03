@@ -145,7 +145,14 @@
 <!-- groups games fragment -->
 <div th:fragment=" groups_games">
 
-	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRound1Games}))"></div>
+	<span>Day 1</span>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round-1).gamesPerDay.get(1)})"></div>
+
+	<span>Day 2</span>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round-1).gamesPerDay.get(2)})"></div>
+
+	<span>Day 3</span>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round-1).gamesPerDay.get(3)})"></div>
 
 </div>
 

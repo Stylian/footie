@@ -23,6 +23,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
@@ -78,9 +79,10 @@ public class SeasonsController {
 		qualsRounds.add(serviceUtils.getQualRound(season, 1));
 		qualsRounds.add(serviceUtils.getQualRound(season, 2));
 		logger.info("qualsRounds: " + qualsRounds);
+		logger.info("qualsRounds games: " + qualsRounds.get(0).getGamesPerDay());
 		model.addAttribute("qualsRounds", qualsRounds);
 
-		// quals previews
+		// groups previews
 		List<Map<String, Map<Team, Integer>>> groupsPreviews = new ArrayList<>();
 		groupsPreviews.add(groupsPreview(season, 1, model));
 		groupsPreviews.add(groupsPreview(season, 2, model));
@@ -91,16 +93,6 @@ public class SeasonsController {
 		List<GroupsRound> groupsRounds = new ArrayList<>();
 		GroupsRound groupsRound1 = serviceUtils.getGroupsRound(season, 1);
 		GroupsRound groupsRound2 = serviceUtils.getGroupsRound(season, 2);
-		
-		List<Game> groupsRound1Games = new ArrayList<>();
-		groupsRound1.getGroups().stream().forEach( g -> groupsRound1Games.addAll(g.getGames())); 
-		Collections.sort(groupsRound1Games, (g1, g2) -> g1.getDay() - g2.getDay());
-		model.addAttribute("groupsRound1Games", groupsRound1Games);
-		
-		List<Game> groupsRound2Games = new ArrayList<>();
-		groupsRound2.getGroups().stream().forEach( g -> groupsRound2Games.addAll(g.getGames())); 
-		model.addAttribute("groupsRound2Games", groupsRound2Games);
-		
 		groupsRounds.add(groupsRound1);
 		groupsRounds.add(groupsRound2);
 		logger.info("groupsRounds: " + groupsRounds);

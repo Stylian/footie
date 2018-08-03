@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 
@@ -64,6 +65,13 @@ public class QualsRound extends Round {
 
 	public void setWeakTeams(List<Team> weakTeams) {
 		this.weakTeams = weakTeams;
+	}
+	
+	@Override
+	public List<Game> getGames() {
+		List<Game> games = new ArrayList<>();
+		matchups.stream().forEach( m -> games.addAll(m.getGames())); 
+		return games;
 	}
 
 	@Override
