@@ -111,7 +111,6 @@ public class SeasonService {
 		Map<String, List<Team>> map = new HashMap<>();
 
 		List<Team> teamsClone = new ArrayList<>(teams);
-		Collections.sort(teamsClone, new CoefficientsOrdering(season));
 
 		List<Team> groupsTeams = new ArrayList<>();
 		Team formerChampion = null;
@@ -132,8 +131,11 @@ public class SeasonService {
 
 		} else {
 
+			Season previousSeason =  serviceUtils.loadSeason(season.getSeasonYear() - 1);
+			Collections.sort(teamsClone, new CoefficientsOrdering(previousSeason));
+
 			// former champion promotes directly
-			formerChampion = serviceUtils.loadSeason(season.getSeasonYear() - 1).getWinner();
+			formerChampion = previousSeason.getWinner();
 			groupsTeams.add(formerChampion);
 			teamsClone.remove(formerChampion);
 

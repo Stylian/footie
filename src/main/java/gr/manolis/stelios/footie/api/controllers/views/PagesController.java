@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.services.BootService;
+import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 
 @Controller
@@ -13,9 +16,26 @@ public class PagesController {
 
 	@Autowired
 	private ServiceUtils serviceUtils;
+
+	@Autowired
+	private BootService bootService;
+
+	@Autowired
+	private SeasonService seasonService;
 	
 	@RequestMapping("/")
 	public RedirectView landingPage(Model model) {
+		
+		// if league has not been initiated make it
+		if (serviceUtils.getLeague() == null) {
+			bootService.loadLeague();
+		}
+		
+		// if no seasons exist yet make the 1st one
+		if(serviceUtils.getNumberOfSeasons() < 1) {
+			seasonService.createSeason();
+			seasonService.setUpSeason();
+		}
 		
 		RedirectView rv = new RedirectView();
         rv.setContextRelative(true);
