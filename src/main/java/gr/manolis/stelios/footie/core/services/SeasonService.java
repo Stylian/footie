@@ -18,6 +18,7 @@ import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
@@ -44,9 +45,9 @@ public class SeasonService {
 	private ServiceUtils serviceUtils;
 
 	public Season createSeason() {
+		logger.info("creating season");
 
 		League league = serviceUtils.getLeague();
-		league.resetStages();
 		league.addSeason();
 		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao2.save(league);
@@ -54,7 +55,8 @@ public class SeasonService {
 		logger.info("creating season " + league.getSeasonNum());
 
 		Season season = new Season(league.getSeasonNum());
-
+		season.setStage(Stage.NOT_STARTED);
+		
 		List<Team> teams = serviceUtils.loadTeams();
 
 		for (Team team : teams) {
@@ -71,7 +73,8 @@ public class SeasonService {
 	}
 
 	public Season setUpSeason() {
-
+		logger.info("setting up season");
+		
 		Season season = serviceUtils.loadCurrentSeason();
 
 		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
@@ -94,6 +97,8 @@ public class SeasonService {
 		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
 		qualsRound1.setTeams(quals1Teams);
 
+		season.setStage(Stage.PLAYING);
+		
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
 
@@ -291,6 +296,7 @@ public class SeasonService {
 		}
 
 		season.setWinner(finalsMatchup.getWinner());
+		season.setStage(Stage.FINISHED);
 
 		// hope it is enough, seems so
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());

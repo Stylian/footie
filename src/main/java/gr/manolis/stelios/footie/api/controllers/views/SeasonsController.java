@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.LeagueStage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
@@ -49,9 +49,6 @@ public class SeasonsController {
 		
 		int year = NumberUtils.toInt(strYear);
 		
-		League league = serviceUtils.getLeague();
-		boolean leagueIsCurrent = league.getSeasonNum() == year;
-		
 		Season season = serviceUtils.loadSeason(year);
 		logger.info("loaded season: " + season);
 
@@ -73,19 +70,10 @@ public class SeasonsController {
 		model.addAttribute("toGroups", teamsInRounds.get("toGroups"));
 		model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
 		model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));
-
-		if(leagueIsCurrent && league.getQuals1() == LeagueStage.NOT_STARTED) {
-			return "season/season";
-		}
-		
-		// a lot of work, needs to filter fragments if legue stage not active
 		
 		getQualsPreviewsToModel(model, season);
-
 		getQualsRoundsToModel(model, season);
-
 		getGroupsPreviewsToModel(model, season);
-		
 		getGroupsRoundsToModel(model, season);
 		
 		return "season/season";

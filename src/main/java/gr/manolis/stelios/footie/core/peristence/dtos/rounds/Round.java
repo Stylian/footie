@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -42,6 +45,9 @@ public abstract class Round {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Team> teams;
+	
+	@Enumerated(EnumType.STRING)
+	private Stage stage;
 
 	public Round() {
 	}
@@ -49,6 +55,7 @@ public abstract class Round {
 	public Round(Season season, String name) {
 		this.season = season;
 		this.name = name;
+		this.stage = Stage.NOT_STARTED;
 		season.addRound(this);
 	}
 
@@ -80,6 +87,14 @@ public abstract class Round {
 
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
+	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 	
 	public abstract List<Game> getGames();

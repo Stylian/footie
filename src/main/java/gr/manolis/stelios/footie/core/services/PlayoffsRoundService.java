@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.LeagueStage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
@@ -56,17 +54,14 @@ public class PlayoffsRoundService {
 
 		logger.info("building quarterfinals ");
 		playoffsRound.buildQuarterMatchups();
-
-		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(playoffsRound);
-
-		League league = serviceUtils.getLeague();
-		league.setQuarterfinals(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+		
+		playoffsRound.setStage(Stage.PLAYING);
+		groupsRoundOf8.setStage(Stage.FINISHED);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
 
 		return playoffsRound;
-
 	}
 
 	public PlayoffsRound seedAndSetSemifinals() {
@@ -77,16 +72,10 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		playoffsRound.buildSemisMatchups();
 
-		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(playoffsRound);
-
-		League league = serviceUtils.getLeague();
-		league.setSemifinals(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
-
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
 		return playoffsRound;
-
 	}
 
 	public PlayoffsRound seedAndSetfinals() {
@@ -97,13 +86,8 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		playoffsRound.buildFinalsMatchup();
 
-		DataAccessObject<PlayoffsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(playoffsRound);
-
-		League league = serviceUtils.getLeague();
-		league.setFinals(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
 
 		return playoffsRound;
 

@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.LeagueStage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
@@ -39,18 +38,13 @@ public class QualsService {
 		logger.info("seed quals round 1");
 
 		Season season = serviceUtils.loadCurrentSeason();
-
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-
 		seedQualsRound(season, roundQuals1);
-
-		League league = serviceUtils.getLeague();
-		league.setQuals1(LeagueStage.ON_PREVIEW);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
-
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
 		return roundQuals1;
-
 	}
 
 	public QualsRound seedUpQualsRound2() {
@@ -63,76 +57,57 @@ public class QualsService {
 
 		// must add winners from roundQuals1
 		List<Matchup> matchups = roundQuals1.getMatchups();
-
 		List<Team> round1Winners = new ArrayList<>();
 
 		for (Matchup matchup : matchups) {
-
 			round1Winners.add(matchup.getWinner());
-
 		}
 
 		roundQuals2.getTeams().addAll(round1Winners);
-
 		seedQualsRound(season, roundQuals2);
-
-		League league = serviceUtils.getLeague();
-		league.setQuals2(LeagueStage.ON_PREVIEW);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
-
+		
+		roundQuals1.setStage(Stage.FINISHED);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
 		return roundQuals2;
-
 	}
 
 	public QualsRound setUpQualsRound1() {
 		logger.info("set up quals round 1");
 
 		Season season = serviceUtils.loadCurrentSeason();
-
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-
 		setUpQualsRound(roundQuals1);
-
-		League league = serviceUtils.getLeague();
-		league.setQuals1(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
-
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
 		return roundQuals1;
-
 	}
 
 	public QualsRound setUpQualsRound2() {
 		logger.info("set up quals round 2");
 
 		Season season = serviceUtils.loadCurrentSeason();
-
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
-
 		setUpQualsRound(roundQuals2);
 
-		League league = serviceUtils.getLeague();
-		league.setQuals2(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
-
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
 		return roundQuals2;
-
 	}
 
 	public void seedQualsRound(Season season, QualsRound qualsRound) {
-
+		logger.info("seed quals round: " + qualsRound.getName());
+		
 		List<Team> teams = qualsRound.getTeams();
-
 		if (season.getSeasonYear() == 1) {
-
 			Collections.shuffle(teams);
-
 		} else {
-
 			Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
-
 		}
 
 		logger.info("quals participants: " + Utils.toString(teams));
@@ -154,14 +129,13 @@ public class QualsService {
 
 		qualsRound.setStrongTeams(strong);
 		qualsRound.setWeakTeams(weak);
-
-		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(qualsRound);
+		qualsRound.setStage(Stage.ON_PREVIEW);
 
 	}
 
 	public void setUpQualsRound(QualsRound qualsRound) {
-
+		logger.info("set quals round: " + qualsRound.getName());
+		
 		List<Team> strong = qualsRound.getStrongTeams();
 		List<Team> weak = qualsRound.getWeakTeams();
 
@@ -179,9 +153,7 @@ public class QualsService {
 		}
 
 		logger.info("matchups " + Utils.toString(qualsRound.getMatchups()));
-
-		DataAccessObject<QualsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(qualsRound);
+		qualsRound.setStage(Stage.PLAYING);
 
 	}
 

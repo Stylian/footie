@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.LeagueStage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
@@ -103,17 +102,14 @@ public class GroupsRoundService {
 		groupsRoundOf12.setStrongTeams(strongTeams);
 		groupsRoundOf12.setMediumTeams(mediumTeams);
 		groupsRoundOf12.setWeakTeams(weakTeams);
-
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(groupsRoundOf12);
-
-		League league = serviceUtils.getLeague();
-		league.setGroups12(LeagueStage.ON_PREVIEW);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+		
+		roundQuals2.setStage(Stage.FINISHED);
+		groupsRoundOf12.setStage(Stage.ON_PREVIEW);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
 
 		return groupsRoundOf12;
-
 	}
 
 	public GroupsRound setUpGroupsRoundOf12() {
@@ -166,16 +162,12 @@ public class GroupsRoundService {
 		logger.info(groupC);
 		logger.info(groupD);
 
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(groupsRoundOf12);
-
-		League league = serviceUtils.getLeague();
-		league.setGroups12(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+		groupsRoundOf12.setStage(Stage.PLAYING);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
 
 		return groupsRoundOf12;
-
 	}
 
 	public GroupsRound seedAndSetGroupsRoundOf8() {
@@ -226,13 +218,11 @@ public class GroupsRoundService {
 		logger.info(groupA);
 		logger.info(groupB);
 
-		DataAccessObject<GroupsRound> roundDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		roundDao.save(groupsRoundOf8);
-
-		League league = serviceUtils.getLeague();
-		league.setGroups8(LeagueStage.PLAYING);
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+		groupsRoundOf8.setStage(Stage.PLAYING);
+		groupsRoundOf12.setStage(Stage.FINISHED);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
 
 		return groupsRoundOf8;
 
