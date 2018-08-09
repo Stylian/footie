@@ -52,9 +52,21 @@ public class SeasonsController {
 		Season season = serviceUtils.loadSeason(year);
 		logger.info("loaded season: " + season);
 
+		model.addAttribute("season", season);
 		model.addAttribute("numberOfSeasons", serviceUtils.getNumberOfSeasons());
 		
-		// season preview
+		getSeasonPreviewToModel(model, year, season);
+
+		
+		getQualsPreviewsToModel(model, season);
+//		getQualsRoundsToModel(model, season);
+//		getGroupsPreviewsToModel(model, season);
+//		getGroupsRoundsToModel(model, season);
+		
+		return "season/season";
+	}
+
+	private void getSeasonPreviewToModel(Model model, int year, Season season) {
 		List<Team> teams = serviceUtils.loadTeams();
 		logger.info("loaded teams: " + teams);
 
@@ -64,19 +76,20 @@ public class SeasonsController {
 		Map<String, List<Team>> teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
 		logger.info("teamsInRounds: " + teamsInRounds);
 		
-		model.addAttribute("season", season);
 		model.addAttribute("teamsWithCoeffs", teamsWithCoeffs);
-		model.addAttribute("champion", teamsInRounds.get("champion").get(0));
-		model.addAttribute("toGroups", teamsInRounds.get("toGroups"));
-		model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
-		model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));
 		
-		getQualsPreviewsToModel(model, season);
-		getQualsRoundsToModel(model, season);
-		getGroupsPreviewsToModel(model, season);
-		getGroupsRoundsToModel(model, season);
-		
-		return "season/season";
+		if(year == 1) {
+			// no reason to display for preview, all displayed from 2nd season onwards only
+			model.addAttribute("champion", Collections.<Team> emptyList());
+			model.addAttribute("toGroups", Collections.<Team> emptyList());
+			model.addAttribute("toQuals1", Collections.<Team> emptyList());
+			model.addAttribute("toQuals2", Collections.<Team> emptyList());		
+		}else {
+			model.addAttribute("champion", teamsInRounds.get("champion").get(0));
+			model.addAttribute("toGroups", teamsInRounds.get("toGroups"));
+			model.addAttribute("toQuals1", teamsInRounds.get("toQuals1"));
+			model.addAttribute("toQuals2", teamsInRounds.get("toQuals2"));			
+		}
 	}
 
 	private void getGroupsRoundsToModel(Model model, Season season) {
