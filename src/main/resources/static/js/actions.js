@@ -23,3 +23,16 @@ $(document).on("click", ".rounds_prog", function(){
 	});
 	
 })
+
+$(document).on("click", ".play_games", function(){
+	
+	$.ajax({
+		url: "/rest/ops/fillGames",
+		method: "POST",
+		success: function() {
+			location.reload();
+		}
+	});
+	
+});
+

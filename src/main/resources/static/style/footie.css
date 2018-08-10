@@ -15,6 +15,7 @@
 	margin: 1.5em;
 }
 
-.rounds_prog {
+.rounds_prog,
+.play_games {
 	cursor: pointer;
 }
