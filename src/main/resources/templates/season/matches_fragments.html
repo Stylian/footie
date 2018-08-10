@@ -7,9 +7,11 @@
 	<table class="table col-md-4" >
 		<tr th:each="game: ${games}" >
 			<td class="col-md-2" th:text="${game.homeTeam}" ></td>
-			<td class="col-md-1" th:text="${game.result.goalsMadeByHomeTeam}" ></td>
+			<td class="col-md-1" th:text="${game.result.goalsMadeByHomeTeam}" th:if="${game.result != null}" ></td>
+			<td class="col-md-1" th:if="${game.result == null}" > </td>
 			<td class="col-md-1" > - </td>
-			<td class="col-md-1" th:text="${game.result.goalsMadeByAwayTeam}" ></td>
+			<td class="col-md-1" th:text="${game.result.goalsMadeByAwayTeam}" th:if="${game.result != null}" ></td>
+			<td class="col-md-1" th:if="${game.result == null}" > </td>
 			<td class="col-md-2" th:text="${game.awayTeam}" ></td>
 		</tr>
 	</table>

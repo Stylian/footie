@@ -56,10 +56,10 @@ public class SeasonsController {
 		model.addAttribute("numberOfSeasons", serviceUtils.getNumberOfSeasons());
 		
 		getSeasonPreviewToModel(model, year, season);
-
 		
 		getQualsPreviewsToModel(model, season);
-//		getQualsRoundsToModel(model, season);
+		getQualsRoundsToModel(model, season);
+		
 //		getGroupsPreviewsToModel(model, season);
 //		getGroupsRoundsToModel(model, season);
 		
@@ -92,20 +92,12 @@ public class SeasonsController {
 		}
 	}
 
-	private void getGroupsRoundsToModel(Model model, Season season) {
-		List<GroupsRound> groupsRounds = new ArrayList<>();
-		groupsRounds.add(serviceUtils.getGroupsRound(season, 1));
-		groupsRounds.add(serviceUtils.getGroupsRound(season, 2));
-		logger.info("groupsRounds: " + groupsRounds);
-		model.addAttribute("groupsRounds", groupsRounds);
-	}
-
-	private void getGroupsPreviewsToModel(Model model, Season season) {
-		List<Map<String, Map<Team, Integer>>> groupsPreviews = new ArrayList<>();
-		groupsPreviews.add(groupsPreview(season, 1, model));
-		groupsPreviews.add(groupsPreview(season, 2, model));
-		logger.info("groupsPreviews: " + groupsPreviews);
-		model.addAttribute("groupsPreviews", groupsPreviews);
+	private void getQualsPreviewsToModel(Model model, Season season) {
+		List<Map<String, Map<Team, Integer>>> qualsPreviews = new ArrayList<>();
+		qualsPreviews.add(qualsPreview(season, 1, model));
+		qualsPreviews.add(qualsPreview(season, 2, model));
+		logger.info("qualsPreviews: " + qualsPreviews);
+		model.addAttribute("qualsPreviews", qualsPreviews);
 	}
 
 	private void getQualsRoundsToModel(Model model, Season season) {
@@ -117,30 +109,34 @@ public class SeasonsController {
 		model.addAttribute("qualsRounds", qualsRounds);
 	}
 
-	private void getQualsPreviewsToModel(Model model, Season season) {
-		List<Map<String, Map<Team, Integer>>> qualsPreviews = new ArrayList<>();
-		qualsPreviews.add(qualsPreview(season, 1, model));
-		qualsPreviews.add(qualsPreview(season, 2, model));
-		logger.info("qualsPreviews: " + qualsPreviews);
-		model.addAttribute("qualsPreviews", qualsPreviews);
+	private void getGroupsPreviewsToModel(Model model, Season season) {
+		List<Map<String, Map<Team, Integer>>> groupsPreviews = new ArrayList<>();
+		groupsPreviews.add(groupsPreview(season, 1, model));
+		groupsPreviews.add(groupsPreview(season, 2, model));
+		logger.info("groupsPreviews: " + groupsPreviews);
+		model.addAttribute("groupsPreviews", groupsPreviews);
+	}
+
+	private void getGroupsRoundsToModel(Model model, Season season) {
+		List<GroupsRound> groupsRounds = new ArrayList<>();
+		groupsRounds.add(serviceUtils.getGroupsRound(season, 1));
+		groupsRounds.add(serviceUtils.getGroupsRound(season, 2));
+		logger.info("groupsRounds: " + groupsRounds);
+		model.addAttribute("groupsRounds", groupsRounds);
 	}
 
 	private Map<String, Map<Team, Integer>> qualsPreview(Season season, int round, Model model) {
 
 		QualsRound qr = serviceUtils.getQualRound(season, round);
 
-		// boolean seeded = false;
-		//
-		// // post seeding case for round
-		// if ("2".equals(round) && qr.getStrongTeams() != null) {
-		//
-		// seeded = true;
-		//
-		// }
-
 		List<Team> teamsStrong = qr.getStrongTeams();
 		List<Team> teamsWeak = qr.getWeakTeams();
 
+		//put to strong teams for pre-previews
+		if(qr.getStage() == Stage.NOT_STARTED) {
+			teamsStrong = qr.getTeams();
+		}
+		
 		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
 		Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
 
@@ -167,6 +163,12 @@ public class SeasonsController {
 		List<Team> teamsStrong = qr.getStrongTeams();
 		List<Team> teamsMedium = qr.getMediumTeams();
 		List<Team> teamsWeak = qr.getWeakTeams();
+		
+		//put to strong teams for pre-previews
+		if(qr.getStage() == Stage.NOT_STARTED) {
+			teamsStrong = qr.getTeams();
+		}
+		
 		
 		Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
 		Map<Team, Integer> teamsMediumWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsMedium);
