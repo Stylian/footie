@@ -14,3 +14,7 @@
 #stats_panel {
 	margin: 1.5em;
 }
+
+.rounds_prog {
+	cursor: pointer;
+}
