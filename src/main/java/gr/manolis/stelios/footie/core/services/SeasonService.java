@@ -77,9 +77,9 @@ public class SeasonService {
 		
 		Season season = serviceUtils.loadCurrentSeason();
 
-		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round");
-		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round");
-		GroupsRound groupsRound12 = new GroupsRound(season, "Groups Round of 12");
+		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round", 1);
+		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round", 2);
+		GroupsRound groupsRound12 = new GroupsRound(season, "Groups Round of 12", 3);
 
 		Map<String, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
 

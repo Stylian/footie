@@ -36,8 +36,8 @@ public class QualsRound extends Round {
 	public QualsRound() {
 	}
 
-	public QualsRound(Season season, String name) {
-		super(season, name);
+	public QualsRound(Season season, String name, int num) {
+		super(season, name, num);
 	}
 
 	public void addMatchup(Matchup matchup) {

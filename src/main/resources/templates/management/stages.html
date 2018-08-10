@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<object th:include="head :: head" th:remove="tag"></object>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<div th:replace="navbar :: navbar"></div>
+		</div>
+
+		<div id="game_stats_panel" class="panel panel-default">
+
+			<div class="panel-heading">Stages on Current Season</div>
+
+			<div class="panel-body">
+				<div class="row">
+
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>season number:</td>
+
+								</tr>
+							<tr>
+								<td>season stage: </td>
+								<td th:text="${season.stage}" />
+							</tr>
+							<tr>
+								<td>1st qualification round: </td>
+								<td th:text="${season.rounds.get(0).stage}" th:if="${#lists.size(season.rounds) &gt; 0}" />
+								<td th:if="${#lists.size(season.rounds) &lt;= 0}">NOT_CREATED</td>
+							</tr>
+							<tr>
+								<td>2nd qualification round: </td>
+								<td th:text="${season.rounds.get(1).stage}" th:if="${#lists.size(season.rounds) &gt; 1}" />
+								<td th:if="${#lists.size(season.rounds) &lt;= 1}">NOT_CREATED</td>
+							</tr>
+							<tr>
+								<td>1st groups round: </td>
+								<td th:text="${season.rounds.get(2).stage}" th:if="${#lists.size(season.rounds) &gt; 2}" />
+								<td th:if="${#lists.size(season.rounds) &lt;= 2}">NOT_CREATED</td>
+							</tr>
+							<tr>
+								<td>2nd groups round: </td>
+								<td th:text="${season.rounds.get(3).stage}" th:if="${#lists.size(season.rounds) &gt; 3}" />
+								<td th:if="${#lists.size(season.rounds) &lt;= 3}">NOT_CREATED</td>
+							</tr>
+							<tr>
+								<td>playoffs: </td>
+								<td th:text="${season.rounds.get(3).stage}" th:if="${#lists.size(season.rounds) &gt; 4}" />
+								<td th:if="${#lists.size(season.rounds) &lt;= 4}">NOT_CREATED</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+			
+</body>
+</html>

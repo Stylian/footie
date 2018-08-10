@@ -58,7 +58,7 @@ public class PlayoffsRound extends Round {
 	}
 
 	public PlayoffsRound(Season season, String name) {
-		super(season, name);
+		super(season, name, 4);
 	}
 
 	public void buildQuarterMatchups() {

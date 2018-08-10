@@ -13,7 +13,6 @@
 			<div th:replace="navbar :: navbar"></div>
 		</div>
 
-
 		<ul class="pagination" th:each="i : ${#numbers.sequence(1, numberOfSeasons/1)}">
 			<li th:classappend="${season.seasonYear == i} ? 'active' : ''"><a th:href="@{ ${i} }" th:text="${i}"></a></li>
 		</ul>
@@ -22,10 +21,10 @@
 
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#preview">Seeding</a></li>
-				<li><a data-toggle="tab" href="#quals1" th:if="${#lists.size(season.rounds) &gt; 4}" >1st Qualification Round</a></li>
-				<li><a data-toggle="tab" href="#quals2" th:if="${#lists.size(season.rounds) &gt; 4}" >2nd Qualification Round</a></li>
-				<li><a data-toggle="tab" href="#groups1" th:if="${#lists.size(season.rounds) &gt; 4}" >1st Groups Round</a></li>
-				<li><a data-toggle="tab" href="#groups2" th:if="${#lists.size(season.rounds) &gt; 4}" >2nd Groups Round</a></li>
+				<li><a data-toggle="tab" href="#quals1" th:if="${#lists.size(season.rounds) &gt; 0}" >1st Qualification Round</a></li>
+				<li><a data-toggle="tab" href="#quals2" th:if="${#lists.size(season.rounds) &gt; 1}" >2nd Qualification Round</a></li>
+				<li><a data-toggle="tab" href="#groups1" th:if="${#lists.size(season.rounds) &gt; 2}" >1st Groups Round</a></li>
+				<li><a data-toggle="tab" href="#groups2" th:if="${#lists.size(season.rounds) &gt; 3}" >2nd Groups Round</a></li>
 				<li><a data-toggle="tab" href="#playoffs_quarters" th:if="${#lists.size(season.rounds) &gt; 4}" >1/4 Finals</a></li>
 				<li><a data-toggle="tab" href="#playoffs_semis" th:if="${#lists.size(season.rounds) &gt; 4}" >1/2 Finals</a></li>
 				<li><a data-toggle="tab" href="#playoffs_finals" th:if="${#lists.size(season.rounds) &gt; 4}" >Finals</a></li>
@@ -36,16 +35,16 @@
 				<div id="preview" class="tab-pane active" >
 					<div th:replace="/season/season_fragments :: season_seeding"></div>
 				</div>
-				<div id="quals1" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/quals_fragments :: quals(round=1)"></div>
+				<div id="quals1" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 0}" >
+					<div th:replace="/season/quals_fragments :: quals(round=${season.rounds.get(0)})"></div>
 				</div>
-				<div id="quals2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/quals_fragments :: quals(round=2)"></div>
+				<div id="quals2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 1}" >
+					<div th:replace="/season/quals_fragments :: quals(round=${season.rounds.get(1)})"></div>
 				</div>
-				<div id="groups1" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
+				<div id="groups1" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 2000}" >
 					<div th:replace="/season/groups_fragments :: groups(round=1)"></div>
 				</div>
-				<div id="groups2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
+				<div id="groups2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 3}" >
 					<div th:replace="/season/groups_fragments :: groups(round=2)"></div>
 				</div>
 				<div id="playoffs_quarters" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >

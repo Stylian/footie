@@ -6,23 +6,23 @@
 <div th:fragment="quals">
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round}" >Seeding</a></li>
-		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round}"  >Matches</a></li>
-		<li><a data-toggle="tab"  th:href="${'#quals_games_replays' + round}"
-			th:unless="${#lists.isEmpty(qualsRounds.get(round-1).gamesPerDay.get(-1))}" >Match Replays</a></li>
+		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round.num}" >Seeding</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round.num}" th:if="${round.stage.name() != 'NOT_STARTED'}" >Matches</a></li>
+<!--		<li><a data-toggle="tab"  th:href="${'#quals_games_replays' + round.num}"
+			th:unless="${#lists.isEmpty(qualsround.get(round.num-1).gamesPerDay.get(-1))}" >Match Replays</a></li>  -->
 	</ul>
 
 	<div id="quals_content" class="tab-content" >
-		<div th:id="${'quals_seeding_' + round}" class="tab-pane active">
-			<div th:replace="/season/quals_fragments :: quals_seeding(round=${round})"></div>
+		<div th:id="${'quals_seeding_' + round.num}" class="tab-pane active">
+			<div th:replace="/season/quals_fragments :: quals_seeding(round.num=${round.num})"></div>
 		</div>
-		<div  th:id="${'quals_games_' + round}"  class="tab-pane">
-			<div th:replace="/season/quals_fragments :: quals_games(round=${round})"></div>
+		<div  th:id="${'quals_games_' + round.num}"  class="tab-pane" th:if="${round.stage.name() != 'NOT_STARTED'}" >
+			<div th:replace="/season/quals_fragments :: quals_games(round.num=${round.num})"></div>
 		</div>
-		<div  th:id="${'quals_games_replays' + round}"  class="tab-pane">
-			<div th:replace="/season/quals_fragments :: quals_games_replays(round=${round})"
-				th:unless="${#lists.isEmpty(qualsRounds.get(round-1).gamesPerDay.get(-1))}"></div>
-		</div>
+<!--		<div  th:id="${'quals_games_replays' + round.num}"  class="tab-pane">
+			<div th:replace="/season/quals_fragments :: quals_games_replays(round.num=${round.num})"
+				th:unless="${#lists.isEmpty(qualsround.get(round.num-1).gamesPerDay.get(-1))}"></div>
+		</div> -->
 	</div>
 
 
@@ -44,7 +44,7 @@
 								<th>team</th>
 								<th>coefficients</th>
 							</tr>
-							<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).strong}">
+							<tr th:each="teamCoeff: ${qualsPreviews.get(round.num-1).strong}">
 								<td th:text="${teamCoeff['key'].name}" />
 								<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
 							</tr>
@@ -68,7 +68,7 @@
 								<th>team</th>
 								<th>coefficients</th>
 							</tr>
-							<tr th:each="teamCoeff: ${qualsPreviews.get(round-1).weak}">
+							<tr th:each="teamCoeff: ${qualsPreviews.get(round.num-1).weak}">
 								<td th:text="${teamCoeff['key'].name}" />
 								<td th:text="${#numbers.formatInteger(teamCoeff['value'],0,'COMMA')}" />
 							</tr>
@@ -83,14 +83,14 @@
 
 </div>
 
-<!-- quals round fragment -->
+<!-- quals round.num fragment -->
 <div th:fragment="quals_games">
-	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).gamesPerDay.get(1)})"></div>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsround.get(round.num-1).gamesPerDay.get(1)})"></div>
 </div>
 
-<!-- quals round fragment -->
+<!-- quals round.num fragment -->
 <div th:fragment="quals_games_replays">
-	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsRounds.get(round-1).gamesPerDay.get(-1)})"></div>
+	<div th:replace="/season/matches_fragments :: matches_day(games=${qualsround.get(round.num-1).gamesPerDay.get(-1)})"></div>
 </div>
 
 </html>

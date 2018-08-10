@@ -40,8 +40,8 @@ public class GroupsRound extends Round {
 	public GroupsRound() {
 	}
 
-	public GroupsRound(Season season, String name) {
-		super(season, name);
+	public GroupsRound(Season season, String name, int num) {
+		super(season, name, num);
 	}
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })

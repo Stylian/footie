@@ -48,14 +48,18 @@ public abstract class Round {
 	
 	@Enumerated(EnumType.STRING)
 	private Stage stage;
+	
+	@Column(name = "NUM_OF_ROUND")
+	private int num;
 
 	public Round() {
 	}
 
-	public Round(Season season, String name) {
+	public Round(Season season, String name, int numOfRound) {
 		this.season = season;
 		this.name = name;
 		this.stage = Stage.NOT_STARTED;
+		this.num = numOfRound;
 		season.addRound(this);
 	}
 
@@ -101,6 +105,10 @@ public abstract class Round {
 	
 	public Map<Integer, List<Game>> getGamesPerDay() {
 		return getGames().stream().collect(Collectors.groupingBy(Game::getDay));
+	}
+
+	public int getNum() {
+		return num;
 	}
 	
 }

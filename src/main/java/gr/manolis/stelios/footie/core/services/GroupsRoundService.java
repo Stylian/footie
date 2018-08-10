@@ -198,7 +198,7 @@ public class GroupsRoundService {
 		groupB.buildGames();
 
 		// build round of 8
-		GroupsRound groupsRoundOf8 = new GroupsRound(season, "Groups Round of 8");
+		GroupsRound groupsRoundOf8 = new GroupsRound(season, "Groups Round of 8", 4);
 		groupsRoundOf8.addGroup(groupA);
 		groupsRoundOf8.addGroup(groupB);
 
