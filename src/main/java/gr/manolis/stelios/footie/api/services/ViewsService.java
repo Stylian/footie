@@ -123,8 +123,13 @@ public class ViewsService {
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
 
 		@SuppressWarnings("unchecked")
-		List<Result> results = sessionFactory.getCurrentSession().createQuery("from RESULTS").list();
+		List<Result> results = sessionFactory.getCurrentSession().createQuery("from RESULTS where HOME_GOALS IS NOT NULL "
+				+ "and AWAY_GOALS IS NOT NULL").list();
 
+		if (results.isEmpty()) {
+			return gamestats;
+		}
+		
 		gamestats.put("number of games played", results.size());
 		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());
 		gamestats.put("draws", results.stream().filter(Result::tie).count());
