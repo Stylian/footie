@@ -62,8 +62,7 @@
 								<td th:text="${season.rounds.get(3).stage}" th:if="${#lists.size(season.rounds) &gt; 3}" />
 								<td th:if="${#lists.size(season.rounds) &lt;= 3}">NOT_CREATED</td>
 								<td>
-									<span class="rounds_prog glyphicon glyphicon-send" title="seed" data-round="4" ></span> 
-									<span class="rounds_prog glyphicon glyphicon-send" title="set" data-round="4" ></span>
+									<span class="rounds_prog glyphicon glyphicon-send" title="seedAndSet" data-round="4" ></span> 
 								</td>
 							</tr>
 							<tr>
@@ -71,8 +70,7 @@
 								<td th:text="${season.rounds.get(3).stage}" th:if="${#lists.size(season.rounds) &gt; 4}" />
 								<td th:if="${#lists.size(season.rounds) &lt;= 4}">NOT_CREATED</td>
 								<td>
-									<span class="rounds_prog glyphicon glyphicon-send" title="seed" data-round="5"></span> 
-									<span class="rounds_prog glyphicon glyphicon-send" title="set" data-round="5"></span>
+									<span class="rounds_prog glyphicon glyphicon-send" title="seedAndSet" data-round="5" ></span> 
 								</td>
 							</tr>
 						</tbody>

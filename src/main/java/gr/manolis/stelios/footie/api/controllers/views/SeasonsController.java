@@ -60,7 +60,7 @@ public class SeasonsController {
 		getQualsPreviewsToModel(model, season);
 		getQualsRoundsToModel(model, season);
 		
-//		getGroupsPreviewsToModel(model, season);
+		getGroupsPreviewsToModel(model, season);
 //		getGroupsRoundsToModel(model, season);
 		
 		return "season/season";
@@ -112,7 +112,7 @@ public class SeasonsController {
 	private void getGroupsPreviewsToModel(Model model, Season season) {
 		List<Map<String, Map<Team, Integer>>> groupsPreviews = new ArrayList<>();
 		groupsPreviews.add(groupsPreview(season, 1, model));
-		groupsPreviews.add(groupsPreview(season, 2, model));
+//		groupsPreviews.add(groupsPreview(season, 2, model));
 		logger.info("groupsPreviews: " + groupsPreviews);
 		model.addAttribute("groupsPreviews", groupsPreviews);
 	}

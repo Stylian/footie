@@ -11,6 +11,19 @@ $(document).on("click", ".rounds_prog", function(){
 	case "2":
 		collection = "quals";
 		break;
+	case "3":
+		collection = "groups";
+		round = "12";
+		break;
+	case "4":
+		collection = "groups";
+		round = "8";
+		break;
+		// TODO
+	case "4":
+		collection = "playoffs";
+		round = "quarterfinals";
+		break;
 		// TODO
 	}
 	

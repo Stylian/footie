@@ -14,7 +14,7 @@
 	</ul>
 
 	<div id="groups_content" class="tab-content">
-		<div th:id="${'groups_seeding_' + round.num}" class="tab-pane active" th:if="${round.num == 1}">
+		<div th:id="${'groups_seeding_' + round.num}" class="tab-pane active" th:if="${round.num == 3}">
 			<!-- no seeding for 2nd groups round -->
 			<div th:replace="/season/groups_fragments :: groups_seeding(round=${round})"></div>
 		</div>
