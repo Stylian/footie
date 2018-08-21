@@ -9,9 +9,9 @@
 		<li class="active"><a data-toggle="tab"  th:href="${'#quals_seeding_' + round.num}" >Seeding</a></li>
 		<li><a data-toggle="tab"  th:href="${'#quals_games_' + round.num}"
 			 th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW'}" >Matches</a></li>
-	<li><a data-toggle="tab"  th:href="${'#quals_games_replays' + round.num}"
-			th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW' 
-				AND !round.gamesPerDay.get(-1).empty }" >Match Replays</a></li>
+		<li><a data-toggle="tab"  th:href="${'#quals_games_replays' + round.num}"
+				th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW' 
+					AND !(round.gamesPerDay.get(-1) == null) AND !round.gamesPerDay.get(-1).empty }" >Match Replays</a></li>
 	</ul>
 
 	<div id="quals_content" class="tab-content" >
@@ -25,7 +25,7 @@
 		<div  th:id="${'quals_games_replays' + round.num}"  class="tab-pane">
 			<div th:replace="/season/quals_fragments :: quals_games_replays(round.num=${round.num})"
 				th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW' 
-				AND !round.gamesPerDay.get(-1).empty }"></div>
+					AND !(round.gamesPerDay.get(-1) == null) AND !round.gamesPerDay.get(-1).empty }"></div>
 		</div>
 	</div>
 
