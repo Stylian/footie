@@ -8,18 +8,19 @@
 	<ul class="nav nav-tabs">
 		<li class="active" ><a data-toggle="tab" th:href="${'#groups_seeding_' + round.num}" th:if="${round.num == 3}">Seeding</a></li>
 		<!-- no seeding for 2nd groups round -->
-		<li><a data-toggle="tab" th:href="${'#groups_round_' + round.num}"
-			 th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW'}" >Round</a></li>
+		<li th:classappend="${round.num == 4} ? 'active' : '' " >
+			<a data-toggle="tab" th:href="${'#groups_round_' + round.num}"
+				 th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW'}" >Round</a></li>
 		<li><a data-toggle="tab" th:href="${'#groups_games_' + round.num}"
 			 th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW'}" >Matches</a></li>
 	</ul>
 
 	<div id="groups_content" class="tab-content">
-		<div th:id="${'groups_seeding_' + round.num}" class="tab-pane active" th:if="${round.num == 3}">
+		<div th:id="${'groups_seeding_' + round.num}" class="tab-pane active" th:if="${round.num == 3}" >
 			<!-- no seeding for 2nd groups round -->
 			<div th:replace="/season/groups_fragments :: groups_seeding(round=${round})"></div>
 		</div>
-		<div th:id="${'groups_round_' + round.num}" class="tab-pane"
+		<div th:id="${'groups_round_' + round.num}" class="tab-pane" th:classappend="${round.num == 4} ? 'active' : '' "
 			 th:if="${round.stage.name() != 'NOT_STARTED' AND round.stage.name() != 'ON_PREVIEW'}" >
 			<div th:replace="/season/groups_fragments :: groups_round(round=${round})"></div>
 		</div>
@@ -155,10 +156,10 @@
 	<div th:if="${round.num == 4}">
 		<div class="row">
 			<div class="col-md-6">
-				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-4).groups.get(0)})"></div>
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-3).groups.get(0)})"></div>
 			</div>
 			<div class="col-md-6">
-				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-4).groups.get(1)})"></div>
+				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-3).groups.get(1)})"></div>
 			</div>
 		</div>
 	</div>
@@ -168,13 +169,13 @@
 <!-- groups games fragment -->
 <div th:fragment=" groups_games">
 
-	<span>Day 1</span>
+	<h4>Day 1</h4>
 	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round.num-3).gamesPerDay.get(1)})"></div>
 
-	<span>Day 2</span>
+	<h4>Day 2</h4>
 	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round.num-3).gamesPerDay.get(2)})"></div>
 
-	<span>Day 3</span>
+	<h4>Day 3</h4>
 	<div th:replace="/season/matches_fragments :: matches_day(games=${groupsRounds.get(round.num-3).gamesPerDay.get(3)})"></div>
 
 </div>
