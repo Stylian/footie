@@ -132,7 +132,7 @@
 <div th:fragment=" groups_round">
 
 	<!-- round of 12 groups view -->
-	<div th:if="${round.num == 1}">
+	<div th:if="${round.num == 3}">
 		<div class="row">
 			<div class="col-md-6">
 				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-3).groups.get(0)})"></div>
@@ -152,7 +152,7 @@
 	</div>
 
 	<!-- round of 8 groups view -->
-	<div th:if="${round.num == 2}">
+	<div th:if="${round.num == 4}">
 		<div class="row">
 			<div class="col-md-6">
 				<div th:replace="/season/groups_fragments :: group_view(group=${groupsRounds.get(round.num-4).groups.get(0)})"></div>
@@ -201,7 +201,7 @@
 						<th>+/-</th>
 					</tr>
 					<tr th:each="team,iter : ${group.teams}"
-						th:class="${round == 1} ? 
+						th:class="${round.num == 3} ? 
 						(${iter.index &lt; 2} ? 'info' : 'danger' ) :
 						(${iter.index &lt; 1} ? 'info' : 
 							(${iter.index &lt; 3} ? 'warning' : 'danger'))">
