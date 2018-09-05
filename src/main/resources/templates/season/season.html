@@ -44,9 +44,11 @@
 				<div id="groups1" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 2}" >
 					<div th:replace="/season/groups_fragments :: groups(round=${season.rounds.get(2)})"></div>
 				</div>
+				<!-- 
 				<div id="groups2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 3}" >
 					<div th:replace="/season/groups_fragments :: groups(round=${season.rounds.get(3)})"></div>
 				</div>
+				 -->
 				<div id="playoffs_quarters" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
 					<div th:replace="/season/playoffs_fragments :: playoffs_quarters"></div>
 				</div>
