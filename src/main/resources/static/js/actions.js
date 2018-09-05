@@ -20,11 +20,18 @@ $(document).on("click", ".rounds_prog", function(){
 		round = "8";
 		break;
 		// TODO
-	case "4":
+	case "5":
 		collection = "playoffs";
 		round = "quarterfinals";
 		break;
-		// TODO
+	case "6":
+		collection = "playoffs";
+		round = "semifinals";
+		break;
+	case "7":
+		collection = "playoffs";
+		round = "finals";
+		break;
 	}
 	
 	$.ajax({
