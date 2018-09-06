@@ -2,6 +2,7 @@ package gr.manolis.stelios.footie.core.peristence.dtos.rounds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -157,8 +158,16 @@ public class PlayoffsRound extends Round {
 
 	@Override
 	public List<Game> getGames() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Game> games = new ArrayList<>();
+		Stream.concat(
+				Stream.concat(
+						quarterMatchups.stream(),
+						semisMatchups.stream()),
+				Stream.of(finalsMatchup)
+		)
+		.forEach( m -> games.addAll(m.getGames())); 
+		
+		return games;
 	}
 
 }

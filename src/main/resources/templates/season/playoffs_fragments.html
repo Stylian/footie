@@ -27,7 +27,7 @@ AAAA
 
 <!-- playoffs_games fragment -->
 <div th:fragment="playoffs_games">
-BBBB
+	<div th:replace="/season/matches_fragments :: matches_day(games=${round.games})"></div>
 </div>
 
 

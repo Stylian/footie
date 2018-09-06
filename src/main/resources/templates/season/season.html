@@ -45,7 +45,7 @@
 					<div th:replace="/season/groups_fragments :: groups(round=${season.rounds.get(3)})"></div>
 				</div>
 				<div id="playoffs" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/playoffs_fragments :: playoffs"></div>
+					<div th:replace="/season/playoffs_fragments :: playoffs(round=${season.rounds.get(4)})"></div>
 				</div>
 
 			</div>
