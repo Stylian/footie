@@ -25,10 +25,7 @@
 				<li><a data-toggle="tab" href="#quals2" th:if="${#lists.size(season.rounds) &gt; 1}" >2nd Qualification Round</a></li>
 				<li><a data-toggle="tab" href="#groups1" th:if="${#lists.size(season.rounds) &gt; 2}" >1st Groups Round</a></li>
 				<li><a data-toggle="tab" href="#groups2" th:if="${#lists.size(season.rounds) &gt; 3}" >2nd Groups Round</a></li>
-				<li><a data-toggle="tab" href="#playoffs_quarters" th:if="${#lists.size(season.rounds) &gt; 4}" >1/4 Finals</a></li>
-				<li><a data-toggle="tab" href="#playoffs_semis" th:if="${#lists.size(season.rounds) &gt; 4}" >1/2 Finals</a></li>
-				<li><a data-toggle="tab" href="#playoffs_finals" th:if="${#lists.size(season.rounds) &gt; 4}" >Finals</a></li>
-
+				<li><a data-toggle="tab" href="#playoffs" th:if="${#lists.size(season.rounds) &gt; 4}" >Playoffs</a></li>
 			</ul>
 
 			<div id='season_panel' class="tab-content">
@@ -47,14 +44,8 @@
 				<div id="groups2" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 3}" >
 					<div th:replace="/season/groups_fragments :: groups(round=${season.rounds.get(3)})"></div>
 				</div>
-				<div id="playoffs_quarters" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/playoffs_fragments :: playoffs_quarters"></div>
-				</div>
-				<div id="playoffs_semis" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/playoffs_fragments :: playoffs_semis"></div>
-				</div>
-				<div id="playoffs_finals" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
-					<div th:replace="/season/playoffs_fragments :: playoffs_finals"></div>
+				<div id="playoffs" class="tab-pane" th:if="${#lists.size(season.rounds) &gt; 4}" >
+					<div th:replace="/season/playoffs_fragments :: playoffs"></div>
 				</div>
 
 			</div>

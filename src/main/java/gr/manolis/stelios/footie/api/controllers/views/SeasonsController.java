@@ -24,6 +24,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.SeasonService;
@@ -63,7 +64,22 @@ public class SeasonsController {
 		getGroupsPreviewsToModel(model, season);
 		getGroupsRoundsToModel(model, season);
 		
+		getPlayoffsToModel(model, season);
+
 		return "season/season";
+	}
+
+	private void getPlayoffsToModel(Model model, Season season) {
+
+		List<Round> rounds = season.getRounds();
+		
+		if(rounds.size() < 5) {
+			return;
+		}
+		
+		PlayoffsRound pr = (PlayoffsRound ) rounds.get(4);
+		model.addAttribute("playoffsRound", pr);
+		
 	}
 
 	private void getSeasonPreviewToModel(Model model, int year, Season season) {
