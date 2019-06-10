@@ -2,6 +2,7 @@
 /target/
 /BD/
 /data/
+/.idea/
 /bin
 *.log
 .springBeans
