@@ -40,7 +40,7 @@ public class RobinGroupOrdering extends Ordering {
 			return s2.getWins() - s1.getWins();
 		}
 
-		// RULE 5
-		return RandomUtils.nextInt(0, 2) - 1;
+		// RULE 5 Alphabetical
+		return o1.getName().compareTo(o2.getName());
 	}
 }
