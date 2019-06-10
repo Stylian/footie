@@ -36,7 +36,7 @@ public class SpringAppTest {
 
 		checkURL("/rest/ops/league", "{status=success, message=created league}");
 
-		for (int n = 1; n < 3; n++)
+		for (int n = 1; n < 7; n++)
 			runSeason(n);
 
 		displayResults();
