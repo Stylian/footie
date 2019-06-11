@@ -1,14 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import LeagueToolbar from "./apps/LeagueToolbar";
 import LeagueBody from "./apps/LeagueBody";
 
-function App() {
-  return (
-    <div className="App">
-      <LeagueToolbar />
-      <LeagueBody />
-    </div>
-  );
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            pageActive: 1,
+        };
+
+    }
+
+    changePageActive = (newPage) => {
+        this.setState( {pageActive: newPage});
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <LeagueToolbar pageActive={this.state.pageActive}/>
+                <LeagueBody pageActive={this.state.pageActive}
+                            changePageActive={this.changePageActive}/>
+            </div>
+        );
+    }
 }
 
 export default App;

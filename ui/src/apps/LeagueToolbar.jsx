@@ -9,21 +9,21 @@ import Menu from '@material-ui/core/Menu';
 
 class LeagueToolbar extends Component {
 
-    state = {
-        menuPosition: null,
-    };
-
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+
+        this.state = {
+            menuPosition: null,
+        };
+
     }
 
-    handleClick(event) {
+    handleClick = (event) => {
         this.setState({ menuPosition: event.currentTarget });
     }
 
-    handleClose() {
+    handleClose = () => {
+        this.props.changePageActive(2); // does not work
         this.setState({ menuPosition: null });
     }
 
@@ -45,13 +45,20 @@ class LeagueToolbar extends Component {
                             open={Boolean(this.state.menuPosition)}
                             onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}>Dashboard</MenuItem>
+                            <MenuItem onClick={this.handleClose}>League Summary</MenuItem>
                             <MenuItem onClick={this.handleClose}>History</MenuItem>
                             <MenuItem onClick={this.handleClose}>Admin</MenuItem>
                         </Menu>
 
                         <Typography variant="h6" >
-                            League Summary
+                            {(function(){
+                                switch(this.props.pageActive) { // does not work
+                                    case 1:
+                                        return <div>option1</div>;
+                                    case 2:
+                                        return <div>option2</div>;
+                                }
+                            })}
                         </Typography>
 
                     </Toolbar>
