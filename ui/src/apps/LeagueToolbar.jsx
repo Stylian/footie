@@ -9,14 +9,47 @@ import Menu from '@material-ui/core/Menu';
 
 class LeagueToolbar extends Component {
 
+    state = {
+        menuPosition: null,
+    };
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+    handleClick(event) {
+        this.setState({ menuPosition: event.currentTarget });
+    }
+
+    handleClose() {
+        this.setState({ menuPosition: null });
+    }
+
     render() {
         return (
             <div >
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="Menu">
-                            <MenuIcon/>
+                        <IconButton edge="start" color="inherit" aria-label="Menu"
+                                    onClick={this.handleClick} >
+                            <MenuIcon />
                         </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={this.state.menuPosition}
+                            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                            getContentAnchorEl={null}
+                            keepMounted
+                            open={Boolean(this.state.menuPosition)}
+                            onClose={this.handleClose}
+                        >
+                            <MenuItem onClick={this.handleClose}>Dashboard</MenuItem>
+                            <MenuItem onClick={this.handleClose}>History</MenuItem>
+                            <MenuItem onClick={this.handleClose}>Admin</MenuItem>
+                        </Menu>
+
                         <Typography variant="h6" >
                             League Summary
                         </Typography>
