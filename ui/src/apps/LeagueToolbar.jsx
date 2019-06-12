@@ -22,8 +22,11 @@ class LeagueToolbar extends Component {
         this.setState({ menuPosition: event.currentTarget });
     }
 
+    handleButtonSelection = (e) => {
+        window.location = e.currentTarget.dataset.link;
+    }
+
     handleClose = () => {
-        this.props.changePageActive(2); // does not work
         this.setState({ menuPosition: null });
     }
 
@@ -45,21 +48,12 @@ class LeagueToolbar extends Component {
                             open={Boolean(this.state.menuPosition)}
                             onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}>League Summary</MenuItem>
-                            <MenuItem onClick={this.handleClose}>History</MenuItem>
-                            <MenuItem onClick={this.handleClose}>Admin</MenuItem>
+                            <MenuItem data-link="" onClick={this.handleButtonSelection}>League Summary</MenuItem>
+                            <MenuItem data-link="history" onClick={this.handleButtonSelection}>History</MenuItem>
+                            <MenuItem data-link="admin" onClick={this.handleButtonSelection}>Admin</MenuItem>
                         </Menu>
 
-                        <Typography variant="h6" >
-                            {(function(){
-                                switch(this.props.pageActive) { // does not work
-                                    case 1:
-                                        return <div>option1</div>;
-                                    case 2:
-                                        return <div>option2</div>;
-                                }
-                            })}
-                        </Typography>
+                        <Typography variant="h6" >{this.props.pageTitle}</Typography>
 
                     </Toolbar>
                 </AppBar>
