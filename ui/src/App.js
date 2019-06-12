@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import LeagueToolbar from "./apps/LeagueToolbar";
+import {BrowserRouter, Switch} from "react-router-dom";
+import Route from "react-router-dom/es/Route";
+import LandingPage from "./components/LandingPage";
+import History from "./components/History";
+import Admin from "./components/Admin";
 
 class App extends Component {
 
@@ -14,9 +18,11 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <LeagueToolbar pageTitle={this.state.pageTitle} />
-            </div>
+            <BrowserRouter>
+                <Route path='/' component={LandingPage}/>
+                <Route path='/history' component={History}/>
+                <Route path='/admin' component={Admin}/>
+            </BrowserRouter>
         );
     }
 }
