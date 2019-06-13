@@ -14,7 +14,6 @@ class LandingPage extends Component {
 
     render() {
         return (
-
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle} />
             </div>
