@@ -48,9 +48,9 @@ class LeagueToolbar extends Component {
                             open={Boolean(this.state.menuPosition)}
                             onClose={this.handleClose}
                         >
-                            <MenuItem data-link="" onClick={this.handleButtonSelection}>League Summary</MenuItem>
-                            <MenuItem data-link="history" onClick={this.handleButtonSelection}>History</MenuItem>
-                            <MenuItem data-link="admin" onClick={this.handleButtonSelection}>Admin</MenuItem>
+                            <MenuItem data-link="/" onClick={this.handleButtonSelection}>League Summary</MenuItem>
+                            <MenuItem data-link="/history" onClick={this.handleButtonSelection}>History</MenuItem>
+                            <MenuItem data-link="/admin" onClick={this.handleButtonSelection}>Admin</MenuItem>
                         </Menu>
 
                         <Typography variant="h6" >{this.props.pageTitle}</Typography>

@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Route path='/' component={LandingPage}/>
+                <Route exact path='/' component={LandingPage}/>
                 <Route path='/history' component={History}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>
