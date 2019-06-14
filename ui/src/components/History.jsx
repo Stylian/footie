@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {AppBar, Tabs, Tab, Typography} from "@material-ui/core";
+import Coefficients from "./history_components/Coefficients";
+import Stats from "./history_components/Stats";
 
 class History extends Component {
 
@@ -32,14 +34,12 @@ class History extends Component {
                 <div>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Item One" />
-                            <Tab label="Item Two" />
-                            <Tab label="Item Three" />
+                            <Tab label="Coefficients" />
+                            <Tab label="Stats" />
                         </Tabs>
                     </AppBar>
-                    {this.state.tabActive === 0 && <Typography >Item One</Typography >}
-                    {this.state.tabActive === 1 && <Typography >Item Two</Typography >}
-                    {this.state.tabActive === 2 && <Typography >Item Three</Typography >}
+                    {this.state.tabActive === 0 && <Coefficients />}
+                    {this.state.tabActive === 1 && <Stats />}
                 </div>
             </div>
         );
