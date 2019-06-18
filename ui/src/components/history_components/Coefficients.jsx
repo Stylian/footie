@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppBar, Tabs, Tab, Typography} from "@material-ui/core";
+import {AppBar, Tabs, Tab, Typography, TableHead, TableRow, TableCell, TableBody} from "@material-ui/core";
 
 class Coefficients extends Component {
 
@@ -42,27 +42,23 @@ class Coefficients extends Component {
     render() {
         return (
             <table className = "table" >
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Team</th>
-                        <th>Coefficients</th>
-                    </tr>
-                </thead>
-                <tbody>
-                // does not work
-                // change to array?
-                // add Mapstruct to back end ? a lot of work there
-                {Object.entries(this.state.teams).forEach(entry => {
-                    console.log(entry[0])
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Pos</TableCell>
+                        <TableCell>Team</TableCell>
+                        <TableCell>Coefficients</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {Object.keys(this.state.teams).map((key, index) => {
                     return (
-                        <tr>
-                            <td>1</td>
-                            <td>{entry[0]}</td>
-                            <td>{entry[1]}</td>
-                        </tr>)
+                        <TableRow >
+                            <TableCell align="right" >{index+1}</TableCell >
+                            <TableCell >{key}</TableCell >
+                            <TableCell align="right" >{this.state.teams[key]}</TableCell >
+                        </TableRow >)
                  })}
-                </tbody>
+                </TableBody>
             </table>
         );
     }
