@@ -28,10 +28,8 @@ class History extends Component {
 
     render() {
         return (
-
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle} />
-
                 <div>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>

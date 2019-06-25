@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
+import {AppBar, Tab, Tabs} from "@material-ui/core";
+import Stats from "./history_components/Stats";
+import Coefficients from "./history_components/Coefficients";
+import PastWinners from "./history_components/PastWinners";
+import GameStats from "./admin_components/GameStats";
+import Monitoring from "./admin_components/Monitoring";
 
 class Admin extends Component {
 
@@ -8,15 +14,34 @@ class Admin extends Component {
 
         this.state = {
             pageTitle: "Admin",
+            tabActive: 0,
         };
 
     }
 
+    handleChange = (event, newValue) => {
+        this.setState(state => {
+            return {
+                ...state,
+                tabActive: newValue,
+            }
+        });
+    }
+
     render() {
         return (
-
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle} />
+                <div>
+                    <AppBar position="static">
+                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
+                            <Tab label="Game Stats" />
+                            <Tab label="Monitoring" />
+                        </Tabs>
+                    </AppBar>
+                    {this.state.tabActive === 0 && <GameStats />}
+                    {this.state.tabActive === 1 && <Monitoring />}
+                </div>
             </div>
         );
     }
