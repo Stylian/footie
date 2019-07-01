@@ -5,6 +5,7 @@ import Stats from "./history_components/Stats";
 import Coefficients from "./history_components/Coefficients";
 import PastWinners from "./history_components/PastWinners";
 import Seeding from "./season_components/Seeding";
+import Quals1 from "./season_components/Quals1";
 
 class Season extends Component {
 
@@ -13,7 +14,7 @@ class Season extends Component {
 
         this.state = {
             pageTitle: "Season " + props.year,
-            tabActive: 0,
+            tabActive: 1,
         };
 
     }
@@ -42,6 +43,7 @@ class Season extends Component {
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <Seeding year={this.props.year}/>}
+                {this.state.tabActive === 1 && <Quals1 year={this.props.year}/>}
             </div>
         );
     }
