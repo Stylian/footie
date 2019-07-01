@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {TableHead, TableRow, TableCell, TableBody, Grid, Paper, Box} from "@material-ui/core";
-import {switchCase} from "@babel/types";
 
 class Seeding extends Component {
 
@@ -10,8 +9,7 @@ class Seeding extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            teams: {},
-            toGroups: [],
+            teams: [],
         };
 
     }
@@ -22,11 +20,44 @@ class Seeding extends Component {
             .then(
                 (result) => {
                     this.setState(state => {
+
+                        let champion = [];
+                        for (let objTeam of result[1].champion) {
+                            champion.push(objTeam.name);
+                        }
+                        let toQuals1 = [];
+                        for (let objTeam of result[1].toQuals1) {
+                            toQuals1.push(objTeam.name);
+                        }
+
+                        let toQuals2 = [];
+                        for (let objTeam of result[1].toQuals2) {
+                            toQuals2.push(objTeam.name);
+                        }
+
+                        let toGroups = [];
+                        for (let objTeam of result[1].toGroups) {
+                            toGroups.push(objTeam.name);
+                        }
+
+                        let teams = [];
+                        Object.keys(result[0]).map((key, index) => {
+                            teams[index] = {"name": key, "coefficients": result[0][key]};
+                            if (champion.find(obj => obj === key)) {
+                                teams[index]["seed"] = "champion";
+                            } else if (toQuals1.find(obj => obj === key)) {
+                                teams[index]["seed"] = "toQuals1";
+                            } else if (toQuals2.find(obj => obj === key)) {
+                                teams[index]["seed"] = "toQuals2";
+                            } else if (toGroups.find(obj => obj === key)) {
+                                teams[index]["seed"] = "toGroups";
+                            }
+                        });
+
                         return {
                             ...state,
                             isLoaded: true,
-                            teams: result[0],
-                            toGroups: result[1].toGroups
+                            teams: teams,
                         }
                     });
                 },
@@ -43,26 +74,14 @@ class Seeding extends Component {
     }
 
     render() {
-// this is crap, have to change the back end with TeamDTO ?
-        let teamsColored = {};
-        Object.keys(this.state.teams).map((key, index) => {
-                teamsColored[key] = this.state.teams[key];
-        });
 
-        let firstTable = {};
-        let secondTable = {};
-        let length = Object.keys(teamsColored).length;
-        Object.keys(teamsColored).map((key, index) => {
-            if (index < length / 2) {
-                firstTable[key] = teamsColored[key];
-            } else {
-                secondTable[key] = teamsColored[key];
-            }
-        });
+        let half_length = Math.ceil(this.state.teams.length / 2);
+        let leftSide = this.state.teams.splice(0,half_length);
+        let rightSide = this.state.teams;
 
         return (
-            <Box width={800} >
-                <Paper elevation={12}  style={{margin: 20}}>
+            <Box width={800}>
+                <Paper elevation={12} style={{margin: 20}}>
 
                     <Grid container spacing={1}>
                         <Grid item sm>
@@ -75,15 +94,19 @@ class Seeding extends Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {Object.keys(firstTable).map((key, index) => {
+                                    {leftSide.map((team, index) => {
                                         return (
                                             <TableRow
-                                                style={{backgroundColor:'#3c763d'}}
+                                                style={{backgroundColor:
+                                                        (team.seed === "champion") ? '#3c763d' :
+                                                            (team.seed === "toGroups") ? '#66b268' :
+                                                                (team.seed === "toQuals2") ? '#aad4ab' :
+                                                ''}}
 
                                             >
                                                 <TableCell align="right">{index + 1}</TableCell>
-                                                <TableCell>{key}</TableCell>
-                                                <TableCell align="right">{this.state.teams[key]}</TableCell>
+                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell align="right">{team.coefficients}</TableCell>
                                             </TableRow>)
                                     })}
                                 </TableBody>
@@ -100,12 +123,18 @@ class Seeding extends Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {Object.keys(secondTable).map((key, index) => {
+                                    {rightSide.map((team, index) => {
                                         return (
-                                            <TableRow>
-                                                <TableCell align="right">{length / 2 + index + 1}</TableCell>
-                                                <TableCell>{key}</TableCell>
-                                                <TableCell align="right">{this.state.teams[key]}</TableCell>
+                                            <TableRow
+                                                style={{backgroundColor:
+                                                        (team.seed === "champion") ? '#3c763d' :
+                                                            (team.seed === "toGroups") ? '#66b268' :
+                                                                (team.seed === "toQuals2") ? '#aad4ab' :
+                                                                    ''}}
+                                            >
+                                                <TableCell align="right">{leftSide.length + index + 1}</TableCell>
+                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell align="right">{team.coefficients}</TableCell>
                                             </TableRow>)
                                     })}
                                 </TableBody>

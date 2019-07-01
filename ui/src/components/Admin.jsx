@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
-import Stats from "./history_components/Stats";
-import Coefficients from "./history_components/Coefficients";
-import PastWinners from "./history_components/PastWinners";
 import GameStats from "./admin_components/GameStats";
 import Monitoring from "./admin_components/Monitoring";
 
