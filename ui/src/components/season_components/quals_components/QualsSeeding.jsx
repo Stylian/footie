@@ -27,7 +27,7 @@ class QualsSeeding extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/quals1/preview")
+        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/preview")
             .then(res => res.json())
             .then(
                 (result) => {

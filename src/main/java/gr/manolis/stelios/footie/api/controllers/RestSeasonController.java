@@ -61,14 +61,16 @@ public class RestSeasonController {
         return teamsWithCoeffs;
     }
 
-    @RequestMapping("/{year}/quals1/preview")
-    public Map<String, Map<Team, Integer>> quals1Preview(@PathVariable(value = "year", required = true) String strYear) {
-        logger.info("quals1 preview");
+    @RequestMapping("/{year}/quals/{round}/preview")
+    public Map<String, Map<Team, Integer>> quals1Preview(@PathVariable(value = "year", required = true) String strYear,
+                                                         @PathVariable(value = "round", required = true) String strRound) {
+        logger.info("quals preview");
 
         int year = NumberUtils.toInt(strYear);
+        int round = NumberUtils.toInt(strRound);
 
         Season season = serviceUtils.loadSeason(year);
-        QualsRound qr = serviceUtils.getQualRound(season, 1);
+        QualsRound qr = serviceUtils.getQualRound(season, round);
 
         List<Team> teamsStrong = qr.getStrongTeams();
         List<Team> teamsWeak = qr.getWeakTeams();

@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import LeagueToolbar from "./LeagueToolbar";
 import {AppBar, Tab, Tabs} from "@material-ui/core";
-import Stats from "./history_components/Stats";
-import Coefficients from "./history_components/Coefficients";
-import PastWinners from "./history_components/PastWinners";
 import Seeding from "./season_components/Seeding";
 import Quals1 from "./season_components/Quals1";
+import Quals2 from "./season_components/Quals2";
+import Groups1 from "./season_components/Groups1";
 
 class Season extends Component {
 
@@ -14,7 +13,7 @@ class Season extends Component {
 
         this.state = {
             pageTitle: "Season " + props.year,
-            tabActive: 1,
+            tabActive: 2,
         };
 
     }
@@ -44,6 +43,8 @@ class Season extends Component {
                 </AppBar>
                 {this.state.tabActive === 0 && <Seeding year={this.props.year}/>}
                 {this.state.tabActive === 1 && <Quals1 year={this.props.year}/>}
+                {this.state.tabActive === 2 && <Quals2 year={this.props.year}/>}
+                {this.state.tabActive === 3 && <Groups1 year={this.props.year}/>}
             </div>
         );
     }
