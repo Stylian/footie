@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 
 @Entity(name = "STATS")
@@ -36,9 +37,11 @@ public class Stats {
 	private int goalsConceded;
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Team team;
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Group group;
 
 	public Stats() {

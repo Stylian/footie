@@ -46,7 +46,6 @@ public class Group {
 
 	public Group(String name) {
 		this.name = name;
-
 		teamsStats = new HashMap<>();
 	}
 
@@ -58,7 +57,6 @@ public class Group {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	public Map<Team, Stats> getTeamsStats() {
 		return teamsStats;
 	}
@@ -68,12 +66,9 @@ public class Group {
 	}
 
 	public void addTeam(Team team) {
-
 		teamsStats.put(team, new Stats(this, team));
-
 	}
 
-	@JsonIgnore
 	public List<Team> getTeams() {
 		return new ArrayList<>(teamsStats.keySet());
 	}

@@ -20,41 +20,22 @@ class GroupsDisplay extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            teamsStrong: [],
-            teamsMedium: [],
-            teamsWeak: [],
+            groups: [],
         };
 
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/groups/" + this.props.round + "/seeding")
+        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/groups/" + this.props.round)
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState(state => {
 
-                        let teamsStrong = [];
-                        Object.keys(result["strong"]).map((key, index) => {
-                            teamsStrong[index] = {"name": key, "coefficients": result["strong"][key]};
-                        });
-
-                        let teamsMedium = [];
-                        Object.keys(result["medium"]).map((key, index) => {
-                            teamsMedium[index] = {"name": key, "coefficients": result["medium"][key]};
-                        });
-
-                        let teamsWeak = [];
-                        Object.keys(result["weak"]).map((key, index) => {
-                            teamsWeak[index] = {"name": key, "coefficients": result["weak"][key]};
-                        });
-
                         return {
                             ...state,
                             isLoaded: true,
-                            teamsStrong: teamsStrong,
-                            teamsMedium: teamsMedium,
-                            teamsWeak: teamsWeak,
+                            groups: result,
                         }
                     });
                 },
@@ -73,96 +54,62 @@ class GroupsDisplay extends Component {
     render() {
 
         return (
-            <Box width={1200}>
+            <Box width={1900}>
 
                 <Grid container spacing={1}>
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 1"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"} >
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsStrong.map((team, index) => {
-                                            return (
-                                                <TableRow>
-                                                    <TableCell align="right">{index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                    {this.state.groups.map((group, index) => {
 
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 2"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsMedium.map((team, index) => {
-                                            return (
+                        return (
+                            <Grid item sm>
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={group.name} align={"center"} style={{backgroundColor: '#f5f5f5'}}
+                                                titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        <table className="table" align={"center"} >
+                                            <TableHead>
                                                 <TableRow>
-                                                    <TableCell align="right">{this.state.teamsStrong.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                                                    <TableCell>Pos</TableCell>
+                                                    <TableCell>Team</TableCell>
+                                                    <TableCell>Played</TableCell>
+                                                    <TableCell>Points</TableCell>
+                                                    <TableCell>W</TableCell>
+                                                    <TableCell>D</TableCell>
+                                                    <TableCell>L</TableCell>
+                                                    <TableCell>GS</TableCell>
+                                                    <TableCell>GC</TableCell>
+                                                    <TableCell>+/-</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {group.teams.map((team, index) => {
+                                                    return (
+                                                        <TableRow
+                                                            style={{
+                                                                backgroundColor:
+                                                                    (this.props.round == 1 && index < 1) ? '#d9edf7' : '#f2dede'
+                                                            }}
+                                                        >
+                                                            <TableCell align="right">{index + 1}</TableCell>
+                                                            <TableCell>{team.name}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].matchesPlayed}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].points}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].wins}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].draws}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].losses}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].goalsScored}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].goalsConceded}</TableCell>
+                                                            <TableCell align="right">{group.teamsStats[team.name].goalDifference}</TableCell>
+                                                        </TableRow>)
+                                                })}
+                                            </TableBody>
+                                        </table>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        )
+                    })}
 
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 3"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"} >
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsWeak.map((team, index) => {
-                                            return (
-                                                <TableRow>
-                                                    <TableCell
-                                                        align="right">{this.state.teamsStrong.length + this.state.teamsMedium.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
 
                 </Grid>
             </Box>

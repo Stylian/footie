@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -50,7 +51,6 @@ public class RobinGroup extends Group {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@Override
 	public List<Team> getTeams() {
-
 		List<Team> teams = super.getTeams();
 		Collections.sort(teams, new RobinGroupOrdering(this));
 

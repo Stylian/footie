@@ -55,7 +55,7 @@ class GroupsMatches extends Component {
     render() {
 
         return (
-            <Box width={1200}>
+            <Box width={1600}>
 
                 <Grid container spacing={1}>
                     {Object.keys(this.state.days).map((day, index) => {

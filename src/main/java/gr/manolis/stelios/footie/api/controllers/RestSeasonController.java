@@ -4,6 +4,7 @@ package gr.manolis.stelios.footie.api.controllers;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
@@ -155,11 +156,28 @@ public class RestSeasonController {
         int round = NumberUtils.toInt(strRound);
 
         Season season = serviceUtils.loadSeason(year);
-        GroupsRound groupsRound = serviceUtils.getGroupsRound(season, 1);
+        GroupsRound groupsRound = serviceUtils.getGroupsRound(season, round);
 
         logger.info("groupsRounds: " + groupsRound);
 
         return groupsRound.getGamesPerDay();
+    }
+
+    @RequestMapping("/{year}/groups/{round}")
+    public  List<RobinGroup> groupsRound(
+            @PathVariable(value = "year", required = true) String strYear,
+            @PathVariable(value = "round", required = true) String strRound) {
+        logger.info("groups round");
+
+        int year = NumberUtils.toInt(strYear);
+        int round = NumberUtils.toInt(strRound);
+
+        Season season = serviceUtils.loadSeason(year);
+        GroupsRound groupsRound = serviceUtils.getGroupsRound(season, round);
+
+        logger.info("groupsRounds: " + groupsRound);
+
+        return groupsRound.getGroups();
     }
 
     // -------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import {AppBar, Tab, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
+import Groups2 from "./season_components/Groups2";
 
 class Season extends Component {
 
@@ -44,6 +45,7 @@ class Season extends Component {
                 {this.state.tabActive === 1 && <Quals year={this.props.year} round={1} />}
                 {this.state.tabActive === 2 && <Quals year={this.props.year} round={2} />}
                 {this.state.tabActive === 3 && <Groups1 year={this.props.year}/>}
+                {this.state.tabActive === 4 && <Groups2 year={this.props.year}/>}
             </div>
         );
     }
