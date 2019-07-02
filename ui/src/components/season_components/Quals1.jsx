@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import QualsSeeding from "./quals_components/QualsSeeding";
+import QualsMatches from "./quals_components/QualsMatches";
 
 class Quals1 extends Component {
 
@@ -8,7 +9,7 @@ class Quals1 extends Component {
         super(props);
 
         this.state = {
-            tabActive: 0,
+            tabActive: 1,
         };
 
     }
@@ -33,6 +34,8 @@ class Quals1 extends Component {
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={1}/>}
+                {this.state.tabActive === 1 && <QualsMatches year={this.props.year} round={1} day={1}/>}
+                {this.state.tabActive === 2 && <QualsMatches year={this.props.year} round={1} day={-1}/>}
             </div>
         );
     }

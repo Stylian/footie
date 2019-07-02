@@ -3,7 +3,10 @@ package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
@@ -31,6 +34,9 @@ public class RestSeasonController {
     @Autowired
     private ServiceUtils serviceUtils;
 
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
     @RequestMapping("/{year}/seeding")
     public Object[] seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
@@ -50,21 +56,15 @@ public class RestSeasonController {
         return new Object[]{teamsWithCoeffs, teamsInRounds};
     }
 
-    private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
-        Collections.sort(teams, new CoefficientsOrdering(season));
 
-        Map<Team, Integer> teamsWithCoeffs = new LinkedHashMap<>();
-
-        for (Team team : teams) {
-            teamsWithCoeffs.put(team, team.getStatsForGroup(season).getPoints());
-        }
-        return teamsWithCoeffs;
-    }
-
-    @RequestMapping("/{year}/quals/{round}/preview")
-    public Map<String, Map<Team, Integer>> quals1Preview(@PathVariable(value = "year", required = true) String strYear,
-                                                         @PathVariable(value = "round", required = true) String strRound) {
-        logger.info("quals preview");
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    @RequestMapping("/{year}/quals/{round}/seeding")
+    public Map<String, Map<Team, Integer>> qualsSeeding(
+            @PathVariable(value = "year", required = true) String strYear,
+            @PathVariable(value = "round", required = true) String strRound) {
+        logger.info("quals seeding");
 
         int year = NumberUtils.toInt(strYear);
         int round = NumberUtils.toInt(strRound);
@@ -88,5 +88,75 @@ public class RestSeasonController {
         qualsTeams.put("weak", teamsWeakWithCoeffs);
 
         return qualsTeams;
+    }
+
+    @RequestMapping("/{year}/quals/{round}/matches/{day}")
+    public List<Game> qualsMatches(
+            @PathVariable(value = "year", required = true) String strYear,
+            @PathVariable(value = "round", required = true) String strRound,
+            @PathVariable(value = "day", required = true) String strDay) {
+        logger.info("quals matches");
+
+        int year = NumberUtils.toInt(strYear);
+        int round = NumberUtils.toInt(strRound);
+        int day = NumberUtils.toInt(strDay);
+
+        Season season = serviceUtils.loadSeason(year);
+        QualsRound qr = serviceUtils.getQualRound(season, round);
+
+        return qr.getGamesPerDay().get(day);
+    }
+
+
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    @RequestMapping("/{year}/groups/{round}/seeding")
+    public Map<String, Map<Team, Integer>> groups1Seeding(
+            @PathVariable(value = "year", required = true) String strYear,
+            @PathVariable(value = "round", required = true) String strRound) {
+        logger.info("groups seeding");
+
+        int year = NumberUtils.toInt(strYear);
+        int round = NumberUtils.toInt(strRound);
+
+        Season season = serviceUtils.loadSeason(year);
+        GroupsRound qr = serviceUtils.getGroupsRound(season, round);
+
+        List<Team> teamsStrong = qr.getStrongTeams();
+        List<Team> teamsMedium = qr.getMediumTeams();
+        List<Team> teamsWeak = qr.getWeakTeams();
+
+        //put to strong teams for pre-previews
+        if(qr.getStage() == Stage.NOT_STARTED) {
+            teamsStrong = qr.getTeams();
+        }
+
+
+        Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+        Map<Team, Integer> teamsMediumWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsMedium);
+        Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+
+        Map<String, Map<Team, Integer>> groupsTeams = new HashMap<>();
+        groupsTeams.put("strong", teamsStrongWithCoeffs);
+        groupsTeams.put("medium", teamsMediumWithCoeffs);
+        groupsTeams.put("weak", teamsWeakWithCoeffs);
+
+        return groupsTeams;
+    }
+
+
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
+        Collections.sort(teams, new CoefficientsOrdering(season));
+
+        Map<Team, Integer> teamsWithCoeffs = new LinkedHashMap<>();
+
+        for (Team team : teams) {
+            teamsWithCoeffs.put(team, team.getStatsForGroup(season).getPoints());
+        }
+        return teamsWithCoeffs;
     }
 }

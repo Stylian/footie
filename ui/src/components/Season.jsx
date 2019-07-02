@@ -13,7 +13,7 @@ class Season extends Component {
 
         this.state = {
             pageTitle: "Season " + props.year,
-            tabActive: 2,
+            tabActive: 1,
         };
 
     }

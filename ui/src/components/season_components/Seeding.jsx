@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
-import {TableHead, TableRow, TableCell, TableBody, Grid, Paper, Box} from "@material-ui/core";
+import {
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    Grid,
+    Paper,
+    Box,
+    Card,
+    CardHeader,
+    CardContent
+} from "@material-ui/core";
 
 class Seeding extends Component {
 
@@ -76,72 +87,81 @@ class Seeding extends Component {
     render() {
 
         let half_length = Math.ceil(this.state.teams.length / 2);
-        let leftSide = this.state.teams.splice(0,half_length);
+        let leftSide = this.state.teams.splice(0, half_length);
         let rightSide = this.state.teams;
 
         return (
             <Box width={800}>
-                <Paper elevation={12} style={{margin: 20}}>
+                <Card style={{margin: 20}}>
+                    <CardHeader title={"Seeding"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
+                                titleTypographyProps={{variant: 'h7'}}
+                    />
+                    <CardContent>
+                        <Grid container spacing={1}>
+                            <Grid item sm>
+                                <table className="table" align={"center"}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Pos</TableCell>
+                                            <TableCell>Team</TableCell>
+                                            <TableCell>Coefficients</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {leftSide.map((team, index) => {
+                                            return (
+                                                <TableRow
+                                                    style={{
+                                                        backgroundColor:
+                                                            (team.seed === "champion") ? '#d9edf7' :
+                                                                (team.seed === "toGroups") ? '#d9edf7' :
+                                                                    (team.seed === "toQuals2") ? '#dff0d8' :
+                                                                        ''
+                                                    }}
 
-                    <Grid container spacing={1}>
-                        <Grid item sm>
-                            <table className="table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Pos</TableCell>
-                                        <TableCell>Team</TableCell>
-                                        <TableCell>Coefficients</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {leftSide.map((team, index) => {
-                                        return (
-                                            <TableRow
-                                                style={{backgroundColor:
-                                                        (team.seed === "champion") ? '#d9edf7' :
-                                                            (team.seed === "toGroups") ? '#d9edf7' :
-                                                                (team.seed === "toQuals2") ? '#dff0d8' :
-                                                ''}}
+                                                >
+                                                    <TableCell align="right">{index + 1}</TableCell>
+                                                    <TableCell>{team.name}</TableCell>
+                                                    <TableCell align="right">{team.coefficients}</TableCell>
+                                                </TableRow>)
+                                        })}
+                                    </TableBody>
+                                </table>
+                            </Grid>
 
-                                            >
-                                                <TableCell align="right">{index + 1}</TableCell>
-                                                <TableCell>{team.name}</TableCell>
-                                                <TableCell align="right">{team.coefficients}</TableCell>
-                                            </TableRow>)
-                                    })}
-                                </TableBody>
-                            </table>
+                            <Grid item sm>
+                                <table className="table" align={"center"}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Pos</TableCell>
+                                            <TableCell>Team</TableCell>
+                                            <TableCell>Coefficients</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rightSide.map((team, index) => {
+                                            return (
+                                                <TableRow
+                                                    style={{
+                                                        backgroundColor:
+                                                            (team.seed === "champion") ? '#d9edf7' :
+                                                                (team.seed === "toGroups") ? '#d9edf7' :
+                                                                    (team.seed === "toQuals2") ? '#dff0d8' :
+                                                                        ''
+                                                    }}
+                                                >
+                                                    <TableCell
+                                                        align="right">{leftSide.length + index + 1}</TableCell>
+                                                    <TableCell>{team.name}</TableCell>
+                                                    <TableCell align="right">{team.coefficients}</TableCell>
+                                                </TableRow>)
+                                        })}
+                                    </TableBody>
+                                </table>
+                            </Grid>
                         </Grid>
-
-                        <Grid item sm>
-                            <table className="table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Pos</TableCell>
-                                        <TableCell>Team</TableCell>
-                                        <TableCell>Coefficients</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rightSide.map((team, index) => {
-                                        return (
-                                            <TableRow
-                                                style={{backgroundColor:
-                                                        (team.seed === "champion") ? '#d9edf7' :
-                                                            (team.seed === "toGroups") ? '#d9edf7' :
-                                                                (team.seed === "toQuals2") ? '#dff0d8' :
-                                                                    ''}}
-                                            >
-                                                <TableCell align="right">{leftSide.length + index + 1}</TableCell>
-                                                <TableCell>{team.name}</TableCell>
-                                                <TableCell align="right">{team.coefficients}</TableCell>
-                                            </TableRow>)
-                                    })}
-                                </TableBody>
-                            </table>
-                        </Grid>
-                    </Grid>
-                </Paper>
+                    </CardContent>
+                </Card>
             </Box>
 
         );
