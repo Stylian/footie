@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import LeagueToolbar from "./LeagueToolbar";
 import Season from "./Season";
 
 class LandingPage extends Component {
@@ -11,7 +10,7 @@ class LandingPage extends Component {
     render() {
         return (
             <div>
-                <Season year ={6} />
+                <Season year ={1} />
             </div>
         );
     }

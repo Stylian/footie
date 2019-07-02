@@ -1,10 +1,2 @@
 
-to use teams.txt file to add/remove teams in later seasons if needed.
-
-stats per group like season are a bad design
-
-remove the transactionals with proper entitymanagers ?
-
-bug notes
-
-master group again missing stats from teams  !! always missing transactional annotation
+to actually test step by step and add actions to react

@@ -11,7 +11,7 @@ class Groups1 extends Component {
         super(props);
 
         this.state = {
-            tabActive: 1,
+            tabActive: 0,
         };
 
     }

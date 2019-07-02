@@ -39,6 +39,25 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
+    @RequestMapping("/{year}/status")
+    public Map<String, String>  seasonStatus(@PathVariable(value = "year", required = true) String strYear) {
+        logger.info("season seeding");
+
+        int year = NumberUtils.toInt(strYear);
+
+        Season season = serviceUtils.loadSeason(year);
+        List<Round> rounds = season.getRounds();
+
+        Map<String, String> roundStages = new LinkedHashMap<>();
+        roundStages.put("quals1", rounds.get(0).getStage().name());
+        roundStages.put("quals2", rounds.get(1).getStage().name());
+        roundStages.put("groups1", rounds.get(2).getStage().name());
+        roundStages.put("qroups2", rounds.get(3).getStage().name());
+        roundStages.put("playoffs", rounds.get(4).getStage().name());
+
+        return roundStages;
+    }
+
     @RequestMapping("/{year}/seeding")
     public Object[] seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
@@ -56,25 +75,6 @@ public class RestSeasonController {
         logger.info("teamsInRounds: " + teamsInRounds);
 
         return new Object[]{teamsWithCoeffs, teamsInRounds};
-    }
-
-    @RequestMapping("/{year}/status")
-    public Map<String, String>  seasonStatus(@PathVariable(value = "year", required = true) String strYear) {
-        logger.info("season seeding");
-
-        int year = NumberUtils.toInt(strYear);
-
-        Season season = serviceUtils.loadSeason(year);
-        List<Round> rounds = season.getRounds();
-
-        Map<String, String> roundStages = new HashMap<>();
-        roundStages.put("quals1", rounds.get(0).getStage().name());
-        roundStages.put("quals2", rounds.get(1).getStage().name());
-        roundStages.put("groups1", rounds.get(2).getStage().name());
-        roundStages.put("qroups2", rounds.get(3).getStage().name());
-        roundStages.put("playoffs", rounds.get(4).getStage().name());
-
-        return roundStages;
     }
 
     // -------------------------------------------------------------------------------------------------

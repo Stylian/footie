@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Tab, TableBody, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
@@ -13,7 +13,7 @@ class Season extends Component {
 
         this.state = {
             pageTitle: "Season " + props.year,
-            tabActive: 3,
+            tabActive: 5,
             stages: {},
         };
 
@@ -25,6 +25,14 @@ class Season extends Component {
             .then(
                 (result) => {
                     this.setState(state => {
+
+                        // to test , also the render as well
+                        let currentStage = 5;
+                        Object.keys(result).map((key, index) => {
+                            if(result[key] === "PLAYING") {
+                                currentStage = index + 1;
+                            }
+                        });
 
                         return {
                             ...state,
@@ -72,6 +80,7 @@ class Season extends Component {
                 {this.state.tabActive === 2 && <Quals year={this.props.year} round={2} />}
                 {this.state.tabActive === 3 && <Groups1 year={this.props.year}/>}
                 {this.state.tabActive === 4 && <Groups2 year={this.props.year}/>}
+                {this.state.tabActive === 5 && <Groups2 year={this.props.year}/>}
             </div>
         );
     }

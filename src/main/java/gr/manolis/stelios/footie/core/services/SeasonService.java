@@ -159,7 +159,7 @@ public class SeasonService {
 
 		}
 
-		map.put("champion", Arrays.asList(formerChampion));
+		map.put("champion", formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
 		map.put("toGroups", groupsTeams);
 		map.put("toQuals1", quals1Teams);
 		map.put("toQuals2", teamsClone);
