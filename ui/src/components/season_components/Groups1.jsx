@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {AppBar, Tab, Tabs} from "@material-ui/core";
 import QualsSeeding from "./quals_components/QualsSeeding";
 import GroupsSeeding from "./groups_components/GroupsSeeding";
+import GroupsMatches from "./groups_components/GroupsMatches";
+import GroupsDisplay from "./groups_components/GroupsDisplay";
 
 class Groups1 extends Component {
 
@@ -9,7 +11,7 @@ class Groups1 extends Component {
         super(props);
 
         this.state = {
-            tabActive: 0,
+            tabActive: 1,
         };
 
     }
@@ -29,11 +31,13 @@ class Groups1 extends Component {
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                         <Tab label="Seeding"/>
+                        <Tab label="Groups"/>
                         <Tab label="Matches"/>
-                        <Tab label="Match Replays"/>
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <GroupsSeeding year={this.props.year} round={1} />}
+                {this.state.tabActive === 1 && <GroupsDisplay year={this.props.year} round={1} />}
+                {this.state.tabActive === 2 && <GroupsMatches year={this.props.year} round={1} />}
             </div>
         );
     }

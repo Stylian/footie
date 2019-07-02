@@ -3,13 +3,13 @@ import {AppBar, Tab, Tabs} from "@material-ui/core";
 import QualsSeeding from "./quals_components/QualsSeeding";
 import QualsMatches from "./quals_components/QualsMatches";
 
-class Quals2 extends Component {
+class Quals extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            tabActive: 0,
+            tabActive: 1,
         };
 
     }
@@ -33,13 +33,13 @@ class Quals2 extends Component {
                         <Tab label="Match Replays"/>
                     </Tabs>
                 </AppBar>
-                {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={2}/>}
-                {this.state.tabActive === 1 && <QualsMatches year={this.props.year} round={2} day={1}/>}
-                {this.state.tabActive === 2 && <QualsMatches year={this.props.year} round={2} day={-1}/>}
+                {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={this.props.round}/>}
+                {this.state.tabActive === 1 && <QualsMatches year={this.props.year} round={this.props.round} day={1}/>}
+                {this.state.tabActive === 2 && <QualsMatches year={this.props.year} round={this.props.round} day={-1}/>}
             </div>
         );
     }
 }
 
 
-export default Quals2;
+export default Quals;

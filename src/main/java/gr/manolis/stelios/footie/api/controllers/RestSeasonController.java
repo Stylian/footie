@@ -145,6 +145,22 @@ public class RestSeasonController {
         return groupsTeams;
     }
 
+    @RequestMapping("/{year}/groups/{round}/matches")
+    public Map<Integer, List<Game>> groupsMatches(
+            @PathVariable(value = "year", required = true) String strYear,
+            @PathVariable(value = "round", required = true) String strRound) {
+        logger.info("groups matches");
+
+        int year = NumberUtils.toInt(strYear);
+        int round = NumberUtils.toInt(strRound);
+
+        Season season = serviceUtils.loadSeason(year);
+        GroupsRound groupsRound = serviceUtils.getGroupsRound(season, 1);
+
+        logger.info("groupsRounds: " + groupsRound);
+
+        return groupsRound.getGamesPerDay();
+    }
 
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
