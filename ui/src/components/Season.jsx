@@ -38,7 +38,7 @@ class Season extends Component {
                         <Tab label="2nd Quals Round"/>
                         <Tab label="1st Round"/>
                         <Tab label="2nd Round"/>
-                        <Tab label="Playoffs"/>
+                        <Tab disabled label="Playoffs"/>
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <Seeding year={this.props.year}/>}

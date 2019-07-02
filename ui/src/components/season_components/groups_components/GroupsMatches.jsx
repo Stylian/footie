@@ -63,7 +63,6 @@ class GroupsMatches extends Component {
                             <Grid item sm>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"Day " + day} align={"center"}
-                                                style={{backgroundColor: '#f5f5f5'}}
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>

@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.MuiAppBar-colorPrimary {
+  background-color: #1f6d93 !important;
+}
+
+.MuiTab-root {
+  text-transform: none !important;
+}
+
+.MuiCardHeader-root {
+  color: #fff !important;
+  background-color: #1f6d93 !important;
+}

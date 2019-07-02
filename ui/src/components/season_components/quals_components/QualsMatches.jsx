@@ -60,8 +60,7 @@ class QualsMatches extends Component {
                 <Grid container spacing={1}>
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Games"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant: 'h7'}}
+                            <CardHeader title={"Games"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>

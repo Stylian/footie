@@ -93,8 +93,7 @@ class Seeding extends Component {
         return (
             <Box width={800}>
                 <Card style={{margin: 20}}>
-                    <CardHeader title={"Seeding"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                titleTypographyProps={{variant: 'h7'}}
+                    <CardHeader title={"Seeding"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                     />
                     <CardContent>
                         <Grid container spacing={1}>

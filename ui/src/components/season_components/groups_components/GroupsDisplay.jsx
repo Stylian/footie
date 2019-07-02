@@ -62,7 +62,7 @@ class GroupsDisplay extends Component {
                         return (
                             <Grid item sm>
                                 <Card style={{margin: 20}}>
-                                    <CardHeader title={group.name} align={"center"} style={{backgroundColor: '#f5f5f5'}}
+                                    <CardHeader title={group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>

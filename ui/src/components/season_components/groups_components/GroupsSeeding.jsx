@@ -78,8 +78,7 @@ class GroupsSeeding extends Component {
                 <Grid container spacing={1}>
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 1"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
+                            <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant:'h7' }}
                             />
                             <CardContent>
                                 <table className="table" align={"center"} >
@@ -107,8 +106,7 @@ class GroupsSeeding extends Component {
 
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 2"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
+                            <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant:'h7' }}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
@@ -136,8 +134,7 @@ class GroupsSeeding extends Component {
 
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 3"} align={"center"} style={{backgroundColor: '#f5f5f5'}}
-                                        titleTypographyProps={{variant:'h7' }}
+                            <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant:'h7' }}
                             />
                             <CardContent>
                                 <table className="table" align={"center"} >
