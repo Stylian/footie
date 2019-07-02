@@ -71,7 +71,9 @@ class QualsSeeding extends Component {
                 <Grid container spacing={1}>
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Seeded"}/>
+                            <CardHeader title={"Seeded"} style={{backgroundColor: '#f5f5f5'}}
+                                        titleTypographyProps={{variant:'h7' }}
+                            />
                             <CardContent>
                                 <table className="table">
                                     <TableHead>
@@ -98,7 +100,9 @@ class QualsSeeding extends Component {
 
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Unseeded"}/>
+                            <CardHeader title={"Unseeded"} style={{backgroundColor: '#f5f5f5'}}
+                                        titleTypographyProps={{variant:'h7' }}
+                            />
                             <CardContent>
                                 <table className="table">
                                     <TableHead>

@@ -69,7 +69,12 @@ class Coefficients extends Component {
                             <TableBody>
                                 {Object.keys(firstTable).map((key, index) => {
                                     return (
-                                        <TableRow>
+                                        <TableRow
+                                            style={{backgroundColor:
+                                                    (index < 3) ? '#d9edf7' :
+                                                            (index < 7) ? '#dff0d8' :
+                                                                ''}}
+                                        >
                                             <TableCell align="right">{index + 1}</TableCell>
                                             <TableCell>{key}</TableCell>
                                             <TableCell align="right">{this.state.teams[key]}</TableCell>

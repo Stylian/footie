@@ -98,9 +98,9 @@ class Seeding extends Component {
                                         return (
                                             <TableRow
                                                 style={{backgroundColor:
-                                                        (team.seed === "champion") ? '#3c763d' :
-                                                            (team.seed === "toGroups") ? '#66b268' :
-                                                                (team.seed === "toQuals2") ? '#aad4ab' :
+                                                        (team.seed === "champion") ? '#d9edf7' :
+                                                            (team.seed === "toGroups") ? '#d9edf7' :
+                                                                (team.seed === "toQuals2") ? '#dff0d8' :
                                                 ''}}
 
                                             >
@@ -127,9 +127,9 @@ class Seeding extends Component {
                                         return (
                                             <TableRow
                                                 style={{backgroundColor:
-                                                        (team.seed === "champion") ? '#3c763d' :
-                                                            (team.seed === "toGroups") ? '#66b268' :
-                                                                (team.seed === "toQuals2") ? '#aad4ab' :
+                                                        (team.seed === "champion") ? '#d9edf7' :
+                                                            (team.seed === "toGroups") ? '#d9edf7' :
+                                                                (team.seed === "toQuals2") ? '#dff0d8' :
                                                                     ''}}
                                             >
                                                 <TableCell align="right">{leftSide.length + index + 1}</TableCell>

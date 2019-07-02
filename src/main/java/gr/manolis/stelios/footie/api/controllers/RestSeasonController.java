@@ -1,8 +1,10 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
@@ -14,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @Transactional
@@ -62,4 +61,30 @@ public class RestSeasonController {
         return teamsWithCoeffs;
     }
 
+    @RequestMapping("/{year}/quals1/preview")
+    public Map<String, Map<Team, Integer>> quals1Preview(@PathVariable(value = "year", required = true) String strYear) {
+        logger.info("quals1 preview");
+
+        int year = NumberUtils.toInt(strYear);
+
+        Season season = serviceUtils.loadSeason(year);
+        QualsRound qr = serviceUtils.getQualRound(season, 1);
+
+        List<Team> teamsStrong = qr.getStrongTeams();
+        List<Team> teamsWeak = qr.getWeakTeams();
+
+        //put to strong teams for pre-previews
+        if(qr.getStage() == Stage.NOT_STARTED) {
+            teamsStrong = qr.getTeams(); // why you empty?
+        }
+
+        Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
+        Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+
+        Map<String, Map<Team, Integer>> qualsTeams = new HashMap<>();
+        qualsTeams.put("strong", teamsStrongWithCoeffs);
+        qualsTeams.put("weak", teamsWeakWithCoeffs);
+
+        return qualsTeams;
+    }
 }
