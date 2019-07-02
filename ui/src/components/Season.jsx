@@ -14,10 +14,36 @@ class Season extends Component {
         this.state = {
             pageTitle: "Season " + props.year,
             tabActive: 3,
+            stages: {},
         };
 
     }
 
+    componentDidMount() {
+        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/status")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            stages: result,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
     handleChange = (event, newValue) => {
         this.setState(state => {
             return {
@@ -34,11 +60,11 @@ class Season extends Component {
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                         <Tab label="Seeding"/>
-                        <Tab label="1st Quals Round"/>
-                        <Tab label="2nd Quals Round"/>
-                        <Tab label="1st Round"/>
-                        <Tab label="2nd Round"/>
-                        <Tab disabled label="Playoffs"/>
+                        <Tab disabled={(this.state.stages.quals1 === "NOT_STARTED")} label="1st Quals Round"/>
+                        <Tab disabled={(this.state.stages.quals2 === "NOT_STARTED")} label="2nd Quals Round"/>
+                        <Tab disabled={(this.state.stages.qroups1 === "NOT_STARTED")} label="1st Round"/>
+                        <Tab disabled={(this.state.stages.qroups2 === "NOT_STARTED")} label="2nd Round"/>
+                        <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <Seeding year={this.props.year}/>}

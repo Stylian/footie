@@ -128,25 +128,25 @@ public class GroupsRoundService {
 		Collections.shuffle(weakTeams);
 
 		// create groups and add teams and games
-		RobinGroup groupA = new RobinGroup12("GROUP A");
+		RobinGroup groupA = new RobinGroup12("Group A");
 		groupA.addTeam(strongTeams.get(0));
 		groupA.addTeam(mediumTeams.get(0));
 		groupA.addTeam(weakTeams.get(0));
 		groupA.buildGames();
 
-		RobinGroup groupB = new RobinGroup12("GROUP B");
+		RobinGroup groupB = new RobinGroup12("Group B");
 		groupB.addTeam(strongTeams.get(1));
 		groupB.addTeam(mediumTeams.get(1));
 		groupB.addTeam(weakTeams.get(1));
 		groupB.buildGames();
 
-		RobinGroup groupC = new RobinGroup12("GROUP C");
+		RobinGroup groupC = new RobinGroup12("Group C");
 		groupC.addTeam(strongTeams.get(2));
 		groupC.addTeam(mediumTeams.get(2));
 		groupC.addTeam(weakTeams.get(2));
 		groupC.buildGames();
 
-		RobinGroup groupD = new RobinGroup12("GROUP D");
+		RobinGroup groupD = new RobinGroup12("Group D");
 		groupD.addTeam(strongTeams.get(3));
 		groupD.addTeam(mediumTeams.get(3));
 		groupD.addTeam(weakTeams.get(3));
