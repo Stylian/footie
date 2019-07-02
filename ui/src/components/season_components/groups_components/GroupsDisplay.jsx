@@ -87,7 +87,10 @@ class GroupsDisplay extends Component {
                                                         <TableRow
                                                             style={{
                                                                 backgroundColor:
-                                                                    (this.props.round == 1 && index < 1) ? '#d9edf7' : '#f2dede'
+                                                                    (this.props.round == 1 && index < 2) ? '#d9edf7' :
+                                                                        (this.props.round == 2 && index < 1) ? '#d9edf7' :
+                                                                        (this.props.round == 2 && index < 3) ? '#fcf8e3' :
+                                                                        '#f2dede'
                                                             }}
                                                         >
                                                             <TableCell align="right">{index + 1}</TableCell>
