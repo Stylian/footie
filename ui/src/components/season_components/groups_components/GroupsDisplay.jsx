@@ -54,13 +54,13 @@ class GroupsDisplay extends Component {
     render() {
 
         return (
-            <Box width={1900}>
+            <Box width={1400}>
 
                 <Grid container spacing={1}>
                     {this.state.groups.map((group, index) => {
 
                         return (
-                            <Grid item sm>
+                            <Grid item sm={6}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}

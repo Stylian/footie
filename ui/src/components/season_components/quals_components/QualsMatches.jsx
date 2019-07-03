@@ -54,13 +54,13 @@ class QualsMatches extends Component {
     render() {
 
         return (
-            <Box width={500}>
+            <Box width={1200}>
                 <Grid container spacing={1}>
                     {Object.keys(this.state.days).map((day, index) => {
                         return (
-                            <Grid item sm>
+                            <Grid item sm={4}>
                                 <Card style={{margin: 20}}>
-                                    <CardHeader title={day == 1 ? "Main Matches" : "Match Replays"} align={"center"}
+                                    <CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>

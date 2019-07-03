@@ -61,7 +61,7 @@ class Stats extends Component {
         });
 
         return (
-            <Box width={1800}>
+            <Box width={1200}>
                 <Paper elevation={12} style={{margin: 20}}>
 
                     <Grid container spacing={1}>

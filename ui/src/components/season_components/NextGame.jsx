@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Typography from "@material-ui/core/Typography";
 
 class NextGame extends Component {
 
@@ -42,9 +41,8 @@ class NextGame extends Component {
         return (
                 <div>
                     {this.state.game.id == 0 ? ('') : (
-                        <Typography variant="h7" >WTF {this.state.game.awayTeam.name}</Typography>
-
-
+                        <div>WTF</div>
+                        //this.state.game.awayTeam.name
                     )}
                 </div>
         );

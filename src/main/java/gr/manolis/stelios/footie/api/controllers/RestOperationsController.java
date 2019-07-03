@@ -77,7 +77,7 @@ public class RestOperationsController {
 
 	}
 
-	@PostMapping("/groups/12/seed")
+	@PostMapping("/groups/1/seed")
 	public RestResponse seedGroupsRoundOf12() {
 
 		GroupsRound round = operationsService.seedGroupsRoundOf12();
@@ -85,7 +85,7 @@ public class RestOperationsController {
 
 	}
 
-	@PostMapping("/groups/12/set")
+	@PostMapping("/groups/1/set")
 	public RestResponse setGroupsRoundOf12() {
 
 		GroupsRound round = operationsService.setGroupsRoundOf12();
@@ -93,7 +93,7 @@ public class RestOperationsController {
 
 	}
 
-	@PostMapping("/groups/8/seedAndSet")
+	@PostMapping("/groups/2/seedAndSet")
 	public RestResponse seedAndSetGroupsRoundOf8() {
 
 		GroupsRound round = operationsService.seedAndSetGroupsRoundOf8();

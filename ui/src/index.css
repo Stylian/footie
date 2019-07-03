@@ -24,3 +24,8 @@ code {
   color: #fff !important;
   background-color: #1f6d93 !important;
 }
+
+
+.MuiTableCell-root {
+  padding: 5px 15px 5px 15px !important;
+}

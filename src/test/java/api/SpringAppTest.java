@@ -32,6 +32,12 @@ public class SpringAppTest {
 	private TestRestTemplate testRestTemplate;
 
 	@Test
+	public void fillGames() throws Exception {
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+	}
+
+
+	@Test
 	public void testOps() throws Exception {
 
 		checkURL("/rest/ops/league", "{status=success, message=created league}");
@@ -54,11 +60,11 @@ public class SpringAppTest {
 		checkURL("/rest/ops/quals/2/set", "{status=success, message=set 2nd Qualifying Round}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/groups/12/seed", "{status=success, message=seeded Groups Round of 12}");
-		checkURL("/rest/ops/groups/12/set", "{status=success, message=set Groups Round of 12}");
+		checkURL("/rest/ops/groups/1/seed", "{status=success, message=seeded Groups Round of 12}");
+		checkURL("/rest/ops/groups/1/set", "{status=success, message=set Groups Round of 12}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/groups/8/seedAndSet", "{status=success, message=seeded and set Groups Round of 8}");
+		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set Groups Round of 8}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
 		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");

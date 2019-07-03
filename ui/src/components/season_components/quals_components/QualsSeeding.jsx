@@ -74,13 +74,7 @@ class QualsSeeding extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            haveToSetUpTeams: result.status != "success",
-                        }
-                    });
+                    window.location.reload();
                 },
                 (error) => {
                     this.setState(state => {

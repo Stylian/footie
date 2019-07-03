@@ -77,7 +77,7 @@ class Season extends Component {
                         <Tab label="1st Quals Round"/>
                         <Tab label="2nd Quals Round"/>
                         <Tab disabled={(this.state.stages.groups1 === "NOT_STARTED")} label="1st Round"/>
-                        {/*<Tab disabled={(this.state.stages.qroups2 === "NOT_STARTED")} label="2nd Round"/>*/}
+                        <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Round"/>
                         {/*<Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>*/}
                     </Tabs>
                 </AppBar>
@@ -86,8 +86,9 @@ class Season extends Component {
                                                       stage={this.state.stages.quals1} />}
                 {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={2}
                                                       stage={this.state.stages.quals2} />}
-                {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}/>}
-                {/*{this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
+                {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}
+                                                        stage={this.state.stages.groups1} />}
+                {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum} />}
                 {/*{this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
             </Paper>
         );

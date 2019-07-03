@@ -43,14 +43,39 @@ public class RestSeasonController {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private RestOperationsController restOperationsController;
+
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     @RequestMapping("next_game")
     @Nullable
-    public Game getNextGame() {
+    public Game getNextGameAndMoveStages() {
         logger.info("getNextGame");
         Game game = gameService.getNextGame();
+
+        // no more games so move to next stage
+        if (game == null) {
+            Map<String, String> rounds = seasonStatus("" + serviceUtils.loadCurrentSeason().getSeasonYear());
+            for (Map.Entry<String, String> round : rounds.entrySet()) {
+                if ("PLAYING".equals(round.getValue())) {
+                    round.setValue("FINISHED");
+
+                    switch (round.getKey()) {
+                        case "quals1":
+                            restOperationsController.seedQualsRound("2");
+                            break;
+                        case "quals2":
+                            restOperationsController.seedGroupsRoundOf12();
+                            break;
+                    }
+                }
+
+            }
+
+        }
+
         return game == null ? new Game() : game; // new game has id of 0
     }
 
@@ -160,7 +185,19 @@ public class RestSeasonController {
         Season season = serviceUtils.loadSeason(year);
         QualsRound qr = serviceUtils.getQualRound(season, round);
 
-        return qr.getGamesPerDay();
+        // need to split main games to day 1 and 2 for viewing
+        Map<Integer, List<Game>> days = qr.getGamesPerDay();
+        List<Game> mainGames = days.get(1);
+        List<Game> replayGames = days.get(-1);
+
+        Map<Integer, List<Game>> newDaysStructure = new HashMap<>();
+        if(replayGames != null) {
+            newDaysStructure.put(-1, replayGames);
+        }
+        newDaysStructure.put(1, mainGames.subList(0, mainGames.size()/2));
+        newDaysStructure.put(2, mainGames.subList(mainGames.size()/2, mainGames.size()));
+
+        return newDaysStructure;
     }
 
 

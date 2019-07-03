@@ -11,6 +11,7 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class GroupsSeeding extends Component {
 
@@ -20,6 +21,7 @@ class GroupsSeeding extends Component {
         this.state = {
             error: null,
             isLoaded: false,
+            haveToSetUpTeams: props.haveToSetUpTeams,
             teamsStrong: [],
             teamsMedium: [],
             teamsWeak: [],
@@ -70,11 +72,35 @@ class GroupsSeeding extends Component {
             )
     }
 
+    handleSettingUpButtonClick = (event, newValue) => {
+        fetch("http://localhost:8080/rest/ops//groups/" + this.props.round + "/set", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    window.location.reload();
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
     render() {
 
         return (
             <Box width={1200}>
-
+                {this.state.haveToSetUpTeams ? (
+                    <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
+                ) : ''}
                 <Grid container spacing={1}>
                     <Grid item sm>
                         <Card style={{margin: 20}}>
