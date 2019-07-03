@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 
 class NextGame extends Component {
 
@@ -6,7 +7,7 @@ class NextGame extends Component {
         super(props);
 
         this.state = {
-            game: {},
+            game: {id: 0, homeTeam: {name: null}, awayTeam: {name: null}},
         };
 
     }
@@ -39,12 +40,19 @@ class NextGame extends Component {
 
     render() {
         return (
-                <div>
+            <table className="table" align={"center"}>
+                <TableBody>
                     {this.state.game.id == 0 ? ('') : (
-                        <div>WTF</div>
-                        //this.state.game.awayTeam.name
+                        <TableRow>
+                            <TableCell class="cancelcss" align={"left"}>{this.state.game.homeTeam.name}</TableCell>
+                            <TableCell class="cancelcss" ></TableCell>
+                            <TableCell class="cancelcss" align={"center"}> - </TableCell>
+                            <TableCell class="cancelcss" ></TableCell>
+                            <TableCell class="cancelcss" align={"right"}>{this.state.game.awayTeam.name}</TableCell>
+                        </TableRow>
                     )}
-                </div>
+                </TableBody>
+            </table>
         );
     }
 

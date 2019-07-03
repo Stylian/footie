@@ -60,7 +60,6 @@ public class RestSeasonController {
             Map<String, String> rounds = seasonStatus("" + serviceUtils.loadCurrentSeason().getSeasonYear());
             for (Map.Entry<String, String> round : rounds.entrySet()) {
                 if ("PLAYING".equals(round.getValue())) {
-                    round.setValue("FINISHED");
 
                     switch (round.getKey()) {
                         case "quals1":
@@ -68,6 +67,9 @@ public class RestSeasonController {
                             break;
                         case "quals2":
                             restOperationsController.seedGroupsRoundOf12();
+                            break;
+                        case "groups1":
+                            restOperationsController.seedAndSetGroupsRoundOf8();
                             break;
                     }
                 }

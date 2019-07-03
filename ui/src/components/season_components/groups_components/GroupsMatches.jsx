@@ -55,7 +55,7 @@ class GroupsMatches extends Component {
     render() {
 
         return (
-            <Box width={1600}>
+            <Box width={1200}>
 
                 <Grid container spacing={1}>
                     {Object.keys(this.state.days).map((day, index) => {
@@ -79,8 +79,12 @@ class GroupsMatches extends Component {
                                                     return (
                                                         <TableRow>
                                                             <TableCell align="left">{game.homeTeam.name}</TableCell>
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                            {game.result == null ? (
+                                                                <TableCell></TableCell>
+                                                            ) : (
+                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                            )}
                                                             <TableCell align="right">{game.awayTeam.name}</TableCell>
                                                         </TableRow>)
                                                 })}
