@@ -36,6 +36,7 @@ class Seeding extends Component {
                     for (let objTeam of result[1].champion) {
                         champion.push(objTeam.name);
                     }
+
                     let toQuals1 = [];
                     for (let objTeam of result[1].toQuals1) {
                         toQuals1.push(objTeam.name);

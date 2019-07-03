@@ -1,18 +1,18 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
-import gr.manolis.stelios.footie.api.services.OperationsService;
+import com.sun.istack.internal.Nullable;
+import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
-import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.SeasonService;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
+import gr.manolis.stelios.footie.core.services.*;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -26,7 +26,7 @@ import java.util.*;
 
 @RestController
 @Transactional
-@RequestMapping("/rest/seasons")
+@RequestMapping("/rest")
 public class RestSeasonController {
 
     final static Logger logger = Logger.getLogger(RestSeasonController.class);
@@ -35,15 +35,29 @@ public class RestSeasonController {
     private SeasonService seasonService;
 
     @Autowired
+    private ViewsService viewsService;
+
+    @Autowired
     private ServiceUtils serviceUtils;
 
     @Autowired
-    private OperationsService operationsService;
+    private GameService gameService;
 
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    @RequestMapping("/{year}/status")
+    @RequestMapping("next_game")
+    @Nullable
+    public Game getNextGame() {
+        logger.info("getNextGame");
+        Game game = gameService.getNextGame();
+        return game == null ? new Game() : game; // new game has id of 0
+    }
+
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    @RequestMapping("seasons/{year}/status")
     public Map<String, String> seasonStatus(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
@@ -66,14 +80,14 @@ public class RestSeasonController {
         }
 
         // replaces default values
-        for(Round round : season.getRounds()) {
+        for (Round round : season.getRounds()) {
             roundStages.put(round.getName(), round.getStage().name());
         }
 
         return roundStages;
-}
+    }
 
-    @RequestMapping("/{year}/seeding")
+    @RequestMapping("seasons/{year}/seeding")
     public Object[] seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
@@ -87,10 +101,14 @@ public class RestSeasonController {
         logger.info("teamsWithCoeffs: " + teamsWithCoeffs);
 
         Map<String, List<Team>> teamsInRounds = null;
-        if(season.getSeasonYear() == 1) {
+        if (season.getSeasonYear() != 1) {
             teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
-        }else { // just for viewing
-            teamsInRounds.put("toQuals1", season.getTeams());
+        } else { // just for viewing
+            teamsInRounds = new HashMap<>();
+            teamsInRounds.put("toQuals1", teams);
+            teamsInRounds.put("toQuals2", Collections.emptyList());
+            teamsInRounds.put("toGroups", Collections.emptyList());
+            teamsInRounds.put("champion", Collections.emptyList());
         }
         logger.info("teamsInRounds: " + teamsInRounds);
 
@@ -100,7 +118,7 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    @RequestMapping("/{year}/quals/{round}/seeding")
+    @RequestMapping("seasons/{year}/quals/{round}/seeding")
     public Map<String, Map<Team, Integer>> qualsSeeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -130,7 +148,7 @@ public class RestSeasonController {
         return qualsTeams;
     }
 
-    @RequestMapping("/{year}/quals/{round}/matches")
+    @RequestMapping("seasons/{year}/quals/{round}/matches")
     public Map<Integer, List<Game>> qualsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -149,7 +167,7 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    @RequestMapping("/{year}/groups/{round}/seeding")
+    @RequestMapping("seasons/{year}/groups/{round}/seeding")
     public Map<String, Map<Team, Integer>> groups1Seeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -183,7 +201,7 @@ public class RestSeasonController {
         return groupsTeams;
     }
 
-    @RequestMapping("/{year}/groups/{round}/matches")
+    @RequestMapping("seasons/{year}/groups/{round}/matches")
     public Map<Integer, List<Game>> groupsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -200,7 +218,7 @@ public class RestSeasonController {
         return groupsRound.getGamesPerDay();
     }
 
-    @RequestMapping("/{year}/groups/{round}")
+    @RequestMapping("seasons/{year}/groups/{round}")
     public List<RobinGroup> groupsRound(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -215,6 +233,12 @@ public class RestSeasonController {
         logger.info("groupsRounds: " + groupsRound);
 
         return groupsRound.getGroups();
+    }
+
+    @RequestMapping("/seasons/{year}/playoffs")
+    public PlayoffsRound getPlayoffsRound(@PathVariable String year) {
+
+        return viewsService.getPlayoffsRound(NumberUtils.toInt(year));
     }
 
     // -------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Paper, Tab, Tabs} from "@material-ui/core";
 import GameStats from "./admin_components/GameStats";
 import Monitoring from "./admin_components/Monitoring";
 
@@ -27,7 +27,7 @@ class Admin extends Component {
 
     render() {
         return (
-            <div>
+            <Paper style={{margin: 20}} elevation={20} >
                 <LeagueToolbar pageTitle={this.state.pageTitle} />
                 <div>
                     <AppBar position="static">
@@ -39,7 +39,7 @@ class Admin extends Component {
                     {this.state.tabActive === 0 && <GameStats />}
                     {this.state.tabActive === 1 && <Monitoring />}
                 </div>
-            </div>
+            </Paper>
         );
     }
 }

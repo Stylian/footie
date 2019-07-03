@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Tabs, Tab, Typography} from "@material-ui/core";
+import {AppBar, Tabs, Tab, Typography, Paper} from "@material-ui/core";
 import Coefficients from "./history_components/Coefficients";
 import Stats from "./history_components/Stats";
 import PastWinners from "./history_components/PastWinners";
@@ -28,7 +28,7 @@ class History extends Component {
 
     render() {
         return (
-            <div>
+            <Paper style={{margin: 20}} elevation={20} >
                 <LeagueToolbar pageTitle={this.state.pageTitle} />
                 <div>
                     <AppBar position="static">
@@ -42,7 +42,7 @@ class History extends Component {
                     {this.state.tabActive === 1 && <Coefficients />}
                     {this.state.tabActive === 2 && <PastWinners />}
                 </div>
-            </div>
+            </Paper>
         );
     }
 }

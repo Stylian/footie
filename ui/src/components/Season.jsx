@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Tab, TableBody, Tabs} from "@material-ui/core";
+import {AppBar, Paper, Tab, TableBody, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
@@ -69,7 +69,7 @@ class Season extends Component {
 
     render() {
         return (
-            <div>
+            <Paper style={{margin: 20}} elevation={20} >
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
@@ -89,7 +89,7 @@ class Season extends Component {
                 {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}/>}
                 {/*{this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
                 {/*{this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
-            </div>
+            </Paper>
         );
     }
 }
