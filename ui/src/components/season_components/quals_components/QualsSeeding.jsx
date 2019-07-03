@@ -11,6 +11,7 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class QualsSeeding extends Component {
 
@@ -20,6 +21,7 @@ class QualsSeeding extends Component {
         this.state = {
             error: null,
             isLoaded: false,
+            haveToSetUpTeams: props.haveToSetUpTeams,
             teamsStrong: [],
             teamsWeak: [],
         };
@@ -27,22 +29,23 @@ class QualsSeeding extends Component {
     }
 
     componentDidMount() {
+
         fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/seeding")
             .then(res => res.json())
             .then(
                 (result) => {
+
+                    let teamsStrong = [];
+                    Object.keys(result["strong"]).map((key, index) => {
+                        teamsStrong[index] = {"name": key, "coefficients": result["strong"][key]};
+                    });
+
+                    let teamsWeak = [];
+                    Object.keys(result["weak"]).map((key, index) => {
+                        teamsWeak[index] = {"name": key, "coefficients": result["weak"][key]};
+                    });
+
                     this.setState(state => {
-
-                        let teamsStrong = [];
-                        Object.keys(result["strong"]).map((key, index) => {
-                            teamsStrong[index] = {"name": key, "coefficients": result["strong"][key]};
-                        });
-
-                        let teamsWeak = [];
-                        Object.keys(result["weak"]).map((key, index) => {
-                            teamsWeak[index] = {"name": key, "coefficients": result["weak"][key]};
-                        });
-
                         return {
                             ...state,
                             isLoaded: true,
@@ -63,15 +66,45 @@ class QualsSeeding extends Component {
             )
     }
 
+    handleSettingUpButtonClick = (event, newValue) => {
+        fetch("http://localhost:8080/rest/ops//quals/" + this.props.round + "/set", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            haveToSetUpTeams: result.status != "success",
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
     render() {
 
         return (
             <Box width={800}>
-
+                {this.state.haveToSetUpTeams ? (
+                    <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
+                ) : ''}
                 <Grid container spacing={1}>
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Seeded"} align={"center"} titleTypographyProps={{variant:'h7' }}
+                            <CardHeader title={"Seeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
@@ -99,7 +132,7 @@ class QualsSeeding extends Component {
 
                     <Grid item sm>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Unseeded"} align={"center"} titleTypographyProps={{variant:'h7' }}
+                            <CardHeader title={"Unseeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>

@@ -11,6 +11,7 @@ import {
     CardHeader,
     CardContent
 } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class Seeding extends Component {
 
@@ -30,41 +31,41 @@ class Seeding extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+
+                    let champion = [];
+                    for (let objTeam of result[1].champion) {
+                        champion.push(objTeam.name);
+                    }
+                    let toQuals1 = [];
+                    for (let objTeam of result[1].toQuals1) {
+                        toQuals1.push(objTeam.name);
+                    }
+
+                    let toQuals2 = [];
+                    for (let objTeam of result[1].toQuals2) {
+                        toQuals2.push(objTeam.name);
+                    }
+
+                    let toGroups = [];
+                    for (let objTeam of result[1].toGroups) {
+                        toGroups.push(objTeam.name);
+                    }
+
+                    let teams = [];
+                    Object.keys(result[0]).map((key, index) => {
+                        teams[index] = {"name": key, "coefficients": result[0][key]};
+                        if (champion.find(obj => obj === key)) {
+                            teams[index]["seed"] = "champion";
+                        } else if (toQuals1.find(obj => obj === key)) {
+                            teams[index]["seed"] = "toQuals1";
+                        } else if (toQuals2.find(obj => obj === key)) {
+                            teams[index]["seed"] = "toQuals2";
+                        } else if (toGroups.find(obj => obj === key)) {
+                            teams[index]["seed"] = "toGroups";
+                        }
+                    });
+
                     this.setState(state => {
-
-                        let champion = [];
-                        for (let objTeam of result[1].champion) {
-                            champion.push(objTeam.name);
-                        }
-                        let toQuals1 = [];
-                        for (let objTeam of result[1].toQuals1) {
-                            toQuals1.push(objTeam.name);
-                        }
-
-                        let toQuals2 = [];
-                        for (let objTeam of result[1].toQuals2) {
-                            toQuals2.push(objTeam.name);
-                        }
-
-                        let toGroups = [];
-                        for (let objTeam of result[1].toGroups) {
-                            toGroups.push(objTeam.name);
-                        }
-
-                        let teams = [];
-                        Object.keys(result[0]).map((key, index) => {
-                            teams[index] = {"name": key, "coefficients": result[0][key]};
-                            if (champion.find(obj => obj === key)) {
-                                teams[index]["seed"] = "champion";
-                            } else if (toQuals1.find(obj => obj === key)) {
-                                teams[index]["seed"] = "toQuals1";
-                            } else if (toQuals2.find(obj => obj === key)) {
-                                teams[index]["seed"] = "toQuals2";
-                            } else if (toGroups.find(obj => obj === key)) {
-                                teams[index]["seed"] = "toGroups";
-                            }
-                        });
-
                         return {
                             ...state,
                             isLoaded: true,
@@ -86,9 +87,10 @@ class Seeding extends Component {
 
     render() {
 
-        let half_length = Math.ceil(this.state.teams.length / 2);
-        let leftSide = this.state.teams.splice(0, half_length);
-        let rightSide = this.state.teams;
+        let teams = [...this.state.teams];
+        let half_length = Math.ceil(teams.length / 2);
+        let leftSide = teams.splice(0, half_length);
+        let rightSide = teams;
 
         return (
             <Box width={800}>
@@ -117,7 +119,6 @@ class Seeding extends Component {
                                                                     (team.seed === "toQuals2") ? '#dff0d8' :
                                                                         ''
                                                     }}
-
                                                 >
                                                     <TableCell align="right">{index + 1}</TableCell>
                                                     <TableCell>{team.name}</TableCell>

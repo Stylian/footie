@@ -12,30 +12,35 @@ class Season extends Component {
         super(props);
 
         this.state = {
-            pageTitle: "Season " + props.year,
-            tabActive: 5,
+            pageTitle: "Season " + props.match.params.seasonNum,
+            tabActive: 0,
             stages: {},
         };
 
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/status")
+        fetch("http://localhost:8080/rest/seasons/" + this.props.match.params.seasonNum + "/status")
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState(state => {
 
                         // to test , also the render as well
-                        let currentStage = 5;
+                        let currentStage = 0;
                         Object.keys(result).map((key, index) => {
-                            if(result[key] === "PLAYING") {
-                                currentStage = index + 1;
+                            if (result[key] === "ON_PREVIEW") {
+                                currentStage = index;
+                                return;
+                            }else if (result[key] === "PLAYING") {
+                                currentStage = index;
+                                return;
                             }
                         });
 
                         return {
                             ...state,
+                            tabActive: currentStage,
                             isLoaded: true,
                             stages: result,
                         }
@@ -52,6 +57,7 @@ class Season extends Component {
                 }
             )
     }
+
     handleChange = (event, newValue) => {
         this.setState(state => {
             return {
@@ -64,23 +70,24 @@ class Season extends Component {
     render() {
         return (
             <div>
-                <LeagueToolbar pageTitle={this.state.pageTitle} />
+                <LeagueToolbar pageTitle={this.state.pageTitle}/>
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                         <Tab label="Seeding"/>
-                        <Tab disabled={(this.state.stages.quals1 === "NOT_STARTED")} label="1st Quals Round"/>
+                        <Tab label="1st Quals Round"/>
                         <Tab disabled={(this.state.stages.quals2 === "NOT_STARTED")} label="2nd Quals Round"/>
-                        <Tab disabled={(this.state.stages.qroups1 === "NOT_STARTED")} label="1st Round"/>
-                        <Tab disabled={(this.state.stages.qroups2 === "NOT_STARTED")} label="2nd Round"/>
-                        <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>
+                        <Tab disabled={(this.state.stages.groups1 === "NOT_STARTED")} label="1st Round"/>
+                        {/*<Tab disabled={(this.state.stages.qroups2 === "NOT_STARTED")} label="2nd Round"/>*/}
+                        {/*<Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>*/}
                     </Tabs>
                 </AppBar>
-                {this.state.tabActive === 0 && <Seeding year={this.props.year}/>}
-                {this.state.tabActive === 1 && <Quals year={this.props.year} round={1} />}
-                {this.state.tabActive === 2 && <Quals year={this.props.year} round={2} />}
-                {this.state.tabActive === 3 && <Groups1 year={this.props.year}/>}
-                {this.state.tabActive === 4 && <Groups2 year={this.props.year}/>}
-                {this.state.tabActive === 5 && <Groups2 year={this.props.year}/>}
+                {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum} />}
+                {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={1}
+                                                      stage={this.state.stages.quals1} />}
+                {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={2}/>}
+                {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}/>}
+                {/*{this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
+                {/*{this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
             </div>
         );
     }

@@ -77,9 +77,13 @@ public class SeasonService {
 		
 		Season season = serviceUtils.loadCurrentSeason();
 
-		QualsRound qualsRound1 = new QualsRound(season, "1st Qualifying Round", 1);
-		QualsRound qualsRound2 = new QualsRound(season, "2nd Qualifying Round", 2);
-		GroupsRound groupsRound12 = new GroupsRound(season, "Groups Round of 12", 3);
+		if(season.getStage() == Stage.PLAYING || season.getStage() == Stage.FINISHED) {
+			return season;
+		}
+
+		QualsRound qualsRound1 = new QualsRound(season, "quals1", 1);
+		QualsRound qualsRound2 = new QualsRound(season, "quals2", 2);
+		GroupsRound groupsRound12 = new GroupsRound(season, "groups1", 3);
 
 		Map<String, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
 

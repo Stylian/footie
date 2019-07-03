@@ -76,8 +76,12 @@ class QualsMatches extends Component {
                                             return (
                                                 <TableRow>
                                                     <TableCell align="left">{game.homeTeam.name}</TableCell>
-                                                    <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                    + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                    {game.result == null ? (
+                                                        <TableCell></TableCell>
+                                                    ) : (
+                                                        <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                        + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                    ) }
                                                     <TableCell align="right">{game.awayTeam.name}</TableCell>
                                                 </TableRow>)
                                         })}
