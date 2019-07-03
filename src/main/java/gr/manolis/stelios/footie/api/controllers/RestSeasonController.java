@@ -130,21 +130,19 @@ public class RestSeasonController {
         return qualsTeams;
     }
 
-    @RequestMapping("/{year}/quals/{round}/matches/{day}")
-    public List<Game> qualsMatches(
+    @RequestMapping("/{year}/quals/{round}/matches")
+    public Map<Integer, List<Game>> qualsMatches(
             @PathVariable(value = "year", required = true) String strYear,
-            @PathVariable(value = "round", required = true) String strRound,
-            @PathVariable(value = "day", required = true) String strDay) {
+            @PathVariable(value = "round", required = true) String strRound) {
         logger.info("quals matches");
 
         int year = NumberUtils.toInt(strYear);
         int round = NumberUtils.toInt(strRound);
-        int day = NumberUtils.toInt(strDay);
 
         Season season = serviceUtils.loadSeason(year);
         QualsRound qr = serviceUtils.getQualRound(season, round);
 
-        return qr.getGamesPerDay().get(day);
+        return qr.getGamesPerDay();
     }
 
 
