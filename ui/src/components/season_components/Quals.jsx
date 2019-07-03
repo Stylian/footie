@@ -9,7 +9,8 @@ class Quals extends Component {
         super(props);
 
         this.state = {
-            tabActive: this.props.stage === "ON_PREVIEW" ? 0 : 1,
+            tabActive: this.props.stage === "ON_PREVIEW" ? 0 :
+                (this.props.stage === "NOT_STARTED" ? 0 : 1),
         };
 
     }
@@ -29,8 +30,8 @@ class Quals extends Component {
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                         <Tab label="Seeding"/>
-                        <Tab disabled={(this.props.stage === "ON_PREVIEW")} label="Matches"/>
-                        <Tab disabled={(this.props.stage === "ON_PREVIEW")} label="Match Replays"/>
+                        <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")} label="Matches"/>
+                        <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")} label="Match Replays"/>
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={this.props.round}

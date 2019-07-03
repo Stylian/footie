@@ -86,7 +86,12 @@ public class RestSeasonController {
         Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
         logger.info("teamsWithCoeffs: " + teamsWithCoeffs);
 
-        Map<String, List<Team>> teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
+        Map<String, List<Team>> teamsInRounds = null;
+        if(season.getSeasonYear() == 1) {
+            teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
+        }else { // just for viewing
+            teamsInRounds.put("toQuals1", season.getTeams());
+        }
         logger.info("teamsInRounds: " + teamsInRounds);
 
         return new Object[]{teamsWithCoeffs, teamsInRounds};
