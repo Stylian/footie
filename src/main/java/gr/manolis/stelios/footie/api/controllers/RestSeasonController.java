@@ -8,6 +8,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
@@ -277,10 +278,27 @@ public class RestSeasonController {
         return groupsRound.getGroups();
     }
 
-    @RequestMapping("/seasons/{year}/playoffs")
-    public PlayoffsRound getPlayoffsRound(@PathVariable String year) {
+    @RequestMapping("/seasons/{year}/playoffs/structure")
+    public Map<String, String> getPlayoffsRound(@PathVariable String year) {
 
-        return viewsService.getPlayoffsRound(NumberUtils.toInt(year));
+        PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
+        Map<String, String> structure = new HashMap<>();
+        structure.put("gA1", round.getgA1().getName());
+        structure.put("gA2", round.getgA2().getName());
+        structure.put("gA3", round.getgA3().getName());
+        structure.put("gB1", round.getgB1().getName());
+        structure.put("gB2", round.getgB2().getName());
+        structure.put("gB3", round.getgB3().getName());
+
+        //semis
+        structure.put("S1", round.getgA3().getName());
+        structure.put("S2", round.getgB3().getName());
+
+        //finals
+        structure.put("F1", round.getgA1().getName());
+        structure.put("F2", round.getgB3().getName());
+
+        return structure;
     }
 
     // -------------------------------------------------------------------------------------------------
