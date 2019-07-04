@@ -29,3 +29,24 @@ code {
 .MuiTableCell-root {
   padding: 5px 15px 5px 15px !important;
 }
+
+.score_field{
+  text-align: right;
+  width: 35px;
+  background-color: #d9edf7;
+}
+
+.homeTeam,
+.awayTeam {
+  width: 120px;
+}
+
+.gameDiff {
+  text-align: center;
+  width: 50px;
+}
+
+.gameTable {
+  height: 64px;
+  background-color: #164e69;
+}

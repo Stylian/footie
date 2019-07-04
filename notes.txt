@@ -3,5 +3,4 @@ to actually test step by step and add actions to react
 
 
 season 1 could have a special seeding page
-
-doing next game panel
+to add game insert

@@ -76,14 +76,14 @@ class QualsMatches extends Component {
                                                 {this.state.days[day].map((game, index) => {
                                                     return (
                                                         <TableRow>
-                                                            <TableCell align="left">{game.homeTeam.name}</TableCell>
+                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
                                                             {game.result == null ? (
                                                                 <TableCell></TableCell>
                                                             ) : (
                                                                 <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                                 + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
-                                                            <TableCell align="right">{game.awayTeam.name}</TableCell>
+                                                            <TableCell align="left">{game.awayTeam.name}</TableCell>
                                                         </TableRow>)
                                                 })}
                                             </TableBody>

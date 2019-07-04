@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import IconButton from '@material-ui/core/IconButton';
+import save from '../../icons/save.svg';
 
 class NextGame extends Component {
 
@@ -8,6 +9,8 @@ class NextGame extends Component {
 
         this.state = {
             game: {id: 0, homeTeam: {name: null}, awayTeam: {name: null}},
+            homeScore: 0,
+            awayScore: 0,
         };
 
     }
@@ -38,22 +41,76 @@ class NextGame extends Component {
             )
     }
 
+    handleChangeScore = field => (event) => {
+        let value = event.target.value;
+        if (value < 0) {
+            return;
+        }
+
+        if (field === "homeScore") {
+            this.setState(state => {
+                return {
+                    ...state,
+                    homeScore: value,
+                }
+            });
+        } else {
+            this.setState(state => {
+                return {
+                    ...state,
+                    awayScore: value,
+                }
+            });
+        }
+
+    }
+
+    handleSave = (event, newValue) => {
+
+
+        window.location.reload();
+
+    }
+
     render() {
-        return (
-            <table className="table" align={"center"}>
-                <TableBody>
-                    {this.state.game.id == 0 ? ('') : (
-                        <TableRow>
-                            <TableCell class="cancelcss" align={"left"}>{this.state.game.homeTeam.name}</TableCell>
-                            <TableCell class="cancelcss" ></TableCell>
-                            <TableCell class="cancelcss" align={"center"}> - </TableCell>
-                            <TableCell class="cancelcss" ></TableCell>
-                            <TableCell class="cancelcss" align={"right"}>{this.state.game.awayTeam.name}</TableCell>
-                        </TableRow>
-                    )}
-                </TableBody>
-            </table>
-        );
+
+        if (this.state.game.id == 0) {
+            return <div></div>
+        } else {
+            return (
+                <table class="gameTable"  align={"right"} >
+                    <tbody>
+                    <tr>
+                        <td class="homeTeam" align={"right"}>{this.state.game.homeTeam.name}</td>
+                        <td class="gameDiff" > -</td>
+                        <td class="awayTeam" align={"left"}>{this.state.game.awayTeam.name}</td>
+                    </tr>
+                    <tr>
+                        <td align={"right"}>
+                            <input type={'number'}
+                                   class="score_field"
+                                   value={this.state.homeScore == 0 ? "" : this.state.homeScore}
+                                   onChange={this.handleChangeScore('homeScore')}
+                            />
+                        </td>
+                        <td class="gameDiff">
+                            <IconButton onClick={this.handleSave}>
+                                <img src={save} title={"save"} />
+                            </IconButton>
+                        </td>
+                        <td align={"left"}>
+                            <input type={'number'}
+                                   class="score_field"
+                                   value={this.state.awayScore == 0 ? "" : this.state.awayScore}
+                                   onChange={this.handleChangeScore('awayScore')}
+                            />
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            )
+        }
     }
 
 }

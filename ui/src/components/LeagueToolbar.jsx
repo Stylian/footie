@@ -6,8 +6,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import {Box, Grid} from "@material-ui/core";
+import {Box, Grid, ListItemIcon, ListItemText} from "@material-ui/core";
 import NextGame from "./season_components/NextGame";
+import list from "../icons/list.svg";
+import build from "../icons/build.svg";
+import history from "../icons/history.svg";
 
 class LeagueToolbar extends Component {
 
@@ -21,7 +24,7 @@ class LeagueToolbar extends Component {
     }
 
     handleClick = (event) => {
-        this.setState({ menuPosition: event.currentTarget });
+        this.setState({menuPosition: event.currentTarget});
     }
 
     handleButtonSelection = (e) => {
@@ -29,42 +32,57 @@ class LeagueToolbar extends Component {
     }
 
     handleClose = () => {
-        this.setState({ menuPosition: null });
+        this.setState({menuPosition: null});
     }
 
     render() {
         return (
-            <div >
+            <div>
                 <AppBar position="static">
                     <Grid container spacing={10}>
-                    <Grid item xs={6}>
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="Menu"
-                                    onClick={this.handleClick} >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="simple-menu"
-                            anchorEl={this.state.menuPosition}
-                            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                            getContentAnchorEl={null}
-                            keepMounted
-                            open={Boolean(this.state.menuPosition)}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem data-link="/" onClick={this.handleButtonSelection}>Main Page</MenuItem>
-                            <MenuItem data-link="/history" onClick={this.handleButtonSelection}>History</MenuItem>
-                            <MenuItem data-link="/admin" onClick={this.handleButtonSelection}>Admin</MenuItem>
-                        </Menu>
+                        <Grid item xs={6}>
+                            <Toolbar>
+                                <IconButton edge="start" color="inherit" aria-label="Menu"
+                                            onClick={this.handleClick}>
+                                    <MenuIcon/>
+                                </IconButton>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={this.state.menuPosition}
+                                    anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+                                    getContentAnchorEl={null}
+                                    keepMounted
+                                    open={Boolean(this.state.menuPosition)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem data-link="/" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={list} title={"Leagues"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Leagues"/>
+                                    </MenuItem>
+                                    <MenuItem data-link="/history" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={history} title={"history"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="History"/>
+                                    </MenuItem>
+                                    <MenuItem data-link="/admin" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={build} title={"admin"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Admin"/>
+                                    </MenuItem>
+                                </Menu>
 
-                        <Typography variant="h6" >{this.props.pageTitle}</Typography>
+                                <Typography variant="h6">{this.props.pageTitle}</Typography>
 
-                    </Toolbar>
+                            </Toolbar>
 
-                </Grid>
-                    <Grid item xs={6}>
-                        <NextGame />
-                    </Grid>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <NextGame/>
+                        </Grid>
                     </Grid>
                 </AppBar>
             </div>
