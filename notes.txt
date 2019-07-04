@@ -3,4 +3,8 @@ to actually test step by step and add actions to react
 
 
 season 1 could have a special seeding page
-to add game insert
+
+bugs
+add game NPE
+gen buttons hiding and need reload
+after games finished needs reload

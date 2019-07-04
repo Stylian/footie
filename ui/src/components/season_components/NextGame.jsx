@@ -67,8 +67,32 @@ class NextGame extends Component {
 
     handleSave = (event, newValue) => {
 
+        fetch("http://localhost:8080/rest/ops//add_game_result", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "goalsMadeByHomeTeam": this.state.homeScore,
+                "goalsMadeByAwayTeam": this.state.awayScore
+            })
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
 
-        window.location.reload();
+
+
+                    // window.location.reload();
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
 
     }
 
@@ -78,11 +102,11 @@ class NextGame extends Component {
             return <div></div>
         } else {
             return (
-                <table class="gameTable"  align={"right"} >
+                <table class="gameTable" align={"right"}>
                     <tbody>
                     <tr>
                         <td class="homeTeam" align={"right"}>{this.state.game.homeTeam.name}</td>
-                        <td class="gameDiff" > -</td>
+                        <td class="gameDiff"> -</td>
                         <td class="awayTeam" align={"left"}>{this.state.game.awayTeam.name}</td>
                     </tr>
                     <tr>
@@ -95,7 +119,7 @@ class NextGame extends Component {
                         </td>
                         <td class="gameDiff">
                             <IconButton onClick={this.handleSave}>
-                                <img src={save} title={"save"} />
+                                <img src={save} title={"save"}/>
                             </IconButton>
                         </td>
                         <td align={"left"}>

@@ -71,6 +71,9 @@ public class RestSeasonController {
                         case "groups1":
                             restOperationsController.seedAndSetGroupsRoundOf8();
                             break;
+                        case "groups2":
+                            restOperationsController.seedAndSetQuarterfinals();
+                            break;
                     }
                 }
 

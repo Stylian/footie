@@ -96,7 +96,7 @@ class GroupsDisplay extends Component {
                                                             <TableCell align="right">{index + 1}</TableCell>
                                                             <TableCell>{team.name}</TableCell>
                                                             <TableCell align="right">{group.teamsStats[team.name].matchesPlayed}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].points}</TableCell>
+                                                            <TableCell align="right" className={"points_td"}>{group.teamsStats[team.name].points}</TableCell>
                                                             <TableCell align="right">{group.teamsStats[team.name].wins}</TableCell>
                                                             <TableCell align="right">{group.teamsStats[team.name].draws}</TableCell>
                                                             <TableCell align="right">{group.teamsStats[team.name].losses}</TableCell>

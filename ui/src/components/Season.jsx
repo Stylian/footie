@@ -5,6 +5,7 @@ import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
 import Groups2 from "./season_components/Groups2";
+import Playoffs from "./season_components/Playoffs";
 
 class Season extends Component {
 
@@ -78,7 +79,7 @@ class Season extends Component {
                         <Tab label="2nd Quals Round"/>
                         <Tab disabled={(this.state.stages.groups1 === "NOT_STARTED")} label="1st Round"/>
                         <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Round"/>
-                        {/*<Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>*/}
+                        <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>
                     </Tabs>
                 </AppBar>
                 {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum} />}
@@ -89,7 +90,7 @@ class Season extends Component {
                 {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}
                                                         stage={this.state.stages.groups1} />}
                 {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum} />}
-                {/*{this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}/>}*/}
+                {this.state.tabActive === 5 && <Playoffs year={this.props.match.params.seasonNum} />}
             </Paper>
         );
     }

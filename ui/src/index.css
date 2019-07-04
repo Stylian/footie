@@ -50,3 +50,7 @@ code {
   height: 64px;
   background-color: #164e69;
 }
+
+.points_td {
+  font-weight: bold !important;
+}

@@ -49,34 +49,40 @@ public class SpringAppTest {
 
 	}
 
+	@Test
+	public void runSeason1() throws Exception {
+		checkURL("/rest/ops/league", "{seasonNum=0}");
+		runSeason(1);
+	}
+
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");
 		checkURL("/rest/ops/season/setup", "{status=success, message=set Season " + seasonNum + "}");
-		checkURL("/rest/ops/quals/1/seed", "{status=success, message=seeded 1st Qualifying Round}");
-		checkURL("/rest/ops/quals/1/set", "{status=success, message=set 1st Qualifying Round}");
+		checkURL("/rest/ops/quals/1/seed", "{status=success, message=seeded quals1}");
+		checkURL("/rest/ops/quals/1/set", "{status=success, message=set quals1}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/quals/2/seed", "{status=success, message=seeded 2nd Qualifying Round}");
-		checkURL("/rest/ops/quals/2/set", "{status=success, message=set 2nd Qualifying Round}");
+		checkURL("/rest/ops/quals/2/seed", "{status=success, message=seeded quals2}");
+		checkURL("/rest/ops/quals/2/set", "{status=success, message=set quals2}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/groups/1/seed", "{status=success, message=seeded Groups Round of 12}");
-		checkURL("/rest/ops/groups/1/set", "{status=success, message=set Groups Round of 12}");
+		checkURL("/rest/ops/groups/1/seed", "{status=success, message=seeded groups1}");
+		checkURL("/rest/ops/groups/1/set", "{status=success, message=set groups1}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set Groups Round of 8}");
+		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set groups2}");
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
-		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
+		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
 	}
 
 	public void displayResults() throws Exception {

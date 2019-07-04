@@ -1,16 +1,15 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
+import gr.manolis.stelios.footie.core.services.GameService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.services.OperationsService;
@@ -25,6 +24,9 @@ public class RestOperationsController {
 
 	@Autowired
 	private OperationsService operationsService;
+
+	@Autowired
+	private GameService gameService;
 
 	@PostMapping("/league")
 	public ResponseEntity getOrCreateLeague() {
@@ -129,6 +131,14 @@ public class RestOperationsController {
 	public RestResponse endSeason() {
 		Season season = operationsService.endSeason();
 		return new RestResponse(RestResponse.SUCCESS, "ended " + season.getName());
+	}
+
+	@ResponseBody
+	@PostMapping("/add_game_result")
+	public RestResponse addGame(@RequestBody Result result) {
+		Game game = gameService.getNextGame();
+		gameService.addResult(game, result);
+		return new RestResponse(RestResponse.SUCCESS, "game result added ");
 	}
 
 	@PostMapping("/fillGames")

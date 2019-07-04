@@ -35,7 +35,7 @@ public class PlayoffsRoundService {
 		Season season = serviceUtils.loadCurrentSeason();
 
 		// build playoffs round
-		PlayoffsRound playoffsRound = new PlayoffsRound(season, "Playoffs");
+		PlayoffsRound playoffsRound = new PlayoffsRound(season, "playoffs");
 
 		// add winners from roundof8
 		GroupsRound groupsRoundOf8 = (GroupsRound) season.getRounds().get(3);
