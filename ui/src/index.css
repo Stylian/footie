@@ -54,3 +54,12 @@ code {
 .points_td {
   font-weight: bold !important;
 }
+
+.tree_team {
+  width: 100px !important;
+  height: 20px !important;
+}
+
+.tree_dist{
+  height: 200px !important;
+}

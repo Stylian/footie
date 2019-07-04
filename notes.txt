@@ -8,3 +8,4 @@ bugs
 add game NPE
 gen buttons hiding and need reload
 after games finished needs reload
+can do some dist css to tree

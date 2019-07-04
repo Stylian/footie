@@ -23,7 +23,8 @@ class Playoffs extends Component {
         super(props);
 
         this.state = {
-            structure: {}
+            structure: {},
+            matches: {}
         };
 
     }
@@ -53,6 +54,30 @@ class Playoffs extends Component {
                     });
                 }
             )
+
+        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/playoffs/matches")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            matches: result,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
 
     render() {
@@ -66,17 +91,17 @@ class Playoffs extends Component {
                         <table className="table" align={"center"}>
                             <TableBody>
                                 <TableRow>
-                                    <TableCell align="center" style={{backgroundColor: '#fcf8e3'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
                                         {this.state.structure.gA3}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#d9edf7'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
                                         {this.state.structure.S1}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell align="center" style={{backgroundColor: '#fcf8e3'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
                                         {this.state.structure.gB2}</TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -84,7 +109,7 @@ class Playoffs extends Component {
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#e2e4ff'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#e2e4ff'}}>
                                         {this.state.structure.F1}</TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -95,21 +120,50 @@ class Playoffs extends Component {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#d9edf7'}}>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
                                         {this.state.structure.gA1}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                 </TableRow>
-
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#d9edf7'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
                                         {this.state.structure.gB1}</TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -120,25 +174,40 @@ class Playoffs extends Component {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell class={"cancel"}></TableCell>
+                                </TableRow>
+                                <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#e2e4ff'}}>
+                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#e2e4ff'}}>
                                         {this.state.structure.F2}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell align="center" style={{backgroundColor: '#fcf8e3'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
                                         {this.state.structure.gB3}</TableCell>
                                     <TableCell class={"cancel"}></TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
-                                    <TableCell align="center" style={{backgroundColor: '#d9edf7'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
                                         {this.state.structure.S2}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell align="center" style={{backgroundColor: '#fcf8e3'}}>
+                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
                                         {this.state.structure.gA2}</TableCell>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>

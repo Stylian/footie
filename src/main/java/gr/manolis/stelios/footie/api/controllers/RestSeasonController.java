@@ -279,7 +279,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/seasons/{year}/playoffs/structure")
-    public Map<String, String> getPlayoffsRound(@PathVariable String year) {
+    public Map<String, String> getPlayoffsRoundStructure(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
         Map<String, String> structure = new HashMap<>();
@@ -290,15 +290,33 @@ public class RestSeasonController {
         structure.put("gB2", round.getgB2().getName());
         structure.put("gB3", round.getgB3().getName());
 
+        // TODO
         //semis
-        structure.put("S1", round.getgA3().getName());
-        structure.put("S2", round.getgB3().getName());
+        structure.put("S1", "");
+        structure.put("S2", "");
+//        structure.put("S1", round.getgA3().getName());
+//        structure.put("S2", round.getgB3().getName());
 
         //finals
-        structure.put("F1", round.getgA1().getName());
-        structure.put("F2", round.getgB3().getName());
+        structure.put("F1", "");
+        structure.put("F2", "");
+//        structure.put("F1", round.getgA1().getName());
+//        structure.put("F2", round.getgB3().getName());
 
         return structure;
+    }
+
+    @RequestMapping("/seasons/{year}/playoffs/matches")
+    public Map<String, List<Matchup>> getPlayoffsRoundMatches(@PathVariable String year) {
+
+        PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
+        Map<String, List<Matchup>> matches = new HashMap<>();
+        matches.put("quarters", round.getQuarterMatchups());
+        matches.put("semis", round.getSemisMatchups());
+        matches.put("finals", round.getFinalsMatchup() == null ? Collections.emptyList()
+                : Arrays.asList(round.getFinalsMatchup()));
+
+        return matches;
     }
 
     // -------------------------------------------------------------------------------------------------
