@@ -1,9 +1,11 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.services.GameService;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,130 +24,146 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 @RequestMapping("/rest/ops")
 public class RestOperationsController {
 
-	@Autowired
-	private OperationsService operationsService;
+    @Autowired
+    private OperationsService operationsService;
 
-	@Autowired
-	private RestSeasonController restSeasonController;
+    @Autowired
+    private RestSeasonController restSeasonController;
 
-	@PostMapping("/league")
-	public ResponseEntity getOrCreateLeague() {
-		League league = operationsService.createLeague();
-		return ResponseEntity.ok().body(league);
-	}
+    @Autowired
+    private ServiceUtils serviceUtils;
 
-	@PostMapping("/season/create")
-	public RestResponse createSeason() {
-		Season season = operationsService.createSeason();
-		operationsService.setUpSeason();
-		operationsService.seedQualsRound1();
+    @PostMapping("/league")
+    public ResponseEntity getOrCreateLeague() {
+        League league = operationsService.createLeague();
+        return ResponseEntity.ok().body(league);
+    }
 
-		return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
-	}
+    @GetMapping("/league/can_create_season")
+    public Object[] canCreateLeague() {
+        League league = operationsService.createLeague();
 
-	// to remove
-	@PostMapping("/season/setup")
-	public RestResponse setUpSeason() {
-		Season season = operationsService.setUpSeason();
-		return new RestResponse(RestResponse.SUCCESS, "set " + season.getName());
-	}
+        boolean canCreate = false;
+        if (league.getSeasonNum() == 0) {
+            canCreate = true;
+        } else {
+            canCreate = serviceUtils.loadCurrentSeason().getStage() == Stage.FINISHED;
+        }
+        return new Object[]{canCreate, league.getSeasonNum()};
+    }
 
-	// maybe remove?
-	@PostMapping("/quals/{num}/seed")
-	public RestResponse seedQualsRound(@PathVariable String num) {
+    @PostMapping("/season/create")
+    public RestResponse createSeason() {
+        Season season = operationsService.createSeason();
+        operationsService.setUpSeason();
+        operationsService.seedQualsRound1();
 
-		int qn = NumberUtils.toInt(num);
+        return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
+    }
 
-		if (qn > 2 || qn < 0) {
-			return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
-		}
+    // to remove
+    @PostMapping("/season/setup")
+    public RestResponse setUpSeason() {
+        Season season = operationsService.setUpSeason();
+        return new RestResponse(RestResponse.SUCCESS, "set " + season.getName());
+    }
 
-		QualsRound round = (qn == 1) ? operationsService.seedQualsRound1() : operationsService.seedQualsRound2();
-		return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
+    // maybe remove?
+    @PostMapping("/quals/{num}/seed")
+    public RestResponse seedQualsRound(@PathVariable String num) {
 
-	}
+        int qn = NumberUtils.toInt(num);
 
-	@PostMapping("/quals/{num}/set")
-	public RestResponse setQualsRound(@PathVariable String num) {
+        if (qn > 2 || qn < 0) {
+            return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
+        }
 
-		int qn = NumberUtils.toInt(num);
+        QualsRound round = (qn == 1) ? operationsService.seedQualsRound1() : operationsService.seedQualsRound2();
+        return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
 
-		if (qn > 2 || qn < 0) {
-			return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
-		}
+    }
 
-		QualsRound round = (qn == 1) ? operationsService.setQualsRound1() : operationsService.setQualsRound2();
-		return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
+    @PostMapping("/quals/{num}/set")
+    public RestResponse setQualsRound(@PathVariable String num) {
 
-	}
+        int qn = NumberUtils.toInt(num);
 
-	@PostMapping("/groups/1/seed")
-	public RestResponse seedGroupsRoundOf12() {
+        if (qn > 2 || qn < 0) {
+            return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
+        }
 
-		GroupsRound round = operationsService.seedGroupsRoundOf12();
-		return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
+        QualsRound round = (qn == 1) ? operationsService.setQualsRound1() : operationsService.setQualsRound2();
+        return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/groups/1/set")
-	public RestResponse setGroupsRoundOf12() {
+    @PostMapping("/groups/1/seed")
+    public RestResponse seedGroupsRoundOf12() {
 
-		GroupsRound round = operationsService.setGroupsRoundOf12();
-		return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
+        GroupsRound round = operationsService.seedGroupsRoundOf12();
+        return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/groups/2/seedAndSet")
-	public RestResponse seedAndSetGroupsRoundOf8() {
+    @PostMapping("/groups/1/set")
+    public RestResponse setGroupsRoundOf12() {
 
-		GroupsRound round = operationsService.seedAndSetGroupsRoundOf8();
-		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
+        GroupsRound round = operationsService.setGroupsRoundOf12();
+        return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/playoffs/quarterfinals/seedAndSet")
-	public RestResponse seedAndSetQuarterfinals() {
+    @PostMapping("/groups/2/seedAndSet")
+    public RestResponse seedAndSetGroupsRoundOf8() {
 
-		PlayoffsRound round = operationsService.seedAndSetQuarterfinals();
-		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
+        GroupsRound round = operationsService.seedAndSetGroupsRoundOf8();
+        return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/playoffs/semifinals/seedAndSet")
-	public RestResponse seedAndSetSemifinals() {
+    @PostMapping("/playoffs/quarterfinals/seedAndSet")
+    public RestResponse seedAndSetQuarterfinals() {
 
-		PlayoffsRound round = operationsService.seedAndSetSemifinals();
-		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
+        PlayoffsRound round = operationsService.seedAndSetQuarterfinals();
+        return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/playoffs/finals/seedAndSet")
-	public RestResponse seedAndSetFinals() {
+    @PostMapping("/playoffs/semifinals/seedAndSet")
+    public RestResponse seedAndSetSemifinals() {
 
-		PlayoffsRound round = operationsService.seedAndSetFinals();
-		return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
+        PlayoffsRound round = operationsService.seedAndSetSemifinals();
+        return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
 
-	}
+    }
 
-	@PostMapping("/season/end")
-	public RestResponse endSeason() {
-		Season season = operationsService.endSeason();
-		return new RestResponse(RestResponse.SUCCESS, "ended " + season.getName());
-	}
+    @PostMapping("/playoffs/finals/seedAndSet")
+    public RestResponse seedAndSetFinals() {
 
-	@ResponseBody
-	@PostMapping("/add_game_result")
-	public RestResponse addGame(@RequestBody Result result) {
-		operationsService.addResult(result);
-		restSeasonController.getNextGameAndMoveStages();
+        PlayoffsRound round = operationsService.seedAndSetFinals();
+        return new RestResponse(RestResponse.SUCCESS, "seeded and set " + round.getName());
 
-		return new RestResponse(RestResponse.SUCCESS, "game result added ");
-	}
+    }
 
-	@GetMapping("/fillGames")
-	public RestResponse fillGamesTEST() {
+    @PostMapping("/season/end")
+    public RestResponse endSeason() {
+        Season season = operationsService.endSeason();
+        return new RestResponse(RestResponse.SUCCESS, "ended " + season.getName());
+    }
 
-		return operationsService.fillGamesTEST();
-	}
+    @ResponseBody
+    @PostMapping("/add_game_result")
+    public RestResponse addGame(@RequestBody Result result) {
+        operationsService.addResult(result);
+        restSeasonController.getNextGameAndMoveStages();
+
+        return new RestResponse(RestResponse.SUCCESS, "game result added ");
+    }
+
+    @GetMapping("/fillGames")
+    public RestResponse fillGamesTEST() {
+
+        return operationsService.fillGamesTEST();
+    }
 
 }

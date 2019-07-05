@@ -58,8 +58,8 @@ public class RestSeasonController {
         logger.info("getNextGame");
 
         League league = (League) (restOperationsController.getOrCreateLeague().getBody()); // runs only the very first time
-        if(league.getSeasonNum() < 1) {
-            return  new Game();
+        if (league.getSeasonNum() < 1) {
+            return new Game();
         }
 
         Game game = gameService.getNextGame();
@@ -82,6 +82,30 @@ public class RestSeasonController {
                             break;
                         case "groups2":
                             restOperationsController.seedAndSetQuarterfinals();
+                            break;
+                        case "playoffs":
+                            Season season = serviceUtils.loadCurrentSeason();
+                            PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+                            if(playoffsRound.getQuarterMatchups().get(0).getWinner() == null
+                                || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
+                                break;
+                            }
+                            if (playoffsRound.getSemisMatchups() == null) {
+                                restOperationsController.seedAndSetSemifinals();
+                            } else {
+                                if(playoffsRound.getSemisMatchups().get(0).getWinner() == null
+                                        || playoffsRound.getSemisMatchups().get(1).getWinner() == null ) {
+                                    break;
+                                }
+
+                                if (playoffsRound.getFinalsMatchup() == null) {
+                                    restOperationsController.seedAndSetFinals();
+                                }else {
+                                    if(playoffsRound.getFinalsMatchup().getWinner() != null) {
+                                        restOperationsController.endSeason();
+                                    }
+                                }
+                            }
                             break;
                     }
                 }
@@ -205,11 +229,11 @@ public class RestSeasonController {
         List<Game> replayGames = days.get(-1);
 
         Map<Integer, List<Game>> newDaysStructure = new HashMap<>();
-        if(replayGames != null) {
+        if (replayGames != null) {
             newDaysStructure.put(-1, replayGames);
         }
-        newDaysStructure.put(1, mainGames.subList(0, mainGames.size()/2));
-        newDaysStructure.put(2, mainGames.subList(mainGames.size()/2, mainGames.size()));
+        newDaysStructure.put(1, mainGames.subList(0, mainGames.size() / 2));
+        newDaysStructure.put(2, mainGames.subList(mainGames.size() / 2, mainGames.size()));
 
         return newDaysStructure;
     }
@@ -300,10 +324,19 @@ public class RestSeasonController {
 
         // TODO
         //semis
-        structure.put("S1", "");
-        structure.put("S2", "");
-//        structure.put("S1", round.getgA3().getName());
-//        structure.put("S2", round.getgB3().getName());
+        Team s1 = round.getQuarterMatchups().get(1).getWinner();
+        if (s1 == null) {
+            structure.put("S1", "");
+        } else {
+            structure.put("S1", s1.getName());
+        }
+
+        Team s2 = round.getQuarterMatchups().get(0).getWinner();
+        if (s2 == null) {
+            structure.put("S2", "");
+        } else {
+            structure.put("S2", s2.getName());
+        }
 
         //finals
         structure.put("F1", "");
@@ -321,15 +354,15 @@ public class RestSeasonController {
         Map<String, List<Game>> matches = new HashMap<>();
 
         List<Game> quarters = new ArrayList<>();
-        round.getQuarterMatchups().forEach( m -> quarters.addAll(m.getGames()));
+        round.getQuarterMatchups().forEach(m -> quarters.addAll(m.getGames()));
         matches.put("quarters", quarters);
 
         List<Game> semis = new ArrayList<>();
-        round.getSemisMatchups().forEach( m -> semis.addAll(m.getGames()));
+        round.getSemisMatchups().forEach(m -> semis.addAll(m.getGames()));
         matches.put("semis", semis);
 
         List<Game> finals = new ArrayList<>();
-        if(round.getFinalsMatchup() != null) {
+        if (round.getFinalsMatchup() != null) {
             finals.addAll(round.getFinalsMatchup().getGames());
         }
         matches.put("finals", finals);

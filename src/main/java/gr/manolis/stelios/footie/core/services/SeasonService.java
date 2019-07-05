@@ -300,6 +300,7 @@ public class SeasonService {
 		}
 
 		season.setWinner(finalsMatchup.getWinner());
+		season.getRounds().get(4).setStage(Stage.FINISHED);
 		season.setStage(Stage.FINISHED);
 
 		// hope it is enough, seems so

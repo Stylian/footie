@@ -15,23 +15,18 @@ class LandingPage extends Component {
     }
 
     componentDidMount() {
-        fetch("/rest/ops/league", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-        })
+        fetch("/rest/ops/league/can_create_season")
             .then(res => res.json())
             .then(
                 (result) => {
 
-                    // TODO more like if previous season finished!
-                    if (result.seasonNum == 0) {
-                        this.setState(state => {
-                            return {
-                                ...state,
-                                canCreateLeague: true,
-                            }
-                        });
-                    }
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            seasonNum: result[1],
+                            canCreateLeague: result[0],
+                        }
+                    });
 
                     this.setState(state => {
                         return {
@@ -87,14 +82,14 @@ class LandingPage extends Component {
         return (
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                Seasons number: {this.state.seasonNum}
-                <br/>
                 {this.state.canCreateLeague ? (
                     <Button onClick={this.handleButtonClick}>Create new Season</Button>
-                ) : ''}
-                {this.state.seasonNum > 0 ? ( // also TODO as above
-                    <Redirect to={"/season/"+this.state.seasonNum} />
-                ) : ''}
+                ) : (
+                    <span>a league is currently running</span>
+                )}
+                {/*{this.state.seasonNum > 0 ? ( // also TODO as above*/}
+                {/*    <Redirect to={"/season/"+this.state.seasonNum} />*/}
+                {/*) : ''}*/}
             </div>
         );
     }
