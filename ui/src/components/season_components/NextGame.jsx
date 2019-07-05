@@ -11,6 +11,8 @@ class NextGame extends Component {
             game: {id: 0, homeTeam: {name: null}, awayTeam: {name: null}},
             homeScore: 0,
             awayScore: 0,
+            editedHome: false,
+            editedAway: false
         };
 
     }
@@ -52,6 +54,7 @@ class NextGame extends Component {
                 return {
                     ...state,
                     homeScore: value,
+                    editedHome: true,
                 }
             });
         } else {
@@ -59,6 +62,7 @@ class NextGame extends Component {
                 return {
                     ...state,
                     awayScore: value,
+                    editedAway: true
                 }
             });
         }
@@ -113,7 +117,7 @@ class NextGame extends Component {
                         <td align={"right"}>
                             <input type={'number'}
                                    class="score_field"
-                                   value={this.state.homeScore == 0 ? "" : this.state.homeScore}
+                                   value={this.state.editedHome ? this.state.homeScore : ""}
                                    onChange={this.handleChangeScore('homeScore')}
                             />
                         </td>
@@ -125,7 +129,7 @@ class NextGame extends Component {
                         <td align={"left"}>
                             <input type={'number'}
                                    class="score_field"
-                                   value={this.state.awayScore == 0 ? "" : this.state.awayScore}
+                                   value={this.state.editedAway ? this.state.awayScore : ""}
                                    onChange={this.handleChangeScore('awayScore')}
                             />
                         </td>

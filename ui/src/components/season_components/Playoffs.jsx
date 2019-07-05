@@ -217,72 +217,76 @@ class Playoffs extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item sm={12}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"½ Finals"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Home</TableCell>
-                                                <TableCell>score</TableCell>
-                                                <TableCell>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.state.games.semis.map((game, index) => {
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell align="right">{game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item sm={12}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Finals"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Home</TableCell>
-                                                <TableCell>score</TableCell>
-                                                <TableCell>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.state.games.finals.map((game, index) => {
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell align="right">{game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                        {this.state.semis != null ? (
+                            <Grid item sm={12}>
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={"½ Finals"} align={"center"}
+                                                titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        <table className="table" align={"center"}>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>Home</TableCell>
+                                                    <TableCell>score</TableCell>
+                                                    <TableCell>Away</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {this.state.games.semis.map((game, index) => {
+                                                    return (
+                                                        <TableRow>
+                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                            {game.result == null ? (
+                                                                <TableCell></TableCell>
+                                                            ) : (
+                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                            )}
+                                                            <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                        </TableRow>)
+                                                })}
+                                            </TableBody>
+                                        </table>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ) : ''}
+                        {this.state.finals != null ? (
+                            <Grid item sm={12}>
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={"Finals"} align={"center"}
+                                                titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        <table className="table" align={"center"}>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>Home</TableCell>
+                                                    <TableCell>score</TableCell>
+                                                    <TableCell>Away</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {this.state.games.finals.map((game, index) => {
+                                                    return (
+                                                        <TableRow>
+                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                            {game.result == null ? (
+                                                                <TableCell></TableCell>
+                                                            ) : (
+                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                            )}
+                                                            <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                        </TableRow>)
+                                                })}
+                                            </TableBody>
+                                        </table>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ) : ''}
                     </Grid>
 
                 </Grid>
