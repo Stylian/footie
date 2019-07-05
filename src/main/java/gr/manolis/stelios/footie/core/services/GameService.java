@@ -1,7 +1,9 @@
 package gr.manolis.stelios.footie.core.services;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -42,16 +44,35 @@ public class GameService {
 
         List results = sessionFactory.getCurrentSession().createQuery("from GAMES").list();
 
+        List<Game> gamesRemaining = new ArrayList<>();
+
         for (Iterator iterator = results.iterator(); iterator.hasNext(); ) {
 
             Game game0 = (Game) iterator.next();
             if (game0.getResult() == null) {
-                return game0;
+                gamesRemaining.add(game0);
             }
 
         }
 
-        return null;
+        if(gamesRemaining.size() == 0) {
+            return null;
+        }else {
+            List<Game> games1 = gamesRemaining.stream().filter( g -> g.getDay() == 1).collect(Collectors.toList());
+            List<Game> games2 = gamesRemaining.stream().filter( g -> g.getDay() == 2).collect(Collectors.toList());
+            List<Game> games3 = gamesRemaining.stream().filter( g -> g.getDay() == 3).collect(Collectors.toList());
+            List<Game> games4 = gamesRemaining.stream().filter( g -> g.getDay() == 4).collect(Collectors.toList());
+            List<Game> games5 = gamesRemaining.stream().filter( g -> g.getDay() == -1).collect(Collectors.toList());
+
+            List<Game> gamesRemaining2 = new ArrayList<>();
+            gamesRemaining2.addAll(games1);
+            gamesRemaining2.addAll(games2);
+            gamesRemaining2.addAll(games3);
+            gamesRemaining2.addAll(games4);
+            gamesRemaining2.addAll(games5);
+
+            return gamesRemaining2.get(0);
+        }
 
     }
 
