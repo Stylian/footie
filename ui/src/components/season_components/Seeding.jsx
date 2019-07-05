@@ -27,7 +27,7 @@ class Seeding extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/seeding")
+        fetch("/rest/seasons/" + this.props.year + "/seeding")
             .then(res => res.json())
             .then(
                 (result) => {

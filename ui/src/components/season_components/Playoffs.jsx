@@ -31,7 +31,7 @@ class Playoffs extends Component {
 
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/playoffs/structure")
+        fetch("/rest/seasons/" + this.props.year + "/playoffs/structure")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -55,7 +55,7 @@ class Playoffs extends Component {
                 }
             )
 
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/playoffs/matches")
+        fetch("/rest/seasons/" + this.props.year + "/playoffs/matches")
             .then(res => res.json())
             .then(
                 (result) => {

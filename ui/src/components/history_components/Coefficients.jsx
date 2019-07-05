@@ -15,7 +15,7 @@ class Coefficients extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/history/coefficients")
+        fetch("/rest/history/coefficients")
             .then(res => res.json())
             .then(
                 (result) => {

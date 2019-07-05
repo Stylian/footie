@@ -15,7 +15,7 @@ class LandingPage extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/ops/league", {
+        fetch("/rest/ops/league", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })
@@ -54,7 +54,7 @@ class LandingPage extends Component {
     }
 
     handleButtonClick = (event, newValue) => {
-        fetch("http://localhost:8080/rest/ops/season/create", {
+        fetch("/rest/ops/season/create", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })

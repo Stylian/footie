@@ -26,7 +26,7 @@ class GroupsDisplay extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/groups/" + this.props.round)
+        fetch("/rest/seasons/" + this.props.year + "/groups/" + this.props.round)
             .then(res => res.json())
             .then(
                 (result) => {

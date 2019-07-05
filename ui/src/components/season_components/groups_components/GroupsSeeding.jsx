@@ -30,7 +30,7 @@ class GroupsSeeding extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/groups/" + this.props.round + "/seeding")
+        fetch("/rest/seasons/" + this.props.year + "/groups/" + this.props.round + "/seeding")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -73,7 +73,7 @@ class GroupsSeeding extends Component {
     }
 
     handleSettingUpButtonClick = (event, newValue) => {
-        fetch("http://localhost:8080/rest/ops//groups/" + this.props.round + "/set", {
+        fetch("/rest/ops//groups/" + this.props.round + "/set", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })

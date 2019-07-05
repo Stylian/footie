@@ -23,7 +23,7 @@ class Stats extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/history/stats")
+        fetch("/rest/history/stats")
             .then(res => res.json())
             .then(
                 (result) => {

@@ -16,7 +16,7 @@ class NextGame extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/next_game")
+        fetch("/rest/next_game")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -67,7 +67,7 @@ class NextGame extends Component {
 
     handleSave = (event, newValue) => {
 
-        fetch("http://localhost:8080/rest/ops//add_game_result", {
+        fetch("/rest/ops//add_game_result", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

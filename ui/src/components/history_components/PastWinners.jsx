@@ -15,7 +15,7 @@ class PastWinners extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/history/past_winners")
+        fetch("/rest/history/past_winners")
             .then(res => res.json())
             .then(
                 (result) => {

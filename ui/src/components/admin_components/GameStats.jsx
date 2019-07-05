@@ -15,7 +15,7 @@ class GameStats extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/admin/game_stats")
+        fetch("/rest/admin/game_stats")
             .then(res => res.json())
             .then(
                 (result) => {

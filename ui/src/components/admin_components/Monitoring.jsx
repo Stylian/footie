@@ -15,7 +15,7 @@ class Monitoring extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/admin/stages")
+        fetch("/rest/admin/stages")
             .then(res => res.json())
             .then(
                 (result) => {

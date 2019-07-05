@@ -30,7 +30,7 @@ class QualsSeeding extends Component {
 
     componentDidMount() {
 
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/seeding")
+        fetch("/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/seeding")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -67,7 +67,7 @@ class QualsSeeding extends Component {
     }
 
     handleSettingUpButtonClick = (event, newValue) => {
-        fetch("http://localhost:8080/rest/ops//quals/" + this.props.round + "/set", {
+        fetch("/rest/ops//quals/" + this.props.round + "/set", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })

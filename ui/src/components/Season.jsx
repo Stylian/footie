@@ -21,7 +21,7 @@ class Season extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.match.params.seasonNum + "/status")
+        fetch("/rest/seasons/" + this.props.match.params.seasonNum + "/status")
             .then(res => res.json())
             .then(
                 (result) => {

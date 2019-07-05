@@ -26,7 +26,7 @@ class QualsMatches extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/matches")
+        fetch("/rest/seasons/" + this.props.year + "/quals/" + this.props.round + "/matches")
             .then(res => res.json())
             .then(
                 (result) => {
