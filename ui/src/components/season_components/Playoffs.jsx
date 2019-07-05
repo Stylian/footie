@@ -113,26 +113,9 @@ class Playoffs extends Component {
                                         {this.state.structure.F1}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell class={"tree_dist1"}></TableCell>
                                 </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
+
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
@@ -140,26 +123,9 @@ class Playoffs extends Component {
                                         {this.state.structure.gA1}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell class={"tree_dist2"}></TableCell>
                                 </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
+
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
                                     <TableCell class={"cancel"}></TableCell>
@@ -167,25 +133,7 @@ class Playoffs extends Component {
                                         {this.state.structure.gB1}</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
+                                    <TableCell class={"tree_dist1"}></TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell class={"cancel"}></TableCell>
