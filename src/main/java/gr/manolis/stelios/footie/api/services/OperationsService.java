@@ -118,4 +118,8 @@ public class OperationsService {
 		return new RestResponse(RestResponse.SUCCESS, "games added");
 	}
 
+	public void addResult(Result result) {
+		Game game = gameService.getNextGame();
+		gameService.addResult(game, result);
+	}
 }

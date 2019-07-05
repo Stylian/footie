@@ -46,7 +46,7 @@ public class App {
 
 				registry
 						.addMapping("/**")
-						.allowedOrigins(reactAppPath)
+//						.allowedOrigins(reactAppPath)    // since I proxied react this breaks it
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};

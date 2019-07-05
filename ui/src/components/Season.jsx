@@ -89,7 +89,8 @@ class Season extends Component {
                                                       stage={this.state.stages.quals2} />}
                 {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}
                                                         stage={this.state.stages.groups1} />}
-                {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum} />}
+                {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}
+                                                        stage={this.state.stages.groups1} />}
                 {this.state.tabActive === 5 && <Playoffs year={this.props.match.params.seasonNum} />}
             </Paper>
         );

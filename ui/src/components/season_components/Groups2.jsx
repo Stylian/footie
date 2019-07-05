@@ -9,7 +9,7 @@ class Groups2 extends Component {
         super(props);
 
         this.state = {
-            tabActive: 0,
+            tabActive: this.props.stage === "ON_PREVIEW" ? 0 : 1,
         };
 
     }

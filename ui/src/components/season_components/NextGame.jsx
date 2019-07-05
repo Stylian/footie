@@ -82,10 +82,7 @@ class NextGame extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-
-
-
-                    // window.location.reload();
+                    window.location.reload();
                 },
                 (error) => {
                     this.setState(state => {

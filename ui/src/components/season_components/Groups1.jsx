@@ -12,7 +12,7 @@ class Groups1 extends Component {
 
         this.state = {
             tabActive: this.props.stage === "ON_PREVIEW" ? 0 :
-                (this.props.stage === "NOT_STARTED" ? 0 : 1),
+                (this.props.stage === "NOT_STARTED" ? 0 : 2),
         };
 
     }

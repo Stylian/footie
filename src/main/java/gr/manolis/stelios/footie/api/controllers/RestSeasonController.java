@@ -1,19 +1,20 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
-import com.sun.istack.internal.Nullable;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
-import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.*;
+import gr.manolis.stelios.footie.core.services.GameService;
+import gr.manolis.stelios.footie.core.services.SeasonService;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -50,10 +51,17 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
+
+    // jack of all trades
     @RequestMapping("next_game")
-    @Nullable
     public Game getNextGameAndMoveStages() {
         logger.info("getNextGame");
+
+        League league = (League) (restOperationsController.getOrCreateLeague().getBody()); // runs only the very first time
+        if(league.getSeasonNum() < 1) {
+            return  new Game();
+        }
+
         Game game = gameService.getNextGame();
 
         // no more games so move to next stage

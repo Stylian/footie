@@ -26,7 +26,7 @@ public class RestOperationsController {
 	private OperationsService operationsService;
 
 	@Autowired
-	private GameService gameService;
+	private RestSeasonController restSeasonController;
 
 	@PostMapping("/league")
 	public ResponseEntity getOrCreateLeague() {
@@ -136,12 +136,13 @@ public class RestOperationsController {
 	@ResponseBody
 	@PostMapping("/add_game_result")
 	public RestResponse addGame(@RequestBody Result result) {
-		Game game = gameService.getNextGame();
-		gameService.addResult(game, result);
+		operationsService.addResult(result);
+		restSeasonController.getNextGameAndMoveStages();
+
 		return new RestResponse(RestResponse.SUCCESS, "game result added ");
 	}
 
-	@PostMapping("/fillGames")
+	@GetMapping("/fillGames")
 	public RestResponse fillGamesTEST() {
 
 		return operationsService.fillGamesTEST();
