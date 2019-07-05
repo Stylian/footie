@@ -56,7 +56,7 @@ code {
 }
 
 .tree_team {
-  width: 100px !important;
+  min-width: 100px !important;
   height: 20px !important;
 }
 
@@ -68,3 +68,6 @@ code {
   height: 100px !important;
 }
 
+.tree_table {
+  margin: 0 !important;
+}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-    AppBar,
+    AppBar, Box,
     Card,
     CardContent,
     CardHeader,
@@ -24,7 +24,11 @@ class Playoffs extends Component {
 
         this.state = {
             structure: {},
-            matches: {}
+            games: {
+                "quarters": [],
+                "semis": [],
+                "finals": []
+            },
         };
 
     }
@@ -64,7 +68,7 @@ class Playoffs extends Component {
                         return {
                             ...state,
                             isLoaded: true,
-                            matches: result,
+                            games: result,
                         }
                     });
                 },
@@ -82,89 +86,207 @@ class Playoffs extends Component {
 
     render() {
         return (
-            <Grid item sm={6}>
-                <Card style={{margin: 20}}>
-                    <CardHeader title={"tree view"} align={"center"}
-                                titleTypographyProps={{variant: 'h7'}}
-                    />
-                    <CardContent>
-                        <table className="table" align={"center"}>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
-                                        {this.state.structure.gA3}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
-                                        {this.state.structure.S1}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
-                                        {this.state.structure.gB2}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#e2e4ff'}}>
-                                        {this.state.structure.F1}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"tree_dist1"}></TableCell>
-                                </TableRow>
+            <Box width={1200}>
 
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
-                                        {this.state.structure.gA1}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"tree_dist2"}></TableCell>
-                                </TableRow>
+                <Grid container spacing={1}>
+                    <Grid item sm={5}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"tree view"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table tree_table" align={"center"}>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}>
+                                                {this.state.structure.gA3}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}>
+                                                {this.state.structure.S1}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}>
+                                                {this.state.structure.gB2}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#e2e4ff'}}>
+                                                {this.state.structure.F1}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"tree_dist1"}></TableCell>
+                                        </TableRow>
 
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
-                                        {this.state.structure.gB1}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"tree_dist1"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#e2e4ff'}}>
-                                        {this.state.structure.F2}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
-                                        {this.state.structure.gB3}</TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#d9edf7'}}>
-                                        {this.state.structure.S2}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className={"tree_team"} align="center" style={{backgroundColor: '#fcf8e3'}}>
-                                        {this.state.structure.gA2}</TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                    <TableCell class={"cancel"}></TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </table>
-                    </CardContent>
-                </Card>
-            </Grid>
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}>
+                                                {this.state.structure.gA1}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"tree_dist2"}></TableCell>
+                                        </TableRow>
+
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}>
+                                                {this.state.structure.gB1}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"tree_dist1"}></TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#e2e4ff'}}>
+                                                {this.state.structure.F2}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}>
+                                                {this.state.structure.gB3}</TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}>
+                                                {this.state.structure.S2}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}>
+                                                {this.state.structure.gA2}</TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                    <Grid item sm={4}>
+                        <Grid item sm={12}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"¼ Finals"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Home</TableCell>
+                                                <TableCell>score</TableCell>
+                                                <TableCell>Away</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.games.quarters.map((game, index) => {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                        {game.result == null ? (
+                                                            <TableCell></TableCell>
+                                                        ) : (
+                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                        )}
+                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item sm={12}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"½ Finals"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Home</TableCell>
+                                                <TableCell>score</TableCell>
+                                                <TableCell>Away</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.games.semis.map((game, index) => {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                        {game.result == null ? (
+                                                            <TableCell></TableCell>
+                                                        ) : (
+                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                        )}
+                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item sm={12}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Finals"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Home</TableCell>
+                                                <TableCell>score</TableCell>
+                                                <TableCell>Away</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.games.finals.map((game, index) => {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                        {game.result == null ? (
+                                                            <TableCell></TableCell>
+                                                        ) : (
+                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                        )}
+                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Box>
         );
     }
 }

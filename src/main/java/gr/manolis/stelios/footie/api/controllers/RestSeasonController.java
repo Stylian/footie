@@ -307,14 +307,24 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/seasons/{year}/playoffs/matches")
-    public Map<String, List<Matchup>> getPlayoffsRoundMatches(@PathVariable String year) {
+    public Map<String, List<Game>> getPlayoffsRoundMatches(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
-        Map<String, List<Matchup>> matches = new HashMap<>();
-        matches.put("quarters", round.getQuarterMatchups());
-        matches.put("semis", round.getSemisMatchups());
-        matches.put("finals", round.getFinalsMatchup() == null ? Collections.emptyList()
-                : Arrays.asList(round.getFinalsMatchup()));
+        Map<String, List<Game>> matches = new HashMap<>();
+
+        List<Game> quarters = new ArrayList<>();
+        round.getQuarterMatchups().forEach( m -> quarters.addAll(m.getGames()));
+        matches.put("quarters", quarters);
+
+        List<Game> semis = new ArrayList<>();
+        round.getSemisMatchups().forEach( m -> semis.addAll(m.getGames()));
+        matches.put("semis", semis);
+
+        List<Game> finals = new ArrayList<>();
+        if(round.getFinalsMatchup() != null) {
+            finals.addAll(round.getFinalsMatchup().getGames());
+        }
+        matches.put("finals", finals);
 
         return matches;
     }
