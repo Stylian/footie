@@ -11,6 +11,7 @@ import NextGame from "./season_components/NextGame";
 import list from "../icons/list.svg";
 import build from "../icons/build.svg";
 import history from "../icons/history.svg";
+import archive from "../icons/archive.svg";
 
 class LeagueToolbar extends Component {
 
@@ -56,6 +57,12 @@ class LeagueToolbar extends Component {
                                     onClose={this.handleClose}
                                 >
                                     <MenuItem data-link="/" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={archive} title={"Landing Page"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Landing Page"/>
+                                    </MenuItem>
+                                    <MenuItem data-link="/season/1" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
                                             <img src={list} title={"Leagues"}/>
                                         </ListItemIcon>
