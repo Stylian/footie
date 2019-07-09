@@ -7,7 +7,7 @@ seedings are using of current season instead of previous master or is empty?
 
 
 TODO
-
+up down buttons to look truly disabled
 seasons tabbing
 seasons menu
 

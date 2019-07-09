@@ -12,6 +12,8 @@ import list from "../icons/list.svg";
 import build from "../icons/build.svg";
 import history from "../icons/history.svg";
 import archive from "../icons/archive.svg";
+import up from "../icons/up.svg";
+import down from "../icons/down.svg";
 
 class LeagueToolbar extends Component {
 
@@ -20,8 +22,35 @@ class LeagueToolbar extends Component {
 
         this.state = {
             menuPosition: null,
+            seasonsTotal: 0
         };
 
+    }
+
+    componentDidMount() {
+        fetch("/rest/seasons")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            seasonsTotal: result,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
 
     handleClick = (event) => {
@@ -34,6 +63,14 @@ class LeagueToolbar extends Component {
 
     handleClose = () => {
         this.setState({menuPosition: null});
+    }
+
+    handleUp = (event) => {
+        window.location.href = parseInt(this.props.seasonNum) + 1;
+    }
+
+    handleDown = (event) => {
+        window.location.href = parseInt(this.props.seasonNum) - 1;
     }
 
     render() {
@@ -81,6 +118,17 @@ class LeagueToolbar extends Component {
                                         <ListItemText primary="Admin"/>
                                     </MenuItem>
                                 </Menu>
+
+                                {this.props.seasonNum !== undefined ? (
+                                    <Box>
+                                        <IconButton onClick={this.handleUp} disabled={this.props.seasonNum == this.state.seasonsTotal}>
+                                            <img src={up} title={"next season"}/>
+                                        </IconButton>
+                                        <IconButton onClick={this.handleDown} disabled={this.props.seasonNum == 1}>
+                                            <img src={down} title={"previous season"}/>
+                                        </IconButton>
+                                    </Box>
+                                ) : ''}
 
                                 <Typography variant="h6">{this.props.pageTitle}</Typography>
 

@@ -76,7 +76,7 @@ class Season extends Component {
     render() {
         return (
             <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={this.state.pageTitle}/>
+                <LeagueToolbar pageTitle={this.state.pageTitle} seasonNum={this.props.match.params.seasonNum} />
 
                 <Box style={{margin: 20}} >
                     <AppBar position="static">

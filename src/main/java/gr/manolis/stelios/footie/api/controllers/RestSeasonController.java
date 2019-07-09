@@ -120,6 +120,12 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
+
+    @RequestMapping("seasons")
+    public int seasonYear() {
+        return serviceUtils.getLeague().getSeasonNum();
+    }
+
     @RequestMapping("seasons/{year}/status")
     public Map<String, String> seasonStatus(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");

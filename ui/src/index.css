@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.MuiIconButton-root {
+  padding: 0 !important;
+}
+
 .MuiAppBar-colorPrimary {
   background-color: #1f6d93 !important;
 }
