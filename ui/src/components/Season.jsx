@@ -39,6 +39,11 @@ class Season extends Component {
                             }
                         });
 
+                        //finished season show finals
+                        if(result["season"] === "FINISHED") {
+                            currentStage = 5;
+                        }
+
                         return {
                             ...state,
                             tabActive: currentStage,

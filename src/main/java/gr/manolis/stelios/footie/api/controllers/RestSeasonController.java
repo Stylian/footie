@@ -322,12 +322,14 @@ public class RestSeasonController {
         structure.put("gB2", round.getgB2().getName());
         structure.put("gB3", round.getgB3().getName());
 
-        // TODO
+        boolean quartersDone = false;
+
         //semis
         Team s1 = round.getQuarterMatchups().get(1).getWinner();
         if (s1 == null) {
             structure.put("S1", "");
         } else {
+            quartersDone = true;
             structure.put("S1", s1.getName());
         }
 
@@ -339,10 +341,25 @@ public class RestSeasonController {
         }
 
         //finals
-        structure.put("F1", "");
-        structure.put("F2", "");
-//        structure.put("F1", round.getgA1().getName());
-//        structure.put("F2", round.getgB3().getName());
+        if (!quartersDone) {
+            structure.put("F1", "");
+            structure.put("F2", "");
+        }else {
+            Team f1 = round.getSemisMatchups().get(0).getWinner();
+            if(f1 == null) {
+                structure.put("F1", "");
+            }else {
+                structure.put("F1", f1.getName());
+            }
+
+            Team f2 = round.getSemisMatchups().get(1).getWinner();
+            if(f2 == null) {
+                structure.put("F2", "");
+            }else {
+                structure.put("F2", f2.getName());
+            }
+
+        }
 
         return structure;
     }
