@@ -217,7 +217,7 @@ class Playoffs extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        {this.state.semis != null ? (
+                        {this.state.games.semis.length > 0 ? (
                             <Grid item sm={12}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"½ Finals"} align={"center"}
@@ -252,7 +252,7 @@ class Playoffs extends Component {
                                 </Card>
                             </Grid>
                         ) : ''}
-                        {this.state.finals != null ? (
+                        {this.state.games.finals.length > 0 ? (
                             <Grid item sm={12}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"Finals"} align={"center"}

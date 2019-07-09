@@ -359,6 +359,11 @@ public class RestSeasonController {
 
         List<Game> semis = new ArrayList<>();
         round.getSemisMatchups().forEach(m -> semis.addAll(m.getGames()));
+        semis.sort( (g1, g2) -> {
+            if(g1.getDay() < 0) return 10;
+            else if (g2.getDay() < 0) return -1;
+            else return g1.getDay() - g2.getDay();
+        });
         matches.put("semis", semis);
 
         List<Game> finals = new ArrayList<>();

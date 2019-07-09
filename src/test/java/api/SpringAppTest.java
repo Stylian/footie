@@ -74,15 +74,15 @@ public class SpringAppTest {
 		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
 
 		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set Playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+
+		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+
+		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+
+		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
 	}
 
 	public void displayResults() throws Exception {

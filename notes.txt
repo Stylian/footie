@@ -3,7 +3,6 @@
 season 1 could have a special seeding page
 
 bugs
-semis and finals not visible in frontend
 seedings are using of current season instead of previous master
 
 

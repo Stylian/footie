@@ -160,7 +160,13 @@ public class RestOperationsController {
         return new RestResponse(RestResponse.SUCCESS, "game result added ");
     }
 
-    @GetMapping("/fillGames")
+    @GetMapping("/fill")
+    public RestResponse fillGamesTEST1() {
+
+        return operationsService.fillGamesTEST();
+    }
+
+    @PostMapping("/fillGames")
     public RestResponse fillGamesTEST() {
 
         return operationsService.fillGamesTEST();
