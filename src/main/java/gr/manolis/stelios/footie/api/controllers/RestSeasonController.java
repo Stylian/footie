@@ -358,7 +358,12 @@ public class RestSeasonController {
             }else {
                 structure.put("F2", f2.getName());
             }
+        }
 
+        if(round.getFinalsMatchup() != null && round.getFinalsMatchup().getWinner() != null) {
+            structure.put("W1", round.getFinalsMatchup().getWinner().getName());
+        }else {
+            structure.put("W1", "");
         }
 
         return structure;

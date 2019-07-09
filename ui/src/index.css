@@ -66,7 +66,11 @@ code {
 }
 
 .tree_dist2{
-  height: 100px !important;
+  height: 40px !important;
+}
+
+.tree_vert_dist{
+  width: 50px !important;
 }
 
 .tree_table {

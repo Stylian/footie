@@ -89,14 +89,30 @@ class Playoffs extends Component {
             <Box width={1200}>
 
                 <Grid container spacing={1}>
-                    <Grid item sm={5}>
+                    <Grid item sm={7}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"tree view"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table tree_table" align={"center"}>
+
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>¼ Finals</TableCell>
+                                            <TableCell class={"tree_vert_dist"}></TableCell>
+                                            <TableCell>½ Finals</TableCell>
+                                            <TableCell class={"tree_vert_dist"}></TableCell>
+                                            <TableCell>Finals</TableCell>
+                                            <TableCell class={"tree_vert_dist"}></TableCell>
+                                            <TableCell>Champion</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+
                                     <TableBody>
+                                        <TableRow>
+                                            <TableCell class={"tree_dist2"}></TableCell>
+                                        </TableRow>
                                         <TableRow>
                                             <TableCell className={"tree_team"} align="center"
                                                        style={{backgroundColor: '#fcf8e3'}}>
@@ -134,6 +150,23 @@ class Playoffs extends Component {
                                                        style={{backgroundColor: '#d9edf7'}}>
                                                 {this.state.structure.gA1}</TableCell>
                                         </TableRow>
+                                        <TableRow>
+                                            <TableCell class={"tree_dist2"}></TableCell>
+                                        </TableRow>
+
+
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team"} align="center"
+                                                       style={{backgroundColor: '#b3b8ff'}}>
+                                                {this.state.structure.W1}</TableCell>
+                                        </TableRow>
+
                                         <TableRow>
                                             <TableCell class={"tree_dist2"}></TableCell>
                                         </TableRow>

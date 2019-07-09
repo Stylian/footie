@@ -7,8 +7,9 @@ seedings are using of current season instead of previous master or is empty?
 
 
 TODO
-css on tabs
+
 seasons tabbing
 seasons menu
 
+teams and groups clickable
 archiving button on landing page

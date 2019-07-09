@@ -54,7 +54,7 @@ class GroupsDisplay extends Component {
     render() {
 
         return (
-            <Box width={1400}>
+            <Box width={1300}>
 
                 <Grid container spacing={1}>
                     {this.state.groups.map((group, index) => {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
 import QualsSeeding from "./quals_components/QualsSeeding";
 import GroupsSeeding from "./groups_components/GroupsSeeding";
 import GroupsMatches from "./groups_components/GroupsMatches";
@@ -28,7 +28,7 @@ class Groups1 extends Component {
 
     render() {
         return (
-            <div>
+            <Box style={{margin: 30, "margin-top": 10}} >
                 <AppBar position="static">
                     <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                         <Tab label="Seeding"/>
@@ -40,7 +40,7 @@ class Groups1 extends Component {
                                                               haveToSetUpTeams={this.props.stage === "ON_PREVIEW"} />}
                 {this.state.tabActive === 1 && <GroupsDisplay year={this.props.year} round={1} />}
                 {this.state.tabActive === 2 && <GroupsMatches year={this.props.year} round={1} />}
-            </div>
+            </Box>
         );
     }
 }
