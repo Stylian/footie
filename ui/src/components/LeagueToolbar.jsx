@@ -121,12 +121,17 @@ class LeagueToolbar extends Component {
 
                                 {this.props.seasonNum !== undefined ? (
                                     <Box>
-                                        <IconButton onClick={this.handleUp} disabled={this.props.seasonNum == this.state.seasonsTotal}>
+                                        {this.props.seasonNum != this.state.seasonsTotal ? (
+                                        <IconButton onClick={this.handleUp}>
                                             <img src={up} title={"next season"}/>
                                         </IconButton>
-                                        <IconButton onClick={this.handleDown} disabled={this.props.seasonNum == 1}>
-                                            <img src={down} title={"previous season"}/>
-                                        </IconButton>
+                                        ) : ('')}
+
+                                        {this.props.seasonNum == this.state.seasonsTotal ? (
+                                            <IconButton onClick={this.handleDown}>
+                                                <img src={down} title={"previous season"}/>
+                                            </IconButton>
+                                        ) : ('')}
                                     </Box>
                                 ) : ''}
 
