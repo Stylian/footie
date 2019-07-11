@@ -127,7 +127,7 @@ class LeagueToolbar extends Component {
                                         </IconButton>
                                         ) : ('')}
 
-                                        {this.props.seasonNum == this.state.seasonsTotal ? (
+                                        {this.props.seasonNum > 1 ? (
                                             <IconButton onClick={this.handleDown}>
                                                 <img src={down} title={"previous season"}/>
                                             </IconButton>

@@ -19,6 +19,7 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -90,7 +91,7 @@ public class RestSeasonController {
                                 || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
                                 break;
                             }
-                            if (playoffsRound.getSemisMatchups() == null) {
+                            if (CollectionUtils.isEmpty(playoffsRound.getSemisMatchups())) {
                                 restOperationsController.seedAndSetSemifinals();
                             } else {
                                 if(playoffsRound.getSemisMatchups().get(0).getWinner() == null

@@ -86,10 +86,10 @@ class Playoffs extends Component {
 
     render() {
         return (
-            <Box width={1200}>
+            <Box width={1600}>
 
                 <Grid container spacing={1}>
-                    <Grid item sm={7}>
+                    <Grid item sm={6}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"tree view"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
@@ -216,7 +216,7 @@ class Playoffs extends Component {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={4}>
+                    <Grid item sm={3}>
                         <Grid item sm={12}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"¼ Finals"} align={"center"}
@@ -250,6 +250,7 @@ class Playoffs extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
+
                         {this.state.games.semis.length > 0 ? (
                             <Grid item sm={12}>
                                 <Card style={{margin: 20}}>
@@ -269,42 +270,8 @@ class Playoffs extends Component {
                                                 {this.state.games.semis.map((game, index) => {
                                                     return (
                                                         <TableRow>
-                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
-                                                            {game.result == null ? (
-                                                                <TableCell></TableCell>
-                                                            ) : (
-                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                            )}
-                                                            <TableCell align="left">{game.awayTeam.name}</TableCell>
-                                                        </TableRow>)
-                                                })}
-                                            </TableBody>
-                                        </table>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ) : ''}
-                        {this.state.games.finals.length > 0 ? (
-                            <Grid item sm={12}>
-                                <Card style={{margin: 20}}>
-                                    <CardHeader title={"Finals"} align={"center"}
-                                                titleTypographyProps={{variant: 'h7'}}
-                                    />
-                                    <CardContent>
-                                        <table className="table" align={"center"}>
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Home</TableCell>
-                                                    <TableCell>score</TableCell>
-                                                    <TableCell>Away</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {this.state.games.finals.map((game, index) => {
-                                                    return (
-                                                        <TableRow>
-                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                            <TableCell
+                                                                align="right">{game.homeTeam.name}</TableCell>
                                                             {game.result == null ? (
                                                                 <TableCell></TableCell>
                                                             ) : (
@@ -322,11 +289,46 @@ class Playoffs extends Component {
                         ) : ''}
                     </Grid>
 
+                    <Grid item sm={3}>
+                        {this.state.games.finals.length > 0 ? (
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Finals"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Home</TableCell>
+                                                <TableCell>score</TableCell>
+                                                <TableCell>Away</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.games.finals.map((game, index) => {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell
+                                                            align="right">{game.homeTeam.name}</TableCell>
+                                                        {game.result == null ? (
+                                                            <TableCell></TableCell>
+                                                        ) : (
+                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                        )}
+                                                        <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        ) : ''}
+                    </Grid>
                 </Grid>
             </Box>
         );
     }
 }
-
 
 export default Playoffs;

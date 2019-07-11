@@ -58,8 +58,8 @@ class PastWinners extends Component {
                                     {this.state.seasons.map((item, index) =>
                                             <TableRow>
                                                 <TableCell align="right">{item.seasonYear}</TableCell>
-                                                <TableCell align="left">{item.winner.name}</TableCell>
-                                                <TableCell align="left">TODO</TableCell>
+                                                <TableCell align="left">{item.winner != null ? item.winner.name : ""}</TableCell>
+                                                <TableCell align="left">{item.runnerUp != null ? item.runnerUp.name : ""}</TableCell>
                                             </TableRow>
                                     )}
                                 </TableBody>

@@ -300,6 +300,7 @@ public class SeasonService {
 		}
 
 		season.setWinner(finalsMatchup.getWinner());
+		season.setRunnerUp(finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ? finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome());
 		season.getRounds().get(4).setStage(Stage.FINISHED);
 		season.setStage(Stage.FINISHED);
 
