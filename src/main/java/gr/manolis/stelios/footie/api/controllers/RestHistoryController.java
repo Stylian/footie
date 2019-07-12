@@ -1,6 +1,8 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.dtos.SeasonPastWinnersDTO;
+import gr.manolis.stelios.footie.api.mappers.SeasonPastWinnersMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -22,6 +24,9 @@ public class RestHistoryController {
     @Autowired
     private ViewsService viewsService;
 
+    @Autowired
+    private SeasonPastWinnersMapper seasonPastWinnersMapper;
+
     @RequestMapping("/coefficients")
     public Map<Team, Integer> coefficients() {
         return viewsService.getTeamsTotalCoefficients();
@@ -33,10 +38,10 @@ public class RestHistoryController {
     }
 
     @RequestMapping("/past_winners")
-    public List<Season>  pastWinners() {
+    public List<SeasonPastWinnersDTO>  pastWinners() {
         List<Season> seasons = viewsService.getAllSeasons();
         Collections.reverse(seasons);
-        return seasons;
+        return seasonPastWinnersMapper.toDTO(seasons);
     }
 
 }

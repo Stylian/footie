@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -51,4 +52,16 @@ public class App {
 			}
 		};
 	}
+
+
+	/**
+	 * jackson mapper accessed from any bean and spring test with autowired
+	 * to remove? not for mapstruct?
+	 * @return the instance of the jackson mapper
+	 */
+	@Bean
+	public ObjectMapper mapper() {
+		return new ObjectMapper();
+	}
+
 }
