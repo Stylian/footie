@@ -1,21 +1,21 @@
 Algeria
 Argentina
+Austria
 Belgium
 Bosnia
 Brazil
-Czechia
 Chile
 Colombia
-Cote d'Ivoire
 Croatia
 Denmark
+Egypt
 England
 France
 Germany
 Greece
 Iceland
-Ireland
 Italy
+Japan
 Mexico
 Morocco
 Netherlands
@@ -25,6 +25,7 @@ Russia
 Senegal
 Serbia
 Slovakia
+Slovenia
 Spain
 Sweden
 Switzerland
