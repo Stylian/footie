@@ -36,20 +36,9 @@ class GroupsSeeding extends Component {
                 (result) => {
                     this.setState(state => {
 
-                        let teamsStrong = [];
-                        Object.keys(result["strong"]).map((key, index) => {
-                            teamsStrong[index] = {"name": key, "coefficients": result["strong"][key]};
-                        });
-
-                        let teamsMedium = [];
-                        Object.keys(result["medium"]).map((key, index) => {
-                            teamsMedium[index] = {"name": key, "coefficients": result["medium"][key]};
-                        });
-
-                        let teamsWeak = [];
-                        Object.keys(result["weak"]).map((key, index) => {
-                            teamsWeak[index] = {"name": key, "coefficients": result["weak"][key]};
-                        });
+                        let teamsStrong = result["STRONG"];
+                        let teamsMedium = result["MEDIUM"];
+                        let teamsWeak = result["WEAK"];
 
                         return {
                             ...state,

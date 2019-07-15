@@ -3,6 +3,7 @@ package gr.manolis.stelios.footie.api.dtos;
 public class SeasonPastWinnersDTO {
     private int seasonYear;
     private TeamSimpleDTO winner;
+    private TeamSimpleDTO runnerUp;
 
     public int getSeasonYear() {
         return seasonYear;
@@ -28,5 +29,4 @@ public class SeasonPastWinnersDTO {
         this.runnerUp = runnerUp;
     }
 
-    private TeamSimpleDTO runnerUp;
 }

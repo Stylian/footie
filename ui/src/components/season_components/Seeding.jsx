@@ -32,45 +32,11 @@ class Seeding extends Component {
             .then(
                 (result) => {
 
-                    let champion = [];
-                    for (let objTeam of result[1].champion) {
-                        champion.push(objTeam.name);
-                    }
-
-                    let toQuals1 = [];
-                    for (let objTeam of result[1].toQuals1) {
-                        toQuals1.push(objTeam.name);
-                    }
-
-                    let toQuals2 = [];
-                    for (let objTeam of result[1].toQuals2) {
-                        toQuals2.push(objTeam.name);
-                    }
-
-                    let toGroups = [];
-                    for (let objTeam of result[1].toGroups) {
-                        toGroups.push(objTeam.name);
-                    }
-
-                    let teams = [];
-                    Object.keys(result[0]).map((key, index) => {
-                        teams[index] = {"name": key, "coefficients": result[0][key]};
-                        if (champion.find(obj => obj === key)) {
-                            teams[index]["seed"] = "champion";
-                        } else if (toQuals1.find(obj => obj === key)) {
-                            teams[index]["seed"] = "toQuals1";
-                        } else if (toQuals2.find(obj => obj === key)) {
-                            teams[index]["seed"] = "toQuals2";
-                        } else if (toGroups.find(obj => obj === key)) {
-                            teams[index]["seed"] = "toGroups";
-                        }
-                    });
-
                     this.setState(state => {
                         return {
                             ...state,
                             isLoaded: true,
-                            teams: teams,
+                            teams: result,
                         }
                     });
                 },
@@ -115,9 +81,9 @@ class Seeding extends Component {
                                                 <TableRow
                                                     style={{
                                                         backgroundColor:
-                                                            (team.seed === "champion") ? '#d9edf7' :
-                                                                (team.seed === "toGroups") ? '#d9edf7' :
-                                                                    (team.seed === "toQuals2") ? '#dff0d8' :
+                                                            (team.seed === "CHAMPION") ? '#B3B8FF' :
+                                                                (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                    (team.seed === "TO_QUALS_2") ? '#dff0d8' :
                                                                         ''
                                                     }}
                                                 >
@@ -145,9 +111,9 @@ class Seeding extends Component {
                                                 <TableRow
                                                     style={{
                                                         backgroundColor:
-                                                            (team.seed === "champion") ? '#d9edf7' :
-                                                                (team.seed === "toGroups") ? '#d9edf7' :
-                                                                    (team.seed === "toQuals2") ? '#dff0d8' :
+                                                            (team.seed === "CHAMPION") ? '#B3B8FF' :
+                                                                (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                    (team.seed === "TO_QUALS_2") ? '#dff0d8' :
                                                                         ''
                                                     }}
                                                 >

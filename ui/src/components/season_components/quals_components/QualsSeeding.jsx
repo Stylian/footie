@@ -35,15 +35,8 @@ class QualsSeeding extends Component {
             .then(
                 (result) => {
 
-                    let teamsStrong = [];
-                    Object.keys(result["strong"]).map((key, index) => {
-                        teamsStrong[index] = {"name": key, "coefficients": result["strong"][key]};
-                    });
-
-                    let teamsWeak = [];
-                    Object.keys(result["weak"]).map((key, index) => {
-                        teamsWeak[index] = {"name": key, "coefficients": result["weak"][key]};
-                    });
+                    let teamsStrong = result["STRONG"];
+                    let teamsWeak = result["WEAK"];
 
                     this.setState(state => {
                         return {

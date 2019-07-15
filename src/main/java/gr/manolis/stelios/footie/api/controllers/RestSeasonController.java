@@ -1,8 +1,11 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
@@ -52,6 +55,9 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
+
+    @Autowired
+    private TeamCoeffsMapper teamCoeffsMapper;
 
     // jack of all trades
     @RequestMapping("next_game")
@@ -158,7 +164,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("seasons/{year}/seeding")
-    public Object[] seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
+    public List<TeamCoeffsDTO>  seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
         int year = NumberUtils.toInt(strYear);
@@ -167,29 +173,29 @@ public class RestSeasonController {
         List<Team> teams = serviceUtils.loadTeams();
         logger.info("loaded teams: " + teams);
 
-        Map<Team, Integer> teamsWithCoeffs = getTeamsWithCoeffsAsMap(season, teams);
-        logger.info("teamsWithCoeffs: " + teamsWithCoeffs);
-
-        Map<String, List<Team>> teamsInRounds = null;
+        Map<Seed, List<Team>> teamsInRounds = null;
         if (season.getSeasonYear() != 1) {
             teamsInRounds = seasonService.checkWhereTeamsAreSeededForASeason(season);
         } else { // just for viewing
             teamsInRounds = new HashMap<>();
-            teamsInRounds.put("toQuals1", teams);
-            teamsInRounds.put("toQuals2", Collections.emptyList());
-            teamsInRounds.put("toGroups", Collections.emptyList());
-            teamsInRounds.put("champion", Collections.emptyList());
+            teamsInRounds.put(Seed.TO_QUALS_1, teams);
+            teamsInRounds.put(Seed.TO_QUALS_2, Collections.emptyList());
+            teamsInRounds.put(Seed.TO_GROUPS, Collections.emptyList());
+            teamsInRounds.put(Seed.CHAMPION, Collections.emptyList());
         }
         logger.info("teamsInRounds: " + teamsInRounds);
 
-        return new Object[]{teamsWithCoeffs, teamsInRounds};
+        List<TeamCoeffsDTO> theTeams = getTeamsWithCoeffsAndSeed(season, teams, teamsInRounds);
+        logger.info("theTeams: " + theTeams);
+
+        return theTeams;
     }
 
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     @RequestMapping("seasons/{year}/quals/{round}/seeding")
-    public Map<String, Map<Team, Integer>> qualsSeeding(
+    public Map<Seed, List<TeamCoeffsDTO>> qualsSeeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
         logger.info("quals seeding");
@@ -208,12 +214,12 @@ public class RestSeasonController {
             teamsStrong = qr.getTeams(); // why you empty?
         }
 
-        Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
-        Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
+        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
+        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK);
 
-        Map<String, Map<Team, Integer>> qualsTeams = new HashMap<>();
-        qualsTeams.put("strong", teamsStrongWithCoeffs);
-        qualsTeams.put("weak", teamsWeakWithCoeffs);
+        Map<Seed, List<TeamCoeffsDTO>>  qualsTeams = new HashMap<>();
+        qualsTeams.put(Seed.STRONG, teamsStrongWithCoeffs);
+        qualsTeams.put(Seed.WEAK, teamsWeakWithCoeffs);
 
         return qualsTeams;
     }
@@ -250,7 +256,7 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     @RequestMapping("seasons/{year}/groups/{round}/seeding")
-    public Map<String, Map<Team, Integer>> groups1Seeding(
+    public Map<Seed, List<TeamCoeffsDTO>> groups1Seeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
         logger.info("groups seeding");
@@ -270,15 +276,14 @@ public class RestSeasonController {
             teamsStrong = qr.getTeams();
         }
 
+        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
+        List<TeamCoeffsDTO> teamsMediumWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsMedium, Seed.MEDIUM);
+        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK);
 
-        Map<Team, Integer> teamsStrongWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsStrong);
-        Map<Team, Integer> teamsMediumWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsMedium);
-        Map<Team, Integer> teamsWeakWithCoeffs = getTeamsWithCoeffsAsMap(season, teamsWeak);
-
-        Map<String, Map<Team, Integer>> groupsTeams = new HashMap<>();
-        groupsTeams.put("strong", teamsStrongWithCoeffs);
-        groupsTeams.put("medium", teamsMediumWithCoeffs);
-        groupsTeams.put("weak", teamsWeakWithCoeffs);
+        Map<Seed, List<TeamCoeffsDTO>> groupsTeams = new HashMap<>();
+        groupsTeams.put(Seed.STRONG, teamsStrongWithCoeffs);
+        groupsTeams.put(Seed.MEDIUM, teamsMediumWithCoeffs);
+        groupsTeams.put(Seed.WEAK, teamsWeakWithCoeffs);
 
         return groupsTeams;
     }
@@ -407,14 +412,42 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    private Map<Team, Integer> getTeamsWithCoeffsAsMap(Season season, List<Team> teams) {
+
+    private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Map<Seed, List<Team>> teamsInRounds) {
         Collections.sort(teams, new CoefficientsOrdering(season));
 
-        Map<Team, Integer> teamsWithCoeffs = new LinkedHashMap<>();
+        List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
         for (Team team : teams) {
-            teamsWithCoeffs.put(team, team.getStatsForGroup(season).getPoints());
+            TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
+            teamDTO.setCoefficients(team.getStatsForGroup(season).getPoints());
+
+            for(Map.Entry<Seed, List<Team>> entry : teamsInRounds.entrySet()) {
+                if(entry.getValue().contains(team)) {
+                    teamDTO.setSeed(entry.getKey());
+                    break;
+                }
+            }
+
+            theTeams.add(teamDTO);
         }
-        return teamsWithCoeffs;
+        return theTeams;
     }
+
+    private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Seed seed) {
+        Collections.sort(teams, new CoefficientsOrdering(season));
+
+        List<TeamCoeffsDTO> theTeams = new ArrayList<>();
+
+        for (Team team : teams) {
+            TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
+            teamDTO.setCoefficients(team.getStatsForGroup(season).getPoints());
+            teamDTO.setSeed(seed);
+
+            theTeams.add(teamDTO);
+        }
+        return theTeams;
+    }
+
+
 }

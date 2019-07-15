@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,6 @@ import org.springframework.stereotype.Service;
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
-import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
@@ -85,19 +82,19 @@ public class SeasonService {
 		QualsRound qualsRound2 = new QualsRound(season, "quals2", 2);
 		GroupsRound groupsRound12 = new GroupsRound(season, "groups1", 3);
 
-		Map<String, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
+		Map<Seed, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
 
-		List<Team> groupsTeams = teamsSeeded.get("toGroups");
+		List<Team> groupsTeams = teamsSeeded.get(Seed.TO_GROUPS);
 		logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
 		groupsRound12.setTeams(groupsTeams);
 		System.out.println("---------------");
 
-		List<Team> quals2Teams = teamsSeeded.get("toQuals2");
+		List<Team> quals2Teams = teamsSeeded.get(Seed.TO_QUALS_2);
 		logger.info("teams go directly to 2nd quals: " + Utils.toString(quals2Teams));
 		qualsRound2.setTeams(quals2Teams);
 		System.out.println("---------------");
 
-		List<Team> quals1Teams = teamsSeeded.get("toQuals1");
+		List<Team> quals1Teams = teamsSeeded.get(Seed.TO_QUALS_1);
 		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
 		qualsRound1.setTeams(quals1Teams);
 
@@ -113,11 +110,11 @@ public class SeasonService {
 	/**
 	 * returns a map with lists of teams seeded per phase
 	 */
-	public Map<String, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
+	public Map<Seed, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
 
 		List<Team> teams = serviceUtils.loadTeams();
 
-		Map<String, List<Team>> map = new HashMap<>();
+		Map<Seed, List<Team>> map = new HashMap<>();
 
 		List<Team> teamsClone = new ArrayList<>(teams);
 
@@ -163,10 +160,10 @@ public class SeasonService {
 
 		}
 
-		map.put("champion", formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
-		map.put("toGroups", groupsTeams);
-		map.put("toQuals1", quals1Teams);
-		map.put("toQuals2", teamsClone);
+		map.put(Seed.CHAMPION, formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
+		map.put(Seed.TO_GROUPS, groupsTeams);
+		map.put(Seed.TO_QUALS_1, quals1Teams);
+		map.put(Seed.TO_QUALS_2, teamsClone);
 
 		return map;
 	}

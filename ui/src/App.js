@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage";
 import History from "./components/History";
 import Admin from "./components/Admin";
 import Season from "./components/Season";
+import Team from "./components/Team";
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
             <BrowserRouter>
                 <Route exact path='/' component={LandingPage}/>
                 <Route exact path='/season/:seasonNum' component={Season}/>
+                <Route exact path='/teams/:teamId' component={Team}/>
                 <Route path='/history' component={History}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>
