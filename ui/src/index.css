@@ -85,3 +85,12 @@ code {
   background-color: #d9edf7 !important;
   margin: 30px !important;
 }
+
+.teamClicker:hover {
+  cursor: pointer;
+  background-color: #d9f7f7 !important;
+}
+
+.teamClicker:hover > td {
+  font-weight: bold !important;
+}

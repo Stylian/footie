@@ -51,6 +51,10 @@ class QualsMatches extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         return (
@@ -76,14 +80,21 @@ class QualsMatches extends Component {
                                                 {this.state.days[day].map((game, index) => {
                                                     return (
                                                         <TableRow>
-                                                            <TableCell align="right">{game.homeTeam.name}</TableCell>
+                                                            <TableCell align="right" className={"teamClicker"}
+                                                                       data-teamid={game.homeTeam.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {game.homeTeam.name}</TableCell>
                                                             {game.result == null ? (
                                                                 <TableCell></TableCell>
                                                             ) : (
-                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                <TableCell>
+                                                                    {game.result.goalsMadeByHomeTeam + " - "
                                                                 + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
-                                                            <TableCell align="left">{game.awayTeam.name}</TableCell>
+                                                            <TableCell align="left" className={"teamClicker"}
+                                                                       data-teamid={game.awayTeam.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {game.awayTeam.name}</TableCell>
                                                         </TableRow>)
                                                 })}
                                             </TableBody>

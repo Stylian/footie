@@ -39,6 +39,8 @@ public class RestTeamsController {
 
         TeamSimpleDTO dto = teamSimpleMapper.toDTO(team);
 
+        // TODO
+
         return dto;
     }
 

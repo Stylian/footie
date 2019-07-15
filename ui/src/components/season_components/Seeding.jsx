@@ -52,6 +52,10 @@ class Seeding extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         let teams = [...this.state.teams];
@@ -78,7 +82,8 @@ class Seeding extends Component {
                                     <TableBody>
                                         {leftSide.map((team, index) => {
                                             return (
-                                                <TableRow
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={this.goToTeam}
                                                     style={{
                                                         backgroundColor:
                                                             (team.seed === "CHAMPION") ? '#B3B8FF' :
@@ -108,7 +113,8 @@ class Seeding extends Component {
                                     <TableBody>
                                         {rightSide.map((team, index) => {
                                             return (
-                                                <TableRow
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={this.goToTeam}
                                                     style={{
                                                         backgroundColor:
                                                             (team.seed === "CHAMPION") ? '#B3B8FF' :

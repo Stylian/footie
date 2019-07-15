@@ -51,6 +51,10 @@ class GroupsDisplay extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         return (

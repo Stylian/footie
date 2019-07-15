@@ -83,6 +83,10 @@ class GroupsSeeding extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         return (
@@ -107,7 +111,8 @@ class GroupsSeeding extends Component {
                                     <TableBody>
                                         {this.state.teamsStrong.map((team, index) => {
                                             return (
-                                                <TableRow>
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={this.goToTeam}>
                                                     <TableCell align="right">{index + 1}</TableCell>
                                                     <TableCell>{team.name}</TableCell>
                                                     <TableCell align="right">{team.coefficients}</TableCell>
@@ -135,7 +140,8 @@ class GroupsSeeding extends Component {
                                     <TableBody>
                                         {this.state.teamsMedium.map((team, index) => {
                                             return (
-                                                <TableRow>
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={this.goToTeam}>
                                                     <TableCell align="right">{this.state.teamsStrong.length + index + 1}</TableCell>
                                                     <TableCell>{team.name}</TableCell>
                                                     <TableCell align="right">{team.coefficients}</TableCell>
@@ -163,7 +169,8 @@ class GroupsSeeding extends Component {
                                     <TableBody>
                                         {this.state.teamsWeak.map((team, index) => {
                                             return (
-                                                <TableRow>
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={this.goToTeam}>
                                                     <TableCell
                                                         align="right">{this.state.teamsStrong.length + this.state.teamsMedium.length + index + 1}</TableCell>
                                                     <TableCell>{team.name}</TableCell>

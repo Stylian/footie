@@ -13,4 +13,5 @@ seasons tabbing
 seasons menu
 
 teams and groups clickable
+- teams now clickable, TODO for playoff tree and groups display
 archiving button on landing page
