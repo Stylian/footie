@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import IconButton from '@material-ui/core/IconButton';
 import save from '../../icons/save.svg';
+import {TableRow} from "@material-ui/core";
 
 class NextGame extends Component {
 
@@ -97,6 +98,10 @@ class NextGame extends Component {
 
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         if (this.state.game.id == 0) {
@@ -106,9 +111,11 @@ class NextGame extends Component {
                 <table class="gameTable" align={"right"}>
                     <tbody>
                     <tr>
-                        <td class="homeTeam" align={"right"}>{this.state.game.homeTeam.name}</td>
+                        <td class="homeTeam teamClickerGamePage" align={"right"} data-teamid={this.state.game.homeTeam.id}
+                            onClick={this.goToTeam} >{this.state.game.homeTeam.name}</td>
                         <td class="gameDiff"> -</td>
-                        <td class="awayTeam" align={"left"}>{this.state.game.awayTeam.name}</td>
+                        <td class="awayTeam teamClickerGamePage" align={"left"} data-teamid={this.state.game.awayTeam.id}
+                            onClick={this.goToTeam} >{this.state.game.awayTeam.name}</td>
                     </tr>
                     <tr>
                         <td align={"right"}>

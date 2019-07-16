@@ -102,3 +102,8 @@ code {
 .teamClicker:hover > td {
   font-weight: bold !important;
 }
+
+.teamClickerGamePage:hover {
+  cursor: pointer;
+  font-weight: bold !important;
+}
