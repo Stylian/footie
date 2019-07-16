@@ -88,7 +88,8 @@ class GroupsDisplay extends Component {
                                             <TableBody>
                                                 {group.teams.map((team, index) => {
                                                     return (
-                                                        <TableRow
+                                                        <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                                  onClick={this.goToTeam}
                                                             style={{
                                                                 backgroundColor:
                                                                     (this.props.round == 1 && index < 2) ? '#d9edf7' :
@@ -99,14 +100,14 @@ class GroupsDisplay extends Component {
                                                         >
                                                             <TableCell align="right">{index + 1}</TableCell>
                                                             <TableCell>{team.name}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].matchesPlayed}</TableCell>
-                                                            <TableCell align="right" className={"points_td"}>{group.teamsStats[team.name].points}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].wins}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].draws}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].losses}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].goalsScored}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].goalsConceded}</TableCell>
-                                                            <TableCell align="right">{group.teamsStats[team.name].goalDifference}</TableCell>
+                                                            <TableCell align="right">{team.stats.matchesPlayed}</TableCell>
+                                                            <TableCell align="right" className={"points_td"}>{team.stats.points}</TableCell>
+                                                            <TableCell align="right">{team.stats.wins}</TableCell>
+                                                            <TableCell align="right">{team.stats.draws}</TableCell>
+                                                            <TableCell align="right">{team.stats.losses}</TableCell>
+                                                            <TableCell align="right">{team.stats.goalsScored}</TableCell>
+                                                            <TableCell align="right">{team.stats.goalsConceded}</TableCell>
+                                                            <TableCell align="right">{team.stats.goalDifference}</TableCell>
                                                         </TableRow>)
                                                 })}
                                             </TableBody>

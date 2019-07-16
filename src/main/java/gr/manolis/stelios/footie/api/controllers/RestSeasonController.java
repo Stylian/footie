@@ -1,15 +1,15 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamGroupDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
+import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
-import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -64,6 +64,9 @@ public class RestSeasonController {
 
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
+
+    @Autowired
+    private RobinGroupMapper robinGroupMapper;
 
     // jack of all trades
     @RequestMapping("next_game")
@@ -312,7 +315,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("seasons/{year}/groups/{round}")
-    public List<RobinGroup> groupsRound(
+    public List<RobinGroupDTO> groupsRound(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
         logger.info("groups round");
@@ -325,7 +328,10 @@ public class RestSeasonController {
 
         logger.info("groupsRounds: " + groupsRound);
 
-        return groupsRound.getGroups();
+        List<RobinGroup> groups = groupsRound.getGroups();
+        List<RobinGroupDTO> groupsDTO = groupstoDTO(groups);
+
+        return groupsDTO;
     }
 
     @RequestMapping("/seasons/{year}/playoffs/structure")
@@ -421,7 +427,35 @@ public class RestSeasonController {
 
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
+    // Mapstruct FAKES!
     // -------------------------------------------------------------------------------------------------
+
+    private List<RobinGroupDTO> groupstoDTO(List<RobinGroup> groups) {
+
+        List<RobinGroupDTO> robinGroupsDTO = new ArrayList<>();
+
+        for(RobinGroup group : groups) {
+            RobinGroupDTO robinGroupDTO = new RobinGroupDTO();
+            robinGroupDTO.setId(group.getId());
+            robinGroupDTO.setName(group.getName());
+
+            List<TeamGroupDTO> teamsInGroup = new ArrayList<>();
+
+            for( Map.Entry<Team, Stats> teamsStats : group.getTeamsStats().entrySet()) {
+                TeamGroupDTO teamGroupDTO = new TeamGroupDTO();
+                teamGroupDTO.setId(teamsStats.getKey().getId());
+                teamGroupDTO.setName(teamsStats.getKey().getName());
+                teamGroupDTO.setStats(teamsStats.getValue());
+
+                teamsInGroup.add(teamGroupDTO);
+            }
+
+            robinGroupDTO.setTeams(teamsInGroup);
+            robinGroupsDTO.add(robinGroupDTO);
+        }
+
+        return robinGroupsDTO;
+    }
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Map<Seed, List<Team>> teamsInRounds) {
         Collections.sort(teams, new CoefficientsOrdering(season));

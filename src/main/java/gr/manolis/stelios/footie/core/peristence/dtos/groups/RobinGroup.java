@@ -32,7 +32,6 @@ public class RobinGroup extends Group {
 		games = new ArrayList<>();
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<GroupGame> getGames() {
 		return games;
 	}
@@ -48,7 +47,6 @@ public class RobinGroup extends Group {
 	/**
 	 * teams in robin group come sorted
 	 */
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@Override
 	public List<Team> getTeams() {
 		List<Team> teams = super.getTeams();
