@@ -88,9 +88,10 @@ code {
 
 .teamClicker:hover {
   cursor: pointer;
-  background-color: #d9f7f7 !important;
+  background-color: #d9f7f0 !important;
 }
 
+.teamClicker:hover,
 .teamClicker:hover > td {
   font-weight: bold !important;
 }

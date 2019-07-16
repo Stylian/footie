@@ -174,7 +174,7 @@ class Playoffs extends Component {
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell className={"tree_team teamClicker"} align="center"
                                                        style={{backgroundColor: '#b3b8ff'}}
-                                                       data-teamid={this.state.structure.gB1.id}
+                                                       data-teamid={this.state.structure.W1.id}
                                                        onClick={this.goToTeam} >
                                                 {this.state.structure.W1.name}</TableCell>
                                         </TableRow>
