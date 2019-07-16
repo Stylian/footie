@@ -114,7 +114,8 @@ class GroupsDisplay extends Component {
                                                             <TableCell align="right">{team.stats.goalsScored}</TableCell>
                                                             <TableCell align="right">{team.stats.goalsConceded}</TableCell>
                                                             <TableCell align="right">{team.stats.goalDifference}</TableCell>
-                                                        </TableRow>)
+                                                        </TableRow>
+                                                    )
                                                 })}
                                             </TableBody>
                                         </table>

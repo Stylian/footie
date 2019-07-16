@@ -44,6 +44,10 @@ public class Group {
 	public Group() {
 	}
 
+	public Group(Map<Team, Stats> teamsStats) {
+		this.teamsStats = teamsStats;
+	}
+
 	public Group(String name) {
 		this.name = name;
 		teamsStats = new HashMap<>();

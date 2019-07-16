@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.*;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +139,11 @@ public class SeasonService {
 		} else {
 
 			Season previousSeason =  serviceUtils.loadSeason(season.getSeasonYear() - 1);
-			Collections.sort(teamsClone, new CoefficientsOrdering(previousSeason));
+
+			if(season.getSeasonYear() > 1) {
+				List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
+				Collections.sort(teamsClone, new CoefficientsRangeOrdering(seasonsPast));
+			}
 
 			// former champion promotes directly
 			formerChampion = previousSeason.getWinner();
@@ -287,13 +292,7 @@ public class SeasonService {
 		// add season stats to master group
 
 		for (Team team : teams) {
-
-			Stats pastStats = new Stats(team.getStatsForGroup(master));
-
 			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
-
-			team.setStatsForGroup(season, pastStats);
-
 		}
 
 		season.setWinner(finalsMatchup.getWinner());

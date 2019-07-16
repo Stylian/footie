@@ -31,27 +31,27 @@ public class SpringAppTest {
 	@Autowired
 	private TestRestTemplate testRestTemplate;
 
-//	@Test
-//	public void fillGames() throws Exception {
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//	}
+	@Test
+	public void fillGames() throws Exception {
+		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+	}
 
 
-//	@Test
-//	public void testOps() throws Exception {
-//
-//		checkURL("/rest/ops/league", "{seasonNum=0}");
-//
-//		for (int n = 1; n < 7; n++)
-//			runSeason(n);
-//
-//	}
+	@Test
+	public void testOps() throws Exception {
 
-//	@Test
-//	public void runSeason1() throws Exception {
-//		checkURL("/rest/ops/league", "{seasonNum=0}");
-//		runSeason(1);
-//	}
+		checkURL("/rest/ops/league", "{seasonNum=0}");
+
+		for (int n = 1; n < 3; n++)
+			runSeason(n);
+
+	}
+
+	@Test
+	public void runSeason1() throws Exception {
+		checkURL("/rest/ops/league", "{seasonNum=0}");
+		runSeason(1);
+	}
 
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");

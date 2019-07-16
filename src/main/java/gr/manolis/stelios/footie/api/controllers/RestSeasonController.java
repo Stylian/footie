@@ -464,7 +464,17 @@ public class RestSeasonController {
 
         for (Team team : teams) {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
-            teamDTO.setCoefficients(team.getStatsForGroup(season).getPoints());
+
+            if(season.getSeasonYear() > 1) {
+                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
+                int p1 = 0;
+                for(Season season1 : seasonsPast) {
+                    p1 += team.getStatsForGroup(season1).getPoints();
+                }
+                teamDTO.setCoefficients(p1);
+            }else {
+                teamDTO.setCoefficients(0);
+            }
 
             for(Map.Entry<Seed, List<Team>> entry : teamsInRounds.entrySet()) {
                 if(entry.getValue().contains(team)) {
@@ -475,6 +485,8 @@ public class RestSeasonController {
 
             theTeams.add(teamDTO);
         }
+
+        Collections.sort(theTeams, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
         return theTeams;
     }
 
@@ -485,11 +497,23 @@ public class RestSeasonController {
 
         for (Team team : teams) {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
-            teamDTO.setCoefficients(team.getStatsForGroup(season).getPoints());
             teamDTO.setSeed(seed);
+
+            if(season.getSeasonYear() > 1) {
+                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
+                int p1 = 0;
+                for(Season season1 : seasonsPast) {
+                    p1 += team.getStatsForGroup(season1).getPoints();
+                }
+                teamDTO.setCoefficients(p1);
+            }else {
+                teamDTO.setCoefficients(0);
+            }
 
             theTeams.add(teamDTO);
         }
+
+        Collections.sort(theTeams, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
         return theTeams;
     }
 
