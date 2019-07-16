@@ -1,29 +1,26 @@
 import React, {Component} from 'react';
-import {
-    AppBar, Box,
-    Card,
-    CardContent,
-    CardHeader,
-    Grid,
-    Tab,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Tabs
-} from "@material-ui/core";
-import QualsSeeding from "./quals_components/QualsSeeding";
-import GroupsSeeding from "./groups_components/GroupsSeeding";
-import GroupsMatches from "./groups_components/GroupsMatches";
-import GroupsDisplay from "./groups_components/GroupsDisplay";
+import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 
 class Playoffs extends Component {
 
     constructor(props) {
         super(props);
 
+        let nullTeam = {id: -1, name: ""};
         this.state = {
-            structure: {},
+            structure: {
+                gA1: nullTeam,
+                gA2: nullTeam,
+                gA3: nullTeam,
+                gB1: nullTeam,
+                gB2: nullTeam,
+                gB3: nullTeam,
+                S1: nullTeam,
+                S2: nullTeam,
+                F1: nullTeam,
+                F2: nullTeam,
+                W1: nullTeam,
+            },
             games: {
                 "quarters": [],
                 "semis": [],
@@ -118,30 +115,38 @@ class Playoffs extends Component {
                                             <TableCell class={"tree_dist2"}></TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}>
-                                                {this.state.structure.gA3}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}
+                                                       data-teamid={this.state.structure.gA3.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gA3.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}>
-                                                {this.state.structure.S1}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}
+                                                       data-teamid={this.state.structure.S1.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.S1.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}>
-                                                {this.state.structure.gB2}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}
+                                                       data-teamid={this.state.structure.gB2.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gB2.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#e2e4ff'}}>
-                                                {this.state.structure.F1}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#e2e4ff'}}
+                                                       data-teamid={this.state.structure.F1.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.F1.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell class={"tree_dist1"}></TableCell>
@@ -150,27 +155,12 @@ class Playoffs extends Component {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}>
-                                                {this.state.structure.gA1}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}
+                                                       data-teamid={this.state.structure.gA1.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gA1.name}</TableCell>
                                         </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"tree_dist2"}></TableCell>
-                                        </TableRow>
-
-
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#b3b8ff'}}>
-                                                {this.state.structure.W1}</TableCell>
-                                        </TableRow>
-
                                         <TableRow>
                                             <TableCell class={"tree_dist2"}></TableCell>
                                         </TableRow>
@@ -178,9 +168,29 @@ class Playoffs extends Component {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}>
-                                                {this.state.structure.gB1}</TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#b3b8ff'}}
+                                                       data-teamid={this.state.structure.gB1.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.W1.name}</TableCell>
+                                        </TableRow>
+
+                                        <TableRow>
+                                            <TableCell class={"tree_dist2"}></TableCell>
+                                        </TableRow>
+
+                                        <TableRow>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell class={"cancel"}></TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}
+                                                       data-teamid={this.state.structure.gB1.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gB1.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell class={"tree_dist1"}></TableCell>
@@ -190,27 +200,35 @@ class Playoffs extends Component {
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#e2e4ff'}}>
-                                                {this.state.structure.F2}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#e2e4ff'}}
+                                                       data-teamid={this.state.structure.F2.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.F2.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}>
-                                                {this.state.structure.gB3}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}
+                                                       data-teamid={this.state.structure.gB3.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gB3.name}</TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}>
-                                                {this.state.structure.S2}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#d9edf7'}}
+                                                       data-teamid={this.state.structure.S2.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.S2.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}>
-                                                {this.state.structure.gA2}</TableCell>
+                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                                       style={{backgroundColor: '#fcf8e3'}}
+                                                       data-teamid={this.state.structure.gA2.id}
+                                                       onClick={this.goToTeam} >
+                                                {this.state.structure.gA2.name}</TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                         </TableRow>

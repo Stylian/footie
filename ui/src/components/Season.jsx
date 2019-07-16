@@ -25,25 +25,25 @@ class Season extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
 
-                        // to test , also the render as well
-                        let currentStage = 0;
-                        Object.keys(result).map((key, index) => {
-                            if (result[key] === "ON_PREVIEW") {
-                                currentStage = index;
-                                return;
-                            } else if (result[key] === "PLAYING") {
-                                currentStage = index;
-                                return;
-                            }
-                        });
-
-                        //finished season show finals
-                        if (result["season"] === "FINISHED") {
-                            currentStage = 5;
+                    // to test , also the render as well
+                    let currentStage = 0;
+                    Object.keys(result).map((key, index) => {
+                        if (result[key] === "ON_PREVIEW") {
+                            currentStage = index;
+                            return;
+                        } else if (result[key] === "PLAYING") {
+                            currentStage = index;
+                            return;
                         }
+                    });
 
+                    //finished season show finals
+                    if (result["season"] === "FINISHED") {
+                        currentStage = 5;
+                    }
+
+                    this.setState(state => {
                         return {
                             ...state,
                             tabActive: currentStage,

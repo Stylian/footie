@@ -2,7 +2,9 @@ package gr.manolis.stelios.footie.api.controllers;
 
 
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
+import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
@@ -49,8 +51,12 @@ public class RestSeasonController {
     @Autowired
     private GameService gameService;
 
+
     @Autowired
     private RestOperationsController restOperationsController;
+
+    @Autowired
+    private TeamSimpleMapper teamSimpleMapper;
 
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
@@ -94,7 +100,7 @@ public class RestSeasonController {
                             Season season = serviceUtils.loadCurrentSeason();
                             PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
                             if(playoffsRound.getQuarterMatchups().get(0).getWinner() == null
-                                || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
+                                    || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
                                 break;
                             }
                             if (CollectionUtils.isEmpty(playoffsRound.getSemisMatchups())) {
@@ -323,59 +329,63 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/seasons/{year}/playoffs/structure")
-    public Map<String, String> getPlayoffsRoundStructure(@PathVariable String year) {
+    public Map<String, TeamSimpleDTO> getPlayoffsRoundStructure(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
-        Map<String, String> structure = new HashMap<>();
-        structure.put("gA1", round.getgA1().getName());
-        structure.put("gA2", round.getgA2().getName());
-        structure.put("gA3", round.getgA3().getName());
-        structure.put("gB1", round.getgB1().getName());
-        structure.put("gB2", round.getgB2().getName());
-        structure.put("gB3", round.getgB3().getName());
+        Map<String, TeamSimpleDTO> structure = new HashMap<>();
+        structure.put("gA1", teamSimpleMapper.toDTO(round.getgA1()));
+        structure.put("gA2", teamSimpleMapper.toDTO(round.getgA2()));
+        structure.put("gA3", teamSimpleMapper.toDTO(round.getgA3()));
+        structure.put("gB1", teamSimpleMapper.toDTO(round.getgB1()));
+        structure.put("gB2", teamSimpleMapper.toDTO(round.getgB2()));
+        structure.put("gB3", teamSimpleMapper.toDTO(round.getgB3()));
 
         boolean quartersDone = false;
+
+        TeamSimpleDTO emptyTeam = new TeamSimpleDTO();
+        emptyTeam.setId(-1);
+        emptyTeam.setName("");
 
         //semis
         Team s1 = round.getQuarterMatchups().get(1).getWinner();
         if (s1 == null) {
-            structure.put("S1", "");
+            structure.put("S1", emptyTeam);
         } else {
             quartersDone = true;
-            structure.put("S1", s1.getName());
+            structure.put("S1", teamSimpleMapper.toDTO(s1));
         }
 
         Team s2 = round.getQuarterMatchups().get(0).getWinner();
         if (s2 == null) {
-            structure.put("S2", "");
+            structure.put("S2", emptyTeam);
         } else {
-            structure.put("S2", s2.getName());
+            structure.put("S2", teamSimpleMapper.toDTO(s2));
         }
 
         //finals
         if (!quartersDone) {
-            structure.put("F1", "");
-            structure.put("F2", "");
+            structure.put("F1", emptyTeam);
+            structure.put("F2", emptyTeam);
         }else {
             Team f1 = round.getSemisMatchups().get(0).getWinner();
             if(f1 == null) {
-                structure.put("F1", "");
+                structure.put("F1", emptyTeam);
             }else {
-                structure.put("F1", f1.getName());
+                structure.put("F1", teamSimpleMapper.toDTO(f1));
             }
 
             Team f2 = round.getSemisMatchups().get(1).getWinner();
             if(f2 == null) {
-                structure.put("F2", "");
+                structure.put("F2", emptyTeam);
             }else {
-                structure.put("F2", f2.getName());
+                structure.put("F2", teamSimpleMapper.toDTO(f2));
             }
         }
 
         if(round.getFinalsMatchup() != null && round.getFinalsMatchup().getWinner() != null) {
-            structure.put("W1", round.getFinalsMatchup().getWinner().getName());
+            structure.put("W1", teamSimpleMapper.toDTO(round.getFinalsMatchup().getWinner()));
         }else {
-            structure.put("W1", "");
+            structure.put("W1", emptyTeam);
         }
 
         return structure;
