@@ -144,10 +144,7 @@ public class ViewsService {
 
 
 	public List<Team> getTeams() {
-
 		List<Team> teams = serviceUtils.loadTeams();
-
 		return teams;
-
 	}
 }

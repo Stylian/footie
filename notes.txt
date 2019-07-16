@@ -7,11 +7,10 @@ seedings are using of current season instead of previous master or is empty?
 past winners show in runnerups sometimes
 
 TODO
-added mapstruct, todo teams gen eaxple and more
+mapstruct fake hacks to fix?
 
 seasons tabbing
 seasons menu
 
-teams and groups clickable
-- teams now clickable, TODO for playoff tree and groups display
+teams and groups pages to fill with useful views
 archiving button on landing page

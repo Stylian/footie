@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,13 @@ public class ServiceUtils {
 
 		DataAccessObject<Team> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		return dao.list("TEAMS");
+
+	}
+
+	public RobinGroup loadRobinGroup(int id) {
+
+		return (RobinGroup) sessionFactory.getCurrentSession()
+				.createQuery("from GROUPS where ID=" + id).uniqueResult();
 
 	}
 

@@ -6,6 +6,7 @@ import History from "./components/History";
 import Admin from "./components/Admin";
 import Season from "./components/Season";
 import Team from "./components/Team";
+import Group from "./components/Group";
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
                 <Route exact path='/' component={LandingPage}/>
                 <Route exact path='/season/:seasonNum' component={Season}/>
                 <Route exact path='/teams/:teamId' component={Team}/>
+                <Route exact path='/groups/:groupId' component={Group}/>
                 <Route path='/history' component={History}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>

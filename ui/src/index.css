@@ -86,6 +86,13 @@ code {
   margin: 30px !important;
 }
 
+.groupClicker:hover {
+  cursor: pointer;
+  background-color: #d9f7f0 !important;
+  color: black !important;
+  font-weight: bold !important;
+}
+
 .teamClicker:hover {
   cursor: pointer;
   background-color: #d9f7f0 !important;

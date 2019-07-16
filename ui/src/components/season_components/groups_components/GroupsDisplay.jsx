@@ -55,6 +55,10 @@ class GroupsDisplay extends Component {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     }
 
+    goToGroup = (event, newValue) => {
+        window.location.href = "/groups/" + event.currentTarget.dataset.groupid;
+    }
+
     render() {
 
         return (
@@ -68,6 +72,8 @@ class GroupsDisplay extends Component {
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
+                                                className={"groupClicker"} data-groupid={group.id}
+                                                onClick={this.goToGroup}
                                     />
                                     <CardContent>
                                         <table className="table" align={"center"} >
