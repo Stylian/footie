@@ -17,9 +17,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.GameService;
-import gr.manolis.stelios.footie.core.services.SeasonService;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
+import gr.manolis.stelios.footie.core.services.*;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -41,6 +39,15 @@ public class RestSeasonController {
 
     @Autowired
     private SeasonService seasonService;
+
+    @Autowired
+    private QualsService qualsService;
+
+    @Autowired
+    private GroupsRoundService groupsRoundService;
+
+    @Autowired
+    private PlayoffsRoundService playoffsRoundService;
 
     @Autowired
     private ViewsService viewsService;
@@ -88,15 +95,19 @@ public class RestSeasonController {
 
                     switch (round.getKey()) {
                         case "quals1":
+                            qualsService.endQualsRound("1");
                             restOperationsController.seedQualsRound("2");
                             break;
                         case "quals2":
+                            qualsService.endQualsRound("2");
                             restOperationsController.seedGroupsRoundOf12();
                             break;
                         case "groups1":
+                            groupsRoundService.endGroupsRound("1");
                             restOperationsController.seedAndSetGroupsRoundOf8();
                             break;
                         case "groups2":
+                            groupsRoundService.endGroupsRound("2");
                             restOperationsController.seedAndSetQuarterfinals();
                             break;
                         case "playoffs":
@@ -107,6 +118,7 @@ public class RestSeasonController {
                                 break;
                             }
                             if (CollectionUtils.isEmpty(playoffsRound.getSemisMatchups())) {
+                                playoffsRoundService.endPlayoffsQuarters();
                                 restOperationsController.seedAndSetSemifinals();
                             } else {
                                 if(playoffsRound.getSemisMatchups().get(0).getWinner() == null
@@ -115,9 +127,11 @@ public class RestSeasonController {
                                 }
 
                                 if (playoffsRound.getFinalsMatchup() == null) {
+                                    playoffsRoundService.endPlayoffsSemis();
                                     restOperationsController.seedAndSetFinals();
                                 }else {
                                     if(playoffsRound.getFinalsMatchup().getWinner() != null) {
+                                        playoffsRoundService.endPlayoffsFinals();
                                         restOperationsController.endSeason();
                                     }
                                 }

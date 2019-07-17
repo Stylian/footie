@@ -177,167 +177,19 @@ public class SeasonService {
 		logger.info("closing down season, calculating coefficients");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
-
-		// add coeffs to quals1 winners
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-
-		for (Matchup matchup : roundQuals1.getMatchups()) {
-
-			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_1);
-
-			// average out points per matchup
-			addGamePointsForMatchup(season, matchup);
-
-		}
-
-		// add coeffs to quals2 winners
-		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
-
-		for (Matchup matchup : roundQuals2.getMatchups()) {
-
-			matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_2);
-
-			// average out points per matchup
-			addGamePointsForMatchup(season, matchup);
-
-		}
-
-		// add coeffs for groups12 positions
-		GroupsRound groupsOf12Round = (GroupsRound) season.getRounds().get(2);
-
-		for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
-
-			robinGroup.getTeams().get(0).getStatsForGroup(season)
-					.addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
-			robinGroup.getTeams().get(1).getStatsForGroup(season)
-					.addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
-
-			for (GroupGame groupGame : robinGroup.getGames()) {
-
-				Team homeTeam = groupGame.getHomeTeam();
-				if (groupGame.getResult().homeTeamWon()) {
-					homeTeam.getStatsForGroup(season).addPoints(Rules.WIN_POINTS);
-				} else if (groupGame.getResult().tie()) {
-					homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
-				}
-
-			}
-
-		}
-
-		// add coeffs for groups8 positions
-		GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(3);
-
-		for (RobinGroup robinGroup : groupsOf8Round.getGroups()) {
-
-			robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
-			robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
-			robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
-
-			for (GroupGame groupGame : robinGroup.getGames()) {
-
-				Team homeTeam = groupGame.getHomeTeam();
-				if (groupGame.getResult().homeTeamWon()) {
-					homeTeam.getStatsForGroup(season).addPoints(Rules.WIN_POINTS);
-				} else if (groupGame.getResult().tie()) {
-					homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
-				}
-
-			}
-
-		}
-
-		// add coeffs to playoffs
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
-
-		for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
-
-			// average out points per matchup
-			addGamePointsForMatchup(season, matchup);
-
-		}
-
-		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
-
-			// average out points per matchup
-			addGamePointsForMatchup(season, matchup);
-
-		}
-
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
-
-		finalsMatchup.getWinner().getStatsForGroup(season).addPoints(Rules.POINTS_WINNING_THE_LEAGUE);
-
-		if (!finalsMatchup.getTeamHome().equals(finalsMatchup.getWinner())) {
-			finalsMatchup.getTeamHome().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
-		} else {
-			finalsMatchup.getTeamAway().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
-		}
-
-		// average out points per matchup
-		addGamePointsForMatchup(season, finalsMatchup);
-
-		// add points for goals scored
-		List<Team> teams = serviceUtils.loadTeams();
-
-		for (Team team : teams) {
-
-			int goalsScored = team.getStatsForGroup(season).getGoalsScored();
-			team.getStatsForGroup(season).addPoints(goalsScored * Rules.GOALS_POINTS);
-
-		}
-
-		// add season stats to master group
-
-		for (Team team : teams) {
-			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
-		}
 
 		season.setWinner(finalsMatchup.getWinner());
 		season.setRunnerUp(finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ? finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome());
 		season.getRounds().get(4).setStage(Stage.FINISHED);
 		season.setStage(Stage.FINISHED);
 
-		// hope it is enough, seems so
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
 
 		return season;
 
-	}
-
-	private void addGamePointsForMatchup(Season season, Matchup matchup) {
-		int matchPointsHome = 0;
-		int matchPointsAway = 0;
-		int numberOfGames = 0;
-
-		for (Game game : matchup.getGames()) {
-
-			numberOfGames++;
-
-			if (game.getResult().homeTeamWon()) {
-
-				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
-					matchPointsHome += Rules.WIN_POINTS;
-				} else {
-					matchPointsAway += Rules.WIN_POINTS;
-				}
-
-			} else if (game.getResult().tie()) {
-
-				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
-					matchPointsHome += Rules.DRAW_POINTS;
-				} else {
-					matchPointsAway += Rules.DRAW_POINTS;
-				}
-
-			}
-
-		}
-
-		matchup.getTeamHome().getStatsForGroup(season).addPoints(2 * matchPointsHome / numberOfGames);
-		matchup.getTeamAway().getStatsForGroup(season).addPoints(2 * matchPointsAway / numberOfGames);
 	}
 
 }

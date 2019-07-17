@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.Rules;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +93,84 @@ public class PlayoffsRoundService {
 		dao.save(season);
 
 		return playoffsRound;
+
+	}
+
+	public void endPlayoffsQuarters() {
+		logger.info("ending playoffs quarters");
+
+		Season season = serviceUtils.loadCurrentSeason();
+		Group master = serviceUtils.getMasterGroup();
+
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
+			// average out points per matchup
+			Utils.addGamePointsForMatchup(season, matchup);
+		}
+
+		// pass to master
+		List<Team> teams = serviceUtils.loadTeams();
+		for (Team team : teams) {
+			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
+		}
+
+		//save
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		seasonDao.save(season);
+
+	}
+
+	public void endPlayoffsSemis() {
+		logger.info("ending playoffs semis");
+
+		Season season = serviceUtils.loadCurrentSeason();
+		Group master = serviceUtils.getMasterGroup();
+
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
+			// average out points per matchup
+			Utils.addGamePointsForMatchup(season, matchup);
+		}
+
+		// pass to master
+		List<Team> teams = serviceUtils.loadTeams();
+		for (Team team : teams) {
+			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
+		}
+
+		//save
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		seasonDao.save(season);
+
+
+	}
+
+	public void endPlayoffsFinals() {
+		logger.info("ending playoffs finals");
+
+		Season season = serviceUtils.loadCurrentSeason();
+		Group master = serviceUtils.getMasterGroup();
+
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
+		finalsMatchup.getWinner().getStatsForGroup(season).addPoints(Rules.POINTS_WINNING_THE_LEAGUE);
+		if (!finalsMatchup.getTeamHome().equals(finalsMatchup.getWinner())) {
+			finalsMatchup.getTeamHome().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
+		} else {
+			finalsMatchup.getTeamAway().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
+		}
+		// average out points per matchup
+		Utils.addGamePointsForMatchup(season, finalsMatchup);
+
+		// pass to master
+		List<Team> teams = serviceUtils.loadTeams();
+		for (Team team : teams) {
+			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
+		}
+
+		//save
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		seasonDao.save(season);
 
 	}
 

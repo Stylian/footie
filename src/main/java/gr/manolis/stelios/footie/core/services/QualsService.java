@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.Rules;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +156,35 @@ public class QualsService {
 
 		logger.info("matchups " + Utils.toString(qualsRound.getMatchups()));
 		qualsRound.setStage(Stage.PLAYING);
+
+	}
+
+	public void endQualsRound(String strRound) {
+		logger.info("ending quals round: " + strRound);
+
+		int round = Integer.parseInt(strRound);
+
+		int pointsAwarded = round < 2 ? Rules.PROMOTION_POINTS_QUALS_1 : Rules.PROMOTION_POINTS_QUALS_2;
+
+		Season season = serviceUtils.loadCurrentSeason();
+		Group master = serviceUtils.getMasterGroup();
+
+		// add coeffs to quals winners
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(round-1);
+		for (Matchup matchup : roundQuals1.getMatchups()) {
+			matchup.getWinner().getStatsForGroup(season).addPoints(pointsAwarded);
+			Utils.addGamePointsForMatchup(season, matchup);
+		}
+
+		// pass to master
+		List<Team> teams = serviceUtils.loadTeams();
+		for (Team team : teams) {
+			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
+		}
+
+		//save
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		seasonDao.save(season);
 
 	}
 

@@ -84,7 +84,7 @@ class Season extends Component {
                             <Tab label="Seeding"/>
                             <Tab label="1st Quals Round"/>
                             <Tab label="2nd Quals Round"/>
-                            <Tab disabled={(this.state.stages.groups1 === "NOT_STARTED")} label="1st Round"/>
+                            <Tab label="1st Round"/>
                             <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Round"/>
                             <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>
                         </Tabs>

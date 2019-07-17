@@ -87,7 +87,6 @@ public class PlayoffsRound extends Round {
 
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA1() {
 		return gA1;
 	}
@@ -96,7 +95,6 @@ public class PlayoffsRound extends Round {
 		this.gA1 = gA1;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA2() {
 		return gA2;
 	}
@@ -105,7 +103,6 @@ public class PlayoffsRound extends Round {
 		this.gA2 = gA2;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgA3() {
 		return gA3;
 	}
@@ -114,7 +111,6 @@ public class PlayoffsRound extends Round {
 		this.gA3 = gA3;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB1() {
 		return gB1;
 	}
@@ -123,7 +119,6 @@ public class PlayoffsRound extends Round {
 		this.gB1 = gB1;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB2() {
 		return gB2;
 	}
@@ -132,7 +127,6 @@ public class PlayoffsRound extends Round {
 		this.gB2 = gB2;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getgB3() {
 		return gB3;
 	}
@@ -141,17 +135,14 @@ public class PlayoffsRound extends Round {
 		this.gB3 = gB3;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Matchup> getQuarterMatchups() {
 		return quarterMatchups;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Matchup> getSemisMatchups() {
 		return semisMatchups;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Matchup getFinalsMatchup() {
 		return finalsMatchup;
 	}
