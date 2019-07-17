@@ -55,32 +55,32 @@ public class SpringAppTest {
 
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");
-		checkURL("/rest/ops/season/setup", "{status=success, message=set Season " + seasonNum + "}");
-		checkURL("/rest/ops/quals/1/seed", "{status=success, message=seeded quals1}");
+
 		checkURL("/rest/ops/quals/1/set", "{status=success, message=set quals1}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-		checkURL("/rest/ops/quals/2/seed", "{status=success, message=seeded quals2}");
 		checkURL("/rest/ops/quals/2/set", "{status=success, message=set quals2}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-		checkURL("/rest/ops/groups/1/seed", "{status=success, message=seeded groups1}");
 		checkURL("/rest/ops/groups/1/set", "{status=success, message=set groups1}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set groups2}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-
-		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
+//		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set groups2}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set playoffs}");
+//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
+//
+//		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
 	}
 
 	public void displayResults() throws Exception {
@@ -110,6 +110,17 @@ public class SpringAppTest {
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
 		ResponseEntity<Map> entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + path, parts,
+				Map.class);
+		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+		assertEquals(expected, entity.getBody().toString());
+	}
+
+	private void checkURLGet(String path, String expected) {
+
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+
+		ResponseEntity<Map> entity = this.testRestTemplate.getForEntity("http://localhost:" + this.port + path,
 				Map.class);
 		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
