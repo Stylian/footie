@@ -175,7 +175,6 @@ public class SeasonService {
 
 	public Season endCurrentSeason() {
 		logger.info("closing down season, calculating coefficients");
-		// maybe set up winner later
 
 		Season season = serviceUtils.loadCurrentSeason();
 		Group master = serviceUtils.getMasterGroup();

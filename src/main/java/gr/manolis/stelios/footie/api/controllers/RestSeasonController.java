@@ -462,9 +462,11 @@ public class RestSeasonController {
 
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
-        // remove champ here grom groups for view
-        Team champion = teamsInRounds.get(Seed.CHAMPION).get(0);
-        teamsInRounds.get(Seed.TO_GROUPS).remove(champion);
+        if(season.getSeasonYear() > 1) {
+            // remove champ here grom groups for view
+            Team champion = teamsInRounds.get(Seed.CHAMPION).get(0);
+            teamsInRounds.get(Seed.TO_GROUPS).remove(champion);
+        }
 
         for (Team team : teams) {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);

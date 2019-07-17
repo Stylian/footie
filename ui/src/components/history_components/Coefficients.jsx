@@ -97,7 +97,7 @@ class Coefficients extends Component {
                                 {Object.keys(secondTable).map((key, index) => {
                                     return (
                                         <TableRow>
-                                            <TableCell align="right">{length / 2 + index + 1}</TableCell>
+                                            <TableCell align="right">{Object.keys(firstTable).length + index + 1}</TableCell>
                                             <TableCell>{key}</TableCell>
                                             <TableCell align="right">{this.state.teams[key]}</TableCell>
                                         </TableRow>)
