@@ -60,7 +60,7 @@ class QualsSeeding extends Component {
     }
 
     handleSettingUpButtonClick = (event, newValue) => {
-        fetch("/rest/ops//quals/" + this.props.round + "/set", {
+        fetch("/rest/ops/quals/" + this.props.round + "/set", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })

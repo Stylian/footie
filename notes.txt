@@ -10,4 +10,5 @@ seasons menu
 teams and groups pages to fill with useful views
 archiving button on landing page
 
-tabs to persist
+tabs to persist DONE,
+seasons persist, more work needed, seasons by toolbar to change

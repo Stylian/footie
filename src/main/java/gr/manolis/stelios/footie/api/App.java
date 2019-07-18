@@ -14,7 +14,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@EntityScan("gr.manolis.stelios.footie.core.peristence.dtos")
+@EntityScan(basePackages= {
+		"gr.manolis.stelios.footie.core.peristence.dtos",
+		"gr.manolis.stelios.footie.api.entities"}
+		)
 @ComponentScan("gr.manolis.stelios.footie")
 public class App {
 

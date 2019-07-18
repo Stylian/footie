@@ -1,30 +1,25 @@
 package gr.manolis.stelios.footie.api.services;
 
-import java.text.DecimalFormat;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.transaction.Transactional;
-
+import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
-import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
-import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
+import javax.transaction.Transactional;
+import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional

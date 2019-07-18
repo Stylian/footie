@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
-import QualsSeeding from "./quals_components/QualsSeeding";
 import GroupsSeeding from "./groups_components/GroupsSeeding";
 import GroupsMatches from "./groups_components/GroupsMatches";
 import GroupsDisplay from "./groups_components/GroupsDisplay";
@@ -11,20 +10,65 @@ class Groups1 extends Component {
         super(props);
 
         this.state = {
-            tabActive: this.props.stage === "ON_PREVIEW" ? 0 :
-                (this.props.stage === "NOT_STARTED" ? 0 : 2),
+            tabActive: 0
         };
 
     }
 
-    handleChange = (event, newValue) => {
-        this.setState(state => {
-            return {
-                ...state,
-                tabActive: newValue,
-            }
-        });
+    componentDidMount() {
+        fetch("/rest/persist/tabs/groups1/" + this.props.year)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            tabActive: result,
+                            isLoaded: true,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
+
+    handleChange = (event, newValue) => {
+
+        fetch("/rest/persist/tabs/groups1/" + this.props.year, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: newValue
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            tabActive: newValue,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
 
     render() {
         return (

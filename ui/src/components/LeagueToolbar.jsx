@@ -22,7 +22,8 @@ class LeagueToolbar extends Component {
 
         this.state = {
             menuPosition: null,
-            seasonsTotal: 0
+            seasonsTotal: 0,
+            currentDisplayedSeason: 1
         };
 
     }
@@ -38,6 +39,29 @@ class LeagueToolbar extends Component {
                             ...state,
                             isLoaded: true,
                             seasonsTotal: result,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/persist/property/season_year")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            currentDisplayedSeason: result,
+                            isLoaded: true,
                         }
                     });
                 },
@@ -99,7 +123,8 @@ class LeagueToolbar extends Component {
                                         </ListItemIcon>
                                         <ListItemText primary="Landing Page"/>
                                     </MenuItem>
-                                    <MenuItem data-link="/season/1" onClick={this.handleButtonSelection}>
+                                    <MenuItem data-link={"/season/" + this.state.currentDisplayedSeason}
+                                              onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
                                             <img src={list} title={"Seasons"}/>
                                         </ListItemIcon>

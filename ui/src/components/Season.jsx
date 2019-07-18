@@ -25,28 +25,9 @@ class Season extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-
-                    // to test , also the render as well
-                    let currentStage = 0;
-                    Object.keys(result).map((key, index) => {
-                        if (result[key] === "ON_PREVIEW") {
-                            currentStage = index;
-                            return;
-                        } else if (result[key] === "PLAYING") {
-                            currentStage = index;
-                            return;
-                        }
-                    });
-
-                    //finished season show finals
-                    if (result["season"] === "FINISHED") {
-                        currentStage = 5;
-                    }
-
                     this.setState(state => {
                         return {
                             ...state,
-                            tabActive: currentStage,
                             isLoaded: true,
                             stages: result,
                         }
@@ -62,23 +43,87 @@ class Season extends Component {
                     });
                 }
             )
+
+        fetch("/rest/persist/tabs/season/" + this.props.match.params.seasonNum)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            tabActive: result,
+                            isLoaded: true,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+
+        fetch("/rest/persist/property/season_year", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: this.props.match.params.seasonNum
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
 
     handleChange = (event, newValue) => {
-        this.setState(state => {
-            return {
-                ...state,
-                tabActive: newValue,
-            }
-        });
+
+        fetch("/rest/persist/tabs/season/" + this.props.match.params.seasonNum, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: newValue
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            tabActive: newValue,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
 
     render() {
         return (
             <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={this.state.pageTitle} seasonNum={this.props.match.params.seasonNum} />
+                <LeagueToolbar pageTitle={this.state.pageTitle} seasonNum={this.props.match.params.seasonNum}/>
 
-                <Box style={{margin: 20}} >
+                <Box style={{margin: 20}}>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                             <Tab label="Seeding"/>
