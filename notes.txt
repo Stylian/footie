@@ -1,12 +1,8 @@
 
-
-season 1 could have a special seeding page
-
 bugs
 past winners show in runnerups sometimes
 
 TODO
-mapstruct fake hacks to fix?
 
 seasons tabbing
 seasons menu
@@ -14,6 +10,4 @@ seasons menu
 teams and groups pages to fill with useful views
 archiving button on landing page
 
-
-master group broken stats
 tabs to persist

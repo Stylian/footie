@@ -464,7 +464,18 @@ public class RestSeasonController {
                 teamsInGroup.add(teamGroupDTO);
             }
 
-            robinGroupDTO.setTeams(teamsInGroup);
+            List<Team> teamsOrdered = group.getTeams();
+            List<TeamGroupDTO> teamsInGroupOrdered = new ArrayList<>();
+            for(Team team : teamsOrdered) {
+                for(TeamGroupDTO tDTO : teamsInGroup) {
+                    if(team.getName().equals(tDTO.getName())) {
+                        teamsInGroupOrdered.add(tDTO);
+                        break;
+                    }
+                }
+            }
+
+            robinGroupDTO.setTeams(teamsInGroupOrdered);
             robinGroupsDTO.add(robinGroupDTO);
         }
 
