@@ -42,7 +42,7 @@ public class SpringAppTest {
 
 		checkURL("/rest/ops/league", "{seasonNum=0}");
 
-		for (int n = 1; n < 4; n++)
+		for (int n = 1; n < 5; n++)
 			runSeason(n);
 
 	}
@@ -68,40 +68,17 @@ public class SpringAppTest {
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
 		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-//		checkURL("/rest/ops/groups/2/seedAndSet", "{status=success, message=seeded and set groups2}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/playoffs/quarterfinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/playoffs/semifinals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/playoffs/finals/seedAndSet", "{status=success, message=seeded and set playoffs}");
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//
-//		checkURL("/rest/ops/season/end", "{status=success, message=ended Season " + seasonNum + "}");
-	}
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-	public void displayResults() throws Exception {
-		//
-		// Monitoring monitoring = new Monitoring();
-		// monitoring.displayCoefficients();
-		//// monitoring.displaySeason(1);
-		// monitoring.displayMetastats();
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
-		// ResponseEntity<String> entity2 = this.testRestTemplate.getForEntity(
-		// "http://localhost:" + this.port + "/rest/views/league", String.class);
-		// then(entity2.getStatusCode()).isEqualTo(HttpStatus.OK);
-		//
-		// System.out.println(entity2.getBody());
-		//
-		// ResponseEntity<String> entity4 = this.testRestTemplate.getForEntity(
-		// "http://localhost:" + this.port + "/rest/views/season", String.class);
-		// then(entity4.getStatusCode()).isEqualTo(HttpStatus.OK);
-		//
-		//
-		// System.out.println(entity4.getBody());
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+
+		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
 
 	}
 
