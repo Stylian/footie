@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.*;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,11 @@ public class GroupsRoundService {
 
             strongTeams.add(teamsCopy.remove(0)); // the champion
 
-            Collections.sort(teamsCopy, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
+            if(season.getSeasonYear() > 1) {
+                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
+                Collections.sort(teamsCopy, new CoefficientsRangeOrdering(seasonsPast));
+            }
+
 
             for (int i = 0; i < 3; i++) {
                 strongTeams.add(teamsCopy.remove(0));
@@ -256,7 +261,6 @@ public class GroupsRoundService {
         int round = Integer.parseInt(strRound);
 
         Season season = serviceUtils.loadCurrentSeason();
-        Group master = serviceUtils.getMasterGroup();
 
         switch(round) {
             case 1:
@@ -295,12 +299,6 @@ public class GroupsRoundService {
                     }
                 }
                 break;
-        }
-
-        // pass to master
-        List<Team> teams = serviceUtils.loadTeams();
-        for (Team team : teams) {
-            team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
         }
 
         //save

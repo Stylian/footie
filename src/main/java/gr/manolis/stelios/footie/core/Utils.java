@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.core;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 
@@ -18,7 +19,7 @@ public class Utils {
 		return lsObj.stream().map(Object::toString).collect(Collectors.joining(","));
 	}
 
-	public static void addGamePointsForMatchup(Season season, Matchup matchup) {
+	public static void addGamePointsForMatchup(Group group, Matchup matchup) {
 		int matchPointsHome = 0;
 		int matchPointsAway = 0;
 		int numberOfGames = 0;
@@ -47,8 +48,8 @@ public class Utils {
 
 		}
 
-		matchup.getTeamHome().getStatsForGroup(season).addPoints(2 * matchPointsHome / numberOfGames);
-		matchup.getTeamAway().getStatsForGroup(season).addPoints(2 * matchPointsAway / numberOfGames);
+		matchup.getTeamHome().getStatsForGroup(group).addPoints(2 * matchPointsHome / numberOfGames);
+		matchup.getTeamAway().getStatsForGroup(group).addPoints(2 * matchPointsAway / numberOfGames);
 	}
 
 }

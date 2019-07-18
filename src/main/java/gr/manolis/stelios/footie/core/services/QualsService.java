@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,10 @@ public class QualsService {
 		if (season.getSeasonYear() == 1) {
 			Collections.shuffle(teams);
 		} else {
-			Collections.sort(teams, new CoefficientsOrdering(serviceUtils.getMasterGroup()));
+			if(season.getSeasonYear() > 1) {
+				List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
+				Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
+			}
 		}
 
 		logger.info("quals participants: " + Utils.toString(teams));
@@ -167,19 +171,12 @@ public class QualsService {
 		int pointsAwarded = round < 2 ? Rules.PROMOTION_POINTS_QUALS_1 : Rules.PROMOTION_POINTS_QUALS_2;
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		// add coeffs to quals winners
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(round-1);
 		for (Matchup matchup : roundQuals1.getMatchups()) {
 			matchup.getWinner().getStatsForGroup(season).addPoints(pointsAwarded);
 			Utils.addGamePointsForMatchup(season, matchup);
-		}
-
-		// pass to master
-		List<Team> teams = serviceUtils.loadTeams();
-		for (Team team : teams) {
-			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
 		}
 
 		//save

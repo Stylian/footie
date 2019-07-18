@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,12 +87,15 @@ public class ViewsService {
 		Map<Team, Stats> statsTotal = new LinkedHashMap<>();
 
 		List<Team> teams = serviceUtils.loadTeams();
-		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(master));
+		Season current = getCurrentSeason();
+		List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, current.getSeasonYear());
+		Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
 
 		for (Team team : teams) {
-			statsTotal.put(team, team.getStatsForGroup(master));
+			Stats completeStats = new Stats();
+			seasonsPast.forEach( (s) -> completeStats.addStats(s.getTeamsStats().get(team)));
+			statsTotal.put(team, completeStats);
 		}
 
 		return statsTotal;
@@ -103,12 +107,17 @@ public class ViewsService {
 		Map<Team, Integer> coeffsTotal = new LinkedHashMap<>();
 
 		List<Team> teams = serviceUtils.loadTeams();
-		Group master = serviceUtils.getMasterGroup();
 
-		Collections.sort(teams, new CoefficientsOrdering(master));
+		Season current = getCurrentSeason();
+		List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, current.getSeasonYear());
+		Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
 
 		for (Team team : teams) {
-			coeffsTotal.put(team, team.getStatsForGroup(master).getPoints());
+			int points = 0;
+			for(Season s : seasonsPast) {
+				points += s.getTeamsStats().get(team).getPoints();
+			}
+			coeffsTotal.put(team, points);
 		}
 
 		return coeffsTotal;

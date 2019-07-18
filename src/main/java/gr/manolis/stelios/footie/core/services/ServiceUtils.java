@@ -35,13 +35,6 @@ public class ServiceUtils {
 
 	}
 
-	public Group getMasterGroup() {
-
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		return groupDao.listByField("GROUPS", "NAME", "master").get(0);
-
-	}
-
 	public Season loadCurrentSeason() {
 
 		League league = getLeague();

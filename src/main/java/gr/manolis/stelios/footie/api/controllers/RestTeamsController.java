@@ -42,11 +42,14 @@ public class RestTeamsController {
         TeamPageDTO dto = new TeamPageDTO();
         dto.setId(team.getId());
         dto.setName(team.getName());
-        dto.setCompleteStats(team.getStatsForGroup(serviceUtils.getMasterGroup()));
 
         List<Stats> seasonsStats = new ArrayList<>();
         serviceUtils.loadAllSeasons().forEach( (s) -> seasonsStats.add(team.getStatsForGroup(s)));
         dto.setSeasonsStats(seasonsStats);
+
+        Stats completeStats = new Stats();
+        seasonsStats.forEach( (stat) -> completeStats.addStats(stat));
+        dto.setCompleteStats(completeStats);
 
         return dto;
     }

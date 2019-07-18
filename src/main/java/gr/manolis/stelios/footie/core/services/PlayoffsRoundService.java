@@ -100,18 +100,11 @@ public class PlayoffsRoundService {
 		logger.info("ending playoffs quarters");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
 			// average out points per matchup
 			Utils.addGamePointsForMatchup(season, matchup);
-		}
-
-		// pass to master
-		List<Team> teams = serviceUtils.loadTeams();
-		for (Team team : teams) {
-			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
 		}
 
 		//save
@@ -124,18 +117,11 @@ public class PlayoffsRoundService {
 		logger.info("ending playoffs semis");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
 			// average out points per matchup
 			Utils.addGamePointsForMatchup(season, matchup);
-		}
-
-		// pass to master
-		List<Team> teams = serviceUtils.loadTeams();
-		for (Team team : teams) {
-			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
 		}
 
 		//save
@@ -149,7 +135,6 @@ public class PlayoffsRoundService {
 		logger.info("ending playoffs finals");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		Group master = serviceUtils.getMasterGroup();
 
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
@@ -161,12 +146,6 @@ public class PlayoffsRoundService {
 		}
 		// average out points per matchup
 		Utils.addGamePointsForMatchup(season, finalsMatchup);
-
-		// pass to master
-		List<Team> teams = serviceUtils.loadTeams();
-		for (Team team : teams) {
-			team.getStatsForGroup(master).addStats(team.getStatsForGroup(season));
-		}
 
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
