@@ -119,13 +119,6 @@ class LeagueToolbar extends Component {
                                 >
                                     <MenuItem data-link="/" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
-                                            <img src={archive} title={"Landing Page"}/>
-                                        </ListItemIcon>
-                                        <ListItemText primary="Landing Page"/>
-                                    </MenuItem>
-                                    <MenuItem data-link={"/season/" + this.state.currentDisplayedSeason}
-                                              onClick={this.handleButtonSelection}>
-                                        <ListItemIcon>
                                             <img src={list} title={"Seasons"}/>
                                         </ListItemIcon>
                                         <ListItemText primary="Seasons"/>

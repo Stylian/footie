@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Paper, Tab, Tabs} from "@material-ui/core";
-import GameStats from "./admin_components/GameStats";
-import Monitoring from "./admin_components/Monitoring";
+import {Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class Admin extends Component {
 
@@ -12,33 +11,180 @@ class Admin extends Component {
         this.state = {
             pageTitle: "Admin",
             tabActive: 0,
+            gameStats: {},
+            seasonsStages: {},
+            seasonNum: 0,
+            canCreateLeague: false,
         };
 
     }
 
-    handleChange = (event, newValue) => {
-        this.setState(state => {
-            return {
-                ...state,
-                tabActive: newValue,
-            }
-        });
+    componentDidMount() {
+        fetch("/rest/admin/game_stats")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            gameStats: result
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/admin/stages")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            seasonsStages: result
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/ops/league/can_create_season")
+            .then(res => res.json())
+            .then(
+                (result) => {
+
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            seasonNum: result[1],
+                            canCreateLeague: result[0],
+                        }
+                    });
+
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            seasonNum: result.seasonNum,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
+    handleButtonClick = (event, newValue) => {
+        fetch("/rest/ops/season/create", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+
+                    window.location.reload();
+
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            canCreateLeague: false,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
     }
 
     render() {
         return (
-            <Paper style={{margin: 20}} elevation={20} >
-                <LeagueToolbar pageTitle={this.state.pageTitle} />
-                <div>
-                    <AppBar position="static">
-                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Game Stats" />
-                            <Tab label="Monitoring" />
-                        </Tabs>
-                    </AppBar>
-                    {this.state.tabActive === 0 && <GameStats />}
-                    {this.state.tabActive === 1 && <Monitoring />}
-                </div>
+            <Paper style={{margin: 20}} elevation={20}>
+                <LeagueToolbar pageTitle={this.state.pageTitle}/>
+                <Grid container spacing={1}>
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"League Stats"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table">
+                                    <TableBody>
+                                        {Object.keys(this.state.gameStats).map((key, index) => {
+                                            return (
+                                                <TableRow>
+                                                    <TableCell>{key}</TableCell>
+                                                    <TableCell align="right">{this.state.gameStats[key]}</TableCell>
+                                                </TableRow>)
+                                        })}
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"Seasons Stage"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table">
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>Season Year</TableCell>
+                                            <TableCell align="right">{this.state.seasonsStages.seasonYear}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Stage</TableCell>
+                                            <TableCell align="right">{this.state.seasonsStages.stage}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell colSpan-={2}>
+                                                {this.state.canCreateLeague ? (
+                                                    <Button onClick={this.handleButtonClick}>Create new Season</Button>
+                                                ) : (
+                                                    <span>a league is currently running</span>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
             </Paper>
         );
     }
