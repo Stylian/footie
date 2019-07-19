@@ -4,7 +4,7 @@ import {
     Card,
     CardContent,
     CardHeader,
-    Grid,
+    Grid, ListItemIcon,
     Paper,
     TableBody,
     TableCell,
@@ -12,6 +12,9 @@ import {
     TableRow
 } from "@material-ui/core";
 import LeagueToolbar from "./LeagueToolbar";
+
+import silvermedal from "../icons/silvermedal.png";
+import goldmedal from "../icons/goldmedal.png";
 
 class Team extends Component {
 
@@ -33,7 +36,8 @@ class Team extends Component {
                     "matchesPlayed": 0,
                     "goalDifference": 0
                 },
-                "seasonsStats": []
+                "seasonsStats": [],
+                "trophies": []
             }
         };
 
@@ -121,6 +125,34 @@ class Team extends Component {
                                         </TableBody>
                                     </table>
                                 </CardContent>
+                            </Card>
+                        </Grid>
+
+                        <Grid item sm={3}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Trophies"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        {this.state.team.trophies.map((trophy, index) => {
+                                            return (
+                                                <TableRow>
+                                                    <TableCell align="right" >
+                                                        {trophy.type == "W" ?
+                                                            (<img src={goldmedal} title={"1st place"}/>) :
+                                                            (<img src={silvermedal} title={"2nd place"}/>)}
+                                                    </TableCell>
+                                                    <TableCell align="right" >{"Season " + trophy.seasonNum}</TableCell>
+                                                    <TableCell align="right" >
+                                                        {trophy.type == "W" ?
+                                                        "Winner" : "Runner-up"}</TableCell>
+                                                </TableRow>
+                                            )
+                                        })}
+                                    </table>
+                                </CardContent>
+
                             </Card>
                         </Grid>
                     </Grid>

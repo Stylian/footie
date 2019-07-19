@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import goldmedal from "../../icons/goldmedal.png";
+import silvermedal from "../../icons/silvermedal.png";
 
 class Seeding extends Component {
 
@@ -72,16 +74,24 @@ class Seeding extends Component {
                                             return (
                                                 <TableRow className={"teamClicker"} data-teamid={team.id}
                                                           onClick={this.goToTeam}
-                                                    style={{
-                                                        backgroundColor:
-                                                            (team.seed === "CHAMPION") ? '#B3B8FF' :
-                                                                (team.seed === "TO_GROUPS") ? '#d9edf7' :
-                                                                    (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                        ''
-                                                    }}
+                                                          style={{
+                                                              backgroundColor:
+                                                                  (team.seed === "CHAMPION") ? '#B3B8FF' :
+                                                                      (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                          (team.seed === "TO_QUALS_2") ? '#dff0d8' :
+                                                                              ''
+                                                          }}
                                                 >
                                                     <TableCell align="right">{index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
+                                                    <TableCell>
+                                                        {team.trophies.map((trophy, index) => {
+                                                            if(trophy.seasonNum == (this.props.year-1)) {
+                                                                return trophy.type == "W" ?
+                                                                    (<img src={goldmedal} title={"1st place"}/>) :
+                                                                    (<img src={silvermedal} title={"2nd place"}/>)
+                                                            }
+                                                        })}
+                                                        {team.name}</TableCell>
                                                     <TableCell align="right">{team.coefficients}</TableCell>
                                                 </TableRow>)
                                         })}
@@ -103,17 +113,25 @@ class Seeding extends Component {
                                             return (
                                                 <TableRow className={"teamClicker"} data-teamid={team.id}
                                                           onClick={this.goToTeam}
-                                                    style={{
-                                                        backgroundColor:
-                                                            (team.seed === "CHAMPION") ? '#B3B8FF' :
-                                                                (team.seed === "TO_GROUPS") ? '#d9edf7' :
-                                                                    (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                        ''
-                                                    }}
+                                                          style={{
+                                                              backgroundColor:
+                                                                  (team.seed === "CHAMPION") ? '#B3B8FF' :
+                                                                      (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                          (team.seed === "TO_QUALS_2") ? '#dff0d8' :
+                                                                              ''
+                                                          }}
                                                 >
                                                     <TableCell
                                                         align="right">{leftSide.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
+                                                    <TableCell>
+                                                        {team.trophies.map((trophy, index) => {
+                                                            if(trophy.seasonNum == (this.props.year-1)) {
+                                                                return trophy.type == "W" ?
+                                                                    (<img src={goldmedal} title={"1st place"}/>) :
+                                                                    (<img src={silvermedal} title={"2nd place"}/>)
+                                                            }
+                                                        })}
+                                                        {team.name}</TableCell>
                                                     <TableCell align="right">{team.coefficients}</TableCell>
                                                 </TableRow>)
                                         })}

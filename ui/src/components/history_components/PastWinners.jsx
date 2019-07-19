@@ -55,7 +55,7 @@ class PastWinners extends Component {
                                     <TableRow>
                                         <TableCell>Season</TableCell>
                                         <TableCell>Winner</TableCell>
-                                        <TableCell>Runner up</TableCell>
+                                        <TableCell>Runner-up</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

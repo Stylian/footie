@@ -3,5 +3,5 @@ bugs
 past winners show in runnerups sometimes ? not anymore?
 
 TODO
-teams and groups pages to fill with useful views
+groups pages to fill with useful views
 archiving button in admin

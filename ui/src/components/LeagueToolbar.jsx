@@ -11,7 +11,6 @@ import NextGame from "./season_components/NextGame";
 import list from "../icons/list.svg";
 import build from "../icons/build.svg";
 import history from "../icons/history.svg";
-import archive from "../icons/archive.svg";
 import up from "../icons/up.svg";
 import down from "../icons/down.svg";
 

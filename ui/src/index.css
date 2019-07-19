@@ -35,6 +35,12 @@ code {
   padding: 5px 15px 5px 15px !important;
 }
 
+.MuiTableCell-root > img {
+  margin-bottom: -8px;
+  margin-right: 10px;
+  width: auto;
+}
+
 .score_field{
   text-align: right;
   width: 35px;

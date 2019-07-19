@@ -178,8 +178,15 @@ public class SeasonService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
 
-		season.setWinner(finalsMatchup.getWinner());
-		season.setRunnerUp(finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ? finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome());
+		Team winner = finalsMatchup.getWinner();
+		Team runnerUp = finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ?
+				finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome();
+
+		winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER));
+		runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP));
+
+		season.setWinner(winner);
+		season.setRunnerUp(runnerUp);
 		season.getRounds().get(4).setStage(Stage.FINISHED);
 		season.setStage(Stage.FINISHED);
 

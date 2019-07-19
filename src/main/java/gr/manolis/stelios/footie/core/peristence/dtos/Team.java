@@ -1,15 +1,11 @@
 package gr.manolis.stelios.footie.core.peristence.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,10 +25,13 @@ public class Team {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Map<Group, Stats> groupStats;
 
+	@Column(name = "TROPHIES")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Trophy> trophies;
+
 	public Team() {
-
 		groupStats = new HashMap<>();
-
+		trophies = new ArrayList<>();
 	}
 
 	public Team(String name) {
@@ -71,6 +70,18 @@ public class Team {
 
 	public Stats setStatsForGroup(Group group, Stats stats) {
 		return groupStats.put(group, stats);
+	}
+
+	public void addTrophy(Trophy trophy) {
+		trophies.add(trophy);
+	}
+
+	public List<Trophy> getTrophies() {
+		return trophies;
+	}
+
+	public void setTrophies(List<Trophy> trophies) {
+		this.trophies = trophies;
 	}
 
 	@Override

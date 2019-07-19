@@ -495,6 +495,7 @@ public class RestSeasonController {
 
         for (Team team : teams) {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
+            teamDTO.setTrophies(team.getTrophies()); // why you not work on your own ?
 
             if(season.getSeasonYear() > 1) {
                 List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
