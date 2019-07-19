@@ -47,6 +47,10 @@ class Stats extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         let firstTable = {};

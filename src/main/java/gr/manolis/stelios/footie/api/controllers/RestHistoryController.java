@@ -2,8 +2,11 @@ package gr.manolis.stelios.footie.api.controllers;
 
 
 import gr.manolis.stelios.footie.api.dtos.SeasonPastWinnersDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
 import gr.manolis.stelios.footie.api.mappers.SeasonPastWinnersMapper;
+import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @Transactional
@@ -27,9 +32,20 @@ public class RestHistoryController {
     @Autowired
     private SeasonPastWinnersMapper seasonPastWinnersMapper;
 
+    @Autowired
+    private TeamCoeffsMapper teamCoeffsMapper;
+
     @RequestMapping("/coefficients")
-    public Map<Team, Integer> coefficients() {
-        return viewsService.getTeamsTotalCoefficients();
+    public List<TeamCoeffsDTO>  coefficients() {
+
+        List<TeamCoeffsDTO> teamsWithCoeffs = new ArrayList<>();
+        for(Map.Entry<Team, Integer> entry : viewsService.getTeamsTotalCoefficients().entrySet()) {
+            TeamCoeffsDTO team = teamCoeffsMapper.toDTO(entry.getKey());
+            team.setCoefficients(entry.getValue());
+            teamsWithCoeffs.add(team);
+        }
+
+        return teamsWithCoeffs;
     }
 
     @RequestMapping("/stats")
@@ -41,7 +57,9 @@ public class RestHistoryController {
     public List<SeasonPastWinnersDTO>  pastWinners() {
         List<Season> seasons = viewsService.getAllSeasons();
         Collections.reverse(seasons);
-        return seasonPastWinnersMapper.toDTO(seasons);
+        List<Season> finishedSeasons = seasons.stream()
+                .filter( (s) -> s.getStage() == Stage.FINISHED).collect(Collectors.toList());
+        return seasonPastWinnersMapper.toDTO(finishedSeasons);
     }
 
 }

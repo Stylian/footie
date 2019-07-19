@@ -39,6 +39,10 @@ class PastWinners extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         return (
@@ -58,8 +62,14 @@ class PastWinners extends Component {
                                     {this.state.seasons.map((item, index) =>
                                             <TableRow>
                                                 <TableCell align="right">{item.seasonYear}</TableCell>
-                                                <TableCell align="left">{item.winner != null ? item.winner.name : ""}</TableCell>
-                                                <TableCell align="left">{item.runnerUp != null ? item.runnerUp.name : ""}</TableCell>
+                                                <TableCell align="left" className={"teamClicker"}
+                                                           data-teamid={item.winner.id}
+                                                           onClick={this.goToTeam}>
+                                                    {item.winner != null ? item.winner.name : ""}</TableCell>
+                                                <TableCell align="left" className={"teamClicker"}
+                                                           data-teamid={item.runnerUp.id}
+                                                           onClick={this.goToTeam}>
+                                                    {item.runnerUp != null ? item.runnerUp.name : ""}</TableCell>
                                             </TableRow>
                                     )}
                                 </TableBody>

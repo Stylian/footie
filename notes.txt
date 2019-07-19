@@ -1,13 +1,7 @@
 
 bugs
-past winners show in runnerups sometimes
+past winners show in runnerups sometimes ? not anymore?
 
 TODO
-
-seasons tabbing
-seasons menu
-
 teams and groups pages to fill with useful views
-archiving button on landing page
-
-seasons persist, more work needed, seasons by toolbar to change
+archiving button in admin

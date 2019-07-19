@@ -150,13 +150,11 @@ public class SeasonService {
 			groupsTeams.add(formerChampion);
 			teamsClone.remove(formerChampion);
 
-			// top 3 seeded teams promote directly to groups round excluding champion
-			groupsTeams.add(teamsClone.remove(0));
-			groupsTeams.add(teamsClone.remove(0));
+			// top 1 seeded team promotes directly to groups round excluding champion
 			groupsTeams.add(teamsClone.remove(0));
 
-			// 2nd round needs 16 teams so
-			int diff = teamsClone.size() - 16; // cannot support more than 36 teams, probably no less than 22 as well
+			// 2nd round needs 20 teams so
+			int diff = teamsClone.size() - 20;
 
 			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
 			for (int index = 0; index < 2 * diff; index++) {

@@ -9,7 +9,7 @@ class Coefficients extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            teams: {}
+            teams: []
         };
 
     }
@@ -39,18 +39,16 @@ class Coefficients extends Component {
             )
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
-        let firstTable = {};
-        let secondTable = {};
-        let length = Object.keys(this.state.teams).length;
-        Object.keys(this.state.teams).map((key, index) => {
-            if (index < length / 2) {
-                firstTable[key] = this.state.teams[key];
-            } else {
-                secondTable[key] = this.state.teams[key];
-            }
-        });
+        let teams = [...this.state.teams];
+        let half_length = Math.ceil(teams.length / 2);
+        let leftSide = teams.splice(0, half_length);
+        let rightSide = teams;
 
         return (
             <Box width={800} >
@@ -67,17 +65,19 @@ class Coefficients extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Object.keys(firstTable).map((key, index) => {
+                                {leftSide.map((team, index) => {
                                     return (
-                                        <TableRow
+                                        <TableRow className={"teamClicker"}
+                                                  data-teamid={team.id}
+                                                  onClick={this.goToTeam}
                                             style={{backgroundColor:
-                                                    (index < 3) ? '#d9edf7' :
+                                                    (index < 1) ? '#d9edf7' :
                                                             (index < 7) ? '#dff0d8' :
                                                                 ''}}
                                         >
                                             <TableCell align="right">{index + 1}</TableCell>
-                                            <TableCell>{key}</TableCell>
-                                            <TableCell align="right">{this.state.teams[key]}</TableCell>
+                                            <TableCell>{team.name}</TableCell>
+                                            <TableCell align="right">{team.coefficients}</TableCell>
                                         </TableRow>)
                                 })}
                             </TableBody>
@@ -94,12 +94,14 @@ class Coefficients extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Object.keys(secondTable).map((key, index) => {
+                                {rightSide.map((team, index) => {
                                     return (
-                                        <TableRow>
-                                            <TableCell align="right">{Object.keys(firstTable).length + index + 1}</TableCell>
-                                            <TableCell>{key}</TableCell>
-                                            <TableCell align="right">{this.state.teams[key]}</TableCell>
+                                        <TableRow className={"teamClicker"}
+                                                  data-teamid={team.id}
+                                                  onClick={this.goToTeam}>
+                                            <TableCell align="right">{leftSide.length + index + 1}</TableCell>
+                                            <TableCell>{team.name}</TableCell>
+                                            <TableCell align="right">{team.coefficients}</TableCell>
                                         </TableRow>)
                                 })}
                             </TableBody>

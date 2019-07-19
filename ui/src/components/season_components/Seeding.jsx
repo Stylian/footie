@@ -1,17 +1,5 @@
 import React, {Component} from 'react';
-import {
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Grid,
-    Paper,
-    Box,
-    Card,
-    CardHeader,
-    CardContent
-} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 
 class Seeding extends Component {
 
