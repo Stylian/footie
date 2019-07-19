@@ -53,28 +53,6 @@ class LeagueToolbar extends Component {
                 }
             )
 
-        fetch("/rest/persist/property/season_year")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            currentDisplayedSeason: result,
-                            isLoaded: true,
-                        }
-                    });
-                },
-                (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
-                }
-            )
     }
 
     handleClick = (event) => {

@@ -9,30 +9,20 @@ class LandingPage extends Component {
 
         this.state = {
             pageTitle: "Landing Page",
-            seasonNum: 0,
-            canCreateLeague: false,
+            currentDisplayedSeason: false,
         };
     }
 
     componentDidMount() {
-        fetch("/rest/ops/league/can_create_season")
+        fetch("/rest/persist/property/season_year")
             .then(res => res.json())
             .then(
                 (result) => {
-
                     this.setState(state => {
                         return {
                             ...state,
-                            seasonNum: result[1],
-                            canCreateLeague: result[0],
-                        }
-                    });
-
-                    this.setState(state => {
-                        return {
-                            ...state,
+                            currentDisplayedSeason: result,
                             isLoaded: true,
-                            seasonNum: result.seasonNum,
                         }
                     });
                 },
@@ -52,8 +42,8 @@ class LandingPage extends Component {
         return (
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                {this.state.seasonNum > 0 ? (
-                    <Redirect to={"/season/"+this.state.seasonNum} />
+                {this.state.currentDisplayedSeason > 0 ? (
+                    <Redirect to={"/season/"+this.state.currentDisplayedSeason} />
                 ) : ''}
             </div>
         );
