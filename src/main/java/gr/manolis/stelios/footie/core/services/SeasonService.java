@@ -153,6 +153,14 @@ public class SeasonService {
 			// top 1 seeded team promotes directly to groups round excluding champion
 			groupsTeams.add(teamsClone.remove(0));
 
+			//former runner up should go to quals2 if not in groups already by moving it to top
+			Team formerRunnerUp = previousSeason.getRunnerUp();
+			if(!groupsTeams.contains(formerRunnerUp)) {
+				int itemPos = teamsClone.indexOf(formerRunnerUp);
+				teamsClone.remove(itemPos);
+				teamsClone.add(0, formerRunnerUp);
+			}
+
 			// 2nd round needs 20 teams so
 			int diff = teamsClone.size() - 20;
 

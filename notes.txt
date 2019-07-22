@@ -1,7 +1,9 @@
 
 bugs
-past winners show in runnerups sometimes ? not anymore?
+past winners show in runnerups sometimes ? not anymore!
+seasons menu not directing to current season
 
 TODO
 groups pages to fill with useful views
 archiving button in admin
+coefffs draws in poitns ?ch
