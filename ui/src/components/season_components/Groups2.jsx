@@ -10,6 +10,7 @@ class Groups2 extends Component {
 
         this.state = {
             tabActive: 0,
+            isLoaded: false
         };
 
     }
@@ -71,16 +72,20 @@ class Groups2 extends Component {
 
     render() {
         return (
-            <Box style={{margin: 30, "margin-top": 10}} >
-                <AppBar position="static">
-                    <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                        <Tab label="Groups"/>
-                        <Tab label="Matches"/>
-                    </Tabs>
-                </AppBar>
-                {this.state.tabActive === 0 && <GroupsDisplay year={this.props.year} round={2} />}
-                {this.state.tabActive === 1 && <GroupsMatches year={this.props.year} round={2} />}
-            </Box>
+            this.state.isLoaded ? (
+                <Box style={{margin: 30, "margin-top": 10}}>
+                    <AppBar position="static">
+                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
+                            <Tab label="Groups"/>
+                            <Tab label="Matches"/>
+                        </Tabs>
+                    </AppBar>
+                    {this.state.tabActive === 0 && <GroupsDisplay year={this.props.year} round={2}/>}
+                    {this.state.tabActive === 1 && <GroupsMatches year={this.props.year} round={2}/>}
+                </Box>
+            ) : (
+                <span></span>
+            )
         );
     }
 }

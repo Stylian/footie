@@ -88,104 +88,107 @@ class GroupsSeeding extends Component {
     }
 
     render() {
-
         return (
-            <Box width={1200}>
-                {this.state.haveToSetUpTeams ? (
-                    <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
-                ) : ''}
-                <Grid container spacing={1}>
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"} >
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsStrong.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={this.goToTeam}>
-                                                    <TableCell align="right">{index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
+            this.state.isLoaded ? (
+                <Box width={1200}>
+                    {this.state.haveToSetUpTeams ? (
+                        <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
+                    ) : ''}
+                    <Grid container spacing={1}>
+                        <Grid item sm>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Pos</TableCell>
+                                                <TableCell>Team</TableCell>
+                                                <TableCell>Coefficients</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.teamsStrong.map((team, index) => {
+                                                return (
+                                                    <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                              onClick={this.goToTeam}>
+                                                        <TableCell align="right">{index + 1}</TableCell>
+                                                        <TableCell>{team.name}</TableCell>
+                                                        <TableCell align="right">{team.coefficients}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
+                        <Grid item sm>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Pos</TableCell>
+                                                <TableCell>Team</TableCell>
+                                                <TableCell>Coefficients</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.teamsMedium.map((team, index) => {
+                                                return (
+                                                    <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                              onClick={this.goToTeam}>
+                                                        <TableCell
+                                                            align="right">{this.state.teamsStrong.length + index + 1}</TableCell>
+                                                        <TableCell>{team.name}</TableCell>
+                                                        <TableCell align="right">{team.coefficients}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
+                        <Grid item sm>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Pos</TableCell>
+                                                <TableCell>Team</TableCell>
+                                                <TableCell>Coefficients</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {this.state.teamsWeak.map((team, index) => {
+                                                return (
+                                                    <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                              onClick={this.goToTeam}>
+                                                        <TableCell
+                                                            align="right">{this.state.teamsStrong.length + this.state.teamsMedium.length + index + 1}</TableCell>
+                                                        <TableCell>{team.name}</TableCell>
+                                                        <TableCell align="right">{team.coefficients}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
                     </Grid>
-
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsMedium.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={this.goToTeam}>
-                                                    <TableCell align="right">{this.state.teamsStrong.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                    <Grid item sm>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant:'h7' }}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"} >
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {this.state.teamsWeak.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={this.goToTeam}>
-                                                    <TableCell
-                                                        align="right">{this.state.teamsStrong.length + this.state.teamsMedium.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.coefficients}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                </Grid>
-            </Box>
-
+                </Box>
+            ) : (
+                <span></span>
+            )
         );
     }
 }

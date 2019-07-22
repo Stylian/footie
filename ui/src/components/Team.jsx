@@ -134,6 +134,7 @@ class Team extends Component {
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
+                                    {this.state.team.trophies.length > 0 ? (
                                     <table className="table" align={"center"}>
                                         {this.state.team.trophies.map((trophy, index) => {
                                             return (
@@ -151,6 +152,9 @@ class Team extends Component {
                                             )
                                         })}
                                     </table>
+                                        ) : (
+                                        <i>nothing in the trophies case</i>
+                                    )}
                                 </CardContent>
 
                             </Card>

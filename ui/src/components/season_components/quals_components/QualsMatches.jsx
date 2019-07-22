@@ -56,57 +56,59 @@ class QualsMatches extends Component {
     }
 
     render() {
-
         return (
-            <Box width={1200}>
-                <Grid container spacing={1}>
-                    {Object.keys(this.state.days).map((day, index) => {
-                        return (
-                            <Grid item sm={4}>
-                                <Card style={{margin: 20}}>
-                                    <CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
-                                                titleTypographyProps={{variant: 'h7'}}
-                                    />
-                                    <CardContent>
-                                        <table className="table" align={"center"}>
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Home</TableCell>
-                                                    <TableCell>score</TableCell>
-                                                    <TableCell>Away</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {this.state.days[day].map((game, index) => {
-                                                    return (
-                                                        <TableRow>
-                                                            <TableCell align="right" className={"teamClicker"}
-                                                                       data-teamid={game.homeTeam.id}
-                                                                       onClick={this.goToTeam}>
-                                                                {game.homeTeam.name}</TableCell>
-                                                            {game.result == null ? (
-                                                                <TableCell></TableCell>
-                                                            ) : (
-                                                                <TableCell>
-                                                                    {game.result.goalsMadeByHomeTeam + " - "
-                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                            )}
-                                                            <TableCell align="left" className={"teamClicker"}
-                                                                       data-teamid={game.awayTeam.id}
-                                                                       onClick={this.goToTeam}>
-                                                                {game.awayTeam.name}</TableCell>
-                                                        </TableRow>)
-                                                })}
-                                            </TableBody>
-                                        </table>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        )
-                    })}
-                </Grid>
-            </Box>
-
+            this.state.isLoaded ? (
+                <Box width={1200}>
+                    <Grid container spacing={1}>
+                        {Object.keys(this.state.days).map((day, index) => {
+                            return (
+                                <Grid item sm={4}>
+                                    <Card style={{margin: 20}}>
+                                        <CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
+                                                    titleTypographyProps={{variant: 'h7'}}
+                                        />
+                                        <CardContent>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Home</TableCell>
+                                                        <TableCell>score</TableCell>
+                                                        <TableCell>Away</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {this.state.days[day].map((game, index) => {
+                                                        return (
+                                                            <TableRow>
+                                                                <TableCell align="right" className={"teamClicker"}
+                                                                           data-teamid={game.homeTeam.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {game.homeTeam.name}</TableCell>
+                                                                {game.result == null ? (
+                                                                    <TableCell></TableCell>
+                                                                ) : (
+                                                                    <TableCell>
+                                                                        {game.result.goalsMadeByHomeTeam + " - "
+                                                                        + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                                )}
+                                                                <TableCell align="left" className={"teamClicker"}
+                                                                           data-teamid={game.awayTeam.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {game.awayTeam.name}</TableCell>
+                                                            </TableRow>)
+                                                    })}
+                                                </TableBody>
+                                            </table>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Box>
+            ) : (
+                <span></span>
+            )
         );
     }
 }

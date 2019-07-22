@@ -10,7 +10,8 @@ class Groups1 extends Component {
         super(props);
 
         this.state = {
-            tabActive: 0
+            tabActive: 0,
+            isLoaded: false
         };
 
     }
@@ -72,19 +73,25 @@ class Groups1 extends Component {
 
     render() {
         return (
-            <Box style={{margin: 30, "margin-top": 10}} >
-                <AppBar position="static">
-                    <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                        <Tab label="Seeding"/>
-                        <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")} label="Groups"/>
-                        <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")} label="Matches"/>
-                    </Tabs>
-                </AppBar>
-                {this.state.tabActive === 0 && <GroupsSeeding year={this.props.year} round={1}
-                                                              haveToSetUpTeams={this.props.stage === "ON_PREVIEW"} />}
-                {this.state.tabActive === 1 && <GroupsDisplay year={this.props.year} round={1} />}
-                {this.state.tabActive === 2 && <GroupsMatches year={this.props.year} round={1} />}
-            </Box>
+            this.state.isLoaded ? (
+                <Box style={{margin: 30, "margin-top": 10}}>
+                    <AppBar position="static">
+                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
+                            <Tab label="Seeding"/>
+                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
+                                 label="Groups"/>
+                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
+                                 label="Matches"/>
+                        </Tabs>
+                    </AppBar>
+                    {this.state.tabActive === 0 && <GroupsSeeding year={this.props.year} round={1}
+                                                                  haveToSetUpTeams={this.props.stage === "ON_PREVIEW"}/>}
+                    {this.state.tabActive === 1 && <GroupsDisplay year={this.props.year} round={1}/>}
+                    {this.state.tabActive === 2 && <GroupsMatches year={this.props.year} round={1}/>}
+                </Box>
+            ) : (
+                <span></span>
+            )
         );
     }
 }

@@ -8,6 +8,7 @@ class Playoffs extends Component {
 
         let nullTeam = {id: -1, name: ""};
         this.state = {
+            isLoaded: false,
             structure: {
                 gA1: nullTeam,
                 gA2: nullTeam,
@@ -87,202 +88,161 @@ class Playoffs extends Component {
 
     render() {
         return (
-            <Box width={1600}>
-
-                <Grid container spacing={1}>
-                    <Grid item sm={6}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"tree view"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table tree_table" align={"center"}>
-
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>¼ Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>½ Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>Champion</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell class={"tree_dist2"}></TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}
-                                                       data-teamid={this.state.structure.gA3.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gA3.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}
-                                                       data-teamid={this.state.structure.S1.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.S1.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}
-                                                       data-teamid={this.state.structure.gB2.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gB2.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#e2e4ff'}}
-                                                       data-teamid={this.state.structure.F1.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.F1.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"tree_dist1"}></TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}
-                                                       data-teamid={this.state.structure.gA1.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gA1.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"tree_dist2"}></TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#b3b8ff'}}
-                                                       data-teamid={this.state.structure.W1.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.W1.name}</TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell class={"tree_dist2"}></TableCell>
-                                        </TableRow>
-
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}
-                                                       data-teamid={this.state.structure.gB1.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gB1.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"tree_dist1"}></TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#e2e4ff'}}
-                                                       data-teamid={this.state.structure.F2.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.F2.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}
-                                                       data-teamid={this.state.structure.gB3.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gB3.name}</TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#d9edf7'}}
-                                                       data-teamid={this.state.structure.S2.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.S2.name}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
-                                                       style={{backgroundColor: '#fcf8e3'}}
-                                                       data-teamid={this.state.structure.gA2.id}
-                                                       onClick={this.goToTeam} >
-                                                {this.state.structure.gA2.name}</TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                            <TableCell class={"cancel"}></TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                    <Grid item sm={3}>
-                        <Grid item sm={12}>
+            this.state.isLoaded ? (
+                <Box width={1600}>
+                    <Grid container spacing={1}>
+                        <Grid item sm={6}>
                             <Card style={{margin: 20}}>
-                                <CardHeader title={"¼ Finals"} align={"center"}
+                                <CardHeader title={"tree view"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
-                                    <table className="table" align={"center"}>
+                                    <table className="table tree_table" align={"center"}>
+
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Home</TableCell>
-                                                <TableCell>score</TableCell>
-                                                <TableCell>Away</TableCell>
+                                                <TableCell>¼ Finals</TableCell>
+                                                <TableCell class={"tree_vert_dist"}></TableCell>
+                                                <TableCell>½ Finals</TableCell>
+                                                <TableCell class={"tree_vert_dist"}></TableCell>
+                                                <TableCell>Finals</TableCell>
+                                                <TableCell class={"tree_vert_dist"}></TableCell>
+                                                <TableCell>Champion</TableCell>
                                             </TableRow>
                                         </TableHead>
+
                                         <TableBody>
-                                            {this.state.games.quarters.map((game, index) => {
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell align="right"    className={"teamClicker"}
-                                                                   data-teamid={game.homeTeam.id}
-                                                                   onClick={this.goToTeam}>
-                                                            {game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left"    className={"teamClicker"}
-                                                                   data-teamid={game.awayTeam.id}
-                                                                   onClick={this.goToTeam}>
-                                                            {game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
+                                            <TableRow>
+                                                <TableCell class={"tree_dist2"}></TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#fcf8e3'}}
+                                                           data-teamid={this.state.structure.gA3.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gA3.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#d9edf7'}}
+                                                           data-teamid={this.state.structure.S1.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.S1.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#fcf8e3'}}
+                                                           data-teamid={this.state.structure.gB2.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gB2.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#e2e4ff'}}
+                                                           data-teamid={this.state.structure.F1.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.F1.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"tree_dist1"}></TableCell>
+                                            </TableRow>
+
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#d9edf7'}}
+                                                           data-teamid={this.state.structure.gA1.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gA1.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"tree_dist2"}></TableCell>
+                                            </TableRow>
+
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#b3b8ff'}}
+                                                           data-teamid={this.state.structure.W1.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.W1.name}</TableCell>
+                                            </TableRow>
+
+                                            <TableRow>
+                                                <TableCell class={"tree_dist2"}></TableCell>
+                                            </TableRow>
+
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#d9edf7'}}
+                                                           data-teamid={this.state.structure.gB1.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gB1.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"tree_dist1"}></TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#e2e4ff'}}
+                                                           data-teamid={this.state.structure.F2.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.F2.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#fcf8e3'}}
+                                                           data-teamid={this.state.structure.gB3.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gB3.name}</TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#d9edf7'}}
+                                                           data-teamid={this.state.structure.S2.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.S2.name}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell className={"tree_team teamClicker"} align="center"
+                                                           style={{backgroundColor: '#fcf8e3'}}
+                                                           data-teamid={this.state.structure.gA2.id}
+                                                           onClick={this.goToTeam}>
+                                                    {this.state.structure.gA2.name}</TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                                <TableCell class={"cancel"}></TableCell>
+                                            </TableRow>
                                         </TableBody>
                                     </table>
                                 </CardContent>
                             </Card>
                         </Grid>
 
-                        {this.state.games.semis.length > 0 ? (
+                        <Grid item sm={3}>
                             <Grid item sm={12}>
                                 <Card style={{margin: 20}}>
-                                    <CardHeader title={"½ Finals"} align={"center"}
+                                    <CardHeader title={"¼ Finals"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>
@@ -295,13 +255,12 @@ class Playoffs extends Component {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {this.state.games.semis.map((game, index) => {
+                                                {this.state.games.quarters.map((game, index) => {
                                                     return (
                                                         <TableRow>
-                                                            <TableCell
-                                                                align="right"   className={"teamClicker"}
-                                                                data-teamid={game.homeTeam.id}
-                                                                onClick={this.goToTeam}>
+                                                            <TableCell align="right" className={"teamClicker"}
+                                                                       data-teamid={game.homeTeam.id}
+                                                                       onClick={this.goToTeam}>
                                                                 {game.homeTeam.name}</TableCell>
                                                             {game.result == null ? (
                                                                 <TableCell></TableCell>
@@ -309,7 +268,7 @@ class Playoffs extends Component {
                                                                 <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                                 + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
-                                                            <TableCell align="left"   className={"teamClicker"}
+                                                            <TableCell align="left" className={"teamClicker"}
                                                                        data-teamid={game.awayTeam.id}
                                                                        onClick={this.goToTeam}>
                                                                 {game.awayTeam.name}</TableCell>
@@ -320,55 +279,100 @@ class Playoffs extends Component {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                        ) : ''}
-                    </Grid>
 
-                    <Grid item sm={3}>
-                        {this.state.games.finals.length > 0 ? (
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Finals"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Home</TableCell>
-                                                <TableCell>score</TableCell>
-                                                <TableCell>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {this.state.games.finals.map((game, index) => {
-                                                return (
+                            {this.state.games.semis.length > 0 ? (
+                                <Grid item sm={12}>
+                                    <Card style={{margin: 20}}>
+                                        <CardHeader title={"½ Finals"} align={"center"}
+                                                    titleTypographyProps={{variant: 'h7'}}
+                                        />
+                                        <CardContent>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
                                                     <TableRow>
-                                                        <TableCell
-                                                            align="right"
-                                                            className={"teamClicker"}
-                                                            data-teamid={game.homeTeam.id}
-                                                            onClick={this.goToTeam}>
-                                                            {game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left"
-                                                                   className={"teamClicker"}
-                                                                   data-teamid={game.awayTeam.id}
-                                                                   onClick={this.goToTeam}>
-                                                            {game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        ) : ''}
+                                                        <TableCell>Home</TableCell>
+                                                        <TableCell>score</TableCell>
+                                                        <TableCell>Away</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {this.state.games.semis.map((game, index) => {
+                                                        return (
+                                                            <TableRow>
+                                                                <TableCell
+                                                                    align="right" className={"teamClicker"}
+                                                                    data-teamid={game.homeTeam.id}
+                                                                    onClick={this.goToTeam}>
+                                                                    {game.homeTeam.name}</TableCell>
+                                                                {game.result == null ? (
+                                                                    <TableCell></TableCell>
+                                                                ) : (
+                                                                    <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                    + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                                )}
+                                                                <TableCell align="left" className={"teamClicker"}
+                                                                           data-teamid={game.awayTeam.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {game.awayTeam.name}</TableCell>
+                                                            </TableRow>)
+                                                    })}
+                                                </TableBody>
+                                            </table>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            ) : ''}
+                        </Grid>
+
+                        <Grid item sm={3}>
+                            {this.state.games.finals.length > 0 ? (
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={"Finals"} align={"center"}
+                                                titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        <table className="table" align={"center"}>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>Home</TableCell>
+                                                    <TableCell>score</TableCell>
+                                                    <TableCell>Away</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {this.state.games.finals.map((game, index) => {
+                                                    return (
+                                                        <TableRow>
+                                                            <TableCell
+                                                                align="right"
+                                                                className={"teamClicker"}
+                                                                data-teamid={game.homeTeam.id}
+                                                                onClick={this.goToTeam}>
+                                                                {game.homeTeam.name}</TableCell>
+                                                            {game.result == null ? (
+                                                                <TableCell></TableCell>
+                                                            ) : (
+                                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
+                                                            )}
+                                                            <TableCell align="left"
+                                                                       className={"teamClicker"}
+                                                                       data-teamid={game.awayTeam.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {game.awayTeam.name}</TableCell>
+                                                        </TableRow>)
+                                                })}
+                                            </TableBody>
+                                        </table>
+                                    </CardContent>
+                                </Card>
+                            ) : ''}
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
+            ) : (
+                <span></span>
+            )
         );
     }
 }
