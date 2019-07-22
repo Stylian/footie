@@ -1,5 +1,7 @@
 package gr.manolis.stelios.footie.api.dtos;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+
 import java.util.List;
 
 public class RobinGroupDTO {
@@ -7,7 +9,8 @@ public class RobinGroupDTO {
     private int id;
     private String name;
     private List<TeamGroupDTO> teams;
-    private List<GameDTO> games;
+    private List<Game> games;
+    private int round;
 
     public int getId() {
         return id;
@@ -33,11 +36,19 @@ public class RobinGroupDTO {
         this.teams = teams;
     }
 
-    public List<GameDTO> getGames() {
+    public List<Game> getGames() {
         return games;
     }
 
-    public void setGames(List<GameDTO> games) {
+    public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 }

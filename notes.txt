@@ -2,8 +2,8 @@
 bugs
 past winners show in runnerups sometimes ? not anymore!
 seasons menu not directing to current season
+coefffs draws in poitns ?ch
 
 TODO
-groups pages to fill with useful views
+nesteed menu to click in seasons -> rounds -> groups etc
 archiving button in admin
-coefffs draws in poitns ?ch

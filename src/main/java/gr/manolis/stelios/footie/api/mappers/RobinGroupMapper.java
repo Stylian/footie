@@ -25,9 +25,6 @@ public abstract class RobinGroupMapper implements EntityMapper<RobinGroupDTO, Ro
     @Autowired
     TeamGroupMapper teamGroupMapper;
 
-    @Autowired
-    GameMapper gameMapper;
-
     @AfterMapping
     void afterMapping(@MappingTarget RobinGroupDTO robinGroupDTO, RobinGroup robinGroup) {
 
@@ -52,7 +49,7 @@ public abstract class RobinGroupMapper implements EntityMapper<RobinGroupDTO, Ro
         }
 
         robinGroupDTO.setTeams(teamsInGroupOrdered);
-        robinGroupDTO.setGames(gameMapper.toDTO(new ArrayList<>(robinGroup.getGames())));
+        robinGroupDTO.setRound(teamsInGroupOrdered.size() > 3 ? 2 : 1);
     }
 
 }
