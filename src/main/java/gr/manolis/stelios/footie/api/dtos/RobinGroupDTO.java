@@ -7,6 +7,7 @@ public class RobinGroupDTO {
     private int id;
     private String name;
     private List<TeamGroupDTO> teams;
+    private List<GameDTO> games;
 
     public int getId() {
         return id;
@@ -32,4 +33,11 @@ public class RobinGroupDTO {
         this.teams = teams;
     }
 
+    public List<GameDTO> getGames() {
+        return games;
+    }
+
+    public void setGames(List<GameDTO> games) {
+        this.games = games;
+    }
 }

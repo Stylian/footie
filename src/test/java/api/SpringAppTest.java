@@ -42,7 +42,7 @@ public class SpringAppTest {
 
 		checkURL("/rest/ops/league", "{seasonNum=0}");
 
-		for (int n = 1; n < 15; n++)
+		for (int n = 1; n < 5; n++)
 			runSeason(n);
 
 	}

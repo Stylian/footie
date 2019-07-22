@@ -9,6 +9,7 @@ class Group extends Component {
 
         this.state = {
             group: {name: null},
+            isLoaded: false
         };
 
     }
@@ -22,6 +23,7 @@ class Group extends Component {
 
                         return {
                             ...state,
+                            isLoaded: true,
                             group: result,
                         }
                     });
@@ -40,13 +42,17 @@ class Group extends Component {
 
     render() {
         return (
-            <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={this.state.group.name} />
+            this.state.isLoaded ? (
+                <Paper style={{margin: 20}} elevation={20}>
+                    <LeagueToolbar pageTitle={this.state.group.name}/>
 
-                <Box style={{margin: 20}} >
+                    <Box style={{margin: 20}}>
 
-                </Box>
-            </Paper>
+                    </Box>
+                </Paper>
+            ) : (
+                <span></span>
+            )
         );
     }
 

@@ -343,7 +343,7 @@ public class RestSeasonController {
         logger.info("groupsRounds: " + groupsRound);
 
         List<RobinGroup> groups = groupsRound.getGroups();
-        List<RobinGroupDTO> groupsDTO = groupstoDTO(groups);
+        List<RobinGroupDTO> groupsDTO = robinGroupMapper.toDTO(groups);
 
         return groupsDTO;
     }
@@ -443,44 +443,6 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // Mapstruct FAKES!
     // -------------------------------------------------------------------------------------------------
-
-    private List<RobinGroupDTO> groupstoDTO(List<RobinGroup> groups) {
-
-        List<RobinGroupDTO> robinGroupsDTO = new ArrayList<>();
-
-        for(RobinGroup group : groups) {
-            RobinGroupDTO robinGroupDTO = new RobinGroupDTO();
-            robinGroupDTO.setId(group.getId());
-            robinGroupDTO.setName(group.getName());
-
-            List<TeamGroupDTO> teamsInGroup = new ArrayList<>();
-
-            for( Map.Entry<Team, Stats> teamsStats : group.getTeamsStats().entrySet()) {
-                TeamGroupDTO teamGroupDTO = new TeamGroupDTO();
-                teamGroupDTO.setId(teamsStats.getKey().getId());
-                teamGroupDTO.setName(teamsStats.getKey().getName());
-                teamGroupDTO.setStats(teamsStats.getValue());
-
-                teamsInGroup.add(teamGroupDTO);
-            }
-
-            List<Team> teamsOrdered = group.getTeams();
-            List<TeamGroupDTO> teamsInGroupOrdered = new ArrayList<>();
-            for(Team team : teamsOrdered) {
-                for(TeamGroupDTO tDTO : teamsInGroup) {
-                    if(team.getName().equals(tDTO.getName())) {
-                        teamsInGroupOrdered.add(tDTO);
-                        break;
-                    }
-                }
-            }
-
-            robinGroupDTO.setTeams(teamsInGroupOrdered);
-            robinGroupsDTO.add(robinGroupDTO);
-        }
-
-        return robinGroupsDTO;
-    }
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Map<Seed, List<Team>> teamsInRounds) {
         Collections.sort(teams, new CoefficientsOrdering(season));
