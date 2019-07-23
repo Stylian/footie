@@ -1,9 +1,6 @@
 
 bugs
-past winners show in runnerups sometimes ? not anymore!
-seasons menu not directing to current season
-coefffs draws in poitns ?ch
 
 TODO
-nesteed menu to click in seasons -> rounds -> groups etc
+make page that includes coeffs, past winners, and list of best by trophies
 

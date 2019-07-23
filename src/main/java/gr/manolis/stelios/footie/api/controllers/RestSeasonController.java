@@ -19,6 +19,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.*;
 import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -234,7 +235,7 @@ public class RestSeasonController {
 
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
-            teamsStrong = qr.getTeams(); // why you empty?
+            teamsStrong = qr.getTeams();
         }
 
         List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
@@ -445,8 +446,8 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Map<Seed, List<Team>> teamsInRounds) {
-        Collections.sort(teams, new CoefficientsOrdering(season));
 
+        List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
         if(season.getSeasonYear() > 1) {
@@ -460,7 +461,6 @@ public class RestSeasonController {
             teamDTO.setTrophies(team.getTrophies()); // why you not work on your own ?
 
             if(season.getSeasonYear() > 1) {
-                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
                 int p1 = 0;
                 for(Season season1 : seasonsPast) {
                     p1 += team.getStatsForGroup(season1).getPoints();
@@ -485,7 +485,7 @@ public class RestSeasonController {
     }
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Seed seed) {
-        Collections.sort(teams, new CoefficientsOrdering(season));
+        List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear());
 
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
@@ -494,7 +494,6 @@ public class RestSeasonController {
             teamDTO.setSeed(seed);
 
             if(season.getSeasonYear() > 1) {
-                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
                 int p1 = 0;
                 for(Season season1 : seasonsPast) {
                     p1 += team.getStatsForGroup(season1).getPoints();

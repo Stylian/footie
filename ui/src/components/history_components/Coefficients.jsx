@@ -72,7 +72,7 @@ class Coefficients extends Component {
                                                   onClick={this.goToTeam}
                                             style={{backgroundColor:
                                                     (index < 1) ? '#d9edf7' :
-                                                            (index < 7) ? '#dff0d8' :
+                                                            (index < 6) ? '#dff0d8' :
                                                                 ''}}
                                         >
                                             <TableCell align="right">{index + 1}</TableCell>
