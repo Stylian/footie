@@ -15,6 +15,8 @@ class Admin extends Component {
             seasonsStages: {},
             seasonNum: 0,
             canCreateLeague: false,
+            lastRestorePoint: "",
+            isLoaded: false
         };
 
     }
@@ -74,16 +76,31 @@ class Admin extends Component {
                     this.setState(state => {
                         return {
                             ...state,
-                            seasonNum: result[1],
+                            seasonNum: result.seasonNum,
                             canCreateLeague: result[0],
                         }
                     });
-
+                },
+                (error) => {
                     this.setState(state => {
                         return {
                             ...state,
                             isLoaded: true,
-                            seasonNum: result.seasonNum,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/admin/restore_point")
+            .then(res => res.text())
+            .then(
+                (result) => {
+
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            lastRestorePoint: result,
                         }
                     });
                 },
@@ -114,6 +131,34 @@ class Admin extends Component {
                         return {
                             ...state,
                             canCreateLeague: false,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
+    handleRestorePointClick = (event, newValue) => {
+        fetch("/rest/admin/restore_point", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.text())
+            .then(
+                (result) => {
+
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            lastRestorePoint: result,
                         }
                     });
                 },
@@ -177,6 +222,29 @@ class Admin extends Component {
                                                 ) : (
                                                     <span>a league is currently running</span>
                                                 )}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"Database"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table">
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>last save</TableCell>
+                                            <TableCell align="right">{this.state.lastRestorePoint}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell colSpan-={2}>
+                                                <Button onClick={this.handleRestorePointClick}>Create Restore
+                                                    Point</Button>
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

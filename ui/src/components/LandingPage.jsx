@@ -9,12 +9,12 @@ class LandingPage extends Component {
 
         this.state = {
             pageTitle: "Landing Page",
-            currentDisplayedSeason: false,
+            currentDisplayedSeason: 0,
         };
     }
 
     componentDidMount() {
-        fetch("/rest/persist/property/season_year")
+        fetch("/rest/seasons")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -39,15 +39,20 @@ class LandingPage extends Component {
     }
 
     render() {
-        return (
+        return this.state.isLoaded ?
+            this.state.currentDisplayedSeason > 0 ? (
             <div>
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                {this.state.currentDisplayedSeason > 0 ? (
                     <Redirect to={"/season/"+this.state.currentDisplayedSeason} />
-                ) : ''}
             </div>
-        );
-    }
+            ) : (
+                <div>
+                    <LeagueToolbar pageTitle={this.state.pageTitle}/>
+                    <Redirect to={"/admin"} />
+                </div>
+            )
+            : (null)
+    };
 }
 
 export default LandingPage;

@@ -150,9 +150,7 @@ class Season extends Component {
                     </Box>
 
                 </Paper>
-            ) : (
-                <span></span>
-            )
+            ) : (null)
         );
     }
 }

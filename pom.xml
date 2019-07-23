@@ -50,6 +50,9 @@
 							<directory>data</directory>
 						</fileset>
 						<fileset>
+							<directory>backups</directory>
+						</fileset>
+						<fileset>
 							<directory>logs</directory>
 						</fileset>
 						<fileset>

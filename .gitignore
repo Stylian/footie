@@ -2,6 +2,7 @@
 /target/
 /BD/
 /data/
+/backups/
 /.idea/
 /bin
 *.log

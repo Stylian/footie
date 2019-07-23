@@ -6,4 +6,4 @@ coefffs draws in poitns ?ch
 
 TODO
 nesteed menu to click in seasons -> rounds -> groups etc
-archiving button in admin
+
