@@ -3,9 +3,12 @@ package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.api.dtos.SeasonPastWinnersDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamWithTrophiesDTO;
 import gr.manolis.stelios.footie.api.mappers.SeasonPastWinnersMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
+import gr.manolis.stelios.footie.api.mappers.TeamWithTrophiesMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.api.tools.TeamsWithTrophiesOrdering;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -35,6 +38,9 @@ public class RestHistoryController {
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
 
+    @Autowired
+    private TeamWithTrophiesMapper teamWithTrophiesMapper;
+
     @RequestMapping("/coefficients")
     public List<TeamCoeffsDTO>  coefficients() {
 
@@ -46,6 +52,21 @@ public class RestHistoryController {
         }
 
         return teamsWithCoeffs;
+    }
+    @RequestMapping("/teams/trophies")
+    public List<TeamWithTrophiesDTO>  teamsWithTrophies() {
+
+        List<Team> teams = viewsService.getTeams();
+
+        List<TeamWithTrophiesDTO> teamsWithTrophiesDTO = teamWithTrophiesMapper.toDTO(teams);
+
+        teamsWithTrophiesDTO = teamsWithTrophiesDTO.stream()
+                .filter( (t) -> t.getGold() > 0 || t.getSilver() > 0)
+                .collect(Collectors.toList());
+
+        teamsWithTrophiesDTO.sort(new TeamsWithTrophiesOrdering());
+
+        return teamsWithTrophiesDTO;
     }
 
     @RequestMapping("/stats")

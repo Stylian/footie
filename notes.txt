@@ -2,5 +2,4 @@
 bugs
 
 TODO
-make page that includes coeffs, past winners, and list of best by trophies
-
+seems done, todo deploy scripts
