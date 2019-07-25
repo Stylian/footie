@@ -1,5 +1,5 @@
 
 bugs
+the archiving paths should be reworked or done externally? or export db?
 
 TODO
-seems done, todo deploy scripts
