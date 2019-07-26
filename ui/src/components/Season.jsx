@@ -146,9 +146,7 @@ class Season extends Component {
                         {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
                         {this.state.tabActive === 5 && <Playoffs year={this.props.match.params.seasonNum}/>}
-
                     </Box>
-
                 </Paper>
             ) : (null)
         );

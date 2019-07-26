@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
-import {Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
+import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 class Admin extends Component {
@@ -176,84 +176,88 @@ class Admin extends Component {
 
     render() {
         return (
-            <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                <Grid container spacing={1}>
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"League Stats"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table">
-                                    <TableBody>
-                                        {Object.keys(this.state.gameStats).map((key, index) => {
-                                            return (
-                                                <TableRow>
-                                                    <TableCell>{key}</TableCell>
-                                                    <TableCell align="right">{this.state.gameStats[key]}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
+            <Box width={1300}>
+                <Paper style={{margin: 20}} elevation={20}>
+                    <LeagueToolbar pageTitle={this.state.pageTitle}/>
+                    <Grid container spacing={1}>
+                        <Grid item sm={4}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"League Stats"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table">
+                                        <TableBody>
+                                            {Object.keys(this.state.gameStats).map((key, index) => {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell>{key}</TableCell>
+                                                        <TableCell align="right">{this.state.gameStats[key]}</TableCell>
+                                                    </TableRow>)
+                                            })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item sm={4}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Seasons Stage"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table">
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell>Season Year</TableCell>
+                                                <TableCell
+                                                    align="right">{this.state.seasonsStages.seasonYear}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell>Stage</TableCell>
+                                                <TableCell align="right">{this.state.seasonsStages.stage}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell colSpan-={2}>
+                                                    {this.state.canCreateLeague ? (
+                                                        <Button onClick={this.handleButtonClick}>Create new
+                                                            Season</Button>
+                                                    ) : (
+                                                        <span>a league is currently running</span>
+                                                    )}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item sm={4}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Database"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table">
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell>last save</TableCell>
+                                                <TableCell align="right">{this.state.lastRestorePoint}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell colSpan-={2}>
+                                                    <Button onClick={this.handleRestorePointClick}>Create Restore
+                                                        Point</Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Seasons Stage"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table">
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>Season Year</TableCell>
-                                            <TableCell align="right">{this.state.seasonsStages.seasonYear}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell>Stage</TableCell>
-                                            <TableCell align="right">{this.state.seasonsStages.stage}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell colSpan-={2}>
-                                                {this.state.canCreateLeague ? (
-                                                    <Button onClick={this.handleButtonClick}>Create new Season</Button>
-                                                ) : (
-                                                    <span>a league is currently running</span>
-                                                )}
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Database"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table">
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>last save</TableCell>
-                                            <TableCell align="right">{this.state.lastRestorePoint}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell colSpan-={2}>
-                                                <Button onClick={this.handleRestorePointClick}>Create Restore
-                                                    Point</Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
-            </Paper>
+                </Paper>
+            </Box>
         );
     }
 }

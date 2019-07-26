@@ -112,11 +112,11 @@ class Coefficients extends Component {
         let rightSide = teams;
 
         return (
-            <Box width={1600}>
+            <Box width={1400}>
                 <Paper elevation={12} style={{margin: 20}}>
 
                     <Grid container spacing={1}>
-                        <Grid item sm={5}>
+                        <Grid item sm={6}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -219,7 +219,7 @@ class Coefficients extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm={4}>
+                        <Grid item sm={3}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Best Performers"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
