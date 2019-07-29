@@ -20,9 +20,9 @@ import org.springframework.util.MultiValueMap;
 
 import gr.manolis.stelios.footie.api.App;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = { "management.port=0" })
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@TestPropertySource(properties = { "management.port=0" })
 public class SpringAppTest {
 
 	@LocalServerPort
@@ -47,11 +47,11 @@ public class SpringAppTest {
 //
 //	}
 
-	@Test
-	public void runSeason1() throws Exception {
-		checkURL("/rest/ops/league", "{seasonNum=0}");
-		runSeason(1);
-	}
+//	@Test
+//	public void runSeason1() throws Exception {
+//		checkURL("/rest/ops/league", "{seasonNum=0}");
+//		runSeason(1);
+//	}
 
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");

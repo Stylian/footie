@@ -20,6 +20,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
 
 			<plugin>
@@ -46,12 +49,6 @@
 				<configuration>
 					<followSymLinks>false</followSymLinks>
 					<filesets>
-						<fileset>
-							<directory>data</directory>
-						</fileset>
-						<fileset>
-							<directory>backups</directory>
-						</fileset>
 						<fileset>
 							<directory>logs</directory>
 						</fileset>
