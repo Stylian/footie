@@ -2,7 +2,7 @@
 bugs
 the archiving paths should be reworked or done externally? or export db?
 
-TODO
+TODO for 0.7
 rename playoffs/quals titles
 support for more teams? 
 adding preliminary round?
@@ -11,4 +11,4 @@ remove replay matches after 1st season
 - in quarter and semis home wins
 - in finals replays still function
 
-docker works, so does java -jar but the jar has issues
+docker works, so does java -jar but the jar has issues with derby

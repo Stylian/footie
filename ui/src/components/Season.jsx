@@ -129,11 +129,11 @@ class Season extends Component {
                         <AppBar position="static">
                             <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                                 <Tab label="Seeding"/>
-                                <Tab label="1st Quals Round"/>
-                                <Tab label="2nd Quals Round"/>
-                                <Tab label="1st Round"/>
-                                <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Round"/>
-                                <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Playoffs"/>
+                                <Tab label="Qualifying round"/>
+                                <Tab label="Play-off round"/>
+                                <Tab label="1st Group stage"/>
+                                <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Group stage"/>
+                                <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
                             </Tabs>
                         </AppBar>
                         {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
