@@ -3,6 +3,7 @@ package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.io.FileUtils;
@@ -64,8 +65,8 @@ public class RestAdminController {
         Date date = new Date();
         String strDate = dateFormat.format(date);
 
-        File dataFolder = new File( "./data");
-        File backupFolder = new File("./backups/data_" + strDate);
+        File dataFolder = Utils.getDatabaseFile();
+        File backupFolder = new File(Utils.getBackupsFolderPath() + "data_" + strDate);
 
         try {
             FileUtils.copyDirectory(dataFolder, backupFolder);

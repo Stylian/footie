@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -22,8 +23,6 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 @Transactional
 public class BootService {
 
-	private static final String TEAMS_FILE = "src/main/resources/teams.txt";
-
 	final static Logger logger = Logger.getLogger(BootService.class);
 
 	@Autowired
@@ -38,28 +37,29 @@ public class BootService {
 
 		if (league == null) {
 
-			registerTeamsFromFile();
-
+			boolean teamsFileFound = registerTeamsFromFile();
 			league = new League();
-			DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-			dao2.save(league);
+
+			if(teamsFileFound) {
+				DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+				dao2.save(league);
+			}
 		}
 
 		return league;
-
 	}
 
-	private void registerTeamsFromFile() {
+	private boolean registerTeamsFromFile() {
 
 		logger.info("loading teams from file");
 
 		try {
 
-			File file = new File(TEAMS_FILE);
+			File file = Utils.getTeamsFile();
 
 			if (!file.exists()) {
 				logger.error("teams file not found");
-				return;
+				return false;
 			}
 
 			List<String> teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
@@ -79,6 +79,7 @@ public class BootService {
 			e.printStackTrace();
 		}
 
+		return true;
 	}
 
 }

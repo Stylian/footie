@@ -17,8 +17,6 @@ public class Rules {
 
 	final static Logger logger = Logger.getLogger(Rules.class);
 
-	private static final String RULES_FILE = "src/main/resources/rules.txt";
-
 	public static final int PROMOTION_POINTS_QUALS_1;
 	public static final int PROMOTION_POINTS_QUALS_2;
 
@@ -58,7 +56,7 @@ public class Rules {
 		try {
 
 			Properties props = new Properties();
-			File file = new File(RULES_FILE);
+			File file = Utils.getRulesFile();
 			FileInputStream fileInput = new FileInputStream(file);
 
 			props.load(fileInput);

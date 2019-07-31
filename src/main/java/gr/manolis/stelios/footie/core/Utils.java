@@ -4,12 +4,34 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Utils {
+
+	public static File getDatabaseFile() {
+		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
+		return new File(footieFolder + File.separator + "data");
+	}
+
+	public static String getBackupsFolderPath() {
+		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
+		return footieFolder + File.separator + "backups"  + File.separator;
+	}
+
+	public static File getTeamsFile() {
+		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
+		return new File(footieFolder + File.separator + "teams.txt");
+	}
+
+	public static File getRulesFile() {
+		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
+		return new File(footieFolder + File.separator + "rules.txt");
+	}
 
 	public static String toString(List<?> lsObj) {
 		return lsObj.stream().map(Object::toString).collect(Collectors.joining(","));

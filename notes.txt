@@ -1,5 +1,6 @@
 
 TODO bugs
+teams file not found for jar startup scenario
 the archiving paths should be reworked or done externally? or export db?
 
 docker works, so does java -jar but the jar has issues with derby
