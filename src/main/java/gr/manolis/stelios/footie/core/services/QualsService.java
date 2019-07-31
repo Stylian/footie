@@ -151,10 +151,19 @@ public class QualsService {
 		Collections.shuffle(strongQueue);
 		Collections.shuffle(weakQueue);
 
+		MatchupTieStrategy tieStrategy = MatchupTieStrategy.REPLAY_GAMES;
+		if (qualsRound.getNum() == 1) {
+			if (qualsRound.getSeason().getSeasonYear() > 1) {
+				tieStrategy = MatchupTieStrategy.HIGHEST_COEFFICIENT_WINS;
+			}
+		}else {
+			tieStrategy = MatchupTieStrategy.REPLAY_GAMES_ONCE;
+		}
+
 		while (strongQueue.size() > 0) {
 
 			qualsRound.addMatchup(new Matchup(strongQueue.remove(0), weakQueue.remove(0),
-					MatchupFormat.FORMAT_IN_OUT_SINGLE, MatchupTieStrategy.REPLAY_GAMES));
+					MatchupFormat.FORMAT_IN_OUT_SINGLE, tieStrategy));
 
 		}
 

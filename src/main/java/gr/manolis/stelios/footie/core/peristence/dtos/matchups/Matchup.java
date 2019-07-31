@@ -106,6 +106,14 @@ public class Matchup {
 		this.winner = winner;
 	}
 
+	public MatchupTieStrategy getTieStrategy() {
+		return tieStrategy;
+	}
+
+	public void setTieStrategy(MatchupTieStrategy tieStrategy) {
+		this.tieStrategy = tieStrategy;
+	}
+
 	@Override
 	public String toString() {
 		return "Matchup [teamHome=" + teamHome + ", teamAway=" + teamAway + "]";

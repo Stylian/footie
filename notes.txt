@@ -1,14 +1,33 @@
 
-bugs
+TODO bugs
 the archiving paths should be reworked or done externally? or export db?
 
-TODO for 0.7
-rename playoffs/quals titles
-support for more teams? 
-adding preliminary round?
-remove replay matches after 1st season
-- in quals coeffs win
-- in quarter and semis home wins
-- in finals replays still function
-
 docker works, so does java -jar but the jar has issues with derby
+
+
+TODO 0.8
+rules tab in each round explaining what happens in ties, how many coeffs are awarded
+replay rules
+- in quals coeffs
+  - if tied infinite replays
+- in play-offs replays once
+  - if tied then coeffs
+    - if tied then infinite replays
+- in quarter and semis home wins
+- in finals infinite replays
+
+in past winners display semifinalists
+
+
+
+TODO 0.9
+support for more teams?
+adding preliminary round?
+
+3 to groups, top coeff + 2 finalists
+18 to play q2
+5 to q2, 2 semifinalists + 3 coeffs
+26 to play q1
+
+= 34 -> preliminary to get to 34
+reddish color for preliminaries

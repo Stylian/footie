@@ -38,7 +38,6 @@ public class BootService {
 
 		if (league == null) {
 
-			createMasterGroup();
 			registerTeamsFromFile();
 
 			league = new League();
@@ -47,16 +46,6 @@ public class BootService {
 		}
 
 		return league;
-
-	}
-
-	private void createMasterGroup() {
-		logger.info("creating master group...");
-
-		Group group = new Group("master");
-
-		DataAccessObject<Group> groupDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		groupDao.save(group);
 
 	}
 

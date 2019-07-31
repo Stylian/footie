@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,20 +112,13 @@ public class GameService {
             MatchupGame matchupGame = (MatchupGame) game;
             ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
         } else if (game instanceof GroupGame) {
-
             if (result.homeTeamWon()) {
-
                 thisGameStats.addPoints(3);
-
             } else if (result.tie()) {
-
                 thisGameStats.addPoints(1);
-
             }
-
             GroupGame groupGame = (GroupGame) game;
             team.getStatsForGroup(groupGame.getRobinGroup()).addStats(thisGameStats);
-
         }
 
         Stats seasonStats = team.getStatsForGroup(season);
@@ -139,11 +133,9 @@ public class GameService {
 
         // if it is the last game of the matchup mark the matchup with the winner
         for (Game game : matchup.getGames()) {
-
             if (game.getResult() == null) {
                 return; // unfinished matchup
             }
-
         }
 
         // finished matchup , so set up winner
@@ -183,10 +175,39 @@ public class GameService {
         } else if (homeGoals < awayGoals) {
             matchup.setWinner(teamAway);
 
-        } else {
+        } else { // Teams tied
 
-            games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
-            games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+            switch(matchup.getTieStrategy()) {
+                case REPLAY_GAMES_ONCE:
+                    if(matchup.getGames().size() < 3) {
+                        games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
+                        games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+                        break;
+                    }else {
+                        // fall through if coeffs are tied
+                    }
+                case HIGHEST_COEFFICIENT_WINS:
+                    Stats teamHomeStats = new Stats();
+                    serviceUtils.loadAllSeasons().forEach( (s) -> teamHomeStats.addStats(teamHome.getStatsForGroup(s)));
+                    Stats teamAwayStats = new Stats();
+                    serviceUtils.loadAllSeasons().forEach( (s) -> teamAwayStats.addStats(teamAway.getStatsForGroup(s)));
+
+                    if(teamHomeStats.getPoints() > teamAwayStats.getPoints()) {
+                        matchup.setWinner(teamHome);
+                        break;
+                    }else if(teamHomeStats.getPoints() < teamAwayStats.getPoints()) {
+                        matchup.setWinner(teamAway);
+                        break;
+                    }
+                    // fall through if coeffs are tied
+                case REPLAY_GAMES:
+                    games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
+                    games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+                    break;
+                case BEST_POSITION_IN_KNOCKOUTS_TREE:
+                    matchup.setWinner(teamHome);
+                    break;
+            }
 
         }
 

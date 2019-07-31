@@ -41,9 +41,6 @@ public class RobinGroupOrderingTest {
 	Group group;
 	
 	@Mock
-	Group master;
-
-	@Mock
 	Stats statsT1;
 	
 	@Mock
