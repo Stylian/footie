@@ -35,6 +35,11 @@ public class RestAdminController {
     @Autowired
     private UIPersistService persistService;
 
+    @RequestMapping("/general_data")
+    public Map<String, Object> generalData() {
+        return viewsService.generalData();
+    }
+
     @RequestMapping("/game_stats")
     public Map<String, Object> gameStats() {
         return viewsService.gameStats();

@@ -12,6 +12,7 @@ class Admin extends Component {
             pageTitle: "Admin",
             tabActive: 0,
             gameStats: {},
+            generalData: {},
             seasonsStages: {},
             seasonNum: 0,
             canCreateLeague: false,
@@ -31,6 +32,29 @@ class Admin extends Component {
                             ...state,
                             isLoaded: true,
                             gameStats: result
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/admin/general_data")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            generalData: result
                         }
                     });
                 },
@@ -240,6 +264,14 @@ class Admin extends Component {
                                 <CardContent>
                                     <table className="table">
                                         <TableBody>
+                                            <TableRow>
+                                                <TableCell>database connection</TableCell>
+                                                <TableCell>{this.state.generalData.databaseConnection ? "active" : "none"}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell>teams loaded</TableCell>
+                                                <TableCell>{this.state.generalData.teamsLoaded}</TableCell>
+                                            </TableRow>
                                             <TableRow>
                                                 <TableCell>last save</TableCell>
                                                 <TableCell align="right">{this.state.lastRestorePoint}</TableCell>

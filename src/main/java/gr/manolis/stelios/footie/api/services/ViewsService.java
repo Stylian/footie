@@ -120,8 +120,6 @@ public class ViewsService {
 	}
 
 	public Map<String, Object> gameStats() {
-
-		// TODO hacked in the keys as displayed names
 		Map<String, Object> gamestats = new LinkedHashMap<>();
 
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
@@ -133,7 +131,7 @@ public class ViewsService {
 		if (results.isEmpty()) {
 			return gamestats;
 		}
-		
+
 		gamestats.put("number of games played", results.size());
 		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());
 		gamestats.put("draws", results.stream().filter(Result::tie).count());
@@ -146,6 +144,14 @@ public class ViewsService {
 		return gamestats;
 	}
 
+	public Map<String, Object> generalData() {
+		Map<String, Object> generalData = new LinkedHashMap<>();
+
+		generalData.put("databaseConnection", serviceUtils.testDbConnection());
+		generalData.put("teamsLoaded", serviceUtils.loadTeams().size());
+
+		return generalData;
+	}
 
 	public List<Team> getTeams() {
 		List<Team> teams = serviceUtils.loadTeams();

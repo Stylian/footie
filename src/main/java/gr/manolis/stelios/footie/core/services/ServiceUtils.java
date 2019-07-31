@@ -1,22 +1,20 @@
 package gr.manolis.stelios.footie.core.services;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,6 +22,17 @@ public class ServiceUtils {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	public boolean testDbConnection() {
+
+		final boolean[] works = new boolean[1];
+
+		Session session = sessionFactory.getCurrentSession();
+		session.doWork( (c) -> works[0] = true );
+
+		return works[0];
+	}
+
 
 	public League getLeague() {
 
