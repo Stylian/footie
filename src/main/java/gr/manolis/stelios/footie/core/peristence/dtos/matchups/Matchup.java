@@ -82,22 +82,18 @@ public class Matchup {
 		return id;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getTeamHome() {
 		return teamHome;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getTeamAway() {
 		return teamAway;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public List<Game> getGames() {
 		return games;
 	}
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public Team getWinner() {
 		return winner;
 	}

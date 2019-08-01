@@ -78,9 +78,12 @@ class QualsMatches extends Component {
                                                 </TableHead>
                                                 <TableBody>
                                                     {this.state.days[day].map((game, index) => {
+                                                        let winnerExists = game.winner != null;
+                                                        let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
+                                                        let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
                                                         return (
                                                             <TableRow>
-                                                                <TableCell align="right" className={"teamClicker"}
+                                                                <TableCell align="right" className={"teamClicker" + (homeWon ? " winner" : "")}
                                                                            data-teamid={game.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {game.homeTeam.name}</TableCell>
@@ -91,7 +94,7 @@ class QualsMatches extends Component {
                                                                         {game.result.goalsMadeByHomeTeam + " - "
                                                                         + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 )}
-                                                                <TableCell align="left" className={"teamClicker"}
+                                                                <TableCell align="left" className={"teamClicker" + (awayWon ? " winner" : "")}
                                                                            data-teamid={game.awayTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {game.awayTeam.name}</TableCell>

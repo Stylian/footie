@@ -256,9 +256,12 @@ class Playoffs extends Component {
                                             </TableHead>
                                             <TableBody>
                                                 {this.state.games.quarters.map((game, index) => {
+                                                    let winnerExists = game.winner != null;
+                                                    let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
+                                                    let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
                                                     return (
                                                         <TableRow>
-                                                            <TableCell align="right" className={"teamClicker"}
+                                                            <TableCell align="right" className={"teamClicker" + (homeWon ? " winner" : "")}
                                                                        data-teamid={game.homeTeam.id}
                                                                        onClick={this.goToTeam}>
                                                                 {game.homeTeam.name}</TableCell>
@@ -268,7 +271,7 @@ class Playoffs extends Component {
                                                                 <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                                 + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
-                                                            <TableCell align="left" className={"teamClicker"}
+                                                            <TableCell align="left" className={"teamClicker" + (awayWon ? " winner" : "")}
                                                                        data-teamid={game.awayTeam.id}
                                                                        onClick={this.goToTeam}>
                                                                 {game.awayTeam.name}</TableCell>
@@ -297,10 +300,13 @@ class Playoffs extends Component {
                                                 </TableHead>
                                                 <TableBody>
                                                     {this.state.games.semis.map((game, index) => {
+                                                        let winnerExists = game.winner != null;
+                                                        let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
+                                                        let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
                                                         return (
                                                             <TableRow>
                                                                 <TableCell
-                                                                    align="right" className={"teamClicker"}
+                                                                    align="right" className={"teamClicker" + (homeWon ? " winner" : "")}
                                                                     data-teamid={game.homeTeam.id}
                                                                     onClick={this.goToTeam}>
                                                                     {game.homeTeam.name}</TableCell>
@@ -310,7 +316,7 @@ class Playoffs extends Component {
                                                                     <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                                     + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 )}
-                                                                <TableCell align="left" className={"teamClicker"}
+                                                                <TableCell align="left" className={"teamClicker" + (awayWon ? " winner" : "")}
                                                                            data-teamid={game.awayTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {game.awayTeam.name}</TableCell>
@@ -341,11 +347,14 @@ class Playoffs extends Component {
                                             </TableHead>
                                             <TableBody>
                                                 {this.state.games.finals.map((game, index) => {
+                                                    let winnerExists = game.winner != null;
+                                                    let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
+                                                    let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
                                                     return (
                                                         <TableRow>
                                                             <TableCell
                                                                 align="right"
-                                                                className={"teamClicker"}
+                                                                className={"teamClicker" + (homeWon ? " winner" : "")}
                                                                 data-teamid={game.homeTeam.id}
                                                                 onClick={this.goToTeam}>
                                                                 {game.homeTeam.name}</TableCell>
@@ -356,7 +365,7 @@ class Playoffs extends Component {
                                                                 + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
                                                             <TableCell align="left"
-                                                                       className={"teamClicker"}
+                                                                       className={"teamClicker" + (awayWon ? " winner" : "")}
                                                                        data-teamid={game.awayTeam.id}
                                                                        onClick={this.goToTeam}>
                                                                 {game.awayTeam.name}</TableCell>

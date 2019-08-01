@@ -1,10 +1,8 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
-import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
-import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
-import gr.manolis.stelios.footie.api.dtos.TeamGroupDTO;
-import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
+import gr.manolis.stelios.footie.api.dtos.*;
+import gr.manolis.stelios.footie.api.mappers.MatchupGameMapper;
 import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
@@ -75,6 +73,9 @@ public class RestSeasonController {
 
     @Autowired
     private RobinGroupMapper robinGroupMapper;
+
+    @Autowired
+    private MatchupGameMapper matchupGameMapper;
 
     // jack of all trades
     @RequestMapping("next_game")
@@ -249,7 +250,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("seasons/{year}/quals/{round}/matches")
-    public Map<Integer, List<Game>> qualsMatches(
+    public Map<Integer, List<MatchupGameDTO>> qualsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
         logger.info("quals matches");
@@ -272,7 +273,13 @@ public class RestSeasonController {
         newDaysStructure.put(1, mainGames.subList(0, mainGames.size() / 2));
         newDaysStructure.put(2, mainGames.subList(mainGames.size() / 2, mainGames.size()));
 
-        return newDaysStructure;
+        // mapping
+        Map<Integer, List<MatchupGameDTO>> newDaysStructureMapped = new HashMap<>();
+        for(Map.Entry<Integer, List<Game>> entry : newDaysStructure.entrySet()) {
+            newDaysStructureMapped.put(entry.getKey(), matchupGameMapper.toDTO(entry.getValue()));
+        }
+
+        return newDaysStructureMapped;
     }
 
 
@@ -413,7 +420,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/seasons/{year}/playoffs/matches")
-    public Map<String, List<Game>> getPlayoffsRoundMatches(@PathVariable String year) {
+    public Map<String, List<MatchupGameDTO>> getPlayoffsRoundMatches(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
         Map<String, List<Game>> matches = new HashMap<>();
@@ -437,7 +444,14 @@ public class RestSeasonController {
         }
         matches.put("finals", finals);
 
-        return matches;
+
+        // mapping
+        Map<String, List<MatchupGameDTO>> matchesMapped = new HashMap<>();
+        for(Map.Entry<String, List<Game>> entry : matches.entrySet()) {
+            matchesMapped.put(entry.getKey(), matchupGameMapper.toDTO(entry.getValue()));
+        }
+
+        return matchesMapped;
     }
 
     // -------------------------------------------------------------------------------------------------

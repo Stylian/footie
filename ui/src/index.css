@@ -113,3 +113,7 @@ code {
   cursor: pointer;
   font-weight: bold !important;
 }
+
+.winner {
+  font-weight: bold !important;
+}
