@@ -23,8 +23,6 @@ public class RobinGroupOrdering extends Ordering {
 			return s2.getPoints() - s1.getPoints();
 		}
 
-		// RULE 1.5 *games between teams may not be worth
-
 		// RULE 2
 		if (s1.getGoalDifference() != s2.getGoalDifference()) {
 			return s2.getGoalDifference() - s1.getGoalDifference();

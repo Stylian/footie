@@ -2,15 +2,7 @@
 TODO bugs
 
 TODO 0.8
-rules tab in each round explaining what happens in ties, how many coeffs are awarded
-replay rules
-- in quals coeffs
-  - if tied infinite replays
-- in play-offs replays once
-  - if tied then coeffs
-    - if tied then infinite replays
-- in quarter and semis home wins
-- in finals infinite replays
+rules done but need to tide up the page/(s)
 
 in past winners display semifinalists
 

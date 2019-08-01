@@ -6,6 +6,7 @@ import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
 import Groups2 from "./season_components/Groups2";
 import Playoffs from "./season_components/Playoffs";
+import Rules from "./season_components/Rules";
 
 class Season extends Component {
 
@@ -128,6 +129,7 @@ class Season extends Component {
                     <Box style={{margin: 20}}>
                         <AppBar position="static">
                             <Tabs value={this.state.tabActive} onChange={this.handleChange}>
+                                <Tab label="Rules"/>
                                 <Tab label="Seeding"/>
                                 <Tab label="Qualifying round"/>
                                 <Tab label="Play-off round"/>
@@ -136,16 +138,17 @@ class Season extends Component {
                                 <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
                             </Tabs>
                         </AppBar>
-                        {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
-                        {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={1}
+                        {this.state.tabActive === 0 && <Rules />}
+                        {this.state.tabActive === 1 && <Seeding year={this.props.match.params.seasonNum}/>}
+                        {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={1}
                                                               stage={this.state.stages.quals1}/>}
-                        {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={2}
+                        {this.state.tabActive === 3 && <Quals year={this.props.match.params.seasonNum} round={2}
                                                               stage={this.state.stages.quals2}/>}
-                        {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}
+                        {this.state.tabActive === 4 && <Groups1 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}
+                        {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 5 && <Playoffs year={this.props.match.params.seasonNum}/>}
+                        {this.state.tabActive === 6 && <Playoffs year={this.props.match.params.seasonNum}/>}
                     </Box>
                 </Paper>
             ) : (null)
