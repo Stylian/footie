@@ -1,10 +1,5 @@
 
 TODO bugs
-teams file not found for jar startup scenario
-the archiving paths should be reworked or done externally? or export db?
-
-docker works, so does java -jar but the jar has issues with derby
-
 
 TODO 0.8
 rules tab in each round explaining what happens in ties, how many coeffs are awarded
