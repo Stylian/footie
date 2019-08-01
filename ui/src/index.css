@@ -99,9 +99,15 @@ code {
   font-weight: bold !important;
 }
 
+.winner {
+  font-weight: bold !important;
+  color: #1f6d93 !important;
+}
+
 .teamClicker:hover {
   cursor: pointer;
   background-color: #d9f7f0 !important;
+  color: #000000 !important;
 }
 
 .teamClicker:hover,
@@ -111,9 +117,5 @@ code {
 
 .teamClickerGamePage:hover {
   cursor: pointer;
-  font-weight: bold !important;
-}
-
-.winner {
   font-weight: bold !important;
 }
