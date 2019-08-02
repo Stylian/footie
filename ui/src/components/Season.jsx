@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Box, Paper, Tab, TableBody, Tabs} from "@material-ui/core";
+import {AppBar, Box, Paper, Tab, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
 import Groups2 from "./season_components/Groups2";
-import Playoffs from "./season_components/Playoffs";
 import Knockouts from "./season_components/Knockouts";
 
 class Season extends Component {
@@ -130,6 +129,7 @@ class Season extends Component {
                         <AppBar position="static">
                             <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                                 <Tab label="Seeding"/>
+                                <Tab disabled={this.props.match.params.seasonNum == 1} label="Preliminary round"/>
                                 <Tab label="Qualifying round"/>
                                 <Tab label="Play-off round"/>
                                 <Tab label="1st Group stage"/>
@@ -138,15 +138,17 @@ class Season extends Component {
                             </Tabs>
                         </AppBar>
                         {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
-                        {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={1}
+                        {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={0}
+                                                              stage={this.state.stages.quals0}/>}
+                        {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={1}
                                                               stage={this.state.stages.quals1}/>}
-                        {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={2}
+                        {this.state.tabActive === 3 && <Quals year={this.props.match.params.seasonNum} round={2}
                                                               stage={this.state.stages.quals2}/>}
-                        {this.state.tabActive === 3 && <Groups1 year={this.props.match.params.seasonNum}
+                        {this.state.tabActive === 4 && <Groups1 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 4 && <Groups2 year={this.props.match.params.seasonNum}
+                        {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 5 && <Knockouts year={this.props.match.params.seasonNum}/>}
+                        {this.state.tabActive === 6 && <Knockouts year={this.props.match.params.seasonNum}/>}
                     </Box>
                 </Paper>
             ) : (null)

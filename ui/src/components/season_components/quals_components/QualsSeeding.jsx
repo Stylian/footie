@@ -158,7 +158,53 @@ class QualsSeeding extends Component {
                                 />
                                 <CardContent>
                                     <table className="table">
-                                        {this.props.round == 1 ? (
+                                        {this.props.round == 0 ? (
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Teams</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>as needed</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Participation</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>bottom teams by coefficients as
+                                                                needed</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Format</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>2 knockout games</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Winners</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>promote to Qualifying round</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Ties rules</TableCell>
+                                                    <TableCell>
+                                                        <ol>
+                                                            <li>highest coefficients win</li>
+                                                            <li>the winner is picked at random</li>
+                                                        </ol>
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableBody>
+
+                                        ) : this.props.round == 1 ? (
                                             <TableBody>
                                                 <TableRow>
                                                     <TableCell align={"right"}>Teams</TableCell>

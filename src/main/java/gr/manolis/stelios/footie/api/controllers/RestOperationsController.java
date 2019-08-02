@@ -56,6 +56,8 @@ public class RestOperationsController {
     public RestResponse createSeason() {
         Season season = operationsService.createSeason();
         operationsService.setUpSeason();
+
+        // TODO preliminar
         operationsService.seedQualsRound1();
 
         return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());

@@ -70,14 +70,18 @@ class Team extends Component {
             )
     }
 
+    goToSeason = (event, newValue) => {
+        window.location.href = "/season/" + event.currentTarget.dataset.season;
+    }
+
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={1300}>
+                <Box >
                     <Paper style={{margin: 20}} elevation={20}>
                         <LeagueToolbar pageTitle={this.state.team.name}/>
 
-                        <Box style={{margin: 20}}>
+                        <Box width={1300} style={{margin: 20}}>
                             <Grid container spacing={1}>
                                 <Grid item sm={8}>
                                     <Card style={{margin: 20}}>
@@ -102,7 +106,9 @@ class Team extends Component {
                                                 <TableBody>
                                                     {this.state.team.seasonsStats.map((seasonStats, index) => {
                                                         return (
-                                                            <TableRow>
+                                                            <TableRow className={"teamClicker"} onClick={this.goToSeason}
+                                                                      data-season={index+1}
+                                                            >
                                                                 <TableCell
                                                                     align="right">{"Season " + (index + 1)}</TableCell>
                                                                 <TableCell

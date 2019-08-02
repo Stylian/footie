@@ -42,10 +42,10 @@ public class GroupsRoundService {
 
         Season season = serviceUtils.loadCurrentSeason();
 
-        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
+        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
 
         // must add winners from roundQuals2
-        QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+        QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
         List<Matchup> matchups = roundQuals2.getMatchups();
         List<Team> round2Winners = new ArrayList<>();
 
@@ -121,7 +121,7 @@ public class GroupsRoundService {
 
         Season season = serviceUtils.loadCurrentSeason();
 
-        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
+        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
 
         List<Team> strongTeams = groupsRoundOf12.getStrongTeams();
         List<Team> mediumTeams = groupsRoundOf12.getMediumTeams();
@@ -180,7 +180,7 @@ public class GroupsRoundService {
         Season season = serviceUtils.loadCurrentSeason();
 
         // must add winners from groups round of 12
-        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(2);
+        GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
         RobinGroup r12gA = groupsRoundOf12.getGroups().get(0);
         RobinGroup r12gB = groupsRoundOf12.getGroups().get(1);
         RobinGroup r12gC = groupsRoundOf12.getGroups().get(2);
@@ -265,7 +265,7 @@ public class GroupsRoundService {
         switch(round) {
             case 1:
                 // add coeffs for groups12 positions
-                GroupsRound groupsOf12Round = (GroupsRound) season.getRounds().get(2);
+                GroupsRound groupsOf12Round = (GroupsRound) season.getRounds().get(3);
                 for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
@@ -283,7 +283,7 @@ public class GroupsRoundService {
                 break;
             case 2:
                 // add coeffs for groups8 positions
-                GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(3);
+                GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(4);
                 for (RobinGroup robinGroup : groupsOf8Round.getGroups()) {
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);

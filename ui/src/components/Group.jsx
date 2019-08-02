@@ -63,9 +63,9 @@ class Group extends Component {
                 <Paper style={{margin: 20}} elevation={20}>
                     <LeagueToolbar pageTitle={this.state.group.name}/>
 
-                    <Box style={{margin: 20}}>
+                    <Box width={1200} style={{margin: 20}}>
                         <Grid container spacing={1}>
-                            <Grid item sm={8}>
+                            <Grid item sm={7}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={this.state.group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
@@ -123,7 +123,7 @@ class Group extends Component {
                                 </Card>
                             </Grid>
 
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"Games"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}

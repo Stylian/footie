@@ -8,43 +8,6 @@ class Rules extends Component {
         return (
             <Box width={1600}>
                 <Grid container spacing={1}>
-                    {/*<Grid item sm={4}>*/}
-                    {/*    <Card style={{margin: 20}}>*/}
-                    {/*        <CardHeader title={"Preliminary round"} align={"center"} titleTypographyProps={{variant: 'h7'}}*/}
-                    {/*        />*/}
-                    {/*        <CardContent>*/}
-                    {/*            <table className="table">*/}
-                    {/*                <TableBody>*/}
-                    {/*                    <TableRow>*/}
-                    {/*                        <TableCell align={"right"}>Teams</TableCell>*/}
-                    {/*                        <TableCell>as needed</TableCell>*/}
-                    {/*                    </TableRow>*/}
-                    {/*                    <TableRow>*/}
-                    {/*                        <TableCell align={"right"}>Participation</TableCell>*/}
-                    {/*                        <TableCell>bottom teams by coefficients as needed</TableCell>*/}
-                    {/*                    </TableRow>*/}
-                    {/*                    <TableRow>*/}
-                    {/*                        <TableCell align={"right"}>Format</TableCell>*/}
-                    {/*                        <TableCell>2 knockout games</TableCell>*/}
-                    {/*                    </TableRow>*/}
-                    {/*                    <TableRow>*/}
-                    {/*                        <TableCell align={"right"}>Winners</TableCell>*/}
-                    {/*                        <TableCell>promote to Qualifying round</TableCell>*/}
-                    {/*                    </TableRow>*/}
-                    {/*                    <TableRow>*/}
-                    {/*                        <TableCell align={"right"}>Ties rules</TableCell>*/}
-                    {/*                        <TableCell>*/}
-                    {/*                            <ol>*/}
-                    {/*                                <li>highest coefficients win</li>*/}
-                    {/*                                <li>the winner is picked at random</li>*/}
-                    {/*                            </ol>*/}
-                    {/*                        </TableCell>*/}
-                    {/*                    </TableRow>*/}
-                    {/*                </TableBody>*/}
-                    {/*            </table>*/}
-                    {/*        </CardContent>*/}
-                    {/*    </Card>*/}
-                    {/*</Grid>*/}
 
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>

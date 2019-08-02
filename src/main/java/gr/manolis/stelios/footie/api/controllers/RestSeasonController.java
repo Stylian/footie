@@ -96,6 +96,10 @@ public class RestSeasonController {
                 if ("PLAYING".equals(round.getValue())) {
 
                     switch (round.getKey()) {
+                        case "quals0":
+                            qualsService.endQualsRound("0");
+                            restOperationsController.seedQualsRound("1");
+                            break;
                         case "quals1":
                             qualsService.endQualsRound("1");
                             restOperationsController.seedQualsRound("2");
@@ -114,7 +118,7 @@ public class RestSeasonController {
                             break;
                         case "playoffs":
                             Season season = serviceUtils.loadCurrentSeason();
-                            PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+                            PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
                             if(playoffsRound.getQuarterMatchups().get(0).getWinner() == null
                                     || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
                                 break;

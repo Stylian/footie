@@ -59,7 +59,7 @@ public class ViewsService {
 
 		Season season = getSeason(year);
 		List<Round> rounds = season.getRounds();
-		return (GroupsRound) rounds.get(round + 1);
+		return (GroupsRound) rounds.get(round + 2);
 
 	}
 
@@ -73,7 +73,7 @@ public class ViewsService {
 
 		Season season = getSeason(year);
 		List<Round> rounds = season.getRounds();
-		return (PlayoffsRound) rounds.get(4);
+		return (PlayoffsRound) rounds.get(5);
 
 	}
 

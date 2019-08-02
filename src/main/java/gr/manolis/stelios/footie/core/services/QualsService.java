@@ -41,7 +41,7 @@ public class QualsService {
 		logger.info("seed quals round 1");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		seedQualsRound(season, roundQuals1);
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -55,8 +55,8 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
-		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
 
 		// must add winners from roundQuals1
 		List<Matchup> matchups = roundQuals1.getMatchups();
@@ -81,7 +81,7 @@ public class QualsService {
 		logger.info("set up quals round 1");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(0);
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		setUpQualsRound(roundQuals1);
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -94,7 +94,7 @@ public class QualsService {
 		logger.info("set up quals round 2");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(1);
+		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
 		setUpQualsRound(roundQuals2);
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -152,12 +152,14 @@ public class QualsService {
 		Collections.shuffle(weakQueue);
 
 		MatchupTieStrategy tieStrategy = MatchupTieStrategy.REPLAY_GAMES;
-		if (qualsRound.getNum() == 1) {
+		if (qualsRound.getNum() == 2) {
 			if (qualsRound.getSeason().getSeasonYear() > 1) {
 				tieStrategy = MatchupTieStrategy.HIGHEST_COEFFICIENT_WINS;
 			}
-		}else {
+		}else if(qualsRound.getNum() == 1) {
 			tieStrategy = MatchupTieStrategy.REPLAY_GAMES_ONCE;
+		}else { // preliminary
+			// TODO
 		}
 
 		while (strongQueue.size() > 0) {
@@ -177,12 +179,12 @@ public class QualsService {
 
 		int round = Integer.parseInt(strRound);
 
-		int pointsAwarded = round < 2 ? Rules.PROMOTION_POINTS_QUALS_1 : Rules.PROMOTION_POINTS_QUALS_2;
+		int pointsAwarded = round < 2 ? Rules.PROMOTION_POINTS_QUALS_1 : Rules.PROMOTION_POINTS_QUALS_2; // TODO preliminar
 
 		Season season = serviceUtils.loadCurrentSeason();
 
 		// add coeffs to quals winners
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(round-1);
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(round);
 		for (Matchup matchup : roundQuals1.getMatchups()) {
 			matchup.getWinner().getStatsForGroup(season).addPoints(pointsAwarded);
 			Utils.addGamePointsForMatchup(season, matchup);

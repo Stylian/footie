@@ -91,14 +91,14 @@ public class ServiceUtils {
 	public QualsRound getQualRound(Season season, int round) {
 
 		List<Round> rounds = season.getRounds();
-		return (QualsRound) rounds.get(round - 1);
+		return (QualsRound) rounds.get(round);
 
 	}
 	
 	public GroupsRound getGroupsRound(Season season, int round) {
 		
 		List<Round> rounds = season.getRounds();
-		return (GroupsRound) rounds.get(round + 1);
+		return (GroupsRound) rounds.get(round + 2);
 		
 	}
 

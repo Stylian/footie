@@ -79,6 +79,7 @@ public class SeasonService {
 			return season;
 		}
 
+		QualsRound preliminary = new QualsRound(season, "quals0", 0);
 		QualsRound qualsRound1 = new QualsRound(season, "quals1", 1);
 		QualsRound qualsRound2 = new QualsRound(season, "quals2", 2);
 		GroupsRound groupsRound12 = new GroupsRound(season, "groups1", 3);
@@ -98,6 +99,10 @@ public class SeasonService {
 		List<Team> quals1Teams = teamsSeeded.get(Seed.TO_QUALS_1);
 		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
 		qualsRound1.setTeams(quals1Teams);
+
+		List<Team> quals0Teams = teamsSeeded.get(Seed.TO_PRELIMINARY);
+		logger.info("teams start from preliminaries: " + Utils.toString(quals0Teams));
+		preliminary.setTeams(quals0Teams);
 
 		season.setStage(Stage.PLAYING);
 		
@@ -175,6 +180,7 @@ public class SeasonService {
 		map.put(Seed.TO_GROUPS, groupsTeams);
 		map.put(Seed.TO_QUALS_1, quals1Teams);
 		map.put(Seed.TO_QUALS_2, teamsClone);
+		map.put(Seed.TO_PRELIMINARY, Collections.emptyList()); // TODO
 
 		return map;
 	}
@@ -183,7 +189,7 @@ public class SeasonService {
 		logger.info("closing down season, calculating coefficients");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
 
 		Team winner = finalsMatchup.getWinner();
@@ -195,7 +201,7 @@ public class SeasonService {
 
 		season.setWinner(winner);
 		season.setRunnerUp(runnerUp);
-		season.getRounds().get(4).setStage(Stage.FINISHED);
+		season.getRounds().get(5).setStage(Stage.FINISHED);
 		season.setStage(Stage.FINISHED);
 
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());

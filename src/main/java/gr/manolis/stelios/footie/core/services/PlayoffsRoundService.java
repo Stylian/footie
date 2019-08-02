@@ -41,7 +41,7 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = new PlayoffsRound(season, "playoffs");
 
 		// add winners from roundof8
-		GroupsRound groupsRoundOf8 = (GroupsRound) season.getRounds().get(3);
+		GroupsRound groupsRoundOf8 = (GroupsRound) season.getRounds().get(4);
 
 		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeams();
 		logger.info("teams from group A:" + Utils.toString(teamsA));
@@ -72,7 +72,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		playoffsRound.buildSemisMatchups();
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -86,7 +86,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		playoffsRound.buildFinalsMatchup();
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -101,7 +101,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
 			// average out points per matchup
 			Utils.addGamePointsForMatchup(season, matchup);
@@ -118,7 +118,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
 			// average out points per matchup
 			Utils.addGamePointsForMatchup(season, matchup);
@@ -136,7 +136,7 @@ public class PlayoffsRoundService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(4);
+		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
 		finalsMatchup.getWinner().getStatsForGroup(season).addPoints(Rules.POINTS_WINNING_THE_LEAGUE);
 		if (!finalsMatchup.getTeamHome().equals(finalsMatchup.getWinner())) {

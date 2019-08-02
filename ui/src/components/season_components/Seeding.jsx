@@ -77,7 +77,7 @@ class Seeding extends Component {
                                                         return (
                                                             <TableRow className={"teamClicker"} data-teamid={team.id}
                                                                       onClick={this.goToTeam}
-                                                                      style={{
+                                                                      style={ this.props.year == 1 ? {} : {
                                                                           backgroundColor:
                                                                               (team.seed === "CHAMPION") ? '#d9edf7' :
                                                                                   (team.seed === "TO_GROUPS") ? '#d9edf7' :
@@ -118,7 +118,7 @@ class Seeding extends Component {
                                                         return (
                                                             <TableRow className={"teamClicker"} data-teamid={team.id}
                                                                       onClick={this.goToTeam}
-                                                                      style={{
+                                                                      style={ this.props.year == 1 ? {} : {
                                                                           backgroundColor:
                                                                               (team.seed === "CHAMPION") ? '#d9edf7' :
                                                                                   (team.seed === "TO_GROUPS") ? '#d9edf7' :

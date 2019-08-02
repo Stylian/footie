@@ -104,6 +104,10 @@ class Coefficients extends Component {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     }
 
+    goToSeason = (event, newValue) => {
+        window.location.href = "/season/" + event.currentTarget.dataset.season;
+    }
+
     render() {
 
         let teams = [...this.state.teams];
@@ -203,7 +207,8 @@ class Coefficients extends Component {
                                         <TableBody>
                                             {this.state.seasons.map((item, index) =>
                                                 <TableRow>
-                                                    <TableCell align="right">{item.seasonYear}</TableCell>
+                                                    <TableCell align="right" className={"teamClicker"} onClick={this.goToSeason}
+                                                               data-season={item.seasonYear}>{item.seasonYear}</TableCell>
                                                     <TableCell align="left" className={"teamClicker"}
                                                                data-teamid={item.winner.id}
                                                                onClick={this.goToTeam}>
