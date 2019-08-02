@@ -200,9 +200,9 @@ class Admin extends Component {
 
     render() {
         return (
-            <Box width={1300}>
-                <Paper style={{margin: 20}} elevation={20}>
-                    <LeagueToolbar pageTitle={this.state.pageTitle}/>
+            <Paper style={{margin: 20}} elevation={20}>
+                <LeagueToolbar pageTitle={this.state.pageTitle}/>
+                <Box width={1100}>
                     <Grid container spacing={1}>
                         <Grid item sm={4}>
                             <Card style={{margin: 20}}>
@@ -287,9 +287,10 @@ class Admin extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
+
                     </Grid>
-                </Paper>
-            </Box>
+                </Box>
+            </Paper>
         );
     }
 }

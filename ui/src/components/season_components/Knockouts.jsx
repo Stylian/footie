@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {AppBar, Box, Paper, Tab, Tabs} from "@material-ui/core";
-import QualsSeeding from "./quals_components/QualsSeeding";
-import QualsMatches from "./quals_components/QualsMatches";
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
+import GroupsSeeding from "./groups_components/GroupsSeeding";
+import GroupsMatches from "./groups_components/GroupsMatches";
+import GroupsDisplay from "./groups_components/GroupsDisplay";
+import Rules from "./knockout_components/Rules";
+import Playoffs from "./Playoffs";
 
-class Quals extends Component {
+class Knockouts extends Component {
 
     constructor(props) {
         super(props);
@@ -16,7 +19,7 @@ class Quals extends Component {
     }
 
     componentDidMount() {
-        fetch("/rest/persist/tabs/quals" + this.props.round + "/" + this.props.year)
+        fetch("/rest/persist/tabs/knockouts/" + this.props.year)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -40,10 +43,9 @@ class Quals extends Component {
             )
     }
 
-
     handleChange = (event, newValue) => {
 
-        fetch("/rest/persist/tabs/quals" + this.props.round + "/" + this.props.year, {
+        fetch("/rest/persist/tabs/knockouts/" + this.props.year, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: newValue
@@ -77,14 +79,12 @@ class Quals extends Component {
                 <Box style={{margin: 30, "margin-top": 10}}>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Overview"/>
-                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
-                                 label="Matches"/>
+                            <Tab label="Rules"/>
+                            <Tab label="Brackets"/>
                         </Tabs>
                     </AppBar>
-                    {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={this.props.round}
-                                                                 haveToSetUpTeams={this.props.stage === "ON_PREVIEW"}/>}
-                    {this.state.tabActive === 1 && <QualsMatches year={this.props.year} round={this.props.round}/>}
+                    {this.state.tabActive === 0 && <Rules/>}
+                    {this.state.tabActive === 1 && <Playoffs year={this.props.year} round={1}/>}
                 </Box>
             ) : (
                 <span></span>
@@ -94,4 +94,4 @@ class Quals extends Component {
 }
 
 
-export default Quals;
+export default Knockouts;

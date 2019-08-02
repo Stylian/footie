@@ -90,12 +90,12 @@ class GroupsSeeding extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={1200}>
+                <Box width={1600}>
                     {this.state.haveToSetUpTeams ? (
                         <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
                     ) : ''}
                     <Grid container spacing={1}>
-                        <Grid item sm>
+                        <Grid item sm={2.5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -124,7 +124,7 @@ class GroupsSeeding extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm>
+                        <Grid item sm={2.5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -154,7 +154,7 @@ class GroupsSeeding extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm>
+                        <Grid item sm={2.5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -178,6 +178,53 @@ class GroupsSeeding extends Component {
                                                         <TableCell align="right">{team.coefficients}</TableCell>
                                                     </TableRow>)
                                             })}
+                                        </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
+                        <Grid item sm={4.5}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table">
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Teams</TableCell>
+                                                <TableCell>12</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Participation</TableCell>
+                                                <TableCell>
+                                                    <ul>
+                                                        <li>last season's 2 finalists</li>
+                                                        <li>1st team by coefficients</li>
+                                                        <li>9 winners from the play-off round</li>
+                                                    </ul>
+                                                </TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Format</TableCell>
+                                                <TableCell>4 groups, round robin</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Winners</TableCell>
+                                                <TableCell>top 2 promote to the 2nd Group stage</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Order rules</TableCell>
+                                                <TableCell>
+                                                    <ol>
+                                                        <li>most points</li>
+                                                        <li>best goal difference</li>
+                                                        <li>most goals scored</li>
+                                                        <li>most wins</li>
+                                                        <li>alphabetical?</li>
+                                                    </ol>
+                                                </TableCell>
+                                            </TableRow>
                                         </TableBody>
                                     </table>
                                 </CardContent>

@@ -88,12 +88,12 @@ class QualsSeeding extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={800}>
+                <Box width={1600}>
                     {this.state.haveToSetUpTeams ? (
                         <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
                     ) : ''}
                     <Grid container spacing={1}>
-                        <Grid item sm>
+                        <Grid item sm={3}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Seeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -122,7 +122,7 @@ class QualsSeeding extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm>
+                        <Grid item sm={3}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Unseeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -147,6 +147,110 @@ class QualsSeeding extends Component {
                                                     </TableRow>)
                                             })}
                                         </TableBody>
+                                    </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
+                        <Grid item sm={4}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <table className="table">
+                                        {this.props.round == 1 ? (
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Teams</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>26</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Participation</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>5th to as needed teams by coefficients</li>
+                                                            <li>winners from the preliminary round</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Format</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>2 knockout games</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Winners</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>promote to the Play-off round</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Ties rules</TableCell>
+                                                    <TableCell>
+                                                        <ol>
+                                                            <li>highest coefficients win</li>
+                                                            <li>the games are re-played</li>
+                                                        </ol>
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        ) : (
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Teams</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>18</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Participation</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>last season's 2 semifinalists</li>
+                                                            <li>2nd to 4th teams by coefficients</li>
+                                                            <li>13 winners from the qualifying round</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Format</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>2 knockout games</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Winners</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>promote to the 1st Group stage</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Ties rules</TableCell>
+                                                    <TableCell>
+                                                        <ol>
+                                                            <li>the games are re-played</li>
+                                                            <li>highest coefficients win</li>
+                                                            <li>the games are re-played</li>
+                                                        </ol>
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        )}
                                     </table>
                                 </CardContent>
                             </Card>

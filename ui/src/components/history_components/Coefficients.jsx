@@ -112,11 +112,11 @@ class Coefficients extends Component {
         let rightSide = teams;
 
         return (
-            <Box width={1400}>
+            <Box width={1700}>
                 <Paper elevation={12} style={{margin: 20}}>
 
                     <Grid container spacing={1}>
-                        <Grid item sm={6}>
+                        <Grid item sm={5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -185,7 +185,7 @@ class Coefficients extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm={3}>
+                        <Grid item sm={4.5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Past Finals"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -197,6 +197,7 @@ class Coefficients extends Component {
                                                 <TableCell>Season</TableCell>
                                                 <TableCell>Winner</TableCell>
                                                 <TableCell>Runner-up</TableCell>
+                                                <TableCell align="center" colSpan={2}>Semifinalists</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -211,6 +212,8 @@ class Coefficients extends Component {
                                                                data-teamid={item.runnerUp.id}
                                                                onClick={this.goToTeam}>
                                                         {item.runnerUp != null ? item.runnerUp.name : ""}</TableCell>
+                                                    <TableCell>Netherlands</TableCell>
+                                                    <TableCell>Argentina</TableCell>
                                                 </TableRow>
                                             )}
                                         </TableBody>
@@ -219,7 +222,7 @@ class Coefficients extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm={3}>
+                        <Grid item sm={2.5}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Best Performers"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
