@@ -208,6 +208,7 @@ public class RestSeasonController {
         } else { // just for viewing
             teamsInRounds = new HashMap<>();
             teamsInRounds.put(Seed.TO_QUALS_1, teams);
+            teamsInRounds.put(Seed.TO_PRELIMINARY, Collections.emptyList());
             teamsInRounds.put(Seed.TO_QUALS_2, Collections.emptyList());
             teamsInRounds.put(Seed.TO_GROUPS, Collections.emptyList());
             teamsInRounds.put(Seed.CHAMPION, Collections.emptyList());
@@ -240,7 +241,12 @@ public class RestSeasonController {
 
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
-            teamsStrong = qr.getTeams();
+            if(round == 1) {
+                teamsStrong = qr.getTeams().subList(0, 13);
+                teamsWeak = qr.getTeams().subList(13, qr.getTeams().size());
+            }else {
+                teamsStrong = qr.getTeams();
+            }
         }
 
         List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
@@ -465,7 +471,6 @@ public class RestSeasonController {
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Map<Seed, List<Team>> teamsInRounds) {
 
-        List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
         if(season.getSeasonYear() > 1) {
@@ -479,6 +484,7 @@ public class RestSeasonController {
             teamDTO.setTrophies(team.getTrophies()); // why you not work on your own ?
 
             if(season.getSeasonYear() > 1) {
+                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
                 int p1 = 0;
                 for(Season season1 : seasonsPast) {
                     p1 += team.getStatsForGroup(season1).getPoints();
@@ -503,7 +509,6 @@ public class RestSeasonController {
     }
 
     private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Seed seed) {
-        List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear());
 
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
@@ -512,6 +517,7 @@ public class RestSeasonController {
             teamDTO.setSeed(seed);
 
             if(season.getSeasonYear() > 1) {
+                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
                 int p1 = 0;
                 for(Season season1 : seasonsPast) {
                     p1 += team.getStatsForGroup(season1).getPoints();

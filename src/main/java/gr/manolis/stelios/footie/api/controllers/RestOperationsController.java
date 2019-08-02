@@ -57,8 +57,11 @@ public class RestOperationsController {
         Season season = operationsService.createSeason();
         operationsService.setUpSeason();
 
-        // TODO preliminar
-        operationsService.seedQualsRound1();
+        if(season.getSeasonYear() == 1) {
+            operationsService.seedQualsRound1();
+        }else {
+            operationsService.seedQualsRound0();
+        }
 
         return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
     }
@@ -70,17 +73,14 @@ public class RestOperationsController {
         return new RestResponse(RestResponse.SUCCESS, "set " + season.getName());
     }
 
-    // maybe remove?
     @PostMapping("/quals/{num}/seed")
     public RestResponse seedQualsRound(@PathVariable String num) {
 
         int qn = NumberUtils.toInt(num);
 
-        if (qn > 2 || qn < 0) {
-            return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
-        }
-
-        QualsRound round = (qn == 1) ? operationsService.seedQualsRound1() : operationsService.seedQualsRound2();
+        QualsRound round = (qn == 1) ? operationsService.seedQualsRound1()
+                : (qn == 2 ? operationsService.seedQualsRound2()
+                : operationsService.seedQualsRound0());
         return new RestResponse(RestResponse.SUCCESS, "seeded " + round.getName());
 
     }
@@ -90,11 +90,9 @@ public class RestOperationsController {
 
         int qn = NumberUtils.toInt(num);
 
-        if (qn > 2 || qn < 0) {
-            return new RestResponse(RestResponse.ERROR, "only supporting 2 qualification rounds");
-        }
-
-        QualsRound round = (qn == 1) ? operationsService.setQualsRound1() : operationsService.setQualsRound2();
+        QualsRound round = (qn == 1) ? operationsService.setQualsRound1()
+                : (qn == 2 ? operationsService.setQualsRound2()
+                : operationsService.setQualsRound0());
         return new RestResponse(RestResponse.SUCCESS, "set " + round.getName());
 
     }

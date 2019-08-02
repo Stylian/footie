@@ -35,7 +35,6 @@ public class RestGroupsController {
 
         RobinGroup group = serviceUtils.loadRobinGroup(groupId);
 
-        // TODO
         return robinGroupMapper.toDTO(group);
     }
 }

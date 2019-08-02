@@ -207,11 +207,19 @@ class GroupsSeeding extends Component {
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell align={"right"}>Format</TableCell>
-                                                <TableCell>4 groups, round robin</TableCell>
+                                                <TableCell>
+                                                    <ul>
+                                                        <li>4 groups, round robin</li>
+                                                    </ul>
+                                                </TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell align={"right"}>Winners</TableCell>
-                                                <TableCell>top 2 promote to the 2nd Group stage</TableCell>
+                                                <TableCell>
+                                                    <ul>
+                                                        <li>top 2 promote to the 2nd Group stage</li>
+                                                    </ul>
+                                                </TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell align={"right"}>Order rules</TableCell>

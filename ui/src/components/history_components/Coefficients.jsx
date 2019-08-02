@@ -37,7 +37,6 @@ class Coefficients extends Component {
                     this.setState(state => {
                         return {
                             ...state,
-                            isLoaded: true,
                             teams: result
                         }
                     });
@@ -83,7 +82,6 @@ class Coefficients extends Component {
                     this.setState(state => {
                         return {
                             ...state,
-                            isLoaded: true,
                             teamsWithTrophies: result
                         }
                     });
@@ -115,7 +113,7 @@ class Coefficients extends Component {
         let leftSide = teams.splice(0, half_length);
         let rightSide = teams;
 
-        return (
+        return ( this.state.isLoaded ? (
             <Box width={1700}>
                 <Paper elevation={12} style={{margin: 20}}>
 
@@ -217,8 +215,14 @@ class Coefficients extends Component {
                                                                data-teamid={item.runnerUp.id}
                                                                onClick={this.goToTeam}>
                                                         {item.runnerUp != null ? item.runnerUp.name : ""}</TableCell>
-                                                    <TableCell>Netherlands</TableCell>
-                                                    <TableCell>Argentina</TableCell>
+                                                    <TableCell align="left" className={"teamClicker"}
+                                                               data-teamid={item.semifinalist1.id}
+                                                               onClick={this.goToTeam}>
+                                                        {item.semifinalist1 != null ? item.semifinalist1.name : ""}</TableCell>
+                                                    <TableCell align="left" className={"teamClicker"}
+                                                               data-teamid={item.semifinalist2.id}
+                                                               onClick={this.goToTeam}>
+                                                        {item.semifinalist2 != null ? item.semifinalist2.name : ""}</TableCell>
                                                 </TableRow>
                                             )}
                                         </TableBody>
@@ -260,7 +264,7 @@ class Coefficients extends Component {
                     </Grid>
                 </Paper>
             </Box>
-
+            ) : (null)
         );
     }
 }

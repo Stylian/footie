@@ -55,6 +55,14 @@ public class OperationsService {
 		return seasonService.setUpSeason();
 	}
 
+	public QualsRound seedQualsRound0() {
+		return qualsService.seedPreliminary();
+	}
+
+	public QualsRound setQualsRound0() {
+		return qualsService.setUpPreliminary();
+	}
+
 	public QualsRound seedQualsRound1() {
 		return qualsService.seedUpQualsRound1();
 	}

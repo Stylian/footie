@@ -37,16 +37,43 @@ public class QualsService {
 	@Autowired
 	private ServiceUtils serviceUtils;
 
-	public QualsRound seedUpQualsRound1() {
-		logger.info("seed quals round 1");
+	public QualsRound seedPreliminary() {
+		logger.info("seed preliminary round");
 
 		Season season = serviceUtils.loadCurrentSeason();
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
-		seedQualsRound(season, roundQuals1);
+		QualsRound preliminary = (QualsRound) season.getRounds().get(0);
+		seedQualsRound(season, preliminary);
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao.save(season);
 		
+		return preliminary;
+	}
+
+	public QualsRound seedUpQualsRound1() {
+		logger.info("seed quals round 1");
+
+		Season season = serviceUtils.loadCurrentSeason();
+
+		QualsRound preliminaries = (QualsRound) season.getRounds().get(0);
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
+
+		// must add winners from preliminaries
+		List<Matchup> matchups = preliminaries.getMatchups();
+		List<Team> round0Winners = new ArrayList<>();
+
+		for (Matchup matchup : matchups) {
+			round0Winners.add(matchup.getWinner());
+		}
+
+		roundQuals1.getTeams().addAll(round0Winners);
+		seedQualsRound(season, roundQuals1);
+
+		preliminaries.setStage(Stage.FINISHED);
+
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+
 		return roundQuals1;
 	}
 
@@ -77,16 +104,29 @@ public class QualsService {
 		return roundQuals2;
 	}
 
+	public QualsRound setUpPreliminary() {
+		logger.info("set up Preliminary round");
+
+		Season season = serviceUtils.loadCurrentSeason();
+		QualsRound preliminary = (QualsRound) season.getRounds().get(0);
+		setUpQualsRound(preliminary);
+		
+		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		dao.save(season);
+		
+		return preliminary;
+	}
+
 	public QualsRound setUpQualsRound1() {
 		logger.info("set up quals round 1");
 
 		Season season = serviceUtils.loadCurrentSeason();
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		setUpQualsRound(roundQuals1);
-		
+
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao.save(season);
-		
+
 		return roundQuals1;
 	}
 
@@ -152,14 +192,14 @@ public class QualsService {
 		Collections.shuffle(weakQueue);
 
 		MatchupTieStrategy tieStrategy = MatchupTieStrategy.REPLAY_GAMES;
-		if (qualsRound.getNum() == 2) {
+		if (qualsRound.getNum() == 1) {
 			if (qualsRound.getSeason().getSeasonYear() > 1) {
 				tieStrategy = MatchupTieStrategy.HIGHEST_COEFFICIENT_WINS;
 			}
-		}else if(qualsRound.getNum() == 1) {
+		}else if(qualsRound.getNum() == 2) {
 			tieStrategy = MatchupTieStrategy.REPLAY_GAMES_ONCE;
 		}else { // preliminary
-			// TODO
+			tieStrategy = MatchupTieStrategy.HIGHEST_COEFFICIENT_WINS_THEN_RANDOM;
 		}
 
 		while (strongQueue.size() > 0) {
@@ -179,13 +219,16 @@ public class QualsService {
 
 		int round = Integer.parseInt(strRound);
 
-		int pointsAwarded = round < 2 ? Rules.PROMOTION_POINTS_QUALS_1 : Rules.PROMOTION_POINTS_QUALS_2; // TODO preliminar
+		int pointsAwarded =
+				round == 1 ? Rules.PROMOTION_POINTS_QUALS_1 :
+						(round == 2 ? Rules.PROMOTION_POINTS_QUALS_2
+								: 0);
 
 		Season season = serviceUtils.loadCurrentSeason();
 
 		// add coeffs to quals winners
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(round);
-		for (Matchup matchup : roundQuals1.getMatchups()) {
+		QualsRound roundQuals = (QualsRound) season.getRounds().get(round);
+		for (Matchup matchup : roundQuals.getMatchups()) {
 			matchup.getWinner().getStatsForGroup(season).addPoints(pointsAwarded);
 			Utils.addGamePointsForMatchup(season, matchup);
 		}

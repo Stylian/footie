@@ -1,14 +1,12 @@
 
 TODO bugs
-
-TODO 0.8
-in past winners display semifinalists
-
-
+semifinalists fail to map?
+in season manyToOne for winners etc should be oneToOne?
 
 TODO 0.9
-support for more teams?
-adding preliminary round?
+to add coeffs gained in rules
+
+adding preliminary round
 
 3 to groups, top coeff + 2 finalists
 18 to play q2
@@ -17,3 +15,6 @@ adding preliminary round?
 
 = 34 -> preliminary to get to 34
 reddish color for preliminaries
+
+TODO 0.91
+support for more teams?

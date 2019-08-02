@@ -56,14 +56,14 @@ public class GameService {
 
         }
 
-        if(gamesRemaining.size() == 0) {
+        if (gamesRemaining.size() == 0) {
             return null;
-        }else {
-            List<Game> games1 = gamesRemaining.stream().filter( g -> g.getDay() == 1).collect(Collectors.toList());
-            List<Game> games2 = gamesRemaining.stream().filter( g -> g.getDay() == 2).collect(Collectors.toList());
-            List<Game> games3 = gamesRemaining.stream().filter( g -> g.getDay() == 3).collect(Collectors.toList());
-            List<Game> games4 = gamesRemaining.stream().filter( g -> g.getDay() == 4).collect(Collectors.toList());
-            List<Game> games5 = gamesRemaining.stream().filter( g -> g.getDay() == -1).collect(Collectors.toList());
+        } else {
+            List<Game> games1 = gamesRemaining.stream().filter(g -> g.getDay() == 1).collect(Collectors.toList());
+            List<Game> games2 = gamesRemaining.stream().filter(g -> g.getDay() == 2).collect(Collectors.toList());
+            List<Game> games3 = gamesRemaining.stream().filter(g -> g.getDay() == 3).collect(Collectors.toList());
+            List<Game> games4 = gamesRemaining.stream().filter(g -> g.getDay() == 4).collect(Collectors.toList());
+            List<Game> games5 = gamesRemaining.stream().filter(g -> g.getDay() == -1).collect(Collectors.toList());
 
             List<Game> gamesRemaining2 = new ArrayList<>();
             gamesRemaining2.addAll(games1);
@@ -177,28 +177,24 @@ public class GameService {
 
         } else { // Teams tied
 
-            switch(matchup.getTieStrategy()) {
+            switch (matchup.getTieStrategy()) {
                 case REPLAY_GAMES_ONCE:
-                    if(matchup.getGames().size() < 3) {
+                    if (matchup.getGames().size() < 3) {
                         games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
                         games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
                         break;
-                    }else {
+                    } else {
                         // fall through if coeffs are tied
                     }
-                case HIGHEST_COEFFICIENT_WINS:
-                    Stats teamHomeStats = new Stats();
-                    serviceUtils.loadAllSeasons().forEach( (s) -> teamHomeStats.addStats(teamHome.getStatsForGroup(s)));
-                    Stats teamAwayStats = new Stats();
-                    serviceUtils.loadAllSeasons().forEach( (s) -> teamAwayStats.addStats(teamAway.getStatsForGroup(s)));
-
-                    if(teamHomeStats.getPoints() > teamAwayStats.getPoints()) {
-                        matchup.setWinner(teamHome);
-                        break;
-                    }else if(teamHomeStats.getPoints() < teamAwayStats.getPoints()) {
-                        matchup.setWinner(teamAway);
-                        break;
+                case HIGHEST_COEFFICIENT_WINS_THEN_RANDOM:
+                    if (!highestCoeffWinsReturnFalseIfEqual(matchup, teamHome, teamAway)) {
+                        // pick winner at random
+                        matchup.setWinner(Math.random() > 0.5 ? teamHome : teamAway);
                     }
+                    break;
+                case HIGHEST_COEFFICIENT_WINS:
+                    if (highestCoeffWinsReturnFalseIfEqual(matchup, teamHome, teamAway))
+                        break;
                     // fall through if coeffs are tied
                 case REPLAY_GAMES:
                     games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
@@ -211,6 +207,22 @@ public class GameService {
 
         }
 
+    }
+
+    private boolean highestCoeffWinsReturnFalseIfEqual(Matchup matchup, Team teamHome, Team teamAway) {
+        Stats teamHomeStats = new Stats();
+        serviceUtils.loadAllSeasons().forEach((s) -> teamHomeStats.addStats(teamHome.getStatsForGroup(s)));
+        Stats teamAwayStats = new Stats();
+        serviceUtils.loadAllSeasons().forEach((s) -> teamAwayStats.addStats(teamAway.getStatsForGroup(s)));
+
+        if (teamHomeStats.getPoints() > teamAwayStats.getPoints()) {
+            matchup.setWinner(teamHome);
+            return true;
+        } else if (teamHomeStats.getPoints() < teamAwayStats.getPoints()) {
+            matchup.setWinner(teamAway);
+            return true;
+        }
+        return false;
     }
 
 }

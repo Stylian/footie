@@ -56,6 +56,12 @@ public class SpringAppTest {
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");
 
+		if(seasonNum > 1) {
+			checkURL("/rest/ops/quals/0/set", "{status=success, message=set quals0}");
+			checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
+			checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		}
+
 		checkURL("/rest/ops/quals/1/set", "{status=success, message=set quals1}");
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
 		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");

@@ -32,6 +32,12 @@ public class Season extends Group {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team runnerUp;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team semifinalist1;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team semifinalist2;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Round> rounds;
 
@@ -88,5 +94,21 @@ public class Season extends Group {
 
 	public void setRunnerUp(Team runnerUp) {
 		this.runnerUp = runnerUp;
+	}
+
+	public Team getSemifinalist1() {
+		return semifinalist1;
+	}
+
+	public void setSemifinalist1(Team semifinalist1) {
+		this.semifinalist1 = semifinalist1;
+	}
+
+	public Team getSemifinalist2() {
+		return semifinalist2;
+	}
+
+	public void setSemifinalist2(Team semifinalist2) {
+		this.semifinalist2 = semifinalist2;
 	}
 }

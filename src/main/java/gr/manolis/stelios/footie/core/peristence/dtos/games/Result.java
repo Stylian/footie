@@ -6,8 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * TODO could be made unique goals pair
- * 
+ *
  * @author stylianos.chatzimano
  *
  */

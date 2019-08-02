@@ -55,7 +55,7 @@ class Seeding extends Component {
 
         return (
             this.state.isLoaded ? (
-                <Box width={900}>
+                <Box width={1000}>
                     <Grid container spacing={1}>
                         <Grid item sm={9}>
                             <Card style={{margin: 20}}>
@@ -82,7 +82,8 @@ class Seeding extends Component {
                                                                               (team.seed === "CHAMPION") ? '#d9edf7' :
                                                                                   (team.seed === "TO_GROUPS") ? '#d9edf7' :
                                                                                       (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                                          '#fdf9e8'
+                                                                                          (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
+                                                                                              '#f2dede'
                                                                       }}
                                                             >
                                                                 <TableCell align="right">{index + 1}</TableCell>
@@ -123,7 +124,8 @@ class Seeding extends Component {
                                                                               (team.seed === "CHAMPION") ? '#d9edf7' :
                                                                                   (team.seed === "TO_GROUPS") ? '#d9edf7' :
                                                                                       (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                                          '#fdf9e8'
+                                                                                          (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
+                                                                                             '#f2dede'
                                                                       }}
                                                             >
                                                                 <TableCell

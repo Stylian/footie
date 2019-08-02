@@ -127,6 +127,8 @@ public class SeasonService {
 		List<Team> groupsTeams = new ArrayList<>();
 		Team formerChampion = null;
 		List<Team> quals1Teams = new ArrayList<>();
+		List<Team> quals2Teams = new ArrayList<>();
+		List<Team> preliminaries = new ArrayList<>();
 
 		if (season.getSeasonYear() == 1) {
 
@@ -139,6 +141,8 @@ public class SeasonService {
 				quals1Teams.add(teamsClone.remove(0));
 			}
 
+			quals2Teams = teamsClone;
+
 			logger.info("1st season no teams go directly to groups");
 
 		} else {
@@ -150,37 +154,52 @@ public class SeasonService {
 				Collections.sort(teamsClone, new CoefficientsRangeOrdering(seasonsPast));
 			}
 
-			// former champion promotes directly
+			// former finalists promote directly
 			formerChampion = previousSeason.getWinner();
 			groupsTeams.add(formerChampion);
 			teamsClone.remove(formerChampion);
+			groupsTeams.add(previousSeason.getRunnerUp());
+			teamsClone.remove(previousSeason.getRunnerUp());
 
 			// top 1 seeded team promotes directly to groups round excluding champion
 			groupsTeams.add(teamsClone.remove(0));
 
-			//former runner up should go to quals2 if not in groups already by moving it to top
-			Team formerRunnerUp = previousSeason.getRunnerUp();
-			if(!groupsTeams.contains(formerRunnerUp)) {
-				int itemPos = teamsClone.indexOf(formerRunnerUp);
+			//former semifinalists should go to quals2 if not in groups already by moving it to top
+			Team formerSemi1 = previousSeason.getSemifinalist1();
+			if(!groupsTeams.contains(formerSemi1)) {
+				int itemPos = teamsClone.indexOf(formerSemi1);
 				teamsClone.remove(itemPos);
-				teamsClone.add(0, formerRunnerUp);
+				teamsClone.add(0, formerSemi1);
+			}
+			Team formerSemi2 = previousSeason.getSemifinalist2();
+			if(!groupsTeams.contains(formerSemi2)) {
+				int itemPos = teamsClone.indexOf(formerSemi2);
+				teamsClone.remove(itemPos);
+				teamsClone.add(1, formerSemi2);
 			}
 
-			// 2nd round needs 20 teams so
-			int diff = teamsClone.size() - 20;
+			// 2nd round takes top 3 teams from coeffs
+			quals2Teams.add(teamsClone.remove(0));
+			quals2Teams.add(teamsClone.remove(0));
+			quals2Teams.add(teamsClone.remove(0));
+			quals2Teams.add(teamsClone.remove(0));
+			quals2Teams.add(teamsClone.remove(0));
 
-			// so bottom 2*diff go to 1st quals, others directly to 2nd quals
+			int diff = teamsClone.size() - 26;
+
+			// so bottom 2*diff go to preliminiaries, others directly to 1st quals
 			for (int index = 0; index < 2 * diff; index++) {
-				quals1Teams.add(teamsClone.remove(teamsClone.size() - 1));
+				preliminaries.add(teamsClone.remove(teamsClone.size() - 1));
 			}
 
+			quals1Teams = teamsClone;
 		}
 
 		map.put(Seed.CHAMPION, formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
 		map.put(Seed.TO_GROUPS, groupsTeams);
 		map.put(Seed.TO_QUALS_1, quals1Teams);
-		map.put(Seed.TO_QUALS_2, teamsClone);
-		map.put(Seed.TO_PRELIMINARY, Collections.emptyList()); // TODO
+		map.put(Seed.TO_QUALS_2, quals2Teams);
+		map.put(Seed.TO_PRELIMINARY, preliminaries);
 
 		return map;
 	}
@@ -190,6 +209,7 @@ public class SeasonService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
+
 		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
 
 		Team winner = finalsMatchup.getWinner();
@@ -198,6 +218,15 @@ public class SeasonService {
 
 		winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER));
 		runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP));
+
+		List<Team> semifinalists = new ArrayList<>();
+		for(Matchup matchup : playoffsRound.getSemisMatchups()) {
+			semifinalists.add(matchup.getTeamHome().equals(matchup.getWinner()) ?
+					matchup.getTeamAway() : matchup.getTeamHome());
+		}
+
+		season.setSemifinalist1(semifinalists.get(0));
+		season.setSemifinalist2(semifinalists.get(1));
 
 		season.setWinner(winner);
 		season.setRunnerUp(runnerUp);
