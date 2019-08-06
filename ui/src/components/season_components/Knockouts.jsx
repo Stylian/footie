@@ -79,12 +79,13 @@ class Knockouts extends Component {
                 <Box style={{margin: 30, "margin-top": 10}}>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Rules"/>
                             <Tab label="Brackets"/>
+                            <Tab label="Rules"/>
                         </Tabs>
                     </AppBar>
-                    {this.state.tabActive === 0 && <Rules/>}
-                    {this.state.tabActive === 1 && <Playoffs year={this.props.year} round={1}/>}
+
+                    {this.state.tabActive === 0 && <Playoffs year={this.props.year} round={1}/>}
+                    {this.state.tabActive === 1 && <Rules/>}
                 </Box>
             ) : (
                 <span></span>
