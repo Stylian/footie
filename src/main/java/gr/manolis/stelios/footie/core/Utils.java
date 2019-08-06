@@ -68,6 +68,13 @@ public class Utils {
 
 			}
 
+			// add points for goals scored
+			if(game.getHomeTeam().equals(matchup.getTeamHome())) {
+				matchPointsHome += game.getResult().getGoalsMadeByHomeTeam() * Rules.GOALS_POINTS;
+			}else {
+				matchPointsAway += game.getResult().getGoalsMadeByHomeTeam() * Rules.GOALS_POINTS;
+			}
+
 		}
 
 		matchup.getTeamHome().getStatsForGroup(group).addPoints(2 * matchPointsHome / numberOfGames);

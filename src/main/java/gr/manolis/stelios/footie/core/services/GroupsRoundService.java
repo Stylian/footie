@@ -277,6 +277,9 @@ public class GroupsRoundService {
                         } else if (groupGame.getResult().tie()) {
                             homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
                         }
+
+                        // add points for goals scored
+                        homeTeam.getStatsForGroup(season).addPoints(groupGame.getResult().getGoalsMadeByHomeTeam() * Rules.GOALS_POINTS);
                     }
 
                 }
@@ -296,6 +299,9 @@ public class GroupsRoundService {
                         } else if (groupGame.getResult().tie()) {
                             homeTeam.getStatsForGroup(season).addPoints(Rules.DRAW_POINTS);
                         }
+
+                        // add points for goals scored
+                        homeTeam.getStatsForGroup(season).addPoints(groupGame.getResult().getGoalsMadeByHomeTeam() * Rules.GOALS_POINTS);
                     }
                 }
                 break;

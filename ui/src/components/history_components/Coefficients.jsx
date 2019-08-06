@@ -144,7 +144,7 @@ class Coefficients extends Component {
                                                                       style={{
                                                                           backgroundColor:
                                                                               (index < 1) ? '#d9edf7' :
-                                                                                  (index < 6) ? '#dff0d8' :
+                                                                                  (index < 4) ? '#dff0d8' :
                                                                                       ''
                                                                       }}
                                                             >
