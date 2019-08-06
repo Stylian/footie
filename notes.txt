@@ -1,6 +1,6 @@
 
 TODO bugs
-semifinalists fail to map?
+
 in season manyToOne for winners etc should be oneToOne?
 
 TODO 0.9
