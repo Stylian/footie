@@ -202,6 +202,16 @@ class QualsSeeding extends Component {
                                                         </ol>
                                                     </TableCell>
                                                 </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>win: 1000</li>
+                                                            <li>draw: 500</li>
+                                                            <li>each goal scored: 100</li>
+                                                        </ul>
+                                                    </TableCell>
+                                                </TableRow>
                                             </TableBody>
 
                                         ) : this.props.round == 1 ? (
@@ -246,6 +256,17 @@ class QualsSeeding extends Component {
                                                             <li>highest coefficients win</li>
                                                             <li>the games are re-played</li>
                                                         </ol>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>promotion: 500</li>
+                                                            <li>win: 1000</li>
+                                                            <li>draw: 500</li>
+                                                            <li>each goal scored: 100</li>
+                                                        </ul>
                                                     </TableCell>
                                                 </TableRow>
                                             </TableBody>
@@ -293,6 +314,17 @@ class QualsSeeding extends Component {
                                                             <li>highest coefficients win</li>
                                                             <li>the games are re-played</li>
                                                         </ol>
+                                                    </TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                    <TableCell>
+                                                        <ul>
+                                                            <li>promotion: 700</li>
+                                                            <li>win: 1000</li>
+                                                            <li>draw: 500</li>
+                                                            <li>each goal scored: 100</li>
+                                                        </ul>
                                                     </TableCell>
                                                 </TableRow>
                                             </TableBody>

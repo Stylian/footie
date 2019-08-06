@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.core;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -7,6 +8,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -79,6 +81,18 @@ public class Utils {
 
 		matchup.getTeamHome().getStatsForGroup(group).addPoints(2 * matchPointsHome / numberOfGames);
 		matchup.getTeamAway().getStatsForGroup(group).addPoints(2 * matchPointsAway / numberOfGames);
+	}
+
+	public static int getCoefficientsUntilSeason(List<Season> allSeasons, Team team, int seasonUntil) {
+		List<Season> seasonsPast = allSeasons.subList(0, seasonUntil);
+		Collections.reverse(seasonsPast);
+
+		int p1 = 0;
+		for(Season season : seasonsPast) {
+			p1 += team.getStatsForGroup(season).getPoints();
+		}
+
+		return p1;
 	}
 
 }

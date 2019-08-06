@@ -1,20 +1,7 @@
 
 TODO bugs
-
-in season manyToOne for winners etc should be oneToOne?
-
-TODO 0.9
-to add coeffs gained in rules
-
-adding preliminary round
-
-3 to groups, top coeff + 2 finalists
-18 to play q2
-5 to q2, 2 semifinalists + 3 coeffs
-26 to play q1
-
-= 34 -> preliminary to get to 34
-reddish color for preliminaries
+debug.log to turn off
 
 TODO 0.91
 support for more teams?
+alphabetical ordering?

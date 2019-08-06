@@ -1,13 +1,19 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
-import gr.manolis.stelios.footie.api.dtos.*;
+import gr.manolis.stelios.footie.api.dtos.MatchupGameDTO;
+import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
 import gr.manolis.stelios.footie.api.mappers.MatchupGameMapper;
 import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
-import gr.manolis.stelios.footie.core.peristence.dtos.*;
+import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -16,8 +22,6 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.*;
-import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
-import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -484,11 +488,7 @@ public class RestSeasonController {
             teamDTO.setTrophies(team.getTrophies()); // why you not work on your own ?
 
             if(season.getSeasonYear() > 1) {
-                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
-                int p1 = 0;
-                for(Season season1 : seasonsPast) {
-                    p1 += team.getStatsForGroup(season1).getPoints();
-                }
+                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear()-1);
                 teamDTO.setCoefficients(p1);
             }else {
                 teamDTO.setCoefficients(0);
@@ -517,11 +517,7 @@ public class RestSeasonController {
             teamDTO.setSeed(seed);
 
             if(season.getSeasonYear() > 1) {
-                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
-                int p1 = 0;
-                for(Season season1 : seasonsPast) {
-                    p1 += team.getStatsForGroup(season1).getPoints();
-                }
+                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear()-1);
                 teamDTO.setCoefficients(p1);
             }else {
                 teamDTO.setCoefficients(0);

@@ -151,8 +151,7 @@ public class QualsService {
 			Collections.shuffle(teams);
 		} else {
 			if(season.getSeasonYear() > 1) {
-				List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
-				Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
+				Collections.sort(teams, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
 			}
 		}
 

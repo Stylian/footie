@@ -150,8 +150,7 @@ public class SeasonService {
 			Season previousSeason =  serviceUtils.loadSeason(season.getSeasonYear() - 1);
 
 			if(season.getSeasonYear() > 1) {
-				List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
-				Collections.sort(teamsClone, new CoefficientsRangeOrdering(seasonsPast));
+				Collections.sort(teamsClone, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), previousSeason.getSeasonYear()));
 			}
 
 			// former finalists promote directly

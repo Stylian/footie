@@ -82,8 +82,7 @@ public class GroupsRoundService {
             strongTeams.add(teamsCopy.remove(0)); // the champion
 
             if(season.getSeasonYear() > 1) {
-                List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, season.getSeasonYear()-1);
-                Collections.sort(teamsCopy, new CoefficientsRangeOrdering(seasonsPast));
+                Collections.sort(teamsCopy, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
             }
 
 

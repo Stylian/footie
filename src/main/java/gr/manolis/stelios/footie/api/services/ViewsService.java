@@ -1,6 +1,9 @@
 package gr.manolis.stelios.footie.api.services;
 
+import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
+import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
@@ -16,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -30,6 +30,9 @@ public class ViewsService {
 
 	@Autowired
 	private ServiceUtils serviceUtils;
+
+    @Autowired
+    private TeamCoeffsMapper teamCoeffsMapper;
 
 	public League getLeague() {
 		return serviceUtils.getLeague();
@@ -85,7 +88,7 @@ public class ViewsService {
 
 		Season current = getCurrentSeason();
 		List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, current.getSeasonYear());
-		Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
+		Collections.sort(teams, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), current.getSeasonYear()));
 
 		for (Team team : teams) {
 			Stats completeStats = new Stats();
@@ -97,25 +100,35 @@ public class ViewsService {
 
 	}
 
-	public Map<Team, Integer> getTeamsTotalCoefficients() {
-
-		Map<Team, Integer> coeffsTotal = new LinkedHashMap<>();
+	public List<TeamCoeffsDTO> getTeamsWithCoefficients() {
 
 		List<Team> teams = serviceUtils.loadTeams();
-
 		Season current = getCurrentSeason();
-		List<Season> seasonsPast = serviceUtils.loadAllSeasons().subList(0, current.getSeasonYear());
-		Collections.sort(teams, new CoefficientsRangeOrdering(seasonsPast));
 
+		List<TeamCoeffsDTO> teamsWithCoeffs = new ArrayList<>();
 		for (Team team : teams) {
-			int points = 0;
-			for(Season s : seasonsPast) {
-				points += s.getTeamsStats().get(team).getPoints();
+			int points = serviceUtils.getCoefficientsUntilSeason(team, current.getSeasonYear());
+			TeamCoeffsDTO teamCoeffDTO = teamCoeffsMapper.toDTO(team);
+			teamCoeffDTO.setCoefficients(points);
+			teamsWithCoeffs.add(teamCoeffDTO);
+		}
+		Collections.sort(teamsWithCoeffs, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
+
+		int counter = 1;
+		for(TeamCoeffsDTO teamCoeffsDTO : teamsWithCoeffs) {
+			if(counter == 1) {
+				teamCoeffsDTO.setSeed(Seed.TO_GROUPS);
+			}else if( counter < 5) {
+				teamCoeffsDTO.setSeed(Seed.TO_QUALS_2);
+			}else if(counter < 33) {
+				teamCoeffsDTO.setSeed(Seed.TO_QUALS_1);
+			}else {
+				teamCoeffsDTO.setSeed(Seed.TO_PRELIMINARY);
 			}
-			coeffsTotal.put(team, points);
+			counter ++;
 		}
 
-		return coeffsTotal;
+		return teamsWithCoeffs;
 
 	}
 

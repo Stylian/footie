@@ -59,12 +59,12 @@ class GroupsMatches extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={this.props.round == 1 ? 1200 : 800}>
+                <Box width={this.props.round == 1 ? 1200 : 1600}>
 
                     <Grid container spacing={1}>
                         {Object.keys(this.state.days).map((day, index) => {
                             return (
-                                <Grid item sm={this.props.round == 1 ? 4 : 6}>
+                                <Grid item sm={this.props.round == 1 ? 4 : 3}>
                                     <Card style={{margin: 20}}>
                                         <CardHeader title={"Day " + day} align={"center"}
                                                     titleTypographyProps={{variant: 'h7'}}

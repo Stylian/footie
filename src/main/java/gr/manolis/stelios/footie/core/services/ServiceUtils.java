@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.core.services;
 
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -72,6 +74,10 @@ public class ServiceUtils {
 
 		return sessionFactory.getCurrentSession().createQuery("from GROUPS where discriminator='S' ").list();
 
+	}
+	@SuppressWarnings("unchecked")
+	public int getCoefficientsUntilSeason(Team team, int seasonUntil) {
+		return Utils.getCoefficientsUntilSeason(loadAllSeasons(), team, seasonUntil);
 	}
 
 	public List<Team> loadTeams() {

@@ -112,6 +112,17 @@ class Rules extends Component {
                                                 </ol>
                                             </TableCell>
                                         </TableRow>
+                                        <TableRow>
+                                            <TableCell align={"right"}>Coefficients granted</TableCell>
+                                            <TableCell>
+                                                <ul>
+                                                    <li>promotion: 1000</li>
+                                                    <li>win: 1000</li>
+                                                    <li>draw: 500</li>
+                                                    <li>each goal scored: 100</li>
+                                                </ul>
+                                            </TableCell>
+                                        </TableRow>
                                     </TableBody>
                                 </table>
                             </CardContent>
@@ -163,6 +174,17 @@ class Rules extends Component {
                                                 <ol>
                                                     <li>the games are re-played</li>
                                                 </ol>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align={"right"}>Coefficients granted</TableCell>
+                                            <TableCell>
+                                                <ul>
+                                                    <li>win the championship: 2000</li>
+                                                    <li>win: 1000</li>
+                                                    <li>draw: 500</li>
+                                                    <li>each goal scored: 100</li>
+                                                </ul>
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

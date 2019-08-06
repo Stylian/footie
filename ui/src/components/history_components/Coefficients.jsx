@@ -143,9 +143,11 @@ class Coefficients extends Component {
                                                                       onClick={this.goToTeam}
                                                                       style={{
                                                                           backgroundColor:
-                                                                              (index < 1) ? '#d9edf7' :
-                                                                                  (index < 4) ? '#dff0d8' :
-                                                                                      ''
+                                                                              (team.seed === "CHAMPION") ? '#d9edf7' :
+                                                                                  (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                                      (team.seed === "TO_QUALS_2") ? '#dff0d8' :
+                                                                                          (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
+                                                                                              '#f2dede'
                                                                       }}
                                                             >
                                                                 <TableCell align="right">{index + 1}</TableCell>
@@ -171,7 +173,16 @@ class Coefficients extends Component {
                                                         return (
                                                             <TableRow className={"teamClicker"}
                                                                       data-teamid={team.id}
-                                                                      onClick={this.goToTeam}>
+                                                                      onClick={this.goToTeam}
+                                                                      style={{
+                                                                          backgroundColor:
+                                                                              (team.seed === "CHAMPION") ? '#d9edf7' :
+                                                                                  (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                                      (team.seed === "TO_QUALS_2") ? '#dff0d8' :
+                                                                                          (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
+                                                                                              '#f2dede'
+                                                                      }}
+                                                            >
                                                                 <TableCell
                                                                     align="right">{leftSide.length + index + 1}</TableCell>
                                                                 <TableCell>{team.name}</TableCell>
@@ -197,8 +208,8 @@ class Coefficients extends Component {
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell>Season</TableCell>
-                                                <TableCell>Winner</TableCell>
-                                                <TableCell>Runner-up</TableCell>
+                                                <TableCell align={"center"}><img src={goldmedal} title={"1st place"} /></TableCell>
+                                                <TableCell align={"center"}><img src={silvermedal} title={"2nd place"} /></TableCell>
                                                 <TableCell align="center" colSpan={2}>Semifinalists</TableCell>
                                             </TableRow>
                                         </TableHead>

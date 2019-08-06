@@ -43,16 +43,9 @@ public class RestHistoryController {
 
     @RequestMapping("/coefficients")
     public List<TeamCoeffsDTO>  coefficients() {
-
-        List<TeamCoeffsDTO> teamsWithCoeffs = new ArrayList<>();
-        for(Map.Entry<Team, Integer> entry : viewsService.getTeamsTotalCoefficients().entrySet()) {
-            TeamCoeffsDTO team = teamCoeffsMapper.toDTO(entry.getKey());
-            team.setCoefficients(entry.getValue());
-            teamsWithCoeffs.add(team);
-        }
-
-        return teamsWithCoeffs;
+        return viewsService.getTeamsWithCoefficients();
     }
+    
     @RequestMapping("/teams/trophies")
     public List<TeamWithTrophiesDTO>  teamsWithTrophies() {
 

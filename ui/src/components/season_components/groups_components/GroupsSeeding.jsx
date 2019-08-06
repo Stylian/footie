@@ -233,6 +233,18 @@ class GroupsSeeding extends Component {
                                                     </ol>
                                                 </TableCell>
                                             </TableRow>
+                                            <TableRow>
+                                                <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                <TableCell>
+                                                    <ul>
+                                                        <li>1st place: 600</li>
+                                                        <li>2nd place: 300</li>
+                                                        <li>win: 1000</li>
+                                                        <li>draw: 500</li>
+                                                        <li>each goal scored: 100</li>
+                                                    </ul>
+                                                </TableCell>
+                                            </TableRow>
                                         </TableBody>
                                     </table>
                                 </CardContent>
