@@ -1,7 +1,13 @@
 
 TODO bugs
 debug.log to turn off
+groups stage order of games messed up
 
 TODO 0.91
+seed teams after matchup complete
+add coeffs on the fly
+auto save on ending rounds
+
+TODO 0.92
 support for more teams?
 alphabetical ordering?

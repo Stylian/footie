@@ -1,31 +1,16 @@
 package gr.manolis.stelios.footie.core.peristence.dtos.rounds;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity(name = "ROUNDS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -92,7 +77,11 @@ public abstract class Round {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-	
+
+	public void addTeam(Team team) {
+		teams.add(team);
+	}
+
 	public Stage getStage() {
 		return stage;
 	}
@@ -110,5 +99,21 @@ public abstract class Round {
 	public int getNum() {
 		return num;
 	}
-	
+
+	public Round getPreviousRound() {
+		int thisRound = season.getRounds().indexOf(this);
+		if(thisRound == 0 ) {
+			return null;
+		}
+		return season.getRounds().get(thisRound-1);
+	}
+
+	public Round getNextRound() {
+		int thisRound = season.getRounds().indexOf(this) + 1;
+		if(thisRound == season.getRounds().size()) {
+			return null;
+		}
+		return season.getRounds().get(thisRound);
+	}
+
 }

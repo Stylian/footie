@@ -44,19 +44,6 @@ public class GroupsRoundService {
 
         GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
 
-        // must add winners from roundQuals2
-        QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
-        List<Matchup> matchups = roundQuals2.getMatchups();
-        List<Team> round2Winners = new ArrayList<>();
-
-        for (Matchup matchup : matchups) {
-
-            round2Winners.add(matchup.getWinner());
-
-        }
-
-        groupsRoundOf12.getTeams().addAll(round2Winners);
-
         logger.info("groups round participants: " + Utils.toString(groupsRoundOf12.getTeams()));
 
         List<Team> strongTeams = new ArrayList<>();
@@ -106,7 +93,9 @@ public class GroupsRoundService {
         groupsRoundOf12.setMediumTeams(mediumTeams);
         groupsRoundOf12.setWeakTeams(weakTeams);
 
+        QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
         roundQuals2.setStage(Stage.FINISHED);
+
         groupsRoundOf12.setStage(Stage.ON_PREVIEW);
 
         DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());

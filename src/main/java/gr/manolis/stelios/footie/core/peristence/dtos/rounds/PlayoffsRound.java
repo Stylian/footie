@@ -64,26 +64,28 @@ public class PlayoffsRound extends Round {
 
 	public void buildQuarterMatchups() {
 
-		quarterMatchups.add(new Matchup(gA2, gB3, MatchupFormat.FORMAT_IN_OUT_SINGLE, MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE));
+		quarterMatchups.add(new Matchup(gA2, gB3, MatchupFormat.FORMAT_IN_OUT_SINGLE,
+				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE, this));
 
-		quarterMatchups.add(new Matchup(gB2, gA3, MatchupFormat.FORMAT_IN_OUT_SINGLE, MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE));
+		quarterMatchups.add(new Matchup(gB2, gA3, MatchupFormat.FORMAT_IN_OUT_SINGLE,
+				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE, this));
 
 	}
 
 	public void buildSemisMatchups() {
 
 		semisMatchups.add(new Matchup(gA1, quarterMatchups.get(1).getWinner(), MatchupFormat.FORMAT_IN_OUT_DOUBLE,
-				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE));
+				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE, this));
 
 		semisMatchups.add(new Matchup(gB1, quarterMatchups.get(0).getWinner(), MatchupFormat.FORMAT_IN_OUT_DOUBLE,
-				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE));
+				MatchupTieStrategy.BEST_POSITION_IN_KNOCKOUTS_TREE, this));
 
 	}
 
 	public void buildFinalsMatchup() {
 
 		finalsMatchup = new Matchup(semisMatchups.get(0).getWinner(), semisMatchups.get(1).getWinner(),
-				MatchupFormat.FORMAT_IN_OUT_DOUBLE, MatchupTieStrategy.REPLAY_GAMES);
+				MatchupFormat.FORMAT_IN_OUT_DOUBLE, MatchupTieStrategy.REPLAY_GAMES, this);
 
 	}
 

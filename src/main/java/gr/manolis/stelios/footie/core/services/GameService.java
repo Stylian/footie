@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,12 +169,15 @@ public class GameService {
         }
 
         logger.info("determining matchup winner with aggregate score " + homeGoals + " - " + awayGoals);
+        boolean matchupFinished = false;
 
         if (homeGoals > awayGoals) {
             matchup.setWinner(teamHome);
+            matchupFinished = true;
 
         } else if (homeGoals < awayGoals) {
             matchup.setWinner(teamAway);
+            matchupFinished = true;
 
         } else { // Teams tied
 
@@ -191,10 +195,13 @@ public class GameService {
                         // pick winner at random
                         matchup.setWinner(Math.random() > 0.5 ? teamHome : teamAway);
                     }
+                    matchupFinished = true;
                     break;
                 case HIGHEST_COEFFICIENT_WINS:
-                    if (highestCoeffWinsReturnFalseIfEqual(matchup, teamHome, teamAway))
+                    if (highestCoeffWinsReturnFalseIfEqual(matchup, teamHome, teamAway)) {
+                        matchupFinished = true;
                         break;
+                    }
                     // fall through if coeffs are tied
                 case REPLAY_GAMES:
                     games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
@@ -202,9 +209,17 @@ public class GameService {
                     break;
                 case BEST_POSITION_IN_KNOCKOUTS_TREE:
                     matchup.setWinner(teamHome);
+                    matchupFinished = true;
                     break;
             }
 
+        }
+
+        if(matchupFinished) {
+            Round nextRound = matchup.getRound().getNextRound();
+            if(nextRound != null) {
+                nextRound.addTeam(matchup.getWinner());
+            }
         }
 
     }

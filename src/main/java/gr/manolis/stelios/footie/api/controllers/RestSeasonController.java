@@ -22,6 +22,8 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.*;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -245,11 +247,19 @@ public class RestSeasonController {
 
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
+            Collections.sort(qr.getTeams(), new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
+                    season.getSeasonYear()-1));
             if(round == 1) {
                 teamsStrong = qr.getTeams().subList(0, 13);
                 teamsWeak = qr.getTeams().subList(13, qr.getTeams().size());
-            }else {
-                teamsStrong = qr.getTeams();
+            }else { // playoffs round
+                if(season.getSeasonYear() == 1) {
+                    teamsStrong = qr.getTeams().subList(0, 12);
+                    teamsWeak = qr.getTeams().subList(12, qr.getTeams().size());
+                }else {
+                    teamsStrong = qr.getTeams().subList(0, 9);
+                    teamsWeak = qr.getTeams().subList(9, qr.getTeams().size());
+                }
             }
         }
 
@@ -318,7 +328,21 @@ public class RestSeasonController {
 
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
-            teamsStrong = qr.getTeams();
+            Collections.sort(qr.getTeams(), new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
+                    season.getSeasonYear()-1));
+            if(qr.getTeams().size() < 5) {
+                teamsStrong = qr.getTeams();
+            }else if(qr.getTeams().size() < 9) {
+                List<List<Team>> listsOfTeams = ListUtils.partition(qr.getTeams(), 4);
+                teamsStrong = listsOfTeams.get(0);
+                teamsMedium = listsOfTeams.get(1);
+            }else {
+                List<List<Team>> listsOfTeams = ListUtils.partition(qr.getTeams(), 4);
+                teamsStrong = listsOfTeams.get(0);
+                teamsMedium = listsOfTeams.get(1);
+                teamsWeak = listsOfTeams.get(2);
+            }
+
         }
 
         List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);

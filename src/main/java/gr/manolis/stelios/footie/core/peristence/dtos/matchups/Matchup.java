@@ -3,21 +3,14 @@ package gr.manolis.stelios.footie.core.peristence.dtos.matchups;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.MatchupGame;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 
 @Entity(name = "MATCHUPS")
 public class Matchup {
@@ -47,16 +40,21 @@ public class Matchup {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	public Round round;
+
 	public Matchup() {
 		games = new ArrayList<>();
 	}
 
-	public Matchup(Team home, Team away, MatchupFormat format, MatchupTieStrategy tieStrategy) {
+	public Matchup(Team home, Team away, MatchupFormat format, MatchupTieStrategy tieStrategy,
+				   Round round) {
 		this();
 		this.teamHome = home;
 		this.teamAway = away;
 		this.format = format;
 		this.tieStrategy = tieStrategy;
+		this.round = round;
 
 		createGames();
 	}
@@ -108,6 +106,14 @@ public class Matchup {
 
 	public void setTieStrategy(MatchupTieStrategy tieStrategy) {
 		this.tieStrategy = tieStrategy;
+	}
+
+	public Round getRound() {
+		return round;
+	}
+
+	public void setRound(Round round) {
+		this.round = round;
 	}
 
 	@Override

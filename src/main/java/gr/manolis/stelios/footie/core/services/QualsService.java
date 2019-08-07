@@ -55,20 +55,10 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		QualsRound preliminaries = (QualsRound) season.getRounds().get(0);
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
-
-		// must add winners from preliminaries
-		List<Matchup> matchups = preliminaries.getMatchups();
-		List<Team> round0Winners = new ArrayList<>();
-
-		for (Matchup matchup : matchups) {
-			round0Winners.add(matchup.getWinner());
-		}
-
-		roundQuals1.getTeams().addAll(round0Winners);
 		seedQualsRound(season, roundQuals1);
 
+		QualsRound preliminaries = (QualsRound) season.getRounds().get(0);
 		preliminaries.setStage(Stage.FINISHED);
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -82,20 +72,10 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 
-		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
-
-		// must add winners from roundQuals1
-		List<Matchup> matchups = roundQuals1.getMatchups();
-		List<Team> round1Winners = new ArrayList<>();
-
-		for (Matchup matchup : matchups) {
-			round1Winners.add(matchup.getWinner());
-		}
-
-		roundQuals2.getTeams().addAll(round1Winners);
 		seedQualsRound(season, roundQuals2);
-		
+
+		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		roundQuals1.setStage(Stage.FINISHED);
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -204,7 +184,7 @@ public class QualsService {
 		while (strongQueue.size() > 0) {
 
 			qualsRound.addMatchup(new Matchup(strongQueue.remove(0), weakQueue.remove(0),
-					MatchupFormat.FORMAT_IN_OUT_SINGLE, tieStrategy));
+					MatchupFormat.FORMAT_IN_OUT_SINGLE, tieStrategy, qualsRound));
 
 		}
 
