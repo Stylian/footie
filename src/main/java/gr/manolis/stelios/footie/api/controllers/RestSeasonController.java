@@ -257,8 +257,12 @@ public class RestSeasonController {
                     teamsStrong = qr.getTeams().subList(0, 12);
                     teamsWeak = qr.getTeams().subList(12, qr.getTeams().size());
                 }else {
-                    teamsStrong = qr.getTeams().subList(0, 9);
-                    teamsWeak = qr.getTeams().subList(9, qr.getTeams().size());
+                    if(qr.getTeams().size() < 10) {
+                        teamsStrong = qr.getTeams();
+                    }else {
+                        teamsStrong = qr.getTeams().subList(0, 9);
+                        teamsWeak = qr.getTeams().subList(9, qr.getTeams().size());
+                    }
                 }
             }
         }

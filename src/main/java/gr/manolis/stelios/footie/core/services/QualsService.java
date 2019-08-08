@@ -215,7 +215,7 @@ public class QualsService {
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
-
+		Utils.autosave(roundQuals);
 	}
 
 }

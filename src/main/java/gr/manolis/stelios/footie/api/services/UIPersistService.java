@@ -69,6 +69,9 @@ public class UIPersistService {
                 .createQuery("from PROPERTIES where PROPERTY_NAME='" +
                         propertyName + "'").uniqueResult();
 
+        if(prop == null)
+            return;
+
         prop.setValue(propertyValue);
         propDAO.save(prop);
 

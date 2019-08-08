@@ -249,12 +249,13 @@ public class GroupsRoundService {
         int round = Integer.parseInt(strRound);
 
         Season season = serviceUtils.loadCurrentSeason();
+        GroupsRound groupsRound = null;
 
         switch(round) {
             case 1:
                 // add coeffs for groups12 positions
-                GroupsRound groupsOf12Round = (GroupsRound) season.getRounds().get(3);
-                for (RobinGroup robinGroup : groupsOf12Round.getGroups()) {
+                groupsRound = (GroupsRound) season.getRounds().get(3);
+                for (RobinGroup robinGroup : groupsRound.getGroups()) {
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 
@@ -274,8 +275,8 @@ public class GroupsRoundService {
                 break;
             case 2:
                 // add coeffs for groups8 positions
-                GroupsRound groupsOf8Round = (GroupsRound) season.getRounds().get(4);
-                for (RobinGroup robinGroup : groupsOf8Round.getGroups()) {
+                groupsRound = (GroupsRound) season.getRounds().get(4);
+                for (RobinGroup robinGroup : groupsRound.getGroups()) {
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
                     robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);
@@ -298,7 +299,7 @@ public class GroupsRoundService {
         //save
         DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
         seasonDao.save(season);
-
+        Utils.autosave(groupsRound);
     }
 
 

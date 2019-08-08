@@ -5,10 +5,15 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -95,4 +100,22 @@ public class Utils {
 		return p1;
 	}
 
+	public static String autosave(Round round) {
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		Date date = new Date();
+		String strDate = dateFormat.format(date);
+
+		File dataFolder = Utils.getDatabaseFile();
+		File backupFolder = new File(Utils.getBackupsFolderPath() + "data_autosave_" + round.getName() + "_" + strDate);
+
+		try {
+			FileUtils.copyDirectory(dataFolder, backupFolder);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return backupFolder.getName();
+	}
 }
