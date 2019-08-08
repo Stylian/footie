@@ -108,7 +108,7 @@ public class RestSeasonController {
         int year = NumberUtils.toInt(strYear);
 
         Season season = serviceUtils.loadSeason(year);
-        List<Team> teams = serviceUtils.loadTeams();
+        List<Team> teams = season.getTeams();
         logger.info("loaded teams: " + teams);
 
         Map<Seed, List<Team>> teamsInRounds = null;

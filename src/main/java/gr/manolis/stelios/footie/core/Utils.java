@@ -7,15 +7,14 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -117,5 +116,36 @@ public class Utils {
 		}
 
 		return backupFolder.getName();
+	}
+
+	public static List<Team> getTeamsFromFile(Logger logger, List<Team> existingTeams) {
+		logger.info("loading teams from file");
+
+		List<Team> lsTeams = new ArrayList<>();
+		try {
+			File file = Utils.getTeamsFile();
+
+			if (!file.exists()) {
+				logger.error("teams file not found");
+				return null;
+			}
+
+			List<String> teams = FileUtils.readLines(file, StandardCharsets.UTF_8);
+
+			for (String tt : teams) {
+				String teamName = tt.trim();
+				Team team = new Team(teamName);
+
+				if(!existingTeams.contains(team)) {
+					logger.info("adding " + teamName);
+					lsTeams.add(team);
+				}
+			}
+			lsTeams.addAll(existingTeams);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return lsTeams;
 	}
 }

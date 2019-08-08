@@ -77,7 +77,7 @@ public class PlayoffsRoundService {
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		dao.save(season);
-		
+
 		return playoffsRound;
 	}
 
@@ -110,7 +110,7 @@ public class PlayoffsRoundService {
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
-
+		Utils.autosave(playoffsRound);
 	}
 
 	public void endPlayoffsSemis() {
@@ -127,8 +127,7 @@ public class PlayoffsRoundService {
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
-
-
+		Utils.autosave(playoffsRound);
 	}
 
 	public void endPlayoffsFinals() {
@@ -150,7 +149,6 @@ public class PlayoffsRoundService {
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		seasonDao.save(season);
-
 	}
 
 }

@@ -46,12 +46,12 @@ public class SpringAppTest {
 			runSeason(n);
 
 	}
-//
-//	@Test
-//	public void runSeason1() throws Exception {
-//		checkURL("/rest/ops/league", "{seasonNum=0}");
-//		runSeason(1);
-//	}
+
+	@Test
+	public void runSeason1() throws Exception {
+		checkURL("/rest/ops/league", "{seasonNum=0}");
+		runSeason(1);
+	}
 
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");

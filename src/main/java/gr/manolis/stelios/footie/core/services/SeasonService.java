@@ -1,5 +1,8 @@
 package gr.manolis.stelios.footie.core.services;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +14,7 @@ import javax.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,209 +38,207 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 @Transactional
 public class SeasonService {
 
-	final static Logger logger = Logger.getLogger(SeasonService.class);
+    final static Logger logger = Logger.getLogger(SeasonService.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Autowired
-	private ServiceUtils serviceUtils;
+    @Autowired
+    private ServiceUtils serviceUtils;
 
-	public Season createSeason() {
-		logger.info("creating season");
+    public Season createSeason() {
+        logger.info("creating season");
 
-		League league = serviceUtils.getLeague();
-		league.addSeason();
-		DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao2.save(league);
+        League league = serviceUtils.getLeague();
+        league.addSeason();
+        DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        dao2.save(league);
 
-		logger.info("creating season " + league.getSeasonNum());
+        logger.info("creating season " + league.getSeasonNum());
 
-		Season season = new Season(league.getSeasonNum());
-		season.setStage(Stage.NOT_STARTED);
-		
-		List<Team> teams = serviceUtils.loadTeams();
+        Season season = new Season(league.getSeasonNum());
+        season.setStage(Stage.NOT_STARTED);
 
-		for (Team team : teams) {
+        List<Team> teams = Utils.getTeamsFromFile(logger, serviceUtils.loadTeams());
 
-			season.addTeam(team);
+        for (Team team : teams) {
+            season.addTeam(team);
+        }
 
-		}
+        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        dao.save(season);
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		dao.save(season);
+        return season;
 
-		return season;
+    }
 
-	}
+    public Season setUpSeason() {
+        logger.info("setting up season");
 
-	public Season setUpSeason() {
-		logger.info("setting up season");
-		
-		Season season = serviceUtils.loadCurrentSeason();
+        Season season = serviceUtils.loadCurrentSeason();
 
-		if(season.getStage() == Stage.PLAYING || season.getStage() == Stage.FINISHED) {
-			return season;
-		}
+        if (season.getStage() == Stage.PLAYING || season.getStage() == Stage.FINISHED) {
+            return season;
+        }
 
-		QualsRound preliminary = new QualsRound(season, "quals0", 0);
-		QualsRound qualsRound1 = new QualsRound(season, "quals1", 1);
-		QualsRound qualsRound2 = new QualsRound(season, "quals2", 2);
-		GroupsRound groupsRound12 = new GroupsRound(season, "groups1", 3);
+        QualsRound preliminary = new QualsRound(season, "quals0", 0);
+        QualsRound qualsRound1 = new QualsRound(season, "quals1", 1);
+        QualsRound qualsRound2 = new QualsRound(season, "quals2", 2);
+        GroupsRound groupsRound12 = new GroupsRound(season, "groups1", 3);
 
-		Map<Seed, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
+        Map<Seed, List<Team>> teamsSeeded = checkWhereTeamsAreSeededForASeason(season);
 
-		List<Team> groupsTeams = teamsSeeded.get(Seed.TO_GROUPS);
-		logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
-		groupsRound12.setTeams(groupsTeams);
-		System.out.println("---------------");
+        List<Team> groupsTeams = teamsSeeded.get(Seed.TO_GROUPS);
+        logger.info("teams go directly to groups: " + Utils.toString(groupsTeams));
+        groupsRound12.setTeams(groupsTeams);
+        System.out.println("---------------");
 
-		List<Team> quals2Teams = teamsSeeded.get(Seed.TO_QUALS_2);
-		logger.info("teams go directly to 2nd quals: " + Utils.toString(quals2Teams));
-		qualsRound2.setTeams(quals2Teams);
-		System.out.println("---------------");
+        List<Team> quals2Teams = teamsSeeded.get(Seed.TO_QUALS_2);
+        logger.info("teams go directly to 2nd quals: " + Utils.toString(quals2Teams));
+        qualsRound2.setTeams(quals2Teams);
+        System.out.println("---------------");
 
-		List<Team> quals1Teams = teamsSeeded.get(Seed.TO_QUALS_1);
-		logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
-		qualsRound1.setTeams(quals1Teams);
+        List<Team> quals1Teams = teamsSeeded.get(Seed.TO_QUALS_1);
+        logger.info("teams start from 1st quals: " + Utils.toString(quals1Teams));
+        qualsRound1.setTeams(quals1Teams);
 
-		List<Team> quals0Teams = teamsSeeded.get(Seed.TO_PRELIMINARY);
-		logger.info("teams start from preliminaries: " + Utils.toString(quals0Teams));
-		preliminary.setTeams(quals0Teams);
+        List<Team> quals0Teams = teamsSeeded.get(Seed.TO_PRELIMINARY);
+        logger.info("teams start from preliminaries: " + Utils.toString(quals0Teams));
+        preliminary.setTeams(quals0Teams);
 
-		season.setStage(Stage.PLAYING);
-		
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		seasonDao.save(season);
+        season.setStage(Stage.PLAYING);
 
-		return season;
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        seasonDao.save(season);
 
-	}
+        return season;
 
-	/**
-	 * returns a map with lists of teams seeded per phase
-	 */
-	public Map<Seed, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
+    }
 
-		List<Team> teams = serviceUtils.loadTeams();
+    /**
+     * returns a map with lists of teams seeded per phase
+     */
+    public Map<Seed, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
 
-		Map<Seed, List<Team>> map = new HashMap<>();
+        List<Team> teams = season.getTeams();
 
-		List<Team> teamsClone = new ArrayList<>(teams);
+        Map<Seed, List<Team>> map = new HashMap<>();
 
-		List<Team> groupsTeams = new ArrayList<>();
-		Team formerChampion = null;
-		List<Team> quals1Teams = new ArrayList<>();
-		List<Team> quals2Teams = new ArrayList<>();
-		List<Team> preliminaries = new ArrayList<>();
+        List<Team> teamsClone = new ArrayList<>(teams);
 
-		if (season.getSeasonYear() == 1) {
+        List<Team> groupsTeams = new ArrayList<>();
+        Team formerChampion = null;
+        List<Team> quals1Teams = new ArrayList<>();
+        List<Team> quals2Teams = new ArrayList<>();
+        List<Team> preliminaries = new ArrayList<>();
 
-			// 2nd round needs 24 teams so
-			int diff = teamsClone.size() - 24;
+        if (season.getSeasonYear() == 1) {
 
-			Collections.shuffle(teamsClone);
+            // 2nd round needs 24 teams so
+            int diff = teamsClone.size() - 24;
 
-			for (int index = 0; index < 2 * diff; index++) {
-				quals1Teams.add(teamsClone.remove(0));
-			}
+            Collections.shuffle(teamsClone);
 
-			quals2Teams = teamsClone;
+            for (int index = 0; index < 2 * diff; index++) {
+                quals1Teams.add(teamsClone.remove(0));
+            }
 
-			logger.info("1st season no teams go directly to groups");
+            quals2Teams = teamsClone;
 
-		} else {
+            logger.info("1st season no teams go directly to groups");
 
-			Season previousSeason =  serviceUtils.loadSeason(season.getSeasonYear() - 1);
+        } else {
 
-			if(season.getSeasonYear() > 1) {
-				Collections.sort(teamsClone, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), previousSeason.getSeasonYear()));
-			}
+            Season previousSeason = serviceUtils.loadSeason(season.getSeasonYear() - 1);
 
-			// former finalists promote directly
-			formerChampion = previousSeason.getWinner();
-			groupsTeams.add(formerChampion);
-			teamsClone.remove(formerChampion);
-			groupsTeams.add(previousSeason.getRunnerUp());
-			teamsClone.remove(previousSeason.getRunnerUp());
+            if (season.getSeasonYear() > 1) {
+                Collections.sort(teamsClone, new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), previousSeason.getSeasonYear()));
+            }
 
-			// top 1 seeded team promotes directly to groups round excluding champion
-			groupsTeams.add(teamsClone.remove(0));
+            // former finalists promote directly
+            formerChampion = previousSeason.getWinner();
+            groupsTeams.add(formerChampion);
+            teamsClone.remove(formerChampion);
+            groupsTeams.add(previousSeason.getRunnerUp());
+            teamsClone.remove(previousSeason.getRunnerUp());
 
-			//former semifinalists should go to quals2 if not in groups already by moving it to top
-			Team formerSemi1 = previousSeason.getSemifinalist1();
-			if(!groupsTeams.contains(formerSemi1)) {
-				int itemPos = teamsClone.indexOf(formerSemi1);
-				teamsClone.remove(itemPos);
-				teamsClone.add(0, formerSemi1);
-			}
-			Team formerSemi2 = previousSeason.getSemifinalist2();
-			if(!groupsTeams.contains(formerSemi2)) {
-				int itemPos = teamsClone.indexOf(formerSemi2);
-				teamsClone.remove(itemPos);
-				teamsClone.add(1, formerSemi2);
-			}
+            // top 1 seeded team promotes directly to groups round excluding champion
+            groupsTeams.add(teamsClone.remove(0));
 
-			// 2nd round takes top 3 teams from coeffs
-			quals2Teams.add(teamsClone.remove(0));
-			quals2Teams.add(teamsClone.remove(0));
-			quals2Teams.add(teamsClone.remove(0));
-			quals2Teams.add(teamsClone.remove(0));
-			quals2Teams.add(teamsClone.remove(0));
+            //former semifinalists should go to quals2 if not in groups already by moving it to top
+            Team formerSemi1 = previousSeason.getSemifinalist1();
+            if (!groupsTeams.contains(formerSemi1)) {
+                int itemPos = teamsClone.indexOf(formerSemi1);
+                teamsClone.remove(itemPos);
+                teamsClone.add(0, formerSemi1);
+            }
+            Team formerSemi2 = previousSeason.getSemifinalist2();
+            if (!groupsTeams.contains(formerSemi2)) {
+                int itemPos = teamsClone.indexOf(formerSemi2);
+                teamsClone.remove(itemPos);
+                teamsClone.add(1, formerSemi2);
+            }
 
-			int diff = teamsClone.size() - 26;
+            // 2nd round takes top 3 teams from coeffs
+            quals2Teams.add(teamsClone.remove(0));
+            quals2Teams.add(teamsClone.remove(0));
+            quals2Teams.add(teamsClone.remove(0));
+            quals2Teams.add(teamsClone.remove(0));
+            quals2Teams.add(teamsClone.remove(0));
 
-			// so bottom 2*diff go to preliminiaries, others directly to 1st quals
-			for (int index = 0; index < 2 * diff; index++) {
-				preliminaries.add(teamsClone.remove(teamsClone.size() - 1));
-			}
+            int diff = teamsClone.size() - 26;
 
-			quals1Teams = teamsClone;
-		}
+            // so bottom 2*diff go to preliminiaries, others directly to 1st quals
+            for (int index = 0; index < 2 * diff; index++) {
+                preliminaries.add(teamsClone.remove(teamsClone.size() - 1));
+            }
 
-		map.put(Seed.CHAMPION, formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
-		map.put(Seed.TO_GROUPS, groupsTeams);
-		map.put(Seed.TO_QUALS_1, quals1Teams);
-		map.put(Seed.TO_QUALS_2, quals2Teams);
-		map.put(Seed.TO_PRELIMINARY, preliminaries);
+            quals1Teams = teamsClone;
+        }
 
-		return map;
-	}
+        map.put(Seed.CHAMPION, formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
+        map.put(Seed.TO_GROUPS, groupsTeams);
+        map.put(Seed.TO_QUALS_1, quals1Teams);
+        map.put(Seed.TO_QUALS_2, quals2Teams);
+        map.put(Seed.TO_PRELIMINARY, preliminaries);
 
-	public Season endCurrentSeason() {
-		logger.info("closing down season, calculating coefficients");
+        return map;
+    }
 
-		Season season = serviceUtils.loadCurrentSeason();
-		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
+    public Season endCurrentSeason() {
+        logger.info("closing down season, calculating coefficients");
 
-		Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
+        Season season = serviceUtils.loadCurrentSeason();
+        PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 
-		Team winner = finalsMatchup.getWinner();
-		Team runnerUp = finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ?
-				finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome();
+        Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
 
-		winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER));
-		runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP));
+        Team winner = finalsMatchup.getWinner();
+        Team runnerUp = finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ?
+                finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome();
 
-		List<Team> semifinalists = new ArrayList<>();
-		for(Matchup matchup : playoffsRound.getSemisMatchups()) {
-			semifinalists.add(matchup.getTeamHome().equals(matchup.getWinner()) ?
-					matchup.getTeamAway() : matchup.getTeamHome());
-		}
+        winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER));
+        runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP));
 
-		season.setSemifinalist1(semifinalists.get(0));
-		season.setSemifinalist2(semifinalists.get(1));
+        List<Team> semifinalists = new ArrayList<>();
+        for (Matchup matchup : playoffsRound.getSemisMatchups()) {
+            semifinalists.add(matchup.getTeamHome().equals(matchup.getWinner()) ?
+                    matchup.getTeamAway() : matchup.getTeamHome());
+        }
 
-		season.setWinner(winner);
-		season.setRunnerUp(runnerUp);
-		season.getRounds().get(5).setStage(Stage.FINISHED);
-		season.setStage(Stage.FINISHED);
+        season.setSemifinalist1(semifinalists.get(0));
+        season.setSemifinalist2(semifinalists.get(1));
 
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		seasonDao.save(season);
+        season.setWinner(winner);
+        season.setRunnerUp(runnerUp);
+        season.getRounds().get(5).setStage(Stage.FINISHED);
+        season.setStage(Stage.FINISHED);
 
-		return season;
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        seasonDao.save(season);
+        Utils.autosave(playoffsRound);
 
-	}
+        return season;
+    }
 
 }

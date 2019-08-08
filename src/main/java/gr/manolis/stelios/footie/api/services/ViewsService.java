@@ -2,6 +2,7 @@ package gr.manolis.stelios.footie.api.services;
 
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
@@ -11,8 +12,10 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
+import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,8 @@ import java.util.*;
 @Service
 @Transactional
 public class ViewsService {
+
+	final static Logger logger = Logger.getLogger(ViewsService.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -161,7 +166,7 @@ public class ViewsService {
 		Map<String, Object> generalData = new LinkedHashMap<>();
 
 		generalData.put("databaseConnection", serviceUtils.testDbConnection());
-		generalData.put("teamsLoaded", serviceUtils.loadTeams().size());
+		generalData.put("teamsLoaded", Utils.getTeamsFromFile(logger, serviceUtils.loadTeams()).size());
 
 		return generalData;
 	}

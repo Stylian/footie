@@ -1,6 +1,9 @@
 
 TODO bugs
 groups stage order of games messed up
+stats page broken
+
+FIX ME ! with curernt DB check quantdruple draw in the red line
 
 
 TODO 0.92

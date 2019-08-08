@@ -65,7 +65,11 @@ public class Team {
 	}
 
 	public Stats getStatsForGroup(Group group) {
-		return groupStats.get(group);
+		if(this.getGroupStats().containsKey(group)) {
+			return groupStats.get(group);
+		}else {
+			return new Stats();
+		}
 	}
 
 	public Stats setStatsForGroup(Group group, Stats stats) {
