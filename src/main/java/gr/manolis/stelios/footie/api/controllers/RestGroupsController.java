@@ -32,7 +32,6 @@ public class RestGroupsController {
         logger.info("getGroupData");
 
         int groupId = NumberUtils.toInt(strGroupId);
-
         RobinGroup group = serviceUtils.loadRobinGroup(groupId);
 
         return robinGroupMapper.toDTO(group);

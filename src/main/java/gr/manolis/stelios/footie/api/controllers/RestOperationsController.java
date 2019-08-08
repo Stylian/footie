@@ -28,7 +28,7 @@ public class RestOperationsController {
     private OperationsService operationsService;
 
     @Autowired
-    private RestSeasonController restSeasonController;
+    private RestNextGameController restNextGameController;
 
     @Autowired
     private ServiceUtils serviceUtils;
@@ -155,7 +155,7 @@ public class RestOperationsController {
     @PostMapping("/add_game_result")
     public RestResponse addGame(@RequestBody Result result) {
         operationsService.addResult(result);
-        restSeasonController.getNextGameAndMoveStages();
+        restNextGameController.getNextGameAndMoveStages();
 
         return new RestResponse(RestResponse.SUCCESS, "game result added ");
     }

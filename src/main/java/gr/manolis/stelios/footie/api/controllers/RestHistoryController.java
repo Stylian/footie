@@ -50,7 +50,6 @@ public class RestHistoryController {
     public List<TeamWithTrophiesDTO>  teamsWithTrophies() {
 
         List<Team> teams = viewsService.getTeams();
-
         List<TeamWithTrophiesDTO> teamsWithTrophiesDTO = teamWithTrophiesMapper.toDTO(teams);
 
         teamsWithTrophiesDTO = teamsWithTrophiesDTO.stream()
@@ -58,7 +57,6 @@ public class RestHistoryController {
                 .collect(Collectors.toList());
 
         teamsWithTrophiesDTO.sort(new TeamsWithTrophiesOrdering());
-
         return teamsWithTrophiesDTO;
     }
 

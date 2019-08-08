@@ -1,6 +1,5 @@
 
 TODO bugs
-debug.log to turn off
 groups stage order of games messed up
 
 

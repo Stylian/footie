@@ -10,7 +10,6 @@ import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -21,13 +20,13 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.*;
+import gr.manolis.stelios.footie.core.services.SeasonService;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +36,7 @@ import java.util.*;
 
 @RestController
 @Transactional
-@RequestMapping("/rest")
+@RequestMapping("/rest/seasons")
 public class RestSeasonController {
 
     final static Logger logger = Logger.getLogger(RestSeasonController.class);
@@ -46,26 +45,10 @@ public class RestSeasonController {
     private SeasonService seasonService;
 
     @Autowired
-    private QualsService qualsService;
-
-    @Autowired
-    private GroupsRoundService groupsRoundService;
-
-    @Autowired
-    private PlayoffsRoundService playoffsRoundService;
-
-    @Autowired
     private ViewsService viewsService;
 
     @Autowired
     private ServiceUtils serviceUtils;
-
-    @Autowired
-    private GameService gameService;
-
-
-    @Autowired
-    private RestOperationsController restOperationsController;
 
     @Autowired
     private TeamSimpleMapper teamSimpleMapper;
@@ -83,92 +66,12 @@ public class RestSeasonController {
     @Autowired
     private MatchupGameMapper matchupGameMapper;
 
-    // jack of all trades
-    @RequestMapping("next_game")
-    public Game getNextGameAndMoveStages() {
-        logger.info("getNextGame");
-
-        League league = (League) (restOperationsController.getOrCreateLeague().getBody()); // runs only the very first time
-        if (league.getSeasonNum() < 1) {
-            return new Game();
-        }
-
-        Game game = gameService.getNextGame();
-
-        // no more games so move to next stage
-        if (game == null) {
-            Map<String, String> rounds = seasonStatus("" + serviceUtils.loadCurrentSeason().getSeasonYear());
-            for (Map.Entry<String, String> round : rounds.entrySet()) {
-                if ("PLAYING".equals(round.getValue())) {
-
-                    switch (round.getKey()) {
-                        case "quals0":
-                            qualsService.endQualsRound("0");
-                            restOperationsController.seedQualsRound("1");
-                            break;
-                        case "quals1":
-                            qualsService.endQualsRound("1");
-                            restOperationsController.seedQualsRound("2");
-                            break;
-                        case "quals2":
-                            qualsService.endQualsRound("2");
-                            restOperationsController.seedGroupsRoundOf12();
-                            break;
-                        case "groups1":
-                            groupsRoundService.endGroupsRound("1");
-                            restOperationsController.seedAndSetGroupsRoundOf8();
-                            break;
-                        case "groups2":
-                            groupsRoundService.endGroupsRound("2");
-                            restOperationsController.seedAndSetQuarterfinals();
-                            break;
-                        case "playoffs":
-                            Season season = serviceUtils.loadCurrentSeason();
-                            PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
-                            if(playoffsRound.getQuarterMatchups().get(0).getWinner() == null
-                                    || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
-                                break;
-                            }
-                            if (CollectionUtils.isEmpty(playoffsRound.getSemisMatchups())) {
-                                playoffsRoundService.endPlayoffsQuarters();
-                                restOperationsController.seedAndSetSemifinals();
-                            } else {
-                                if(playoffsRound.getSemisMatchups().get(0).getWinner() == null
-                                        || playoffsRound.getSemisMatchups().get(1).getWinner() == null ) {
-                                    break;
-                                }
-
-                                if (playoffsRound.getFinalsMatchup() == null) {
-                                    playoffsRoundService.endPlayoffsSemis();
-                                    restOperationsController.seedAndSetFinals();
-                                }else {
-                                    if(playoffsRound.getFinalsMatchup().getWinner() != null) {
-                                        playoffsRoundService.endPlayoffsFinals();
-                                        restOperationsController.endSeason();
-                                    }
-                                }
-                            }
-                            break;
-                    }
-                }
-
-            }
-
-        }
-
-        return game == null ? new Game() : game; // new game has id of 0
-    }
-
-    // -------------------------------------------------------------------------------------------------
-    // -------------------------------------------------------------------------------------------------
-    // -------------------------------------------------------------------------------------------------
-
-    @RequestMapping("seasons")
+     @RequestMapping("/")
     public int seasonYear() {
         return serviceUtils.getLeague().getSeasonNum();
     }
 
-    @RequestMapping("seasons/{year}/status")
+    @RequestMapping("/{year}/status")
     public Map<String, String> seasonStatus(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
@@ -198,7 +101,7 @@ public class RestSeasonController {
         return roundStages;
     }
 
-    @RequestMapping("seasons/{year}/seeding")
+    @RequestMapping("/{year}/seeding")
     public List<TeamCoeffsDTO>  seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
@@ -230,7 +133,7 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    @RequestMapping("seasons/{year}/quals/{round}/seeding")
+    @RequestMapping("/{year}/quals/{round}/seeding")
     public Map<Seed, List<TeamCoeffsDTO>> qualsSeeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -277,7 +180,7 @@ public class RestSeasonController {
         return qualsTeams;
     }
 
-    @RequestMapping("seasons/{year}/quals/{round}/matches")
+    @RequestMapping("/{year}/quals/{round}/matches")
     public Map<Integer, List<MatchupGameDTO>> qualsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -314,7 +217,7 @@ public class RestSeasonController {
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
-    @RequestMapping("seasons/{year}/groups/{round}/seeding")
+    @RequestMapping("/{year}/groups/{round}/seeding")
     public Map<Seed, List<TeamCoeffsDTO>> groups1Seeding(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -361,7 +264,7 @@ public class RestSeasonController {
         return groupsTeams;
     }
 
-    @RequestMapping("seasons/{year}/groups/{round}/matches")
+    @RequestMapping("/{year}/groups/{round}/matches")
     public Map<Integer, List<Game>> groupsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -378,7 +281,7 @@ public class RestSeasonController {
         return groupsRound.getGamesPerDay();
     }
 
-    @RequestMapping("seasons/{year}/groups/{round}")
+    @RequestMapping("/{year}/groups/{round}")
     public List<RobinGroupDTO> groupsRound(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
@@ -398,7 +301,7 @@ public class RestSeasonController {
         return groupsDTO;
     }
 
-    @RequestMapping("/seasons/{year}/playoffs/structure")
+    @RequestMapping("/{year}/playoffs/structure")
     public Map<String, TeamSimpleDTO> getPlayoffsRoundStructure(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
@@ -461,7 +364,7 @@ public class RestSeasonController {
         return structure;
     }
 
-    @RequestMapping("/seasons/{year}/playoffs/matches")
+    @RequestMapping("/{year}/playoffs/matches")
     public Map<String, List<MatchupGameDTO>> getPlayoffsRoundMatches(@PathVariable String year) {
 
         PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));

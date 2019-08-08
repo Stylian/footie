@@ -64,48 +64,37 @@ public class ServiceUtils {
 	}
 
 	public int getNumberOfSeasons() {
-
 		return getLeague().getSeasonNum();
-
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Season> loadAllSeasons() {
-
 		return sessionFactory.getCurrentSession().createQuery("from GROUPS where discriminator='S' ").list();
-
 	}
+
 	@SuppressWarnings("unchecked")
 	public int getCoefficientsUntilSeason(Team team, int seasonUntil) {
 		return Utils.getCoefficientsUntilSeason(loadAllSeasons(), team, seasonUntil);
 	}
 
 	public List<Team> loadTeams() {
-
 		DataAccessObject<Team> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
 		return dao.list("TEAMS");
-
 	}
 
 	public RobinGroup loadRobinGroup(int id) {
-
 		return (RobinGroup) sessionFactory.getCurrentSession()
 				.createQuery("from GROUPS where ID=" + id).uniqueResult();
-
 	}
 
 	public QualsRound getQualRound(Season season, int round) {
-
 		List<Round> rounds = season.getRounds();
 		return (QualsRound) rounds.get(round);
-
 	}
 	
 	public GroupsRound getGroupsRound(Season season, int round) {
-		
 		List<Round> rounds = season.getRounds();
 		return (GroupsRound) rounds.get(round + 2);
-		
 	}
 
 }
