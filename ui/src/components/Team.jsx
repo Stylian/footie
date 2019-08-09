@@ -105,7 +105,7 @@ class Team extends Component {
                                                 </TableHead>
                                                 <TableBody>
                                                     {this.state.team.seasonsStats.map((seasonStats, index) => {
-                                                        return (
+                                                        return seasonStats.matchesPlayed > 0 ? (
                                                             <TableRow className={"teamClicker"} onClick={this.goToSeason}
                                                                       data-season={index+1}
                                                             >
@@ -125,6 +125,21 @@ class Team extends Component {
                                                                     align="right">{seasonStats.goalsConceded}</TableCell>
                                                                 <TableCell
                                                                     align="right">{seasonStats.goalDifference}</TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow className={"teamClicker"} onClick={this.goToSeason}
+                                                                      data-season={index+1}
+                                                            >
+                                                                <TableCell
+                                                                    align="right">{"Season " + (index + 1)}</TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
+                                                                <TableCell></TableCell>
                                                             </TableRow>
                                                         )
                                                     })}
