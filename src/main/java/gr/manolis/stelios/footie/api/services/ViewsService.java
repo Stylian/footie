@@ -120,12 +120,13 @@ public class ViewsService {
 		Collections.sort(teamsWithCoeffs, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
 
 		int counter = 1;
+		int redLine = 68 - teamsWithCoeffs.size();
 		for(TeamCoeffsDTO teamCoeffsDTO : teamsWithCoeffs) {
 			if(counter == 1) {
 				teamCoeffsDTO.setSeed(Seed.TO_GROUPS);
 			}else if( counter < 5) {
 				teamCoeffsDTO.setSeed(Seed.TO_QUALS_2);
-			}else if(counter < 33) {
+			}else if(counter < (redLine+1)) {
 				teamCoeffsDTO.setSeed(Seed.TO_QUALS_1);
 			}else {
 				teamCoeffsDTO.setSeed(Seed.TO_PRELIMINARY);
