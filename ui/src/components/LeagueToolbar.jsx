@@ -28,7 +28,7 @@ class LeagueToolbar extends Component {
     }
 
     componentDidMount() {
-        fetch("/rest/seasons")
+        fetch("/rest/seasons/")
             .then(res => res.json())
             .then(
                 (result) => {
