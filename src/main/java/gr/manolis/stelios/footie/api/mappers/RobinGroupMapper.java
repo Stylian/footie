@@ -50,6 +50,7 @@ public abstract class RobinGroupMapper implements EntityMapper<RobinGroupDTO, Ro
 
         robinGroupDTO.setTeams(teamsInGroupOrdered);
         robinGroupDTO.setRound(teamsInGroupOrdered.size() > 3 ? 2 : 1);
+        robinGroupDTO.setSeasonNum(robinGroup.getSeason().getSeasonYear());
     }
 
 }

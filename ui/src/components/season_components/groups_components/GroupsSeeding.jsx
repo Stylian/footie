@@ -214,27 +214,6 @@ class GroupsSeeding extends Component {
                                                 </TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align={"right"}>Winners</TableCell>
-                                                <TableCell>
-                                                    <ul>
-                                                        <li>top 2 promote to the 2nd Group stage</li>
-                                                    </ul>
-                                                </TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell align={"right"}>Order rules</TableCell>
-                                                <TableCell>
-                                                    <ol>
-                                                        <li>most points</li>
-                                                        <li>best goal difference</li>
-                                                        <li>most goals scored</li>
-                                                        <li>most wins</li>
-                                                        <li>highest coefficients</li>
-                                                        <li>alphabetical?</li>
-                                                    </ol>
-                                                </TableCell>
-                                            </TableRow>
-                                            <TableRow>
                                                 <TableCell align={"right"}>Coefficients granted</TableCell>
                                                 <TableCell>
                                                     <ul>

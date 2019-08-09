@@ -61,11 +61,11 @@ class Group extends Component {
         return (
             this.state.isLoaded ? (
                 <Paper style={{margin: 20}} elevation={20}>
-                    <LeagueToolbar pageTitle={this.state.group.name}/>
+                    <LeagueToolbar pageTitle={"Season " + this.state.group.seasonNum + " - " + this.state.group.name}/>
 
-                    <Box width={1200} style={{margin: 20}}>
+                    <Box width={1800} style={{margin: 20}}>
                         <Grid container spacing={1}>
-                            <Grid item sm={7}>
+                            <Grid item sm={5}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={this.state.group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
@@ -123,7 +123,7 @@ class Group extends Component {
                                 </Card>
                             </Grid>
 
-                            <Grid item sm={5}>
+                            <Grid item sm={3}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"Games"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
@@ -167,6 +167,105 @@ class Group extends Component {
                                     </CardContent>
                                 </Card>
                             </Grid>
+
+                            <Grid item sm={4}>
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        { this.state.group.round == 1 ? (
+                                            <table className="table">
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Winners</TableCell>
+                                                        <TableCell>
+                                                            <ul>
+                                                                <li>top 2 promote to the 2nd Group stage</li>
+                                                            </ul>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Order rules</TableCell>
+                                                        <TableCell>
+                                                            <ol>
+                                                                <li>most points</li>
+                                                                <li>best goal difference</li>
+                                                                <li>most goals scored</li>
+                                                                <li>most wins</li>
+                                                                <li>highest coefficients</li>
+                                                                <li>alphabetical?</li>
+                                                            </ol>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                        <TableCell>
+                                                            <ul>
+                                                                <li>1st place: 600</li>
+                                                                <li>2nd place: 300</li>
+                                                                <li>win: 1000</li>
+                                                                <li>draw: 500</li>
+                                                                <li>each goal scored: 100</li>
+                                                            </ul>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </TableBody>
+                                            </table>
+                                        ) : (
+                                            <table className="table">
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Format</TableCell>
+                                                        <TableCell>
+                                                            <ul>
+                                                                <li>round robin</li>
+                                                                <li>same games excluded</li>
+                                                                <li>1st group stage points are carried over</li>
+                                                            </ul>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Winners</TableCell>
+                                                        <TableCell>
+                                                            <ul>
+                                                                <li>1st team promotes to ½ finals</li>
+                                                                <li>2nd and 3rd teams promote to ¼ finals</li>
+                                                            </ul>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Order rules</TableCell>
+                                                        <TableCell>
+                                                            <ol>
+                                                                <li>most points</li>
+                                                                <li>best goal difference</li>
+                                                                <li>most goals scored</li>
+                                                                <li>most wins</li>
+                                                                <li>highest coefficients</li>
+                                                                <li>alphabetical?</li>
+                                                            </ol>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
+                                                        <TableCell align={"right"}>Coefficients granted</TableCell>
+                                                        <TableCell>
+                                                            <ul>
+                                                                <li>1st place: 2000</li>
+                                                                <li>2nd place: 600</li>
+                                                                <li>23rd place: 300</li>
+                                                                <li>win: 1000</li>
+                                                                <li>draw: 500</li>
+                                                                <li>each goal scored: 100</li>
+                                                            </ul>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </TableBody>
+                                            </table>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+
                         </Grid>
                     </Box>
                 </Paper>

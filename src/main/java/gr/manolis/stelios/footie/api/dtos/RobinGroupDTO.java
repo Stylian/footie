@@ -11,6 +11,7 @@ public class RobinGroupDTO {
     private List<TeamGroupDTO> teams;
     private List<Game> games;
     private int round;
+    private int seasonNum;
 
     public int getId() {
         return id;
@@ -50,5 +51,13 @@ public class RobinGroupDTO {
 
     public void setRound(int round) {
         this.round = round;
+    }
+
+    public int getSeasonNum() {
+        return seasonNum;
+    }
+
+    public void setSeasonNum(int seasonNum) {
+        this.seasonNum = seasonNum;
     }
 }

@@ -3,13 +3,10 @@ TODO bugs
 groups stage order of games messed up
 stats page broken
 
-FIX ME ! with curernt DB check quantdruple draw in the red line
-
 
 TODO 0.92
 seeding rules team mentioning
 preliminaries rules team participants
-team stats per season make empty lines
 remove teams func and greying out
 
 support for more teams?
