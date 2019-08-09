@@ -19,8 +19,8 @@ public class RobinGroup8 extends RobinGroup {
 	public RobinGroup8() {
 	}
 
-	public RobinGroup8(String name) {
-		super(name);
+	public RobinGroup8(String name, Season season) {
+		super(name, season);
 	}
 
 	public void addTeam(Team team) {

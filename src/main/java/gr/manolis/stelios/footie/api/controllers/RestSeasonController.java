@@ -23,6 +23,8 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrderingDTO;
+import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -296,6 +298,10 @@ public class RestSeasonController {
         logger.info("groupsRounds: " + groupsRound);
 
         List<RobinGroup> groups = groupsRound.getGroups();
+        for(RobinGroup rg : groups) {
+            Collections.sort(rg.getTeams(), new RobinGroupOrdering(rg,
+                    serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
+        }
         List<RobinGroupDTO> groupsDTO = robinGroupMapper.toDTO(groups);
 
         return groupsDTO;
@@ -435,7 +441,7 @@ public class RestSeasonController {
             theTeams.add(teamDTO);
         }
 
-        Collections.sort(theTeams, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
+        Collections.sort(theTeams, new CoefficientsRangeOrderingDTO());
         return theTeams;
     }
 
@@ -457,7 +463,7 @@ public class RestSeasonController {
             theTeams.add(teamDTO);
         }
 
-        Collections.sort(theTeams, Comparator.comparingInt(TeamCoeffsDTO::getCoefficients).reversed());
+        Collections.sort(theTeams, new CoefficientsRangeOrderingDTO());
         return theTeams;
     }
 

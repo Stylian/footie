@@ -15,8 +15,8 @@ public class RobinGroup12 extends RobinGroup {
 	public RobinGroup12() {
 	}
 
-	public RobinGroup12(String name) {
-		super(name);
+	public RobinGroup12(String name, Season season) {
+		super(name, season);
 	}
 
 	public void buildGames() {

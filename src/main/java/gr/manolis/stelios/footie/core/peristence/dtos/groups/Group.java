@@ -5,24 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import org.apache.commons.collections4.ListUtils;
 
 @Entity(name = "GROUPS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -40,6 +30,10 @@ public class Group {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Map<Team, Stats> teamsStats;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="TEAMS_ORDERED")
+	private List<Team> teams;
 
 	public Group() {
 	}
@@ -73,8 +67,15 @@ public class Group {
 		teamsStats.put(team, new Stats(this, team));
 	}
 
-	public List<Team> getTeams() {
+	public List<Team> getTeams1() {
 		return new ArrayList<>(teamsStats.keySet());
+	}
+
+	public List<Team> getTeams() {
+		if(teams == null || teams.size() < teamsStats.size()) {
+			teams = getTeams1();
+		}
+		return teams;
 	}
 
 	@Override

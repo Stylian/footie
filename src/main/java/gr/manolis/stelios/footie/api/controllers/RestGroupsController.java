@@ -5,6 +5,7 @@ import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
 import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
+import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 
 @RestController
 @Transactional
@@ -33,6 +35,8 @@ public class RestGroupsController {
 
         int groupId = NumberUtils.toInt(strGroupId);
         RobinGroup group = serviceUtils.loadRobinGroup(groupId);
+        Collections.sort(group.getTeams(), new RobinGroupOrdering(group,
+                serviceUtils.loadAllSeasons(), group.getSeason().getSeasonYear()-1));
 
         return robinGroupMapper.toDTO(group);
     }

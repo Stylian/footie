@@ -229,6 +229,7 @@ class GroupsSeeding extends Component {
                                                         <li>best goal difference</li>
                                                         <li>most goals scored</li>
                                                         <li>most wins</li>
+                                                        <li>highest coefficients</li>
                                                         <li>alphabetical?</li>
                                                     </ol>
                                                 </TableCell>

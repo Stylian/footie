@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.core.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +47,16 @@ public class PlayoffsRoundService {
 
 		List<Team> teamsA = groupsRoundOf8.getGroups().get(0).getTeams();
 		logger.info("teams from group A:" + Utils.toString(teamsA));
+		Collections.sort(teamsA, new RobinGroupOrdering(groupsRoundOf8.getGroups().get(0),
+				serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
 		playoffsRound.setgA1(teamsA.get(0));
 		playoffsRound.setgA2(teamsA.get(1));
 		playoffsRound.setgA3(teamsA.get(2));
 
 		List<Team> teamsB = groupsRoundOf8.getGroups().get(1).getTeams();
 		logger.info("teams from group B:" + Utils.toString(teamsB));
+		Collections.sort(teamsB, new RobinGroupOrdering(groupsRoundOf8.getGroups().get(1),
+				serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
 		playoffsRound.setgB1(teamsB.get(0));
 		playoffsRound.setgB2(teamsB.get(1));
 		playoffsRound.setgB3(teamsB.get(2));

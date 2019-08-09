@@ -1,29 +1,29 @@
 package gr.manolis.stelios.footie.core.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
 import gr.manolis.stelios.footie.core.Rules;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.*;
-import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup12;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup8;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
+import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @Transactional
@@ -120,25 +120,25 @@ public class GroupsRoundService {
         Collections.shuffle(weakTeams);
 
         // create groups and add teams and games
-        RobinGroup groupA = new RobinGroup12("Group A");
+        RobinGroup groupA = new RobinGroup12("Group A", season);
         groupA.addTeam(strongTeams.get(0));
         groupA.addTeam(mediumTeams.get(0));
         groupA.addTeam(weakTeams.get(0));
         groupA.buildGames();
 
-        RobinGroup groupB = new RobinGroup12("Group B");
+        RobinGroup groupB = new RobinGroup12("Group B", season);
         groupB.addTeam(strongTeams.get(1));
         groupB.addTeam(mediumTeams.get(1));
         groupB.addTeam(weakTeams.get(1));
         groupB.buildGames();
 
-        RobinGroup groupC = new RobinGroup12("Group C");
+        RobinGroup groupC = new RobinGroup12("Group C", season);
         groupC.addTeam(strongTeams.get(2));
         groupC.addTeam(mediumTeams.get(2));
         groupC.addTeam(weakTeams.get(2));
         groupC.buildGames();
 
-        RobinGroup groupD = new RobinGroup12("Group D");
+        RobinGroup groupD = new RobinGroup12("Group D", season);
         groupD.addTeam(strongTeams.get(3));
         groupD.addTeam(mediumTeams.get(3));
         groupD.addTeam(weakTeams.get(3));
@@ -169,20 +169,32 @@ public class GroupsRoundService {
 
         // must add winners from groups round of 12
         GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
+
         RobinGroup r12gA = groupsRoundOf12.getGroups().get(0);
+        Collections.sort(r12gA.getTeams(), new RobinGroupOrdering(r12gA,
+                serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
+
         RobinGroup r12gB = groupsRoundOf12.getGroups().get(1);
+        Collections.sort(r12gB.getTeams(), new RobinGroupOrdering(r12gB,
+                serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
+
         RobinGroup r12gC = groupsRoundOf12.getGroups().get(2);
+        Collections.sort(r12gC.getTeams(), new RobinGroupOrdering(r12gC,
+                serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
+
         RobinGroup r12gD = groupsRoundOf12.getGroups().get(3);
+        Collections.sort(r12gD.getTeams(), new RobinGroupOrdering(r12gD,
+                serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
 
         // create groups and add teams and games
-        RobinGroup groupA = new RobinGroup8("GROUP A");
+        RobinGroup groupA = new RobinGroup8("GROUP A", season);
         groupA.addTeam(r12gA.getTeams().get(0));
         groupA.addTeam(r12gA.getTeams().get(1));
         groupA.addTeam(r12gB.getTeams().get(0));
         groupA.addTeam(r12gB.getTeams().get(1));
         groupA.buildGames();
 
-        RobinGroup groupB = new RobinGroup8("GROUP B");
+        RobinGroup groupB = new RobinGroup8("GROUP B", season);
         groupB.addTeam(r12gC.getTeams().get(0));
         groupB.addTeam(r12gC.getTeams().get(1));
         groupB.addTeam(r12gD.getTeams().get(0));
@@ -256,6 +268,8 @@ public class GroupsRoundService {
                 // add coeffs for groups12 positions
                 groupsRound = (GroupsRound) season.getRounds().get(3);
                 for (RobinGroup robinGroup : groupsRound.getGroups()) {
+                    Collections.sort(robinGroup.getTeams(), new RobinGroupOrdering(robinGroup,
+                            serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP12_2ND_PLACE);
 
@@ -277,6 +291,8 @@ public class GroupsRoundService {
                 // add coeffs for groups8 positions
                 groupsRound = (GroupsRound) season.getRounds().get(4);
                 for (RobinGroup robinGroup : groupsRound.getGroups()) {
+                    Collections.sort(robinGroup.getTeams(), new RobinGroupOrdering(robinGroup,
+                            serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
                     robinGroup.getTeams().get(0).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_1ST_PLACE);
                     robinGroup.getTeams().get(1).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_2ND_PLACE);
                     robinGroup.getTeams().get(2).getStatsForGroup(season).addPoints(Rules.POINTS_GROUP8_3RD_PLACE);

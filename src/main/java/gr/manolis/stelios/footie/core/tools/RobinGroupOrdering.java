@@ -1,15 +1,24 @@
 package gr.manolis.stelios.footie.core.tools;
 
+import gr.manolis.stelios.footie.core.Utils;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import org.apache.commons.lang3.RandomUtils;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 
+import java.util.List;
+
 public class RobinGroupOrdering extends Ordering {
-	
-	public RobinGroupOrdering(Group group) {
+
+	private List<Season> seasons;
+	private int seasonUntil;
+
+	public RobinGroupOrdering(Group group, List<Season> seasons, int seasonUntil) {
 		super(group);
+		this.seasons = seasons;
+		this.seasonUntil = seasonUntil;
 	}
 
 	@Override
@@ -38,7 +47,16 @@ public class RobinGroupOrdering extends Ordering {
 			return s2.getWins() - s1.getWins();
 		}
 
-		// RULE 5 Alphabetical
+		// RULE 5 coefficients
+		int p1 = Utils.getCoefficientsUntilSeason(seasons, o1, seasonUntil);
+		int p2 = Utils.getCoefficientsUntilSeason(seasons, o2, seasonUntil);
+
+		// compare by coeffs
+		if( p1 != p2) {
+			return p2 - p1;
+		}
+
+		// RULE 6 Alphabetical
 		return o1.getName().compareTo(o2.getName());
 	}
 }

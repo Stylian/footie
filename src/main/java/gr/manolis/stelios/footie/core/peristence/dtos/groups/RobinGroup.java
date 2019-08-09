@@ -1,63 +1,44 @@
 package gr.manolis.stelios.footie.core.peristence.dtos.groups;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
-import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "R")
 public class RobinGroup extends Group {
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<GroupGame> games;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<GroupGame> games;
 
-	public RobinGroup() {
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Season season;
 
-	public RobinGroup(String name) {
-		super(name);
-		games = new ArrayList<>();
-	}
+    public RobinGroup() {
+    }
 
-	public List<GroupGame> getGames() {
-		return games;
-	}
+    public RobinGroup(String name, Season season) {
+        super(name);
+        this.season = season;
+        games = new ArrayList<>();
+    }
 
-	public void addGame(GroupGame game) {
-		games.add(game);
-	}
+    public List<GroupGame> getGames() {
+        return games;
+    }
 
-	public void addGames(List<GroupGame> newGames) {
-		games.addAll(newGames);
-	}
+    public void addGame(GroupGame game) {
+        games.add(game);
+    }
 
-	/**
-	 * teams in robin group come sorted
-	 */
-	@Override
-	public List<Team> getTeams() {
-		List<Team> teams = super.getTeams();
-		Collections.sort(teams, new RobinGroupOrdering(this));
+    public void buildGames() {
+        // to extend
+    }
 
-		return teams;
-
-	}
-
-	public void buildGames() {
-		// to extend
-	};
-
+    public Season getSeason() {
+        return season;
+    }
 }

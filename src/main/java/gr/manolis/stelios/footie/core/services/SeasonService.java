@@ -1,38 +1,21 @@
 package gr.manolis.stelios.footie.core.services;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.transaction.Transactional;
-
-import gr.manolis.stelios.footie.core.peristence.dtos.*;
-import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
-import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
+import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
+import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 @Transactional
