@@ -197,7 +197,7 @@ class Seeding extends Component {
                                                 <TableCell align={"right"}>Teams</TableCell>
                                                 <TableCell>
                                                     <ul>
-                                                        <li>36</li>
+                                                        <li>{this.state.teams.length}</li>
                                                     </ul>
                                                 </TableCell>
                                             </TableRow>
