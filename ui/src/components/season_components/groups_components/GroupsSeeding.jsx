@@ -193,7 +193,11 @@ class GroupsSeeding extends Component {
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell align={"right"}>Teams</TableCell>
-                                                <TableCell>12</TableCell>
+                                                <TableCell>
+                                                    <ul>
+                                                        <li>12</li>
+                                                    </ul>
+                                                </TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell align={"right"}>Participation</TableCell>

@@ -172,8 +172,7 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Participation</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>bottom teams by coefficients as
-                                                                needed</li>
+                                                            <li>bottom {this.state.teamsStrong.length * 2} teams by coefficients</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
@@ -228,7 +227,7 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Participation</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>5th to as needed teams by coefficients</li>
+                                                            <li>middle teams by coefficients</li>
                                                             <li>winners from the preliminary round</li>
                                                         </ul>
                                                     </TableCell>
