@@ -164,7 +164,7 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Teams</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>as needed</li>
+                                                            <li>{this.state.teamsStrong.length * 2}</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
