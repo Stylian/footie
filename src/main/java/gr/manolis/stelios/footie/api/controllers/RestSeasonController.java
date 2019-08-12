@@ -55,10 +55,6 @@ public class RestSeasonController {
     @Autowired
     private TeamSimpleMapper teamSimpleMapper;
 
-    // -------------------------------------------------------------------------------------------------
-    // -------------------------------------------------------------------------------------------------
-    // -------------------------------------------------------------------------------------------------
-
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
 
@@ -70,7 +66,7 @@ public class RestSeasonController {
 
      @RequestMapping("/")
     public int seasonYear() {
-        return serviceUtils.getLeague().getSeasonNum();
+        return serviceUtils.getNumberOfSeasons();
     }
 
     @RequestMapping("/{year}/status")

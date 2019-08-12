@@ -4,14 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,8 +15,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupFormat;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
 
-@Entity
-@DiscriminatorValue(value = "PR")
+@Entity(name = "ROUNDS_PLAYOFFSROUNDS")
 public class PlayoffsRound extends Round {
 
 	@ManyToOne(fetch = FetchType.LAZY)

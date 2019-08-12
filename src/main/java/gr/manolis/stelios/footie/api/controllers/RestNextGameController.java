@@ -1,7 +1,6 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
@@ -47,8 +46,7 @@ public class RestNextGameController {
     public Game getNextGameAndMoveStages() {
         logger.info("getNextGame");
 
-        League league = (League) (restOperationsController.getOrCreateLeague().getBody()); // runs only the very first time
-        if (league.getSeasonNum() < 1) {
+        if (serviceUtils.getNumberOfSeasons() < 1) {
             return new Game();
         }
 

@@ -1,15 +1,10 @@
 package gr.manolis.stelios.footie.api.controllers;
 
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
-import gr.manolis.stelios.footie.core.services.GameService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,23 +28,16 @@ public class RestOperationsController {
     @Autowired
     private ServiceUtils serviceUtils;
 
-    @PostMapping("/league")
-    public ResponseEntity getOrCreateLeague() {
-        League league = operationsService.createLeague();
-        return ResponseEntity.ok().body(league);
-    }
-
     @GetMapping("/league/can_create_season")
     public Object[] canCreateLeague() {
-        League league = operationsService.createLeague();
 
         boolean canCreate = false;
-        if (league.getSeasonNum() == 0) {
+        if (serviceUtils.getNumberOfSeasons() == 0) {
             canCreate = true;
         } else {
             canCreate = serviceUtils.loadCurrentSeason().getStage() == Stage.FINISHED;
         }
-        return new Object[]{canCreate, league.getSeasonNum()};
+        return new Object[]{canCreate, serviceUtils.getNumberOfSeasons()};
     }
 
     @PostMapping("/season/create")

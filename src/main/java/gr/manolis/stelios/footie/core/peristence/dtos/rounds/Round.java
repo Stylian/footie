@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Entity(name = "ROUNDS")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Round {
 
 	@Id

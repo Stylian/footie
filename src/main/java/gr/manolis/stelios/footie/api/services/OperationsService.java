@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gr.manolis.stelios.footie.api.RestResponse;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.services.BootService;
 import gr.manolis.stelios.footie.core.services.GameService;
 import gr.manolis.stelios.footie.core.services.GroupsRoundService;
 import gr.manolis.stelios.footie.core.services.PlayoffsRoundService;
@@ -24,9 +22,6 @@ import gr.manolis.stelios.footie.core.services.SeasonService;
 @Service
 @Transactional
 public class OperationsService {
-
-	@Autowired
-	private BootService bootService;
 
 	@Autowired
 	private SeasonService seasonService;
@@ -42,10 +37,6 @@ public class OperationsService {
 
 	@Autowired
 	private GameService gameService;
-
-	public League createLeague() {
-		return bootService.loadLeague();
-	}
 
 	public Season createSeason() {
 		return seasonService.createSeason();

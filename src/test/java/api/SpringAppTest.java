@@ -40,8 +40,6 @@ public class SpringAppTest {
 	@Test
 	public void testOps() throws Exception {
 
-		checkURL("/rest/ops/league", "{seasonNum=0}");
-
 		for (int n = 1; n < 4; n++)
 			runSeason(n);
 
@@ -49,7 +47,6 @@ public class SpringAppTest {
 
 	@Test
 	public void runSeason1() throws Exception {
-		checkURL("/rest/ops/league", "{seasonNum=0}");
 		runSeason(1);
 	}
 

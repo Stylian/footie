@@ -1,23 +1,21 @@
 package gr.manolis.stelios.footie.core.services;
 
+import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import org.apache.commons.io.FileUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.NumberUtils;
 
 import javax.transaction.Transactional;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -26,6 +24,9 @@ public class ServiceUtils {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private UIPersistService persistService;
 
 	public boolean testDbConnection() {
 
@@ -37,25 +38,9 @@ public class ServiceUtils {
 		return works[0];
 	}
 
-
-	public League getLeague() {
-
-		DataAccessObject<League> groupDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-
-		List<League> ls = groupDao.list("LEAGUES");
-
-		return ls.size() > 0 ? groupDao.list("LEAGUES").get(0) : null;
-
-	}
-
 	public Season loadCurrentSeason() {
-
-		League league = getLeague();
-
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-
-		return dao.listByField("GROUPS", "SEASON_YEAR", "" + league.getSeasonNum()).get(0);
-
+		return dao.listByField("GROUPS", "SEASON_YEAR", "" + getNumberOfSeasons()).get(0);
 	}
 
 	public Season loadSeason(int year) {
@@ -66,7 +51,12 @@ public class ServiceUtils {
 	}
 
 	public int getNumberOfSeasons() {
-		return getLeague().getSeasonNum();
+		String strSeasonNum = persistService.getPropertyValue("seasonNum");
+		int seasonNum = 0;
+		if(strSeasonNum != null) {
+			seasonNum = Integer.parseInt(strSeasonNum);
+		}
+		return seasonNum;
 	}
 	
 	@SuppressWarnings("unchecked")

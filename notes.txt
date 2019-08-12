@@ -1,12 +1,14 @@
 
-TODO bugs
+db issues
+season takes columns, should be separated from groups
+
+TEAMS_ORDERED needs table
+
+robingroups strong,medium,weak could be packed in 1 table
+
+
+TODO 1.1
 groups stage order of games messed up
 stats page broken- on adding teams?
-
-
-TODO 0.92
-seeding rules team mentioning
-preliminaries rules team participants
 remove teams func and greying out
 
-support for less teams?

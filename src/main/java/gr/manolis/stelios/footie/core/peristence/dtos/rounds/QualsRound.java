@@ -3,13 +3,7 @@ package gr.manolis.stelios.footie.core.peristence.dtos.rounds;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,8 +12,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 
-@Entity
-@DiscriminatorValue(value = "Q")
+@Entity(name = "ROUNDS_QUALSROUNDS")
 public class QualsRound extends Round {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

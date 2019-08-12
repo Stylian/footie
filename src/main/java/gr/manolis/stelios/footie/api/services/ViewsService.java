@@ -3,7 +3,6 @@ package gr.manolis.stelios.footie.api.services;
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.core.Utils;
-import gr.manolis.stelios.footie.core.peristence.dtos.League;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -12,7 +11,6 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import gr.manolis.stelios.footie.core.services.SeasonService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.log4j.Logger;
@@ -38,10 +36,6 @@ public class ViewsService {
 
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
-
-	public League getLeague() {
-		return serviceUtils.getLeague();
-	}
 
 	public List<Season> getAllSeasons() {
 		return serviceUtils.loadAllSeasons();

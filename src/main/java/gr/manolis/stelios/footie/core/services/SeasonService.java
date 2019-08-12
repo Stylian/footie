@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.core.services;
 
+import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.*;
@@ -24,6 +25,9 @@ public class SeasonService {
     final static Logger logger = Logger.getLogger(SeasonService.class);
 
     @Autowired
+    private UIPersistService persistService;
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -32,14 +36,12 @@ public class SeasonService {
     public Season createSeason() {
         logger.info("creating season");
 
-        League league = serviceUtils.getLeague();
-        league.addSeason();
-        DataAccessObject<League> dao2 = new DataAccessObject<>(sessionFactory.getCurrentSession());
-        dao2.save(league);
+        int numberOfSeasons = serviceUtils.getNumberOfSeasons();
+        persistService.setPropertyValue("seasonNum", "" + (numberOfSeasons + 1));
 
-        logger.info("creating season " + league.getSeasonNum());
+        logger.info("creating season " + numberOfSeasons + 1);
 
-        Season season = new Season(league.getSeasonNum());
+        Season season = new Season( numberOfSeasons + 1);
         season.setStage(Stage.NOT_STARTED);
 
         List<Team> teams = Utils.getTeamsFromFile(logger, serviceUtils.loadTeams());

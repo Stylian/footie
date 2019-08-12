@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "GROUPS_ROBINGROUP")
 @DiscriminatorValue(value = "R")
 public class RobinGroup extends Group {
 

@@ -72,10 +72,6 @@ public class Team {
 		}
 	}
 
-	public Stats setStatsForGroup(Group group, Stats stats) {
-		return groupStats.put(group, stats);
-	}
-
 	public void addTrophy(Trophy trophy) {
 		trophies.add(trophy);
 	}
