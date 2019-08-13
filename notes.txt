@@ -1,11 +1,12 @@
 
-db issues
-season takes columns, should be separated from groups
+TODO before 1.0 release
 
+db issues
+GROUP_STATS_TEAMS to fix duplicate table
+derby.log to move to logs folder
 TEAMS_ORDERED needs table
 
-robingroups strong,medium,weak could be packed in 1 table
-
+QA todo
 
 TODO 1.1
 groups stage order of games messed up

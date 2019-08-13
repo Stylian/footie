@@ -9,8 +9,7 @@ import javax.persistence.Entity;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 
-@Entity
-@DiscriminatorValue(value = "R8")
+@Entity(name = "GROUPS_ROBIN_8")
 public class RobinGroup8 extends RobinGroup {
 
 	// keeps order for game buildings

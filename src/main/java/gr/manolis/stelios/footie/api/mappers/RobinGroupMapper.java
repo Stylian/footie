@@ -3,12 +3,9 @@ package gr.manolis.stelios.footie.api.mappers;
 
 import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamGroupDTO;
-import gr.manolis.stelios.footie.core.EntityMapper;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
-import org.junit.After;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -20,7 +17,11 @@ import java.util.Map;
 
 
 @Mapper(componentModel = "spring")
-public abstract class RobinGroupMapper implements EntityMapper<RobinGroupDTO, RobinGroup> {
+public abstract class RobinGroupMapper {
+
+    public abstract RobinGroupDTO toDTO(RobinGroup entity);
+
+    public abstract List<RobinGroupDTO> toDTO(List<RobinGroup> entityList);
 
     @Autowired
     TeamGroupMapper teamGroupMapper;

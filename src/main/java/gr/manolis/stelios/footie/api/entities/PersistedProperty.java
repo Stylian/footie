@@ -14,7 +14,7 @@ public class PersistedProperty {
     @Column(name = "ID")
     private int id;
 
-    @Column(name = "PROPERTY_NAME")
+    @Column(name = "PROPERTY_NAME", unique = true)
     private String name;
 
     @Column(name = "PROPERTY_VALUE")

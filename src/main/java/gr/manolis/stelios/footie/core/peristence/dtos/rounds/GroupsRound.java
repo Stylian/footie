@@ -13,22 +13,22 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 
-@Entity(name = "ROUNDS_GROUPROUNDS")
+@Entity(name = "ROUNDS_GROUPSROUNDS")
 public class GroupsRound extends Round {
 
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<RobinGroup> groups = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "GROUPS_STRONG_TEAMS")
+	@JoinTable(name = "ROUNDS_GROUPSROUNDS_STRONG_TEAMS")
 	private List<Team> strongTeams;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "GROUPS_MEDIUM_TEAMS")
+	@JoinTable(name = "ROUNDS_GROUPSROUNDS_MEDIUM_TEAMS")
 	private List<Team> mediumTeams;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "GROUPS_WEAK_TEAMS")
+	@JoinTable(name = "ROUNDS_GROUPSROUNDS_WEAK_TEAMS")
 	private List<Team> weakTeams;
 
 	public GroupsRound() {

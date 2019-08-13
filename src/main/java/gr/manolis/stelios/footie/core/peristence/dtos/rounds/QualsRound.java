@@ -19,11 +19,11 @@ public class QualsRound extends Round {
 	private List<Matchup> matchups = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "QUALS_STRONG_TEAMS")
+	@JoinTable(name = "ROUNDS_QUALSROUNDS_STRONG_TEAMS")
 	private List<Team> strongTeams;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "QUALS_WEAK_TEAMS")
+	@JoinTable(name = "ROUNDS_QUALSROUNDS_WEAK_TEAMS")
 	private List<Team> weakTeams;
 
 	public QualsRound() {

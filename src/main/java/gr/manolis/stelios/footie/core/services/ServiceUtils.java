@@ -40,13 +40,13 @@ public class ServiceUtils {
 
 	public Season loadCurrentSeason() {
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-		return dao.listByField("GROUPS", "SEASON_YEAR", "" + getNumberOfSeasons()).get(0);
+		return dao.listByField("SEASONS", "SEASON_YEAR", "" + getNumberOfSeasons()).get(0);
 	}
 
 	public Season loadSeason(int year) {
 
 		return (Season) sessionFactory.getCurrentSession()
-				.createQuery("from GROUPS where discriminator='S' and SEASON_YEAR=" + year).uniqueResult();
+				.createQuery("from SEASONS where SEASON_YEAR=" + year).uniqueResult();
 
 	}
 
@@ -61,7 +61,7 @@ public class ServiceUtils {
 	
 	@SuppressWarnings("unchecked")
 	public List<Season> loadAllSeasons() {
-		return sessionFactory.getCurrentSession().createQuery("from GROUPS where discriminator='S' ").list();
+		return sessionFactory.getCurrentSession().createQuery("from SEASONS").list();
 	}
 
 	@SuppressWarnings("unchecked")

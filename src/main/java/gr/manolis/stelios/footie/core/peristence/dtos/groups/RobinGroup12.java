@@ -8,8 +8,7 @@ import javax.persistence.Entity;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 
-@Entity
-@DiscriminatorValue(value = "R12")
+@Entity(name = "GROUPS_ROBIN_12")
 public class RobinGroup12 extends RobinGroup {
 
 	public RobinGroup12() {

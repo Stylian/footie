@@ -184,8 +184,7 @@ public class GameService {
             switch (matchup.getTieStrategy()) {
                 case REPLAY_GAMES_ONCE:
                     if (matchup.getGames().size() < 3) {
-                        games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
-                        games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+                        createReplayMatches(matchup, games, teamHome, teamAway);
                         break;
                     } else {
                         // fall through if coeffs are tied
@@ -204,8 +203,7 @@ public class GameService {
                     }
                     // fall through if coeffs are tied
                 case REPLAY_GAMES:
-                    games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
-                    games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+                    createReplayMatches(matchup, games, teamHome, teamAway);
                     break;
                 case BEST_POSITION_IN_KNOCKOUTS_TREE:
                     matchup.setWinner(teamHome);
@@ -222,6 +220,17 @@ public class GameService {
             }
         }
 
+    }
+
+    private void createReplayMatches(Matchup matchup, List<Game> games, Team teamHome, Team teamAway) {
+        Team lastHome = games.get(games.size()-1).getHomeTeam();
+        if(teamHome.equals(lastHome)) {
+            games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+            games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
+        }else {
+            games.add(new MatchupGame(teamAway, teamHome, Game.EXTRA_GAME, matchup));
+            games.add(new MatchupGame(teamHome, teamAway, Game.EXTRA_GAME, matchup));
+        }
     }
 
     private boolean highestCoeffWinsReturnFalseIfEqual(Matchup matchup, Team teamHome, Team teamAway) {

@@ -19,8 +19,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 
-@Entity
-@DiscriminatorValue(value = "S")
+@Entity(name = "SEASONS")
 public class Season extends Group {
 
 	@Column(name = "SEASON_YEAR")

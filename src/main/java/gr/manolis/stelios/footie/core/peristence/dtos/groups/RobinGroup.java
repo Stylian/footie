@@ -7,9 +7,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "GROUPS_ROBINGROUP")
-@DiscriminatorValue(value = "R")
-public class RobinGroup extends Group {
+@Entity
+public abstract class RobinGroup extends Group {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<GroupGame> games;
