@@ -29,9 +29,7 @@ public abstract class Group {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Map<Team, Stats> teamsStats;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="TEAMS_ORDERED")
-	private List<Team> teams;
+	private transient List<Team> teams;
 
 	public Group() {
 	}

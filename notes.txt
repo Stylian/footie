@@ -3,9 +3,7 @@ TODO before 1.0 release
 
 db issues
 GROUP_STATS_TEAMS to fix duplicate table
-TEAMS_ORDERED needs table
 
-format coeffs with dot
 QA todo
 
 TODO 1.1

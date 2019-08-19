@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import goldmedal from "../../icons/goldmedal.png";
 import silvermedal from "../../icons/silvermedal.png";
+import Numeral from "numeral";
 
 class Seeding extends Component {
 
@@ -103,8 +104,7 @@ class Seeding extends Component {
                                                                                 }
                                                                             })}
                                                                             {team.name}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{team.coefficients}</TableCell>
+                                                                        <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                                     </TableRow>)
                                                             })}
                                                         </TableBody>
@@ -148,8 +148,7 @@ class Seeding extends Component {
                                                                                 }
                                                                             })}
                                                                             {team.name}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{team.coefficients}</TableCell>
+                                                                        <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                                     </TableRow>)
                                                             })}
                                                         </TableBody>

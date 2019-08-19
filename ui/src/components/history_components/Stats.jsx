@@ -8,6 +8,7 @@ import {
     TableCell,
     TableBody, CardHeader, CardContent, Card
 } from "@material-ui/core";
+import Numeral from "numeral";
 
 class Stats extends Component {
 
@@ -110,7 +111,7 @@ class Stats extends Component {
                                                                 <TableCell
                                                                     align="right">{this.state.teams[key].goalsScored - this.state.teams[key].goalsConceded}</TableCell>
                                                                 <TableCell
-                                                                    align="right">{this.state.teams[key].points}</TableCell>
+                                                                    align="right">{Numeral(this.state.teams[key].points/1000).format('0.000')}</TableCell>
                                                             </TableRow>)
                                                     })}
                                                 </TableBody>
@@ -152,7 +153,7 @@ class Stats extends Component {
                                                                 <TableCell
                                                                     align="right">{this.state.teams[key].goalsScored - this.state.teams[key].goalsConceded}</TableCell>
                                                                 <TableCell
-                                                                    align="right">{this.state.teams[key].points}</TableCell>
+                                                                    align="right">{Numeral(this.state.teams[key].points/1000).format('0.000')}</TableCell>
                                                             </TableRow>)
                                                     })}
                                                 </TableBody>

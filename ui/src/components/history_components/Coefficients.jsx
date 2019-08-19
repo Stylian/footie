@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Numeral from "numeral";
 import {
     TableHead,
     TableRow,
@@ -152,7 +153,7 @@ class Coefficients extends Component {
                                                             >
                                                                 <TableCell align="right">{index + 1}</TableCell>
                                                                 <TableCell>{team.name}</TableCell>
-                                                                <TableCell align="right">{team.coefficients}</TableCell>
+                                                                <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                             </TableRow>)
                                                     })}
                                                 </TableBody>
@@ -186,7 +187,7 @@ class Coefficients extends Component {
                                                                 <TableCell
                                                                     align="right">{leftSide.length + index + 1}</TableCell>
                                                                 <TableCell>{team.name}</TableCell>
-                                                                <TableCell align="right">{team.coefficients}</TableCell>
+                                                                <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                             </TableRow>)
                                                     })}
                                                 </TableBody>

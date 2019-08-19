@@ -12,6 +12,7 @@ import {
     TableRow
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import Numeral from "numeral";
 
 class QualsSeeding extends Component {
 
@@ -113,7 +114,7 @@ class QualsSeeding extends Component {
                                                               onClick={this.goToTeam}>
                                                         <TableCell align="right">{index + 1}</TableCell>
                                                         <TableCell>{team.name}</TableCell>
-                                                        <TableCell align="right">{team.coefficients}</TableCell>
+                                                        <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                     </TableRow>)
                                             })}
                                         </TableBody>
@@ -143,7 +144,7 @@ class QualsSeeding extends Component {
                                                         <TableCell
                                                             align="right">{this.state.teamsStrong.length + index + 1}</TableCell>
                                                         <TableCell>{team.name}</TableCell>
-                                                        <TableCell align="right">{team.coefficients}</TableCell>
+                                                        <TableCell align="right">{Numeral(team.coefficients/1000).format('0.000')}</TableCell>
                                                     </TableRow>)
                                             })}
                                         </TableBody>
