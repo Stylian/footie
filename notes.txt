@@ -2,7 +2,8 @@
 TODO before 1.0 release
 
 db issues
-GROUP_STATS_TEAMS to fix duplicate table
+
+where strong/weak
 
 QA todo
 

@@ -21,15 +21,17 @@ public class Team {
 
 	@Column(name = "NAME", unique = true)
 	private String name;
+//
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
+//	private Map<Group, Stats> groupStats;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Map<Group, Stats> groupStats;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
+	private List<Stats> stats = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Trophy> trophies;
 
 	public Team() {
-		groupStats = new HashMap<>();
 		trophies = new ArrayList<>();
 	}
 
@@ -54,21 +56,19 @@ public class Team {
 		this.name = name;
 	}
 
-	@JsonIgnore
-	public Map<Group, Stats> getGroupStats() {
-		return groupStats;
-	}
-
-	public void addGroupStats(Group group, Stats stats) {
-		groupStats.put(group, stats);
-	}
-
 	public Stats getStatsForGroup(Group group) {
-		if(this.getGroupStats().containsKey(group)) {
-			return groupStats.get(group);
-		}else {
-			return new Stats();
+
+		for(Stats stat : stats) {
+			if(group.equals(stat.getGroup())) {
+				return stat;
+			}
 		}
+
+		return new Stats();
+	}
+
+	public void addStats(Stats stat) {
+		stats.add(stat);
 	}
 
 	public void addTrophy(Trophy trophy) {

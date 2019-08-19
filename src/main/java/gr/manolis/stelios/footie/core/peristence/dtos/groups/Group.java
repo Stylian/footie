@@ -26,21 +26,16 @@ public abstract class Group {
 	@Column(name = "NAME")
 	protected String name;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Map<Team, Stats> teamsStats;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
+	private List<Stats> stats = new ArrayList<>();
 
-	private transient List<Team> teams;
+	private transient List<Team> teamsOrdered;
 
 	public Group() {
 	}
 
-	public Group(Map<Team, Stats> teamsStats) {
-		this.teamsStats = teamsStats;
-	}
-
 	public Group(String name) {
 		this.name = name;
-		teamsStats = new HashMap<>();
 	}
 
 	public int getId() {
@@ -52,6 +47,10 @@ public abstract class Group {
 	}
 
 	public Map<Team, Stats> getTeamsStats() {
+		Map<Team, Stats> teamsStats = new HashMap<>();
+		for(Stats stat : stats) {
+			teamsStats.put(stat.getTeam(), stat);
+		}
 		return teamsStats;
 	}
 
@@ -60,18 +59,20 @@ public abstract class Group {
 	}
 
 	public void addTeam(Team team) {
-		teamsStats.put(team, new Stats(this, team));
-	}
-
-	public List<Team> getTeams1() {
-		return new ArrayList<>(teamsStats.keySet());
+		new Stats(this, team);
 	}
 
 	public List<Team> getTeams() {
-		if(teams == null || teams.size() < teamsStats.size()) {
-			teams = getTeams1();
+		if(teamsOrdered != null) {
+			return teamsOrdered;
+		}else {
+			teamsOrdered = new ArrayList<>(getTeamsStats().keySet());
 		}
-		return teams;
+		return teamsOrdered;
+	}
+
+	public void addStats(Stats stat) {
+		stats.add(stat);
 	}
 
 	@Override

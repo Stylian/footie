@@ -51,14 +51,12 @@ public class Stats {
 		this.group = group;
 		this.team = team;
 
-		this.team.addGroupStats(this.group, this);
+		group.addStats(this);
+		team.addStats(this);
 	}
 
 	/**
 	 * clone constructor, ignores references
-	 * 
-	 * @param st
-	 *          the stats to use
 	 */
 	public Stats(Stats st) {
 
