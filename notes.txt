@@ -1,12 +1,4 @@
 
-TODO before 1.0 release
-
-db issues
-
-where strong/weak
-
-QA todo
-
 TODO 1.1
 groups stage order of games messed up
 stats page broken- on adding teams?

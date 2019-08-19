@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
@@ -21,8 +22,14 @@ import org.springframework.util.MultiValueMap;
 import gr.manolis.stelios.footie.api.App;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes =
+		{
+				App.class,
+				DerbyTestDbConfig.class
+		},
+		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = { "management.port=0" })
+@ActiveProfiles("test")
 public class SpringAppTest {
 
 	@LocalServerPort
@@ -31,24 +38,13 @@ public class SpringAppTest {
 	@Autowired
 	private TestRestTemplate testRestTemplate;
 
-//	@Test
-//	public void fillGames() throws Exception {
-//		checkURL("/rest/ops/fillGames", "{status=success, message=games added}");
-//	}
-//
-//
 	@Test
 	public void testOps() throws Exception {
 
-		for (int n = 1; n < 4; n++)
+		for (int n = 1; n < 3; n++)
 			runSeason(n);
 
 	}
-//
-//	@Test
-//	public void runSeason1() throws Exception {
-//		runSeason(1);
-//	}
 
 	private void runSeason(int seasonNum) {
 		checkURL("/rest/ops/season/create", "{status=success, message=created Season " + seasonNum + "}");

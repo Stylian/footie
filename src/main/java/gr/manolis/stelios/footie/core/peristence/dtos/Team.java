@@ -21,9 +21,6 @@ public class Team {
 
 	@Column(name = "NAME", unique = true)
 	private String name;
-//
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
-//	private Map<Group, Stats> groupStats;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Stats> stats = new ArrayList<>();

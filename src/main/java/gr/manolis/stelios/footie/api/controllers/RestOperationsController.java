@@ -5,6 +5,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -148,19 +149,9 @@ public class RestOperationsController {
         return new RestResponse(RestResponse.SUCCESS, "game result added ");
     }
 
-
-    // TO REMOVE
-
-
+    // used for testing, do not access
     @GetMapping("/fill")
     public RestResponse fillGamesTEST1() {
-
-        return operationsService.fillGamesTEST();
-    }
-
-    @PostMapping("/fillGames")
-    public RestResponse fillGamesTEST() {
-
         return operationsService.fillGamesTEST();
     }
 
