@@ -25,8 +25,7 @@ public class Team {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Map<Group, Stats> groupStats;
 
-	@Column(name = "TROPHIES")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Trophy> trophies;
 
 	public Team() {

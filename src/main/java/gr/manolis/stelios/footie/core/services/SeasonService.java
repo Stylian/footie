@@ -202,8 +202,8 @@ public class SeasonService {
         Team runnerUp = finalsMatchup.getWinner().equals(finalsMatchup.getTeamHome()) ?
                 finalsMatchup.getTeamAway() : finalsMatchup.getTeamHome();
 
-        winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER));
-        runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP));
+        winner.addTrophy(new Trophy(season.getSeasonYear(), Trophy.WINNER, winner));
+        runnerUp.addTrophy(new Trophy(season.getSeasonYear(), Trophy.RUNNER_UP, runnerUp));
 
         List<Team> semifinalists = new ArrayList<>();
         for (Matchup matchup : playoffsRound.getSemisMatchups()) {

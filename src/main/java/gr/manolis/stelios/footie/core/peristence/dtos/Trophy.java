@@ -1,9 +1,8 @@
 package gr.manolis.stelios.footie.core.peristence.dtos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity(name = "TROPHIES")
 public class Trophy {
@@ -22,11 +21,16 @@ public class Trophy {
     @Column(name = "TROPHY_TYPE")
     private String type;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Team team;
+
     public Trophy() { }
 
-    public Trophy(int seasonNum, String type) {
+    public Trophy(int seasonNum, String type, Team team) {
         this.seasonNum = seasonNum;
         this.type = type;
+        this.team = team;
     }
 
     public int getSeasonNum() {
@@ -43,5 +47,13 @@ public class Trophy {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
