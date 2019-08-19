@@ -15,7 +15,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 @Entity(name = "ROUNDS_QUALSROUNDS")
 public class QualsRound extends Round {
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "round")
 	private List<Matchup> matchups = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)

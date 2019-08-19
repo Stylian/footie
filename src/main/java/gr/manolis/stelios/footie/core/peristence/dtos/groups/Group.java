@@ -26,7 +26,7 @@ public abstract class Group {
 	@Column(name = "NAME")
 	protected String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Map<Team, Stats> teamsStats;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

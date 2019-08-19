@@ -3,13 +3,13 @@ TODO before 1.0 release
 
 db issues
 GROUP_STATS_TEAMS to fix duplicate table
-derby.log to move to logs folder
 TEAMS_ORDERED needs table
 
+format coeffs with dot
 QA todo
 
 TODO 1.1
 groups stage order of games messed up
 stats page broken- on adding teams?
 remove teams func and greying out
-
+derby.log to move to logs folder

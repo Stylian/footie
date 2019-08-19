@@ -37,7 +37,7 @@ public class Season extends Group {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team semifinalist2;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "season")
 	private List<Round> rounds;
 
 	@Enumerated(EnumType.STRING)

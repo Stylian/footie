@@ -40,7 +40,7 @@ public class Matchup {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team winner;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Round round;
 
 	public Matchup() {
