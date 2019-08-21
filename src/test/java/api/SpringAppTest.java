@@ -41,8 +41,8 @@ public class SpringAppTest {
 	@Test
 	public void testOps() throws Exception {
 
-		for (int n = 1; n < 3; n++)
-			runSeason(n);
+//		for (int n = 1; n < 3; n++)
+//			runSeason(n);
 
 	}
 

@@ -62,7 +62,7 @@ class GroupsDisplay extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={1300}>
+                <Box width={1400}>
                     <Grid container spacing={1}>
                         {this.state.groups.map((group, index) => {
 

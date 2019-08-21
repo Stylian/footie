@@ -155,8 +155,12 @@ public class RestSeasonController {
                 teamsWeak = qr.getTeams().subList(13, qr.getTeams().size());
             }else { // playoffs round
                 if(season.getSeasonYear() == 1) {
-                    teamsStrong = qr.getTeams().subList(0, 12);
-                    teamsWeak = qr.getTeams().subList(12, qr.getTeams().size());
+                    if(qr.getTeams().size() < 12) {
+                        teamsStrong = qr.getTeams();
+                    }else {
+                        teamsStrong = qr.getTeams().subList(0, 12);
+                        teamsWeak = qr.getTeams().subList(12, qr.getTeams().size());
+                    }
                 }else {
                     if(qr.getTeams().size() < 10) {
                         teamsStrong = qr.getTeams();

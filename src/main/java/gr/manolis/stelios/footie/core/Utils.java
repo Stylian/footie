@@ -7,6 +7,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -134,6 +135,9 @@ public class Utils {
 
 			for (String tt : teams) {
 				String teamName = tt.trim();
+				if(StringUtils.isBlank(teamName)) {
+					continue;
+				}
 				Team team = new Team(teamName);
 
 				if(!existingTeams.contains(team)) {
