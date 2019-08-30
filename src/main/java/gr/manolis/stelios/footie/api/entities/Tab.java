@@ -1,7 +1,10 @@
 package gr.manolis.stelios.footie.api.entities;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity(name = "TABS")

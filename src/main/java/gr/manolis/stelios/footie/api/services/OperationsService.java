@@ -1,11 +1,5 @@
 package gr.manolis.stelios.footie.api.services;
 
-import javax.transaction.Transactional;
-
-import org.apache.commons.lang3.RandomUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
@@ -13,11 +7,12 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
-import gr.manolis.stelios.footie.core.services.GameService;
-import gr.manolis.stelios.footie.core.services.GroupsRoundService;
-import gr.manolis.stelios.footie.core.services.PlayoffsRoundService;
-import gr.manolis.stelios.footie.core.services.QualsService;
-import gr.manolis.stelios.footie.core.services.SeasonService;
+import gr.manolis.stelios.footie.core.services.*;
+import org.apache.commons.lang3.RandomUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 @Transactional

@@ -1,6 +1,5 @@
 package gr.manolis.stelios.footie.api.dtos;
 
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 
 public class MatchupGameDTO {

@@ -1,10 +1,11 @@
 
-TODO 1.02
+TODO 1.1
+rules teams participation wrong for year 1
 double button press on stage seed
 game insert with id for double button press
 points in rules format , 500 -> 0.500
 
-TODO 1.1
+TODO 1.2
 groups stage order of games messed up
 stats page broken- on adding teams?
 remove teams func and greying out

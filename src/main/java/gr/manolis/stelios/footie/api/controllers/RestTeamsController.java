@@ -3,7 +3,6 @@ package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.api.dtos.TeamPageDTO;
 import gr.manolis.stelios.footie.api.mappers.TeamPageMapper;
-import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;

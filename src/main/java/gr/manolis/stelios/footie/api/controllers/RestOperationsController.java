@@ -1,20 +1,17 @@
 package gr.manolis.stelios.footie.api.controllers;
 
-import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
-import gr.manolis.stelios.footie.core.services.ServiceUtils;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.services.OperationsService;
+import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rest/ops")
