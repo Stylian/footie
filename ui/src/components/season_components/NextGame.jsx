@@ -72,7 +72,7 @@ class NextGame extends Component {
 
     handleSave = (event, newValue) => {
 
-        fetch("/rest/ops//add_game_result", {
+        fetch("/rest/ops/add_game_result/" + this.state.game.id, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

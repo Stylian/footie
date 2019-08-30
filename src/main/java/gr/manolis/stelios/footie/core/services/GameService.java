@@ -84,6 +84,10 @@ public class GameService {
 
         Season season = serviceUtils.loadCurrentSeason();
 
+        if (game.getResult() != null) {
+            return;
+        }
+
         // add stats to teams
         Team team = game.getHomeTeam();
 

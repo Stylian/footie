@@ -138,9 +138,11 @@ public class RestOperationsController {
     }
 
     @ResponseBody
-    @PostMapping("/add_game_result")
-    public RestResponse addGame(@RequestBody Result result) {
-        operationsService.addResult(result);
+    @PostMapping("/add_game_result/{game_id}")
+    public RestResponse addGame(@RequestBody Result result, @PathVariable("game_id") String gameId) {
+
+        int id = Integer.parseInt(gameId);
+        operationsService.addResult(id, result);
         restNextGameController.getNextGameAndMoveStages();
 
         return new RestResponse(RestResponse.SUCCESS, "game result added ");

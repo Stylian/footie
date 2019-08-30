@@ -33,6 +33,9 @@ public class OperationsService {
 	@Autowired
 	private GameService gameService;
 
+	@Autowired
+	private ServiceUtils serviceUtils;
+
 	public Season createSeason() {
 		return seasonService.createSeason();
 	}
@@ -112,8 +115,8 @@ public class OperationsService {
 		return new RestResponse(RestResponse.SUCCESS, "games added");
 	}
 
-	public void addResult(Result result) {
-		Game game = gameService.getNextGame();
+	public void addResult(int gameId, Result result) {
+		Game game = serviceUtils.loadGame(gameId);
 		gameService.addResult(game, result);
 	}
 }

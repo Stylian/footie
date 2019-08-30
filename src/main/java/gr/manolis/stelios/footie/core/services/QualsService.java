@@ -89,6 +89,9 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 		QualsRound preliminary = (QualsRound) season.getRounds().get(0);
+		if(!preliminary.getStage().equals(Stage.ON_PREVIEW)) {
+			return null;
+		}
 		setUpQualsRound(preliminary);
 		
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -102,6 +105,9 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
+		if(!roundQuals1.getStage().equals(Stage.ON_PREVIEW)) {
+			return null;
+		}
 		setUpQualsRound(roundQuals1);
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -115,6 +121,9 @@ public class QualsService {
 
 		Season season = serviceUtils.loadCurrentSeason();
 		QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
+		if(!roundQuals2.getStage().equals(Stage.ON_PREVIEW)) {
+			return null;
+		}
 		setUpQualsRound(roundQuals2);
 
 		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());

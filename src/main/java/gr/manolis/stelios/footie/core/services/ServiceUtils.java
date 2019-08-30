@@ -4,6 +4,7 @@ import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
@@ -82,6 +83,10 @@ public class ServiceUtils {
 					.createQuery("from GROUPS_ROBIN_8 where ID=" + id).uniqueResult();
 		}
 		return (RobinGroup) group;
+	}
+
+	public Game loadGame(int id) {
+		return (Game) sessionFactory.getCurrentSession().createQuery("from GAMES where ID=" + id).uniqueResult();
 	}
 
 	public QualsRound getQualRound(Season season, int round) {

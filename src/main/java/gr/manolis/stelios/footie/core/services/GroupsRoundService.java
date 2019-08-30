@@ -111,6 +111,10 @@ public class GroupsRoundService {
 
         GroupsRound groupsRoundOf12 = (GroupsRound) season.getRounds().get(3);
 
+        if(!groupsRoundOf12.getStage().equals(Stage.ON_PREVIEW)) {
+            return null;
+        }
+
         List<Team> strongTeams = groupsRoundOf12.getStrongTeams();
         List<Team> mediumTeams = groupsRoundOf12.getMediumTeams();
         List<Team> weakTeams = groupsRoundOf12.getWeakTeams();

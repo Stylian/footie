@@ -1,7 +1,5 @@
 
 TODO 1.1
-double button press on stage seed
-game insert with id for double button press
 
 TODO 1.2
 groups stage order of games messed up
