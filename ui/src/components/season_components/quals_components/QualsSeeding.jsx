@@ -206,9 +206,9 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Coefficients granted</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>win: 1000</li>
-                                                            <li>draw: 500</li>
-                                                            <li>each goal scored: 100</li>
+                                                            <li>win: 1.000</li>
+                                                            <li>draw: 0.500</li>
+                                                            <li>each goal scored: 0.100</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
@@ -220,7 +220,7 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Teams</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>26</li>
+                                                            <li>{this.state.teamsStrong.length * 2}</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
@@ -262,10 +262,10 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Coefficients granted</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>promotion: 500</li>
-                                                            <li>win: 1000</li>
-                                                            <li>draw: 500</li>
-                                                            <li>each goal scored: 100</li>
+                                                            <li>promotion: 0.500</li>
+                                                            <li>win: 1.000</li>
+                                                            <li>draw: 0.500</li>
+                                                            <li>each goal scored: 0.100</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
@@ -276,7 +276,7 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Teams</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>18</li>
+                                                            <li>{this.state.teamsStrong.length * 2}</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>
@@ -320,10 +320,10 @@ class QualsSeeding extends Component {
                                                     <TableCell align={"right"}>Coefficients granted</TableCell>
                                                     <TableCell>
                                                         <ul>
-                                                            <li>promotion: 700</li>
-                                                            <li>win: 1000</li>
-                                                            <li>draw: 500</li>
-                                                            <li>each goal scored: 100</li>
+                                                            <li>promotion: 0.700</li>
+                                                            <li>win: 1.000</li>
+                                                            <li>draw: 0.500</li>
+                                                            <li>each goal scored: 0.100</li>
                                                         </ul>
                                                     </TableCell>
                                                 </TableRow>

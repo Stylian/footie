@@ -222,11 +222,11 @@ class GroupsSeeding extends Component {
                                                 <TableCell align={"right"}>Coefficients granted</TableCell>
                                                 <TableCell>
                                                     <ul>
-                                                        <li>1st place: 600</li>
-                                                        <li>2nd place: 300</li>
-                                                        <li>win: 1000</li>
-                                                        <li>draw: 500</li>
-                                                        <li>each goal scored: 100</li>
+                                                        <li>1st place: 0.600</li>
+                                                        <li>2nd place: 0.300</li>
+                                                        <li>win: 1.000</li>
+                                                        <li>draw: 0.500</li>
+                                                        <li>each goal scored: 0.100</li>
                                                     </ul>
                                                 </TableCell>
                                             </TableRow>
