@@ -1,6 +1,4 @@
 
-TODO 1.1
-
 TODO 1.2
 groups stage order of games messed up
 stats page broken- on adding teams?
