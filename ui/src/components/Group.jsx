@@ -193,7 +193,7 @@ class Group extends Component {
                                                                 <li>most goals scored</li>
                                                                 <li>most wins</li>
                                                                 <li>highest coefficients</li>
-                                                                <li>alphabetical?</li>
+                                                                <li>alphabetical</li>
                                                             </ol>
                                                         </TableCell>
                                                     </TableRow>
@@ -201,11 +201,11 @@ class Group extends Component {
                                                         <TableCell align={"right"}>Coefficients granted</TableCell>
                                                         <TableCell>
                                                             <ul>
-                                                                <li>1st place: 600</li>
-                                                                <li>2nd place: 300</li>
-                                                                <li>win: 1000</li>
-                                                                <li>draw: 500</li>
-                                                                <li>each goal scored: 100</li>
+                                                                <li>1st place: 0.600</li>
+                                                                <li>2nd place: 0.300</li>
+                                                                <li>win: 1.000</li>
+                                                                <li>draw: 0.500</li>
+                                                                <li>each goal scored: 0.100</li>
                                                             </ul>
                                                         </TableCell>
                                                     </TableRow>
@@ -242,7 +242,7 @@ class Group extends Component {
                                                                 <li>most goals scored</li>
                                                                 <li>most wins</li>
                                                                 <li>highest coefficients</li>
-                                                                <li>alphabetical?</li>
+                                                                <li>alphabetical</li>
                                                             </ol>
                                                         </TableCell>
                                                     </TableRow>
@@ -250,12 +250,12 @@ class Group extends Component {
                                                         <TableCell align={"right"}>Coefficients granted</TableCell>
                                                         <TableCell>
                                                             <ul>
-                                                                <li>1st place: 2000</li>
-                                                                <li>2nd place: 600</li>
-                                                                <li>23rd place: 300</li>
-                                                                <li>win: 1000</li>
-                                                                <li>draw: 500</li>
-                                                                <li>each goal scored: 100</li>
+                                                                <li>1st place: 2.000</li>
+                                                                <li>2nd place: 0.600</li>
+                                                                <li>23rd place: 0.300</li>
+                                                                <li>win: 1.000</li>
+                                                                <li>draw: 0.500</li>
+                                                                <li>each goal scored: 0.100</li>
                                                             </ul>
                                                         </TableCell>
                                                     </TableRow>

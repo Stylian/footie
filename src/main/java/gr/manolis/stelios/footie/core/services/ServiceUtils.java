@@ -75,8 +75,13 @@ public class ServiceUtils {
 	}
 
 	public RobinGroup loadRobinGroup(int id) {
-		return (RobinGroup) sessionFactory.getCurrentSession()
-				.createQuery("from GROUPS where ID=" + id).uniqueResult();
+		Object group = sessionFactory.getCurrentSession()
+				.createQuery("from GROUPS_ROBIN_12 where ID=" + id).uniqueResult();
+		if (group == null) {
+			group = sessionFactory.getCurrentSession()
+					.createQuery("from GROUPS_ROBIN_8 where ID=" + id).uniqueResult();
+		}
+		return (RobinGroup) group;
 	}
 
 	public QualsRound getQualRound(Season season, int round) {
