@@ -48,7 +48,7 @@ class Statistics extends Component {
                         <Grid container spacing={1}>
                             <Grid item sm={4}>
                                 <Card style={{margin: 20}}>
-                                    <CardHeader title={"League Stats"} align={"center"}
+                                    <CardHeader title={"league stats"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>
@@ -133,6 +133,44 @@ class Statistics extends Component {
                                                 }}
                                             />
                                         </div>
+
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                            <Grid item sm={4}>
+                                <Card style={{margin: 20}}>
+                                    <CardHeader title={"scores stats"} align={"center"}
+                                                titleTypographyProps={{variant: 'h7'}}
+                                    />
+                                    <CardContent>
+                                        <HorizontalBar
+                                            data={{
+                                                labels: [
+                                                    ...Object.keys(this.state.gameStats["results_frequency"]),
+                                                ],
+                                                datasets: [{
+                                                    data: [
+                                                        ...Object.values(this.state.gameStats["results_frequency"])
+                                                    ],
+                                                    backgroundColor: '#2d5cd2',
+                                                    hoverBackgroundColor: '#2d5cd2',
+                                                }],
+                                            }}
+                                            options={{
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                legend: {
+                                                    display: false,
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        ticks: {
+                                                            min: 0,
+                                                        }
+                                                    }],
+                                                }
+                                            }}
+                                        />
 
                                     </CardContent>
                                 </Card>

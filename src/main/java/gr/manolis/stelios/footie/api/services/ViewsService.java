@@ -186,6 +186,19 @@ public class ViewsService {
 		gamestats.put("draws_percent", drawsPercent);
 		gamestats.put("losses_percent", lossesPercent);
 
+		// scores frequency graphs
+		Map<Result, Integer> resultsFrequency = new HashMap<>();
+		for(Result result: results) {
+			if(resultsFrequency.containsKey(result)) {
+				Integer count = resultsFrequency.get(result);
+				count ++;
+				resultsFrequency.put(result, count);
+			}else {
+				resultsFrequency.put(result, 1);
+			}
+		}
+
+		gamestats.put("results_frequency", resultsFrequency);
 
 		return gamestats;
 	}

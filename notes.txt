@@ -1,9 +1,5 @@
 
 TODO 1.2
-DONE
-scores frequency graphs
-results graphs
-
 radar diagrams per team
 
 player registration system

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /**
  *
@@ -66,6 +67,20 @@ public class Result {
 
 	public void setGoalsMadeByAwayTeam(int goalsMadeByAwayTeam) {
 		this.goalsMadeByAwayTeam = goalsMadeByAwayTeam;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Result result = (Result) o;
+		return goalsMadeByHomeTeam == result.goalsMadeByHomeTeam &&
+				goalsMadeByAwayTeam == result.goalsMadeByAwayTeam;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(goalsMadeByHomeTeam, goalsMadeByAwayTeam);
 	}
 
 	@Override
