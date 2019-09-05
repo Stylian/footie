@@ -15,6 +15,7 @@ import LeagueToolbar from "./LeagueToolbar";
 
 import silvermedal from "../icons/silvermedal.png";
 import goldmedal from "../icons/goldmedal.png";
+import {Doughnut, HorizontalBar} from "react-chartjs-2";
 
 class Team extends Component {
 
@@ -39,7 +40,8 @@ class Team extends Component {
                 },
                 "seasonsStats": [],
                 "trophies": []
-            }
+            },
+            gameStats: {},
         };
 
     }
@@ -55,6 +57,29 @@ class Team extends Component {
                             ...state,
                             team: result,
                             isLoaded: true,
+                        }
+                    });
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+
+        fetch("/rest/history/statistics/teams/" + this.props.match.params.teamId)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            gameStats: result
                         }
                     });
                 },
@@ -170,36 +195,129 @@ class Team extends Component {
                                 </Grid>
 
                                 <Grid item sm={4}>
-                                    <Card style={{margin: 20}}>
-                                        <CardHeader title={"Trophies"} align={"center"}
-                                                    titleTypographyProps={{variant: 'h7'}}
-                                        />
-                                        <CardContent>
-                                            {this.state.team.trophies.length > 0 ? (
-                                                <table className="table" align={"center"}>
-                                                    {this.state.team.trophies.map((trophy, index) => {
-                                                        return (
-                                                            <TableRow>
-                                                                <TableCell align="right">
-                                                                    {trophy.type == "W" ?
-                                                                        (<img src={goldmedal} title={"1st place"}/>) :
-                                                                        (<img src={silvermedal} title={"2nd place"}/>)}
-                                                                </TableCell>
-                                                                <TableCell
-                                                                    align="right">{"Season " + trophy.seasonNum}</TableCell>
-                                                                <TableCell align="right">
-                                                                    {trophy.type == "W" ?
-                                                                        "Winner" : "Runner-up"}</TableCell>
-                                                            </TableRow>
-                                                        )
-                                                    })}
-                                                </table>
-                                            ) : (
-                                                <i>nothing in the trophies case</i>
-                                            )}
-                                        </CardContent>
+                                    <Grid container spacing={1}>
+                                        <Grid item sm={12}>
+                                            <Card style={{margin: 20}}>
+                                                <CardHeader title={"Trophies"} align={"center"}
+                                                            titleTypographyProps={{variant: 'h7'}}
+                                                />
+                                                <CardContent>
+                                                    {this.state.team.trophies.length > 0 ? (
+                                                        <table className="table" align={"center"}>
+                                                            {this.state.team.trophies.map((trophy, index) => {
+                                                                return (
+                                                                    <TableRow>
+                                                                        <TableCell align="right">
+                                                                            {trophy.type == "W" ?
+                                                                                (<img src={goldmedal} title={"1st place"}/>) :
+                                                                                (<img src={silvermedal} title={"2nd place"}/>)}
+                                                                        </TableCell>
+                                                                        <TableCell
+                                                                            align="right">{"Season " + trophy.seasonNum}</TableCell>
+                                                                        <TableCell align="right">
+                                                                            {trophy.type == "W" ?
+                                                                                "Winner" : "Runner-up"}</TableCell>
+                                                                    </TableRow>
+                                                                )
+                                                            })}
+                                                        </table>
+                                                    ) : (
+                                                        <i>nothing in the trophies case</i>
+                                                    )}
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                        <Grid item sm={12}>
+                                            <Card style={{margin: 20}}>
+                                                <CardHeader title={"Statistics"} align={"center"}
+                                                            titleTypographyProps={{variant: 'h7'}}
+                                                />
+                                                <CardContent>
+                                                    <Doughnut
+                                                        data={{
+                                                            labels: [
+                                                                'Wins - ' + parseFloat(Math.round(100 * this.state.gameStats["wins_percent"] * 100) / 100).toFixed(0) + "%",
+                                                                'Draws - ' + parseFloat(Math.round(100 * this.state.gameStats["draws_percent"] * 100) / 100).toFixed(0) + "%",
+                                                                'Losses - ' + parseFloat(Math.round(100 * this.state.gameStats["losses_percent"] * 100) / 100).toFixed(0) + "%",
+                                                            ],
+                                                            datasets: [{
+                                                                data: [
+                                                                    this.state.gameStats["wins"],
+                                                                    this.state.gameStats["draws"],
+                                                                    this.state.gameStats["losses"]
+                                                                ],
+                                                                backgroundColor: [
+                                                                    '#1f4093',
+                                                                    '#919294',
+                                                                    '#ab1d1d'
+                                                                ],
+                                                                hoverBackgroundColor: [
+                                                                    '#1f4093',
+                                                                    '#919294',
+                                                                    '#ab1d1d'
+                                                                ]
+                                                            }],
+                                                        }}
+                                                        options={{
+                                                            responsive: true,
+                                                            title: {
+                                                                display: true,
+                                                                position: "bottom",
+                                                                text: "" + this.state.gameStats["number of games played"] + " games",
+                                                                fontSize: 11,
+                                                                fontColor: "#111"
+                                                            },
+                                                            legend: {
+                                                                display: true,
+                                                                position: 'right'
+                                                            },
+                                                        }}
+                                                    />
 
-                                    </Card>
+                                                    <br/>
+                                                    <div style={{height: "80px"}}>
+                                                        <HorizontalBar
+                                                            data={{
+                                                                labels: [
+                                                                    'goals scored - ' + this.state.gameStats["avg goals scored"],
+                                                                    'goals conceded - ' + this.state.gameStats["avg goals conceded"],
+                                                                ],
+                                                                datasets: [{
+                                                                    data: [
+                                                                        this.state.gameStats["avg goals scored"],
+                                                                        this.state.gameStats["avg goals conceded"]
+                                                                    ],
+                                                                    backgroundColor: [
+                                                                        '#2d5cd2',
+                                                                        '#da2525'
+                                                                    ],
+                                                                    hoverBackgroundColor: [
+                                                                        '#2d5cd2',
+                                                                        '#da2525'
+                                                                    ]
+                                                                }],
+                                                            }}
+                                                            options={{
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                legend: {
+                                                                    display: false,
+                                                                },
+                                                                scales: {
+                                                                    xAxes: [{
+                                                                        ticks: {
+                                                                            min: 0,
+                                                                            max: 8
+                                                                        }
+                                                                    }],
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Box>

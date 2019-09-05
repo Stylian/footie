@@ -44,7 +44,7 @@ class Statistics extends Component {
         return (
             this.state.isLoaded ? (
                 <Paper style={{margin: 20}} elevation={20}>
-                    <Box width={1100}>
+                    <Box width={1200}>
                         <Grid container spacing={1}>
                             <Grid item sm={4}>
                                 <Card style={{margin: 20}}>
@@ -55,9 +55,9 @@ class Statistics extends Component {
                                         <Doughnut
                                             data={{
                                                 labels: [
-                                                    'Wins - ' + 100 * this.state.gameStats["wins_percent"] + "%",
-                                                    'Draws - ' + 100 * this.state.gameStats["draws_percent"] + "%",
-                                                    'Losses - ' + 100 * this.state.gameStats["losses_percent"] + "%",
+                                                    'Wins - ' + parseFloat(Math.round(100 * this.state.gameStats["wins_percent"] * 100) / 100).toFixed(0) + "%",
+                                                    'Draws - ' + parseFloat(Math.round(100 * this.state.gameStats["draws_percent"] * 100) / 100).toFixed(0) + "%",
+                                                    'Losses - ' + parseFloat(Math.round(100 * this.state.gameStats["losses_percent"] * 100) / 100).toFixed(0) + "%",
                                                 ],
                                                 datasets: [{
                                                     data: [
@@ -122,6 +122,14 @@ class Statistics extends Component {
                                                     legend: {
                                                         display: false,
                                                     },
+                                                    scales: {
+                                                        xAxes: [{
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 8
+                                                            }
+                                                        }],
+                                                    }
                                                 }}
                                             />
                                         </div>

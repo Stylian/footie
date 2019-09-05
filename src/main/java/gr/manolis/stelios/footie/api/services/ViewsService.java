@@ -6,6 +6,7 @@ import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -134,13 +136,30 @@ public class ViewsService {
 	}
 
 	public Map<String, Object> gameStats() {
+	    return gameStats(0);
+    }
+
+	public Map<String, Object> gameStats(int teamId) {
 		Map<String, Object> gamestats = new LinkedHashMap<>();
 
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
 
-		@SuppressWarnings("unchecked")
-		List<Result> results = sessionFactory.getCurrentSession().createQuery("from RESULTS where HOME_GOALS IS NOT NULL "
-				+ "and AWAY_GOALS IS NOT NULL").list();
+        List<Result> results = null;
+
+        if(teamId > 0) {
+
+            List<Game> games = sessionFactory.getCurrentSession().createQuery(
+                    "from GAMES where HOME_TEAM_ID=" + teamId).list();
+
+            results = games.stream()
+                    .filter( g -> g.getResult() != null)
+                    .map(Game::getResult)
+                    .collect(Collectors.toList());
+
+        }else {
+            results = sessionFactory.getCurrentSession().createQuery("from RESULTS where HOME_GOALS IS " +
+                    "NOT NULL and AWAY_GOALS IS NOT NULL").list();
+        }
 
 		if (results.isEmpty()) {
 			return gamestats;

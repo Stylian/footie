@@ -1,14 +1,24 @@
 
 TODO 1.2
-derby.log to move to logs folder
+DONE
 scores frequency graphs
 results graphs
+
+radar diagrams per team
+
+player registration system
+post season dream team
+player of the year
+
 groups stage order of games messed up
 
+stats page reordering
 
 TODO 1.3
 elo rating system
 elo rating graph
+odds system
+derby.log to move to logs folder
 
 TODO 1.4
 stats page broken- on adding teams?
