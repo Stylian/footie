@@ -1,16 +1,18 @@
 
 TODO 1.2
-radar diagrams per team
+groups stage order of games messed up
 
+
+TODO 1.3
+stats page reordering
 player registration system
 post season dream team
 player of the year
 
-groups stage order of games messed up
-
-stats page reordering
 
 TODO 1.3
+
+radar diagrams per team
 elo rating system
 elo rating graph
 odds system

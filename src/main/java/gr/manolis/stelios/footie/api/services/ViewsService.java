@@ -187,7 +187,14 @@ public class ViewsService {
 		gamestats.put("losses_percent", lossesPercent);
 
 		// scores frequency graphs
-		Map<Result, Integer> resultsFrequency = new HashMap<>();
+		Map<Result, Integer> resultsFrequency = new LinkedHashMap<>();
+
+		for(int x = 0; x < 20; x ++) {
+			for (int y = 0; y < 10; y++) {
+				resultsFrequency.put(new Result(x, y), 0);
+			}
+		}
+
 		for(Result result: results) {
 			if(resultsFrequency.containsKey(result)) {
 				Integer count = resultsFrequency.get(result);
@@ -197,6 +204,10 @@ public class ViewsService {
 				resultsFrequency.put(result, 1);
 			}
 		}
+
+		resultsFrequency = resultsFrequency.entrySet().stream()
+				.filter( e -> e.getValue() > 0)
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o, n) -> o, LinkedHashMap::new));
 
 		gamestats.put("results_frequency", resultsFrequency);
 
