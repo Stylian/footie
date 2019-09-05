@@ -3,6 +3,7 @@ import LeagueToolbar from "./LeagueToolbar";
 import {AppBar, Paper, Tab, Tabs} from "@material-ui/core";
 import Coefficients from "./history_components/Coefficients";
 import Stats from "./history_components/Stats";
+import Statistics from "./history_components/Statistics";
 
 class History extends Component {
 
@@ -33,11 +34,13 @@ class History extends Component {
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                             <Tab label="Awards & Coefficients" />
+                            <Tab label="Statistics" />
                             <Tab label="Stats" />
                         </Tabs>
                     </AppBar>
                     {this.state.tabActive === 0 && <Coefficients />}
-                    {this.state.tabActive === 1 && <Stats />}
+                    {this.state.tabActive === 1 && <Statistics />}
+                    {this.state.tabActive === 2 && <Stats />}
                 </div>
             </Paper>
         );

@@ -11,7 +11,6 @@ class Admin extends Component {
         this.state = {
             pageTitle: "Admin",
             tabActive: 0,
-            gameStats: {},
             generalData: {},
             seasonsStages: {},
             seasonNum: 0,
@@ -23,28 +22,6 @@ class Admin extends Component {
     }
 
     componentDidMount() {
-        fetch("/rest/admin/game_stats")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            gameStats: result
-                        }
-                    });
-                },
-                (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
-                }
-            )
 
         fetch("/rest/admin/general_data")
             .then(res => res.json())
@@ -202,29 +179,10 @@ class Admin extends Component {
         return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                <Box width={1100}>
+                <Box width={1200}>
                     <Grid container spacing={1}>
-                        <Grid item sm={4}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"League Stats"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table">
-                                        <TableBody>
-                                            {Object.keys(this.state.gameStats).map((key, index) => {
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell>{key}</TableCell>
-                                                        <TableCell align="right">{this.state.gameStats[key]}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item sm={4}>
+
+                        <Grid item sm={6}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Seasons Stage"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -256,7 +214,7 @@ class Admin extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item sm={4}>
+                        <Grid item sm={6}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Database"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}

@@ -35,16 +35,18 @@ public class RestHistoryController {
     private SeasonPastWinnersMapper seasonPastWinnersMapper;
 
     @Autowired
-    private TeamCoeffsMapper teamCoeffsMapper;
-
-    @Autowired
     private TeamWithTrophiesMapper teamWithTrophiesMapper;
 
     @RequestMapping("/coefficients")
     public List<TeamCoeffsDTO>  coefficients() {
         return viewsService.getTeamsWithCoefficients();
     }
-    
+
+    @RequestMapping("/statistics")
+    public Map<String, Object>  statistics() {
+        return viewsService.gameStats();
+    }
+
     @RequestMapping("/teams/trophies")
     public List<TeamWithTrophiesDTO>  teamsWithTrophies() {
 

@@ -13,6 +13,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
+import org.apache.commons.math3.util.Precision;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,14 +146,27 @@ public class ViewsService {
 			return gamestats;
 		}
 
-		gamestats.put("number of games played", results.size());
-		gamestats.put("wins", results.stream().filter(Result::homeTeamWon).count());
-		gamestats.put("draws", results.stream().filter(Result::tie).count());
-		gamestats.put("losses", results.stream().filter(Result::awayTeamWon).count());
+		int numOfGames = results.size();
+		long wins = results.stream().filter(Result::homeTeamWon).count();
+		long draws = results.stream().filter(Result::tie).count();
+		long losses = results.stream().filter(Result::awayTeamWon).count();
+		double winsPercent = Precision.round(1.0 * wins / numOfGames, 2);
+		double drawsPercent = Precision.round(1.0 * draws / numOfGames, 2);
+		double lossesPercent = Precision.round(1.0 * losses / numOfGames, 2);
+
+		gamestats.put("number of games played", numOfGames);
+		gamestats.put("wins", wins);
+		gamestats.put("draws", draws);
+		gamestats.put("losses", losses);
 		gamestats.put("avg goals scored", numberFormat
 				.format(results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
 		gamestats.put("avg goals conceded", numberFormat
 				.format(results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
+
+		gamestats.put("wins_percent", winsPercent);
+		gamestats.put("draws_percent", drawsPercent);
+		gamestats.put("losses_percent", lossesPercent);
+
 
 		return gamestats;
 	}
@@ -170,4 +184,5 @@ public class ViewsService {
 		List<Team> teams = serviceUtils.loadTeams();
 		return teams;
 	}
+
 }
