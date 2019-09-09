@@ -13,7 +13,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+
 @RestController
+@Transactional
 @RequestMapping("/rest/ops")
 public class RestOperationsController {
 

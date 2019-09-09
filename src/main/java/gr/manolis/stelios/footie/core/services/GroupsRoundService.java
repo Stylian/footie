@@ -160,6 +160,12 @@ public class GroupsRoundService {
 
         groupsRoundOf12.setStage(Stage.PLAYING);
 
+        DataAccessObject<RobinGroup> dao1 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        dao1.save(groupA);
+        dao1.save(groupB);
+        dao1.save(groupC);
+        dao1.save(groupD);
+
         DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
         dao.save(season);
 

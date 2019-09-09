@@ -189,7 +189,7 @@ public class ViewsService {
 		// scores frequency graphs
 		Map<Result, Integer> resultsFrequency = new LinkedHashMap<>();
 
-		for(int x = 0; x < 20; x ++) {
+		for(int x = 20; x > 0; x --) {
 			for (int y = 0; y < 10; y++) {
 				resultsFrequency.put(new Result(x, y), 0);
 			}
