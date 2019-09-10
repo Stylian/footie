@@ -347,35 +347,36 @@ class Team extends Component {
                                                             titleTypographyProps={{variant: 'h7'}}
                                                 />
                                                 <CardContent>
-                                                    <HorizontalBar
-                                                        data={{
-                                                            labels: [
-                                                                ...Object.keys(this.state.gameStats["results_frequency"]),
-                                                            ],
-                                                            datasets: [{
-                                                                data: [
-                                                                    ...Object.values(this.state.gameStats["results_frequency"])
+                                                    <div style={{height: (50 + 15 * Object.keys(this.state.gameStats["results_frequency"]).length) }} >
+                                                        <HorizontalBar
+                                                            data={{
+                                                                labels: [
+                                                                    ...Object.keys(this.state.gameStats["results_frequency"]),
                                                                 ],
-                                                                backgroundColor: '#2d5cd2',
-                                                                hoverBackgroundColor: '#2d5cd2',
-                                                            }],
-                                                        }}
-                                                        options={{
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            legend: {
-                                                                display: false,
-                                                            },
-                                                            scales: {
-                                                                xAxes: [{
-                                                                    ticks: {
-                                                                        min: 0,
-                                                                    }
+                                                                datasets: [{
+                                                                    data: [
+                                                                        ...Object.values(this.state.gameStats["results_frequency"])
+                                                                    ],
+                                                                    backgroundColor: '#2d5cd2',
+                                                                    hoverBackgroundColor: '#2d5cd2',
                                                                 }],
-                                                            }
-                                                        }}
-                                                    />
-
+                                                            }}
+                                                            options={{
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                legend: {
+                                                                    display: false,
+                                                                },
+                                                                scales: {
+                                                                    xAxes: [{
+                                                                        ticks: {
+                                                                            min: 0,
+                                                                        }
+                                                                    }],
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
                                                 </CardContent>
                                             </Card>
                                         </Grid>
