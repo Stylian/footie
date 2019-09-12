@@ -211,6 +211,30 @@ public class ViewsService {
 
 		gamestats.put("results_frequency", resultsFrequency);
 
+		// home/away goals distribution
+		Map<String, Integer> homeGoalsFrequency = new LinkedHashMap<>();
+		Map<String, Integer> awayGoalsFrequency = new LinkedHashMap<>();
+
+		for(int x = 0; x < 10; x++) {
+			homeGoalsFrequency.put("" + x, 0);
+			awayGoalsFrequency.put("" + x, 0);
+		}
+		homeGoalsFrequency.put("10+", 0);
+		awayGoalsFrequency.put("10+", 0);
+
+		for(Result result : results) {
+			int homeGoals = result.getGoalsMadeByHomeTeam();
+			String strHomeGoals = homeGoals < 10 ? ("" + homeGoals) : "10+";
+			homeGoalsFrequency.put(strHomeGoals, homeGoalsFrequency.get(strHomeGoals) + 1);
+
+			int awayGoals = result.getGoalsMadeByAwayTeam();
+			String strAwayGoals = awayGoals < 10 ? ("" + awayGoals) : "10+";
+			awayGoalsFrequency.put(strAwayGoals, awayGoalsFrequency.get(strAwayGoals) + 1);
+		}
+
+		gamestats.put("home_goals_frequency", homeGoalsFrequency);
+		gamestats.put("away_goals_frequency", awayGoalsFrequency);
+
 		return gamestats;
 	}
 

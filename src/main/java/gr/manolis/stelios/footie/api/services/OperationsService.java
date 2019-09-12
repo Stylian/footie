@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -106,7 +107,13 @@ public class OperationsService {
 				break;
 			}
 
-			gameService.addResult(next, new Result(RandomUtils.nextInt(0, 5), RandomUtils.nextInt(0, 2)));
+			Random r = new Random();
+			double r1 = r.nextGaussian();
+			r1 = r1 < -1 ? -1 : r1;
+			double r2 = r.nextGaussian();
+			r2 = r2 < -1 ? -1 : r2;
+
+			gameService.addResult(next, new Result((int) (r1*3 + 3), (int) (r2 + 1)));
 
 			System.out.println(next);
 

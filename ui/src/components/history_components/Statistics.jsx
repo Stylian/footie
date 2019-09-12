@@ -1,7 +1,7 @@
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
 import LeagueToolbar from "../LeagueToolbar";
 import React, {Component} from "react";
-import {Doughnut, HorizontalBar} from "react-chartjs-2";
+import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
 
 class Statistics extends Component {
 
@@ -81,8 +81,8 @@ class Statistics extends Component {
                                                 responsive: true,
                                                 title: {
                                                     display: true,
-                                                    position: "bottom",
-                                                    text: "" + this.state.gameStats["number of games played"] + " games",
+                                                    position: "top",
+                                                    text: "results of " + this.state.gameStats["number of games played"] + " games",
                                                     fontSize: 11,
                                                     fontColor: "#111"
                                                 },
@@ -94,7 +94,7 @@ class Statistics extends Component {
                                         />
 
                                         <br/>
-                                        <div style={{height: "80px"}}>
+                                        <div style={{height: "120px"}}>
                                             <HorizontalBar
                                                 data={{
                                                     labels: [
@@ -122,12 +122,101 @@ class Statistics extends Component {
                                                     legend: {
                                                         display: false,
                                                     },
+                                                    title: {
+                                                        display: true,
+                                                        position: "top",
+                                                        text: "average goals",
+                                                        fontSize: 11,
+                                                        fontColor: "#111"
+                                                    },
                                                     scales: {
                                                         xAxes: [{
                                                             ticks: {
                                                                 min: 0,
-                                                                max: 8
-                                                            }
+                                                                max: 8,
+                                                                stepSize: 1,
+                                                            },
+                                                            barPercentage: 1
+                                                        }],
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+
+                                        <br/>
+                                        <div style={{width: 330}} >
+                                            <Bar
+                                                data={{
+                                                    labels: [
+                                                        ...Object.keys(this.state.gameStats["home_goals_frequency"]),
+                                                    ],
+                                                    datasets: [{
+                                                        data: [
+                                                            ...Object.values(this.state.gameStats["home_goals_frequency"])
+                                                        ],
+                                                        backgroundColor: '#2d5cd2',
+                                                        hoverBackgroundColor: '#2d5cd2',
+                                                    }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    title: {
+                                                        display: true,
+                                                        position: "top",
+                                                        text: "goals scored",
+                                                        fontSize: 11,
+                                                        fontColor: "#111"
+                                                    },
+                                                    scales: {
+                                                        xAxes: [{
+                                                            ticks: {
+                                                                min: 0,
+                                                            },
+                                                            barPercentage: 0.6
+                                                        }],
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+
+                                        <br/>
+                                        <div style={{width: 330}} >
+                                            <Bar
+                                                data={{
+                                                    labels: [
+                                                        ...Object.keys(this.state.gameStats["away_goals_frequency"]),
+                                                    ],
+                                                    datasets: [{
+                                                        data: [
+                                                            ...Object.values(this.state.gameStats["away_goals_frequency"])
+                                                        ],
+                                                        backgroundColor: '#da2525',
+                                                        hoverBackgroundColor: '#da2525',
+                                                    }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    title: {
+                                                        display: true,
+                                                        position: "top",
+                                                        text: "goals conceded",
+                                                        fontSize: 11,
+                                                        fontColor: "#111"
+                                                    },
+                                                    scales: {
+                                                        xAxes: [{
+                                                            ticks: {
+                                                                min: 0,
+                                                            },
+                                                            barPercentage: 0.6
                                                         }],
                                                     }
                                                 }}
@@ -167,7 +256,8 @@ class Statistics extends Component {
                                                         xAxes: [{
                                                             ticks: {
                                                                 min: 0,
-                                                            }
+                                                                stepSize: 10,
+                                                            },
                                                         }],
                                                     }
                                                 }}

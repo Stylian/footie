@@ -1,19 +1,37 @@
 
+1.3 release
+added goals scored, conceded bars
+reworked team view page
+
 TODO 1.3
 stats page reordering
+
 player registration system
-post season dream team
+post season overview page
+ dream team
 player of the year
+best win
+highest scoring game
++ later
+ overachievers
+ underperformers
 
 
-TODO 1.3
 
+TODO 1.4
 radar diagrams per team
+home attacking
+home defending
+away attacking
+away defending
+elo
+
 elo rating system
 elo rating graph
 odds system
+
 derby.log to move to logs folder
 
-TODO 1.4
+TODO 1.5
 stats page broken- on adding teams?
 remove teams func and greying out
