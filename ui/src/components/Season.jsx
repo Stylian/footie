@@ -6,6 +6,7 @@ import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
 import Groups2 from "./season_components/Groups2";
 import Knockouts from "./season_components/Knockouts";
+import SeasonPostview from "./season_components/SeasonPostview";
 
 class Season extends Component {
 
@@ -135,6 +136,7 @@ class Season extends Component {
                                 <Tab label="1st Group stage"/>
                                 <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Group stage"/>
                                 <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
+                                <Tab disabled={(this.state.stages.playoffs !== "FINISHED")} label="Overview"/>
                             </Tabs>
                         </AppBar>
                         {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
@@ -149,6 +151,7 @@ class Season extends Component {
                         {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
                                                                 stage={this.state.stages.groups1}/>}
                         {this.state.tabActive === 6 && <Knockouts year={this.props.match.params.seasonNum}/>}
+                        {this.state.tabActive === 7 && <SeasonPostview year={this.props.match.params.seasonNum}/>}
                     </Box>
                 </Paper>
             ) : (null)

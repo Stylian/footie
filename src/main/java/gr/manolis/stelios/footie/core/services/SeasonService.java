@@ -4,11 +4,14 @@ import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.*;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -226,4 +229,79 @@ public class SeasonService {
         return season;
     }
 
+    public Map<String, Object> getPostSeasonData(Season season) {
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("winner", season.getWinner());
+        data.put("runner_up", season.getRunnerUp());
+        data.put("semifinalist1", season.getSemifinalist1());
+        data.put("semifinalist2", season.getSemifinalist2());
+
+        PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
+        List<Team> quarterfinalists = new ArrayList<>();
+        for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
+            quarterfinalists.add(matchup.getTeamHome().equals(matchup.getWinner()) ?
+                    matchup.getTeamAway() : matchup.getTeamHome());
+        }
+        data.put("quarterfinalist1", quarterfinalists.get(0));
+        data.put("quarterfinalist2", quarterfinalists.get(1));
+
+        List<Game> seasonGames = new ArrayList<>();
+        for(Round round : season.getRounds()) {
+            seasonGames.addAll(round.getGames());
+        }
+
+        Game highestScoringGame = null;
+        Game bestWin = null;
+        Game worstResult = null;
+        for(Game game: seasonGames) {
+            if(bestWin == null) { // first time
+                bestWin = game;
+                highestScoringGame = game;
+                worstResult = game;
+            }
+            if(betterWin(bestWin, game)) {
+                bestWin = game;
+            }
+            if(worseResult(worstResult, game)) {
+                worstResult = game;
+            }
+            if(higherScoringGame(highestScoringGame, game)) {
+                highestScoringGame = game;
+            }
+        }
+        data.put("bestWin", bestWin);
+        data.put("highestScoringGame", highestScoringGame);
+        data.put("worstResult", worstResult);
+
+        return data;
+    }
+
+    private boolean worseResult(Game worstResult, Game game) {
+        int diff1 = worstResult.getResult().getGoalsMadeByHomeTeam() - worstResult.getResult().getGoalsMadeByAwayTeam();
+        int diff2 = game.getResult().getGoalsMadeByHomeTeam() - game.getResult().getGoalsMadeByAwayTeam();
+
+        if( diff1 == diff2) {
+            return game.getResult().getGoalsMadeByHomeTeam() < worstResult.getResult().getGoalsMadeByHomeTeam();
+        }else {
+            return diff2 < diff1;
+        }
+    }
+
+    private boolean higherScoringGame(Game highestScoringGame, Game game) {
+        int goals1 = highestScoringGame.getResult().getGoalsMadeByHomeTeam() + highestScoringGame.getResult().getGoalsMadeByAwayTeam();
+        int goals2 = game.getResult().getGoalsMadeByHomeTeam() + game.getResult().getGoalsMadeByAwayTeam();
+        return goals2 > goals1;
+    }
+
+    private boolean betterWin(Game bestWin, Game game) {
+        int diff1 = bestWin.getResult().getGoalsMadeByHomeTeam() - bestWin.getResult().getGoalsMadeByAwayTeam();
+        int diff2 = game.getResult().getGoalsMadeByHomeTeam() - game.getResult().getGoalsMadeByAwayTeam();
+
+        if( diff1 == diff2) {
+            return game.getResult().getGoalsMadeByHomeTeam() > bestWin.getResult().getGoalsMadeByHomeTeam();
+        }else {
+            return diff2 > diff1;
+        }
+    }
 }

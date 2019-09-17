@@ -405,6 +405,29 @@ public class RestSeasonController {
         return matchesMapped;
     }
 
+    @RequestMapping("/{year}/overview")
+    public Map<String, Object> seasonOverview(
+            @PathVariable(value = "year", required = true) String strYear) {
+
+        int year = NumberUtils.toInt(strYear);
+        Season season = serviceUtils.loadSeason(year);
+
+        Map<String, Object> data = seasonService.getPostSeasonData(season);
+        data.put("winner", teamSimpleMapper.toDTO((Team) data.get("winner")));
+        data.put("runner_up", teamSimpleMapper.toDTO((Team) data.get("runner_up")));
+        data.put("semifinalist1", teamSimpleMapper.toDTO((Team) data.get("semifinalist1")));
+        data.put("semifinalist2", teamSimpleMapper.toDTO((Team) data.get("semifinalist2")));
+        data.put("quarterfinalist1", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist1")));
+        data.put("quarterfinalist2", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist2")));
+
+        // TODO
+        data.put("overachievers", data.get("winner"));
+        data.put("underperformers", data.get("semifinalist2"));
+
+
+        return data;
+    }
+
     // -------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------
     // Mapstruct FAKES!

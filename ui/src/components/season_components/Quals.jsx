@@ -77,7 +77,7 @@ class Quals extends Component {
                 <Box style={{margin: 30, "margin-top": 10}}>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Overview"/>
+                            <Tab label="Seeding"/>
                             <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
                                  label="Matches"/>
                         </Tabs>
