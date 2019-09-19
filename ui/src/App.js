@@ -7,6 +7,7 @@ import Admin from "./components/Admin";
 import Season from "./components/Season";
 import Team from "./components/Team";
 import Group from "./components/Group";
+import Players from "./components/Players";
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
                 <Route exact path='/teams/:teamId' component={Team}/>
                 <Route exact path='/groups/:groupId' component={Group}/>
                 <Route path='/history' component={History}/>
+                <Route path='/players' component={Players}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>
         );

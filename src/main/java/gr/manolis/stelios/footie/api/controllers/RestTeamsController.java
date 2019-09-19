@@ -40,8 +40,7 @@ public class RestTeamsController {
 
         int teamId = NumberUtils.toInt(strTeamId);
 
-        List<Team> teams = viewsService.getTeams();
-        Team team = teams.stream().filter ( t -> t.getId() == teamId).findFirst().get();
+        Team team = serviceUtils.loadTeam(teamId);
 
         TeamPageDTO dto = teamPageMapper.toDTO(team);
 

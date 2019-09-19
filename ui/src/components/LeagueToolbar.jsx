@@ -106,6 +106,12 @@ class LeagueToolbar extends Component {
                                         </ListItemIcon>
                                         <ListItemText primary="History"/>
                                     </MenuItem>
+                                    <MenuItem data-link="/players" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={history} title={"players"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Players"/>
+                                    </MenuItem>
                                     <MenuItem data-link="/admin" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
                                             <img src={build} title={"admin"}/>

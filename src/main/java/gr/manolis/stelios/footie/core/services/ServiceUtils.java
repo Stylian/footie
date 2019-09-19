@@ -75,6 +75,13 @@ public class ServiceUtils {
 		return dao.list("TEAMS");
 	}
 
+	// not efficient to write?
+	public Team loadTeam(int teamId) {
+		List<Team> teams = loadTeams();
+		Team team = teams.stream().filter ( t -> t.getId() == teamId).findFirst().get();
+		return team;
+	}
+
 	public RobinGroup loadRobinGroup(int id) {
 		Object group = sessionFactory.getCurrentSession()
 				.createQuery("from GROUPS_ROBIN_12 where ID=" + id).uniqueResult();

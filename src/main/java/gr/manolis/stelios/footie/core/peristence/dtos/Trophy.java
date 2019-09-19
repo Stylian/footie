@@ -25,6 +25,10 @@ public class Trophy {
     @JsonIgnore
     private Team team;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Player player;
+
     public Trophy() { }
 
     public Trophy(int seasonNum, String type, Team team) {
@@ -55,5 +59,13 @@ public class Trophy {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
