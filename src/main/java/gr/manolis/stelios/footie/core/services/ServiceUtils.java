@@ -3,6 +3,7 @@ package gr.manolis.stelios.footie.core.services;
 import gr.manolis.stelios.footie.api.services.UIPersistService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
+import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
@@ -106,4 +107,15 @@ public class ServiceUtils {
 		return (GroupsRound) rounds.get(round + 2);
 	}
 
+	public List<Player> loadPlayers() {
+		DataAccessObject<Player> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		return dao.list("PLAYERS");
+	}
+
+	public Player loadPlayer(int id) {
+		List<Player> players = loadPlayers();
+		Player player = players.stream().filter ( t -> t.getId() == id).findFirst().get();
+		return player;
+
+	}
 }

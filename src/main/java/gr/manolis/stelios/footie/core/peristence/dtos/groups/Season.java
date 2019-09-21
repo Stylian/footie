@@ -39,8 +39,38 @@ public class Season extends Group {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Player playerOfTheSeason;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Player> dreamTeam;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamGK;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamDL;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamDR;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamDCL;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamDCR;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamCML;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamCMR;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamAMR;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamAML;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamAMC;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player dreamTeamST;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "season")
 	private List<Round> rounds;
@@ -140,11 +170,91 @@ public class Season extends Group {
 		this.playerOfTheSeason = playerOfTheSeason;
 	}
 
-	public List<Player> getDreamTeam() {
-		return dreamTeam;
+	public Player getDreamTeamGK() {
+		return dreamTeamGK;
 	}
 
-	public void setDreamTeam(List<Player> dreamTeam) {
-		this.dreamTeam = dreamTeam;
+	public void setDreamTeamGK(Player dreamTeamGK) {
+		this.dreamTeamGK = dreamTeamGK;
+	}
+
+	public Player getDreamTeamDL() {
+		return dreamTeamDL;
+	}
+
+	public void setDreamTeamDL(Player dreamTeamDL) {
+		this.dreamTeamDL = dreamTeamDL;
+	}
+
+	public Player getDreamTeamDR() {
+		return dreamTeamDR;
+	}
+
+	public void setDreamTeamDR(Player dreamTeamDR) {
+		this.dreamTeamDR = dreamTeamDR;
+	}
+
+	public Player getDreamTeamDCL() {
+		return dreamTeamDCL;
+	}
+
+	public void setDreamTeamDCL(Player dreamTeamDCL) {
+		this.dreamTeamDCL = dreamTeamDCL;
+	}
+
+	public Player getDreamTeamDCR() {
+		return dreamTeamDCR;
+	}
+
+	public void setDreamTeamDCR(Player dreamTeamDCR) {
+		this.dreamTeamDCR = dreamTeamDCR;
+	}
+
+	public Player getDreamTeamCML() {
+		return dreamTeamCML;
+	}
+
+	public void setDreamTeamCML(Player dreamTeamCML) {
+		this.dreamTeamCML = dreamTeamCML;
+	}
+
+	public Player getDreamTeamCMR() {
+		return dreamTeamCMR;
+	}
+
+	public void setDreamTeamCMR(Player dreamTeamCMR) {
+		this.dreamTeamCMR = dreamTeamCMR;
+	}
+
+	public Player getDreamTeamAMR() {
+		return dreamTeamAMR;
+	}
+
+	public void setDreamTeamAMR(Player dreamTeamAMR) {
+		this.dreamTeamAMR = dreamTeamAMR;
+	}
+
+	public Player getDreamTeamAML() {
+		return dreamTeamAML;
+	}
+
+	public void setDreamTeamAML(Player dreamTeamAML) {
+		this.dreamTeamAML = dreamTeamAML;
+	}
+
+	public Player getDreamTeamAMC() {
+		return dreamTeamAMC;
+	}
+
+	public void setDreamTeamAMC(Player dreamTeamAMC) {
+		this.dreamTeamAMC = dreamTeamAMC;
+	}
+
+	public Player getDreamTeamST() {
+		return dreamTeamST;
+	}
+
+	public void setDreamTeamST(Player dreamTeamST) {
+		this.dreamTeamST = dreamTeamST;
 	}
 }

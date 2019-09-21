@@ -104,12 +104,15 @@ code {
   color: #1f6d93 !important;
 }
 
-.teamClicker:hover {
+.teamClicker:hover,
+.playerClicker:hover {
   cursor: pointer;
   background-color: #d9f7f0 !important;
   color: #000000 !important;
 }
 
+.playerClicker:hover,
+.playerClicker:hover > td,
 .teamClicker:hover,
 .teamClicker:hover > td {
   font-weight: bold !important;

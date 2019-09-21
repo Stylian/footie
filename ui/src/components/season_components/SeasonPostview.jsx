@@ -14,6 +14,7 @@ import {
 import goldmedal from "../../icons/goldmedal.png";
 import silvermedal from "../../icons/silvermedal.png";
 import Numeral from "numeral";
+import Button from "@material-ui/core/Button";
 
 class SeasonPostview extends Component {
 
@@ -247,12 +248,50 @@ class SeasonPostview extends Component {
 
     }
 
+    handlePublish = (event, newValue) => {
+        fetch("/rest/seasons/" + this.props.year + "/publish", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: "overachievers=" + this.state.overachievers
+                + "&underperformers=" + this.state.underperformers
+                + "&playerOfTheYear=" + this.state.playerOfTheYear
+                + "&gk=" + this.state.gk
+                + "&dl=" + this.state.dl
+                + "&dr=" + this.state.dr
+                + "&dcl=" + this.state.dcl
+                + "&dcr=" + this.state.dcr
+                + "&cml=" + this.state.cml
+                + "&cmr=" + this.state.cmr
+                + "&amr=" + this.state.amr
+                + "&aml=" + this.state.aml
+                + "&amc=" + this.state.amc
+                + "&st=" + this.state.st
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    window.location.reload();
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
 
     render() {
 
         return (
             (this.state.isLoaded && this.state.isLoaded2 && this.state.isLoaded3) ? (
                 <Box>
+                    {this.state.data.haveToPublish ? (
+                        <Button onClick={this.handlePublish}>Publish</Button>
+                    ) : ''}
                     <Grid container spacing={1}>
                         <Grid item sm={4}>
                             <Card style={{margin: 20}}>
@@ -541,7 +580,7 @@ class SeasonPostview extends Component {
                                             <table className="table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell>player of the year</TableCell>
+                                                        <TableCell colSpan={2}>player of the year</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -565,16 +604,74 @@ class SeasonPostview extends Component {
                                                             </TableCell>
                                                         </TableRow>
                                                     ) : (
-                                                        <TableRow className={"playerClicker"}
-                                                                  data-playerid={this.state.data.player_of_the_year.id}
-                                                                  onClick={this.goToPlayer}
+                                                        <TableRow
                                                                   style={{backgroundColor: 'rgb(179, 184, 255)'}}>
-                                                            <TableCell>
+                                                            <TableCell className={"playerClicker"}
+                                                                       data-playerid={this.state.data.player_of_the_year.id}
+                                                                       onClick={this.goToPlayer}>
                                                                 <img src={goldmedal} title={"1st place"}/>
                                                                 {this.state.data.player_of_the_year.name}
                                                             </TableCell>
+                                                            <TableCell className={"teamClicker"}
+                                                                       data-teamid={this.state.data.player_of_the_year.team.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {this.state.data.player_of_the_year.team.name}
+                                                            </TableCell>
                                                         </TableRow>)}
 
+                                                </TableBody>
+                                            </table>
+                                        </Grid>
+
+                                        <Grid item sm={12}>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell colSpan={3}>dream team</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    <TableBody>
+
+                                                        {this.state.data.gk == null ? (
+                                                            <TableRow>
+                                                                <TableCell>GK</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="gk"
+                                                                        select
+                                                                        label="goalkeeper"
+                                                                        value={this.state.gk}
+                                                                        onChange={this.handleChange("gk")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                      style={{backgroundColor: '#996633'}}>
+                                                                <TableCell>GK</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.gk.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.gk.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.gk.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.gk.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+                                                    </TableBody>
                                                 </TableBody>
                                             </table>
                                         </Grid>

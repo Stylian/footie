@@ -1,15 +1,15 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.dtos.MatchupGameDTO;
 import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
-import gr.manolis.stelios.footie.api.mappers.MatchupGameMapper;
-import gr.manolis.stelios.footie.api.mappers.RobinGroupMapper;
-import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
-import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
+import gr.manolis.stelios.footie.api.mappers.*;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
+import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -28,10 +28,9 @@ import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -44,6 +43,9 @@ public class RestSeasonController {
     final static Logger logger = Logger.getLogger(RestSeasonController.class);
 
     @Autowired
+    private SessionFactory sessionFactory;
+
+    @Autowired
     private SeasonService seasonService;
 
     @Autowired
@@ -54,6 +56,9 @@ public class RestSeasonController {
 
     @Autowired
     private TeamSimpleMapper teamSimpleMapper;
+
+    @Autowired
+    private PlayerMapper playerMapper;
 
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
@@ -412,19 +417,82 @@ public class RestSeasonController {
         int year = NumberUtils.toInt(strYear);
         Season season = serviceUtils.loadSeason(year);
 
-        Map<String, Object> data = seasonService.getPostSeasonData(season);
-        data.put("winner", teamSimpleMapper.toDTO((Team) data.get("winner")));
-        data.put("runner_up", teamSimpleMapper.toDTO((Team) data.get("runner_up")));
-        data.put("semifinalist1", teamSimpleMapper.toDTO((Team) data.get("semifinalist1")));
-        data.put("semifinalist2", teamSimpleMapper.toDTO((Team) data.get("semifinalist2")));
-        data.put("quarterfinalist1", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist1")));
-        data.put("quarterfinalist2", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist2")));
+        Map<String, Object> dataFromSeason = seasonService.getPostSeasonData(season);
+        Map<String, Object> data = new HashMap<>();
+        data.put("winner", teamSimpleMapper.toDTO((Team) dataFromSeason.get("winner")));
+        data.put("runner_up", teamSimpleMapper.toDTO((Team) dataFromSeason.get("runner_up")));
+        data.put("semifinalist1", teamSimpleMapper.toDTO((Team) dataFromSeason.get("semifinalist1")));
+        data.put("semifinalist2", teamSimpleMapper.toDTO((Team) dataFromSeason.get("semifinalist2")));
+        data.put("quarterfinalist1", teamSimpleMapper.toDTO((Team) dataFromSeason.get("quarterfinalist1")));
+        data.put("quarterfinalist2", teamSimpleMapper.toDTO((Team) dataFromSeason.get("quarterfinalist2")));
 
-        data.put("overachievers", teamSimpleMapper.toDTO((Team) data.get("overachievers")));
-        data.put("underperformers", teamSimpleMapper.toDTO((Team) data.get("underperformers")));
+        data.put("bestWin", dataFromSeason.get("bestWin"));
+        data.put("highestScoringGame", dataFromSeason.get("highestScoringGame"));
+        data.put("worstResult", dataFromSeason.get("worstResult"));
 
+        data.put("overachievers", teamSimpleMapper.toDTO((Team) dataFromSeason.get("overachievers")));
+        data.put("underperformers", teamSimpleMapper.toDTO((Team) dataFromSeason.get("underperformers")));
+
+        data.put("player_of_the_year", playerMapper.toDTO((Player) dataFromSeason.get("player_of_the_year")));
+
+        data.put("gk", playerMapper.toDTO((Player) dataFromSeason.get("gk")));
+        data.put("dl", playerMapper.toDTO((Player) dataFromSeason.get("dl")));
+        data.put("dr", playerMapper.toDTO((Player) dataFromSeason.get("dr")));
+        data.put("dcl", playerMapper.toDTO((Player) dataFromSeason.get("dcl")));
+        data.put("dcr", playerMapper.toDTO((Player) dataFromSeason.get("dcr")));
+        data.put("cml", playerMapper.toDTO((Player) dataFromSeason.get("cml")));
+        data.put("cmr", playerMapper.toDTO((Player) dataFromSeason.get("cmr")));
+        data.put("amr", playerMapper.toDTO((Player) dataFromSeason.get("amr")));
+        data.put("aml", playerMapper.toDTO((Player) dataFromSeason.get("aml")));
+        data.put("amc", playerMapper.toDTO((Player) dataFromSeason.get("amc")));
+        data.put("st", playerMapper.toDTO((Player) dataFromSeason.get("st")));
+
+        data.put("haveToPublish", true);
 
         return data;
+    }
+
+    @ResponseBody
+    @PostMapping("/{year}/publish")
+    public RestResponse publishOverview( @PathVariable(value = "year", required = true) String strYear,
+            @RequestParam(name = "overachievers", required = false) String overachieversId,
+            @RequestParam(name = "underperformers", required = false) String underperformersId,
+            @RequestParam(name = "playerOfTheYear", required = false) String playerOfTheYearId,
+            @RequestParam(name = "gk", required = false) String gkId
+
+            ) {
+
+        int year = NumberUtils.toInt(strYear);
+        Season season = serviceUtils.loadSeason(year);
+
+        if(!"null".equals(overachieversId)) {
+            int id = Integer.parseInt(overachieversId);
+            Team team = serviceUtils.loadTeam(id);
+            season.setOverachiever(team);
+        }
+
+        if(!"null".equals(underperformersId)) {
+            int id = Integer.parseInt(underperformersId);
+            Team team = serviceUtils.loadTeam(id);
+            season.setUnderperformer(team);
+        }
+
+        if(!"null".equals(playerOfTheYearId)) {
+            int id = Integer.parseInt(playerOfTheYearId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setPlayerOfTheSeason(player);
+        }
+
+        if(!"null".equals(gkId)) {
+            int id = Integer.parseInt(gkId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamGK(player);
+        }
+
+        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        dao.save(season);
+
+        return new RestResponse(RestResponse.SUCCESS, "published season data");
     }
 
     // -------------------------------------------------------------------------------------------------

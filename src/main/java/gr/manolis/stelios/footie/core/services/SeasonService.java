@@ -280,8 +280,17 @@ public class SeasonService {
 
         // player awards
         data.put("player_of_the_year", season.getPlayerOfTheSeason());
-        data.put("dream_team", season.getDreamTeam());
-
+        data.put("gk", season.getDreamTeamGK());
+        data.put("dl", season.getDreamTeamDL());
+        data.put("dr", season.getDreamTeamDR());
+        data.put("dcl", season.getDreamTeamDCL());
+        data.put("dcr", season.getDreamTeamDCR());
+        data.put("cml", season.getDreamTeamCML());
+        data.put("cmr", season.getDreamTeamCMR());
+        data.put("aml", season.getDreamTeamAML());
+        data.put("amr", season.getDreamTeamAMR());
+        data.put("amc", season.getDreamTeamAMC());
+        data.put("st", season.getDreamTeamST());
 
         return data;
     }
