@@ -458,7 +458,9 @@ public class RestSeasonController {
             @RequestParam(name = "overachievers", required = false) String overachieversId,
             @RequestParam(name = "underperformers", required = false) String underperformersId,
             @RequestParam(name = "playerOfTheYear", required = false) String playerOfTheYearId,
-            @RequestParam(name = "gk", required = false) String gkId
+            @RequestParam(name = "gk", required = false) String gkId,
+            @RequestParam(name = "dl", required = false) String dlId,
+            @RequestParam(name = "dr", required = false) String drId
 
             ) {
 
@@ -487,6 +489,18 @@ public class RestSeasonController {
             int id = Integer.parseInt(gkId);
             Player player = serviceUtils.loadPlayer(id);
             season.setDreamTeamGK(player);
+        }
+
+        if(!"null".equals(dlId)) {
+            int id = Integer.parseInt(dlId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamDL(player);
+        }
+
+        if(!"null".equals(drId)) {
+            int id = Integer.parseInt(drId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamDR(player);
         }
 
         DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());

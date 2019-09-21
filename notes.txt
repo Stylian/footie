@@ -6,17 +6,16 @@ best win
 highest scoring game
 worst result
 player registration system
+player of the year
+ overachievers
+ underperformers
 
 TODO 1.3
 stats page reordering
 
 post season overview page
  dream team
-player of the year
-
-+ later
- overachievers
- underperformers
+ doing mostly copy paste and editing needed
 
 
 
@@ -31,6 +30,10 @@ elo
 elo rating system
 elo rating graph
 odds system
+
+recommended
+ overachievers
+ underperformers
 
 derby.log to move to logs folder
 
