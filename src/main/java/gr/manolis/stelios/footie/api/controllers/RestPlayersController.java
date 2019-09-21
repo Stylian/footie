@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,9 @@ public class RestPlayersController {
 
     @GetMapping("/")
     public List<PlayerDTO> getPlayers() {
-        return playerMapper.toDTO(playerService.getAllPlayers());
+        List<PlayerDTO> players = playerMapper.toDTO(playerService.getAllPlayers());
+        Collections.sort(players, Comparator.comparing(PlayerDTO::getName));
+        return players;
     }
 
     @ResponseBody

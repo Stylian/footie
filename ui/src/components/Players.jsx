@@ -59,8 +59,7 @@ class Players extends Component {
                 }
             )
 
-        // TODO replace with alphabetical
-        fetch("/rest/history/coefficients")
+        fetch("/rest/teams/")
             .then(res => res.json())
             .then(
                 (result) => {
