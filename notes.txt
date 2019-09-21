@@ -5,11 +5,11 @@ reworked team view page
 best win
 highest scoring game
 worst result
+player registration system
 
 TODO 1.3
 stats page reordering
 
-player registration system
 post season overview page
  dream team
 player of the year

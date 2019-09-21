@@ -13,6 +13,7 @@ import build from "../icons/build.svg";
 import history from "../icons/history.svg";
 import up from "../icons/up.svg";
 import down from "../icons/down.svg";
+import players from "../icons/football-players.png";
 
 class LeagueToolbar extends Component {
 
@@ -108,7 +109,7 @@ class LeagueToolbar extends Component {
                                     </MenuItem>
                                     <MenuItem data-link="/players" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
-                                            <img src={history} title={"players"}/>
+                                            <img src={players} title={"players"}/>
                                         </ListItemIcon>
                                         <ListItemText primary="Players"/>
                                     </MenuItem>

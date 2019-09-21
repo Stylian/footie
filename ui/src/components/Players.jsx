@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import save from "../icons/save.svg";
+import plus from "../icons/plus.png";
 
 class Players extends Component {
 
@@ -193,7 +193,7 @@ class Players extends Component {
                                                             </TableCell>
                                                             <TableCell>
                                                                 <IconButton onClick={this.handleAdd}>
-                                                                    <img src={save} title={"add"}/>
+                                                                    <img src={plus} title={"add"}/>
                                                                 </IconButton>
                                                             </TableCell>
                                                         </TableRow>
