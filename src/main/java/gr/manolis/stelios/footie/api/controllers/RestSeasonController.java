@@ -420,9 +420,8 @@ public class RestSeasonController {
         data.put("quarterfinalist1", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist1")));
         data.put("quarterfinalist2", teamSimpleMapper.toDTO((Team) data.get("quarterfinalist2")));
 
-        // TODO
-        data.put("overachievers", data.get("winner"));
-        data.put("underperformers", data.get("semifinalist2"));
+        data.put("overachievers", teamSimpleMapper.toDTO((Team) data.get("overachievers")));
+        data.put("underperformers", teamSimpleMapper.toDTO((Team) data.get("underperformers")));
 
 
         return data;

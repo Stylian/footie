@@ -232,6 +232,7 @@ public class SeasonService {
     public Map<String, Object> getPostSeasonData(Season season) {
         Map<String, Object> data = new HashMap<>();
 
+        // team  awards
         data.put("winner", season.getWinner());
         data.put("runner_up", season.getRunnerUp());
         data.put("semifinalist1", season.getSemifinalist1());
@@ -273,6 +274,14 @@ public class SeasonService {
         data.put("bestWin", bestWin);
         data.put("highestScoringGame", highestScoringGame);
         data.put("worstResult", worstResult);
+
+        data.put("overachievers", season.getOverachiever());
+        data.put("underperformers", season.getUnderperformer());
+
+        // player awards
+        data.put("player_of_the_year", season.getPlayerOfTheSeason());
+        data.put("dream_team", season.getDreamTeam());
+
 
         return data;
     }

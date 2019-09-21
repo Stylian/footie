@@ -3,18 +3,11 @@ package gr.manolis.stelios.footie.core.peristence.dtos.groups;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
@@ -36,6 +29,18 @@ public class Season extends Group {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Team semifinalist2;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team overachiever;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Team underperformer;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Player playerOfTheSeason;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Player> dreamTeam;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "season")
 	private List<Round> rounds;
@@ -109,5 +114,37 @@ public class Season extends Group {
 
 	public void setSemifinalist2(Team semifinalist2) {
 		this.semifinalist2 = semifinalist2;
+	}
+
+	public Team getOverachiever() {
+		return overachiever;
+	}
+
+	public void setOverachiever(Team overachiever) {
+		this.overachiever = overachiever;
+	}
+
+	public Team getUnderperformer() {
+		return underperformer;
+	}
+
+	public void setUnderperformer(Team underperformer) {
+		this.underperformer = underperformer;
+	}
+
+	public Player getPlayerOfTheSeason() {
+		return playerOfTheSeason;
+	}
+
+	public void setPlayerOfTheSeason(Player playerOfTheSeason) {
+		this.playerOfTheSeason = playerOfTheSeason;
+	}
+
+	public List<Player> getDreamTeam() {
+		return dreamTeam;
+	}
+
+	public void setDreamTeam(List<Player> dreamTeam) {
+		this.dreamTeam = dreamTeam;
 	}
 }
