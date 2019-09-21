@@ -27,6 +27,7 @@ class Players extends Component {
             isLoaded: false,
             isLoaded2: false,
             teams: [],
+            players: [],
             name: "",
             teamId: 0
         };
@@ -43,6 +44,7 @@ class Players extends Component {
                         return {
                             ...state,
                             isLoaded: true,
+                            players: result,
                         }
                     });
                 },
@@ -161,38 +163,48 @@ class Players extends Component {
                                                     </TableHead>
 
                                                     <TableBody>
-                                                        <TableCell></TableCell>
-                                                        <TableCell>
-                                                            <TextField
-                                                                style={{width: 200}}
-                                                                id="player-name"
-                                                                label="player"
-                                                                value={this.state.name}
-                                                                onChange={this.handleChange("name")}
-                                                                margin="normal" />
+                                                        <TableRow>
+                                                            <TableCell></TableCell>
+                                                            <TableCell>
+                                                                <TextField
+                                                                    style={{width: 200}}
+                                                                    id="player-name"
+                                                                    label="player"
+                                                                    value={this.state.name}
+                                                                    onChange={this.handleChange("name")}
+                                                                    margin="normal"/>
 
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <TextField
-                                                                style={{width: 200}}
-                                                                id="team"
-                                                                select
-                                                                label="team"
-                                                                value={this.state.teamId}
-                                                                onChange={this.handleChange("team")}
-                                                                margin="normal">
-                                                                {this.state.teams.map(team => (
-                                                                    <MenuItem key={team.id} value={team.id}>
-                                                                        {team.name}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </TextField>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <IconButton onClick={this.handleAdd}>
-                                                                <img src={save} title={"add"}/>
-                                                            </IconButton>
-                                                        </TableCell>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                <TextField
+                                                                    style={{width: 200}}
+                                                                    id="team"
+                                                                    select
+                                                                    label="team"
+                                                                    value={this.state.teamId}
+                                                                    onChange={this.handleChange("team")}
+                                                                    margin="normal">
+                                                                    {this.state.teams.map(team => (
+                                                                        <MenuItem key={team.id} value={team.id}>
+                                                                            {team.name}
+                                                                        </MenuItem>
+                                                                    ))}
+                                                                </TextField>
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                <IconButton onClick={this.handleAdd}>
+                                                                    <img src={save} title={"add"}/>
+                                                                </IconButton>
+                                                            </TableCell>
+                                                        </TableRow>
+
+                                                        {this.state.players.map(player => (
+                                                            <TableRow>
+                                                                <TableCell>{player.id}</TableCell>
+                                                                <TableCell>{player.name}</TableCell>
+                                                                <TableCell>{player.team.name}</TableCell>
+                                                            </TableRow>
+                                                        ))}
                                                     </TableBody>
                                                 </table>
                                             </Grid>

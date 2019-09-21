@@ -2,11 +2,10 @@ package gr.manolis.stelios.footie.api.controllers;
 
 
 import gr.manolis.stelios.footie.api.RestResponse;
+import gr.manolis.stelios.footie.api.dtos.PlayerDTO;
 import gr.manolis.stelios.footie.api.mappers.PlayerMapper;
-import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.services.PlayerService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.log4j.Logger;
@@ -14,15 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @Transactional
 @RequestMapping("/rest/players")
-public class RestPlayerController {
+public class RestPlayersController {
 
-    final static Logger logger = Logger.getLogger(RestPlayerController.class);
+    final static Logger logger = Logger.getLogger(RestPlayersController.class);
 
     @Autowired
     private ServiceUtils serviceUtils;
@@ -34,10 +32,8 @@ public class RestPlayerController {
     private PlayerMapper playerMapper;
 
     @GetMapping("/")
-    public List<Player> getPlayers() {
-        List<Player> players = new ArrayList<>();
-
-        return players;
+    public List<PlayerDTO> getPlayers() {
+        return playerMapper.toDTO(playerService.getAllPlayers());
     }
 
     @ResponseBody
