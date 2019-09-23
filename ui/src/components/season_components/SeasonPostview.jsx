@@ -671,6 +671,84 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                             </TableRow>)}
 
+                                                        {this.state.data.dcl == null ? (
+                                                            <TableRow>
+                                                                <TableCell>DC</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="dcl"
+                                                                        select
+                                                                        label="central defender"
+                                                                        value={this.state.dcl}
+                                                                        onChange={this.handleChange("dcl")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: 'rgb(217, 237, 247)'}}>
+                                                                <TableCell>DC</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.dcl.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.dcl.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.dcl.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.dcl.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+                                                        {this.state.data.dcr == null ? (
+                                                            <TableRow>
+                                                                <TableCell>DC</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="dcr"
+                                                                        select
+                                                                        label="central defender"
+                                                                        value={this.state.dcr}
+                                                                        onChange={this.handleChange("dcr")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: 'rgb(217, 237, 247)'}}>
+                                                                <TableCell>DC</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.dcr.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.dcr.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.dcr.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.dcr.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
                                                         {this.state.data.dl == null ? (
                                                             <TableRow>
                                                                 <TableCell>DL</TableCell>
@@ -679,7 +757,7 @@ class SeasonPostview extends Component {
                                                                         style={{width: 200}}
                                                                         id="dl"
                                                                         select
-                                                                        label="defender left"
+                                                                        label="left defender"
                                                                         value={this.state.dl}
                                                                         onChange={this.handleChange("dl")}
                                                                         margin="normal">
@@ -694,7 +772,7 @@ class SeasonPostview extends Component {
                                                             </TableRow>
                                                         ) : (
                                                             <TableRow
-                                                                style={{backgroundColor: '#b3e6ff'}}>
+                                                                style={{backgroundColor: 'rgb(217, 237, 247)'}}>
                                                                 <TableCell>DL</TableCell>
                                                                 <TableCell
                                                                     className={"playerClicker"}
@@ -718,7 +796,7 @@ class SeasonPostview extends Component {
                                                                         style={{width: 200}}
                                                                         id="dr"
                                                                         select
-                                                                        label="defender right"
+                                                                        label="right defender"
                                                                         value={this.state.dr}
                                                                         onChange={this.handleChange("dr")}
                                                                         margin="normal">
@@ -733,7 +811,7 @@ class SeasonPostview extends Component {
                                                             </TableRow>
                                                         ) : (
                                                             <TableRow
-                                                                style={{backgroundColor: '#b3e6ff'}}>
+                                                                style={{backgroundColor: 'rgb(217, 237, 247)'}}>
                                                                 <TableCell>DR</TableCell>
                                                                 <TableCell
                                                                     className={"playerClicker"}
@@ -749,7 +827,240 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                             </TableRow>)}
 
-                                                        {{ /*  TODO */ }}
+                                                        {this.state.data.cml == null ? (
+                                                            <TableRow>
+                                                                <TableCell>CM</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="cml"
+                                                                        select
+                                                                        label="central midfielder"
+                                                                        value={this.state.cml}
+                                                                        onChange={this.handleChange("cml")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#dbf0db'}}>
+                                                                <TableCell>CM</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.cml.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.cml.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.cml.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.cml.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+                                                        {this.state.data.cmr == null ? (
+                                                            <TableRow>
+                                                                <TableCell>CM</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="cmr"
+                                                                        select
+                                                                        label="central midfielder"
+                                                                        value={this.state.cmr}
+                                                                        onChange={this.handleChange("cmr")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#dbf0db'}}>
+                                                                <TableCell>CM</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.cmr.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.cmr.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.cmr.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.cmr.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+
+                                                        {this.state.data.amc == null ? (
+                                                            <TableRow>
+                                                                <TableCell>AMC</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="amc"
+                                                                        select
+                                                                        label="attacking midfielder centre"
+                                                                        value={this.state.amc}
+                                                                        onChange={this.handleChange("amc")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#dbf0db'}}>
+                                                                <TableCell>AMC</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.amc.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.amc.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.amc.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.amc.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+                                                        {this.state.data.aml == null ? (
+                                                            <TableRow>
+                                                                <TableCell>LW</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="aml"
+                                                                        select
+                                                                        label="left winger"
+                                                                        value={this.state.aml}
+                                                                        onChange={this.handleChange("aml")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#e2b6b6'}}>
+                                                                <TableCell>LW</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.aml.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.aml.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.aml.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.aml.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+                                                        {this.state.data.amr == null ? (
+                                                            <TableRow>
+                                                                <TableCell>RW</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="amr"
+                                                                        select
+                                                                        label="right winger"
+                                                                        value={this.state.amr}
+                                                                        onChange={this.handleChange("amr")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#e2b6b6'}}>
+                                                                <TableCell>LR</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.amr.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.amr.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.amr.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.amr.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
+
+                                                        {this.state.data.st == null ? (
+                                                            <TableRow>
+                                                                <TableCell>ST</TableCell>
+                                                                <TableCell>
+                                                                    <TextField
+                                                                        style={{width: 200}}
+                                                                        id="st"
+                                                                        select
+                                                                        label="striker"
+                                                                        value={this.state.st}
+                                                                        onChange={this.handleChange("st")}
+                                                                        margin="normal">
+                                                                        {this.state.players.map(player => (
+                                                                            <MenuItem key={player.id} value={player.id}>
+                                                                                {player.name}
+                                                                            </MenuItem>
+                                                                        ))}
+                                                                    </TextField>
+                                                                </TableCell>
+                                                                <TableCell></TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            <TableRow
+                                                                style={{backgroundColor: '#e2b6b6'}}>
+                                                                <TableCell>LR</TableCell>
+                                                                <TableCell
+                                                                    className={"playerClicker"}
+                                                                    data-playerid={this.state.data.amr.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >
+                                                                    {this.state.data.amr.name}
+                                                                </TableCell>
+                                                                <TableCell className={"teamClicker"}
+                                                                           data-teamid={this.state.data.amr.team.id}
+                                                                           onClick={this.goToTeam}>
+                                                                    {this.state.data.amr.team.name}
+                                                                </TableCell>
+                                                            </TableRow>)}
 
                                                     </TableBody>
                                                 </TableBody>

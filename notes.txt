@@ -9,15 +9,13 @@ player registration system
 player of the year
  overachievers
  underperformers
+ dream team
 
 TODO 1.3
 stats page reordering
 
-post season overview page
- dream team
- doing mostly copy paste and editing needed
-
-
+add awards to players
+add player page
 
 TODO 1.4
 radar diagrams per team

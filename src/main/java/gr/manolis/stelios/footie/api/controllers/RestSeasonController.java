@@ -447,7 +447,22 @@ public class RestSeasonController {
         data.put("amc", playerMapper.toDTO((Player) dataFromSeason.get("amc")));
         data.put("st", playerMapper.toDTO((Player) dataFromSeason.get("st")));
 
-        data.put("haveToPublish", true);
+        boolean haveToPublish = false;
+        if(season.getDreamTeamGK() == null
+            || season.getDreamTeamDCL() == null
+            || season.getDreamTeamDCR() == null
+            || season.getDreamTeamDL() == null
+            || season.getDreamTeamDR() == null
+            || season.getDreamTeamCML() == null
+            || season.getDreamTeamCMR() == null
+            || season.getDreamTeamAMC() == null
+            || season.getDreamTeamAMR() == null
+            || season.getDreamTeamAML() == null
+            || season.getDreamTeamST() == null
+        ) {
+            haveToPublish = true;
+        }
+        data.put("haveToPublish", haveToPublish);
 
         return data;
     }
@@ -459,9 +474,16 @@ public class RestSeasonController {
             @RequestParam(name = "underperformers", required = false) String underperformersId,
             @RequestParam(name = "playerOfTheYear", required = false) String playerOfTheYearId,
             @RequestParam(name = "gk", required = false) String gkId,
+            @RequestParam(name = "dcl", required = false) String dclId,
+            @RequestParam(name = "dcr", required = false) String dcrId,
             @RequestParam(name = "dl", required = false) String dlId,
-            @RequestParam(name = "dr", required = false) String drId
-
+            @RequestParam(name = "dr", required = false) String drId,
+            @RequestParam(name = "cml", required = false) String cmlId,
+            @RequestParam(name = "cmr", required = false) String cmrId,
+            @RequestParam(name = "aml", required = false) String amlId,
+            @RequestParam(name = "amr", required = false) String amrId,
+            @RequestParam(name = "amc", required = false) String amcId,
+            @RequestParam(name = "st", required = false) String stId
             ) {
 
         int year = NumberUtils.toInt(strYear);
@@ -491,6 +513,18 @@ public class RestSeasonController {
             season.setDreamTeamGK(player);
         }
 
+        if(!"null".equals(dclId)) {
+            int id = Integer.parseInt(dclId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamDCL(player);
+        }
+
+        if(!"null".equals(dcrId)) {
+            int id = Integer.parseInt(dcrId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamDCR(player);
+        }
+
         if(!"null".equals(dlId)) {
             int id = Integer.parseInt(dlId);
             Player player = serviceUtils.loadPlayer(id);
@@ -501,6 +535,42 @@ public class RestSeasonController {
             int id = Integer.parseInt(drId);
             Player player = serviceUtils.loadPlayer(id);
             season.setDreamTeamDR(player);
+        }
+
+        if(!"null".equals(cmlId)) {
+            int id = Integer.parseInt(cmlId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamCML(player);
+        }
+
+        if(!"null".equals(cmrId)) {
+            int id = Integer.parseInt(cmrId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamCMR(player);
+        }
+
+        if(!"null".equals(amlId)) {
+            int id = Integer.parseInt(amlId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamAML(player);
+        }
+
+        if(!"null".equals(amrId)) {
+            int id = Integer.parseInt(amrId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamAMR(player);
+        }
+
+        if(!"null".equals(amcId)) {
+            int id = Integer.parseInt(amcId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamAMC(player);
+        }
+
+        if(!"null".equals(stId)) {
+            int id = Integer.parseInt(stId);
+            Player player = serviceUtils.loadPlayer(id);
+            season.setDreamTeamST(player);
         }
 
         DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
