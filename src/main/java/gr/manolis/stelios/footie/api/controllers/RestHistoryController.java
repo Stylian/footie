@@ -72,7 +72,7 @@ public class RestHistoryController {
     }
 
     @RequestMapping("/stats")
-    public Map<Team, Stats> stats() {
+    public Map<Team, Map<String, Object>> stats() {
         return viewsService.getTeamsTotalStats();
     }
 

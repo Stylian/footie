@@ -82,9 +82,9 @@ public class ViewsService {
 
 	}
 
-	public Map<Team, Stats> getTeamsTotalStats() {
+	public Map<Team, Map<String, Object>> getTeamsTotalStats() {
 
-		Map<Team, Stats> statsTotal = new LinkedHashMap<>();
+		Map<Team, Map<String, Object>> allTeamsData = new LinkedHashMap<>();
 
 		List<Team> teams = serviceUtils.loadTeams();
 
@@ -95,10 +95,13 @@ public class ViewsService {
 		for (Team team : teams) {
 			Stats completeStats = new Stats();
 			seasonsPast.forEach( (s) -> completeStats.addStats(s.getTeamsStats().get(team)));
-			statsTotal.put(team, completeStats);
+
+			Map<String, Object> allTeamData = gameStats(team.getId());
+			allTeamData.put("stats", completeStats);
+			allTeamsData.put(team, allTeamData);
 		}
 
-		return statsTotal;
+		return allTeamsData;
 
 	}
 
