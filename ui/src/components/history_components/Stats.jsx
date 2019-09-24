@@ -87,7 +87,11 @@ class Stats extends Component {
                                                 <TableBody>
                                                     {Object.keys(this.state.teams).map((key, index) => {
                                                         return (
-                                                            <TableRow>
+                                                            <TableRow
+                                                                style={{ backgroundColor:'#fff' }}
+                                                                className={"teamClicker"}
+                                                                data-teamid={this.state.teams[key]["teamObject"].id}
+                                                                onClick={this.goToTeam}>
                                                                 <TableCell align="right">{index + 1}</TableCell>
                                                                 <TableCell>{key}</TableCell>
                                                                 <TableCell

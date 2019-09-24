@@ -3,9 +3,11 @@ package gr.manolis.stelios.footie.api.controllers;
 
 import gr.manolis.stelios.footie.api.dtos.SeasonPastWinnersDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamWithTrophiesDTO;
 import gr.manolis.stelios.footie.api.mappers.SeasonPastWinnersMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
+import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamWithTrophiesMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.api.tools.TeamsWithTrophiesOrdering;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,6 +41,9 @@ public class RestHistoryController {
 
     @Autowired
     private TeamWithTrophiesMapper teamWithTrophiesMapper;
+
+    @Autowired
+    private TeamSimpleMapper teamSimpleMapper;
 
     @RequestMapping("/coefficients")
     public List<TeamCoeffsDTO>  coefficients() {
@@ -72,8 +78,19 @@ public class RestHistoryController {
     }
 
     @RequestMapping("/stats")
-    public Map<Team, Map<String, Object>> stats() {
-        return viewsService.getTeamsTotalStats();
+    public Map<String, Map<String, Object>> stats() {
+        Map<Team, Map<String, Object>> teams = viewsService.getTeamsTotalStats();
+        Map<String, Map<String, Object>> teamsDTO = new LinkedHashMap<>();
+
+        for(Map.Entry<Team, Map<String, Object>> entry : teams.entrySet()) {
+            entry.getValue().put("teamObject", teamSimpleMapper.toDTO(entry.getKey()));
+            teamsDTO.put(
+                    entry.getKey().getName(),
+                    entry.getValue()
+            );
+        }
+
+        return teamsDTO;
     }
 
     @RequestMapping("/past_winners")
