@@ -13,7 +13,8 @@ import {
 } from "@material-ui/core";
 import goldmedal from "../../icons/goldmedal.png";
 import silvermedal from "../../icons/silvermedal.png";
-import Numeral from "numeral";
+import playeroftheyear from "../../icons/playeroftheyear.png";
+import dreamteam from "../../icons/dreamteam.png";
 import Button from "@material-ui/core/Button";
 
 class SeasonPostview extends Component {
@@ -609,7 +610,7 @@ class SeasonPostview extends Component {
                                                             <TableCell className={"playerClicker"}
                                                                        data-playerid={this.state.data.player_of_the_year.id}
                                                                        onClick={this.goToPlayer}>
-                                                                <img src={goldmedal} title={"1st place"}/>
+                                                                <img src={playeroftheyear} title={"1st place"}/>
                                                                 {this.state.data.player_of_the_year.name}
                                                             </TableCell>
                                                             <TableCell className={"teamClicker"}
@@ -627,7 +628,9 @@ class SeasonPostview extends Component {
                                             <table className="table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell colSpan={3}>dream team</TableCell>
+                                                        <TableCell colSpan={3}>
+                                                            <img src={dreamteam} title={"dreamteam"}/>
+                                                            dream team</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
