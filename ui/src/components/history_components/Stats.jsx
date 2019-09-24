@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import Numeral from "numeral";
 import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
+import LeagueToolbar from "../LeagueToolbar";
 
 class Stats extends Component {
 
@@ -55,8 +56,9 @@ class Stats extends Component {
 
     render() {
         return (
-            <Box width={1300}>
-                <Paper elevation={12} style={{margin: 20}}>
+            <Paper style={{margin: 20}} elevation={20}>
+                <LeagueToolbar pageTitle={"Teams' Stats"}/>
+                <Box width={1300}>
                     <Grid container spacing={1}>
                         <Grid item sm={12}>
                             <Card style={{margin: 20}}>
@@ -88,7 +90,7 @@ class Stats extends Component {
                                                     {Object.keys(this.state.teams).map((key, index) => {
                                                         return (
                                                             <TableRow
-                                                                style={{ backgroundColor:'#fff' }}
+                                                                style={{backgroundColor: '#fff'}}
                                                                 className={"teamClicker"}
                                                                 data-teamid={this.state.teams[key]["teamObject"].id}
                                                                 onClick={this.goToTeam}>
@@ -200,9 +202,8 @@ class Stats extends Component {
                             </Card>
                         </Grid>
                     </Grid>
-                </Paper>
-            </Box>
-
+                </Box>
+            </Paper>
         );
     }
 }

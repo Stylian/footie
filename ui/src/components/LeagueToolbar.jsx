@@ -14,6 +14,9 @@ import history from "../icons/history.svg";
 import up from "../icons/up.svg";
 import down from "../icons/down.svg";
 import players from "../icons/football-players.png";
+import analytics from "../icons/analytics.png";
+import barchart from "../icons/bar-chart.png";
+import medal1 from "../icons/medal1.png";
 
 class LeagueToolbar extends Component {
 
@@ -101,11 +104,23 @@ class LeagueToolbar extends Component {
                                         </ListItemIcon>
                                         <ListItemText primary="Seasons"/>
                                     </MenuItem>
-                                    <MenuItem data-link="/history" onClick={this.handleButtonSelection}>
+                                    <MenuItem data-link="/coefficients" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
-                                            <img src={history} title={"history"}/>
+                                            <img src={medal1} title={"Awards & Coefficients"}/>
                                         </ListItemIcon>
-                                        <ListItemText primary="History"/>
+                                        <ListItemText primary="Awards & Coefficients"/>
+                                    </MenuItem>
+                                    <MenuItem data-link="/league_stats" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={analytics} title={"League Stats"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="League Stats"/>
+                                    </MenuItem>
+                                    <MenuItem data-link="/teams_stats" onClick={this.handleButtonSelection}>
+                                        <ListItemIcon>
+                                            <img src={barchart} title={"Teams' Stats"}/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Teams' Stats"/>
                                     </MenuItem>
                                     <MenuItem data-link="/players" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>

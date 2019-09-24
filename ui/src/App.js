@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {BrowserRouter, Switch} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 import LandingPage from "./components/LandingPage";
-import History from "./components/History";
 import Admin from "./components/Admin";
 import Season from "./components/Season";
 import Team from "./components/Team";
 import Group from "./components/Group";
 import Players from "./components/Players";
+import Stats from "./components/history_components/Stats";
+import Statistics from "./components/history_components/Statistics";
+import Coefficients from "./components/history_components/Coefficients";
 
 class App extends Component {
 
@@ -27,7 +29,9 @@ class App extends Component {
                 <Route exact path='/season/:seasonNum' component={Season}/>
                 <Route exact path='/teams/:teamId' component={Team}/>
                 <Route exact path='/groups/:groupId' component={Group}/>
-                <Route path='/history' component={History}/>
+                <Route path='/coefficients' component={Coefficients}/>
+                <Route path='/league_stats' component={Statistics}/>
+                <Route path='/teams_stats' component={Stats}/>
                 <Route path='/players' component={Players}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>

@@ -44,6 +44,7 @@ class Statistics extends Component {
         return (
             this.state.isLoaded ? (
                 <Paper style={{margin: 20}} elevation={20}>
+                    <LeagueToolbar pageTitle={"League Stats"}/>
                     <Box width={1200}>
                         <Grid container spacing={1}>
                             <Grid item sm={4}>
