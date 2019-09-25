@@ -122,3 +122,7 @@ code {
   cursor: pointer;
   font-weight: bold !important;
 }
+
+.reorder_tab {
+  cursor: pointer;
+}

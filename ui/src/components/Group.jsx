@@ -13,6 +13,9 @@ import {
 } from "@material-ui/core";
 import LeagueToolbar from "./LeagueToolbar";
 
+const $ = require('jquery');
+$.DataTable = require('datatables.net');
+
 class Group extends Component {
 
     constructor(props) {
@@ -38,6 +41,14 @@ class Group extends Component {
                             group: result,
                         }
                     });
+
+                    console.log($(".table"));
+                    console.log($(".table").length);
+                        $(".table").DataTable({
+                            "paging" : false,
+                            "searching" : false,
+                            "bInfo" : false,
+                        });
                 },
                 (error) => {
                     this.setState(state => {
@@ -74,16 +85,16 @@ class Group extends Component {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell>Pos</TableCell>
-                                                    <TableCell>Team</TableCell>
-                                                    <TableCell>Played</TableCell>
-                                                    <TableCell>Points</TableCell>
-                                                    <TableCell>W</TableCell>
-                                                    <TableCell>D</TableCell>
-                                                    <TableCell>L</TableCell>
-                                                    <TableCell>GS</TableCell>
-                                                    <TableCell>GC</TableCell>
-                                                    <TableCell>+/-</TableCell>
+                                                    <TableCell className={"reorder_tab"}>Pos</TableCell>
+                                                    <TableCell className={"reorder_tab"}>Team</TableCell>
+                                                    <TableCell className={"reorder_tab"}>Played</TableCell>
+                                                    <TableCell className={"reorder_tab"}>Points</TableCell>
+                                                    <TableCell className={"reorder_tab"}>W</TableCell>
+                                                    <TableCell className={"reorder_tab"}>D</TableCell>
+                                                    <TableCell className={"reorder_tab"}>L</TableCell>
+                                                    <TableCell className={"reorder_tab"}>GS</TableCell>
+                                                    <TableCell className={"reorder_tab"}>GC</TableCell>
+                                                    <TableCell className={"reorder_tab"}>+/-</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -129,7 +140,7 @@ class Group extends Component {
                                                 titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>
-                                        <table className="table" align={"center"}>
+                                        <table className="table1" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell>Day</TableCell>
@@ -212,7 +223,7 @@ class Group extends Component {
                                                 </TableBody>
                                             </table>
                                         ) : (
-                                            <table className="table">
+                                            <table className="table1">
                                                 <TableBody>
                                                     <TableRow>
                                                         <TableCell align={"right"}>Format</TableCell>

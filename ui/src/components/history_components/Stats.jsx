@@ -12,6 +12,9 @@ import Numeral from "numeral";
 import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
 import LeagueToolbar from "../LeagueToolbar";
 
+const $ = require('jquery');
+$.DataTable = require('datatables.net');
+
 class Stats extends Component {
 
     constructor(props) {
@@ -36,6 +39,12 @@ class Stats extends Component {
                             isLoaded: true,
                             teams: result
                         }
+                    });
+
+                    $(".table").DataTable({
+                        "paging": false,
+                        "searching": false,
+                        "bInfo": false,
                     });
                 },
                 (error) => {
@@ -72,18 +81,18 @@ class Stats extends Component {
                                             <table className="table">
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell>Pos</TableCell>
-                                                        <TableCell>Team</TableCell>
-                                                        <TableCell>GP</TableCell>
-                                                        <TableCell>W</TableCell>
-                                                        <TableCell>D</TableCell>
-                                                        <TableCell>L</TableCell>
-                                                        <TableCell>GS</TableCell>
-                                                        <TableCell>GC</TableCell>
-                                                        <TableCell>+/-</TableCell>
-                                                        <TableCell>Coefficients</TableCell>
-                                                        <TableCell>results ratio</TableCell>
-                                                        <TableCell>goals per game</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Pos</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Team</TableCell>
+                                                        <TableCell className={"reorder_tab"}>GP</TableCell>
+                                                        <TableCell className={"reorder_tab"}>W</TableCell>
+                                                        <TableCell className={"reorder_tab"}>D</TableCell>
+                                                        <TableCell className={"reorder_tab"}>L</TableCell>
+                                                        <TableCell className={"reorder_tab"}>GS</TableCell>
+                                                        <TableCell className={"reorder_tab"}>GC</TableCell>
+                                                        <TableCell className={"reorder_tab"}>+/-</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Coefficients</TableCell>
+                                                        <TableCell className={"reorder_tab"}>results ratio</TableCell>
+                                                        <TableCell className={"reorder_tab"}>goals per game</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -114,7 +123,10 @@ class Stats extends Component {
                                                                     align="right">{Numeral(this.state.teams[key].stats.points / 1000).format('0.000')}</TableCell>
                                                                 <TableCell
                                                                     align="right">
-                                                                    <div style={{height: "30px", width: "30px"}}>
+                                                                    <div style={{height: "30px", width: "30px"}}
+                                                                         data-order={
+                                                                             this.state.teams[key]["wins_percent"]
+                                                                         }>
                                                                         <Doughnut
                                                                             data={{
                                                                                 labels: ["", "", ""
@@ -185,6 +197,9 @@ class Stats extends Component {
                                                                                     }],
                                                                                     xAxes: [{
                                                                                         display: false,
+                                                                                        ticks: {
+                                                                                            min: 0,
+                                                                                        },
                                                                                     }],
                                                                                 }
                                                                             }}

@@ -12,6 +12,9 @@ import {
     TableRow
 } from "@material-ui/core";
 
+const $ = require('jquery');
+$.DataTable = require('datatables.net');
+
 class GroupsDisplay extends Component {
 
     constructor(props) {
@@ -37,6 +40,12 @@ class GroupsDisplay extends Component {
                             isLoaded: true,
                             groups: result,
                         }
+                    });
+
+                    $(".table").DataTable({
+                        "paging": false,
+                        "searching": false,
+                        "bInfo": false,
                     });
                 },
                 (error) => {
@@ -78,16 +87,16 @@ class GroupsDisplay extends Component {
                                             <table className="table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell>Pos</TableCell>
-                                                        <TableCell>Team</TableCell>
-                                                        <TableCell>Played</TableCell>
-                                                        <TableCell>Points</TableCell>
-                                                        <TableCell>W</TableCell>
-                                                        <TableCell>D</TableCell>
-                                                        <TableCell>L</TableCell>
-                                                        <TableCell>GS</TableCell>
-                                                        <TableCell>GC</TableCell>
-                                                        <TableCell>+/-</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Pos</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Team</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Played</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Points</TableCell>
+                                                        <TableCell className={"reorder_tab"}>W</TableCell>
+                                                        <TableCell className={"reorder_tab"}>D</TableCell>
+                                                        <TableCell className={"reorder_tab"}>L</TableCell>
+                                                        <TableCell className={"reorder_tab"}>GS</TableCell>
+                                                        <TableCell className={"reorder_tab"}>GC</TableCell>
+                                                        <TableCell className={"reorder_tab"}>+/-</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>

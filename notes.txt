@@ -10,9 +10,9 @@ player of the year
  overachievers
  underperformers
  dream team
+stats page reordering
 
 TODO 1.3
-stats page reordering
 
 add awards to players
 add player page
