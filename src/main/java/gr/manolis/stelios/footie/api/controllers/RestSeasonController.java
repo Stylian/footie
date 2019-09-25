@@ -9,10 +9,7 @@ import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
 import gr.manolis.stelios.footie.api.mappers.*;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
-import gr.manolis.stelios.footie.core.peristence.dtos.Player;
-import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
-import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
-import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -69,7 +66,7 @@ public class RestSeasonController {
     @Autowired
     private MatchupGameMapper matchupGameMapper;
 
-     @RequestMapping("/")
+    @RequestMapping("/")
     public int seasonYear() {
         return serviceUtils.getNumberOfSeasons();
     }
@@ -105,7 +102,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/{year}/seeding")
-    public List<TeamCoeffsDTO>  seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
+    public List<TeamCoeffsDTO> seasonSeeding(@PathVariable(value = "year", required = true) String strYear) {
         logger.info("season seeding");
 
         int year = NumberUtils.toInt(strYear);
@@ -154,22 +151,22 @@ public class RestSeasonController {
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
             Collections.sort(qr.getTeams(), new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
-                    season.getSeasonYear()-1));
-            if(round == 1) {
+                    season.getSeasonYear() - 1));
+            if (round == 1) {
                 teamsStrong = qr.getTeams().subList(0, 13);
                 teamsWeak = qr.getTeams().subList(13, qr.getTeams().size());
-            }else { // playoffs round
-                if(season.getSeasonYear() == 1) {
-                    if(qr.getTeams().size() < 12) {
+            } else { // playoffs round
+                if (season.getSeasonYear() == 1) {
+                    if (qr.getTeams().size() < 12) {
                         teamsStrong = qr.getTeams();
-                    }else {
+                    } else {
                         teamsStrong = qr.getTeams().subList(0, 12);
                         teamsWeak = qr.getTeams().subList(12, qr.getTeams().size());
                     }
-                }else {
-                    if(qr.getTeams().size() < 10) {
+                } else {
+                    if (qr.getTeams().size() < 10) {
                         teamsStrong = qr.getTeams();
-                    }else {
+                    } else {
                         teamsStrong = qr.getTeams().subList(0, 9);
                         teamsWeak = qr.getTeams().subList(9, qr.getTeams().size());
                     }
@@ -180,7 +177,7 @@ public class RestSeasonController {
         List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
         List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK);
 
-        Map<Seed, List<TeamCoeffsDTO>>  qualsTeams = new HashMap<>();
+        Map<Seed, List<TeamCoeffsDTO>> qualsTeams = new HashMap<>();
         qualsTeams.put(Seed.STRONG, teamsStrongWithCoeffs);
         qualsTeams.put(Seed.WEAK, teamsWeakWithCoeffs);
 
@@ -213,7 +210,7 @@ public class RestSeasonController {
 
         // mapping
         Map<Integer, List<MatchupGameDTO>> newDaysStructureMapped = new HashMap<>();
-        for(Map.Entry<Integer, List<Game>> entry : newDaysStructure.entrySet()) {
+        for (Map.Entry<Integer, List<Game>> entry : newDaysStructure.entrySet()) {
             newDaysStructureMapped.put(entry.getKey(), matchupGameMapper.toDTO(entry.getValue()));
         }
 
@@ -243,14 +240,14 @@ public class RestSeasonController {
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
             Collections.sort(qr.getTeams(), new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
-                    season.getSeasonYear()-1));
-            if(qr.getTeams().size() < 5) {
+                    season.getSeasonYear() - 1));
+            if (qr.getTeams().size() < 5) {
                 teamsStrong = qr.getTeams();
-            }else if(qr.getTeams().size() < 9) {
+            } else if (qr.getTeams().size() < 9) {
                 List<List<Team>> listsOfTeams = ListUtils.partition(qr.getTeams(), 4);
                 teamsStrong = listsOfTeams.get(0);
                 teamsMedium = listsOfTeams.get(1);
-            }else {
+            } else {
                 List<List<Team>> listsOfTeams = ListUtils.partition(qr.getTeams(), 4);
                 teamsStrong = listsOfTeams.get(0);
                 teamsMedium = listsOfTeams.get(1);
@@ -303,9 +300,9 @@ public class RestSeasonController {
         logger.info("groupsRounds: " + groupsRound);
 
         List<RobinGroup> groups = groupsRound.getGroups();
-        for(RobinGroup rg : groups) {
+        for (RobinGroup rg : groups) {
             Collections.sort(rg.getTeams(), new RobinGroupOrdering(rg,
-                    serviceUtils.loadAllSeasons(), season.getSeasonYear()-1));
+                    serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
         }
         List<RobinGroupDTO> groupsDTO = robinGroupMapper.toDTO(groups);
 
@@ -350,25 +347,25 @@ public class RestSeasonController {
         if (!quartersDone) {
             structure.put("F1", emptyTeam);
             structure.put("F2", emptyTeam);
-        }else {
+        } else {
             Team f1 = round.getSemisMatchups().get(0).getWinner();
-            if(f1 == null) {
+            if (f1 == null) {
                 structure.put("F1", emptyTeam);
-            }else {
+            } else {
                 structure.put("F1", teamSimpleMapper.toDTO(f1));
             }
 
             Team f2 = round.getSemisMatchups().get(1).getWinner();
-            if(f2 == null) {
+            if (f2 == null) {
                 structure.put("F2", emptyTeam);
-            }else {
+            } else {
                 structure.put("F2", teamSimpleMapper.toDTO(f2));
             }
         }
 
-        if(round.getFinalsMatchup() != null && round.getFinalsMatchup().getWinner() != null) {
+        if (round.getFinalsMatchup() != null && round.getFinalsMatchup().getWinner() != null) {
             structure.put("W1", teamSimpleMapper.toDTO(round.getFinalsMatchup().getWinner()));
-        }else {
+        } else {
             structure.put("W1", emptyTeam);
         }
 
@@ -387,8 +384,8 @@ public class RestSeasonController {
 
         List<Game> semis = new ArrayList<>();
         round.getSemisMatchups().forEach(m -> semis.addAll(m.getGames()));
-        semis.sort( (g1, g2) -> {
-            if(g1.getDay() < 0) return 10;
+        semis.sort((g1, g2) -> {
+            if (g1.getDay() < 0) return 10;
             else if (g2.getDay() < 0) return -1;
             else return g1.getDay() - g2.getDay();
         });
@@ -403,7 +400,7 @@ public class RestSeasonController {
 
         // mapping
         Map<String, List<MatchupGameDTO>> matchesMapped = new HashMap<>();
-        for(Map.Entry<String, List<Game>> entry : matches.entrySet()) {
+        for (Map.Entry<String, List<Game>> entry : matches.entrySet()) {
             matchesMapped.put(entry.getKey(), matchupGameMapper.toDTO(entry.getValue()));
         }
 
@@ -448,17 +445,17 @@ public class RestSeasonController {
         data.put("st", playerMapper.toDTO((Player) dataFromSeason.get("st")));
 
         boolean haveToPublish = false;
-        if(season.getDreamTeamGK() == null
-            || season.getDreamTeamDCL() == null
-            || season.getDreamTeamDCR() == null
-            || season.getDreamTeamDL() == null
-            || season.getDreamTeamDR() == null
-            || season.getDreamTeamCML() == null
-            || season.getDreamTeamCMR() == null
-            || season.getDreamTeamAMC() == null
-            || season.getDreamTeamAMR() == null
-            || season.getDreamTeamAML() == null
-            || season.getDreamTeamST() == null
+        if (season.getDreamTeamGK() == null
+                || season.getDreamTeamDCL() == null
+                || season.getDreamTeamDCR() == null
+                || season.getDreamTeamDL() == null
+                || season.getDreamTeamDR() == null
+                || season.getDreamTeamCML() == null
+                || season.getDreamTeamCMR() == null
+                || season.getDreamTeamAMC() == null
+                || season.getDreamTeamAMR() == null
+                || season.getDreamTeamAML() == null
+                || season.getDreamTeamST() == null
         ) {
             haveToPublish = true;
         }
@@ -469,107 +466,119 @@ public class RestSeasonController {
 
     @ResponseBody
     @PostMapping("/{year}/publish")
-    public RestResponse publishOverview( @PathVariable(value = "year", required = true) String strYear,
-            @RequestParam(name = "overachievers", required = false) String overachieversId,
-            @RequestParam(name = "underperformers", required = false) String underperformersId,
-            @RequestParam(name = "playerOfTheYear", required = false) String playerOfTheYearId,
-            @RequestParam(name = "gk", required = false) String gkId,
-            @RequestParam(name = "dcl", required = false) String dclId,
-            @RequestParam(name = "dcr", required = false) String dcrId,
-            @RequestParam(name = "dl", required = false) String dlId,
-            @RequestParam(name = "dr", required = false) String drId,
-            @RequestParam(name = "cml", required = false) String cmlId,
-            @RequestParam(name = "cmr", required = false) String cmrId,
-            @RequestParam(name = "aml", required = false) String amlId,
-            @RequestParam(name = "amr", required = false) String amrId,
-            @RequestParam(name = "amc", required = false) String amcId,
-            @RequestParam(name = "st", required = false) String stId
-            ) {
+    public RestResponse publishOverview(@PathVariable(value = "year", required = true) String strYear,
+                                        @RequestParam(name = "overachievers", required = false) String overachieversId,
+                                        @RequestParam(name = "underperformers", required = false) String underperformersId,
+                                        @RequestParam(name = "playerOfTheYear", required = false) String playerOfTheYearId,
+                                        @RequestParam(name = "gk", required = false) String gkId,
+                                        @RequestParam(name = "dcl", required = false) String dclId,
+                                        @RequestParam(name = "dcr", required = false) String dcrId,
+                                        @RequestParam(name = "dl", required = false) String dlId,
+                                        @RequestParam(name = "dr", required = false) String drId,
+                                        @RequestParam(name = "cml", required = false) String cmlId,
+                                        @RequestParam(name = "cmr", required = false) String cmrId,
+                                        @RequestParam(name = "aml", required = false) String amlId,
+                                        @RequestParam(name = "amr", required = false) String amrId,
+                                        @RequestParam(name = "amc", required = false) String amcId,
+                                        @RequestParam(name = "st", required = false) String stId
+    ) {
 
         int year = NumberUtils.toInt(strYear);
         Season season = serviceUtils.loadSeason(year);
 
-        if(!"null".equals(overachieversId)) {
+        if (!"null".equals(overachieversId)) {
             int id = Integer.parseInt(overachieversId);
             Team team = serviceUtils.loadTeam(id);
             season.setOverachiever(team);
         }
 
-        if(!"null".equals(underperformersId)) {
+        if (!"null".equals(underperformersId)) {
             int id = Integer.parseInt(underperformersId);
             Team team = serviceUtils.loadTeam(id);
             season.setUnderperformer(team);
         }
 
-        if(!"null".equals(playerOfTheYearId)) {
+        if (!"null".equals(playerOfTheYearId)) {
             int id = Integer.parseInt(playerOfTheYearId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.PLAYER_OF_THE_YEAR, player));
             season.setPlayerOfTheSeason(player);
         }
 
-        if(!"null".equals(gkId)) {
+        if (!"null".equals(gkId)) {
             int id = Integer.parseInt(gkId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamGK(player);
         }
 
-        if(!"null".equals(dclId)) {
+        if (!"null".equals(dclId)) {
             int id = Integer.parseInt(dclId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamDCL(player);
         }
 
-        if(!"null".equals(dcrId)) {
+        if (!"null".equals(dcrId)) {
             int id = Integer.parseInt(dcrId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamDCR(player);
         }
 
-        if(!"null".equals(dlId)) {
+        if (!"null".equals(dlId)) {
             int id = Integer.parseInt(dlId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamDL(player);
         }
 
-        if(!"null".equals(drId)) {
+        if (!"null".equals(drId)) {
             int id = Integer.parseInt(drId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamDR(player);
         }
 
-        if(!"null".equals(cmlId)) {
+        if (!"null".equals(cmlId)) {
             int id = Integer.parseInt(cmlId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamCML(player);
         }
 
-        if(!"null".equals(cmrId)) {
+        if (!"null".equals(cmrId)) {
             int id = Integer.parseInt(cmrId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamCMR(player);
         }
 
-        if(!"null".equals(amlId)) {
+        if (!"null".equals(amlId)) {
             int id = Integer.parseInt(amlId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamAML(player);
         }
 
-        if(!"null".equals(amrId)) {
+        if (!"null".equals(amrId)) {
             int id = Integer.parseInt(amrId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamAMR(player);
         }
 
-        if(!"null".equals(amcId)) {
+        if (!"null".equals(amcId)) {
             int id = Integer.parseInt(amcId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamAMC(player);
         }
 
-        if(!"null".equals(stId)) {
+        if (!"null".equals(stId)) {
             int id = Integer.parseInt(stId);
             Player player = serviceUtils.loadPlayer(id);
+            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
             season.setDreamTeamST(player);
         }
 
@@ -588,7 +597,7 @@ public class RestSeasonController {
 
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
-        if(season.getSeasonYear() > 1) {
+        if (season.getSeasonYear() > 1) {
             // remove champ here grom groups for view
             Team champion = teamsInRounds.get(Seed.CHAMPION).get(0);
             teamsInRounds.get(Seed.TO_GROUPS).remove(champion);
@@ -598,15 +607,15 @@ public class RestSeasonController {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
             teamDTO.setTrophies(team.getTrophies()); // why you not work on your own ?
 
-            if(season.getSeasonYear() > 1) {
-                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear()-1);
+            if (season.getSeasonYear() > 1) {
+                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear() - 1);
                 teamDTO.setCoefficients(p1);
-            }else {
+            } else {
                 teamDTO.setCoefficients(0);
             }
 
-            for(Map.Entry<Seed, List<Team>> entry : teamsInRounds.entrySet()) {
-                if(entry.getValue().contains(team)) {
+            for (Map.Entry<Seed, List<Team>> entry : teamsInRounds.entrySet()) {
+                if (entry.getValue().contains(team)) {
                     teamDTO.setSeed(entry.getKey());
                     break;
                 }
@@ -627,10 +636,10 @@ public class RestSeasonController {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
             teamDTO.setSeed(seed);
 
-            if(season.getSeasonYear() > 1) {
-                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear()-1);
+            if (season.getSeasonYear() > 1) {
+                int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear() - 1);
                 teamDTO.setCoefficients(p1);
-            }else {
+            } else {
                 teamDTO.setCoefficients(0);
             }
 

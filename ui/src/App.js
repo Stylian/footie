@@ -10,6 +10,7 @@ import Players from "./components/Players";
 import Stats from "./components/history_components/Stats";
 import Statistics from "./components/history_components/Statistics";
 import Coefficients from "./components/history_components/Coefficients";
+import Player from "./components/Player";
 
 class App extends Component {
 
@@ -32,7 +33,8 @@ class App extends Component {
                 <Route path='/coefficients' component={Coefficients}/>
                 <Route path='/league_stats' component={Statistics}/>
                 <Route path='/teams_stats' component={Stats}/>
-                <Route path='/players' component={Players}/>
+                <Route path='/players_edit' component={Players}/>
+                <Route path='/players/:playerId' component={Player}/>
                 <Route path='/admin' component={Admin}/>
             </BrowserRouter>
         );

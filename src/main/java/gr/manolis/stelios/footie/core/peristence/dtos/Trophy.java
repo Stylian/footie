@@ -7,8 +7,13 @@ import javax.persistence.*;
 @Entity(name = "TROPHIES")
 public class Trophy {
 
+    // team awards
     public static final String WINNER = "W";
     public static final String RUNNER_UP = "R";
+
+    // player awards
+    public static final String PLAYER_OF_THE_YEAR = "PL";
+    public static final String DREAM_TEAM = "DT";
 
     @Id
     @GeneratedValue
@@ -35,6 +40,12 @@ public class Trophy {
         this.seasonNum = seasonNum;
         this.type = type;
         this.team = team;
+    }
+
+    public Trophy(int seasonNum, String type, Player player) {
+        this.seasonNum = seasonNum;
+        this.type = type;
+        this.player = player;
     }
 
     public int getSeasonNum() {

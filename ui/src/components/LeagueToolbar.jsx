@@ -122,7 +122,7 @@ class LeagueToolbar extends Component {
                                         </ListItemIcon>
                                         <ListItemText primary="Teams' Stats"/>
                                     </MenuItem>
-                                    <MenuItem data-link="/players" onClick={this.handleButtonSelection}>
+                                    <MenuItem data-link="/players_edit" onClick={this.handleButtonSelection}>
                                         <ListItemIcon>
                                             <img src={players} title={"players"}/>
                                         </ListItemIcon>
