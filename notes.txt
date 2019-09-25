@@ -11,13 +11,13 @@ player of the year
  underperformers
  dream team
 stats page reordering
-
-TODO 1.3
-
 add awards to players
 add player page
 
 TODO 1.4
+players to be clickable in players page
+somewhere put a top performers card for players
+
 radar diagrams per team
 home attacking
 home defending

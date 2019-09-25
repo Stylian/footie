@@ -155,7 +155,7 @@ class Coefficients extends Component {
                                                                               }}
                                                                     >
                                                                         <TableCell align="right">{index + 1}</TableCell>
-                                                                        <TableCell>{team.name}</TableCell>
+                                                                        <TableCell style={{minWidth:100, maxWidth:100}} >{team.name}</TableCell>
                                                                         <TableCell
                                                                             align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
                                                                     </TableRow>)
@@ -190,7 +190,7 @@ class Coefficients extends Component {
                                                                     >
                                                                         <TableCell
                                                                             align="right">{leftSide.length + index + 1}</TableCell>
-                                                                        <TableCell>{team.name}</TableCell>
+                                                                        <TableCell style={{minWidth:100, maxWidth:100}} >{team.name}</TableCell>
                                                                         <TableCell
                                                                             align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
                                                                     </TableRow>)

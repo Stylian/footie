@@ -185,7 +185,7 @@ class Group extends Component {
                                     />
                                     <CardContent>
                                         { this.state.group.round == 1 ? (
-                                            <table className="table">
+                                            <table className="table1">
                                                 <TableBody>
                                                     <TableRow>
                                                         <TableCell align={"right"}>Winners</TableCell>

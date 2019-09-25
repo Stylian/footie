@@ -104,7 +104,7 @@ class Stats extends Component {
                                                                 data-teamid={this.state.teams[key]["teamObject"].id}
                                                                 onClick={this.goToTeam}>
                                                                 <TableCell align="right">{index + 1}</TableCell>
-                                                                <TableCell>{key}</TableCell>
+                                                                <TableCell style={{minWidth:200, maxWidth:300}} >{key}</TableCell>
                                                                 <TableCell
                                                                     align="right">{this.state.teams[key]["number of games played"]}</TableCell>
                                                                 <TableCell
