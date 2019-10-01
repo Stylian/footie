@@ -1064,7 +1064,7 @@ class SeasonPostview extends Component {
                                                                     data-playerid={this.state.data.st.id}
                                                                       style={{minWidth:150, maxWidth:150}}  onClick={this.goToPlayer}
                                                                 >
-                                                                    {this.state.data.amr.name}
+                                                                    {this.state.data.st.name}
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.st.team.id}
