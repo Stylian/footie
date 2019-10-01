@@ -1058,18 +1058,18 @@ class SeasonPostview extends Component {
                                                         ) : (
                                                             <TableRow
                                                                 style={{backgroundColor: '#e2b6b6'}}>
-                                                                <TableCell>LR</TableCell>
+                                                                <TableCell>ST</TableCell>
                                                                 <TableCell
                                                                     className={"playerClicker"}
-                                                                    data-playerid={this.state.data.amr.id}
+                                                                    data-playerid={this.state.data.st.id}
                                                                       style={{minWidth:150, maxWidth:150}}  onClick={this.goToPlayer}
                                                                 >
                                                                     {this.state.data.amr.name}
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
-                                                                           data-teamid={this.state.data.amr.team.id}
+                                                                           data-teamid={this.state.data.st.team.id}
                                                                             style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
-                                                                    {this.state.data.amr.team.name}
+                                                                    {this.state.data.st.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
 
