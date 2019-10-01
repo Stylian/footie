@@ -456,6 +456,7 @@ public class RestSeasonController {
                 || season.getDreamTeamAMR() == null
                 || season.getDreamTeamAML() == null
                 || season.getDreamTeamST() == null
+                || season.getPlayerOfTheSeason() == null
         ) {
             haveToPublish = true;
         }
