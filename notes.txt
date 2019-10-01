@@ -1,4 +1,7 @@
 
+TODO
+nulls hell with coeffs in playoffs
+
 TODO 1.4
 players to be clickable in players page
 somewhere put a top performers card for players

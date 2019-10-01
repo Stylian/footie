@@ -127,7 +127,7 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		for (Matchup matchup : playoffsRound.getSemisMatchups()) {
 			// average out points per matchup
-			Utils.addGamePointsForMatchup(season, matchup);
+			Utils.addGamePointsForMatchup(season, matchup, true);
 		}
 
 		//save
@@ -150,7 +150,7 @@ public class PlayoffsRoundService {
 			finalsMatchup.getTeamAway().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);
 		}
 		// average out points per matchup
-		Utils.addGamePointsForMatchup(season, finalsMatchup);
+		Utils.addGamePointsForMatchup(season, finalsMatchup, true);
 
 		//save
 		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());

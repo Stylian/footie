@@ -48,7 +48,12 @@ public class Utils {
 		return lsObj.stream().map(Object::toString).collect(Collectors.joining(","));
 	}
 
+	// half points only for quals
 	public static void addGamePointsForMatchup(Group group, Matchup matchup) {
+		addGamePointsForMatchup(group, matchup, false);
+	}
+
+	public static void addGamePointsForMatchup(Group group, Matchup matchup, boolean doublePoints) {
 		int matchPointsHome = 0;
 		int matchPointsAway = 0;
 		int numberOfGames = 0;
@@ -61,16 +66,20 @@ public class Utils {
 
 				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
 					matchPointsHome += Rules.WIN_POINTS;
-				} else {
+				} else if (game.getHomeTeam().equals(matchup.getTeamAway())) {
 					matchPointsAway += Rules.WIN_POINTS;
+				} else {
+					System.out.println("AAAAAAAAAAAAAAAAAAAAA");
 				}
 
 			} else if (game.getResult().tie()) {
 
 				if (game.getHomeTeam().equals(matchup.getTeamHome())) {
 					matchPointsHome += Rules.DRAW_POINTS;
-				} else {
+				} else if (game.getHomeTeam().equals(matchup.getTeamAway())) {
 					matchPointsAway += Rules.DRAW_POINTS;
+				} else {
+					System.out.println("AAAAAAAAAAAAAAAAAAAAA");
 				}
 
 			}
@@ -84,8 +93,10 @@ public class Utils {
 
 		}
 
-		matchup.getTeamHome().getStatsForGroup(group).addPoints(2 * matchPointsHome / numberOfGames);
-		matchup.getTeamAway().getStatsForGroup(group).addPoints(2 * matchPointsAway / numberOfGames);
+		int mult = doublePoints ? 2 : 1;
+
+		matchup.getTeamHome().getStatsForGroup(group).addPoints(2 * mult * matchPointsHome / numberOfGames);
+		matchup.getTeamAway().getStatsForGroup(group).addPoints(2 * mult * matchPointsAway / numberOfGames);
 	}
 
 	public static int getCoefficientsUntilSeason(List<Season> allSeasons, Team team, int seasonUntil) {

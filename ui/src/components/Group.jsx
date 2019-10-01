@@ -263,7 +263,7 @@ class Group extends Component {
                                                             <ul>
                                                                 <li>1st place: 2.000</li>
                                                                 <li>2nd place: 0.600</li>
-                                                                <li>23rd place: 0.300</li>
+                                                                <li>3rd place: 0.300</li>
                                                                 <li>win: 1.000</li>
                                                                 <li>draw: 0.500</li>
                                                                 <li>each goal scored: 0.100</li>

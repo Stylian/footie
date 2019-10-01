@@ -194,7 +194,7 @@ public class SeasonService {
     }
 
     public Season endCurrentSeason() {
-        logger.info("closing down season, calculating coefficients");
+        logger.info("closing down season");
 
         Season season = serviceUtils.loadCurrentSeason();
         PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);

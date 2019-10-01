@@ -271,6 +271,15 @@ public class GroupsRoundService {
         int round = Integer.parseInt(strRound);
 
         Season season = serviceUtils.loadCurrentSeason();
+        GroupsRound groupsRound = calcCoeffsForGroup(round, season);
+
+        //save
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        seasonDao.save(season);
+        Utils.autosave(groupsRound);
+    }
+
+    public GroupsRound calcCoeffsForGroup(int round, Season season) {
         GroupsRound groupsRound = null;
 
         switch(round) {
@@ -321,11 +330,7 @@ public class GroupsRoundService {
                 }
                 break;
         }
-
-        //save
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
-        seasonDao.save(season);
-        Utils.autosave(groupsRound);
+        return groupsRound;
     }
 
 

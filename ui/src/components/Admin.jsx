@@ -175,14 +175,38 @@ class Admin extends Component {
             )
     }
 
+    handleRecalcCoeffs = (event, newValue) => {
+        fetch("/rest/admin/recalculate_coeffs", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.text())
+            .then(
+                (result) => {
+
+                    alert("done recalculation");
+
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
     render() {
         return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                <Box width={1200}>
+                <Box >
                     <Grid container spacing={1}>
 
-                        <Grid item sm={6}>
+                        <Grid item sm={4}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Seasons Stage"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -214,7 +238,7 @@ class Admin extends Component {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item sm={6}>
+                        <Grid item sm={4}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Database"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -242,6 +266,16 @@ class Admin extends Component {
                                             </TableRow>
                                         </TableBody>
                                     </table>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item sm={4}>
+                            <Card style={{margin: 20}}>
+                                <CardHeader title={"Coeffs calc"} align={"center"}
+                                            titleTypographyProps={{variant: 'h7'}}
+                                />
+                                <CardContent>
+                                    <Button onClick={this.handleRecalcCoeffs}>Recalculate current season's coeffs</Button>
                                 </CardContent>
                             </Card>
                         </Grid>

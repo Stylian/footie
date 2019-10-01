@@ -92,6 +92,8 @@ class Stats extends Component {
                                                         <TableCell className={"reorder_tab"}>+/-</TableCell>
                                                         <TableCell className={"reorder_tab"}>Coefficients</TableCell>
                                                         <TableCell className={"reorder_tab"}>results ratio</TableCell>
+                                                        <TableCell className={"reorder_tab"}>avg gs</TableCell>
+                                                        <TableCell className={"reorder_tab"}>avg gc</TableCell>
                                                         <TableCell className={"reorder_tab"}>goals per game</TableCell>
                                                     </TableRow>
                                                 </TableHead>
@@ -162,6 +164,10 @@ class Stats extends Component {
                                                                     </div>
                                                                 </TableCell>
                                                                 <TableCell
+                                                                    align="right">{this.state.teams[key]["avg goals scored"]}</TableCell>
+                                                                <TableCell
+                                                                    align="right">{this.state.teams[key]["avg goals conceded"]}</TableCell>
+                                                                <TableCell
                                                                     align="right">
                                                                     <div style={{height: "25px", width: "100px"}}>
                                                                         <HorizontalBar
@@ -199,6 +205,7 @@ class Stats extends Component {
                                                                                         display: false,
                                                                                         ticks: {
                                                                                             min: 0,
+                                                                                            max: 6
                                                                                         },
                                                                                     }],
                                                                                 }
