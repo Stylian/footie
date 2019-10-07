@@ -15,7 +15,7 @@ import LeagueToolbar from "./LeagueToolbar";
 
 import silvermedal from "../icons/silvermedal.png";
 import goldmedal from "../icons/goldmedal.png";
-import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
+import {Bar, Doughnut, HorizontalBar, Radar} from "react-chartjs-2";
 
 class Team extends Component {
 
@@ -121,9 +121,12 @@ class Team extends Component {
                                                     <Doughnut
                                                         data={{
                                                             labels: [
-                                                                'Wins - ' + parseFloat(Math.round(100 * this.state.gameStats["wins_percent"] * 100) / 100).toFixed(0) + "%",
-                                                                'Draws - ' + parseFloat(Math.round(100 * this.state.gameStats["draws_percent"] * 100) / 100).toFixed(0) + "%",
-                                                                'Losses - ' + parseFloat(Math.round(100 * this.state.gameStats["losses_percent"] * 100) / 100).toFixed(0) + "%",
+                                                                'Wins - ' + parseFloat(Math.round(100 * this.state.gameStats["wins_percent"] * 100) / 100).toFixed(0) + "%"
+                                                                + " (" + parseFloat(Math.round(100 * this.state.gameStats["wins_percent_away"] * 100) / 100).toFixed(0) + "%)",
+                                                                'Draws - ' + parseFloat(Math.round(100 * this.state.gameStats["draws_percent"] * 100) / 100).toFixed(0) + "%"
+                                                                + " (" + parseFloat(Math.round(100 * this.state.gameStats["draws_percent_away"] * 100) / 100).toFixed(0) + "%)",
+                                                                'Losses - ' + parseFloat(Math.round(100 * this.state.gameStats["losses_percent"] * 100) / 100).toFixed(0) + "%"
+                                                                + " (" + parseFloat(Math.round(100 * this.state.gameStats["losses_percent_away"] * 100) / 100).toFixed(0) + "%)",
                                                             ],
                                                             datasets: [{
                                                                 data: [
@@ -141,6 +144,23 @@ class Team extends Component {
                                                                     '#919294',
                                                                     '#ab1d1d'
                                                                 ]
+                                                            },
+                                                            {
+                                                                data: [
+                                                                    this.state.gameStats["winsAway"],
+                                                                    this.state.gameStats["drawsAway"],
+                                                                    this.state.gameStats["lossesAway"]
+                                                                ],
+                                                                backgroundColor: [
+                                                                    '#6c8de0',
+                                                                    '#d8d9d9',
+                                                                    '#e56666'
+                                                                ],
+                                                                hoverBackgroundColor: [
+                                                                    '#6c8de0',
+                                                                    '#d8d9d9',
+                                                                    '#e56666'
+                                                                ]
                                                             }],
                                                         }}
                                                         options={{
@@ -148,7 +168,8 @@ class Team extends Component {
                                                             title: {
                                                                 display: true,
                                                                 position: "top",
-                                                                text: "results of " + this.state.gameStats["number of games played"] + " games",
+                                                                text: "results of " + this.state.gameStats["number of games played"]
+                                                                   + " (" + this.state.gameStats["number of games played away"] + ") games",
                                                                 fontSize: 11,
                                                                 fontColor: "#111"
                                                             },
@@ -164,21 +185,35 @@ class Team extends Component {
                                                         <HorizontalBar
                                                             data={{
                                                                 labels: [
-                                                                    'goals scored - ' + this.state.gameStats["avg goals scored"],
-                                                                    'goals conceded - ' + this.state.gameStats["avg goals conceded"],
+                                                                    'scored - ' + this.state.gameStats["avg goals scored"] + " ("+this.state.gameStats["avg goals scored away"]+")",
+                                                                    'conceded - ' + this.state.gameStats["avg goals conceded"] + " ("+this.state.gameStats["avg goals conceded away"]+")"
                                                                 ],
                                                                 datasets: [{
                                                                     data: [
                                                                         this.state.gameStats["avg goals scored"],
-                                                                        this.state.gameStats["avg goals conceded"]
+                                                                        this.state.gameStats["avg goals conceded"],
                                                                     ],
                                                                     backgroundColor: [
                                                                         '#2d5cd2',
-                                                                        '#da2525'
+                                                                        '#da2525',
                                                                     ],
                                                                     hoverBackgroundColor: [
                                                                         '#2d5cd2',
-                                                                        '#da2525'
+                                                                        '#da2525',
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    data: [
+                                                                        this.state.gameStats["avg goals scored away"],
+                                                                        this.state.gameStats["avg goals conceded away"]
+                                                                    ],
+                                                                    backgroundColor: [
+                                                                        '#abbeed',
+                                                                        '#f0a8a8'
+                                                                    ],
+                                                                    hoverBackgroundColor: [
+                                                                        '#abbeed',
+                                                                        '#f0a8a8'
                                                                     ]
                                                                 }],
                                                             }}
@@ -377,6 +412,49 @@ class Team extends Component {
                                                                     titleTypographyProps={{variant: 'h7'}}
                                                         />
                                                         <CardContent>
+                                                            <Radar
+                                                                data={{
+                                                                    labels: [
+                                                                        "Elo",
+                                                                        "Away Attack",
+                                                                        "Away Defence",
+                                                                        "Defence",
+                                                                        "Attack",
+                                                                    ],
+                                                                    datasets: [{
+                                                                        data: [
+                                                                            85,
+                                                                            this.state.gameStats["avg goals scored away"]*50,
+                                                                            (8 - this.state.gameStats["avg goals conceded away"])*12.5,
+                                                                            (4 - this.state.gameStats["avg goals conceded"])*25,
+                                                                            this.state.gameStats["avg goals scored"]*(100/6),
+                                                                        ],
+                                                                        backgroundColor: '#2d5cd2',
+                                                                        hoverBackgroundColor: '#2d5cd2',
+                                                                    }],
+                                                                }}
+                                                                options={{
+                                                                    responsive: true,
+                                                                    maintainAspectRatio: false,
+                                                                    legend: {
+                                                                        display: false,
+                                                                    },
+                                                                    scale: {
+                                                                        ticks: {
+                                                                            beginAtZero: true,
+                                                                            max: 100,
+                                                                            min: 0,
+                                                                            display: false,
+                                                                            stepSize: 20
+                                                                        },
+                                                                    },
+                                                                    elements: {
+                                                                        point:{
+                                                                            radius: 0
+                                                                        }
+                                                                    }
+                                                                }}
+                                                            />
                                                         </CardContent>
                                                     </Card>
                                                 </Grid>

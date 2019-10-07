@@ -1,17 +1,21 @@
 
-TODO
-nulls hell with coeffs in playoffs
-
-TODO 1.4
-players to be clickable in players page
-somewhere put a top performers card for players
-
+DONE
 radar diagrams per team
 home attacking
 home defending
 away attacking
 away defending
-elo
+elo ( does nothing yet )
+added away stats to stats page
+fixed stats page reordering
+added dividers, double header
+
+TODO
+nulls hell with coeffs in playoffs
+
+TODO 1.5
+players to be clickable in players page
+somewhere put a top performers card for players
 
 elo rating system
 elo rating graph
@@ -22,7 +26,5 @@ recommended
  underperformers
 
 derby.log to move to logs folder
-
-TODO 1.5
 stats page broken- on adding teams?
 remove teams func and greying out

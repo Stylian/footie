@@ -15,6 +15,8 @@ import LeagueToolbar from "../LeagueToolbar";
 const $ = require('jquery');
 $.DataTable = require('datatables.net');
 
+const leftDivider = {"border-left" : "1px solid #ddd"};
+
 class Stats extends Component {
 
     constructor(props) {
@@ -67,7 +69,7 @@ class Stats extends Component {
         return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={"Teams' Stats"}/>
-                <Box width={1300}>
+                <Box >
                     <Grid container spacing={1}>
                         <Grid item sm={12}>
                             <Card style={{margin: 20}}>
@@ -81,6 +83,13 @@ class Stats extends Component {
                                             <table className="table">
                                                 <TableHead>
                                                     <TableRow>
+                                                        <TableCell className={"reorder_tab"} colSpan={10}></TableCell>
+                                                        <TableCell className={"reorder_tab"} colSpan={4} style={leftDivider}
+                                                            align={"center"}>home stats</TableCell>
+                                                        <TableCell className={"reorder_tab"} colSpan={4} style={leftDivider}
+                                                            align={"center"}>away stats</TableCell>
+                                                    </TableRow>
+                                                    <TableRow>
                                                         <TableCell className={"reorder_tab"}>Pos</TableCell>
                                                         <TableCell className={"reorder_tab"}>Team</TableCell>
                                                         <TableCell className={"reorder_tab"}>GP</TableCell>
@@ -91,7 +100,11 @@ class Stats extends Component {
                                                         <TableCell className={"reorder_tab"}>GC</TableCell>
                                                         <TableCell className={"reorder_tab"}>+/-</TableCell>
                                                         <TableCell className={"reorder_tab"}>Coefficients</TableCell>
-                                                        <TableCell className={"reorder_tab"}>results ratio</TableCell>
+                                                        <TableCell className={"reorder_tab"} style={leftDivider}>results ratio</TableCell>
+                                                        <TableCell className={"reorder_tab"}>avg gs</TableCell>
+                                                        <TableCell className={"reorder_tab"}>avg gc</TableCell>
+                                                        <TableCell className={"reorder_tab"}>goals per game</TableCell>
+                                                        <TableCell className={"reorder_tab"} style={leftDivider}>results ratio</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gs</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gc</TableCell>
                                                         <TableCell className={"reorder_tab"}>goals per game</TableCell>
@@ -106,7 +119,7 @@ class Stats extends Component {
                                                                 data-teamid={this.state.teams[key]["teamObject"].id}
                                                                 onClick={this.goToTeam}>
                                                                 <TableCell align="right">{index + 1}</TableCell>
-                                                                <TableCell style={{minWidth:200, maxWidth:300}} >{key}</TableCell>
+                                                                <TableCell style={{minWidth:400, maxWidth:400}} >{key}</TableCell>
                                                                 <TableCell
                                                                     align="right">{this.state.teams[key]["number of games played"]}</TableCell>
                                                                 <TableCell
@@ -123,12 +136,11 @@ class Stats extends Component {
                                                                     align="right">{this.state.teams[key].stats.goalsScored - this.state.teams[key].stats.goalsConceded}</TableCell>
                                                                 <TableCell
                                                                     align="right">{Numeral(this.state.teams[key].stats.points / 1000).format('0.000')}</TableCell>
-                                                                <TableCell
-                                                                    align="right">
-                                                                    <div style={{height: "30px", width: "30px"}}
-                                                                         data-order={
-                                                                             this.state.teams[key]["wins_percent"]
-                                                                         }>
+                                                                <TableCell style={leftDivider}
+                                                                    align="right" data-order={
+                                                                    this.state.teams[key]["wins_percent"]
+                                                                }>
+                                                                    <div style={{height: "30px", width: "30px"}}>
                                                                         <Doughnut
                                                                             data={{
                                                                                 labels: ["", "", ""
@@ -167,8 +179,9 @@ class Stats extends Component {
                                                                     align="right">{this.state.teams[key]["avg goals scored"]}</TableCell>
                                                                 <TableCell
                                                                     align="right">{this.state.teams[key]["avg goals conceded"]}</TableCell>
-                                                                <TableCell
-                                                                    align="right">
+                                                                <TableCell align="right" data-order={
+                                                                    this.state.teams[key]["avg goals scored"]
+                                                                }>
                                                                     <div style={{height: "25px", width: "100px"}}>
                                                                         <HorizontalBar
                                                                             data={{
@@ -186,6 +199,94 @@ class Stats extends Component {
                                                                                     hoverBackgroundColor: [
                                                                                         '#2d5cd2',
                                                                                         '#da2525'
+                                                                                    ]
+                                                                                }],
+                                                                            }}
+                                                                            options={{
+                                                                                tooltips: {enabled: false},
+                                                                                hover: {mode: null},
+                                                                                responsive: true,
+                                                                                maintainAspectRatio: false,
+                                                                                legend: {
+                                                                                    display: false,
+                                                                                },
+                                                                                scales: {
+                                                                                    yAxes: [{
+                                                                                        display: false
+                                                                                    }],
+                                                                                    xAxes: [{
+                                                                                        display: false,
+                                                                                        ticks: {
+                                                                                            min: 0,
+                                                                                            max: 6
+                                                                                        },
+                                                                                    }],
+                                                                                }
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                </TableCell>
+                                                                <TableCell style={leftDivider}
+                                                                    align="right" data-order={
+                                                                    this.state.teams[key]["wins_percent_away"]
+                                                                }>
+                                                                    <div style={{height: "30px", width: "30px"}}>
+                                                                        <Doughnut
+                                                                            data={{
+                                                                                labels: ["", "", ""
+                                                                                ],
+                                                                                datasets: [{
+                                                                                    data: [
+                                                                                        this.state.teams[key]["winsAway"],
+                                                                                        this.state.teams[key]["drawsAway"],
+                                                                                        this.state.teams[key]["lossesAway"]
+                                                                                    ],
+                                                                                    backgroundColor: [
+                                                                                        '#6c8de0',
+                                                                                        '#d8d9d9',
+                                                                                        '#e56666'
+                                                                                    ],
+                                                                                    hoverBackgroundColor: [
+                                                                                        '#6c8de0',
+                                                                                        '#d8d9d9',
+                                                                                        '#e56666'
+                                                                                    ]
+                                                                                }],
+                                                                            }}
+                                                                            options={{
+                                                                                tooltips: {enabled: false},
+                                                                                hover: {mode: null},
+                                                                                responsive: true,
+                                                                                maintainAspectRatio: false,
+                                                                                legend: {
+                                                                                    display: false,
+                                                                                },
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                </TableCell>
+                                                                <TableCell align="right">{this.state.teams[key]["avg goals scored away"]}</TableCell>
+                                                                <TableCell align="right">{this.state.teams[key]["avg goals conceded away"]}</TableCell>
+                                                                <TableCell align="right" data-order={
+                                                                    this.state.teams[key]["avg goals scored away"]
+                                                                }>
+                                                                    <div style={{height: "25px", width: "100px"}}>
+                                                                        <HorizontalBar
+                                                                            data={{
+                                                                                labels: ["", ""
+                                                                                ],
+                                                                                datasets: [{
+                                                                                    data: [
+                                                                                        this.state.teams[key]["avg goals scored away"],
+                                                                                        this.state.teams[key]["avg goals conceded away"]
+                                                                                    ],
+                                                                                    backgroundColor: [
+                                                                                        '#abbeed',
+                                                                                        '#f0a8a8'
+                                                                                    ],
+                                                                                    hoverBackgroundColor: [
+                                                                                        '#abbeed',
+                                                                                        '#f0a8a8'
                                                                                     ]
                                                                                 }],
                                                                             }}

@@ -143,18 +143,28 @@ public class ViewsService {
     }
 
 	public Map<String, Object> gameStats(int teamId) {
+
 		Map<String, Object> gamestats = new LinkedHashMap<>();
 
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
 
         List<Result> results = null;
+        List<Result> resultsAway = null;
 
         if(teamId > 0) {
 
             List<Game> games = sessionFactory.getCurrentSession().createQuery(
                     "from GAMES where HOME_TEAM_ID=" + teamId).list();
 
+            List<Game> gamesAway = sessionFactory.getCurrentSession().createQuery(
+                    "from GAMES where AWAY_TEAM_ID=" + teamId).list();
+
             results = games.stream()
+                    .filter( g -> g.getResult() != null)
+                    .map(Game::getResult)
+                    .collect(Collectors.toList());
+
+            resultsAway = gamesAway.stream()
                     .filter( g -> g.getResult() != null)
                     .map(Game::getResult)
                     .collect(Collectors.toList());
@@ -188,6 +198,33 @@ public class ViewsService {
 		gamestats.put("wins_percent", winsPercent);
 		gamestats.put("draws_percent", drawsPercent);
 		gamestats.put("losses_percent", lossesPercent);
+
+		if(teamId > 0) {
+			//away
+			int numOfGamesAway = resultsAway.size();
+			long winsAway = resultsAway.stream().filter(Result::awayTeamWon).count();
+			long drawsAway = resultsAway.stream().filter(Result::tie).count();
+			long lossesAway = resultsAway.stream().filter(Result::homeTeamWon).count();
+			double winsPercentAway = Precision.round(1.0 * winsAway / numOfGamesAway, 2);
+			double drawsPercentAway = Precision.round(1.0 * drawsAway / numOfGamesAway, 2);
+			double lossesPercentAway = Precision.round(1.0 * lossesAway / numOfGamesAway, 2);
+
+			//away
+			gamestats.put("number of games played away", numOfGamesAway);
+			gamestats.put("winsAway", winsAway);
+			gamestats.put("drawsAway", drawsAway);
+			gamestats.put("lossesAway", lossesAway);
+
+			gamestats.put("wins_percent_away", winsPercentAway);
+			gamestats.put("draws_percent_away", drawsPercentAway);
+			gamestats.put("losses_percent_away", lossesPercentAway);
+
+			gamestats.put("avg goals scored away", numberFormat
+					.format(resultsAway.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
+			gamestats.put("avg goals conceded away", numberFormat
+					.format(resultsAway.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
+
+		}
 
 		// scores frequency graphs
 		Map<Result, Integer> resultsFrequency = new LinkedHashMap<>();
