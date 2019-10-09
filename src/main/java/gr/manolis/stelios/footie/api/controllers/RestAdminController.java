@@ -73,6 +73,19 @@ public class RestAdminController {
         return persistService.getPropertyValue("backupDatabase");
     }
 
+    @PostMapping("/reset_tabs")
+    public String resetTabs() {
+        persistService.resetTabNumbers();
+        return "done";
+    }
+
+    @PostMapping("/recalculate_elo")
+    public String recalculateElo() {
+
+
+        return "done";
+    }
+
     @PostMapping("/recalculate_coeffs")
     public String recalculateCoeffs() {
 

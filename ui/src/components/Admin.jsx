@@ -199,6 +199,54 @@ class Admin extends Component {
             )
     }
 
+    handleRecalcElo = (event, newValue) => {
+        fetch("/rest/admin/recalculate_elo", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.text())
+            .then(
+                (result) => {
+
+                    alert("done recalculation");
+
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
+    handleResetTabs = (event, newValue) => {
+        fetch("/rest/admin/reset_tabs", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.text())
+            .then(
+                (result) => {
+
+                    alert("done recalculation");
+
+                },
+                (error) => {
+                    this.setState(state => {
+                        return {
+                            ...state,
+                            isLoaded: true,
+                            error
+                        }
+                    });
+                }
+            )
+    }
+
     render() {
         return (
             <Paper style={{margin: 20}} elevation={20}>
@@ -276,6 +324,10 @@ class Admin extends Component {
                                 />
                                 <CardContent>
                                     <Button onClick={this.handleRecalcCoeffs}>Recalculate current season's coeffs</Button>
+                                    <br/>
+                                    <Button onClick={this.handleRecalcElo}>Recalculate Elo from the beginning</Button>
+                                    <br/>
+                                    <Button onClick={this.handleResetTabs}>Reset tab numbers</Button>
                                 </CardContent>
                             </Card>
                         </Grid>

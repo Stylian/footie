@@ -4,11 +4,14 @@ package gr.manolis.stelios.footie.api.services;
 import gr.manolis.stelios.footie.api.entities.PersistedProperty;
 import gr.manolis.stelios.footie.api.entities.Tab;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -77,4 +80,13 @@ public class UIPersistService {
 
     }
 
+    public void resetTabNumbers() {
+
+        DataAccessObject<Tab> tabDAO = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        List<Tab> tabs = tabDAO.list("TABS");
+        for(Tab tab: tabs) {
+            tab.setTabNumber(0);
+            tabDAO.save(tab);
+        }
+    }
 }

@@ -10,6 +10,10 @@ added away stats to stats page
 fixed stats page reordering
 added dividers, double header
 
+added tab reset
+added elo recalc
+
+
 TODO
 nulls hell with coeffs in playoffs
 
