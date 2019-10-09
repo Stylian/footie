@@ -203,8 +203,8 @@ public class ViewsService {
 		gamestats.put("losses_percent", lossesPercent);
 
 		//radar coeffs
-		double radarGoalsScored = fitToRange(Math.pow(avgGoalsScored - 1, 2) * 5);
-		double radarGoalsConceded = fitToRange(Math.pow(4.5 - avgGoalsConceded, 2) * 6.25);
+		double radarGoalsScored = fitToRange((avgGoalsScored + Math.pow(avgGoalsScored - 1, 1.5)) * 7.7);
+		double radarGoalsConceded = fitToRange((3.5 - avgGoalsConceded + Math.pow(3.5 - avgGoalsConceded, 2)) * 8);
 
 		gamestats.put("radarGoalsScored", radarGoalsScored);
 		gamestats.put("radarGoalsConceded", radarGoalsConceded);
@@ -236,12 +236,8 @@ public class ViewsService {
 			gamestats.put("avg goals conceded away", numberFormat.format(avgGoalsConcededAway));
 
 			//radar coeffs
-			double radarGoalsScoredAway = fitToRange(Math.pow(avgGoalsScoredAway + 1.1, 2) * 13);
-			double radarGoalsConcededAway = fitToRange(Math.pow(4.5 - avgGoalsConcededAway, 2) * 6.25);
-
-			// 1.7 100
-			// 4 50
-			// 5.5 0
+			double radarGoalsScoredAway = fitToRange((avgGoalsScoredAway + 1.1 + Math.pow(avgGoalsScoredAway + 1.1, 2)) * 10);
+			double radarGoalsConcededAway = fitToRange((6.5 - avgGoalsConcededAway + Math.pow(6.5 - avgGoalsConcededAway, 2) )* 6.35);
 
 			// 0 for 800, 100  for 1600
 			// might be too much for this league
