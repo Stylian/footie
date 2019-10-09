@@ -470,6 +470,7 @@ class Team extends Component {
                                                                 <TableRow>
                                                                     <TableCell></TableCell>
                                                                     <TableCell>Coefficients</TableCell>
+                                                                    <TableCell>Elo</TableCell>
                                                                     <TableCell>Matches Played</TableCell>
                                                                     <TableCell>W</TableCell>
                                                                     <TableCell>D</TableCell>
@@ -490,6 +491,8 @@ class Team extends Component {
                                                                                 align="right">{"Season " + (index + 1)}</TableCell>
                                                                             <TableCell
                                                                                 align="right">{seasonStats.points}</TableCell>
+                                                                            <TableCell
+                                                                                align="right">{seasonStats.elo}</TableCell>
                                                                             <TableCell
                                                                                 align="right">{seasonStats.matchesPlayed}</TableCell>
                                                                             <TableCell
@@ -520,6 +523,7 @@ class Team extends Component {
                                                                             <TableCell></TableCell>
                                                                             <TableCell></TableCell>
                                                                             <TableCell></TableCell>
+                                                                            <TableCell></TableCell>
                                                                         </TableRow>
                                                                     )
                                                                 })}
@@ -528,6 +532,8 @@ class Team extends Component {
                                                                                className={"points_td"}>Total</TableCell>
                                                                     <TableCell align="right"
                                                                                className={"points_td"}>{this.state.team.completeStats.points}</TableCell>
+                                                                    <TableCell align="right"
+                                                                               className={"points_td"}></TableCell>
                                                                     <TableCell align="right"
                                                                                className={"points_td"}>{this.state.team.completeStats.matchesPlayed}</TableCell>
                                                                     <TableCell align="right"

@@ -18,6 +18,9 @@ public class Stats {
 	@Column(name = "ID")
 	private int id;
 
+	@Column(name = "ELO",  nullable = false, columnDefinition = "int default 1200")
+	private int elo;
+
 	@Column(name = "POINTS")
 	private int points;
 
@@ -60,6 +63,7 @@ public class Stats {
 	 */
 	public Stats(Stats st) {
 
+		elo = st.getElo();
 		points = st.getPoints();
 		wins = st.getWins();
 		draws = st.getDraws();
@@ -70,7 +74,7 @@ public class Stats {
 	}
 
 	public void addStats(Stats stats) {
-		
+
 		addPoints(stats.getPoints());
 		addWins(stats.getWins());
 		addDraws(stats.getDraws());
@@ -94,6 +98,14 @@ public class Stats {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getElo() {
+		return elo;
+	}
+
+	public void setElo(int elo) {
+		this.elo = elo;
 	}
 
 	public int getPoints() {

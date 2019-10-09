@@ -163,4 +163,13 @@ public class Utils {
 		}
 		return lsTeams;
 	}
+
+	public static int[] calculateElo(int eloHome, int eloAway) {
+
+		// TODO
+
+
+		return new int[] {8, 0, -8};
+	}
+
 }

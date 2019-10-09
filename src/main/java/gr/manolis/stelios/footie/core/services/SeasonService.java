@@ -51,6 +51,13 @@ public class SeasonService {
 
         for (Team team : teams) {
             season.addTeam(team);
+            // set elo
+            if(numberOfSeasons > 0) {
+                Season lastSeason = serviceUtils.loadSeason(numberOfSeasons);
+                team.getStatsForGroup(season).setElo(team.getStatsForGroup(lastSeason).getElo());
+            }else {
+                team.getStatsForGroup(season).setElo(1200);
+            }
         }
 
         DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());

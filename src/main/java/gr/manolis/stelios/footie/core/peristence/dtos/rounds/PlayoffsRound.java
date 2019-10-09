@@ -36,15 +36,15 @@ public class PlayoffsRound extends Round {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Team gB3;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ROUNDS_PLAYOFFSROUNDS_QUARTER_MATCHUPS")
 	private List<Matchup> quarterMatchups = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ROUNDS_PLAYOFFSROUNDS_SEMI_MATCHUPS")
 	private List<Matchup> semisMatchups = new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Matchup finalsMatchup;
 
 	public PlayoffsRound() {

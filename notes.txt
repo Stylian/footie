@@ -1,12 +1,12 @@
 
-DONE
+1.5
 
 added tab reset
 added elo recalc
 
 
 TODO
-nulls hell with coeffs in playoffs
+nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
 TODO 1.5
 players to be clickable in players page

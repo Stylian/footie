@@ -100,6 +100,7 @@ class Stats extends Component {
                                                         <TableCell className={"reorder_tab"}>GC</TableCell>
                                                         <TableCell className={"reorder_tab"}>+/-</TableCell>
                                                         <TableCell className={"reorder_tab"}>Coefficients</TableCell>
+                                                        <TableCell className={"reorder_tab"}>Elo</TableCell>
                                                         <TableCell className={"reorder_tab"} style={leftDivider}>results ratio</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gs</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gc</TableCell>
@@ -136,6 +137,8 @@ class Stats extends Component {
                                                                     align="right">{this.state.teams[key].stats.goalsScored - this.state.teams[key].stats.goalsConceded}</TableCell>
                                                                 <TableCell
                                                                     align="right">{Numeral(this.state.teams[key].stats.points / 1000).format('0.000')}</TableCell>
+                                                                <TableCell
+                                                                    align="right">{this.state.teams[key].stats.elo}</TableCell>
                                                                 <TableCell style={leftDivider}
                                                                     align="right" data-order={
                                                                     this.state.teams[key]["wins_percent"]

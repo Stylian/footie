@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.log4j.Logger;
@@ -96,17 +97,11 @@ public class GameService {
         thisGameStats.addGoalsConceded(result.getGoalsMadeByAwayTeam());
 
         if (result.homeTeamWon()) {
-
             thisGameStats.addWins(1);
-
         } else if (result.awayTeamWon()) {
-
             thisGameStats.addLosses(1);
-
         } else if (result.tie()) {
-
             thisGameStats.addDraws(1);
-
         }
 
         Stats toAddToSeasonStats = new Stats(thisGameStats);
@@ -116,6 +111,25 @@ public class GameService {
         if (game instanceof MatchupGame) {
             MatchupGame matchupGame = (MatchupGame) game;
             ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
+
+            // elo calculation
+            if(matchupGame.getMatchup().getWinner() != null) {
+                int homeElo = matchupGame.getHomeTeam().getStatsForGroup(season).getElo();
+                int awayElo = matchupGame.getAwayTeam().getStatsForGroup(season).getElo();
+                int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
+                if (matchupGame.getMatchup().getTeamHome().equals(matchupGame.getMatchup().getWinner())) {
+                    // home win
+                    homeElo += eloRatings[0];
+                    awayElo -= eloRatings[0];
+                } else {
+                    // away win
+                    homeElo += eloRatings[2];
+                    awayElo -= eloRatings[2];
+                }
+                matchupGame.getHomeTeam().getStatsForGroup(season).setElo(homeElo);
+                matchupGame.getAwayTeam().getStatsForGroup(season).setElo(awayElo);
+            }
+
         } else if (game instanceof GroupGame) {
             if (result.homeTeamWon()) {
                 thisGameStats.addPoints(3);
