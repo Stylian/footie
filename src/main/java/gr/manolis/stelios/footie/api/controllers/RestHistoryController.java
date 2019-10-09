@@ -15,6 +15,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,9 @@ public class RestHistoryController {
 
     @Autowired
     private ViewsService viewsService;
+
+    @Autowired
+    private ServiceUtils serviceUtils;
 
     @Autowired
     private SeasonPastWinnersMapper seasonPastWinnersMapper;
@@ -60,7 +64,8 @@ public class RestHistoryController {
             @PathVariable(value = "team_id", required = true) String strTeamId) {
 
         int teamId = NumberUtils.toInt(strTeamId);
-        return viewsService.gameStats(teamId);
+        Team team = serviceUtils.loadTeam(teamId);
+        return viewsService.gameStats(teamId, team.getStatsForGroup(serviceUtils.loadCurrentSeason()).getElo());
     }
 
     @RequestMapping("/teams/trophies")

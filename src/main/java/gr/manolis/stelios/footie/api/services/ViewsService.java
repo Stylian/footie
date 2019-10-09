@@ -96,7 +96,10 @@ public class ViewsService {
 			Stats completeStats = new Stats();
 			seasonsPast.forEach( (s) -> completeStats.addStats(s.getTeamsStats().get(team)));
 
-			Map<String, Object> allTeamData = gameStats(team.getId());
+			int elo = team.getStatsForGroup(current).getElo();
+			completeStats.setElo(elo);
+
+			Map<String, Object> allTeamData = gameStats(team.getId(), elo);
 			allTeamData.put("stats", completeStats);
 			allTeamsData.put(team, allTeamData);
 		}
@@ -139,10 +142,10 @@ public class ViewsService {
 	}
 
 	public Map<String, Object> gameStats() {
-	    return gameStats(0);
+	    return gameStats(0, 0);
     }
 
-	public Map<String, Object> gameStats(int teamId) {
+	public Map<String, Object> gameStats(int teamId, int teamElo) {
 
 		Map<String, Object> gamestats = new LinkedHashMap<>();
 
@@ -207,6 +210,7 @@ public class ViewsService {
 		gamestats.put("radarGoalsConceded", radarGoalsConceded);
 
 		if(teamId > 0) {
+
 			//away
 			int numOfGamesAway = resultsAway.size();
 			long winsAway = resultsAway.stream().filter(Result::awayTeamWon).count();
@@ -231,7 +235,6 @@ public class ViewsService {
 			gamestats.put("avg goals scored away", numberFormat.format(avgGoalsScoredAway));
 			gamestats.put("avg goals conceded away", numberFormat.format(avgGoalsConcededAway));
 
-
 			//radar coeffs
 			double radarGoalsScoredAway = fitToRange(Math.pow(avgGoalsScoredAway + 1.1, 2) * 13);
 			double radarGoalsConcededAway = fitToRange(Math.pow(4.5 - avgGoalsConcededAway, 2) * 6.25);
@@ -239,6 +242,13 @@ public class ViewsService {
 			// 1.7 100
 			// 4 50
 			// 5.5 0
+
+			// 0 for 800, 100  for 1600
+			// might be too much for this league
+			double radarElo = fitToRange(
+					((teamElo < 1200) ? -1 : 1) *
+					Math.pow(teamElo - 1200, 2)/3200 + 50); // good for now, but to change
+			gamestats.put("radarElo", radarElo);
 
 			gamestats.put("radarGoalsScoredAway", radarGoalsScoredAway);
 			gamestats.put("radarGoalsConcededAway", radarGoalsConcededAway);

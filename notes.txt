@@ -1,11 +1,18 @@
 
 1.5
-
 added tab reset
 added elo recalc
 
 
+
 TODO
+to write elo method
+to write recalc method
+to test by deleting column
+
+todo graph with rating spreading
+todo graph with elo progression
+
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
 TODO 1.5

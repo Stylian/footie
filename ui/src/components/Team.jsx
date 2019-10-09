@@ -15,7 +15,7 @@ import LeagueToolbar from "./LeagueToolbar";
 
 import silvermedal from "../icons/silvermedal.png";
 import goldmedal from "../icons/goldmedal.png";
-import {Bar, Doughnut, HorizontalBar, Radar} from "react-chartjs-2";
+import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2";
 
 class Team extends Component {
 
@@ -101,6 +101,16 @@ class Team extends Component {
     }
 
     render() {
+
+        let elos = [1200];
+        let elosSeasons = ["0"];
+        if(this.state.isLoaded && this.state.isLoaded2) {
+            this.state.team.seasonsStats.map(function (v, k) {
+                elos[elos.length] = v.elo;
+                elosSeasons[elosSeasons.length] = "" + (k+1);
+            });
+        }
+
         return (
             this.state.isLoaded && this.state.isLoaded2 ? (
                 <Box>
@@ -145,23 +155,23 @@ class Team extends Component {
                                                                     '#ab1d1d'
                                                                 ]
                                                             },
-                                                            {
-                                                                data: [
-                                                                    this.state.gameStats["winsAway"],
-                                                                    this.state.gameStats["drawsAway"],
-                                                                    this.state.gameStats["lossesAway"]
-                                                                ],
-                                                                backgroundColor: [
-                                                                    '#6c8de0',
-                                                                    '#d8d9d9',
-                                                                    '#e56666'
-                                                                ],
-                                                                hoverBackgroundColor: [
-                                                                    '#6c8de0',
-                                                                    '#d8d9d9',
-                                                                    '#e56666'
-                                                                ]
-                                                            }],
+                                                                {
+                                                                    data: [
+                                                                        this.state.gameStats["winsAway"],
+                                                                        this.state.gameStats["drawsAway"],
+                                                                        this.state.gameStats["lossesAway"]
+                                                                    ],
+                                                                    backgroundColor: [
+                                                                        '#6c8de0',
+                                                                        '#d8d9d9',
+                                                                        '#e56666'
+                                                                    ],
+                                                                    hoverBackgroundColor: [
+                                                                        '#6c8de0',
+                                                                        '#d8d9d9',
+                                                                        '#e56666'
+                                                                    ]
+                                                                }],
                                                         }}
                                                         options={{
                                                             responsive: true,
@@ -169,7 +179,7 @@ class Team extends Component {
                                                                 display: true,
                                                                 position: "top",
                                                                 text: "results of " + this.state.gameStats["number of games played"]
-                                                                   + " (" + this.state.gameStats["number of games played away"] + ") games",
+                                                                    + " (" + this.state.gameStats["number of games played away"] + ") games",
                                                                 fontSize: 11,
                                                                 fontColor: "#111"
                                                             },
@@ -185,8 +195,8 @@ class Team extends Component {
                                                         <HorizontalBar
                                                             data={{
                                                                 labels: [
-                                                                    'scored - ' + this.state.gameStats["avg goals scored"] + " ("+this.state.gameStats["avg goals scored away"]+")",
-                                                                    'conceded - ' + this.state.gameStats["avg goals conceded"] + " ("+this.state.gameStats["avg goals conceded away"]+")"
+                                                                    'scored - ' + this.state.gameStats["avg goals scored"] + " (" + this.state.gameStats["avg goals scored away"] + ")",
+                                                                    'conceded - ' + this.state.gameStats["avg goals conceded"] + " (" + this.state.gameStats["avg goals conceded away"] + ")"
                                                                 ],
                                                                 datasets: [{
                                                                     data: [
@@ -202,20 +212,20 @@ class Team extends Component {
                                                                         '#da2525',
                                                                     ]
                                                                 },
-                                                                {
-                                                                    data: [
-                                                                        this.state.gameStats["avg goals scored away"],
-                                                                        this.state.gameStats["avg goals conceded away"]
-                                                                    ],
-                                                                    backgroundColor: [
-                                                                        '#abbeed',
-                                                                        '#f0a8a8'
-                                                                    ],
-                                                                    hoverBackgroundColor: [
-                                                                        '#abbeed',
-                                                                        '#f0a8a8'
-                                                                    ]
-                                                                }],
+                                                                    {
+                                                                        data: [
+                                                                            this.state.gameStats["avg goals scored away"],
+                                                                            this.state.gameStats["avg goals conceded away"]
+                                                                        ],
+                                                                        backgroundColor: [
+                                                                            '#abbeed',
+                                                                            '#f0a8a8'
+                                                                        ],
+                                                                        hoverBackgroundColor: [
+                                                                            '#abbeed',
+                                                                            '#f0a8a8'
+                                                                        ]
+                                                                    }],
                                                             }}
                                                             options={{
                                                                 responsive: true,
@@ -329,45 +339,94 @@ class Team extends Component {
                                     </Grid>
                                 </Grid>
                                 <Grid item sm={3}>
-                                    <Card style={{margin: 20}}>
-                                        <CardHeader title={"scores stats"} align={"center"}
-                                                    titleTypographyProps={{variant: 'h7'}}
-                                        />
-                                        <CardContent>
-                                            <div
-                                                style={{height: (50 + 15 * Object.keys(this.state.gameStats["results_frequency"]).length)}}>
-                                                <HorizontalBar
-                                                    data={{
-                                                        labels: [
-                                                            ...Object.keys(this.state.gameStats["results_frequency"]),
-                                                        ],
-                                                        datasets: [{
-                                                            data: [
-                                                                ...Object.values(this.state.gameStats["results_frequency"])
-                                                            ],
-                                                            backgroundColor: '#2d5cd2',
-                                                            hoverBackgroundColor: '#2d5cd2',
-                                                        }],
-                                                    }}
-                                                    options={{
-                                                        responsive: true,
-                                                        maintainAspectRatio: false,
-                                                        legend: {
-                                                            display: false,
-                                                        },
-                                                        scales: {
-                                                            xAxes: [{
-                                                                ticks: {
-                                                                    min: 0,
-                                                                    stepSize: 1,
-                                                                }
-                                                            }],
-                                                        }
-                                                    }}
+                                    <Grid container>
+                                        <Grid item sm={12}>
+                                            <Card style={{margin: 20}}>
+                                                <CardHeader title={"scores stats"} align={"center"}
+                                                            titleTypographyProps={{variant: 'h7'}}
                                                 />
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                                <CardContent>
+                                                    <div
+                                                        style={{height: (50 + 15 * Object.keys(this.state.gameStats["results_frequency"]).length)}}>
+                                                        <HorizontalBar
+                                                            data={{
+                                                                labels: [
+                                                                    ...Object.keys(this.state.gameStats["results_frequency"]),
+                                                                ],
+                                                                datasets: [{
+                                                                    data: [
+                                                                        ...Object.values(this.state.gameStats["results_frequency"])
+                                                                    ],
+                                                                    backgroundColor: '#2d5cd2',
+                                                                    hoverBackgroundColor: '#2d5cd2',
+                                                                }],
+                                                            }}
+                                                            options={{
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                legend: {
+                                                                    display: false,
+                                                                },
+                                                                scales: {
+                                                                    xAxes: [{
+                                                                        ticks: {
+                                                                            min: 0,
+                                                                            stepSize: 1,
+                                                                        }
+                                                                    }],
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                        <Grid item sm={12}>
+                                            <Card style={{margin: 20}}>
+                                                <CardHeader title={"elo progression"} align={"center"}
+                                                            titleTypographyProps={{variant: 'h7'}}
+                                                />
+                                                <CardContent>
+                                                    <Line
+                                                        data={{
+                                                            labels: [
+                                                                ...elosSeasons
+                                                            ],
+                                                            datasets: [{
+                                                                data: [
+                                                                    ...elos
+                                                                ],
+                                                                backgroundColor: '#2d5cd2',
+                                                                hoverBackgroundColor: '#2d5cd2',
+                                                            }],
+                                                        }}
+                                                        options={{
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            legend: {
+                                                                display: false,
+                                                            },
+                                                            scales: {
+                                                                yAxes: [{
+                                                                    ticks: {
+                                                                        // min: 1100,
+                                                                        // maz: 1300,
+                                                                        // stepSize: 50,
+                                                                    }
+                                                                }],
+                                                            },
+                                                            elements: {
+                                                                point: {
+                                                                    radius: 0
+                                                                }
+                                                            }
+                                                        }}
+                                                    />
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                    </Grid>
+
                                 </Grid>
                                 <Grid item sm={6}>
                                     <Grid container spacing={1}>
@@ -423,7 +482,7 @@ class Team extends Component {
                                                                     ],
                                                                     datasets: [{
                                                                         data: [
-                                                                            85,
+                                                                            this.state.gameStats["radarElo"],
                                                                             this.state.gameStats["radarGoalsScoredAway"],
                                                                             this.state.gameStats["radarGoalsConcededAway"],
                                                                             this.state.gameStats["radarGoalsConceded"],
@@ -449,7 +508,7 @@ class Team extends Component {
                                                                         },
                                                                     },
                                                                     elements: {
-                                                                        point:{
+                                                                        point: {
                                                                             radius: 0
                                                                         }
                                                                     }
