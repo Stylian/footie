@@ -1,14 +1,5 @@
 
 DONE
-radar diagrams per team
-home attacking
-home defending
-away attacking
-away defending
-elo ( does nothing yet )
-added away stats to stats page
-fixed stats page reordering
-added dividers, double header
 
 added tab reset
 added elo recalc
