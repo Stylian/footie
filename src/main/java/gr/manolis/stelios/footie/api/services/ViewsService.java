@@ -185,19 +185,26 @@ public class ViewsService {
 		double winsPercent = Precision.round(1.0 * wins / numOfGames, 2);
 		double drawsPercent = Precision.round(1.0 * draws / numOfGames, 2);
 		double lossesPercent = Precision.round(1.0 * losses / numOfGames, 2);
+		double avgGoalsScored = results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
+		double avgGoalsConceded =  results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
 
 		gamestats.put("number of games played", numOfGames);
 		gamestats.put("wins", wins);
 		gamestats.put("draws", draws);
 		gamestats.put("losses", losses);
-		gamestats.put("avg goals scored", numberFormat
-				.format(results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
-		gamestats.put("avg goals conceded", numberFormat
-				.format(results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
+		gamestats.put("avg goals scored", numberFormat.format(avgGoalsScored));
+		gamestats.put("avg goals conceded", numberFormat.format(avgGoalsConceded));
 
 		gamestats.put("wins_percent", winsPercent);
 		gamestats.put("draws_percent", drawsPercent);
 		gamestats.put("losses_percent", lossesPercent);
+
+		//radar coeffs
+		double radarGoalsScored = fitToRange(Math.pow(avgGoalsScored - 1, 2) * 5);
+		double radarGoalsConceded = fitToRange(Math.pow(4.5 - avgGoalsConceded, 2) * 6.25);
+
+		gamestats.put("radarGoalsScored", radarGoalsScored);
+		gamestats.put("radarGoalsConceded", radarGoalsConceded);
 
 		if(teamId > 0) {
 			//away
@@ -208,6 +215,8 @@ public class ViewsService {
 			double winsPercentAway = Precision.round(1.0 * winsAway / numOfGamesAway, 2);
 			double drawsPercentAway = Precision.round(1.0 * drawsAway / numOfGamesAway, 2);
 			double lossesPercentAway = Precision.round(1.0 * lossesAway / numOfGamesAway, 2);
+			double avgGoalsScoredAway = resultsAway.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
+			double avgGoalsConcededAway =  resultsAway.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
 
 			//away
 			gamestats.put("number of games played away", numOfGamesAway);
@@ -219,11 +228,20 @@ public class ViewsService {
 			gamestats.put("draws_percent_away", drawsPercentAway);
 			gamestats.put("losses_percent_away", lossesPercentAway);
 
-			gamestats.put("avg goals scored away", numberFormat
-					.format(resultsAway.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble()));
-			gamestats.put("avg goals conceded away", numberFormat
-					.format(resultsAway.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble()));
+			gamestats.put("avg goals scored away", numberFormat.format(avgGoalsScoredAway));
+			gamestats.put("avg goals conceded away", numberFormat.format(avgGoalsConcededAway));
 
+
+			//radar coeffs
+			double radarGoalsScoredAway = fitToRange(Math.pow(avgGoalsScoredAway + 1.1, 2) * 13);
+			double radarGoalsConcededAway = fitToRange(Math.pow(4.5 - avgGoalsConcededAway, 2) * 6.25);
+
+			// 1.7 100
+			// 4 50
+			// 5.5 0
+
+			gamestats.put("radarGoalsScoredAway", radarGoalsScoredAway);
+			gamestats.put("radarGoalsConcededAway", radarGoalsConcededAway);
 		}
 
 		// scores frequency graphs
@@ -276,6 +294,12 @@ public class ViewsService {
 		gamestats.put("away_goals_frequency", awayGoalsFrequency);
 
 		return gamestats;
+	}
+
+	private double fitToRange(double v) {
+		v = Math.min(v, 100);
+		v = Math.max(v, 20);
+		return v;
 	}
 
 	public Map<String, Object> generalData() {

@@ -424,10 +424,10 @@ class Team extends Component {
                                                                     datasets: [{
                                                                         data: [
                                                                             85,
-                                                                            this.state.gameStats["avg goals scored away"]*50,
-                                                                            (8 - this.state.gameStats["avg goals conceded away"])*12.5,
-                                                                            (4 - this.state.gameStats["avg goals conceded"])*25,
-                                                                            this.state.gameStats["avg goals scored"]*(100/6),
+                                                                            this.state.gameStats["radarGoalsScoredAway"],
+                                                                            this.state.gameStats["radarGoalsConcededAway"],
+                                                                            this.state.gameStats["radarGoalsConceded"],
+                                                                            this.state.gameStats["radarGoalsScored"],
                                                                         ],
                                                                         backgroundColor: '#2d5cd2',
                                                                         hoverBackgroundColor: '#2d5cd2',
