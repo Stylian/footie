@@ -118,7 +118,7 @@ class Coefficients extends Component {
         return (this.state.isLoaded ? (
                 <Paper style={{margin: 20}} elevation={20}>
                     <LeagueToolbar pageTitle={"Awards & Coefficients"}/>
-                    <Box width={1700}>
+                    <Box>
                         <Paper elevation={12} style={{margin: 20}}>
 
                             <Grid container spacing={1}>

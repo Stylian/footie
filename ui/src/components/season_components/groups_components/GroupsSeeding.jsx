@@ -91,7 +91,7 @@ class GroupsSeeding extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={1600}>
+                <Box >
                     {this.state.haveToSetUpTeams ? (
                         <Button onClick={this.handleSettingUpButtonClick}>Set up Teams</Button>
                     ) : ''}
@@ -190,7 +190,7 @@ class GroupsSeeding extends Component {
                                 <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
-                                    <table className="table">
+                                    <table className="table" style={{minWidth:320, maxWidth:320}}>
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell align={"right"}>Teams</TableCell>

@@ -74,7 +74,7 @@ class Groups1 extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box style={{margin: 30, "margin-top": 10}}>
+                <Box style={{margin: 10, "margin-top": 10}}>
                     <AppBar position="static">
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                             <Tab label="Seeding"/>

@@ -59,7 +59,7 @@ class GroupsMatches extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={this.props.round == 1 ? 1200 : 1600}>
+                <Box >
 
                     <Grid container spacing={1}>
                         {Object.keys(this.state.days).map((day, index) => {

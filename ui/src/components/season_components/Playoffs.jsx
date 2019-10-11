@@ -89,7 +89,7 @@ class Playoffs extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Box width={1600}>
+                <Box >
                     <Grid container spacing={1}>
                         <Grid item sm={6}>
                             <Card style={{margin: 20}}>

@@ -56,17 +56,17 @@ class Seeding extends Component {
 
         return (
             this.state.isLoaded ? (
-                <Box width={1750}>
+                <Box >
                     <Grid container spacing={1}>
-                        <Grid item sm={7}>
+                        <Grid item sm={8}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
-                                <CardContent>
-                                    <Grid container>
+                                <CardContent  >
+                                    <Grid container >
 
-                                        <Grid item sm={8}>
+                                        <Grid item sm={9}>
                                             <Grid container spacing={1}>
                                                 <Grid item sm={6}>
                                                     <table className="table" align={"center"}>
@@ -93,7 +93,7 @@ class Seeding extends Component {
                                                                               }}
                                                                     >
                                                                         <TableCell align="right">{index + 1}</TableCell>
-                                                                        <TableCell>
+                                                                        <TableCell style={{minWidth:100, maxWidth:100}} >
                                                                             {team.trophies.map((trophy, index) => {
                                                                                 if (trophy.seasonNum == (this.props.year - 1)) {
                                                                                     return trophy.type == "W" ?
@@ -157,7 +157,7 @@ class Seeding extends Component {
                                             </Grid>
                                         </Grid>
 
-                                        <Grid item sm={4}>
+                                        <Grid item sm={3}>
                                             <table className="table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
@@ -185,7 +185,7 @@ class Seeding extends Component {
                             </Card>
                         </Grid>
 
-                        <Grid item sm={5}>
+                        <Grid item sm={4}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                                 />

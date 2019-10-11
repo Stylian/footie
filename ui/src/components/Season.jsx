@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Box, Paper, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Box, Grid, Paper, Tab, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
 import Groups1 from "./season_components/Groups1";
 import Quals from "./season_components/Quals";
 import Groups2 from "./season_components/Groups2";
 import Knockouts from "./season_components/Knockouts";
 import SeasonPostview from "./season_components/SeasonPostview";
+import NextGame from "./season_components/NextGame";
 
 class Season extends Component {
 
@@ -123,35 +124,46 @@ class Season extends Component {
     render() {
         return (
             this.state.isLoaded ? (
-                <Paper style={{margin: 20}} elevation={20}>
+                <Paper style={{margin: 10}} elevation={20}>
                     <LeagueToolbar pageTitle={this.state.pageTitle} seasonNum={this.props.match.params.seasonNum}/>
 
-                    <Box style={{margin: 20}}>
-                        <AppBar position="static">
-                            <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                                <Tab label="Seeding"/>
-                                <Tab disabled={this.props.match.params.seasonNum == 1} label="Preliminary round"/>
-                                <Tab label="Qualifying round"/>
-                                <Tab label="Play-off round"/>
-                                <Tab label="1st Group stage"/>
-                                <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")} label="2nd Group stage"/>
-                                <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
-                                <Tab disabled={(this.state.stages.playoffs !== "FINISHED")} label="Overview"/>
-                            </Tabs>
-                        </AppBar>
-                        {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
-                        {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={0}
-                                                              stage={this.state.stages.quals0}/>}
-                        {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={1}
-                                                              stage={this.state.stages.quals1}/>}
-                        {this.state.tabActive === 3 && <Quals year={this.props.match.params.seasonNum} round={2}
-                                                              stage={this.state.stages.quals2}/>}
-                        {this.state.tabActive === 4 && <Groups1 year={this.props.match.params.seasonNum}
-                                                                stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
-                                                                stage={this.state.stages.groups1}/>}
-                        {this.state.tabActive === 6 && <Knockouts year={this.props.match.params.seasonNum}/>}
-                        {this.state.tabActive === 7 && <SeasonPostview year={this.props.match.params.seasonNum}/>}
+                    <Box style={{margin: 10}}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={9}>
+                                <AppBar position="static">
+                                    <Tabs value={this.state.tabActive} onChange={this.handleChange}>
+                                        <Tab label="Seeding"/>
+                                        <Tab disabled={this.props.match.params.seasonNum == 1}
+                                             label="Preliminary round"/>
+                                        <Tab label="Qualifying round"/>
+                                        <Tab label="Play-off round"/>
+                                        <Tab label="1st Group stage"/>
+                                        <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")}
+                                             label="2nd Group stage"/>
+                                        <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")}
+                                             label="Knockout phase"/>
+                                        <Tab disabled={(this.state.stages.playoffs !== "FINISHED")} label="Overview"/>
+                                    </Tabs>
+                                </AppBar>
+                                {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
+                                {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={0}
+                                                                      stage={this.state.stages.quals0}/>}
+                                {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={1}
+                                                                      stage={this.state.stages.quals1}/>}
+                                {this.state.tabActive === 3 && <Quals year={this.props.match.params.seasonNum} round={2}
+                                                                      stage={this.state.stages.quals2}/>}
+                                {this.state.tabActive === 4 && <Groups1 year={this.props.match.params.seasonNum}
+                                                                        stage={this.state.stages.groups1}/>}
+                                {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
+                                                                        stage={this.state.stages.groups1}/>}
+                                {this.state.tabActive === 6 && <Knockouts year={this.props.match.params.seasonNum}/>}
+                                {this.state.tabActive === 7 &&
+                                <SeasonPostview year={this.props.match.params.seasonNum}/>}
+                            </Grid>
+                            <Grid item xs={3}>
+                                <NextGame/>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Paper>
             ) : (null)

@@ -7,10 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import {Box, Grid, ListItemIcon, ListItemText} from "@material-ui/core";
-import NextGame from "./season_components/NextGame";
 import list from "../icons/list.svg";
 import build from "../icons/build.svg";
-import history from "../icons/history.svg";
 import up from "../icons/up.svg";
 import down from "../icons/down.svg";
 import players from "../icons/football-players.png";
@@ -153,12 +151,7 @@ class LeagueToolbar extends Component {
                                 ) : ''}
 
                                 <Typography variant="h6">{this.props.pageTitle}</Typography>
-
                             </Toolbar>
-
-                        </Grid>
-                        <Grid item xs={6}>
-                            <NextGame/>
                         </Grid>
                     </Grid>
                 </AppBar>

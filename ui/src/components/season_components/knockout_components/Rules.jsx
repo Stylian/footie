@@ -6,7 +6,7 @@ class Rules extends Component {
 
     render() {
         return (
-            <Box width={1600}>
+            <Box >
                 <Grid container spacing={1}>
 
                     <Grid item sm={4}>

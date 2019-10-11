@@ -113,7 +113,7 @@ class GroupsDisplay extends Component {
                                                                       }}
                                                             >
                                                                 <TableCell align="right">{index + 1}</TableCell>
-                                                                <TableCell>{team.name}</TableCell>
+                                                                <TableCell style={{minWidth:100, maxWidth:100}} >{team.name}</TableCell>
                                                                 <TableCell
                                                                     align="right">{team.stats.matchesPlayed}</TableCell>
                                                                 <TableCell align="right"

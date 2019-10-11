@@ -294,7 +294,7 @@ class SeasonPostview extends Component {
                         <Button onClick={this.handlePublish}>Publish</Button>
                     ) : ''}
                     <Grid container spacing={1}>
-                        <Grid item sm={4}>
+                        <Grid item sm={6}>
                             <Card style={{margin: 20}}>
                                 <CardHeader title={"Team Awards"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -418,7 +418,7 @@ class SeasonPostview extends Component {
                                                                            data-teamid={this.state.data.highestScoringGame.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.highestScoringGame.homeTeam.name}</TableCell>
-                                                                <TableCell>
+                                                                <TableCell style={{minWidth:40, maxWidth:40}}>
                                                                     {this.state.data.highestScoringGame.result.goalsMadeByHomeTeam + " - "
                                                                     + this.state.data.highestScoringGame.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
@@ -447,7 +447,7 @@ class SeasonPostview extends Component {
                                                                            data-teamid={this.state.data.bestWin.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.bestWin.homeTeam.name}</TableCell>
-                                                                <TableCell>
+                                                                <TableCell style={{minWidth:40, maxWidth:40}}>
                                                                     {this.state.data.bestWin.result.goalsMadeByHomeTeam + " - "
                                                                     + this.state.data.bestWin.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
@@ -476,7 +476,7 @@ class SeasonPostview extends Component {
                                                                            data-teamid={this.state.data.worstResult.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.worstResult.homeTeam.name}</TableCell>
-                                                                <TableCell>
+                                                                <TableCell style={{minWidth:40, maxWidth:40}}>
                                                                     {this.state.data.worstResult.result.goalsMadeByHomeTeam + " - "
                                                                     + this.state.data.worstResult.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
