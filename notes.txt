@@ -1,6 +1,8 @@
 
 
 TODO
+fix ( ) in wrong order on next game panel goals scored/conceded
+
 to add winning odds to matchup
 group odds?
 league odds?
