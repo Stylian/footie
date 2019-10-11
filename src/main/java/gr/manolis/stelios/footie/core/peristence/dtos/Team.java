@@ -10,6 +10,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 
 @Entity(name = "TEAMS")
 public class Team {
@@ -62,6 +63,18 @@ public class Team {
 		}
 
 		return new Stats();
+	}
+
+	public Stats getAllStats() {
+
+		Stats stats1 = new Stats();
+		for(Stats stat : stats) {
+			if(stat.getGroup() instanceof Season) {
+				stats1.addStats(stat);
+			}
+		}
+
+		return stats1;
 	}
 
 	public void addStats(Stats stat) {

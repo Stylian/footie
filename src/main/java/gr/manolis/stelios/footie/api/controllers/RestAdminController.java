@@ -81,6 +81,8 @@ public class RestAdminController {
         return "done";
     }
 
+    // will bring different results after +10 games per team.
+    // should be removed later? or keep
     @PostMapping("/recalculate_elo")
     public String recalculateElo() {
         DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());

@@ -166,14 +166,35 @@ public class Utils {
 		return lsTeams;
 	}
 
-	public static int[] calculateElo(int eloHome, int eloAway) {
+	public static int[] calculateElo(int eloHome, int eloAway, int n1, int n2) {
 
         double homeOdds = calculateWinningOdds(eloHome, eloAway);
 
-	    int gainA = (int) (16 * (1-homeOdds));
-        int gainB = (int) (16 * homeOdds);
+        // n1 -> homeTeam games played, should be matchups but oh well
+		int k1 = 64;
+		int k2 = 64;
+		// have to run it once, then on 1.6 remove these, use the scaling below, and remove the recalc elo function
+//        int k1 = 16;
+//        if(n1<10) {
+//        	k1 = 48;
+//		}else if(n1<20) {
+//        	k1 =32;
+//		}
+//
+//        int k2 = 16;
+//        if(n2<10) {
+//        	k2 = 48;
+//		}else if(n2<20) {
+//        	k2 =32;
+//		}
 
-		return new int[] {gainA, 0, -gainB};
+	    int gainA = (int) (k1 * (1-homeOdds));
+	    int lossA = (int) (k1 * (homeOdds));
+        int gainB = (int) (k2 * homeOdds);
+        int lossB = (int) (k2 * (1-homeOdds));
+
+
+		return new int[] {gainA, -lossA, gainB, -lossB};
 	}
 
     public static double calculateWinningOdds(int eloHome, int eloAway) {
@@ -190,15 +211,19 @@ public class Utils {
 		if(matchup.getWinner() != null) {
 			int homeElo = matchup.getTeamHome().getStatsForGroup(season).getElo();
 			int awayElo = matchup.getTeamAway().getStatsForGroup(season).getElo();
-			int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
+			int[] eloRatings = Utils.calculateElo(homeElo,
+					awayElo,
+					matchup.getTeamHome().getAllStats().getMatchesPlayed(),
+					matchup.getTeamAway().getAllStats().getMatchesPlayed()
+			);
 			if (matchup.getTeamHome().equals(matchup.getWinner())) {
 				// home win
 				homeElo += eloRatings[0];
-				awayElo -= eloRatings[0];
+				awayElo += eloRatings[3];
 			} else {
 				// away win
-				homeElo += eloRatings[2];
-				awayElo -= eloRatings[2];
+				homeElo += eloRatings[1];
+				awayElo += eloRatings[2];
 			}
 			matchup.getTeamHome().getStatsForGroup(season).setElo(homeElo);
 			matchup.getTeamAway().getStatsForGroup(season).setElo(awayElo);
@@ -233,9 +258,14 @@ public class Utils {
 	public static void eloGroupWin(Season season, Team team1, Team team2) {
 		int homeElo = team1.getStatsForGroup(season).getElo();
 		int awayElo = team2.getStatsForGroup(season).getElo();
-		int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
+		int[] eloRatings = Utils.calculateElo(
+				homeElo,
+				awayElo,
+				team1.getAllStats().getMatchesPlayed(),
+				team2.getAllStats().getMatchesPlayed()
+		);
 		homeElo += eloRatings[0];
-		awayElo -= eloRatings[0];
+		awayElo += eloRatings[3];
 		team1.getStatsForGroup(season).setElo(homeElo);
 		team2.getStatsForGroup(season).setElo(awayElo);
 	}
