@@ -15,6 +15,8 @@ import LeagueToolbar from "./LeagueToolbar";
 
 import silvermedal from "../icons/silvermedal.png";
 import goldmedal from "../icons/goldmedal.png";
+import greenup from "../icons/green_up.png";
+import reddown from "../icons/red_down.png";
 import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2";
 
 class Team extends Component {
@@ -387,6 +389,11 @@ class Team extends Component {
                                                             titleTypographyProps={{variant: 'h7'}}
                                                 />
                                                 <CardContent>
+                                                    {(elos[elos.length-1] == elos[elos.length-2]) ? (null) : (
+                                                       <img src={ (elos[elos.length-1] > elos[elos.length-2]) ? greenup : reddown}
+                                                         style={{float: "left" }}/>)}
+                                                         <div style={{float: "left", color: "#111", "font-size": 18, "margin-bottom": 20, "font-weight": "bold"}}
+                                                            >{ " " + elos[elos.length-1] }</div>
                                                     <Line
                                                         data={{
                                                             labels: [
@@ -409,9 +416,9 @@ class Team extends Component {
                                                             scales: {
                                                                 yAxes: [{
                                                                     ticks: {
-                                                                        // min: 1100,
-                                                                        // maz: 1300,
-                                                                        // stepSize: 50,
+                                                                        min: 1100,
+                                                                        maz: 1300,
+                                                                        stepSize: 50,
                                                                     }
                                                                 }],
                                                             },

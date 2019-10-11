@@ -3,15 +3,16 @@
 added tab reset
 added elo recalc
 balanced radar
-
+to write recalc method
+added elo rating and arrows up down
 
 TODO
 to write elo method
-to write recalc method
 to test by deleting column
 
 to add past games played
 to add radars to next game panel
+
 
 todo graph with rating spreading
 todo graph with elo progression
