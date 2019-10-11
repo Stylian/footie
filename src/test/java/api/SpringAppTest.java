@@ -52,32 +52,32 @@ public class SpringAppTest {
 		if(seasonNum > 1) {
 			checkURL("/rest/ops/quals/0/set", "{status=success, message=set quals0}");
 			checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-			checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+			runURLget("/rest/next_game");
 		}
 
 		checkURL("/rest/ops/quals/1/set", "{status=success, message=set quals1}");
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURL("/rest/ops/quals/2/set", "{status=success, message=set quals2}");
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURL("/rest/ops/groups/1/set", "{status=success, message=set groups1}");
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 		checkURLGet("/rest/ops/fill", "{status=success, message=games added}");
-		checkURLGet("/rest/next_game", "{id=0, homeTeam=null, awayTeam=null, result=null, day=0}");
+		runURLget("/rest/next_game");
 
 	}
 
@@ -101,6 +101,14 @@ public class SpringAppTest {
 		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 		assertEquals(expected, entity.getBody().toString());
+	}
+	private void runURLget(String path) {
+
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+
+		ResponseEntity<Map> entity = this.testRestTemplate.getForEntity("http://localhost:" + this.port + path,
+				Map.class);
+		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
 }
