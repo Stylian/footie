@@ -97,6 +97,13 @@ public class RestAdminController {
 
         // calculate all
         for (Season season : seasons) {
+            // pick up elo from former year
+            if(season.getSeasonYear() > 1) {
+                Season formerSeason = seasons.get(season.getSeasonYear() - 2);
+                for(Team team : season.getTeams()) {
+                    team.getStatsForGroup(season).setElo(team.getStatsForGroup(formerSeason).getElo());
+                }
+            }
             for (Round round : season.getRounds()) {
                 if (round instanceof QualsRound) {
                     for (Matchup matchup : ((QualsRound) round).getMatchups()) {

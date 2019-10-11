@@ -171,28 +171,24 @@ public class Utils {
         double homeOdds = calculateWinningOdds(eloHome, eloAway);
 
         // n1 -> homeTeam games played, should be matchups but oh well
-		int k1 = 64;
-		int k2 = 64;
-		// have to run it once, then on 1.6 remove these, use the scaling below, and remove the recalc elo function
-//        int k1 = 16;
-//        if(n1<10) {
-//        	k1 = 48;
-//		}else if(n1<20) {
-//        	k1 =32;
-//		}
-//
-//        int k2 = 16;
-//        if(n2<10) {
-//        	k2 = 48;
-//		}else if(n2<20) {
-//        	k2 =32;
-//		}
+        int k1 = 16;
+        if(n1<10) {
+        	k1 = 48;
+		}else if(n1<20) {
+        	k1 =32;
+		}
+
+        int k2 = 16;
+        if(n2<10) {
+        	k2 = 48;
+		}else if(n2<20) {
+        	k2 =32;
+		}
 
 	    int gainA = (int) (k1 * (1-homeOdds));
 	    int lossA = (int) (k1 * (homeOdds));
         int gainB = (int) (k2 * homeOdds);
         int lossB = (int) (k2 * (1-homeOdds));
-
 
 		return new int[] {gainA, -lossA, gainB, -lossB};
 	}
