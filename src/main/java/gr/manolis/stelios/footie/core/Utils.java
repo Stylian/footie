@@ -168,11 +168,23 @@ public class Utils {
 
 	public static int[] calculateElo(int eloHome, int eloAway) {
 
-		// TODO
+        double homeOdds = calculateWinningOdds(eloHome, eloAway);
 
+	    int gainA = (int) (16 * (1-homeOdds));
+        int gainB = (int) (16 * homeOdds);
 
-		return new int[] {8, 0, -8};
+		return new int[] {gainA, 0, -gainB};
 	}
+
+    public static double calculateWinningOdds(int eloHome, int eloAway) {
+        double e = Math.pow(10, (double)((eloAway - eloHome)) / 400);
+        double odds = 1 / ( 1 + e);
+
+        // chop down to 4 digits
+        int odds4 = (int)(odds * 10000);
+        double dodds = ((double) odds4) / 10000;
+        return dodds;
+    }
 
 	public static void getEloForMatchup(Season season, Matchup matchup) {
 		if(matchup.getWinner() != null) {

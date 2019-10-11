@@ -5,11 +5,13 @@ added elo recalc
 balanced radar
 to write recalc method
 added elo rating and arrows up down
+elo method
+
 
 TODO
-to write elo method
-to test by deleting column
-
+to add winning odds to matchup somewhere
+group odds?
+league odds?
 to add past games played
 to add radars to next game panel
 
