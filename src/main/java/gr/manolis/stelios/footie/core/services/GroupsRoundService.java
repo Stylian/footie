@@ -270,7 +270,7 @@ public class GroupsRoundService {
         Season season = serviceUtils.loadCurrentSeason();
         GroupsRound groupsRound = calcCoeffsForGroup(round, season);
 
-        calcElo(season, groupsRound);
+        Utils.calcEloForGroup(season, groupsRound);
 
         //save
         DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
@@ -278,40 +278,6 @@ public class GroupsRoundService {
         Utils.autosave(groupsRound);
     }
 
-    private void calcElo(Season season, GroupsRound groupsRound) {
-        switch(groupsRound.getNum()) {
-            case 1:
-                for(Group group : groupsRound.getGroups()) {
-                    List<Team> teams = group.getTeams();
-                    eloGroupWin(season, teams.get(0), teams.get(1));
-                    eloGroupWin(season, teams.get(0), teams.get(2));
-                    eloGroupWin(season, teams.get(1), teams.get(2));
-                }
-                break;
-            case 2:
-                for(Group group : groupsRound.getGroups()) {
-                    List<Team> teams = group.getTeams();
-                    eloGroupWin(season, teams.get(0), teams.get(1));
-                    eloGroupWin(season, teams.get(0), teams.get(2));
-                    eloGroupWin(season, teams.get(0), teams.get(3));
-                    eloGroupWin(season, teams.get(1), teams.get(2));
-                    eloGroupWin(season, teams.get(1), teams.get(3));
-                    eloGroupWin(season, teams.get(2), teams.get(3));
-                }
-                break;
-        }
-
-    }
-
-    private void eloGroupWin(Season season, Team team1, Team team2) {
-        int homeElo = team1.getStatsForGroup(season).getElo();
-        int awayElo = team2.getStatsForGroup(season).getElo();
-        int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
-        homeElo += eloRatings[0];
-        awayElo -= eloRatings[0];
-        team1.getStatsForGroup(season).setElo(homeElo);
-        team2.getStatsForGroup(season).setElo(awayElo);
-    }
 
     public GroupsRound calcCoeffsForGroup(int round, Season season) {
         GroupsRound groupsRound = null;

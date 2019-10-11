@@ -10,6 +10,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -81,7 +83,41 @@ public class RestAdminController {
 
     @PostMapping("/recalculate_elo")
     public String recalculateElo() {
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        List<Season> seasons = serviceUtils.loadAllSeasons();
 
+        // reset elos
+        for (Season season : seasons) {
+            for(Team team : season.getTeams()) {
+                team.getStatsForGroup(season).setElo(1200);
+            }
+        }
+
+        // calculate all
+        for (Season season : seasons) {
+            for (Round round : season.getRounds()) {
+                if (round instanceof QualsRound) {
+                    for (Matchup matchup : ((QualsRound) round).getMatchups()) {
+                        Utils.getEloForMatchup(season, matchup);
+                    }
+                }
+                if (round instanceof GroupsRound) {
+                    Utils.calcEloForGroup(season, (GroupsRound) round);
+                }
+                if (round instanceof PlayoffsRound) {
+                    PlayoffsRound playoffsRound = (PlayoffsRound) round;
+                    for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
+                        Utils.getEloForMatchup(season, matchup);
+                    }
+                    for (Matchup matchup : playoffsRound.getSemisMatchups()) {
+                        Utils.getEloForMatchup(season, matchup);
+                    }
+                    Utils.getEloForMatchup(season, playoffsRound.getFinalsMatchup());
+                }
+            }
+            //save
+            seasonDao.save(season);
+        }
 
         return "done";
     }
@@ -92,13 +128,13 @@ public class RestAdminController {
         Season season = serviceUtils.loadCurrentSeason();
 
         // clear coeffs
-        for(Team team : season.getTeams()) {
+        for (Team team : season.getTeams()) {
             team.getStatsForGroup(season).setPoints(0);
         }
 
         QualsRound prelim = (QualsRound) season.getRounds().get(0);
-        if(season.getSeasonYear() != 1) {
-            if(prelim.getStage().equals(Stage.FINISHED)) {
+        if (season.getSeasonYear() != 1) {
+            if (prelim.getStage().equals(Stage.FINISHED)) {
                 for (Matchup matchup : prelim.getMatchups()) {
                     Utils.addGamePointsForMatchup(season, matchup);
                 }
@@ -106,7 +142,7 @@ public class RestAdminController {
         }
 
         QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
-        if(roundQuals1.getStage().equals(Stage.FINISHED)) {
+        if (roundQuals1.getStage().equals(Stage.FINISHED)) {
             for (Matchup matchup : roundQuals1.getMatchups()) {
                 matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_1);
                 Utils.addGamePointsForMatchup(season, matchup);
@@ -114,37 +150,37 @@ public class RestAdminController {
         }
 
         QualsRound roundQuals2 = (QualsRound) season.getRounds().get(2);
-        if(roundQuals2.getStage().equals(Stage.FINISHED)) {
+        if (roundQuals2.getStage().equals(Stage.FINISHED)) {
             for (Matchup matchup : roundQuals2.getMatchups()) {
                 matchup.getWinner().getStatsForGroup(season).addPoints(Rules.PROMOTION_POINTS_QUALS_2);
                 Utils.addGamePointsForMatchup(season, matchup);
             }
         }
 
-        if(season.getRounds().get(3).getStage().equals(Stage.FINISHED)) {
+        if (season.getRounds().get(3).getStage().equals(Stage.FINISHED)) {
             groupsRoundService.calcCoeffsForGroup(1, season);
         }
 
-        if(season.getRounds().get(4).getStage().equals(Stage.FINISHED)) {
+        if (season.getRounds().get(4).getStage().equals(Stage.FINISHED)) {
             groupsRoundService.calcCoeffsForGroup(2, season);
         }
 
         PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 
         for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
-            if(matchup.getWinner() != null) {
+            if (matchup.getWinner() != null) {
                 Utils.addGamePointsForMatchup(season, matchup, false);
             }
         }
 
         for (Matchup matchup : playoffsRound.getSemisMatchups()) {
-            if(matchup.getWinner() != null) {
+            if (matchup.getWinner() != null) {
                 Utils.addGamePointsForMatchup(season, matchup, true);
             }
         }
 
         Matchup finalsMatchup = playoffsRound.getFinalsMatchup();
-        if(finalsMatchup.getWinner() != null) {
+        if (finalsMatchup.getWinner() != null) {
             finalsMatchup.getWinner().getStatsForGroup(season).addPoints(Rules.POINTS_WINNING_THE_LEAGUE);
             if (!finalsMatchup.getTeamHome().equals(finalsMatchup.getWinner())) {
                 finalsMatchup.getTeamHome().getStatsForGroup(season).addPoints(Rules.PROMOTION_TO_FINAL);

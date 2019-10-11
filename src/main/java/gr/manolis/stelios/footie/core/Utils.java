@@ -2,9 +2,11 @@ package gr.manolis.stelios.footie.core;
 
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.MatchupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -171,5 +173,60 @@ public class Utils {
 
 		return new int[] {8, 0, -8};
 	}
+
+	public static void getEloForMatchup(Season season, Matchup matchup) {
+		if(matchup.getWinner() != null) {
+			int homeElo = matchup.getTeamHome().getStatsForGroup(season).getElo();
+			int awayElo = matchup.getTeamAway().getStatsForGroup(season).getElo();
+			int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
+			if (matchup.getTeamHome().equals(matchup.getWinner())) {
+				// home win
+				homeElo += eloRatings[0];
+				awayElo -= eloRatings[0];
+			} else {
+				// away win
+				homeElo += eloRatings[2];
+				awayElo -= eloRatings[2];
+			}
+			matchup.getTeamHome().getStatsForGroup(season).setElo(homeElo);
+			matchup.getTeamAway().getStatsForGroup(season).setElo(awayElo);
+		}
+	}
+
+	public static void calcEloForGroup(Season season, GroupsRound groupsRound) {
+		switch(groupsRound.getNum()) {
+			case 1:
+				for(Group group : groupsRound.getGroups()) {
+					List<Team> teams = group.getTeams();
+					eloGroupWin(season, teams.get(0), teams.get(1));
+					eloGroupWin(season, teams.get(0), teams.get(2));
+					eloGroupWin(season, teams.get(1), teams.get(2));
+				}
+				break;
+			case 2:
+				for(Group group : groupsRound.getGroups()) {
+					List<Team> teams = group.getTeams();
+					eloGroupWin(season, teams.get(0), teams.get(1));
+					eloGroupWin(season, teams.get(0), teams.get(2));
+					eloGroupWin(season, teams.get(0), teams.get(3));
+					eloGroupWin(season, teams.get(1), teams.get(2));
+					eloGroupWin(season, teams.get(1), teams.get(3));
+					eloGroupWin(season, teams.get(2), teams.get(3));
+				}
+				break;
+		}
+
+	}
+
+	public static void eloGroupWin(Season season, Team team1, Team team2) {
+		int homeElo = team1.getStatsForGroup(season).getElo();
+		int awayElo = team2.getStatsForGroup(season).getElo();
+		int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
+		homeElo += eloRatings[0];
+		awayElo -= eloRatings[0];
+		team1.getStatsForGroup(season).setElo(homeElo);
+		team2.getStatsForGroup(season).setElo(awayElo);
+	}
+
 
 }

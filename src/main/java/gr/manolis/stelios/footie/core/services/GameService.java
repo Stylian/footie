@@ -113,22 +113,7 @@ public class GameService {
             ifMatchupIsFinishedDecideTheWinner(matchupGame.getMatchup());
 
             // elo calculation
-            if(matchupGame.getMatchup().getWinner() != null) {
-                int homeElo = matchupGame.getHomeTeam().getStatsForGroup(season).getElo();
-                int awayElo = matchupGame.getAwayTeam().getStatsForGroup(season).getElo();
-                int[] eloRatings = Utils.calculateElo(homeElo, awayElo);
-                if (matchupGame.getMatchup().getTeamHome().equals(matchupGame.getMatchup().getWinner())) {
-                    // home win
-                    homeElo += eloRatings[0];
-                    awayElo -= eloRatings[0];
-                } else {
-                    // away win
-                    homeElo += eloRatings[2];
-                    awayElo -= eloRatings[2];
-                }
-                matchupGame.getHomeTeam().getStatsForGroup(season).setElo(homeElo);
-                matchupGame.getAwayTeam().getStatsForGroup(season).setElo(awayElo);
-            }
+            Utils.getEloForMatchup(season, matchupGame.getMatchup());
 
         } else if (game instanceof GroupGame) {
             if (result.homeTeamWon()) {
