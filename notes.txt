@@ -1,24 +1,11 @@
 
-1.5
-added tab reset
-added elo recalc
-balanced radar
-to write recalc method
-added elo rating and arrows up down
-elo method
-
 
 TODO
-to add winning odds to matchup somewhere
+to add winning odds to matchup
 group odds?
 league odds?
-
 to add past games played
-to add radars to next game panel
 
-
-todo graph with rating spreading
-todo graph with elo progression
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 

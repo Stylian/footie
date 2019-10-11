@@ -145,6 +145,10 @@ public class ViewsService {
 	    return gameStats(0, 0);
     }
 
+	public Map<String, Object> gameStats(Team team) {
+	    return gameStats(team.getId(), team.getAllStats().getElo());
+    }
+
 	public Map<String, Object> gameStats(int teamId, int teamElo) {
 
 		Map<String, Object> gamestats = new LinkedHashMap<>();

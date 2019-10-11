@@ -67,12 +67,15 @@ public class Team {
 
 	public Stats getAllStats() {
 
+		List<Season> seasons = new ArrayList<>();
 		Stats stats1 = new Stats();
 		for(Stats stat : stats) {
 			if(stat.getGroup() instanceof Season) {
+				seasons.add( (Season) stat.getGroup());
 				stats1.addStats(stat);
 			}
 		}
+		stats1.setElo( this.getStatsForGroup(seasons.get(seasons.size()-1)).getElo() );
 
 		return stats1;
 	}

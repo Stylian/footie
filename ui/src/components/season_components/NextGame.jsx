@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import IconButton from '@material-ui/core/IconButton';
 import save from '../../icons/save.svg';
-import {TableRow} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Grid, TableCell, TableRow} from "@material-ui/core";
+import {HorizontalBar, Radar} from "react-chartjs-2";
 
 class NextGame extends Component {
 
@@ -9,11 +10,10 @@ class NextGame extends Component {
         super(props);
 
         this.state = {
-            game: {id: 0, homeTeam: {name: null}, awayTeam: {name: null}},
             homeScore: 0,
             awayScore: 0,
             editedHome: false,
-            editedAway: false
+            editedAway: false,
         };
 
     }
@@ -27,7 +27,7 @@ class NextGame extends Component {
 
                         return {
                             ...state,
-                            game: result,
+                            data: result,
                             isLoaded: true,
                         }
                     });
@@ -72,7 +72,7 @@ class NextGame extends Component {
 
     handleSave = (event, newValue) => {
 
-        fetch("/rest/ops/add_game_result/" + this.state.game.id, {
+        fetch("/rest/ops/add_game_result/" + this.state.data.game.id, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -104,43 +104,285 @@ class NextGame extends Component {
 
     render() {
 
-        if (this.state.game.id == 0) {
+        if (this.state.data == null || this.state.data.game == null || this.state.data.game.id == 0) {
             return <div></div>
         } else {
             return (
-                <table class="gameTable" align={"right"}>
-                    <tbody>
-                    <tr>
-                        <td class="homeTeam teamClickerGamePage" align={"right"} data-teamid={this.state.game.homeTeam.id}
-                            onClick={this.goToTeam} >{this.state.game.homeTeam.name}</td>
-                        <td class="gameDiff"> -</td>
-                        <td class="awayTeam teamClickerGamePage" align={"left"} data-teamid={this.state.game.awayTeam.id}
-                            onClick={this.goToTeam} >{this.state.game.awayTeam.name}</td>
-                    </tr>
-                    <tr>
-                        <td align={"right"}>
-                            <input type={'number'}
-                                   class="score_field"
-                                   value={this.state.editedHome ? this.state.homeScore : ""}
-                                   onChange={this.handleChangeScore('homeScore')}
-                            />
-                        </td>
-                        <td class="gameDiff">
-                            <IconButton onClick={this.handleSave}>
-                                <img src={save} title={"save"}/>
-                            </IconButton>
-                        </td>
-                        <td align={"left"}>
-                            <input type={'number'}
-                                   class="score_field"
-                                   value={this.state.editedAway ? this.state.awayScore : ""}
-                                   onChange={this.handleChangeScore('awayScore')}
-                            />
-                        </td>
-                    </tr>
-                    </tbody>
+                <Card style={{margin: 10}}>
+                    <CardHeader title={"upcoming game"} align={"center"}
+                                titleTypographyProps={{variant: 'h7'}}
+                    />
+                    <CardContent>
+                        <table className="table" align={"center"}>
+                            <TableRow>
+                                <TableCell align="right" >
+                                    <input type={'number'}
+                                           className="score_field"
+                                           value={this.state.editedHome ? this.state.homeScore : ""}
+                                           onChange={this.handleChangeScore('homeScore')}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton onClick={this.handleSave}>
+                                        <img src={save} title={"save"}/>
+                                    </IconButton>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <input type={'number'}
+                                           className="score_field"
+                                           value={this.state.editedAway ? this.state.awayScore : ""}
+                                           onChange={this.handleChangeScore('awayScore')}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell align="right"
+                                           className={"teamClicker"}
+                                           data-teamid={this.state.data.game.homeTeam.id}
+                                           onClick={this.goToTeam}>
+                                    {this.state.data.game.homeTeam.name}</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell align="left"
+                                           className={"teamClicker"}
+                                           data-teamid={this.state.data.game.awayTeam.id}
+                                           onClick={this.goToTeam}>
+                                    {this.state.data.game.awayTeam.name}</TableCell>
 
-                </table>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell style={{minWidth: 150, maxWidth: 150}}>
+                                    <Radar
+                                        data={{
+                                            labels: [
+                                                "Elo",
+                                                "A. Att",
+                                                "A. Def",
+                                                "Def",
+                                                "Att",
+                                            ],
+                                            datasets: [{
+                                                data: [
+                                                    this.state.data.homeData["radarElo"],
+                                                    this.state.data.homeData["radarGoalsScoredAway"],
+                                                    this.state.data.homeData["radarGoalsConcededAway"],
+                                                    this.state.data.homeData["radarGoalsConceded"],
+                                                    this.state.data.homeData["radarGoalsScored"],
+                                                ],
+                                                backgroundColor: '#2d5cd2',
+                                                hoverBackgroundColor: '#2d5cd2',
+                                            }],
+                                        }}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                                display: false,
+                                            },
+                                            scale: {
+                                                pointLabels: {
+                                                    fontSize: 9,
+                                                },
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    max: 100,
+                                                    min: 0,
+                                                    display: false,
+                                                    stepSize: 20
+                                                },
+                                            },
+                                            elements: {
+                                                point: {
+                                                    radius: 0
+                                                }
+                                            }
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell></TableCell>
+                                <TableCell style={{minWidth: 150, maxWidth: 150}}>
+                                    <Radar
+                                        data={{
+                                            labels: [
+                                                "Elo",
+                                                "A. Att",
+                                                "A. Def",
+                                                "Def",
+                                                "Att",
+                                            ],
+                                            datasets: [{
+                                                data: [
+                                                    this.state.data.awayData["radarElo"],
+                                                    this.state.data.awayData["radarGoalsScoredAway"],
+                                                    this.state.data.awayData["radarGoalsConcededAway"],
+                                                    this.state.data.awayData["radarGoalsConceded"],
+                                                    this.state.data.awayData["radarGoalsScored"],
+                                                ],
+                                                backgroundColor: '#2d5cd2',
+                                                hoverBackgroundColor: '#2d5cd2',
+                                            }],
+                                        }}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                                display: false,
+                                            },
+                                            scale: {
+                                                pointLabels: {
+                                                    fontSize: 9,
+                                                },
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    max: 100,
+                                                    min: 0,
+                                                    display: false,
+                                                    stepSize: 20
+                                                },
+                                            },
+                                            elements: {
+                                                point: {
+                                                    radius: 0
+                                                }
+                                            }
+                                        }}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
+                                    <HorizontalBar
+                                        data={{
+                                            labels: [ "", ""
+                                            ],
+                                            datasets: [{
+                                                data: [
+                                                    this.state.data.homeData["avg goals scored"],
+                                                    this.state.data.homeData["avg goals conceded"],
+                                                ],
+                                                backgroundColor: [
+                                                    '#2d5cd2',
+                                                    '#da2525',
+                                                ],
+                                                hoverBackgroundColor: [
+                                                    '#2d5cd2',
+                                                    '#da2525',
+                                                ]
+                                            },
+                                                {
+                                                    data: [
+                                                        this.state.data.homeData["avg goals scored away"],
+                                                        this.state.data.homeData["avg goals conceded away"]
+                                                    ],
+                                                    backgroundColor: [
+                                                        '#abbeed',
+                                                        '#f0a8a8'
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        '#abbeed',
+                                                        '#f0a8a8'
+                                                    ]
+                                                }],
+                                        }}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                                display: false,
+                                            },
+                                            title: {
+                                                display: true,
+                                                position: "bottom",
+                                                text: "" + this.state.data.homeData["avg goals scored"] + "(" +
+                                                    this.state.data.homeData["avg goals conceded"] + ") - "
+                                                 + this.state.data.homeData["avg goals scored away"] + "(" +
+                                                    this.state.data.homeData["avg goals conceded away"] + ")",
+                                                fontSize: 9,
+                                                fontColor: "#111"
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    ticks: {
+                                                        min: 0,
+                                                        max: 6,
+                                                        stepSize: 2,
+                                                    },
+                                                    barPercentage: 1
+                                                }],
+                                            }
+                                        }}
+                                    />
+
+                                </TableCell>
+                                <TableCell></TableCell>
+                                <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
+                                    <HorizontalBar
+                                        data={{
+                                            labels: [ "", ""
+                                            ],
+                                            datasets: [{
+                                                data: [
+                                                    this.state.data.awayData["avg goals scored"],
+                                                    this.state.data.awayData["avg goals conceded"],
+                                                ],
+                                                backgroundColor: [
+                                                    '#2d5cd2',
+                                                    '#da2525',
+                                                ],
+                                                hoverBackgroundColor: [
+                                                    '#2d5cd2',
+                                                    '#da2525',
+                                                ]
+                                            },
+                                                {
+                                                    data: [
+                                                        this.state.data.awayData["avg goals scored away"],
+                                                        this.state.data.awayData["avg goals conceded away"]
+                                                    ],
+                                                    backgroundColor: [
+                                                        '#abbeed',
+                                                        '#f0a8a8'
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        '#abbeed',
+                                                        '#f0a8a8'
+                                                    ]
+                                                }],
+                                        }}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                                display: false,
+                                            },
+                                            title: {
+                                                display: true,
+                                                position: "bottom",
+                                                text: "" + this.state.data.awayData["avg goals scored"] + "(" +
+                                                    this.state.data.awayData["avg goals conceded"] + ") - "
+                                                    + this.state.data.awayData["avg goals scored away"] + "(" +
+                                                    this.state.data.awayData["avg goals conceded away"] + ")",
+                                                fontSize: 9,
+                                                fontColor: "#111"
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    ticks: {
+                                                        min: 0,
+                                                        max: 6,
+                                                        stepSize: 2,
+                                                    },
+                                                    barPercentage: 1
+                                                }],
+                                            }
+                                        }}
+                                    />
+
+                                </TableCell>
+                            </TableRow>
+                        </table>
+
+                    </CardContent>
+                </Card>
             )
         }
     }

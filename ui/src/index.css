@@ -47,21 +47,6 @@ code {
   background-color: #d9edf7;
 }
 
-.homeTeam,
-.awayTeam {
-  width: 120px;
-}
-
-.gameDiff {
-  text-align: center;
-  width: 50px;
-}
-
-.gameTable {
-  height: 64px;
-  background-color: #164e69;
-}
-
 .points_td {
   font-weight: bold !important;
 }
@@ -115,11 +100,6 @@ code {
 .playerClicker:hover > td,
 .teamClicker:hover,
 .teamClicker:hover > td {
-  font-weight: bold !important;
-}
-
-.teamClickerGamePage:hover {
-  cursor: pointer;
   font-weight: bold !important;
 }
 

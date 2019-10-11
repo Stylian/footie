@@ -1,6 +1,8 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -34,6 +37,9 @@ public class RestNextGameController {
     private ServiceUtils serviceUtils;
 
     @Autowired
+    private ViewsService viewsService;
+
+    @Autowired
     private GameService gameService;
 
     @Autowired
@@ -43,11 +49,14 @@ public class RestNextGameController {
     private RestSeasonController restSeasonController;
 
     @RequestMapping("/next_game")
-    public Game getNextGameAndMoveStages() {
+    public Map<String, Object> getNextGameAndMoveStages() {
         logger.info("getNextGame");
 
+        Map<String, Object> data = new HashMap<>();
+
         if (serviceUtils.getNumberOfSeasons() < 1) {
-            return new Game();
+            data.put("game", null);
+            return data;
         }
 
         Game game = gameService.getNextGame();
@@ -108,12 +117,18 @@ public class RestNextGameController {
                             break;
                     }
                 }
-
             }
-
         }
 
-        return game == null ? new Game() : game; // new game has id of 0
+        data.put("game", game);
+        if(game != null) {
+            data.put("homeData", viewsService.gameStats(game.getHomeTeam()));
+            data.put("awayData", viewsService.gameStats(game.getAwayTeam()));
+        }
+
+        // TODO upcoming games
+
+        return data;
     }
 
 }
