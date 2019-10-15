@@ -4,14 +4,13 @@ add winning odds to matchup
 add decimal odds
 past games played in teams page
 past games played in next game panel
+past encounters
 
 TODO
-
+save icon table css resize work
 
 group odds?
 league odds?
-to add past games played
-
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 

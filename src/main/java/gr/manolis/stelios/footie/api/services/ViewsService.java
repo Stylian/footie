@@ -203,10 +203,6 @@ public class ViewsService {
                     "NOT NULL and AWAY_GOALS IS NOT NULL").list();
         }
 
-		if (results.isEmpty()) {
-			return gamestats;
-		}
-
 		int numOfGames = results.size();
 		long wins = results.stream().filter(Result::homeTeamWon).count();
 		long draws = results.stream().filter(Result::tie).count();
@@ -214,8 +210,15 @@ public class ViewsService {
 		double winsPercent = Precision.round(1.0 * wins / numOfGames, 2);
 		double drawsPercent = Precision.round(1.0 * draws / numOfGames, 2);
 		double lossesPercent = Precision.round(1.0 * losses / numOfGames, 2);
-		double avgGoalsScored = results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
-		double avgGoalsConceded =  results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
+		double avgGoalsScored;
+		double avgGoalsConceded;
+		if (results.isEmpty()) {
+			avgGoalsScored = 0;
+			avgGoalsConceded = 0;
+		}else {
+			avgGoalsScored = results.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
+			avgGoalsConceded =  results.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
+		}
 
 		gamestats.put("number of games played", numOfGames);
 		gamestats.put("wins", wins);
@@ -245,8 +248,15 @@ public class ViewsService {
 			double winsPercentAway = Precision.round(1.0 * winsAway / numOfGamesAway, 2);
 			double drawsPercentAway = Precision.round(1.0 * drawsAway / numOfGamesAway, 2);
 			double lossesPercentAway = Precision.round(1.0 * lossesAway / numOfGamesAway, 2);
-			double avgGoalsScoredAway = resultsAway.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
-			double avgGoalsConcededAway =  resultsAway.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
+			double avgGoalsScoredAway;
+			double avgGoalsConcededAway;
+			if (results.isEmpty()) {
+				avgGoalsScoredAway = 0;
+				avgGoalsConcededAway = 0;
+			}else {
+				avgGoalsScoredAway = resultsAway.stream().mapToDouble(Result::getGoalsMadeByAwayTeam).average().getAsDouble();
+				avgGoalsConcededAway =  resultsAway.stream().mapToDouble(Result::getGoalsMadeByHomeTeam).average().getAsDouble();
+			}
 
 			//away
 			gamestats.put("number of games played away", numOfGamesAway);

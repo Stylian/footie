@@ -122,8 +122,8 @@ class NextGame extends Component {
                                            onChange={this.handleChangeScore('homeScore')}
                                     />
                                 </TableCell>
-                                <TableCell>
-                                    <IconButton onClick={this.handleSave}>
+                                <TableCell align={"center"} >
+                                    <IconButton onClick={this.handleSave} >
                                         <img src={save} title={"save"}/>
                                     </IconButton>
                                 </TableCell>
@@ -152,296 +152,324 @@ class NextGame extends Component {
                             {this.state.data.winOdds < 0 ? (null) : (
                                 <TableRow>
                                     <TableCell align={"right"}>{this.state.data.decHomeOdds}</TableCell>
-                                    <TableCell align={"center"}>:</TableCell>
+                                    <TableCell align={"center"}></TableCell>
                                     <TableCell>{this.state.data.decAwayOdds}</TableCell>
                                 </TableRow>
                             )}
                             {this.state.data.winOdds < 0 ? (null) : (
                                 <TableRow>
                                     <TableCell align={"right"}>{this.state.data.winOdds}%</TableCell>
-                                    <TableCell align={"center"}>:</TableCell>
+                                    <TableCell align={"center"}></TableCell>
                                     <TableCell>{100 - this.state.data.winOdds}%</TableCell>
                                 </TableRow>
                             )}
                             <TableRow>
-                                <TableCell style={{minWidth: 150, maxWidth: 150}}>
-                                    <Radar
-                                        data={{
-                                            labels: [
-                                                "Elo",
-                                                "A. Att",
-                                                "A. Def",
-                                                "Def",
-                                                "Att",
-                                            ],
-                                            datasets: [{
-                                                data: [
-                                                    this.state.data.homeData["radarElo"],
-                                                    this.state.data.homeData["radarGoalsScoredAway"],
-                                                    this.state.data.homeData["radarGoalsConcededAway"],
-                                                    this.state.data.homeData["radarGoalsConceded"],
-                                                    this.state.data.homeData["radarGoalsScored"],
-                                                ],
-                                                backgroundColor: '#2d5cd2',
-                                                hoverBackgroundColor: '#2d5cd2',
-                                            }],
-                                        }}
-                                        options={{
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            legend: {
-                                                display: false,
-                                            },
-                                            scale: {
-                                                pointLabels: {
-                                                    fontSize: 9,
-                                                },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    max: 100,
-                                                    min: 0,
-                                                    display: false,
-                                                    stepSize: 20
-                                                },
-                                            },
-                                            elements: {
-                                                point: {
-                                                    radius: 0
-                                                }
-                                            }
-                                        }}
-                                    />
-                                </TableCell>
-                                <TableCell></TableCell>
-                                <TableCell style={{minWidth: 150, maxWidth: 150}}>
-                                    <Radar
-                                        data={{
-                                            labels: [
-                                                "Elo",
-                                                "A. Att",
-                                                "A. Def",
-                                                "Def",
-                                                "Att",
-                                            ],
-                                            datasets: [{
-                                                data: [
-                                                    this.state.data.awayData["radarElo"],
-                                                    this.state.data.awayData["radarGoalsScoredAway"],
-                                                    this.state.data.awayData["radarGoalsConcededAway"],
-                                                    this.state.data.awayData["radarGoalsConceded"],
-                                                    this.state.data.awayData["radarGoalsScored"],
-                                                ],
-                                                backgroundColor: '#2d5cd2',
-                                                hoverBackgroundColor: '#2d5cd2',
-                                            }],
-                                        }}
-                                        options={{
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            legend: {
-                                                display: false,
-                                            },
-                                            scale: {
-                                                pointLabels: {
-                                                    fontSize: 9,
-                                                },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    max: 100,
-                                                    min: 0,
-                                                    display: false,
-                                                    stepSize: 20
-                                                },
-                                            },
-                                            elements: {
-                                                point: {
-                                                    radius: 0
-                                                }
-                                            }
-                                        }}
-                                    />
+                                <TableCell colSpan={3}>
+                                    <Grid container spacing={1}>
+                                        <Grid item sm={6}>
+                                            <Radar
+                                                data={{
+                                                    labels: [
+                                                        "Elo",
+                                                        "A. Att",
+                                                        "A. Def",
+                                                        "Def",
+                                                        "Att",
+                                                    ],
+                                                    datasets: [{
+                                                        data: [
+                                                            this.state.data.homeData["radarElo"],
+                                                            this.state.data.homeData["radarGoalsScoredAway"],
+                                                            this.state.data.homeData["radarGoalsConcededAway"],
+                                                            this.state.data.homeData["radarGoalsConceded"],
+                                                            this.state.data.homeData["radarGoalsScored"],
+                                                        ],
+                                                        backgroundColor: '#2d5cd2',
+                                                        hoverBackgroundColor: '#2d5cd2',
+                                                    }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    scale: {
+                                                        pointLabels: {
+                                                            fontSize: 9,
+                                                        },
+                                                        ticks: {
+                                                            beginAtZero: true,
+                                                            max: 100,
+                                                            min: 0,
+                                                            display: false,
+                                                            stepSize: 20
+                                                        },
+                                                    },
+                                                    elements: {
+                                                        point: {
+                                                            radius: 0
+                                                        }
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={6}>
+                                            <Radar
+                                                data={{
+                                                    labels: [
+                                                        "Elo",
+                                                        "A. Att",
+                                                        "A. Def",
+                                                        "Def",
+                                                        "Att",
+                                                    ],
+                                                    datasets: [{
+                                                        data: [
+                                                            this.state.data.awayData["radarElo"],
+                                                            this.state.data.awayData["radarGoalsScoredAway"],
+                                                            this.state.data.awayData["radarGoalsConcededAway"],
+                                                            this.state.data.awayData["radarGoalsConceded"],
+                                                            this.state.data.awayData["radarGoalsScored"],
+                                                        ],
+                                                        backgroundColor: '#2d5cd2',
+                                                        hoverBackgroundColor: '#2d5cd2',
+                                                    }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    scale: {
+                                                        pointLabels: {
+                                                            fontSize: 9,
+                                                        },
+                                                        ticks: {
+                                                            beginAtZero: true,
+                                                            max: 100,
+                                                            min: 0,
+                                                            display: false,
+                                                            stepSize: 20
+                                                        },
+                                                    },
+                                                    elements: {
+                                                        point: {
+                                                            radius: 0
+                                                        }
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
-                                    <HorizontalBar
-                                        data={{
-                                            labels: ["", ""
-                                            ],
-                                            datasets: [{
-                                                data: [
-                                                    this.state.data.homeData["avg goals scored"],
-                                                    this.state.data.homeData["avg goals conceded"],
-                                                ],
-                                                backgroundColor: [
-                                                    '#2d5cd2',
-                                                    '#da2525',
-                                                ],
-                                                hoverBackgroundColor: [
-                                                    '#2d5cd2',
-                                                    '#da2525',
-                                                ]
-                                            },
-                                                {
-                                                    data: [
-                                                        this.state.data.homeData["avg goals scored away"],
-                                                        this.state.data.homeData["avg goals conceded away"]
+                                <TableCell colSpan={3} >
+                                    <Grid container spacing={1} >
+                                        <Grid item sm={6} style={{ minHeight: 120, maxHeight: 120}}>
+                                            <HorizontalBar
+                                                data={{
+                                                    labels: ["", ""
                                                     ],
-                                                    backgroundColor: [
-                                                        '#abbeed',
-                                                        '#f0a8a8'
-                                                    ],
-                                                    hoverBackgroundColor: [
-                                                        '#abbeed',
-                                                        '#f0a8a8'
-                                                    ]
-                                                }],
-                                        }}
-                                        options={{
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            legend: {
-                                                display: false,
-                                            },
-                                            title: {
-                                                display: true,
-                                                position: "bottom",
-                                                text: "" + this.state.data.homeData["avg goals scored"] + "(" +
-                                                    this.state.data.homeData["avg goals scored away"] + ") - "
-                                                    + this.state.data.homeData["avg goals conceded"] + "(" +
-                                                    this.state.data.homeData["avg goals conceded away"] + ")",
-                                                fontSize: 9,
-                                                fontColor: "#111"
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    ticks: {
-                                                        min: 0,
-                                                        max: 6,
-                                                        stepSize: 2,
+                                                    datasets: [{
+                                                        data: [
+                                                            this.state.data.homeData["avg goals scored"],
+                                                            this.state.data.homeData["avg goals conceded"],
+                                                        ],
+                                                        backgroundColor: [
+                                                            '#2d5cd2',
+                                                            '#da2525',
+                                                        ],
+                                                        hoverBackgroundColor: [
+                                                            '#2d5cd2',
+                                                            '#da2525',
+                                                        ]
                                                     },
-                                                    barPercentage: 1
-                                                }],
-                                            }
-                                        }}
-                                    />
-
-                                </TableCell>
-                                <TableCell></TableCell>
-                                <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
-                                    <HorizontalBar
-                                        data={{
-                                            labels: ["", ""
-                                            ],
-                                            datasets: [{
-                                                data: [
-                                                    this.state.data.awayData["avg goals scored"],
-                                                    this.state.data.awayData["avg goals conceded"],
-                                                ],
-                                                backgroundColor: [
-                                                    '#2d5cd2',
-                                                    '#da2525',
-                                                ],
-                                                hoverBackgroundColor: [
-                                                    '#2d5cd2',
-                                                    '#da2525',
-                                                ]
-                                            },
-                                                {
-                                                    data: [
-                                                        this.state.data.awayData["avg goals scored away"],
-                                                        this.state.data.awayData["avg goals conceded away"]
-                                                    ],
-                                                    backgroundColor: [
-                                                        '#abbeed',
-                                                        '#f0a8a8'
-                                                    ],
-                                                    hoverBackgroundColor: [
-                                                        '#abbeed',
-                                                        '#f0a8a8'
-                                                    ]
-                                                }],
-                                        }}
-                                        options={{
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            legend: {
-                                                display: false,
-                                            },
-                                            title: {
-                                                display: true,
-                                                position: "bottom",
-                                                text: "" + this.state.data.awayData["avg goals scored"] + "(" +
-                                                    this.state.data.awayData["avg goals scored away"] + ") - "
-                                                    + this.state.data.awayData["avg goals conceded"] + "(" +
-                                                    this.state.data.awayData["avg goals conceded away"] + ")",
-                                                fontSize: 9,
-                                                fontColor: "#111"
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    ticks: {
-                                                        min: 0,
-                                                        max: 6,
-                                                        stepSize: 2,
+                                                        {
+                                                            data: [
+                                                                this.state.data.homeData["avg goals scored away"],
+                                                                this.state.data.homeData["avg goals conceded away"]
+                                                            ],
+                                                            backgroundColor: [
+                                                                '#abbeed',
+                                                                '#f0a8a8'
+                                                            ],
+                                                            hoverBackgroundColor: [
+                                                                '#abbeed',
+                                                                '#f0a8a8'
+                                                            ]
+                                                        }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
                                                     },
-                                                    barPercentage: 1
-                                                }],
-                                            }
-                                        }}
-                                    />
-
+                                                    title: {
+                                                        display: true,
+                                                        position: "bottom",
+                                                        text: "" + this.state.data.homeData["avg goals scored"] + "(" +
+                                                            this.state.data.homeData["avg goals scored away"] + ") - "
+                                                            + this.state.data.homeData["avg goals conceded"] + "(" +
+                                                            this.state.data.homeData["avg goals conceded away"] + ")",
+                                                        fontSize: 9,
+                                                        fontColor: "#111"
+                                                    },
+                                                    scales: {
+                                                        xAxes: [{
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 6,
+                                                                stepSize: 2,
+                                                            },
+                                                            barPercentage: 1
+                                                        }],
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={6} style={{ minHeight: 120, maxHeight: 120}}>
+                                            <HorizontalBar
+                                                data={{
+                                                    labels: ["", ""
+                                                    ],
+                                                    datasets: [{
+                                                        data: [
+                                                            this.state.data.awayData["avg goals scored"],
+                                                            this.state.data.awayData["avg goals conceded"],
+                                                        ],
+                                                        backgroundColor: [
+                                                            '#2d5cd2',
+                                                            '#da2525',
+                                                        ],
+                                                        hoverBackgroundColor: [
+                                                            '#2d5cd2',
+                                                            '#da2525',
+                                                        ]
+                                                    },
+                                                        {
+                                                            data: [
+                                                                this.state.data.awayData["avg goals scored away"],
+                                                                this.state.data.awayData["avg goals conceded away"]
+                                                            ],
+                                                            backgroundColor: [
+                                                                '#abbeed',
+                                                                '#f0a8a8'
+                                                            ],
+                                                            hoverBackgroundColor: [
+                                                                '#abbeed',
+                                                                '#f0a8a8'
+                                                            ]
+                                                        }],
+                                                }}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    title: {
+                                                        display: true,
+                                                        position: "bottom",
+                                                        text: "" + this.state.data.awayData["avg goals scored"] + "(" +
+                                                            this.state.data.awayData["avg goals scored away"] + ") - "
+                                                            + this.state.data.awayData["avg goals conceded"] + "(" +
+                                                            this.state.data.awayData["avg goals conceded away"] + ")",
+                                                        fontSize: 9,
+                                                        fontColor: "#111"
+                                                    },
+                                                    scales: {
+                                                        xAxes: [{
+                                                            ticks: {
+                                                                min: 0,
+                                                                max: 6,
+                                                                stepSize: 2,
+                                                            },
+                                                            barPercentage: 1
+                                                        }],
+                                                    }
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </TableCell>
                             </TableRow>
+                            {this.state.data.encounters.length < 1 ? (null) : (
+                                <TableRow>
+                                    <TableCell align={"center"} colSpan={3}>
+                                        <table className="table" align={"center"}>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell
+                                                        align={"center"}>past encounters</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableRow>
+                                                <TableCell>
+                                                    {this.state.data.encounters.map((game, index) => {
+                                                        return game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam
+                                                    }).join(", ")}
+                                                </TableCell>
+                                            </TableRow>
+                                        </table>
+                                    </TableCell>
+                                </TableRow>)}
                             <TableRow>
-                                <TableCell>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell colSpan={2}
-                                                           align={"center"}>Home</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        {this.state.data.homeData.games5Home.map((game, index) => {
-                                            return (
-                                                <TableRow>
-                                                    <TableCell style={{minWidth: 30, maxWidth: 30}}
-                                                        >{game.result.goalsMadeByHomeTeam + " - "
-                                                    + game.result.goalsMadeByAwayTeam} </TableCell>
-                                                    <TableCell align="left"
-                                                               className={"teamClicker"}
-                                                               data-teamid={game.awayTeam.id}
-                                                               onClick={this.goToTeam}>
-                                                        {game.awayTeam.name}</TableCell>
-                                                </TableRow>
-                                            )
-                                        })}
-                                    </table>
-                                </TableCell>
-                                <TableCell></TableCell>
-                                <TableCell>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell colSpan={2}
-                                                           align={"center"}>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        {this.state.data.awayData.games5Away.map((game, index) => {
-                                            return (
-                                                <TableRow>
-                                                    <TableCell style={{minWidth: 30, maxWidth: 30}}
-                                                     >{game.result.goalsMadeByAwayTeam + " - "
-                                                    + game.result.goalsMadeByHomeTeam} </TableCell>
-                                                    <TableCell align="left"
-                                                               className={"teamClicker"}
-                                                               data-teamid={game.homeTeam.id}
-                                                               onClick={this.goToTeam}>
-                                                        {game.homeTeam.name}</TableCell>
-                                                </TableRow>
-                                            )
-                                        })}
-                                    </table>
+                                <TableCell colSpan={3}>
+                                    <Grid container spacing={1}>
+                                        <Grid item sm={6}>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell colSpan={2}
+                                                                   align={"center"}>last 5 games home</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                {this.state.data.homeData.games5Home.map((game, index) => {
+                                                    return (
+                                                        <TableRow>
+                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
+                                                            >{game.result.goalsMadeByHomeTeam + " - "
+                                                            + game.result.goalsMadeByAwayTeam} </TableCell>
+                                                            <TableCell align="left"
+                                                                       className={"teamClicker"}
+                                                                       data-teamid={game.awayTeam.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {game.awayTeam.name}</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                })}
+                                            </table>
+                                        </Grid>
+                                        <Grid item sm={6}>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell colSpan={2}
+                                                                   align={"center"}>last 5 games away</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                {this.state.data.awayData.games5Away.map((game, index) => {
+                                                    return (
+                                                        <TableRow>
+                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
+                                                            >{game.result.goalsMadeByAwayTeam + " - "
+                                                            + game.result.goalsMadeByHomeTeam} </TableCell>
+                                                            <TableCell align="left"
+                                                                       className={"teamClicker"}
+                                                                       data-teamid={game.homeTeam.id}
+                                                                       onClick={this.goToTeam}>
+                                                                {game.homeTeam.name}</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                })}
+                                            </table>
+                                        </Grid>
+                                    </Grid>
                                 </TableCell>
                             </TableRow>
                         </table>

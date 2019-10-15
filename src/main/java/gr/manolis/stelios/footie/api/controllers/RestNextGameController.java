@@ -11,6 +11,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.services.*;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @Transactional
@@ -51,6 +54,9 @@ public class RestNextGameController {
 
     @Autowired
     private RestSeasonController restSeasonController;
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @RequestMapping("/next_game")
     public Map<String, Object> getNextGameAndMoveStages() {
@@ -135,22 +141,31 @@ public class RestNextGameController {
                 Matchup matchup = mGame.getMatchup();
                 double homeOdds = Utils.calculateWinningOdds(matchup.getTeamHome().getAllStats().getElo(), matchup.getTeamAway().getAllStats().getElo());
                 double decHomeOdds = 1 / homeOdds;
-                double decAwayOdds = 1 / (1-homeOdds);
+                double decAwayOdds = 1 / (1 - homeOdds);
                 if (mGame.getHomeTeam().equals(matchup.getTeamHome())) {
                     data.put("winOdds", Math.round(homeOdds * 100));
-                    data.put("decHomeOdds", numberFormat.format(0.05*Math.round(decHomeOdds/0.05)));
-                    data.put("decAwayOdds", numberFormat.format(0.05*Math.round(decAwayOdds/0.05)));
+                    data.put("decHomeOdds", numberFormat.format(0.05 * Math.round(decHomeOdds / 0.05)));
+                    data.put("decAwayOdds", numberFormat.format(0.05 * Math.round(decAwayOdds / 0.05)));
                 } else {
-                    data.put("winOdds", Math.round((1-homeOdds) * 100));
-                    data.put("decAwayOdds", numberFormat.format(0.05*Math.round(decHomeOdds/0.05)));
-                    data.put("decHomeOdds", numberFormat.format(0.05*Math.round(decAwayOdds/0.05)));
+                    data.put("winOdds", Math.round((1 - homeOdds) * 100));
+                    data.put("decAwayOdds", numberFormat.format(0.05 * Math.round(decHomeOdds / 0.05)));
+                    data.put("decHomeOdds", numberFormat.format(0.05 * Math.round(decAwayOdds / 0.05)));
                 }
             } else {
                 data.put("winOdds", -1);
             }
-        }
 
-        // TODO upcoming games
+            // past encounters
+            List<Game> encounters = sessionFactory.getCurrentSession().createQuery(
+                    "from GAMES where HOME_TEAM_ID=" + game.getHomeTeam().getId() + " and " +
+                            " AWAY_TEAM_ID=" + game.getAwayTeam().getId()).list();
+
+            List<Game> pastEncounters = encounters.stream()
+                    .filter(g -> g.getResult() != null)
+                    .collect(Collectors.toList());
+
+            data.put("encounters", pastEncounters);
+        }
 
         return data;
     }

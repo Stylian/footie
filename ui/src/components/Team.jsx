@@ -462,7 +462,7 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Home.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
                                                                                 >{game.result.goalsMadeByHomeTeam + " - "
                                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                                             <TableCell align="left"
@@ -486,7 +486,7 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Away.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
                                                                                 >{game.result.goalsMadeByAwayTeam + " - "
                                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                                             <TableCell align="left"
