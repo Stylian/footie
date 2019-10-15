@@ -293,8 +293,8 @@ class NextGame extends Component {
                                                 display: true,
                                                 position: "bottom",
                                                 text: "" + this.state.data.homeData["avg goals scored"] + "(" +
-                                                    this.state.data.homeData["avg goals conceded"] + ") - "
-                                                 + this.state.data.homeData["avg goals scored away"] + "(" +
+                                                    this.state.data.homeData["avg goals scored away"] + ") - "
+                                                    + this.state.data.homeData["avg goals conceded"] + "(" +
                                                     this.state.data.homeData["avg goals conceded away"] + ")",
                                                 fontSize: 9,
                                                 fontColor: "#111"
@@ -358,8 +358,8 @@ class NextGame extends Component {
                                                 display: true,
                                                 position: "bottom",
                                                 text: "" + this.state.data.awayData["avg goals scored"] + "(" +
-                                                    this.state.data.awayData["avg goals conceded"] + ") - "
-                                                    + this.state.data.awayData["avg goals scored away"] + "(" +
+                                                    this.state.data.awayData["avg goals scored away"] + ") - "
+                                                    + this.state.data.awayData["avg goals conceded"] + "(" +
                                                     this.state.data.awayData["avg goals conceded away"] + ")",
                                                 fontSize: 9,
                                                 fontColor: "#111"
