@@ -3,6 +3,7 @@ fix ( ) in wrong order on next game panel goals scored/conceded
 add winning odds to matchup
 add decimal odds
 past games played in teams page
+past games played in next game panel
 
 TODO
 

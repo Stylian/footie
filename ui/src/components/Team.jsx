@@ -462,8 +462,8 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Home.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell
-                                                                                className={"points_td"}>{game.result.goalsMadeByHomeTeam + " - "
+                                                                            <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                                                >{game.result.goalsMadeByHomeTeam + " - "
                                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                                             <TableCell align="left"
                                                                                        className={"teamClicker"}
@@ -486,8 +486,8 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Away.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell
-                                                                                className={"points_td"}>{game.result.goalsMadeByAwayTeam + " - "
+                                                                            <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                                                >{game.result.goalsMadeByAwayTeam + " - "
                                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                                             <TableCell align="left"
                                                                                        className={"teamClicker"}

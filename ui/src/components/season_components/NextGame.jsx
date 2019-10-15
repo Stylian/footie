@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import IconButton from '@material-ui/core/IconButton';
 import save from '../../icons/save.svg';
-import {Card, CardContent, CardHeader, Grid, TableCell, TableRow} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Grid, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {HorizontalBar, Radar} from "react-chartjs-2";
 
 class NextGame extends Component {
@@ -108,7 +108,7 @@ class NextGame extends Component {
             return <div></div>
         } else {
             return (
-                <Card style={{margin: 10}}>
+                <Card style={{margin: 5}}>
                     <CardHeader title={"upcoming game"} align={"center"}
                                 titleTypographyProps={{variant: 'h7'}}
                     />
@@ -391,6 +391,57 @@ class NextGame extends Component {
                                         }}
                                     />
 
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell colSpan={2}
+                                                           align={"center"}>Home</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        {this.state.data.homeData.games5Home.map((game, index) => {
+                                            return (
+                                                <TableRow>
+                                                    <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                        >{game.result.goalsMadeByHomeTeam + " - "
+                                                    + game.result.goalsMadeByAwayTeam} </TableCell>
+                                                    <TableCell align="left"
+                                                               className={"teamClicker"}
+                                                               data-teamid={game.awayTeam.id}
+                                                               onClick={this.goToTeam}>
+                                                        {game.awayTeam.name}</TableCell>
+                                                </TableRow>
+                                            )
+                                        })}
+                                    </table>
+                                </TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>
+                                    <table className="table" align={"center"}>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell colSpan={2}
+                                                           align={"center"}>Away</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        {this.state.data.awayData.games5Away.map((game, index) => {
+                                            return (
+                                                <TableRow>
+                                                    <TableCell style={{minWidth: 30, maxWidth: 30}}
+                                                     >{game.result.goalsMadeByAwayTeam + " - "
+                                                    + game.result.goalsMadeByHomeTeam} </TableCell>
+                                                    <TableCell align="left"
+                                                               className={"teamClicker"}
+                                                               data-teamid={game.homeTeam.id}
+                                                               onClick={this.goToTeam}>
+                                                        {game.homeTeam.name}</TableCell>
+                                                </TableRow>
+                                            )
+                                        })}
+                                    </table>
                                 </TableCell>
                             </TableRow>
                         </table>
