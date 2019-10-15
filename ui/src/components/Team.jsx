@@ -102,30 +102,34 @@ class Team extends Component {
         window.location.href = "/season/" + event.currentTarget.dataset.season;
     }
 
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
     render() {
 
         let elos = [1200];
         let elosSeasons = ["0"];
-        if(this.state.isLoaded && this.state.isLoaded2) {
+        if (this.state.isLoaded && this.state.isLoaded2) {
             this.state.team.seasonsStats.map(function (v, k) {
                 elos[elos.length] = v.elo;
-                elosSeasons[elosSeasons.length] = "" + (k+1);
+                elosSeasons[elosSeasons.length] = "" + (k + 1);
             });
         }
 
         return (
             this.state.isLoaded && this.state.isLoaded2 ? (
                 <Box>
-                    <Paper style={{margin: 20}} elevation={20}>
+                    <Paper style={{margin: 10}} elevation={20}>
                         <LeagueToolbar pageTitle={this.state.team.name}/>
 
-                        <Box width={1700} style={{margin: 20}}>
+                        <Box style={{margin: 10}}>
                             <Grid container spacing={1}>
 
                                 <Grid item sm={3}>
                                     <Grid container spacing={1}>
                                         <Grid item sm={12}>
-                                            <Card style={{margin: 20}}>
+                                            <Card style={{margin: 10}}>
                                                 <CardHeader title={"statistics"} align={"center"}
                                                             titleTypographyProps={{variant: 'h7'}}
                                                 />
@@ -343,13 +347,13 @@ class Team extends Component {
                                 <Grid item sm={3}>
                                     <Grid container>
                                         <Grid item sm={12}>
-                                            <Card style={{margin: 20}}>
+                                            <Card style={{margin: 10}}>
                                                 <CardHeader title={"scores stats"} align={"center"}
                                                             titleTypographyProps={{variant: 'h7'}}
                                                 />
                                                 <CardContent>
                                                     <div
-                                                        style={{height: (50 + 15 * Object.keys(this.state.gameStats["results_frequency"]).length)}}>
+                                                        style={{height: (50 + 10 * Object.keys(this.state.gameStats["results_frequency"]).length)}}>
                                                         <HorizontalBar
                                                             data={{
                                                                 labels: [
@@ -384,16 +388,24 @@ class Team extends Component {
                                             </Card>
                                         </Grid>
                                         <Grid item sm={12}>
-                                            <Card style={{margin: 20}}>
+                                            <Card style={{margin: 10}}>
                                                 <CardHeader title={"elo progression"} align={"center"}
                                                             titleTypographyProps={{variant: 'h7'}}
                                                 />
-                                                <CardContent>
-                                                    {(elos[elos.length-1] == elos[elos.length-2]) ? (null) : (
-                                                       <img src={ (elos[elos.length-1] > elos[elos.length-2]) ? greenup : reddown}
-                                                         style={{float: "left" }}/>)}
-                                                         <div style={{float: "left", color: "#111", "font-size": 18, "margin-bottom": 20, "font-weight": "bold"}}
-                                                            >{ " " + elos[elos.length-1] }</div>
+                                                <CardContent
+                                                    style={{minHeight: 90, maxHeight: 90, "padding-bottom": 50}}>
+                                                    {(elos[elos.length - 1] == elos[elos.length - 2]) ? (null) : (
+                                                        <img
+                                                            src={(elos[elos.length - 1] > elos[elos.length - 2]) ? greenup : reddown}
+                                                            style={{float: "left"}}/>)}
+                                                    <div style={{
+                                                        float: "left",
+                                                        color: "#111",
+                                                        "font-size": 18,
+                                                        "margin-bottom": 10,
+                                                        "font-weight": "bold"
+                                                    }}
+                                                    >{" " + elos[elos.length - 1]}</div>
                                                     <Line
                                                         data={{
                                                             labels: [
@@ -432,6 +444,65 @@ class Team extends Component {
                                                 </CardContent>
                                             </Card>
                                         </Grid>
+                                        <Grid item sm={12}>
+                                            <Card style={{margin: 10}}>
+                                                <CardHeader title={"last 5 games"} align={"center"}
+                                                            titleTypographyProps={{variant: 'h7'}}
+                                                />
+                                                <CardContent style={{minHeight: 200, maxHeight: 200}}>
+                                                    <Grid container spacing={1}>
+                                                        <Grid item sm={6}>
+                                                            <table className="table" align={"center"}>
+                                                                <TableHead>
+                                                                    <TableRow>
+                                                                        <TableCell colSpan={2}
+                                                                                   align={"center"}>Home</TableCell>
+                                                                    </TableRow>
+                                                                </TableHead>
+                                                                {this.state.gameStats.games5Home.map((game, index) => {
+                                                                    return (
+                                                                        <TableRow>
+                                                                            <TableCell
+                                                                                className={"points_td"}>{game.result.goalsMadeByHomeTeam + " - "
+                                                                            + game.result.goalsMadeByAwayTeam} </TableCell>
+                                                                            <TableCell align="left"
+                                                                                       className={"teamClicker"}
+                                                                                       data-teamid={game.awayTeam.id}
+                                                                                       onClick={this.goToTeam}>
+                                                                                {game.awayTeam.name}</TableCell>
+                                                                        </TableRow>
+                                                                    )
+                                                                })}
+                                                            </table>
+                                                        </Grid>
+                                                        <Grid item sm={6}>
+                                                            <table className="table" align={"center"}>
+                                                                <TableHead>
+                                                                    <TableRow>
+                                                                        <TableCell colSpan={2}
+                                                                                   align={"center"}>Away</TableCell>
+                                                                    </TableRow>
+                                                                </TableHead>
+                                                                {this.state.gameStats.games5Away.map((game, index) => {
+                                                                    return (
+                                                                        <TableRow>
+                                                                            <TableCell
+                                                                                className={"points_td"}>{game.result.goalsMadeByAwayTeam + " - "
+                                                                            + game.result.goalsMadeByHomeTeam} </TableCell>
+                                                                            <TableCell align="left"
+                                                                                       className={"teamClicker"}
+                                                                                       data-teamid={game.homeTeam.id}
+                                                                                       onClick={this.goToTeam}>
+                                                                                {game.homeTeam.name}</TableCell>
+                                                                        </TableRow>
+                                                                    )
+                                                                })}
+                                                            </table>
+                                                        </Grid>
+                                                    </Grid>
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
                                     </Grid>
 
                                 </Grid>
@@ -440,7 +511,7 @@ class Team extends Component {
                                         <Grid item sm={12}>
                                             <Grid container spacing={1}>
                                                 <Grid item sm={6}>
-                                                    <Card style={{margin: 20}}>
+                                                    <Card style={{margin: 10}}>
                                                         <CardHeader title={"trophies"} align={"center"}
                                                                     titleTypographyProps={{variant: 'h7'}}
                                                         />
@@ -473,7 +544,7 @@ class Team extends Component {
                                                     </Card>
                                                 </Grid>
                                                 <Grid item sm={6}>
-                                                    <Card style={{margin: 20}}>
+                                                    <Card style={{margin: 10}}>
                                                         <CardHeader title={"team overview"} align={"center"}
                                                                     titleTypographyProps={{variant: 'h7'}}
                                                         />
@@ -526,7 +597,7 @@ class Team extends Component {
                                                 </Grid>
                                             </Grid>
                                             <Grid item sm={12}>
-                                                <Card style={{margin: 20}}>
+                                                <Card style={{margin: 10}}>
                                                     <CardHeader title={"season stats"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />

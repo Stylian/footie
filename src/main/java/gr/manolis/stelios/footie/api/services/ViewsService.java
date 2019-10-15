@@ -20,6 +20,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -158,23 +159,44 @@ public class ViewsService {
         List<Result> results = null;
         List<Result> resultsAway = null;
 
+        List<Game> games5Home = new ArrayList<>();
+        List<Game> games5Away = new ArrayList<>();
+
         if(teamId > 0) {
 
-            List<Game> games = sessionFactory.getCurrentSession().createQuery(
+            List<Game> games1 = sessionFactory.getCurrentSession().createQuery(
                     "from GAMES where HOME_TEAM_ID=" + teamId).list();
 
-            List<Game> gamesAway = sessionFactory.getCurrentSession().createQuery(
+            List<Game> gamesAway1 = sessionFactory.getCurrentSession().createQuery(
                     "from GAMES where AWAY_TEAM_ID=" + teamId).list();
 
-            results = games.stream()
+            List<Game> games = games1.stream()
                     .filter( g -> g.getResult() != null)
+                    .collect(Collectors.toList());
+
+            List<Game> gamesAway = gamesAway1.stream()
+                    .filter( g -> g.getResult() != null)
+                    .collect(Collectors.toList());
+
+            results = games.stream()
                     .map(Game::getResult)
                     .collect(Collectors.toList());
 
             resultsAway = gamesAway.stream()
-                    .filter( g -> g.getResult() != null)
                     .map(Game::getResult)
                     .collect(Collectors.toList());
+
+            // pick last 5 games home and away
+            if (games.size() > 5) {
+                games5Home = games.subList(games.size()-5, games.size());
+            }else {
+                games5Home = games;
+            }
+            if(gamesAway.size() > 5) {
+                games5Away = gamesAway.subList(gamesAway.size() - 5, gamesAway.size());
+            }else {
+                games5Away = gamesAway;
+            }
 
         }else {
             results = sessionFactory.getCurrentSession().createQuery("from RESULTS where HOME_GOALS IS " +
@@ -252,6 +274,9 @@ public class ViewsService {
 
 			gamestats.put("radarGoalsScoredAway", radarGoalsScoredAway);
 			gamestats.put("radarGoalsConcededAway", radarGoalsConcededAway);
+
+			gamestats.put("games5Home", games5Home);
+			gamestats.put("games5Away", games5Away);
 		}
 
 		// scores frequency graphs

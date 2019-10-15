@@ -2,6 +2,7 @@
 fix ( ) in wrong order on next game panel goals scored/conceded
 add winning odds to matchup
 add decimal odds
+past games played in teams page
 
 TODO
 
@@ -16,9 +17,6 @@ nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see i
 players to be clickable in players page
 somewhere put a top performers card for players
 
-elo rating system
-elo rating graph
-odds system
 
 recommended
  overachievers
