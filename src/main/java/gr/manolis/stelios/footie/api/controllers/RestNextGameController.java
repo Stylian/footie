@@ -134,10 +134,16 @@ public class RestNextGameController {
                 MatchupGame mGame = (MatchupGame) game;
                 Matchup matchup = mGame.getMatchup();
                 double homeOdds = Utils.calculateWinningOdds(matchup.getTeamHome().getAllStats().getElo(), matchup.getTeamAway().getAllStats().getElo());
+                double decHomeOdds = 1 / homeOdds;
+                double decAwayOdds = 1 / (1-homeOdds);
                 if (mGame.getHomeTeam().equals(matchup.getTeamHome())) {
                     data.put("winOdds", numberFormat.format(homeOdds * 100));
+                    data.put("decHomeOdds", numberFormat.format(decHomeOdds));
+                    data.put("decAwayOdds", numberFormat.format(decAwayOdds));
                 } else {
                     data.put("winOdds", numberFormat.format((1-homeOdds) * 100));
+                    data.put("decAwayOdds", numberFormat.format(decHomeOdds));
+                    data.put("decHomeOdds", numberFormat.format(decAwayOdds));
                 }
             } else {
                 data.put("winOdds", -1);

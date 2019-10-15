@@ -1,7 +1,7 @@
 1.6
 fix ( ) in wrong order on next game panel goals scored/conceded
 add winning odds to matchup
-
+add decimal odds
 
 TODO
 
