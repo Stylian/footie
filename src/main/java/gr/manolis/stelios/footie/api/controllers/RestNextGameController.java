@@ -137,13 +137,13 @@ public class RestNextGameController {
                 double decHomeOdds = 1 / homeOdds;
                 double decAwayOdds = 1 / (1-homeOdds);
                 if (mGame.getHomeTeam().equals(matchup.getTeamHome())) {
-                    data.put("winOdds", numberFormat.format(homeOdds * 100));
-                    data.put("decHomeOdds", numberFormat.format(decHomeOdds));
-                    data.put("decAwayOdds", numberFormat.format(decAwayOdds));
+                    data.put("winOdds", Math.round(homeOdds * 100));
+                    data.put("decHomeOdds", numberFormat.format(0.05*Math.round(decHomeOdds/0.05)));
+                    data.put("decAwayOdds", numberFormat.format(0.05*Math.round(decAwayOdds/0.05)));
                 } else {
-                    data.put("winOdds", numberFormat.format((1-homeOdds) * 100));
-                    data.put("decAwayOdds", numberFormat.format(decHomeOdds));
-                    data.put("decHomeOdds", numberFormat.format(decAwayOdds));
+                    data.put("winOdds", Math.round((1-homeOdds) * 100));
+                    data.put("decAwayOdds", numberFormat.format(0.05*Math.round(decHomeOdds/0.05)));
+                    data.put("decHomeOdds", numberFormat.format(0.05*Math.round(decAwayOdds/0.05)));
                 }
             } else {
                 data.put("winOdds", -1);
