@@ -1,10 +1,11 @@
 1.6
 fix ( ) in wrong order on next game panel goals scored/conceded
+add winning odds to matchup
+
 
 TODO
 
 
-to add winning odds to matchup
 group odds?
 league odds?
 to add past games played

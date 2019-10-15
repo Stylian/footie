@@ -2,9 +2,12 @@ package gr.manolis.stelios.footie.api.controllers;
 
 
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.MatchupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
+import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.services.*;
 import org.apache.log4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,24 +95,24 @@ public class RestNextGameController {
                         case "playoffs":
                             Season season = serviceUtils.loadCurrentSeason();
                             PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
-                            if(playoffsRound.getQuarterMatchups().get(0).getWinner() == null
-                                    || playoffsRound.getQuarterMatchups().get(1).getWinner() == null ) {
+                            if (playoffsRound.getQuarterMatchups().get(0).getWinner() == null
+                                    || playoffsRound.getQuarterMatchups().get(1).getWinner() == null) {
                                 break;
                             }
                             if (CollectionUtils.isEmpty(playoffsRound.getSemisMatchups())) {
                                 playoffsRoundService.endPlayoffsQuarters();
                                 restOperationsController.seedAndSetSemifinals();
                             } else {
-                                if(playoffsRound.getSemisMatchups().get(0).getWinner() == null
-                                        || playoffsRound.getSemisMatchups().get(1).getWinner() == null ) {
+                                if (playoffsRound.getSemisMatchups().get(0).getWinner() == null
+                                        || playoffsRound.getSemisMatchups().get(1).getWinner() == null) {
                                     break;
                                 }
 
                                 if (playoffsRound.getFinalsMatchup() == null) {
                                     playoffsRoundService.endPlayoffsSemis();
                                     restOperationsController.seedAndSetFinals();
-                                }else {
-                                    if(playoffsRound.getFinalsMatchup().getWinner() != null) {
+                                } else {
+                                    if (playoffsRound.getFinalsMatchup().getWinner() != null) {
                                         playoffsRoundService.endPlayoffsFinals();
                                         restOperationsController.endSeason();
                                     }
@@ -120,10 +124,24 @@ public class RestNextGameController {
             }
         }
 
+
+        DecimalFormat numberFormat = new DecimalFormat("0.00");
         data.put("game", game);
-        if(game != null) {
+        if (game != null) {
             data.put("homeData", viewsService.gameStats(game.getHomeTeam()));
             data.put("awayData", viewsService.gameStats(game.getAwayTeam()));
+            if (game instanceof MatchupGame) {
+                MatchupGame mGame = (MatchupGame) game;
+                Matchup matchup = mGame.getMatchup();
+                double homeOdds = Utils.calculateWinningOdds(matchup.getTeamHome().getAllStats().getElo(), matchup.getTeamAway().getAllStats().getElo());
+                if (mGame.getHomeTeam().equals(matchup.getTeamHome())) {
+                    data.put("winOdds", numberFormat.format(homeOdds * 100));
+                } else {
+                    data.put("winOdds", numberFormat.format((1-homeOdds) * 100));
+                }
+            } else {
+                data.put("winOdds", -1);
+            }
         }
 
         // TODO upcoming games

@@ -115,7 +115,7 @@ class NextGame extends Component {
                     <CardContent>
                         <table className="table" align={"center"}>
                             <TableRow>
-                                <TableCell align="right" >
+                                <TableCell align="right">
                                     <input type={'number'}
                                            className="score_field"
                                            value={this.state.editedHome ? this.state.homeScore : ""}
@@ -149,6 +149,13 @@ class NextGame extends Component {
                                     {this.state.data.game.awayTeam.name}</TableCell>
 
                             </TableRow>
+                            {this.state.data.winOdds < 0 ? (null) : (
+                                <TableRow>
+                                    <TableCell align={"right"}>{this.state.data.winOdds}%</TableCell>
+                                    <TableCell align={"center"}>:</TableCell>
+                                    <TableCell>{100 - this.state.data.winOdds}%</TableCell>
+                                </TableRow>
+                            )}
                             <TableRow>
                                 <TableCell style={{minWidth: 150, maxWidth: 150}}>
                                     <Radar
@@ -252,7 +259,7 @@ class NextGame extends Component {
                                 <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
                                     <HorizontalBar
                                         data={{
-                                            labels: [ "", ""
+                                            labels: ["", ""
                                             ],
                                             datasets: [{
                                                 data: [
@@ -317,7 +324,7 @@ class NextGame extends Component {
                                 <TableCell style={{minWidth: 150, maxWidth: 150, minHeight: 110, maxHeight: 110}}>
                                     <HorizontalBar
                                         data={{
-                                            labels: [ "", ""
+                                            labels: ["", ""
                                             ],
                                             datasets: [{
                                                 data: [
