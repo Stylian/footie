@@ -1,5 +1,6 @@
 package gr.manolis.stelios.footie.api.dtos;
 
+import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Trophy;
 
@@ -12,6 +13,7 @@ public class TeamPageDTO {
     private Stats completeStats;
     private List<Stats> seasonsStats;
     private List<Trophy> trophies;
+    private List<PlayerDTO> players;
 
     public int getId() {
         return id;
@@ -53,4 +55,11 @@ public class TeamPageDTO {
         this.trophies = trophies;
     }
 
+    public List<PlayerDTO> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<PlayerDTO> players) {
+        this.players = players;
+    }
 }

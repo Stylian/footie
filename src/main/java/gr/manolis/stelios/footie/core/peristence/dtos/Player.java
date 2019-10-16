@@ -29,6 +29,7 @@ public class Player {
         this();
         this.name = name;
         this.team = team;
+        team.addPlayer(this);
     }
 
     public void addTrophy(Trophy trophy) {

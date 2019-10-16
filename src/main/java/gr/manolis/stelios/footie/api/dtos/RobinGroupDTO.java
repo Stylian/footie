@@ -9,7 +9,7 @@ public class RobinGroupDTO {
     private int id;
     private String name;
     private List<TeamGroupDTO> teams;
-    private List<Game> games;
+    private List<GameDTO> games;
     private int round;
     private int seasonNum;
 
@@ -37,11 +37,11 @@ public class RobinGroupDTO {
         this.teams = teams;
     }
 
-    public List<Game> getGames() {
+    public List<GameDTO> getGames() {
         return games;
     }
 
-    public void setGames(List<Game> games) {
+    public void setGames(List<GameDTO> games) {
         this.games = games;
     }
 

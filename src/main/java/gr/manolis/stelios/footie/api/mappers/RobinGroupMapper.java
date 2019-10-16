@@ -5,6 +5,8 @@ import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamGroupDTO;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
+import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -26,8 +28,17 @@ public abstract class RobinGroupMapper {
     @Autowired
     TeamGroupMapper teamGroupMapper;
 
+    @Autowired
+    GameMapper gameMapper;
+
     @AfterMapping
     void afterMapping(@MappingTarget RobinGroupDTO robinGroupDTO, RobinGroup robinGroup) {
+
+        List<Game> games = new ArrayList<>();
+        for(GroupGame gg : robinGroup.getGames()) {
+            games.add((Game) gg);
+        }
+        robinGroupDTO.setGames(gameMapper.toDTO(games));
 
         List<TeamGroupDTO> teamsInGroup = new ArrayList<>();
 

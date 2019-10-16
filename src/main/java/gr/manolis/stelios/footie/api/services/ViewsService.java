@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.api.services;
 
 import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
+import gr.manolis.stelios.footie.api.mappers.GameMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamCoeffsMapper;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Seed;
@@ -40,6 +41,9 @@ public class ViewsService {
 
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
+
+    @Autowired
+    private GameMapper gameMapper;
 
 	public List<Season> getAllSeasons() {
 		return serviceUtils.loadAllSeasons();
@@ -290,8 +294,8 @@ public class ViewsService {
 			gamestats.put("radarGoalsScoredAway", radarGoalsScoredAway);
 			gamestats.put("radarGoalsConcededAway", radarGoalsConcededAway);
 
-			gamestats.put("games5Home", games5Home);
-			gamestats.put("games5Away", games5Away);
+			gamestats.put("games5Home", gameMapper.toDTO(games5Home));
+			gamestats.put("games5Away", gameMapper.toDTO(games5Away));
 		}
 
 		// scores frequency graphs

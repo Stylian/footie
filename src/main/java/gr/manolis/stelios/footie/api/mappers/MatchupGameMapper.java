@@ -19,6 +19,8 @@ public abstract class MatchupGameMapper implements EntityMapper<MatchupGameDTO, 
         void afterMapping(@MappingTarget MatchupGameDTO matchupGameDTO, Game game) {
             if(game instanceof MatchupGame) {
                 MatchupGame mg = (MatchupGame) game;
+                matchupGameDTO.setHomeTeam(teamSimpleMapper.toDTO(mg.getHomeTeam()));
+                matchupGameDTO.setAwayTeam(teamSimpleMapper.toDTO(mg.getAwayTeam()));
                 if(mg.getMatchup().getWinner() != null) {
                     matchupGameDTO.setWinner(teamSimpleMapper.toDTO(mg.getMatchup().getWinner()));
                 }

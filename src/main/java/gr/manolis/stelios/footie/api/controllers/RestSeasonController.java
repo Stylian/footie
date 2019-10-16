@@ -2,10 +2,7 @@ package gr.manolis.stelios.footie.api.controllers;
 
 
 import gr.manolis.stelios.footie.api.RestResponse;
-import gr.manolis.stelios.footie.api.dtos.MatchupGameDTO;
-import gr.manolis.stelios.footie.api.dtos.RobinGroupDTO;
-import gr.manolis.stelios.footie.api.dtos.TeamCoeffsDTO;
-import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
+import gr.manolis.stelios.footie.api.dtos.*;
 import gr.manolis.stelios.footie.api.mappers.*;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
@@ -65,6 +62,9 @@ public class RestSeasonController {
 
     @Autowired
     private MatchupGameMapper matchupGameMapper;
+
+    @Autowired
+    GameMapper gameMapper;
 
     @RequestMapping("/")
     public int seasonYear() {
@@ -269,7 +269,7 @@ public class RestSeasonController {
     }
 
     @RequestMapping("/{year}/groups/{round}/matches")
-    public Map<Integer, List<Game>> groupsMatches(
+    public Map<Integer, List<GameDTO>> groupsMatches(
             @PathVariable(value = "year", required = true) String strYear,
             @PathVariable(value = "round", required = true) String strRound) {
         logger.info("groups matches");
@@ -282,7 +282,13 @@ public class RestSeasonController {
 
         logger.info("groupsRounds: " + groupsRound);
 
-        return groupsRound.getGamesPerDay();
+        Map<Integer, List<Game>> games = groupsRound.getGamesPerDay();
+        Map<Integer, List<GameDTO>> gamesDTO = new HashMap<>();
+        for(Map.Entry<Integer, List<Game>> day : games.entrySet()) {
+            gamesDTO.put(day.getKey(), gameMapper.toDTO(day.getValue()));
+        }
+
+        return gamesDTO;
     }
 
     @RequestMapping("/{year}/groups/{round}")
@@ -423,9 +429,9 @@ public class RestSeasonController {
         data.put("quarterfinalist1", teamSimpleMapper.toDTO((Team) dataFromSeason.get("quarterfinalist1")));
         data.put("quarterfinalist2", teamSimpleMapper.toDTO((Team) dataFromSeason.get("quarterfinalist2")));
 
-        data.put("bestWin", dataFromSeason.get("bestWin"));
-        data.put("highestScoringGame", dataFromSeason.get("highestScoringGame"));
-        data.put("worstResult", dataFromSeason.get("worstResult"));
+        data.put("bestWin", gameMapper.toDTO((Game) dataFromSeason.get("bestWin")));
+        data.put("highestScoringGame", gameMapper.toDTO((Game) dataFromSeason.get("highestScoringGame")));
+        data.put("worstResult", gameMapper.toDTO((Game) dataFromSeason.get("worstResult")));
 
         data.put("overachievers", teamSimpleMapper.toDTO((Team) dataFromSeason.get("overachievers")));
         data.put("underperformers", teamSimpleMapper.toDTO((Team) dataFromSeason.get("underperformers")));

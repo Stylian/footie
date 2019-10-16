@@ -29,6 +29,9 @@ public class Team {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Trophy> trophies;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
+	private List<Player> players = new ArrayList<>();
+
 	public Team() {
 		trophies = new ArrayList<>();
 	}
@@ -94,6 +97,14 @@ public class Team {
 
 	public void setTrophies(List<Trophy> trophies) {
 		this.trophies = trophies;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void addPlayer(Player player) {
+		players.add(player);
 	}
 
 	@Override

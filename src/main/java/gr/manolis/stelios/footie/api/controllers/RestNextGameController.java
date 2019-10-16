@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.mappers.GameMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
@@ -57,6 +58,9 @@ public class RestNextGameController {
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    GameMapper gameMapper;
 
     @RequestMapping("/next_game")
     public Map<String, Object> getNextGameAndMoveStages() {
@@ -128,11 +132,13 @@ public class RestNextGameController {
                     }
                 }
             }
+            data.put("game", null);
+            return data;
         }
 
 
         DecimalFormat numberFormat = new DecimalFormat("0.00");
-        data.put("game", game);
+        data.put("game", gameMapper.toDTO(game));
         if (game != null) {
             data.put("homeData", viewsService.gameStats(game.getHomeTeam()));
             data.put("awayData", viewsService.gameStats(game.getAwayTeam()));
@@ -164,7 +170,7 @@ public class RestNextGameController {
                     .filter(g -> g.getResult() != null)
                     .collect(Collectors.toList());
 
-            data.put("encounters", pastEncounters);
+            data.put("encounters", gameMapper.toDTO(pastEncounters));
         }
 
         return data;
