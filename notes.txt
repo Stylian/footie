@@ -1,23 +1,9 @@
-1.6
-fix ( ) in wrong order on next game panel goals scored/conceded
-add winning odds to matchup
-add decimal odds
-past games played in teams page
-past games played in next game panel
-past encounters
-elo radar range fix
-players clickable
-added players in team page
 
 TODO
 datatables crashing
-
-league odds?
-
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
-somewhere put a top performers card for players
-
+league odds?
 
 derby.log to move to logs folder
 stats page broken- on adding teams?
