@@ -42,8 +42,6 @@ class Group extends Component {
                         }
                     });
 
-                    console.log($(".table"));
-                    console.log($(".table").length);
                         $(".table").DataTable({
                             "paging" : false,
                             "searching" : false,

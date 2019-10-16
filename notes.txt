@@ -5,11 +5,10 @@ add decimal odds
 past games played in teams page
 past games played in next game panel
 past encounters
+elo radar range fix
 
 TODO
-save icon table css resize work
 
-group odds?
 league odds?
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
@@ -17,10 +16,6 @@ nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see i
 players to be clickable in players page
 somewhere put a top performers card for players
 
-
-recommended
- overachievers
- underperformers
 
 derby.log to move to logs folder
 stats page broken- on adding teams?

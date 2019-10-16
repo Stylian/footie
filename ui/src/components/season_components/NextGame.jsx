@@ -152,14 +152,14 @@ class NextGame extends Component {
                             {this.state.data.winOdds < 0 ? (null) : (
                                 <TableRow>
                                     <TableCell align={"right"}>{this.state.data.decHomeOdds}</TableCell>
-                                    <TableCell align={"center"}></TableCell>
+                                    <TableCell align={"center"}>odds</TableCell>
                                     <TableCell>{this.state.data.decAwayOdds}</TableCell>
                                 </TableRow>
                             )}
                             {this.state.data.winOdds < 0 ? (null) : (
                                 <TableRow>
                                     <TableCell align={"right"}>{this.state.data.winOdds}%</TableCell>
-                                    <TableCell align={"center"}></TableCell>
+                                    <TableCell align={"center"}>promotion chance</TableCell>
                                     <TableCell>{100 - this.state.data.winOdds}%</TableCell>
                                 </TableRow>
                             )}

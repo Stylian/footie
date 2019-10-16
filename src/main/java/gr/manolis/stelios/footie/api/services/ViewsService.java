@@ -277,9 +277,14 @@ public class ViewsService {
 
 			// 0 for 800, 100  for 1600
 			// might be too much for this league
+//			double radarElo = fitToRange(
+//					((teamElo < 1200) ? -1 : 1) *
+//					Math.pow(teamElo - 1200, 2)/3200 + 50); // good for now, but to change
+
+			// 0 for 1000, 100  for 1400
 			double radarElo = fitToRange(
 					((teamElo < 1200) ? -1 : 1) *
-					Math.pow(teamElo - 1200, 2)/3200 + 50); // good for now, but to change
+					Math.pow(teamElo - 1200, 2)/800 + 50); // good for now, but to change
 			gamestats.put("radarElo", radarElo);
 
 			gamestats.put("radarGoalsScoredAway", radarGoalsScoredAway);
