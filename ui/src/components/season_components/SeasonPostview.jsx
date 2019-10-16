@@ -126,7 +126,6 @@ class SeasonPostview extends Component {
         window.location.href = "/players/" + event.currentTarget.dataset.playerid;
     }
 
-
     handleChange = field => (event) => {
         let value = event.target.value;
         if (value < 0) {
@@ -617,7 +616,7 @@ class SeasonPostview extends Component {
                                                                        data-playerid={this.state.data.player_of_the_year.id}
                                                                        style={{minWidth:150, maxWidth:150}}
                                                                        onClick={this.goToPlayer}>
-                                                                <img src={playeroftheyear} title={"1st place"}/>
+                                                                <img src={playeroftheyear} title={"player of the year"}/>
                                                                 {this.state.data.player_of_the_year.name}
                                                             </TableCell>
                                                             <TableCell className={"teamClicker"}
@@ -637,7 +636,7 @@ class SeasonPostview extends Component {
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell colSpan={3}>
-                                                            <img src={dreamteam} title={"dreamteam"}/>
+                                                            <img src={dreamteam} title={"selected in a dream team"}/>
                                                             dream team</TableCell>
                                                     </TableRow>
                                                 </TableHead>

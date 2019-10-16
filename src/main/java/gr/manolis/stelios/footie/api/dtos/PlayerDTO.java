@@ -10,6 +10,9 @@ public class PlayerDTO {
     private String name;
     private TeamSimpleDTO team;
     private List<Trophy> trophies;
+    private int dreamTeamTrophies;
+    private int playerOfTheYearTrophies;
+
 
     public int getId() {
         return id;
@@ -41,5 +44,21 @@ public class PlayerDTO {
 
     public void setTrophies(List<Trophy> trophies) {
         this.trophies = trophies;
+    }
+
+    public int getDreamTeamTrophies() {
+        return dreamTeamTrophies;
+    }
+
+    public void setDreamTeamTrophies(int dreamTeamTrophies) {
+        this.dreamTeamTrophies = dreamTeamTrophies;
+    }
+
+    public int getPlayerOfTheYearTrophies() {
+        return playerOfTheYearTrophies;
+    }
+
+    public void setPlayerOfTheYearTrophies(int playerOfTheYearTrophies) {
+        this.playerOfTheYearTrophies = playerOfTheYearTrophies;
     }
 }

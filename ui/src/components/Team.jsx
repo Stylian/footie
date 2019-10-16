@@ -18,6 +18,8 @@ import goldmedal from "../icons/goldmedal.png";
 import greenup from "../icons/green_up.png";
 import reddown from "../icons/red_down.png";
 import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2";
+import dreamteam from "../icons/dreamteam.png";
+import playeroftheyear from "../icons/playeroftheyear.png";
 
 class Team extends Component {
 
@@ -96,6 +98,10 @@ class Team extends Component {
                     });
                 }
             )
+    }
+
+    goToPlayer = (event, newValue) => {
+        window.location.href = "/players/" + event.currentTarget.dataset.playerid;
     }
 
     goToSeason = (event, newValue) => {
@@ -462,8 +468,9 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Home.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
-                                                                                >{game.result.goalsMadeByHomeTeam + " - "
+                                                                            <TableCell
+                                                                                style={{minWidth: 40, maxWidth: 40}}
+                                                                            >{game.result.goalsMadeByHomeTeam + " - "
                                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                                             <TableCell align="left"
                                                                                        className={"teamClicker"}
@@ -486,8 +493,9 @@ class Team extends Component {
                                                                 {this.state.gameStats.games5Away.map((game, index) => {
                                                                     return (
                                                                         <TableRow>
-                                                                            <TableCell style={{minWidth: 40, maxWidth: 40}}
-                                                                                >{game.result.goalsMadeByAwayTeam + " - "
+                                                                            <TableCell
+                                                                                style={{minWidth: 40, maxWidth: 40}}
+                                                                            >{game.result.goalsMadeByAwayTeam + " - "
                                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                                             <TableCell align="left"
                                                                                        className={"teamClicker"}
@@ -506,7 +514,7 @@ class Team extends Component {
                                     </Grid>
 
                                 </Grid>
-                                <Grid item sm={6}>
+                                <Grid item sm={4}>
                                     <Grid container spacing={1}>
                                         <Grid item sm={12}>
                                             <Grid container spacing={1}>
@@ -529,10 +537,10 @@ class Team extends Component {
                                                                                               title={"2nd place"}/>)}
                                                                                 </TableCell>
                                                                                 <TableCell
+                                                                                    className={"teamClicker"}
+                                                                                    onClick={this.goToSeason}
+                                                                                    data-season={trophy.seasonNum}
                                                                                     align="right">{"Season " + trophy.seasonNum}</TableCell>
-                                                                                <TableCell align="right">
-                                                                                    {trophy.type == "W" ?
-                                                                                        "Winner" : "Runner-up"}</TableCell>
                                                                             </TableRow>
                                                                         )
                                                                     })}
@@ -605,10 +613,10 @@ class Team extends Component {
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
-                                                                    <TableCell></TableCell>
-                                                                    <TableCell>Coefficients</TableCell>
+                                                                    <TableCell>Season</TableCell>
+                                                                    <TableCell>Coeffs</TableCell>
                                                                     <TableCell>Elo</TableCell>
-                                                                    <TableCell>Matches Played</TableCell>
+                                                                    <TableCell>GP</TableCell>
                                                                     <TableCell>W</TableCell>
                                                                     <TableCell>D</TableCell>
                                                                     <TableCell>L</TableCell>
@@ -625,7 +633,7 @@ class Team extends Component {
                                                                                   data-season={index + 1}
                                                                         >
                                                                             <TableCell
-                                                                                align="right">{"Season " + (index + 1)}</TableCell>
+                                                                                align="right">{"" + (index + 1)}</TableCell>
                                                                             <TableCell
                                                                                 align="right">{seasonStats.points}</TableCell>
                                                                             <TableCell
@@ -651,7 +659,7 @@ class Team extends Component {
                                                                                   data-season={index + 1}
                                                                         >
                                                                             <TableCell
-                                                                                align="right">{"Season " + (index + 1)}</TableCell>
+                                                                                align="right">{"" + (index + 1)}</TableCell>
                                                                             <TableCell></TableCell>
                                                                             <TableCell></TableCell>
                                                                             <TableCell></TableCell>
@@ -693,6 +701,38 @@ class Team extends Component {
                                             </Grid>
                                         </Grid>
                                     </Grid>
+                                </Grid>
+                                <Grid item sm={2}>
+                                    <Card style={{margin: 10}}>
+                                        <CardHeader title={"players"} align={"center"}
+                                                    titleTypographyProps={{variant: 'h7'}}
+                                        />
+                                        <CardContent>
+                                            <table className="table" align={"center"}>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell style={{ minWidth: 100, maxWidth: 100}}>Player</TableCell>
+                                                        <TableCell><img src={playeroftheyear} title={"player of the year"}/></TableCell>
+                                                        <TableCell> <img src={dreamteam} title={"selected in a dream team"}/></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {this.state.team.players.map((player, index) => {
+                                                        return (
+                                                            <TableRow className={"teamClicker"}
+                                                                      onClick={this.goToPlayer}
+                                                                      data-playerid={player.id}
+                                                            >
+                                                                <TableCell
+                                                                    align="right">{player.name}</TableCell>
+                                                                <TableCell align={"center"}>{player.playerOfTheYearTrophies}</TableCell>
+                                                                <TableCell align={"center"}>{player.dreamTeamTrophies}</TableCell>
+                                                            </TableRow>
+                                                            )})}
+                                                </TableBody>
+                                            </table>
+                                        </CardContent>
+                                    </Card>
                                 </Grid>
                             </Grid>
                         </Box>

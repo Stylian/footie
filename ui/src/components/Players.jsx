@@ -109,7 +109,6 @@ class Players extends Component {
 
     }
 
-
     handleAdd = (event, newValue) => {
 
         fetch("/rest/players/", {
@@ -133,6 +132,14 @@ class Players extends Component {
                 }
             )
 
+    }
+
+    goToTeam = (event, newValue) => {
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
+    }
+
+    goToPlayer = (event, newValue) => {
+        window.location.href = "/players/" + event.currentTarget.dataset.playerid;
     }
 
     render() {
@@ -200,8 +207,16 @@ class Players extends Component {
                                                         {this.state.players.map(player => (
                                                             <TableRow>
                                                                 <TableCell>{player.id}</TableCell>
-                                                                <TableCell>{player.name}</TableCell>
-                                                                <TableCell>{player.team.name}</TableCell>
+                                                                <TableCell
+                                                                    className={"teamClicker"}
+                                                                    data-playerid={player.id}
+                                                                    onClick={this.goToPlayer}
+                                                                >{player.name}</TableCell>
+                                                                <TableCell
+                                                                    className={"teamClicker"}
+                                                                    data-teamid={player.team.id}
+                                                                    onClick={this.goToTeam}
+                                                                >{player.team.name}</TableCell>
                                                             </TableRow>
                                                         ))}
                                                     </TableBody>

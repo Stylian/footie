@@ -7,6 +7,7 @@ import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
 import gr.manolis.stelios.footie.api.mappers.TeamPageMapper;
 import gr.manolis.stelios.footie.api.mappers.TeamSimpleMapper;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.api.tools.PlayersWithTrophiesOrdering;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
@@ -57,6 +58,8 @@ public class RestTeamsController {
         Team team = serviceUtils.loadTeam(teamId);
 
         TeamPageDTO dto = teamPageMapper.toDTO(team);
+
+        dto.getPlayers().sort(new PlayersWithTrophiesOrdering());
 
         List<Stats> seasonsStats = new ArrayList<>();
         serviceUtils.loadAllSeasons().forEach( (s) -> seasonsStats.add(team.getStatsForGroup(s)));
