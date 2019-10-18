@@ -5,6 +5,7 @@ import GroupsMatches from "./groups_components/GroupsMatches";
 import GroupsDisplay from "./groups_components/GroupsDisplay";
 import Rules from "./knockout_components/Rules";
 import Playoffs from "./Playoffs";
+import KnockoutOdds from "./knockout_components/KnockoutOdds";
 
 class Knockouts extends Component {
 
@@ -81,11 +82,13 @@ class Knockouts extends Component {
                         <Tabs value={this.state.tabActive} onChange={this.handleChange}>
                             <Tab label="Brackets"/>
                             <Tab label="Rules"/>
+                            <Tab label="Odds"/>
                         </Tabs>
                     </AppBar>
 
                     {this.state.tabActive === 0 && <Playoffs year={this.props.year} round={1}/>}
                     {this.state.tabActive === 1 && <Rules/>}
+                    {this.state.tabActive === 2 && <KnockoutOdds year={this.props.year}/>}
                 </Box>
             ) : (
                 <span></span>

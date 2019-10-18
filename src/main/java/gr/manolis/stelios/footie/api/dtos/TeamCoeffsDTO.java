@@ -34,4 +34,5 @@ public class TeamCoeffsDTO extends TeamSimpleDTO {
     public void setTrophies(List<Trophy> trophies) {
         this.trophies = trophies;
     }
+
 }

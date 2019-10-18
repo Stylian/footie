@@ -1,6 +1,7 @@
 1.7
 fixed elo groups not working
 removed sortables from groups
+added knockout odds with tab
 
 TODO
 

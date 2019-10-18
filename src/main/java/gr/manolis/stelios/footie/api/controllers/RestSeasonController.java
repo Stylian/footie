@@ -5,6 +5,7 @@ import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.dtos.*;
 import gr.manolis.stelios.footie.api.mappers.*;
 import gr.manolis.stelios.footie.api.services.ViewsService;
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.*;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
@@ -56,6 +57,9 @@ public class RestSeasonController {
 
     @Autowired
     private TeamCoeffsMapper teamCoeffsMapper;
+
+    @Autowired
+    private TeamOddsMapper teamOddsMapper;
 
     @Autowired
     private RobinGroupMapper robinGroupMapper;
@@ -313,6 +317,24 @@ public class RestSeasonController {
         List<RobinGroupDTO> groupsDTO = robinGroupMapper.toDTO(groups);
 
         return groupsDTO;
+    }
+
+    @RequestMapping("/{year}/playoffs/odds")
+    public List<TeamOddsDTO> getPlayoffsOdds(@PathVariable String year) {
+
+        PlayoffsRound round = viewsService.getPlayoffsRound(NumberUtils.toInt(year));
+        List<TeamOddsDTO> teams = new ArrayList<>();
+        teams.add(teamOddsMapper.toDTO(round.getgA1()));
+        teams.add(teamOddsMapper.toDTO(round.getgA2()));
+        teams.add(teamOddsMapper.toDTO(round.getgA3()));
+        teams.add(teamOddsMapper.toDTO(round.getgB1()));
+        teams.add(teamOddsMapper.toDTO(round.getgB2()));
+        teams.add(teamOddsMapper.toDTO(round.getgB3()));
+
+        Utils.calculateLeagueWinningOddsInPLayoffs(round, teams);
+
+        teams.sort(Comparator.comparingDouble(TeamOddsDTO::getOdds));
+        return teams;
     }
 
     @RequestMapping("/{year}/playoffs/structure")

@@ -1,12 +1,13 @@
 package gr.manolis.stelios.footie.core;
 
+import gr.manolis.stelios.footie.api.dtos.TeamOddsDTO;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
-import gr.manolis.stelios.footie.core.peristence.dtos.games.MatchupGame;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
+import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -266,5 +267,61 @@ public class Utils {
 		team2.getStatsForGroup(season).setElo(awayElo);
 	}
 
+	public static void calculateLeagueWinningOddsInPLayoffs(PlayoffsRound pr, List<TeamOddsDTO> teams) {
 
+		Season thatSeason = pr.getSeason();
+
+		Team a1 = pr.getgA1();
+		Team b2 = pr.getgB2();
+		Team a3 = pr.getgA3();
+		double[] branch1 = toFinalOdds(thatSeason, a1, b2, a3);
+
+		Team b1 = pr.getgB1();
+		Team a2 = pr.getgA2();
+		Team b3 = pr.getgB3();
+		double[] branch2 = toFinalOdds(thatSeason, b1, a2, b3);
+
+		// multiplied with chance to go to final
+		double wxa1 = branch1[0] * toWinFinalOdds(thatSeason, a1, b1, a2, b3, branch2);
+		double wxb2 = branch1[1] * toWinFinalOdds(thatSeason, b2, b1, a2, b3, branch2);
+		double wxa3 = branch1[2] * toWinFinalOdds(thatSeason, a3, b1, a2, b3, branch2);
+
+		double wxb1 = branch2[0] * toWinFinalOdds(thatSeason, b1, a1, b2, a3, branch1);
+		double wxa2 = branch2[1] * toWinFinalOdds(thatSeason, a2, a1, b2, a3, branch1);
+		double wxb3 = branch2[2] * toWinFinalOdds(thatSeason, b3, a1, b2, a3, branch1);
+
+		teams.stream().filter( t -> t.getId() == a1.getId()).findFirst().get().setChances(wxa1);
+		teams.stream().filter( t -> t.getId() == a2.getId()).findFirst().get().setChances(wxa2);
+		teams.stream().filter( t -> t.getId() == a3.getId()).findFirst().get().setChances(wxa3);
+		teams.stream().filter( t -> t.getId() == b1.getId()).findFirst().get().setChances(wxb1);
+		teams.stream().filter( t -> t.getId() == b2.getId()).findFirst().get().setChances(wxb2);
+		teams.stream().filter( t -> t.getId() == b3.getId()).findFirst().get().setChances(wxb3);
+
+	}
+
+	public static double toWinFinalOdds(Season currentSeason, Team a1, Team b1, Team a2, Team b3, double[] otherBranch) {
+		// a1 chances to win each potential final
+		double oddsA1wB1 = calculateWinningOdds(a1.getStatsForGroup(currentSeason).getElo(), b1.getStatsForGroup(currentSeason).getElo());
+		double oddsA1wA2 = calculateWinningOdds(a1.getStatsForGroup(currentSeason).getElo(), a2.getStatsForGroup(currentSeason).getElo());
+		double oddsA1wB3 = calculateWinningOdds(a1.getStatsForGroup(currentSeason).getElo(), b3.getStatsForGroup(currentSeason).getElo());
+		// a1 chance to win the final
+		return  oddsA1wB1*otherBranch[0] + oddsA1wA2*otherBranch[1] + oddsA1wB3*otherBranch[2];
+	}
+
+	public static double[] toFinalOdds(Season currentSeason, Team a1, Team b2, Team a3) {
+		// to the semi 1
+		double oddsS1 = calculateWinningOdds(b2.getStatsForGroup(currentSeason).getElo(), a3.getStatsForGroup(currentSeason).getElo());
+
+		//a1 to the final
+		double oddsF1x1 = calculateWinningOdds(a1.getStatsForGroup(currentSeason).getElo(), b2.getStatsForGroup(currentSeason).getElo());
+		double oddsF1x2 = calculateWinningOdds(a1.getStatsForGroup(currentSeason).getElo(), a3.getStatsForGroup(currentSeason).getElo());
+		double oddsF1xA1 = oddsS1*oddsF1x1 + (1-oddsS1)*oddsF1x2;
+
+		//b2 to the final
+		double oddsF1xB2 = oddsS1*(1-oddsF1x1);
+		//a3 to the final
+		double oddsF1xA3 = (1-oddsS1)*(1-oddsF1x2);
+
+		return new double[]{ oddsF1xA1, oddsF1xB2, oddsF1xA3 };
+	}
 }
