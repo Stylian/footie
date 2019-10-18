@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.api.services;
 
 import gr.manolis.stelios.footie.api.RestResponse;
+import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
@@ -107,10 +108,16 @@ public class OperationsService {
 				break;
 			}
 
+			int homeElo = next.getHomeTeam().getAllStats().getElo();
+			int awayElo = next.getAwayTeam().getAllStats().getElo();
+			double winOdds = Utils.calculateWinningOdds(homeElo, awayElo);
+
 			Random r = new Random();
 			double r1 = r.nextGaussian();
+			r1 = r1*winOdds*2;
 			r1 = r1 < -1 ? -1 : r1;
 			double r2 = r.nextGaussian();
+			r2 = r2*(1-winOdds)*2;
 			r2 = r2 < -1 ? -1 : r2;
 
 			gameService.addResult(next, new Result((int) (r1*3 + 3), (int) (r2 + 1)));
