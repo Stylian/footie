@@ -12,9 +12,6 @@ import {
     TableRow
 } from "@material-ui/core";
 
-const $ = require('jquery');
-$.DataTable = require('datatables.net');
-
 class GroupsDisplay extends Component {
 
     constructor(props) {
@@ -40,12 +37,6 @@ class GroupsDisplay extends Component {
                             isLoaded: true,
                             groups: result,
                         }
-                    });
-
-                    $(".table").DataTable({
-                        "paging": false,
-                        "searching": false,
-                        "bInfo": false,
                     });
                 },
                 (error) => {

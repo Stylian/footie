@@ -1,10 +1,9 @@
 1.7
 fixed elo groups not working
-
+removed sortables from groups
 
 TODO
 
-datatables crashing
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
