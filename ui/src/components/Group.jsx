@@ -13,9 +13,6 @@ import {
 } from "@material-ui/core";
 import LeagueToolbar from "./LeagueToolbar";
 
-const $ = require('jquery');
-$.DataTable = require('datatables.net');
-
 class Group extends Component {
 
     constructor(props) {
@@ -42,11 +39,6 @@ class Group extends Component {
                         }
                     });
 
-                        $(".table").DataTable({
-                            "paging" : false,
-                            "searching" : false,
-                            "bInfo" : false,
-                        });
                 },
                 (error) => {
                     this.setState(state => {

@@ -105,23 +105,25 @@ public class RestAdminController {
                 }
             }
             for (Round round : season.getRounds()) {
-                if (round instanceof QualsRound) {
-                    for (Matchup matchup : ((QualsRound) round).getMatchups()) {
-                        Utils.getEloForMatchup(season, matchup);
+                if(round.getStage().equals(Stage.FINISHED)) {
+                    if (round instanceof QualsRound) {
+                        for (Matchup matchup : ((QualsRound) round).getMatchups()) {
+                            Utils.getEloForMatchup(season, matchup);
+                        }
                     }
-                }
-                if (round instanceof GroupsRound) {
-                    Utils.calcEloForGroup(season, (GroupsRound) round);
-                }
-                if (round instanceof PlayoffsRound) {
-                    PlayoffsRound playoffsRound = (PlayoffsRound) round;
-                    for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
-                        Utils.getEloForMatchup(season, matchup);
+                    if (round instanceof GroupsRound) {
+                        Utils.calcEloForGroup(season, (GroupsRound) round);
                     }
-                    for (Matchup matchup : playoffsRound.getSemisMatchups()) {
-                        Utils.getEloForMatchup(season, matchup);
+                    if (round instanceof PlayoffsRound) {
+                        PlayoffsRound playoffsRound = (PlayoffsRound) round;
+                        for (Matchup matchup : playoffsRound.getQuarterMatchups()) {
+                            Utils.getEloForMatchup(season, matchup);
+                        }
+                        for (Matchup matchup : playoffsRound.getSemisMatchups()) {
+                            Utils.getEloForMatchup(season, matchup);
+                        }
+                        Utils.getEloForMatchup(season, playoffsRound.getFinalsMatchup());
                     }
-                    Utils.getEloForMatchup(season, playoffsRound.getFinalsMatchup());
                 }
             }
             //save

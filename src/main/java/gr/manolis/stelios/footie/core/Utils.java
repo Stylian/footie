@@ -228,7 +228,7 @@ public class Utils {
 
 	public static void calcEloForGroup(Season season, GroupsRound groupsRound) {
 		switch(groupsRound.getNum()) {
-			case 1:
+			case 3:
 				for(Group group : groupsRound.getGroups()) {
 					List<Team> teams = group.getTeams();
 					eloGroupWin(season, teams.get(0), teams.get(1));
@@ -236,7 +236,7 @@ public class Utils {
 					eloGroupWin(season, teams.get(1), teams.get(2));
 				}
 				break;
-			case 2:
+			case 4:
 				for(Group group : groupsRound.getGroups()) {
 					List<Team> teams = group.getTeams();
 					eloGroupWin(season, teams.get(0), teams.get(1));
