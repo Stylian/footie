@@ -282,25 +282,17 @@ class NextGame extends Component {
                                                             '#2d5cd2',
                                                             '#da2525',
                                                         ],
-                                                        hoverBackgroundColor: [
-                                                            '#2d5cd2',
-                                                            '#da2525',
-                                                        ]
                                                     },
-                                                        {
-                                                            data: [
-                                                                this.state.data.homeData["avg goals scored away"],
-                                                                this.state.data.homeData["avg goals conceded away"]
-                                                            ],
-                                                            backgroundColor: [
-                                                                '#abbeed',
-                                                                '#f0a8a8'
-                                                            ],
-                                                            hoverBackgroundColor: [
-                                                                '#abbeed',
-                                                                '#f0a8a8'
-                                                            ]
-                                                        }],
+                                                    {
+                                                        data: [
+                                                            this.state.data.homeData["avg goals scored away"],
+                                                            this.state.data.homeData["avg goals conceded away"]
+                                                        ],
+                                                        backgroundColor: [
+                                                            '#abbeed',
+                                                            '#f0a8a8'
+                                                        ],
+                                                    }],
                                                 }}
                                                 options={{
                                                     responsive: true,
@@ -315,7 +307,7 @@ class NextGame extends Component {
                                                             this.state.data.homeData["avg goals scored away"] + ") - "
                                                             + this.state.data.homeData["avg goals conceded"] + "(" +
                                                             this.state.data.homeData["avg goals conceded away"] + ")",
-                                                        fontSize: 9,
+                                                        fontSize: 11,
                                                         fontColor: "#111"
                                                     },
                                                     scales: {
@@ -333,7 +325,7 @@ class NextGame extends Component {
                                         </Grid>
                                         <Grid item sm={6} style={{ minHeight: 120, maxHeight: 120}}>
                                             <HorizontalBar
-                                                data={{
+                                              data={{
                                                     labels: ["", ""
                                                     ],
                                                     datasets: [{
@@ -342,28 +334,20 @@ class NextGame extends Component {
                                                             this.state.data.awayData["avg goals conceded"],
                                                         ],
                                                         backgroundColor: [
+                                                            '#abbeed',
+                                                            '#f0a8a8'
+                                                        ],
+                                                    },
+                                                    {
+                                                        data: [
+                                                            this.state.data.awayData["avg goals scored away"],
+                                                            this.state.data.awayData["avg goals conceded away"]
+                                                        ],
+                                                        backgroundColor: [
                                                             '#2d5cd2',
                                                             '#da2525',
                                                         ],
-                                                        hoverBackgroundColor: [
-                                                            '#2d5cd2',
-                                                            '#da2525',
-                                                        ]
-                                                    },
-                                                        {
-                                                            data: [
-                                                                this.state.data.awayData["avg goals scored away"],
-                                                                this.state.data.awayData["avg goals conceded away"]
-                                                            ],
-                                                            backgroundColor: [
-                                                                '#abbeed',
-                                                                '#f0a8a8'
-                                                            ],
-                                                            hoverBackgroundColor: [
-                                                                '#abbeed',
-                                                                '#f0a8a8'
-                                                            ]
-                                                        }],
+                                                    }],
                                                 }}
                                                 options={{
                                                     responsive: true,
@@ -378,7 +362,7 @@ class NextGame extends Component {
                                                             this.state.data.awayData["avg goals scored away"] + ") - "
                                                             + this.state.data.awayData["avg goals conceded"] + "(" +
                                                             this.state.data.awayData["avg goals conceded away"] + ")",
-                                                        fontSize: 9,
+                                                        fontSize: 11,
                                                         fontColor: "#111"
                                                     },
                                                     scales: {
