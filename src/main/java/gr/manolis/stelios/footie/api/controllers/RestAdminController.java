@@ -112,7 +112,7 @@ public class RestAdminController {
                         }
                     }
                     if (round instanceof GroupsRound) {
-                        Utils.calcEloForGroup(season, (GroupsRound) round);
+                        Utils.calcEloForGroup(seasons, season, (GroupsRound) round);
                     }
                     if (round instanceof PlayoffsRound) {
                         PlayoffsRound playoffsRound = (PlayoffsRound) round;

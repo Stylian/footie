@@ -4,11 +4,13 @@ import gr.manolis.stelios.footie.api.dtos.TeamOddsDTO;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Game;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
+import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
+import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -227,19 +229,23 @@ public class Utils {
 		}
 	}
 
-	public static void calcEloForGroup(Season season, GroupsRound groupsRound) {
+	public static void calcEloForGroup(List<Season> allSeasons, Season season, GroupsRound groupsRound) {
 		switch(groupsRound.getNum()) {
 			case 3:
-				for(Group group : groupsRound.getGroups()) {
+				for(RobinGroup group : groupsRound.getGroups()) {
 					List<Team> teams = group.getTeams();
+					Collections.sort(group.getTeams(), new RobinGroupOrdering(group,
+							allSeasons, group.getSeason().getSeasonYear()-1));
 					eloGroupWin(season, teams.get(0), teams.get(1));
 					eloGroupWin(season, teams.get(0), teams.get(2));
 					eloGroupWin(season, teams.get(1), teams.get(2));
 				}
 				break;
 			case 4:
-				for(Group group : groupsRound.getGroups()) {
+				for(RobinGroup group : groupsRound.getGroups()) {
 					List<Team> teams = group.getTeams();
+					Collections.sort(group.getTeams(), new RobinGroupOrdering(group,
+							allSeasons, group.getSeason().getSeasonYear()-1));
 					eloGroupWin(season, teams.get(0), teams.get(1));
 					eloGroupWin(season, teams.get(0), teams.get(2));
 					eloGroupWin(season, teams.get(0), teams.get(3));

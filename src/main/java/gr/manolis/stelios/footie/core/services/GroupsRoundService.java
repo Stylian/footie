@@ -270,7 +270,7 @@ public class GroupsRoundService {
         Season season = serviceUtils.loadCurrentSeason();
         GroupsRound groupsRound = calcCoeffsForGroup(round, season);
 
-        Utils.calcEloForGroup(season, groupsRound);
+        Utils.calcEloForGroup(serviceUtils.loadAllSeasons(), season, groupsRound);
 
         //save
         DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
