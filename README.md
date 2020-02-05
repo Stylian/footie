@@ -1,17 +1,5 @@
-# Footie
-run maven install
-copy jar to startup folder
-copy folder to user folder
-run jar
+# how to use
+copy footie from COPY_TO_USER_FOLDER to user folder
+run mvn install
+run java -jar target/footie-1.7.jar
 
-jdbc:derby:C:\Users\stylianos.chatzimano\footie\data
-
-#development
-import to intellij as maven project
-run maven install
-run App.java
-
-# system depedencies
-npm
-maven
-git
