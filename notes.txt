@@ -1,6 +1,7 @@
 
 TODO
 
+teams stats page bug , a td is missing in the header
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
