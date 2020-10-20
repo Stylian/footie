@@ -83,7 +83,7 @@ class Stats extends Component {
                                             <table className="table">
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell className={"reorder_tab"} colSpan={10}></TableCell>
+                                                        <TableCell className={"reorder_tab"} colSpan={11}></TableCell>
                                                         <TableCell className={"reorder_tab"} colSpan={4} style={leftDivider}
                                                             align={"center"}>home stats</TableCell>
                                                         <TableCell className={"reorder_tab"} colSpan={4} style={leftDivider}
