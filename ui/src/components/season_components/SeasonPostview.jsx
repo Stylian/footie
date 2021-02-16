@@ -314,7 +314,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.winner.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(179, 184, 255)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}}>
+                                                                <TableCell style={{minWidth:120, maxWidth:120}}>
                                                                     <img src={goldmedal} title={"1st place"}/>
                                                                     {this.state.data.winner.name}
                                                                 </TableCell>
@@ -334,7 +334,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.runner_up.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(226, 228, 255)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}} >
+                                                                <TableCell style={{minWidth:120, maxWidth:120}} >
                                                                     <img src={silvermedal} title={"2nd place"}/>
                                                                     {this.state.data.runner_up.name}
                                                                 </TableCell>
@@ -354,7 +354,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.semifinalist1.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}}>
+                                                                <TableCell style={{minWidth:120, maxWidth:120}}>
                                                                     {this.state.data.semifinalist1.name}
                                                                 </TableCell>
                                                             </TableRow>
@@ -362,7 +362,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.semifinalist2.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}}>
+                                                                <TableCell style={{minWidth:120, maxWidth:120}}>
                                                                     {this.state.data.semifinalist2.name}
                                                                 </TableCell>
                                                             </TableRow>
@@ -381,7 +381,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.quarterfinalist1.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(252, 248, 227)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}}>
+                                                                <TableCell style={{minWidth:120, maxWidth:120}}>
                                                                     {this.state.data.quarterfinalist1.name}
                                                                 </TableCell>
                                                             </TableRow>
@@ -389,7 +389,7 @@ class SeasonPostview extends Component {
                                                                       data-teamid={this.state.data.quarterfinalist2.id}
                                                                       onClick={this.goToTeam}
                                                                       style={{backgroundColor: 'rgb(252, 248, 227)'}}>
-                                                                <TableCell style={{minWidth:100, maxWidth:100}}>
+                                                                <TableCell style={{minWidth:120, maxWidth:120}}>
                                                                     {this.state.data.quarterfinalist2.name}
                                                                 </TableCell>
                                                             </TableRow>
@@ -413,7 +413,7 @@ class SeasonPostview extends Component {
                                                                 style={{backgroundColor: '#e6ffe6'}}>
                                                                 <TableCell align="right"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.highestScoringGame.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.highestScoringGame.homeTeam.name}</TableCell>
@@ -422,7 +422,7 @@ class SeasonPostview extends Component {
                                                                     + this.state.data.highestScoringGame.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.highestScoringGame.awayTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.highestScoringGame.awayTeam.name}</TableCell>
@@ -442,7 +442,7 @@ class SeasonPostview extends Component {
                                                                 style={{backgroundColor: '#e6ffe6'}}>
                                                                 <TableCell align="right"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.bestWin.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.bestWin.homeTeam.name}</TableCell>
@@ -451,7 +451,7 @@ class SeasonPostview extends Component {
                                                                     + this.state.data.bestWin.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.bestWin.awayTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.bestWin.awayTeam.name}</TableCell>
@@ -471,7 +471,7 @@ class SeasonPostview extends Component {
                                                                 style={{backgroundColor: '#f2dede'}}>
                                                                 <TableCell align="right"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.worstResult.homeTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.worstResult.homeTeam.name}</TableCell>
@@ -480,7 +480,7 @@ class SeasonPostview extends Component {
                                                                     + this.state.data.worstResult.result.goalsMadeByAwayTeam}  </TableCell>
                                                                 <TableCell align="left"
                                                                            className={"teamClicker"}
-                                                                           style={{minWidth:100, maxWidth:100}}
+                                                                           style={{minWidth:120, maxWidth:120}}
                                                                            data-teamid={this.state.data.worstResult.awayTeam.id}
                                                                            onClick={this.goToTeam}>
                                                                     {this.state.data.worstResult.awayTeam.name}</TableCell>
@@ -521,7 +521,7 @@ class SeasonPostview extends Component {
                                                                           data-teamid={this.state.data.overachievers.id}
                                                                           onClick={this.goToTeam}
                                                                           style={{backgroundColor: 'rgb(226, 228, 255)'}}>
-                                                                    <TableCell  style={{minWidth:100, maxWidth:100}}>
+                                                                    <TableCell  style={{minWidth:120, maxWidth:120}}>
                                                                         {this.state.data.overachievers.name}
                                                                     </TableCell>
                                                                 </TableRow>)}
@@ -561,7 +561,7 @@ class SeasonPostview extends Component {
                                                                           data-teamid={this.state.data.underperformers.id}
                                                                           onClick={this.goToTeam}
                                                                           style={{backgroundColor: '#f2dede'}}>
-                                                                    <TableCell  style={{minWidth:100, maxWidth:100}}>
+                                                                    <TableCell  style={{minWidth:120, maxWidth:120}}>
                                                                         {this.state.data.underperformers.name}
                                                                     </TableCell>
                                                                 </TableRow>)}
@@ -621,7 +621,7 @@ class SeasonPostview extends Component {
                                                             </TableCell>
                                                             <TableCell className={"teamClicker"}
                                                                        data-teamid={this.state.data.player_of_the_year.team.id}
-                                                                       style={{minWidth:100, maxWidth:100}}
+                                                                       style={{minWidth:120, maxWidth:120}}
                                                                        onClick={this.goToTeam}>
                                                                 {this.state.data.player_of_the_year.team.name}
                                                             </TableCell>
@@ -676,7 +676,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.gk.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.gk.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -715,7 +715,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.dcl.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.dcl.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -754,7 +754,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.dcr.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.dcr.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -793,7 +793,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.dl.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.dl.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -832,7 +832,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.dr.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.dr.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -871,7 +871,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.cml.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.cml.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -910,7 +910,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.cmr.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.cmr.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -950,7 +950,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.amc.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.amc.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -989,7 +989,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.aml.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.aml.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -1028,7 +1028,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.amr.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.amr.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -1067,7 +1067,7 @@ class SeasonPostview extends Component {
                                                                 </TableCell>
                                                                 <TableCell className={"teamClicker"}
                                                                            data-teamid={this.state.data.st.team.id}
-                                                                            style={{minWidth:100, maxWidth:100}} onClick={this.goToTeam}>
+                                                                            style={{minWidth:120, maxWidth:120}} onClick={this.goToTeam}>
                                                                     {this.state.data.st.team.name}
                                                                 </TableCell>
                                                             </TableRow>)}
