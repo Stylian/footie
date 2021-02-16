@@ -254,7 +254,7 @@ public class ViewsService {
 			double lossesPercentAway = Precision.round(1.0 * lossesAway / numOfGamesAway, 2);
 			double avgGoalsScoredAway;
 			double avgGoalsConcededAway;
-			if (results.isEmpty()) {
+			if (resultsAway.isEmpty()) {
 				avgGoalsScoredAway = 0;
 				avgGoalsConcededAway = 0;
 			}else {
