@@ -6,18 +6,175 @@
   "latency": 0,
   "port": 8080,
   "hostname": "",
-  "folders": [],
+  "folders": [
+    {
+      "uuid": "6775b40c-d1dc-45b8-bd5a-7d79842e700c",
+      "name": "Seeding",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "39647661-e896-4360-8ce5-23cd8e05582c"
+        }
+      ]
+    },
+    {
+      "uuid": "340a7f0f-4500-435a-a643-6e11ec0bdf18",
+      "name": "quals",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "34b98b72-e4c4-4f34-acf5-e4c473913748"
+        },
+        {
+          "type": "route",
+          "uuid": "601b6a8c-1c18-43b9-b5b7-5ea1947212a1"
+        },
+        {
+          "type": "route",
+          "uuid": "cbbe018a-3917-4050-b703-a4cd3f2804af"
+        },
+        {
+          "type": "route",
+          "uuid": "bfb3a684-6ed4-4f4a-9c0f-0c91cdf988a9"
+        },
+        {
+          "type": "route",
+          "uuid": "a5c8f1bc-e669-405d-b78c-217769d46826"
+        },
+        {
+          "type": "route",
+          "uuid": "4070c533-6421-4124-8f2f-a3297ee7fdf1"
+        }
+      ]
+    },
+    {
+      "uuid": "66fb8cdf-cc62-4d61-9d5a-0d157ce4ece5",
+      "name": "tabs",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "5295c534-51d4-4a12-b998-c00e3581ea0c"
+        },
+        {
+          "type": "route",
+          "uuid": "14bc8cdc-0870-4b6d-a04f-12f9cb0f386b"
+        },
+        {
+          "type": "route",
+          "uuid": "fb57a5e7-5fda-4f99-a9c5-edc5071c19a6"
+        },
+        {
+          "type": "route",
+          "uuid": "74f475ea-a701-4fc8-9c65-c57a23846109"
+        },
+        {
+          "type": "route",
+          "uuid": "111ec055-4348-490e-ba60-2ee83af08261"
+        },
+        {
+          "type": "route",
+          "uuid": "cd8e9a74-2ffa-46c8-8a0e-8a1beaa928b3"
+        },
+        {
+          "type": "route",
+          "uuid": "480726cb-7422-455b-8255-af4f71905cc5"
+        },
+        {
+          "type": "route",
+          "uuid": "a359c3fe-3e08-4047-abd5-f185ba2bfe7e"
+        }
+      ]
+    },
+    {
+      "uuid": "0ce7c808-00a4-4b17-985b-39172ca36152",
+      "name": "groups",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "d43993cd-2d39-4d41-b727-2781b208043e"
+        },
+        {
+          "type": "route",
+          "uuid": "c81e8962-7375-48aa-a358-28c083271049"
+        },
+        {
+          "type": "route",
+          "uuid": "7840c149-9ae8-4a1a-9971-150c5350e331"
+        },
+        {
+          "type": "route",
+          "uuid": "1e3f3594-27da-4550-b6fe-12a430c9d011"
+        },
+        {
+          "type": "route",
+          "uuid": "31846a2e-b90a-4557-b376-f424aa9405a0"
+        }
+      ]
+    },
+    {
+      "uuid": "fe1be5c8-3e29-451c-8e71-3a9632499276",
+      "name": "knockouts",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "52da0ce5-9b52-44e0-a0fc-1f61e6ea56c6"
+        },
+        {
+          "type": "route",
+          "uuid": "7c887ecb-27d9-490c-b728-71b6cfd75703"
+        },
+        {
+          "type": "route",
+          "uuid": "3625c2b9-67f1-4518-a737-874efd3aed41"
+        }
+      ]
+    },
+    {
+      "uuid": "59fb7136-85a6-4e2b-8577-1a8d48d006ae",
+      "name": "state posts",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "558ee0a6-4ab3-4614-9616-e4dff65d011c"
+        },
+        {
+          "type": "route",
+          "uuid": "1709977c-b10d-4d1f-a1a1-89400847eb01"
+        },
+        {
+          "type": "route",
+          "uuid": "a7a2ea20-de15-495a-87cb-c5b4496c8c81"
+        },
+        {
+          "type": "route",
+          "uuid": "befd8004-60b8-4440-a3cc-8ac8bc345838"
+        },
+        {
+          "type": "route",
+          "uuid": "6da85d34-c653-4d5f-bb49-8edce4f8b278"
+        },
+        {
+          "type": "route",
+          "uuid": "3052d971-a606-40f4-8e50-4374a9d768b9"
+        },
+        {
+          "type": "route",
+          "uuid": "458aa77f-b84f-4a01-ab49-0684f3d98f85"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "uuid": "67fc8f15-4202-4f1b-97b1-9283745659d4",
       "type": "http",
-      "documentation": "",
+      "documentation": "The Current Season number",
       "method": "get",
       "endpoint": "rest/seasons/",
       "responses": [
         {
           "uuid": "895355bd-b6c5-4e3f-bdfe-7e57472ae277",
-          "body": "5",
+          "body": "2",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -40,42 +197,13 @@
     {
       "uuid": "e95d7ffc-b4be-42f5-8208-a0aefd4bef9d",
       "type": "http",
-      "documentation": "",
+      "documentation": "The state of the season",
       "method": "get",
-      "endpoint": "rest/seasons/5/status",
+      "endpoint": "rest/seasons/2/status",
       "responses": [
         {
           "uuid": "36110e15-5ed9-4815-95a6-c315dad7ab06",
-          "body": "{\n  quals1: \"FINISHED\",\n  quals2: \"FINISHED\",\n  groups1: \"FINISHED\",\n  groups2: \"FINISHED\",\n  playoffs: \"FINISHED\",\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
-      "uuid": "45a0614d-16cf-4fe7-8853-4b2fc9f14498",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "rest/persist/tabs/season/5",
-      "responses": [
-        {
-          "uuid": "3d7155dc-1f4f-48a8-8e08-9f5da4bd3f99",
-          "body": "6",
+          "body": "{\n    \"season\": \"FINISHED\",\n    \"quals1\": \"FINISHED\",\n    \"quals2\": \"FINISHED\",\n    \"groups1\": \"FINISHED\",\n    \"groups2\": \"FINISHED\",\n    \"playoffs\": \"FINISHED\",\n    \"quals0\": \"FINISHED\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -123,6 +251,963 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "b6f0ce52-760e-4be8-9199-bef1919d3e5c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/next_game",
+      "responses": [
+        {
+          "uuid": "0f983670-e0c0-4637-ab2b-25c52f9ec27d",
+          "body": "{\"game\":null}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "39647661-e896-4360-8ce5-23cd8e05582c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/seasons/2/seeding",
+      "responses": [
+        {
+          "uuid": "9f61a0eb-00a6-47ac-941d-5454f2adfe65",
+          "body": "[\n    {\n        \"id\": 30,\n        \"name\": \"Russia\",\n        \"coefficients\": 17000,\n        \"seed\": \"TO_GROUPS\",\n        \"trophies\": [\n            {\n                \"seasonNum\": 1,\n                \"type\": \"R\"\n            }\n        ]\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Morocco\",\n        \"coefficients\": 15900,\n        \"seed\": \"CHAMPION\",\n        \"trophies\": [\n            {\n                \"seasonNum\": 1,\n                \"type\": \"W\"\n            }\n        ]\n    },\n    {\n        \"id\": 17,\n        \"name\": \"Bosnia\",\n        \"coefficients\": 15200,\n        \"seed\": \"TO_GROUPS\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 24,\n        \"name\": \"Greece\",\n        \"coefficients\": 13050,\n        \"seed\": \"TO_QUALS_2\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 41,\n        \"name\": \"Norway\",\n        \"coefficients\": 10900,\n        \"seed\": \"TO_QUALS_2\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 27,\n        \"name\": \"Netherlands\",\n        \"coefficients\": 10450,\n        \"seed\": \"TO_QUALS_2\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 39,\n        \"name\": \"Ghana\",\n        \"coefficients\": 8200,\n        \"seed\": \"TO_QUALS_2\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 25,\n        \"name\": \"Iceland\",\n        \"coefficients\": 8100,\n        \"seed\": \"TO_QUALS_2\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 42,\n        \"name\": \"Ireland\",\n        \"coefficients\": 5300,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 43,\n        \"name\": \"Romania\",\n        \"coefficients\": 4800,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 37,\n        \"name\": \"Ukraine\",\n        \"coefficients\": 4400,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Mexico\",\n        \"coefficients\": 4200,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 23,\n        \"name\": \"Germany\",\n        \"coefficients\": 3300,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 28,\n        \"name\": \"Poland\",\n        \"coefficients\": 3000,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 36,\n        \"name\": \"Turkey\",\n        \"coefficients\": 2900,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": [\n            {\n                \"seasonNum\": 2,\n                \"type\": \"R\"\n            }\n        ]\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Slovakia\",\n        \"coefficients\": 2600,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Senegal\",\n        \"coefficients\": 2250,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 1,\n        \"name\": \"Algeria\",\n        \"coefficients\": 2200,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Nigeria\",\n        \"coefficients\": 2200,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 11,\n        \"name\": \"Brazil\",\n        \"coefficients\": 1900,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 31,\n        \"name\": \"Serbia\",\n        \"coefficients\": 1433,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Cameroon\",\n        \"coefficients\": 1400,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 18,\n        \"name\": \"Croatia\",\n        \"coefficients\": 1400,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Egypt\",\n        \"coefficients\": 1400,\n        \"seed\": \"TO_QUALS_1\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 21,\n        \"name\": \"England\",\n        \"coefficients\": 1400,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Japan\",\n        \"coefficients\": 1300,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 34,\n        \"name\": \"Sweden\",\n        \"coefficients\": 1300,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 35,\n        \"name\": \"Switzerland\",\n        \"coefficients\": 1200,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 38,\n        \"name\": \"Wales\",\n        \"coefficients\": 1200,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 22,\n        \"name\": \"France\",\n        \"coefficients\": 1100,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 44,\n        \"name\": \"Scotland\",\n        \"coefficients\": 1100,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": [\n            {\n                \"seasonNum\": 2,\n                \"type\": \"W\"\n            }\n        ]\n    },\n    {\n        \"id\": 14,\n        \"name\": \"Uruguay\",\n        \"coefficients\": 1100,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 26,\n        \"name\": \"Italy\",\n        \"coefficients\": 900,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 33,\n        \"name\": \"Spain\",\n        \"coefficients\": 600,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Argentina\",\n        \"coefficients\": 500,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 16,\n        \"name\": \"Belgium\",\n        \"coefficients\": 500,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 29,\n        \"name\": \"Portugal\",\n        \"coefficients\": 500,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Denmark\",\n        \"coefficients\": 400,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 40,\n        \"name\": \"Slovenia\",\n        \"coefficients\": 100,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 15,\n        \"name\": \"Austria\",\n        \"coefficients\": 0,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 12,\n        \"name\": \"Chile\",\n        \"coefficients\": 0,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 13,\n        \"name\": \"Colombia\",\n        \"coefficients\": 0,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Cote d'Ivoire\",\n        \"coefficients\": 0,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Czechia\",\n        \"coefficients\": 0,\n        \"seed\": \"TO_PRELIMINARY\",\n        \"trophies\": []\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "34b98b72-e4c4-4f34-acf5-e4c473913748",
+      "type": "http",
+      "documentation": "Preliminary Seeding",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/0/seeding",
+      "responses": [
+        {
+          "uuid": "b592fd1e-ec7b-4eb6-be0c-b50da3d1909b",
+          "body": "{\n    \"WEAK\": [\n        {\n            \"id\": 10,\n            \"name\": \"Argentina\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Belgium\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 29,\n            \"name\": \"Portugal\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Denmark\",\n            \"coefficients\": 400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 40,\n            \"name\": \"Slovenia\",\n            \"coefficients\": 100,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Austria\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Chile\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 13,\n            \"name\": \"Colombia\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Cote d'Ivoire\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 19,\n            \"name\": \"Czechia\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        }\n    ],\n    \"STRONG\": [\n        {\n            \"id\": 21,\n            \"name\": \"England\",\n            \"coefficients\": 1400,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Japan\",\n            \"coefficients\": 1300,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 34,\n            \"name\": \"Sweden\",\n            \"coefficients\": 1300,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 35,\n            \"name\": \"Switzerland\",\n            \"coefficients\": 1200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 38,\n            \"name\": \"Wales\",\n            \"coefficients\": 1200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 22,\n            \"name\": \"France\",\n            \"coefficients\": 1100,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 44,\n            \"name\": \"Scotland\",\n            \"coefficients\": 1100,\n            \"seed\": \"STRONG\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"W\"\n                }\n            ]\n        },\n        {\n            \"id\": 14,\n            \"name\": \"Uruguay\",\n            \"coefficients\": 1100,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 26,\n            \"name\": \"Italy\",\n            \"coefficients\": 900,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 33,\n            \"name\": \"Spain\",\n            \"coefficients\": 600,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "111ec055-4348-490e-ba60-2ee83af08261",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/quals0/2",
+      "responses": [
+        {
+          "uuid": "ccc1cb6f-0718-48a7-bebb-373e355213c0",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "14bc8cdc-0870-4b6d-a04f-12f9cb0f386b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/season/2",
+      "responses": [
+        {
+          "uuid": "981259ee-5709-4c47-912c-c7c9e818271e",
+          "body": "1",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "601b6a8c-1c18-43b9-b5b7-5ea1947212a1",
+      "type": "http",
+      "documentation": "Preliminary Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/0/matches",
+      "responses": [
+        {
+          "uuid": "deba8cad-6c4e-4a48-97b5-476837a3690a",
+          "body": "{\n    \"1\": [\n        {\n            \"id\": 131,\n            \"homeTeam\": {\n                \"id\": 2,\n                \"name\": \"Cote d'Ivoire\"\n            },\n            \"awayTeam\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            },\n            \"result\": {\n                \"id\": 131,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            }\n        },\n        {\n            \"id\": 132,\n            \"homeTeam\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            },\n            \"awayTeam\": {\n                \"id\": 2,\n                \"name\": \"Cote d'Ivoire\"\n            },\n            \"result\": {\n                \"id\": 132,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            }\n        },\n        {\n            \"id\": 133,\n            \"homeTeam\": {\n                \"id\": 29,\n                \"name\": \"Portugal\"\n            },\n            \"awayTeam\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            },\n            \"result\": {\n                \"id\": 133,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            }\n        },\n        {\n            \"id\": 134,\n            \"homeTeam\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            },\n            \"awayTeam\": {\n                \"id\": 29,\n                \"name\": \"Portugal\"\n            },\n            \"result\": {\n                \"id\": 134,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            }\n        },\n        {\n            \"id\": 135,\n            \"homeTeam\": {\n                \"id\": 10,\n                \"name\": \"Argentina\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 135,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 3\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 136,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 10,\n                \"name\": \"Argentina\"\n            },\n            \"result\": {\n                \"id\": 136,\n                \"goalsMadeByHomeTeam\": 9,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 137,\n            \"homeTeam\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            },\n            \"awayTeam\": {\n                \"id\": 21,\n                \"name\": \"England\"\n            },\n            \"result\": {\n                \"id\": 137,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            }\n        },\n        {\n            \"id\": 138,\n            \"homeTeam\": {\n                \"id\": 21,\n                \"name\": \"England\"\n            },\n            \"awayTeam\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            },\n            \"result\": {\n                \"id\": 138,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            }\n        },\n        {\n            \"id\": 139,\n            \"homeTeam\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            },\n            \"awayTeam\": {\n                \"id\": 14,\n                \"name\": \"Uruguay\"\n            },\n            \"result\": {\n                \"id\": 139,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            }\n        },\n        {\n            \"id\": 140,\n            \"homeTeam\": {\n                \"id\": 14,\n                \"name\": \"Uruguay\"\n            },\n            \"awayTeam\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            },\n            \"result\": {\n                \"id\": 140,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            }\n        }\n    ],\n    \"2\": [\n        {\n            \"id\": 141,\n            \"homeTeam\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            },\n            \"awayTeam\": {\n                \"id\": 35,\n                \"name\": \"Switzerland\"\n            },\n            \"result\": {\n                \"id\": 141,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            }\n        },\n        {\n            \"id\": 142,\n            \"homeTeam\": {\n                \"id\": 35,\n                \"name\": \"Switzerland\"\n            },\n            \"awayTeam\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            },\n            \"result\": {\n                \"id\": 142,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            }\n        },\n        {\n            \"id\": 143,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 26,\n                \"name\": \"Italy\"\n            },\n            \"result\": {\n                \"id\": 143,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        },\n        {\n            \"id\": 144,\n            \"homeTeam\": {\n                \"id\": 26,\n                \"name\": \"Italy\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 144,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        },\n        {\n            \"id\": 145,\n            \"homeTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"awayTeam\": {\n                \"id\": 22,\n                \"name\": \"France\"\n            },\n            \"result\": {\n                \"id\": 145,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 146,\n            \"homeTeam\": {\n                \"id\": 22,\n                \"name\": \"France\"\n            },\n            \"awayTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"result\": {\n                \"id\": 146,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 147,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 9,\n                \"name\": \"Japan\"\n            },\n            \"result\": {\n                \"id\": 147,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 148,\n            \"homeTeam\": {\n                \"id\": 9,\n                \"name\": \"Japan\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 148,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 149,\n            \"homeTeam\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            },\n            \"awayTeam\": {\n                \"id\": 33,\n                \"name\": \"Spain\"\n            },\n            \"result\": {\n                \"id\": 149,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            }\n        },\n        {\n            \"id\": 150,\n            \"homeTeam\": {\n                \"id\": 33,\n                \"name\": \"Spain\"\n            },\n            \"awayTeam\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            },\n            \"result\": {\n                \"id\": 150,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            }\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cbbe018a-3917-4050-b703-a4cd3f2804af",
+      "type": "http",
+      "documentation": "Qualifing Seeding",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/1/seeding",
+      "responses": [
+        {
+          "uuid": "a536b104-b979-4039-8bed-7480767214d5",
+          "body": "{\n    \"WEAK\": [\n        {\n            \"id\": 3,\n            \"name\": \"Cameroon\",\n            \"coefficients\": 1400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 18,\n            \"name\": \"Croatia\",\n            \"coefficients\": 1400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Egypt\",\n            \"coefficients\": 1400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 34,\n            \"name\": \"Sweden\",\n            \"coefficients\": 1300,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 38,\n            \"name\": \"Wales\",\n            \"coefficients\": 1200,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 44,\n            \"name\": \"Scotland\",\n            \"coefficients\": 1100,\n            \"seed\": \"WEAK\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"W\"\n                }\n            ]\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Belgium\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Denmark\",\n            \"coefficients\": 400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 40,\n            \"name\": \"Slovenia\",\n            \"coefficients\": 100,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Austria\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Chile\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 13,\n            \"name\": \"Colombia\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 19,\n            \"name\": \"Czechia\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        }\n    ],\n    \"STRONG\": [\n        {\n            \"id\": 42,\n            \"name\": \"Ireland\",\n            \"coefficients\": 5300,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 43,\n            \"name\": \"Romania\",\n            \"coefficients\": 4800,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 37,\n            \"name\": \"Ukraine\",\n            \"coefficients\": 4400,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Mexico\",\n            \"coefficients\": 4200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 23,\n            \"name\": \"Germany\",\n            \"coefficients\": 3300,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 28,\n            \"name\": \"Poland\",\n            \"coefficients\": 3000,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 36,\n            \"name\": \"Turkey\",\n            \"coefficients\": 2900,\n            \"seed\": \"STRONG\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"R\"\n                }\n            ]\n        },\n        {\n            \"id\": 32,\n            \"name\": \"Slovakia\",\n            \"coefficients\": 2600,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Senegal\",\n            \"coefficients\": 2250,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Algeria\",\n            \"coefficients\": 2200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Nigeria\",\n            \"coefficients\": 2200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Brazil\",\n            \"coefficients\": 1900,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 31,\n            \"name\": \"Serbia\",\n            \"coefficients\": 1433,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "a5c8f1bc-e669-405d-b78c-217769d46826",
+      "type": "http",
+      "documentation": "Play-offs Seeding",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/2/seeding",
+      "responses": [
+        {
+          "uuid": "1c1997b4-1134-4b3d-8308-5de60a8709d1",
+          "body": "{\n    \"WEAK\": [\n        {\n            \"id\": 6,\n            \"name\": \"Nigeria\",\n            \"coefficients\": 2200,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Brazil\",\n            \"coefficients\": 1900,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 31,\n            \"name\": \"Serbia\",\n            \"coefficients\": 1433,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Cameroon\",\n            \"coefficients\": 1400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Egypt\",\n            \"coefficients\": 1400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 44,\n            \"name\": \"Scotland\",\n            \"coefficients\": 1100,\n            \"seed\": \"WEAK\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"W\"\n                }\n            ]\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Belgium\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Denmark\",\n            \"coefficients\": 400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Austria\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        }\n    ],\n    \"STRONG\": [\n        {\n            \"id\": 24,\n            \"name\": \"Greece\",\n            \"coefficients\": 13050,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 41,\n            \"name\": \"Norway\",\n            \"coefficients\": 10900,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 27,\n            \"name\": \"Netherlands\",\n            \"coefficients\": 10450,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 39,\n            \"name\": \"Ghana\",\n            \"coefficients\": 8200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 25,\n            \"name\": \"Iceland\",\n            \"coefficients\": 8100,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 28,\n            \"name\": \"Poland\",\n            \"coefficients\": 3000,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 36,\n            \"name\": \"Turkey\",\n            \"coefficients\": 2900,\n            \"seed\": \"STRONG\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"R\"\n                }\n            ]\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Senegal\",\n            \"coefficients\": 2250,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Algeria\",\n            \"coefficients\": 2200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "5295c534-51d4-4a12-b998-c00e3581ea0c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/quals2/2",
+      "responses": [
+        {
+          "uuid": "9223122f-c085-4660-a669-e080b05223e2",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4070c533-6421-4124-8f2f-a3297ee7fdf1",
+      "type": "http",
+      "documentation": "Play-offs Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/2/matches",
+      "responses": [
+        {
+          "uuid": "39c1ddb2-7cd5-4fde-a04c-d55068ec1a26",
+          "body": "{\n    \"-1\": [\n        {\n            \"id\": 195,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"result\": {\n                \"id\": 195,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": -1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 196,\n            \"homeTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 196,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": -1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        }\n    ],\n    \"1\": [\n        {\n            \"id\": 177,\n            \"homeTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 177,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 178,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"result\": {\n                \"id\": 178,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 179,\n            \"homeTeam\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            },\n            \"awayTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"result\": {\n                \"id\": 179,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            }\n        },\n        {\n            \"id\": 180,\n            \"homeTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"awayTeam\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            },\n            \"result\": {\n                \"id\": 180,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            }\n        },\n        {\n            \"id\": 181,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            },\n            \"result\": {\n                \"id\": 181,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 182,\n            \"homeTeam\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 182,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 183,\n            \"homeTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"awayTeam\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            },\n            \"result\": {\n                \"id\": 183,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 184,\n            \"homeTeam\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            },\n            \"awayTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"result\": {\n                \"id\": 184,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 185,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 24,\n                \"name\": \"Greece\"\n            },\n            \"result\": {\n                \"id\": 185,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 4\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            }\n        }\n    ],\n    \"2\": [\n        {\n            \"id\": 186,\n            \"homeTeam\": {\n                \"id\": 24,\n                \"name\": \"Greece\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 186,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            }\n        },\n        {\n            \"id\": 187,\n            \"homeTeam\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 187,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 188,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            },\n            \"result\": {\n                \"id\": 188,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 3\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 189,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 41,\n                \"name\": \"Norway\"\n            },\n            \"result\": {\n                \"id\": 189,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 190,\n            \"homeTeam\": {\n                \"id\": 41,\n                \"name\": \"Norway\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 190,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 191,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 39,\n                \"name\": \"Ghana\"\n            },\n            \"result\": {\n                \"id\": 191,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        },\n        {\n            \"id\": 192,\n            \"homeTeam\": {\n                \"id\": 39,\n                \"name\": \"Ghana\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 192,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        },\n        {\n            \"id\": 193,\n            \"homeTeam\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            },\n            \"awayTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"result\": {\n                \"id\": 193,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            }\n        },\n        {\n            \"id\": 194,\n            \"homeTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"awayTeam\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            },\n            \"result\": {\n                \"id\": 194,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            }\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d43993cd-2d39-4d41-b727-2781b208043e",
+      "type": "http",
+      "documentation": "1st Group Stage Seeding",
+      "method": "get",
+      "endpoint": "rest/seasons/2/groups/1/seeding",
+      "responses": [
+        {
+          "uuid": "bb9e0dbf-bab3-4ebe-bbb7-2272426be988",
+          "body": "{\n    \"WEAK\": [\n        {\n            \"id\": 44,\n            \"name\": \"Scotland\",\n            \"coefficients\": 1100,\n            \"seed\": \"WEAK\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"W\"\n                }\n            ]\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Belgium\",\n            \"coefficients\": 500,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Denmark\",\n            \"coefficients\": 400,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Austria\",\n            \"coefficients\": 0,\n            \"seed\": \"WEAK\",\n            \"trophies\": []\n        }\n    ],\n    \"STRONG\": [\n        {\n            \"id\": 30,\n            \"name\": \"Russia\",\n            \"coefficients\": 17000,\n            \"seed\": \"STRONG\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 1,\n                    \"type\": \"R\"\n                }\n            ]\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Morocco\",\n            \"coefficients\": 15900,\n            \"seed\": \"STRONG\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 1,\n                    \"type\": \"W\"\n                }\n            ]\n        },\n        {\n            \"id\": 17,\n            \"name\": \"Bosnia\",\n            \"coefficients\": 15200,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 27,\n            \"name\": \"Netherlands\",\n            \"coefficients\": 10450,\n            \"seed\": \"STRONG\",\n            \"trophies\": []\n        }\n    ],\n    \"MEDIUM\": [\n        {\n            \"id\": 25,\n            \"name\": \"Iceland\",\n            \"coefficients\": 8100,\n            \"seed\": \"MEDIUM\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 36,\n            \"name\": \"Turkey\",\n            \"coefficients\": 2900,\n            \"seed\": \"MEDIUM\",\n            \"trophies\": [\n                {\n                    \"seasonNum\": 2,\n                    \"type\": \"R\"\n                }\n            ]\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Algeria\",\n            \"coefficients\": 2200,\n            \"seed\": \"MEDIUM\",\n            \"trophies\": []\n        },\n        {\n            \"id\": 31,\n            \"name\": \"Serbia\",\n            \"coefficients\": 1433,\n            \"seed\": \"MEDIUM\",\n            \"trophies\": []\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "fb57a5e7-5fda-4f99-a9c5-edc5071c19a6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/groups1/2",
+      "responses": [
+        {
+          "uuid": "0f8ad754-9787-45eb-b330-868137a0f60e",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "c81e8962-7375-48aa-a358-28c083271049",
+      "type": "http",
+      "documentation": "1st Group Stage data",
+      "method": "get",
+      "endpoint": "rest/seasons/2/groups/1",
+      "responses": [
+        {
+          "uuid": "5a127813-84c1-4380-8c92-ca9c1e398077",
+          "body": "[\n    {\n        \"id\": 9,\n        \"name\": \"Group A\",\n        \"teams\": [\n            {\n                \"id\": 36,\n                \"name\": \"Turkey\",\n                \"stats\": {\n                    \"id\": 110,\n                    \"elo\": 0,\n                    \"points\": 6,\n                    \"wins\": 2,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 14,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 13\n                }\n            },\n            {\n                \"id\": 30,\n                \"name\": \"Russia\",\n                \"stats\": {\n                    \"id\": 109,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 7,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 7\n                }\n            },\n            {\n                \"id\": 15,\n                \"name\": \"Austria\",\n                \"stats\": {\n                    \"id\": 111,\n                    \"elo\": 0,\n                    \"points\": 3,\n                    \"wins\": 1,\n                    \"draws\": 0,\n                    \"losses\": 1,\n                    \"goalsScored\": 3,\n                    \"goalsConceded\": 2,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 1\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 197,\n                \"homeTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"awayTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"result\": {\n                    \"id\": 197,\n                    \"goalsMadeByHomeTeam\": 7,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 198,\n                \"homeTeam\": {\n                    \"id\": 15,\n                    \"name\": \"Austria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"result\": {\n                    \"id\": 198,\n                    \"goalsMadeByHomeTeam\": 1,\n                    \"goalsMadeByAwayTeam\": 2\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 199,\n                \"homeTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 15,\n                    \"name\": \"Austria\"\n                },\n                \"result\": {\n                    \"id\": 205,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 200,\n                \"homeTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"awayTeam\": {\n                    \"id\": 15,\n                    \"name\": \"Austria\"\n                },\n                \"result\": {\n                    \"id\": 206,\n                    \"goalsMadeByHomeTeam\": 7,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 201,\n                \"homeTeam\": {\n                    \"id\": 15,\n                    \"name\": \"Austria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"result\": {\n                    \"id\": 213,\n                    \"goalsMadeByHomeTeam\": 2,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 202,\n                \"homeTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"result\": {\n                    \"id\": 214,\n                    \"goalsMadeByHomeTeam\": 7,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            }\n        ],\n        \"round\": 1,\n        \"seasonNum\": 2\n    },\n    {\n        \"id\": 11,\n        \"name\": \"Group B\",\n        \"teams\": [\n            {\n                \"id\": 20,\n                \"name\": \"Denmark\",\n                \"stats\": {\n                    \"id\": 116,\n                    \"elo\": 0,\n                    \"points\": 6,\n                    \"wins\": 2,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 10,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 9\n                }\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Algeria\",\n                \"stats\": {\n                    \"id\": 115,\n                    \"elo\": 0,\n                    \"points\": 6,\n                    \"wins\": 2,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 6,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 6\n                }\n            },\n            {\n                \"id\": 17,\n                \"name\": \"Bosnia\",\n                \"stats\": {\n                    \"id\": 117,\n                    \"elo\": 0,\n                    \"points\": 3,\n                    \"wins\": 1,\n                    \"draws\": 0,\n                    \"losses\": 1,\n                    \"goalsScored\": 5,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 4\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 209,\n                \"homeTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 17,\n                    \"name\": \"Bosnia\"\n                },\n                \"result\": {\n                    \"id\": 201,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 210,\n                \"homeTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"awayTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"result\": {\n                    \"id\": 202,\n                    \"goalsMadeByHomeTeam\": 9,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 211,\n                \"homeTeam\": {\n                    \"id\": 17,\n                    \"name\": \"Bosnia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"result\": {\n                    \"id\": 209,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 212,\n                \"homeTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"result\": {\n                    \"id\": 210,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 213,\n                \"homeTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"awayTeam\": {\n                    \"id\": 17,\n                    \"name\": \"Bosnia\"\n                },\n                \"result\": {\n                    \"id\": 217,\n                    \"goalsMadeByHomeTeam\": 1,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 214,\n                \"homeTeam\": {\n                    \"id\": 17,\n                    \"name\": \"Bosnia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"result\": {\n                    \"id\": 218,\n                    \"goalsMadeByHomeTeam\": 5,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            }\n        ],\n        \"round\": 1,\n        \"seasonNum\": 2\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Group C\",\n        \"teams\": [\n            {\n                \"id\": 44,\n                \"name\": \"Scotland\",\n                \"stats\": {\n                    \"id\": 113,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 3,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 3\n                }\n            },\n            {\n                \"id\": 31,\n                \"name\": \"Serbia\",\n                \"stats\": {\n                    \"id\": 112,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 4,\n                    \"goalsConceded\": 2,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 2\n                }\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Morocco\",\n                \"stats\": {\n                    \"id\": 114,\n                    \"elo\": 0,\n                    \"points\": 1,\n                    \"wins\": 0,\n                    \"draws\": 1,\n                    \"losses\": 1,\n                    \"goalsScored\": 0,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": -1\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 203,\n                \"homeTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"result\": {\n                    \"id\": 199,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 204,\n                \"homeTeam\": {\n                    \"id\": 5,\n                    \"name\": \"Morocco\"\n                },\n                \"awayTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"result\": {\n                    \"id\": 200,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 205,\n                \"homeTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 5,\n                    \"name\": \"Morocco\"\n                },\n                \"result\": {\n                    \"id\": 207,\n                    \"goalsMadeByHomeTeam\": 4,\n                    \"goalsMadeByAwayTeam\": 2\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 206,\n                \"homeTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 5,\n                    \"name\": \"Morocco\"\n                },\n                \"result\": {\n                    \"id\": 208,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 207,\n                \"homeTeam\": {\n                    \"id\": 5,\n                    \"name\": \"Morocco\"\n                },\n                \"awayTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"result\": {\n                    \"id\": 215,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 208,\n                \"homeTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"result\": {\n                    \"id\": 216,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            }\n        ],\n        \"round\": 1,\n        \"seasonNum\": 2\n    },\n    {\n        \"id\": 12,\n        \"name\": \"Group D\",\n        \"teams\": [\n            {\n                \"id\": 25,\n                \"name\": \"Iceland\",\n                \"stats\": {\n                    \"id\": 118,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 7,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 7\n                }\n            },\n            {\n                \"id\": 16,\n                \"name\": \"Belgium\",\n                \"stats\": {\n                    \"id\": 119,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 4,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 3\n                }\n            },\n            {\n                \"id\": 27,\n                \"name\": \"Netherlands\",\n                \"stats\": {\n                    \"id\": 120,\n                    \"elo\": 0,\n                    \"points\": 4,\n                    \"wins\": 1,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 3,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 2,\n                    \"goalDifference\": 3\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 215,\n                \"homeTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"awayTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"result\": {\n                    \"id\": 203,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 216,\n                \"homeTeam\": {\n                    \"id\": 27,\n                    \"name\": \"Netherlands\"\n                },\n                \"awayTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"result\": {\n                    \"id\": 204,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 217,\n                \"homeTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 27,\n                    \"name\": \"Netherlands\"\n                },\n                \"result\": {\n                    \"id\": 211,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 218,\n                \"homeTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"awayTeam\": {\n                    \"id\": 27,\n                    \"name\": \"Netherlands\"\n                },\n                \"result\": {\n                    \"id\": 212,\n                    \"goalsMadeByHomeTeam\": 1,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 219,\n                \"homeTeam\": {\n                    \"id\": 27,\n                    \"name\": \"Netherlands\"\n                },\n                \"awayTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"result\": {\n                    \"id\": 219,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 220,\n                \"homeTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"result\": {\n                    \"id\": 220,\n                    \"goalsMadeByHomeTeam\": 7,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            }\n        ],\n        \"round\": 1,\n        \"seasonNum\": 2\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7840c149-9ae8-4a1a-9971-150c5350e331",
+      "type": "http",
+      "documentation": "1st Group Stage Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/groups/1/matches",
+      "responses": [
+        {
+          "uuid": "b4caead6-d403-4835-8691-3950d9712d8c",
+          "body": "{\n    \"1\": [\n        {\n            \"id\": 197,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"result\": {\n                \"id\": 197,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 198,\n            \"homeTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 198,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 209,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 17,\n                \"name\": \"Bosnia\"\n            },\n            \"result\": {\n                \"id\": 201,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 210,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 202,\n                \"goalsMadeByHomeTeam\": 9,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 203,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 199,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 204,\n            \"homeTeam\": {\n                \"id\": 5,\n                \"name\": \"Morocco\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 200,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 215,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"result\": {\n                \"id\": 203,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 216,\n            \"homeTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 204,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        }\n    ],\n    \"2\": [\n        {\n            \"id\": 199,\n            \"homeTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"awayTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"result\": {\n                \"id\": 205,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 200,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"result\": {\n                \"id\": 206,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 211,\n            \"homeTeam\": {\n                \"id\": 17,\n                \"name\": \"Bosnia\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 209,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 212,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 210,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 205,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 5,\n                \"name\": \"Morocco\"\n            },\n            \"result\": {\n                \"id\": 207,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 206,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 5,\n                \"name\": \"Morocco\"\n            },\n            \"result\": {\n                \"id\": 208,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 217,\n            \"homeTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"awayTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"result\": {\n                \"id\": 211,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 218,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"result\": {\n                \"id\": 212,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2\n        }\n    ],\n    \"3\": [\n        {\n            \"id\": 201,\n            \"homeTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"awayTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"result\": {\n                \"id\": 213,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 202,\n            \"homeTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 214,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 213,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 17,\n                \"name\": \"Bosnia\"\n            },\n            \"result\": {\n                \"id\": 217,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 214,\n            \"homeTeam\": {\n                \"id\": 17,\n                \"name\": \"Bosnia\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 218,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 207,\n            \"homeTeam\": {\n                \"id\": 5,\n                \"name\": \"Morocco\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 215,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 208,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 216,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 219,\n            \"homeTeam\": {\n                \"id\": 27,\n                \"name\": \"Netherlands\"\n            },\n            \"awayTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"result\": {\n                \"id\": 219,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 220,\n            \"homeTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 220,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1e3f3594-27da-4550-b6fe-12a430c9d011",
+      "type": "http",
+      "documentation": "2nd Group Stage Data",
+      "method": "get",
+      "endpoint": "rest/seasons/2/groups/2",
+      "responses": [
+        {
+          "uuid": "eed3013b-8058-4951-b72c-a97689672bd6",
+          "body": "[\n    {\n        \"id\": 13,\n        \"name\": \"GROUP A\",\n        \"teams\": [\n            {\n                \"id\": 36,\n                \"name\": \"Turkey\",\n                \"stats\": {\n                    \"id\": 124,\n                    \"elo\": 0,\n                    \"points\": 12,\n                    \"wins\": 4,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 22,\n                    \"goalsConceded\": 2,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 20\n                }\n            },\n            {\n                \"id\": 1,\n                \"name\": \"Algeria\",\n                \"stats\": {\n                    \"id\": 122,\n                    \"elo\": 0,\n                    \"points\": 12,\n                    \"wins\": 4,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 16,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 15\n                }\n            },\n            {\n                \"id\": 20,\n                \"name\": \"Denmark\",\n                \"stats\": {\n                    \"id\": 123,\n                    \"elo\": 0,\n                    \"points\": 12,\n                    \"wins\": 4,\n                    \"draws\": 0,\n                    \"losses\": 0,\n                    \"goalsScored\": 14,\n                    \"goalsConceded\": 3,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 11\n                }\n            },\n            {\n                \"id\": 30,\n                \"name\": \"Russia\",\n                \"stats\": {\n                    \"id\": 121,\n                    \"elo\": 0,\n                    \"points\": 6,\n                    \"wins\": 1,\n                    \"draws\": 3,\n                    \"losses\": 0,\n                    \"goalsScored\": 7,\n                    \"goalsConceded\": 0,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 7\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 221,\n                \"homeTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"awayTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"result\": {\n                    \"id\": 221,\n                    \"goalsMadeByHomeTeam\": 5,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 222,\n                \"homeTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"result\": {\n                    \"id\": 222,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 223,\n                \"homeTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"result\": {\n                    \"id\": 225,\n                    \"goalsMadeByHomeTeam\": 4,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 224,\n                \"homeTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"awayTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"result\": {\n                    \"id\": 226,\n                    \"goalsMadeByHomeTeam\": 2,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 225,\n                \"homeTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"result\": {\n                    \"id\": 229,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 226,\n                \"homeTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"awayTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"result\": {\n                    \"id\": 230,\n                    \"goalsMadeByHomeTeam\": 3,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 227,\n                \"homeTeam\": {\n                    \"id\": 1,\n                    \"name\": \"Algeria\"\n                },\n                \"awayTeam\": {\n                    \"id\": 30,\n                    \"name\": \"Russia\"\n                },\n                \"result\": {\n                    \"id\": 233,\n                    \"goalsMadeByHomeTeam\": 6,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 4\n            },\n            {\n                \"id\": 228,\n                \"homeTeam\": {\n                    \"id\": 20,\n                    \"name\": \"Denmark\"\n                },\n                \"awayTeam\": {\n                    \"id\": 36,\n                    \"name\": \"Turkey\"\n                },\n                \"result\": {\n                    \"id\": 234,\n                    \"goalsMadeByHomeTeam\": 2,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 4\n            }\n        ],\n        \"round\": 2,\n        \"seasonNum\": 2\n    },\n    {\n        \"id\": 14,\n        \"name\": \"GROUP B\",\n        \"teams\": [\n            {\n                \"id\": 44,\n                \"name\": \"Scotland\",\n                \"stats\": {\n                    \"id\": 125,\n                    \"elo\": 0,\n                    \"points\": 10,\n                    \"wins\": 3,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 14,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 13\n                }\n            },\n            {\n                \"id\": 31,\n                \"name\": \"Serbia\",\n                \"stats\": {\n                    \"id\": 128,\n                    \"elo\": 0,\n                    \"points\": 10,\n                    \"wins\": 3,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 13,\n                    \"goalsConceded\": 2,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 11\n                }\n            },\n            {\n                \"id\": 16,\n                \"name\": \"Belgium\",\n                \"stats\": {\n                    \"id\": 126,\n                    \"elo\": 0,\n                    \"points\": 10,\n                    \"wins\": 3,\n                    \"draws\": 1,\n                    \"losses\": 0,\n                    \"goalsScored\": 11,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 10\n                }\n            },\n            {\n                \"id\": 25,\n                \"name\": \"Iceland\",\n                \"stats\": {\n                    \"id\": 127,\n                    \"elo\": 0,\n                    \"points\": 7,\n                    \"wins\": 2,\n                    \"draws\": 1,\n                    \"losses\": 1,\n                    \"goalsScored\": 9,\n                    \"goalsConceded\": 1,\n                    \"matchesPlayed\": 4,\n                    \"goalDifference\": 8\n                }\n            }\n        ],\n        \"games\": [\n            {\n                \"id\": 229,\n                \"homeTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"result\": {\n                    \"id\": 223,\n                    \"goalsMadeByHomeTeam\": 10,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 230,\n                \"homeTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"result\": {\n                    \"id\": 224,\n                    \"goalsMadeByHomeTeam\": 5,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 1\n            },\n            {\n                \"id\": 231,\n                \"homeTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"awayTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"result\": {\n                    \"id\": 227,\n                    \"goalsMadeByHomeTeam\": 2,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 232,\n                \"homeTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"result\": {\n                    \"id\": 228,\n                    \"goalsMadeByHomeTeam\": 0,\n                    \"goalsMadeByAwayTeam\": 1\n                },\n                \"day\": 2\n            },\n            {\n                \"id\": 233,\n                \"homeTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"awayTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"result\": {\n                    \"id\": 231,\n                    \"goalsMadeByHomeTeam\": 4,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 234,\n                \"homeTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"result\": {\n                    \"id\": 232,\n                    \"goalsMadeByHomeTeam\": 1,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 3\n            },\n            {\n                \"id\": 235,\n                \"homeTeam\": {\n                    \"id\": 16,\n                    \"name\": \"Belgium\"\n                },\n                \"awayTeam\": {\n                    \"id\": 31,\n                    \"name\": \"Serbia\"\n                },\n                \"result\": {\n                    \"id\": 235,\n                    \"goalsMadeByHomeTeam\": 5,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 4\n            },\n            {\n                \"id\": 236,\n                \"homeTeam\": {\n                    \"id\": 25,\n                    \"name\": \"Iceland\"\n                },\n                \"awayTeam\": {\n                    \"id\": 44,\n                    \"name\": \"Scotland\"\n                },\n                \"result\": {\n                    \"id\": 236,\n                    \"goalsMadeByHomeTeam\": 2,\n                    \"goalsMadeByAwayTeam\": 0\n                },\n                \"day\": 4\n            }\n        ],\n        \"round\": 2,\n        \"seasonNum\": 2\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "31846a2e-b90a-4557-b376-f424aa9405a0",
+      "type": "http",
+      "documentation": "2nd Group Stage Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/groups/2/matches",
+      "responses": [
+        {
+          "uuid": "870489e2-15bc-45d5-a186-ba42db214482",
+          "body": "{\n    \"1\": [\n        {\n            \"id\": 221,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 221,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 222,\n            \"homeTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 222,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 229,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"result\": {\n                \"id\": 223,\n                \"goalsMadeByHomeTeam\": 10,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1\n        },\n        {\n            \"id\": 230,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 224,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1\n        }\n    ],\n    \"2\": [\n        {\n            \"id\": 223,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 225,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 224,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"result\": {\n                \"id\": 226,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 231,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 227,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2\n        },\n        {\n            \"id\": 232,\n            \"homeTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 228,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2\n        }\n    ],\n    \"3\": [\n        {\n            \"id\": 225,\n            \"homeTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 229,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 226,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 230,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 233,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"result\": {\n                \"id\": 231,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        },\n        {\n            \"id\": 234,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 232,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 3\n        }\n    ],\n    \"4\": [\n        {\n            \"id\": 227,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 30,\n                \"name\": \"Russia\"\n            },\n            \"result\": {\n                \"id\": 233,\n                \"goalsMadeByHomeTeam\": 6,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 4\n        },\n        {\n            \"id\": 228,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 234,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 4\n        },\n        {\n            \"id\": 235,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 235,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 4\n        },\n        {\n            \"id\": 236,\n            \"homeTeam\": {\n                \"id\": 25,\n                \"name\": \"Iceland\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 236,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 4\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "bfb3a684-6ed4-4f4a-9c0f-0c91cdf988a9",
+      "type": "http",
+      "documentation": "Qualifying Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/quals/1/matches",
+      "responses": [
+        {
+          "uuid": "50d5ec02-8932-4415-9c34-753b188885e2",
+          "body": "{\n    \"1\": [\n        {\n            \"id\": 151,\n            \"homeTeam\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 151,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 152,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 12,\n                \"name\": \"Chile\"\n            },\n            \"result\": {\n                \"id\": 152,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 153,\n            \"homeTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"awayTeam\": {\n                \"id\": 43,\n                \"name\": \"Romania\"\n            },\n            \"result\": {\n                \"id\": 153,\n                \"goalsMadeByHomeTeam\": 9,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 154,\n            \"homeTeam\": {\n                \"id\": 43,\n                \"name\": \"Romania\"\n            },\n            \"awayTeam\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            },\n            \"result\": {\n                \"id\": 154,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 15,\n                \"name\": \"Austria\"\n            }\n        },\n        {\n            \"id\": 155,\n            \"homeTeam\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            },\n            \"awayTeam\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            },\n            \"result\": {\n                \"id\": 155,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            }\n        },\n        {\n            \"id\": 156,\n            \"homeTeam\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            },\n            \"awayTeam\": {\n                \"id\": 19,\n                \"name\": \"Czechia\"\n            },\n            \"result\": {\n                \"id\": 156,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 11,\n                \"name\": \"Brazil\"\n            }\n        },\n        {\n            \"id\": 157,\n            \"homeTeam\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            },\n            \"awayTeam\": {\n                \"id\": 8,\n                \"name\": \"Mexico\"\n            },\n            \"result\": {\n                \"id\": 157,\n                \"goalsMadeByHomeTeam\": 6,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            }\n        },\n        {\n            \"id\": 158,\n            \"homeTeam\": {\n                \"id\": 8,\n                \"name\": \"Mexico\"\n            },\n            \"awayTeam\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            },\n            \"result\": {\n                \"id\": 158,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 4,\n                \"name\": \"Egypt\"\n            }\n        },\n        {\n            \"id\": 159,\n            \"homeTeam\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            },\n            \"awayTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"result\": {\n                \"id\": 159,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 3\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            }\n        },\n        {\n            \"id\": 160,\n            \"homeTeam\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 34,\n                \"name\": \"Sweden\"\n            },\n            \"result\": {\n                \"id\": 160,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 6,\n                \"name\": \"Nigeria\"\n            }\n        },\n        {\n            \"id\": 161,\n            \"homeTeam\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            },\n            \"awayTeam\": {\n                \"id\": 42,\n                \"name\": \"Ireland\"\n            },\n            \"result\": {\n                \"id\": 161,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            }\n        },\n        {\n            \"id\": 162,\n            \"homeTeam\": {\n                \"id\": 42,\n                \"name\": \"Ireland\"\n            },\n            \"awayTeam\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            },\n            \"result\": {\n                \"id\": 162,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 3,\n                \"name\": \"Cameroon\"\n            }\n        },\n        {\n            \"id\": 163,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 37,\n                \"name\": \"Ukraine\"\n            },\n            \"result\": {\n                \"id\": 163,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        }\n    ],\n    \"2\": [\n        {\n            \"id\": 164,\n            \"homeTeam\": {\n                \"id\": 37,\n                \"name\": \"Ukraine\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 164,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            }\n        },\n        {\n            \"id\": 165,\n            \"homeTeam\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 165,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 166,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 13,\n                \"name\": \"Colombia\"\n            },\n            \"result\": {\n                \"id\": 166,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 167,\n            \"homeTeam\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            },\n            \"awayTeam\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            },\n            \"result\": {\n                \"id\": 167,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            }\n        },\n        {\n            \"id\": 168,\n            \"homeTeam\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            },\n            \"awayTeam\": {\n                \"id\": 38,\n                \"name\": \"Wales\"\n            },\n            \"result\": {\n                \"id\": 168,\n                \"goalsMadeByHomeTeam\": 4,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 28,\n                \"name\": \"Poland\"\n            }\n        },\n        {\n            \"id\": 169,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 23,\n                \"name\": \"Germany\"\n            },\n            \"result\": {\n                \"id\": 169,\n                \"goalsMadeByHomeTeam\": 8,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 170,\n            \"homeTeam\": {\n                \"id\": 23,\n                \"name\": \"Germany\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 170,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 171,\n            \"homeTeam\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            },\n            \"awayTeam\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            },\n            \"result\": {\n                \"id\": 171,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            }\n        },\n        {\n            \"id\": 172,\n            \"homeTeam\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            },\n            \"awayTeam\": {\n                \"id\": 40,\n                \"name\": \"Slovenia\"\n            },\n            \"result\": {\n                \"id\": 172,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 7,\n                \"name\": \"Senegal\"\n            }\n        },\n        {\n            \"id\": 173,\n            \"homeTeam\": {\n                \"id\": 18,\n                \"name\": \"Croatia\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 173,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            }\n        },\n        {\n            \"id\": 174,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 18,\n                \"name\": \"Croatia\"\n            },\n            \"result\": {\n                \"id\": 174,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            }\n        },\n        {\n            \"id\": 175,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 32,\n                \"name\": \"Slovakia\"\n            },\n            \"result\": {\n                \"id\": 175,\n                \"goalsMadeByHomeTeam\": 8,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 176,\n            \"homeTeam\": {\n                \"id\": 32,\n                \"name\": \"Slovakia\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 176,\n                \"goalsMadeByHomeTeam\": 6,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "52da0ce5-9b52-44e0-a0fc-1f61e6ea56c6",
+      "type": "http",
+      "documentation": "Knockout Matches",
+      "method": "get",
+      "endpoint": "rest/seasons/2/playoffs/matches",
+      "responses": [
+        {
+          "uuid": "475b780e-5f00-4bab-bbe1-a29e449f6d90",
+          "body": "{\n    \"semis\": [\n        {\n            \"id\": 241,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 241,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 242,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 242,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 245,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 243,\n                \"goalsMadeByHomeTeam\": 7,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 246,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 244,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 2\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 243,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 245,\n                \"goalsMadeByHomeTeam\": 5,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 244,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 246,\n                \"goalsMadeByHomeTeam\": 10,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            }\n        },\n        {\n            \"id\": 247,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 247,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 248,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 248,\n                \"goalsMadeByHomeTeam\": 9,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        }\n    ],\n    \"finals\": [\n        {\n            \"id\": 249,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 249,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 250,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 250,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 251,\n            \"homeTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"awayTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"result\": {\n                \"id\": 251,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        },\n        {\n            \"id\": 252,\n            \"homeTeam\": {\n                \"id\": 36,\n                \"name\": \"Turkey\"\n            },\n            \"awayTeam\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            },\n            \"result\": {\n                \"id\": 252,\n                \"goalsMadeByHomeTeam\": 1,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 2,\n            \"winner\": {\n                \"id\": 44,\n                \"name\": \"Scotland\"\n            }\n        }\n    ],\n    \"quarters\": [\n        {\n            \"id\": 237,\n            \"homeTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"awayTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"result\": {\n                \"id\": 237,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 3\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 238,\n            \"homeTeam\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            },\n            \"awayTeam\": {\n                \"id\": 16,\n                \"name\": \"Belgium\"\n            },\n            \"result\": {\n                \"id\": 238,\n                \"goalsMadeByHomeTeam\": 0,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 1,\n                \"name\": \"Algeria\"\n            }\n        },\n        {\n            \"id\": 239,\n            \"homeTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"awayTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"result\": {\n                \"id\": 239,\n                \"goalsMadeByHomeTeam\": 3,\n                \"goalsMadeByAwayTeam\": 0\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        },\n        {\n            \"id\": 240,\n            \"homeTeam\": {\n                \"id\": 31,\n                \"name\": \"Serbia\"\n            },\n            \"awayTeam\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            },\n            \"result\": {\n                \"id\": 240,\n                \"goalsMadeByHomeTeam\": 2,\n                \"goalsMadeByAwayTeam\": 1\n            },\n            \"day\": 1,\n            \"winner\": {\n                \"id\": 20,\n                \"name\": \"Denmark\"\n            }\n        }\n    ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7c887ecb-27d9-490c-b728-71b6cfd75703",
+      "type": "http",
+      "documentation": "Knockout Structure",
+      "method": "get",
+      "endpoint": "rest/seasons/2/playoffs/structure",
+      "responses": [
+        {
+          "uuid": "5ceeb777-7da8-4b3f-a44a-3890e8109c96",
+          "body": "{\n    \"gA1\": {\n        \"id\": 36,\n        \"name\": \"Turkey\"\n    },\n    \"gB2\": {\n        \"id\": 31,\n        \"name\": \"Serbia\"\n    },\n    \"gB1\": {\n        \"id\": 44,\n        \"name\": \"Scotland\"\n    },\n    \"gA3\": {\n        \"id\": 20,\n        \"name\": \"Denmark\"\n    },\n    \"gA2\": {\n        \"id\": 1,\n        \"name\": \"Algeria\"\n    },\n    \"gB3\": {\n        \"id\": 16,\n        \"name\": \"Belgium\"\n    },\n    \"W1\": {\n        \"id\": 44,\n        \"name\": \"Scotland\"\n    },\n    \"F1\": {\n        \"id\": 36,\n        \"name\": \"Turkey\"\n    },\n    \"F2\": {\n        \"id\": 44,\n        \"name\": \"Scotland\"\n    },\n    \"S1\": {\n        \"id\": 20,\n        \"name\": \"Denmark\"\n    },\n    \"S2\": {\n        \"id\": 1,\n        \"name\": \"Algeria\"\n    }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3625c2b9-67f1-4518-a737-874efd3aed41",
+      "type": "http",
+      "documentation": "Knockout Odds",
+      "method": "get",
+      "endpoint": "rest/seasons/2/playoffs/odds",
+      "responses": [
+        {
+          "uuid": "bf2fef99-af5d-4231-93b1-cf83a159ade5",
+          "body": "[\n    {\n        \"id\": 44,\n        \"name\": \"Scotland\",\n        \"odds\": 2.45,\n        \"chances\": 0.41000000000000003\n    },\n    {\n        \"id\": 36,\n        \"name\": \"Turkey\",\n        \"odds\": 3.0,\n        \"chances\": 0.32\n    },\n    {\n        \"id\": 1,\n        \"name\": \"Algeria\",\n        \"odds\": 12.0,\n        \"chances\": 0.08\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Denmark\",\n        \"odds\": 12.0,\n        \"chances\": 0.08\n    },\n    {\n        \"id\": 31,\n        \"name\": \"Serbia\",\n        \"odds\": 16.0,\n        \"chances\": 0.06\n    },\n    {\n        \"id\": 16,\n        \"name\": \"Belgium\",\n        \"odds\": 25.0,\n        \"chances\": 0.04\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "956a200e-bba7-4628-a3cc-a356034e0162",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/teams/",
+      "responses": [
+        {
+          "uuid": "5e838c71-c7a2-4ad4-bb23-542ad94a5704",
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Algeria\"\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Argentina\"\n    },\n    {\n        \"id\": 15,\n        \"name\": \"Austria\"\n    },\n    {\n        \"id\": 16,\n        \"name\": \"Belgium\"\n    },\n    {\n        \"id\": 17,\n        \"name\": \"Bosnia\"\n    },\n    {\n        \"id\": 11,\n        \"name\": \"Brazil\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Cameroon\"\n    },\n    {\n        \"id\": 12,\n        \"name\": \"Chile\"\n    },\n    {\n        \"id\": 13,\n        \"name\": \"Colombia\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Cote d'Ivoire\"\n    },\n    {\n        \"id\": 18,\n        \"name\": \"Croatia\"\n    },\n    {\n        \"id\": 19,\n        \"name\": \"Czechia\"\n    },\n    {\n        \"id\": 20,\n        \"name\": \"Denmark\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Egypt\"\n    },\n    {\n        \"id\": 21,\n        \"name\": \"England\"\n    },\n    {\n        \"id\": 22,\n        \"name\": \"France\"\n    },\n    {\n        \"id\": 23,\n        \"name\": \"Germany\"\n    },\n    {\n        \"id\": 39,\n        \"name\": \"Ghana\"\n    },\n    {\n        \"id\": 24,\n        \"name\": \"Greece\"\n    },\n    {\n        \"id\": 25,\n        \"name\": \"Iceland\"\n    },\n    {\n        \"id\": 42,\n        \"name\": \"Ireland\"\n    },\n    {\n        \"id\": 26,\n        \"name\": \"Italy\"\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Japan\"\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Mexico\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Morocco\"\n    },\n    {\n        \"id\": 27,\n        \"name\": \"Netherlands\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Nigeria\"\n    },\n    {\n        \"id\": 41,\n        \"name\": \"Norway\"\n    },\n    {\n        \"id\": 28,\n        \"name\": \"Poland\"\n    },\n    {\n        \"id\": 29,\n        \"name\": \"Portugal\"\n    },\n    {\n        \"id\": 43,\n        \"name\": \"Romania\"\n    },\n    {\n        \"id\": 30,\n        \"name\": \"Russia\"\n    },\n    {\n        \"id\": 44,\n        \"name\": \"Scotland\"\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Senegal\"\n    },\n    {\n        \"id\": 31,\n        \"name\": \"Serbia\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"Slovakia\"\n    },\n    {\n        \"id\": 40,\n        \"name\": \"Slovenia\"\n    },\n    {\n        \"id\": 33,\n        \"name\": \"Spain\"\n    },\n    {\n        \"id\": 34,\n        \"name\": \"Sweden\"\n    },\n    {\n        \"id\": 35,\n        \"name\": \"Switzerland\"\n    },\n    {\n        \"id\": 36,\n        \"name\": \"Turkey\"\n    },\n    {\n        \"id\": 37,\n        \"name\": \"Ukraine\"\n    },\n    {\n        \"id\": 14,\n        \"name\": \"Uruguay\"\n    },\n    {\n        \"id\": 38,\n        \"name\": \"Wales\"\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "a7475d9a-bbf6-4497-b78f-d7ac72275643",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/players/",
+      "responses": [
+        {
+          "uuid": "35cfc827-d63d-43f3-b808-125d5022a14a",
+          "body": "[]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "99db45a1-8698-4391-8da1-340fa71b6fc5",
+      "type": "http",
+      "documentation": "Season Overview",
+      "method": "get",
+      "endpoint": "rest/seasons/2/overview",
+      "responses": [
+        {
+          "uuid": "742b3a22-2d30-468e-9897-cb84cb46bda8",
+          "body": "{\n    \"runner_up\": {\n        \"id\": 36,\n        \"name\": \"Turkey\"\n    },\n    \"quarterfinalist1\": {\n        \"id\": 16,\n        \"name\": \"Belgium\"\n    },\n    \"overachievers\": null,\n    \"aml\": null,\n    \"st\": null,\n    \"quarterfinalist2\": {\n        \"id\": 31,\n        \"name\": \"Serbia\"\n    },\n    \"cml\": null,\n    \"gk\": null,\n    \"semifinalist1\": {\n        \"id\": 20,\n        \"name\": \"Denmark\"\n    },\n    \"amr\": null,\n    \"dl\": null,\n    \"cmr\": null,\n    \"underperformers\": null,\n    \"dcl\": null,\n    \"dr\": null,\n    \"dcr\": null,\n    \"winner\": {\n        \"id\": 44,\n        \"name\": \"Scotland\"\n    },\n    \"highestScoringGame\": {\n        \"id\": 229,\n        \"homeTeam\": {\n            \"id\": 44,\n            \"name\": \"Scotland\"\n        },\n        \"awayTeam\": {\n            \"id\": 25,\n            \"name\": \"Iceland\"\n        },\n        \"result\": {\n            \"id\": 223,\n            \"goalsMadeByHomeTeam\": 10,\n            \"goalsMadeByAwayTeam\": 1\n        },\n        \"day\": 1\n    },\n    \"worstResult\": {\n        \"id\": 237,\n        \"homeTeam\": {\n            \"id\": 16,\n            \"name\": \"Belgium\"\n        },\n        \"awayTeam\": {\n            \"id\": 1,\n            \"name\": \"Algeria\"\n        },\n        \"result\": {\n            \"id\": 237,\n            \"goalsMadeByHomeTeam\": 0,\n            \"goalsMadeByAwayTeam\": 3\n        },\n        \"day\": 1\n    },\n    \"amc\": null,\n    \"semifinalist2\": {\n        \"id\": 1,\n        \"name\": \"Algeria\"\n    },\n    \"haveToPublish\": true,\n    \"bestWin\": {\n        \"id\": 244,\n        \"homeTeam\": {\n            \"id\": 36,\n            \"name\": \"Turkey\"\n        },\n        \"awayTeam\": {\n            \"id\": 20,\n            \"name\": \"Denmark\"\n        },\n        \"result\": {\n            \"id\": 246,\n            \"goalsMadeByHomeTeam\": 10,\n            \"goalsMadeByAwayTeam\": 0\n        },\n        \"day\": 2\n    },\n    \"player_of_the_year\": null\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "558ee0a6-4ab3-4614-9616-e4dff65d011c",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/property/season_year",
+      "responses": [
+        {
+          "uuid": "4227c4fe-98d5-4e9b-85fc-8eaa0545b9ea",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1709977c-b10d-4d1f-a1a1-89400847eb01",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/season/2",
+      "responses": [
+        {
+          "uuid": "45e4edcb-d3c4-4500-85d3-8dd51b16812e",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3052d971-a606-40f4-8e50-4374a9d768b9",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/groups2/2",
+      "responses": [
+        {
+          "uuid": "f192813e-6469-4d60-8836-b05e76985485",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "458aa77f-b84f-4a01-ab49-0684f3d98f85",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/groups1/2",
+      "responses": [
+        {
+          "uuid": "c7ab332c-1698-4a31-8194-0ed173a1c139",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6da85d34-c653-4d5f-bb49-8edce4f8b278",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/quals2/2",
+      "responses": [
+        {
+          "uuid": "4c36dd4d-8317-4341-b984-910a5ba59067",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "a7a2ea20-de15-495a-87cb-c5b4496c8c81",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/quals0/2",
+      "responses": [
+        {
+          "uuid": "b59e314d-8fec-4b4a-9896-71838f55d361",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "befd8004-60b8-4440-a3cc-8ac8bc345838",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "rest/persist/tabs/quals1/2",
+      "responses": [
+        {
+          "uuid": "437bd485-20dc-40a9-863d-5b2a24b6cd96",
+          "body": "{\"status\":\"success\",\"message\":\"done\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cd8e9a74-2ffa-46c8-8a0e-8a1beaa928b3",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/quals1/2",
+      "responses": [
+        {
+          "uuid": "610493d6-413e-4944-b905-af395c179357",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "74f475ea-a701-4fc8-9c65-c57a23846109",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/groups2/2",
+      "responses": [
+        {
+          "uuid": "c5b33f3a-92fa-4abf-b53e-f09b59a4cecb",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "a359c3fe-3e08-4047-abd5-f185ba2bfe7e",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/knockouts/2",
+      "responses": [
+        {
+          "uuid": "d09692d3-eba8-44d9-8ae5-c468225da885",
+          "body": "0",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -136,11 +1221,43 @@
     },
     {
       "type": "route",
-      "uuid": "45a0614d-16cf-4fe7-8853-4b2fc9f14498"
+      "uuid": "99db45a1-8698-4391-8da1-340fa71b6fc5"
     },
     {
       "type": "route",
-      "uuid": "480726cb-7422-455b-8255-af4f71905cc5"
+      "uuid": "956a200e-bba7-4628-a3cc-a356034e0162"
+    },
+    {
+      "type": "route",
+      "uuid": "a7475d9a-bbf6-4497-b78f-d7ac72275643"
+    },
+    {
+      "type": "route",
+      "uuid": "b6f0ce52-760e-4be8-9199-bef1919d3e5c"
+    },
+    {
+      "type": "folder",
+      "uuid": "6775b40c-d1dc-45b8-bd5a-7d79842e700c"
+    },
+    {
+      "type": "folder",
+      "uuid": "340a7f0f-4500-435a-a643-6e11ec0bdf18"
+    },
+    {
+      "type": "folder",
+      "uuid": "0ce7c808-00a4-4b17-985b-39172ca36152"
+    },
+    {
+      "type": "folder",
+      "uuid": "fe1be5c8-3e29-451c-8e71-3a9632499276"
+    },
+    {
+      "type": "folder",
+      "uuid": "66fb8cdf-cc62-4d61-9d5a-0d157ce4ece5"
+    },
+    {
+      "type": "folder",
+      "uuid": "59fb7136-85a6-4e2b-8577-1a8d48d006ae"
     }
   ],
   "proxyMode": false,
