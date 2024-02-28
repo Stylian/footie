@@ -1,0 +1,179 @@
+{
+  "uuid": "ba0af633-a6ce-41e4-abfb-2af1474c7c23",
+  "lastMigration": 32,
+  "name": "Mockoon",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8080,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "67fc8f15-4202-4f1b-97b1-9283745659d4",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/seasons/",
+      "responses": [
+        {
+          "uuid": "895355bd-b6c5-4e3f-bdfe-7e57472ae277",
+          "body": "5",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e95d7ffc-b4be-42f5-8208-a0aefd4bef9d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/seasons/5/status",
+      "responses": [
+        {
+          "uuid": "36110e15-5ed9-4815-95a6-c315dad7ab06",
+          "body": "{\n  quals1: \"FINISHED\",\n  quals2: \"FINISHED\",\n  groups1: \"FINISHED\",\n  groups2: \"FINISHED\",\n  playoffs: \"FINISHED\",\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "45a0614d-16cf-4fe7-8853-4b2fc9f14498",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/season/5",
+      "responses": [
+        {
+          "uuid": "3d7155dc-1f4f-48a8-8e08-9f5da4bd3f99",
+          "body": "6",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "480726cb-7422-455b-8255-af4f71905cc5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "rest/persist/tabs/season/5/playoffs/structure",
+      "responses": [
+        {
+          "uuid": "85d54b28-d833-44eb-9128-cd4b4637c59e",
+          "body": "{\n                gA1: { id: 1, name=\"Argentina\"},\n                gA2: { id: 1, name=\"Brazil\"},\n                gA3: { id: 1, name=\"Chile\"},\n                gB1: { id: 1, name=\"Greece\"},\n                gB2: { id: 1, name=\"England\"},\n                gB3: { id: 1, name=\"USA\"},\n                S1: { id: 1, name=\"UAE\"},\n                S2: { id: 1, name=\"Japan\"},\n                F1: { id: 1, name=\"S. Korea\"},\n                F2: { id: 1, name=\"Germany\"},\n                W1: { id: 1, name=\"Italy\"},\n            },",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "67fc8f15-4202-4f1b-97b1-9283745659d4"
+    },
+    {
+      "type": "route",
+      "uuid": "e95d7ffc-b4be-42f5-8208-a0aefd4bef9d"
+    },
+    {
+      "type": "route",
+      "uuid": "45a0614d-16cf-4fe7-8853-4b2fc9f14498"
+    },
+    {
+      "type": "route",
+      "uuid": "480726cb-7422-455b-8255-af4f71905cc5"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
