@@ -3,19 +3,13 @@ import LeagueToolbar from "./LeagueToolbar";
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-function Admin() {
+export default function Admin() {
 
     const [pageTitle] = useState("Admin")
-    const [tabActive] = useState(0)
-    const [generalData, setGeneralData] = useState({
-        databaseConnection: false,
-        teamsLoaded: undefined
-    })
-    const [seasonsStages, setSeasonsStages] = useState({ seasonYear: 0 })
-    const [seasonNum, setSeasonNum] = useState(0)
+    const [generalData, setGeneralData] = useState({})
+    const [seasonsStages, setSeasonsStages] = useState({})
     const [canCreateLeague, setCanCreateLeague] = useState(false)
     const [lastRestorePoint, setLastRestorePoint] = useState("")
-    const [isLoaded, setLoaded] = useState(false)
 
     useEffect(() => {
 
@@ -23,36 +17,24 @@ function Admin() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    setLoaded(true)
                     setGeneralData(result)
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
 
         fetch("/rest/admin/stages")
             .then(res => res.json())
             .then(
                 (result) => {
-                    setLoaded(true)
                     setSeasonsStages(result)
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
 
         fetch("/rest/ops/league/can_create_season")
             .then(res => res.json())
             .then(
                 (result) => {
-                    setSeasonNum(result.seasonNum)
                     setCanCreateLeague(result[0])
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
 
         fetch("/rest/admin/restore_point")
@@ -61,9 +43,6 @@ function Admin() {
                 (result) => {
                     setLastRestorePoint(result)
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     });
 
@@ -78,9 +57,6 @@ function Admin() {
                     window.location.reload();
                     setCanCreateLeague(false)
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     }
 
@@ -94,9 +70,6 @@ function Admin() {
                 (result) => {
                     setLastRestorePoint(result)
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     }
 
@@ -110,9 +83,6 @@ function Admin() {
                 (result) => {
                     alert("done recalculation");
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     }
 
@@ -126,9 +96,6 @@ function Admin() {
                 (result) => {
                     alert("done recalculation");
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     }
 
@@ -142,9 +109,6 @@ function Admin() {
                 (result) => {
                     alert("done recalculation");
                 },
-                (error) => {
-                    setLoaded(true) //TODO
-                }
             )
     }
 
@@ -239,4 +203,3 @@ function Admin() {
     );
 }
 
-export default Admin;
