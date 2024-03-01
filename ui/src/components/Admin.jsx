@@ -1,48 +1,33 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-class Admin extends Component {
+function Admin() {
 
-    constructor(props) {
-        super(props);
+    const [pageTitle] = useState("Admin")
+    const [tabActive] = useState(0)
+    const [generalData, setGeneralData] = useState({
+        databaseConnection: false,
+        teamsLoaded: undefined
+    })
+    const [seasonsStages, setSeasonsStages] = useState({ seasonYear: 0 })
+    const [seasonNum, setSeasonNum] = useState(0)
+    const [canCreateLeague, setCanCreateLeague] = useState(false)
+    const [lastRestorePoint, setLastRestorePoint] = useState("")
+    const [isLoaded, setLoaded] = useState(false)
 
-        this.state = {
-            pageTitle: "Admin",
-            tabActive: 0,
-            generalData: {},
-            seasonsStages: {},
-            seasonNum: 0,
-            canCreateLeague: false,
-            lastRestorePoint: "",
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
+    useEffect(() => {
 
         fetch("/rest/admin/general_data")
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            generalData: result
-                        }
-                    });
+                    setLoaded(true)
+                    setGeneralData(result)
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
 
@@ -50,22 +35,11 @@ class Admin extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            seasonsStages: result
-                        }
-                    });
+                    setLoaded(true)
+                    setSeasonsStages(result)
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
 
@@ -73,23 +47,11 @@ class Admin extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            seasonNum: result.seasonNum,
-                            canCreateLeague: result[0],
-                        }
-                    });
+                    setSeasonNum(result.seasonNum)
+                    setCanCreateLeague(result[0])
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
 
@@ -97,27 +59,15 @@ class Admin extends Component {
             .then(res => res.text())
             .then(
                 (result) => {
-
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            lastRestorePoint: result,
-                        }
-                    });
+                    setLastRestorePoint(result)
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
-    }
+    });
 
-    handleButtonClick = (event, newValue) => {
+    const handleButtonClick = (event, newValue) => {
         fetch("/rest/ops/season/create", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -125,29 +75,16 @@ class Admin extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-
                     window.location.reload();
-
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            canCreateLeague: false,
-                        }
-                    });
+                    setCanCreateLeague(false)
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
     }
 
-    handleRestorePointClick = (event, newValue) => {
+    const handleRestorePointClick = (event, newValue) => {
         fetch("/rest/admin/restore_point", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -155,27 +92,15 @@ class Admin extends Component {
             .then(res => res.text())
             .then(
                 (result) => {
-
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            lastRestorePoint: result,
-                        }
-                    });
+                    setLastRestorePoint(result)
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
     }
 
-    handleRecalcCoeffs = (event, newValue) => {
+    const handleRecalcCoeffs = (event, newValue) => {
         fetch("/rest/admin/recalculate_coeffs", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -183,23 +108,15 @@ class Admin extends Component {
             .then(res => res.text())
             .then(
                 (result) => {
-
                     alert("done recalculation");
-
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
     }
 
-    handleRecalcElo = (event, newValue) => {
+    const handleRecalcElo = (event, newValue) => {
         fetch("/rest/admin/recalculate_elo", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -207,23 +124,15 @@ class Admin extends Component {
             .then(res => res.text())
             .then(
                 (result) => {
-
                     alert("done recalculation");
-
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
     }
 
-    handleResetTabs = (event, newValue) => {
+    const handleResetTabs = (event, newValue) => {
         fetch("/rest/admin/reset_tabs", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -231,112 +140,103 @@ class Admin extends Component {
             .then(res => res.text())
             .then(
                 (result) => {
-
                     alert("done recalculation");
-
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true) //TODO
                 }
             )
     }
 
-    render() {
-        return (
-            <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                <Box >
-                    <Grid container spacing={1}>
+    return (
+        <Paper style={{margin: 20}} elevation={20}>
+            <LeagueToolbar pageTitle={pageTitle}/>
+            <Box>
+                <Grid container spacing={1}>
 
-                        <Grid item sm={4}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Seasons Stage"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table">
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell>Season Year</TableCell>
-                                                <TableCell
-                                                    align="right">{this.state.seasonsStages.seasonYear}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>Stage</TableCell>
-                                                <TableCell align="right">{this.state.seasonsStages.stage}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell colSpan-={2}>
-                                                    {this.state.canCreateLeague ? (
-                                                        <Button onClick={this.handleButtonClick}>Create new
-                                                            Season</Button>
-                                                    ) : (
-                                                        <span>a league is currently running</span>
-                                                    )}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item sm={4}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Database"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table">
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell>database connection</TableCell>
-                                                <TableCell>{this.state.generalData.databaseConnection ? "active" : "none"}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>teams loaded</TableCell>
-                                                <TableCell>{this.state.generalData.teamsLoaded}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>last save</TableCell>
-                                                <TableCell align="right">{this.state.lastRestorePoint}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell colSpan-={2}>
-                                                    <Button onClick={this.handleRestorePointClick}>Create Restore
-                                                        Point</Button>
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item sm={4}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Engine Tools"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <Button onClick={this.handleRecalcCoeffs}>Recalculate current season's coeffs</Button>
-                                    <br/>
-                                    <Button onClick={this.handleRecalcElo}>Recalculate Elo from the beginning</Button>
-                                    <br/>
-                                    <Button onClick={this.handleResetTabs}>Reset tab numbers</Button>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"Seasons Stage"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table">
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>Season Year</TableCell>
+                                            <TableCell
+                                                align="right">{seasonsStages.seasonYear}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Stage</TableCell>
+                                            <TableCell align="right">{seasonsStages.stage}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell colSpan-={2}>
+                                                {canCreateLeague ? (
+                                                    <Button onClick={handleButtonClick}>Create new
+                                                        Season</Button>
+                                                ) : (
+                                                    <span>a league is currently running</span>
+                                                )}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
                     </Grid>
-                </Box>
-            </Paper>
-        );
-    }
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"Database"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <table className="table">
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>database connection</TableCell>
+                                            <TableCell>{generalData.databaseConnection ? "active" : "none"}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>teams loaded</TableCell>
+                                            <TableCell>{generalData.teamsLoaded}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>last save</TableCell>
+                                            <TableCell align="right">{lastRestorePoint}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell colSpan-={2}>
+                                                <Button onClick={handleRestorePointClick}>Create Restore
+                                                    Point</Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </table>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item sm={4}>
+                        <Card style={{margin: 20}}>
+                            <CardHeader title={"Engine Tools"} align={"center"}
+                                        titleTypographyProps={{variant: 'h7'}}
+                            />
+                            <CardContent>
+                                <Button onClick={handleRecalcCoeffs}>Recalculate current season's
+                                    coeffs</Button>
+                                <br/>
+                                <Button onClick={handleRecalcElo}>Recalculate Elo from the beginning</Button>
+                                <br/>
+                                <Button onClick={handleResetTabs}>Reset tab numbers</Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                </Grid>
+            </Box>
+        </Paper>
+    );
 }
 
 export default Admin;
