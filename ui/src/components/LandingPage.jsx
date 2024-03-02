@@ -1,58 +1,45 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {Redirect} from "react-router";
 
-class LandingPage extends Component {
+function LandingPage() {
 
-    constructor(props) {
-        super(props);
+    const [pageTitle] = useState("Landing Page")
+    const [currentDisplayedSeason, setCurrentDisplayedSeason] = useState(0)
+    const [isLoaded, setIsLoaded] = useState(false)
 
-        this.state = {
-            pageTitle: "Landing Page",
-            currentDisplayedSeason: 0,
-        };
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         fetch("/rest/seasons/")
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            currentDisplayedSeason: result,
-                            isLoaded: true,
-                        }
-                    });
+
+                    setCurrentDisplayedSeason(result)
+                    setIsLoaded(true)
+
                 },
-                (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                () => {
+                    setIsLoaded(true)
                 }
             )
-    }
+    });
 
-    render() {
-        return this.state.isLoaded ?
-            this.state.currentDisplayedSeason > 0 ? (
+    return isLoaded ?
+        currentDisplayedSeason > 0 ? (
             <div>
-                <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                    <Redirect to={"/season/"+this.state.currentDisplayedSeason} />
+                <LeagueToolbar pageTitle={pageTitle}/>
+                <Redirect to={"/season/"+currentDisplayedSeason} />
+
             </div>
-            ) : (
-                <div>
-                    <LeagueToolbar pageTitle={this.state.pageTitle}/>
-                    <Redirect to={"/admin"} />
-                </div>
-            )
-            : (null)
-    };
+        ) : (
+            <div>
+                <LeagueToolbar pageTitle={pageTitle}/>
+                <Redirect to={"/admin"} />
+
+            </div>
+        )
+        : null
+
 }
 
 export default LandingPage;

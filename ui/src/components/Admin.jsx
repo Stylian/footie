@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -46,21 +46,21 @@ export default function Admin() {
             )
     });
 
-    const handleButtonClick = (event, newValue) => {
+    const handleButtonClick = () => {
         fetch("/rest/ops/season/create", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })
             .then(res => res.json())
             .then(
-                (result) => {
+                () => {
                     window.location.reload();
                     setCanCreateLeague(false)
                 },
             )
     }
 
-    const handleRestorePointClick = (event, newValue) => {
+    const handleRestorePointClick = () => {
         fetch("/rest/admin/restore_point", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -73,40 +73,40 @@ export default function Admin() {
             )
     }
 
-    const handleRecalcCoeffs = (event, newValue) => {
+    const handleRecalcCoeffs = () => {
         fetch("/rest/admin/recalculate_coeffs", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })
             .then(res => res.text())
             .then(
-                (result) => {
+                () => {
                     alert("done recalculation");
                 },
             )
     }
 
-    const handleRecalcElo = (event, newValue) => {
+    const handleRecalcElo = () => {
         fetch("/rest/admin/recalculate_elo", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })
             .then(res => res.text())
             .then(
-                (result) => {
+                () => {
                     alert("done recalculation");
                 },
             )
     }
 
-    const handleResetTabs = (event, newValue) => {
+    const handleResetTabs = () => {
         fetch("/rest/admin/reset_tabs", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
         })
             .then(res => res.text())
             .then(
-                (result) => {
+                () => {
                     alert("done recalculation");
                 },
             )
