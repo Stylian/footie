@@ -70,59 +70,59 @@ export default function Season() {
                     setTabActive(newValue);
                 },
                 (error) => {
-                    setIsLoaded(true);
                     console.error('Error:', error);
                 }
             );
     };
 
-    return (
-        isLoaded ? (
-                <Paper style={{margin: 10}} elevation={20}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={9}>
-                            <LeagueToolbar pageTitle={pageTitle}
-                                           seasonNum={seasonNum}/>
+    if (!isLoaded) {
+        return (<div>Loading...</div>)
+    } else {
+        return (
+            <Paper style={{margin: 10}} elevation={20}>
+                <Grid container spacing={1}>
+                    <Grid item xs={9}>
+                        <LeagueToolbar pageTitle={pageTitle}
+                                       seasonNum={seasonNum}/>
 
-                            <Box style={{margin: 10}}>
-                                <AppBar position="static">
-                                    <Tabs value={tabActive} onChange={handleChange}>
-                                        <Tab label="Seeding"/>
-                                        <Tab disabled={seasonNum === 1}
-                                             label="Preliminary round"/>
-                                        <Tab label="Qualifying round"/>
-                                        <Tab label="Play-off round"/>
-                                        <Tab label="1st Group stage"/>
-                                        <Tab disabled={(stages.groups2 === "NOT_STARTED")}
-                                             label="2nd Group stage"/>
-                                        <Tab disabled={(stages.playoffs === "NOT_STARTED")}
-                                             label="Knockout phase"/>
-                                        <Tab disabled={(stages.playoffs !== "FINISHED")} label="Overview"/>
-                                    </Tabs>
-                                </AppBar>
-                                {tabActive === 0 && <Seeding year={seasonNum}/>}
-                                {tabActive === 1 && <Quals year={seasonNum} round={0}
-                                                           stage={stages.quals0}/>}
-                                {tabActive === 2 && <Quals year={seasonNum} round={1}
-                                                           stage={stages.quals1}/>}
-                                {tabActive === 3 && <Quals year={seasonNum} round={2}
-                                                           stage={stages.quals2}/>}
-                                {tabActive === 4 && <Groups1 year={seasonNum}
-                                                             stage={stages.groups1}/>}
-                                {tabActive === 5 && <Groups2 year={seasonNum}
-                                                             stage={stages.groups1}/>}
-                                {tabActive === 6 && <Knockouts year={seasonNum}/>}
-                                {tabActive === 7 &&
-                                    <SeasonPostview year={seasonNum}/>}
+                        <Box style={{margin: 10}}>
+                            <AppBar position="static">
+                                <Tabs value={tabActive} onChange={handleChange}>
+                                    <Tab label="Seeding"/>
+                                    <Tab disabled={seasonNum === 1}
+                                         label="Preliminary round"/>
+                                    <Tab label="Qualifying round"/>
+                                    <Tab label="Play-off round"/>
+                                    <Tab label="1st Group stage"/>
+                                    <Tab disabled={(stages.groups2 === "NOT_STARTED")}
+                                         label="2nd Group stage"/>
+                                    <Tab disabled={(stages.playoffs === "NOT_STARTED")}
+                                         label="Knockout phase"/>
+                                    <Tab disabled={(stages.playoffs !== "FINISHED")} label="Overview"/>
+                                </Tabs>
+                            </AppBar>
+                            {tabActive === 0 && <Seeding year={seasonNum}/>}
+                            {tabActive === 1 && <Quals year={seasonNum} round={0}
+                                                       stage={stages.quals0}/>}
+                            {tabActive === 2 && <Quals year={seasonNum} round={1}
+                                                       stage={stages.quals1}/>}
+                            {tabActive === 3 && <Quals year={seasonNum} round={2}
+                                                       stage={stages.quals2}/>}
+                            {tabActive === 4 && <Groups1 year={seasonNum}
+                                                         stage={stages.groups1}/>}
+                            {tabActive === 5 && <Groups2 year={seasonNum}
+                                                         stage={stages.groups1}/>}
+                            {tabActive === 6 && <Knockouts year={seasonNum}/>}
+                            {tabActive === 7 &&
+                                <SeasonPostview year={seasonNum}/>}
 
-                            </Box>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <NextGame/>
-                        </Grid>
+                        </Box>
                     </Grid>
-                </Paper>
-            ) :
-            null
-    );
+                    <Grid item xs={3}>
+                        <NextGame/>
+                    </Grid>
+                </Grid>
+            </Paper>
+        );
+    }
 }
