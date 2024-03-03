@@ -44,7 +44,7 @@ export default function Admin() {
                     setLastRestorePoint(result)
                 },
             )
-    });
+    }, []);
 
     const handleButtonClick = () => {
         fetch("/rest/ops/season/create", {

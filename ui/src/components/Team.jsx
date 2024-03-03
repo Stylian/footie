@@ -70,7 +70,7 @@ function Team() {
                     setLoaded2(true)
                 }
             )
-    });
+    }, []);
 
     const goToPlayer = (event, newValue) => {
         window.location.href = "/players/" + event.currentTarget.dataset.playerid;

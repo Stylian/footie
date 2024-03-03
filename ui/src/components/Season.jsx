@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import LeagueToolbar from "./LeagueToolbar";
 import {AppBar, Box, Grid, Paper, Tab, Tabs} from "@material-ui/core";
 import Seeding from "./season_components/Seeding";
@@ -8,170 +8,121 @@ import Groups2 from "./season_components/Groups2";
 import Knockouts from "./season_components/Knockouts";
 import SeasonPostview from "./season_components/SeasonPostview";
 import NextGame from "./season_components/NextGame";
+import {useParams} from "react-router";
 
-class Season extends Component {
+export default function Season() {
+    const {seasonNum} = useParams();
 
-    constructor(props) {
-        super(props);
+    const [pageTitle] = useState("Season " + seasonNum);
+    const [tabActive, setTabActive] = useState(0);
+    const [stages, setStages] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
 
-        this.state = {
-            pageTitle: "Season " + props.match.params.seasonNum,
-            tabActive: 0,
-            stages: {},
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
-        fetch("/rest/seasons/" + this.props.match.params.seasonNum + "/status")
+    useEffect(() => {
+        fetch("/rest/seasons/" + seasonNum + "/status")
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            stages: result,
-                        }
-                    });
+                    setStages(result);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    console.error('Error:', error);
                 }
-            )
+            );
 
-        fetch("/rest/persist/tabs/season/" + this.props.match.params.seasonNum)
+        fetch("/rest/persist/tabs/season/" + seasonNum)
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: result,
-                            isLoaded: true,
-                        }
-                    });
+                    setTabActive(result);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    console.error('Error:', error);
                 }
-            )
-
+            );
 
         fetch("/rest/persist/property/season_year", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: this.props.match.params.seasonNum
+            body: JSON.stringify(seasonNum)
         })
             .then(res => res.json())
             .then(
                 (result) => {
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    console.error('Error:', error);
                 }
-            )
-    }
+            );
 
-    handleChange = (event, newValue) => {
+        setIsLoaded(true);
+    }, []);
 
-        fetch("/rest/persist/tabs/season/" + this.props.match.params.seasonNum, {
+    const handleChange = (event, newValue) => {
+        fetch("/rest/persist/tabs/season/" + seasonNum, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: newValue
+            body: JSON.stringify(newValue)
         })
             .then(res => res.json())
             .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: newValue,
-                        }
-                    });
+                () => {
+                    setTabActive(newValue);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setIsLoaded(true);
+                    console.error('Error:', error);
                 }
-            )
-    }
+            );
+    };
 
-    render() {
-        return (
-            this.state.isLoaded ? (
-                    <Paper style={{margin: 10}} elevation={20}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={9}>
-                                <LeagueToolbar pageTitle={this.state.pageTitle}
-                                               seasonNum={this.props.match.params.seasonNum}/>
+    return (
+        isLoaded ? (
+                <Paper style={{margin: 10}} elevation={20}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={9}>
+                            <LeagueToolbar pageTitle={pageTitle}
+                                           seasonNum={seasonNum}/>
 
-                                <Box style={{margin: 10}}>
-                                    <AppBar position="static">
-                                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                                            <Tab label="Seeding"/>
-                                            <Tab disabled={this.props.match.params.seasonNum == 1}
-                                                 label="Preliminary round"/>
-                                            <Tab label="Qualifying round"/>
-                                            <Tab label="Play-off round"/>
-                                            <Tab label="1st Group stage"/>
-                                            <Tab disabled={(this.state.stages.groups2 === "NOT_STARTED")}
-                                                 label="2nd Group stage"/>
-                                            <Tab disabled={(this.state.stages.playoffs === "NOT_STARTED")}
-                                                 label="Knockout phase"/>
-                                            <Tab disabled={(this.state.stages.playoffs !== "FINISHED")} label="Overview"/>
-                                        </Tabs>
-                                    </AppBar>
-                                    {this.state.tabActive === 0 && <Seeding year={this.props.match.params.seasonNum}/>}
-                                    {this.state.tabActive === 1 && <Quals year={this.props.match.params.seasonNum} round={0}
-                                                                          stage={this.state.stages.quals0}/>}
-                                    {this.state.tabActive === 2 && <Quals year={this.props.match.params.seasonNum} round={1}
-                                                                          stage={this.state.stages.quals1}/>}
-                                    {this.state.tabActive === 3 && <Quals year={this.props.match.params.seasonNum} round={2}
-                                                                          stage={this.state.stages.quals2}/>}
-                                    {this.state.tabActive === 4 && <Groups1 year={this.props.match.params.seasonNum}
-                                                                            stage={this.state.stages.groups1}/>}
-                                    {this.state.tabActive === 5 && <Groups2 year={this.props.match.params.seasonNum}
-                                                                            stage={this.state.stages.groups1}/>}
-                                    {this.state.tabActive === 6 && <Knockouts year={this.props.match.params.seasonNum}/>}
-                                    {this.state.tabActive === 7 &&
-                                    <SeasonPostview year={this.props.match.params.seasonNum}/>}
+                            <Box style={{margin: 10}}>
+                                <AppBar position="static">
+                                    <Tabs value={tabActive} onChange={handleChange}>
+                                        <Tab label="Seeding"/>
+                                        <Tab disabled={seasonNum === 1}
+                                             label="Preliminary round"/>
+                                        <Tab label="Qualifying round"/>
+                                        <Tab label="Play-off round"/>
+                                        <Tab label="1st Group stage"/>
+                                        <Tab disabled={(stages.groups2 === "NOT_STARTED")}
+                                             label="2nd Group stage"/>
+                                        <Tab disabled={(stages.playoffs === "NOT_STARTED")}
+                                             label="Knockout phase"/>
+                                        <Tab disabled={(stages.playoffs !== "FINISHED")} label="Overview"/>
+                                    </Tabs>
+                                </AppBar>
+                                {tabActive === 0 && <Seeding year={seasonNum}/>}
+                                {tabActive === 1 && <Quals year={seasonNum} round={0}
+                                                           stage={stages.quals0}/>}
+                                {tabActive === 2 && <Quals year={seasonNum} round={1}
+                                                           stage={stages.quals1}/>}
+                                {tabActive === 3 && <Quals year={seasonNum} round={2}
+                                                           stage={stages.quals2}/>}
+                                {tabActive === 4 && <Groups1 year={seasonNum}
+                                                             stage={stages.groups1}/>}
+                                {tabActive === 5 && <Groups2 year={seasonNum}
+                                                             stage={stages.groups1}/>}
+                                {tabActive === 6 && <Knockouts year={seasonNum}/>}
+                                {tabActive === 7 &&
+                                    <SeasonPostview year={seasonNum}/>}
 
-                                </Box>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <NextGame/>
-                            </Grid>
+                            </Box>
                         </Grid>
-                    </Paper>
-                ) :
-                (null)
-        );
-    }
+                        <Grid item xs={3}>
+                            <NextGame/>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            ) :
+            null
+    );
 }
-
-export default Season;

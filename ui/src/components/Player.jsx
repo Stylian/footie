@@ -26,7 +26,7 @@ export default function Player() {
                     setLoaded(true);
                 }
             );
-    });
+    }, []);
 
     return (
         isLoaded ? (

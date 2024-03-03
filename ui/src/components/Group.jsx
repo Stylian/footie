@@ -34,7 +34,7 @@ export default function Group() {
                     console.error(error);
                 }
             );
-    });
+    }, []);
 
     const goToTeam = (event) => {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;

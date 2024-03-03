@@ -22,7 +22,7 @@ function LandingPage() {
                     setIsLoaded(true)
                 }
             )
-    });
+    }, []);
 
     return isLoaded ?
         currentDisplayedSeason > 0 ? (
