@@ -22,7 +22,6 @@ $.DataTable = require('datatables.net');
 const leftDivider = {"border-left": "1px solid #ddd"};
 
 export default function Stats() {
-    const {} = useParams();
 
     const [isLoaded, setLoaded] = useState(false);
     const [teams, setTeams] = useState({});
