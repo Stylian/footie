@@ -23,16 +23,20 @@ export default function Season() {
             .then(res => res.json())
             .then((result) => {
                 setStages(result);
+                setLoaded(true)
             }, (error) => {
                 console.error('Error:', error);
+                setLoaded(true)
             });
 
         fetch("/rest/persist/tabs/season/" + seasonNum)
             .then(res => res.json())
             .then((result) => {
                 setTabActive(result);
+                setLoaded(true)
             }, (error) => {
                 console.error('Error:', error);
+                setLoaded(true)
             });
 
         fetch("/rest/persist/property/season_year", {
@@ -40,11 +44,11 @@ export default function Season() {
         })
             .then(res => res.json())
             .then((result) => {
+                setLoaded(true)
             }, (error) => {
                 console.error('Error:', error);
+                setLoaded(true)
             });
-
-        setLoaded(true);
     }, []);
 
     const handleChange = (event, newValue) => {
