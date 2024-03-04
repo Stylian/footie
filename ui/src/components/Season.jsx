@@ -16,63 +16,47 @@ export default function Season() {
     const [pageTitle] = useState("Season " + seasonNum);
     const [tabActive, setTabActive] = useState(0);
     const [stages, setStages] = useState({});
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
         fetch("/rest/seasons/" + seasonNum + "/status")
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setStages(result);
-                },
-                (error) => {
-                    console.error('Error:', error);
-                }
-            );
+            .then((result) => {
+                setStages(result);
+            }, (error) => {
+                console.error('Error:', error);
+            });
 
         fetch("/rest/persist/tabs/season/" + seasonNum)
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setTabActive(result);
-                },
-                (error) => {
-                    console.error('Error:', error);
-                }
-            );
+            .then((result) => {
+                setTabActive(result);
+            }, (error) => {
+                console.error('Error:', error);
+            });
 
         fetch("/rest/persist/property/season_year", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(seasonNum)
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seasonNum)
         })
             .then(res => res.json())
-            .then(
-                (result) => {
-                },
-                (error) => {
-                    console.error('Error:', error);
-                }
-            );
+            .then((result) => {
+            }, (error) => {
+                console.error('Error:', error);
+            });
 
-        setIsLoaded(true);
+        setLoaded(true);
     }, []);
 
     const handleChange = (event, newValue) => {
         fetch("/rest/persist/tabs/season/" + seasonNum, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newValue)
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(newValue)
         })
             .then(res => res.json())
-            .then(
-                () => {
-                    setTabActive(newValue);
-                },
-                (error) => {
-                    console.error('Error:', error);
-                }
-            );
+            .then(() => {
+                setTabActive(newValue);
+            }, (error) => {
+                console.error('Error:', error);
+            });
     };
 
     if (!isLoaded) {
@@ -82,40 +66,28 @@ export default function Season() {
             <Paper style={{margin: 10}} elevation={20}>
                 <Grid container spacing={1}>
                     <Grid item xs={9}>
-                        <LeagueToolbar pageTitle={pageTitle}
-                                       seasonNum={seasonNum}/>
-
+                        <LeagueToolbar pageTitle={pageTitle} seasonNum={seasonNum}/>
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChange}>
                                     <Tab label="Seeding"/>
-                                    <Tab disabled={seasonNum === 1}
-                                         label="Preliminary round"/>
+                                    <Tab disabled={seasonNum === 1} label="Preliminary round"/>
                                     <Tab label="Qualifying round"/>
                                     <Tab label="Play-off round"/>
                                     <Tab label="1st Group stage"/>
-                                    <Tab disabled={(stages.groups2 === "NOT_STARTED")}
-                                         label="2nd Group stage"/>
-                                    <Tab disabled={(stages.playoffs === "NOT_STARTED")}
-                                         label="Knockout phase"/>
+                                    <Tab disabled={(stages.groups2 === "NOT_STARTED")} label="2nd Group stage"/>
+                                    <Tab disabled={(stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
                                     <Tab disabled={(stages.playoffs !== "FINISHED")} label="Overview"/>
                                 </Tabs>
                             </AppBar>
                             {tabActive === 0 && <Seeding year={seasonNum}/>}
-                            {tabActive === 1 && <Quals year={seasonNum} round={0}
-                                                       stage={stages.quals0}/>}
-                            {tabActive === 2 && <Quals year={seasonNum} round={1}
-                                                       stage={stages.quals1}/>}
-                            {tabActive === 3 && <Quals year={seasonNum} round={2}
-                                                       stage={stages.quals2}/>}
-                            {tabActive === 4 && <Groups1 year={seasonNum}
-                                                         stage={stages.groups1}/>}
-                            {tabActive === 5 && <Groups2 year={seasonNum}
-                                                         stage={stages.groups1}/>}
+                            {tabActive === 1 && <Quals year={seasonNum} round={0} stage={stages.quals0}/>}
+                            {tabActive === 2 && <Quals year={seasonNum} round={1} stage={stages.quals1}/>}
+                            {tabActive === 3 && <Quals year={seasonNum} round={2} stage={stages.quals2}/>}
+                            {tabActive === 4 && <Groups1 year={seasonNum} stage={stages.groups1}/>}
+                            {tabActive === 5 && <Groups2 year={seasonNum} stage={stages.groups1}/>}
                             {tabActive === 6 && <Knockouts year={seasonNum}/>}
-                            {tabActive === 7 &&
-                                <SeasonPostview year={seasonNum}/>}
-
+                            {tabActive === 7 && <SeasonPostview year={seasonNum}/>}
                         </Box>
                     </Grid>
                     <Grid item xs={3}>

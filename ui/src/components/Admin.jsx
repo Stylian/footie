@@ -12,7 +12,6 @@ export default function Admin() {
     const [lastRestorePoint, setLastRestorePoint] = useState("")
 
     useEffect(() => {
-
         fetch("/rest/admin/general_data")
             .then(res => res.json())
             .then(
@@ -20,7 +19,6 @@ export default function Admin() {
                     setGeneralData(result)
                 },
             )
-
         fetch("/rest/admin/stages")
             .then(res => res.json())
             .then(
@@ -28,7 +26,6 @@ export default function Admin() {
                     setSeasonsStages(result)
                 },
             )
-
         fetch("/rest/ops/league/can_create_season")
             .then(res => res.json())
             .then(
@@ -36,7 +33,6 @@ export default function Admin() {
                     setCanCreateLeague(result[0])
                 },
             )
-
         fetch("/rest/admin/restore_point")
             .then(res => res.text())
             .then(
@@ -120,16 +116,14 @@ export default function Admin() {
 
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Seasons Stage"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
+                            <CardHeader title={"Seasons Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table">
                                     <TableBody>
                                         <TableRow>
                                             <TableCell>Season Year</TableCell>
-                                            <TableCell
-                                                align="right">{seasonsStages.seasonYear}</TableCell>
+                                            <TableCell align="right">{seasonsStages.seasonYear}</TableCell>
                                         </TableRow>
                                         <TableRow>
                                             <TableCell>Stage</TableCell>
@@ -138,8 +132,7 @@ export default function Admin() {
                                         <TableRow>
                                             <TableCell colSpan-={2}>
                                                 {canCreateLeague ? (
-                                                    <Button onClick={handleButtonClick}>Create new
-                                                        Season</Button>
+                                                    <Button onClick={handleButtonClick}>Create new Season</Button>
                                                 ) : (
                                                     <span>a league is currently running</span>
                                                 )}
@@ -152,8 +145,7 @@ export default function Admin() {
                     </Grid>
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Database"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
+                            <CardHeader title={"Database"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table">
@@ -183,12 +175,9 @@ export default function Admin() {
                     </Grid>
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Engine Tools"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
+                            <CardHeader title={"Engine Tools"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                             <CardContent>
-                                <Button onClick={handleRecalcCoeffs}>Recalculate current season's
-                                    coeffs</Button>
+                                <Button onClick={handleRecalcCoeffs}>Recalculate current season's coeffs</Button>
                                 <br/>
                                 <Button onClick={handleRecalcElo}>Recalculate Elo from the beginning</Button>
                                 <br/>
@@ -196,7 +185,6 @@ export default function Admin() {
                             </CardContent>
                         </Card>
                     </Grid>
-
                 </Grid>
             </Box>
         </Paper>
