@@ -13,10 +13,13 @@ export default function Groups1({year}, {stage}) {
 
     useEffect(() => {
         getTag(year, phase, setTabActive)
+            .then(setTabActive)
             .then(() => setLoaded(true))
+
     }, []);
 
-    const handleChange = (_, tagValue) => saveTag(tagValue, year, phase, setTabActive)
+    const handleChange = (_, tagValue) => saveTag(tagValue, year, phase)
+        .then(setTabActive)
 
     if (!isLoaded) {
         return (<div>Loading...</div>)
