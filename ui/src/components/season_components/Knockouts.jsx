@@ -54,9 +54,9 @@ export default function Knockouts({year}) {
                     </Tabs>
                 </AppBar>
 
-                {tabActive === 0 && <Playoffs year={year} round={1}/>}
+                {tabActive === 0 && <Playoffs year={year} />}
                 {tabActive === 1 && <Rules/>}
-                {tabActive === 2 && <KnockoutOdds year={year}/>}
+                {tabActive === 2 && <KnockoutOdds year={year} />}
             </Box>
         )
     }

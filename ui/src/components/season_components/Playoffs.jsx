@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 
-export default function Playoffs({year}, {round}) {
+export default function Playoffs({year}) {
     const [structure, setStructure] = useState({
         gA1: {id: -1, name: ""},
         gA2: {id: -1, name: ""},
