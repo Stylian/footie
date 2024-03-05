@@ -12,7 +12,7 @@ export default function Groups1({year}, {stage}) {
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        getTag(year, phase, setTabActive)
+        getTag(year, phase)
             .then(setTabActive)
             .then(() => setLoaded(true))
 
