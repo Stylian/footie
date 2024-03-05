@@ -12,10 +12,11 @@ export default function Groups1({year}, {stage}) {
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        getTag(year, phase, setTabActive, setLoaded)
+        getTag(year, phase, setTabActive)
+            .then(() => setLoaded(true))
     }, []);
 
-    const handleChange = (_, tagValue) => saveTag(tagValue, year, phase, setTabActive, setLoaded)
+    const handleChange = (_, tagValue) => saveTag(tagValue, year, phase, setTabActive)
 
     if (!isLoaded) {
         return (<div>Loading...</div>)
