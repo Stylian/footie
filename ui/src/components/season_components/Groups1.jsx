@@ -1,46 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { AppBar, Box, Tab, Tabs } from "@material-ui/core";
+import React, {useEffect, useState} from 'react';
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
 import GroupsSeeding from "./groups_components/GroupsSeeding";
 import GroupsMatches from "./groups_components/GroupsMatches";
 import GroupsDisplay from "./groups_components/GroupsDisplay";
-import {useParams} from "react-router";
+import {getTag, saveTag} from "../../TabsPersistanceManager";
 
 export default function Groups1({year}, {stage}) {
+    const phase = "groups1"
+
     const [tabActive, setTabActive] = useState(0);
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        fetch("/rest/persist/tabs/groups1/" + year)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setTabActive(result);
-                    setLoaded(true);
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error('Error:', error);
-                }
-            )
+        getTag(year, phase, setTabActive, setLoaded)
     }, []);
 
-    const handleChange = (event, newValue) => {
-        fetch("/rest/persist/tabs/groups1/" + year, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: newValue
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setTabActive(newValue);
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error('Error:', error);
-                }
-            )
-    }
+    const handleChange = (_, tagValue) => saveTag(tagValue, year, phase, setTabActive, setLoaded)
 
     if (!isLoaded) {
         return (<div>Loading...</div>)
