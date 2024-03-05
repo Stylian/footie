@@ -1,97 +1,22 @@
-import React, {Component} from 'react';
-import {AppBar, Box, Paper, Tab, Tabs} from "@material-ui/core";
+import React from 'react';
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
 import QualsSeeding from "./quals_components/QualsSeeding";
 import QualsMatches from "./quals_components/QualsMatches";
+import {useTab} from "../../TabsPersistanceManager";
 
-class Quals extends Component {
+export default function Quals({year, round, stage}) {
+    const {tabActive, handleChangeTab} = useTab(year, "quals" + round)
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            tabActive: 0,
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
-        fetch("/rest/persist/tabs/quals" + this.props.round + "/" + this.props.year)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: result,
-                            isLoaded: true,
-                        }
-                    });
-                },
-                (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
-                }
-            )
-    }
-
-
-    handleChange = (event, newValue) => {
-
-        fetch("/rest/persist/tabs/quals" + this.props.round + "/" + this.props.year, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: newValue
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: newValue,
-                        }
-                    });
-                },
-                (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
-                }
-            )
-    }
-
-
-    render() {
-        return (
-            this.state.isLoaded ? (
-                <Box style={{margin: 10, "margin-top": 10}}>
-                    <AppBar position="static">
-                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Seeding"/>
-                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
-                                 label="Matches"/>
-                        </Tabs>
-                    </AppBar>
-                    {this.state.tabActive === 0 && <QualsSeeding year={this.props.year} round={this.props.round}
-                                                                 haveToSetUpTeams={this.props.stage === "ON_PREVIEW"}/>}
-                    {this.state.tabActive === 1 && <QualsMatches year={this.props.year} round={this.props.round}/>}
-                </Box>
-            ) : (
-                <span></span>
-            )
-        );
-    }
+    return (
+        <Box style={{margin: 10, "margin-top": 10}}>
+            <AppBar position="static">
+                <Tabs value={tabActive} onChange={handleChangeTab}>
+                    <Tab label="Seeding"/>
+                    <Tab disabled={(stage === "ON_PREVIEW" || stage === "NOT_STARTED")} label="Matches"/>
+                </Tabs>
+            </AppBar>
+            {tabActive === 0 && <QualsSeeding year={year} round={round} haveToSetUpTeams={stage === "ON_PREVIEW"}/>}
+            {tabActive === 1 && <QualsMatches year={year} round={round} />}
+        </Box>
+    )
 }
-
-
-export default Quals;
