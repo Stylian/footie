@@ -1,101 +1,63 @@
-import React, {Component} from 'react';
-import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
-import GroupsSeeding from "./groups_components/GroupsSeeding";
-import GroupsMatches from "./groups_components/GroupsMatches";
-import GroupsDisplay from "./groups_components/GroupsDisplay";
+import React, { useState, useEffect } from 'react';
+import { AppBar, Box, Tab, Tabs } from "@material-ui/core";
 import Rules from "./knockout_components/Rules";
 import Playoffs from "./Playoffs";
 import KnockoutOdds from "./knockout_components/KnockoutOdds";
 
-class Knockouts extends Component {
+export default function Knockouts({year}) {
+    const [tabActive, setTabActive] = useState(0);
+    const [isLoaded, setLoaded] = useState(false);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            tabActive: 0,
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
-        fetch("/rest/persist/tabs/knockouts/" + this.props.year)
+    useEffect(() => {
+        fetch("/rest/persist/tabs/knockouts/" + year)
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: result,
-                            isLoaded: true,
-                        }
-                    });
+                    setTabActive(result);
+                    setLoaded(true);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
-    }
+    }, [year]);
 
-    handleChange = (event, newValue) => {
-
-        fetch("/rest/persist/tabs/knockouts/" + this.props.year, {
+    const handleChange = (event, newValue) => {
+        fetch("/rest/persist/tabs/knockouts/" + year, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: newValue
         })
             .then(res => res.json())
             .then(
-                (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: newValue,
-                        }
-                    });
+                () => {
+                    setTabActive(newValue);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
     }
 
-
-    render() {
+    if (!isLoaded) {
+        return (<div>Loading...</div>)
+    } else {
         return (
-            this.state.isLoaded ? (
-                <Box style={{margin: 10, "margin-top": 10}}>
-                    <AppBar position="static">
-                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Brackets"/>
-                            <Tab label="Rules"/>
-                            <Tab label="Odds"/>
-                        </Tabs>
-                    </AppBar>
+            <Box style={{margin: 10, marginTop: 10}}>
+                <AppBar position="static">
+                    <Tabs value={tabActive} onChange={handleChange}>
+                        <Tab label="Brackets"/>
+                        <Tab label="Rules"/>
+                        <Tab label="Odds"/>
+                    </Tabs>
+                </AppBar>
 
-                    {this.state.tabActive === 0 && <Playoffs year={this.props.year} round={1}/>}
-                    {this.state.tabActive === 1 && <Rules/>}
-                    {this.state.tabActive === 2 && <KnockoutOdds year={this.props.year}/>}
-                </Box>
-            ) : (
-                <span></span>
-            )
-        );
+                {tabActive === 0 && <Playoffs year={year} round={1}/>}
+                {tabActive === 1 && <Rules/>}
+                {tabActive === 2 && <KnockoutOdds year={year}/>}
+            </Box>
+        )
     }
 }
-
-
-export default Knockouts;

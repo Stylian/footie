@@ -1,60 +1,34 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     AppBar,
     Box,
-    Card,
-    CardContent,
-    CardHeader,
-    Grid,
     Tab,
-    TableBody,
-    TableCell,
-    TableRow,
     Tabs
 } from "@material-ui/core";
 import GroupsMatches from "./groups_components/GroupsMatches";
 import GroupsDisplay from "./groups_components/GroupsDisplay";
 
-class Groups2 extends Component {
+export default function Groups2({year}, {stage}) {
+    const [tabActive, setTabActive] = useState(0);
+    const [isLoaded, setLoaded] = useState(false);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            tabActive: 0,
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
-        fetch("/rest/persist/tabs/groups2/" + this.props.year)
+    useEffect(() => {
+        fetch("/rest/persist/tabs/groups2/" + year)
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: result,
-                            isLoaded: true,
-                        }
-                    });
+                    setTabActive(result);
+                    setLoaded(true);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
-    }
+    }, []);
 
-    handleChange = (event, newValue) => {
-
-        fetch("/rest/persist/tabs/groups2/" + this.props.year, {
+    const handleChange = (event, newValue) => {
+        fetch("/rest/persist/tabs/groups2/" + year, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: newValue
@@ -62,46 +36,30 @@ class Groups2 extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: newValue,
-                        }
-                    });
+                    setTabActive(newValue);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
     }
 
+    return (
+        isLoaded ? (
+            <Box style={{ margin: 10, marginTop: 10 }}>
+                <AppBar position="static">
+                    <Tabs value={tabActive} onChange={handleChange}>
+                        <Tab label="Groups"/>
+                        <Tab label="Matches"/>
+                    </Tabs>
+                </AppBar>
 
-    render() {
-        return (
-            this.state.isLoaded ? (
-                <Box style={{margin: 10, "margin-top": 10}}>
-                    <AppBar position="static">
-                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Groups"/>
-                            <Tab label="Matches"/>
-                        </Tabs>
-                    </AppBar>
-
-                    {this.state.tabActive === 0 && <GroupsDisplay year={this.props.year} round={2}/>}
-                    {this.state.tabActive === 1 && <GroupsMatches year={this.props.year} round={2}/>}
-                </Box>
-            ) : (
-                <span></span>
-            )
-        );
-    }
+                {tabActive === 0 && <GroupsDisplay year={year} round={2}/>}
+                {tabActive === 1 && <GroupsMatches year={year} round={2}/>}
+            </Box>
+        ) : (
+            <span></span>
+        )
+    );
 }
-
-
-export default Groups2;

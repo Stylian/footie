@@ -1,100 +1,63 @@
-import React, {Component} from 'react';
-import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
+import React, { useState, useEffect } from 'react';
+import { AppBar, Box, Tab, Tabs } from "@material-ui/core";
 import GroupsSeeding from "./groups_components/GroupsSeeding";
 import GroupsMatches from "./groups_components/GroupsMatches";
 import GroupsDisplay from "./groups_components/GroupsDisplay";
+import {useParams} from "react-router";
 
-class Groups1 extends Component {
+export default function Groups1({year}, {stage}) {
+    const [tabActive, setTabActive] = useState(0);
+    const [isLoaded, setLoaded] = useState(false);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            tabActive: 0,
-            isLoaded: false
-        };
-
-    }
-
-    componentDidMount() {
-        fetch("/rest/persist/tabs/groups1/" + this.props.year)
+    useEffect(() => {
+        fetch("/rest/persist/tabs/groups1/" + year)
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: result,
-                            isLoaded: true,
-                        }
-                    });
+                    setTabActive(result);
+                    setLoaded(true);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
-    }
+    }, []);
 
-    handleChange = (event, newValue) => {
-
-        fetch("/rest/persist/tabs/groups1/" + this.props.year, {
+    const handleChange = (event, newValue) => {
+        fetch("/rest/persist/tabs/groups1/" + year, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: newValue
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            tabActive: newValue,
-                        }
-                    });
+                    setTabActive(newValue);
                 },
                 (error) => {
-                    this.setState(state => {
-                        return {
-                            ...state,
-                            isLoaded: true,
-                            error
-                        }
-                    });
+                    setLoaded(true);
+                    console.error('Error:', error);
                 }
             )
     }
 
-
-    render() {
+    if (!isLoaded) {
+        return (<div>Loading...</div>)
+    } else {
         return (
-            this.state.isLoaded ? (
-                <Box style={{margin: 10, "margin-top": 10}}>
-                    <AppBar position="static">
-                        <Tabs value={this.state.tabActive} onChange={this.handleChange}>
-                            <Tab label="Seeding"/>
-                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
-                                 label="Groups"/>
-                            <Tab disabled={(this.props.stage === "ON_PREVIEW" || this.props.stage === "NOT_STARTED")}
-                                 label="Matches"/>
-                        </Tabs>
-                    </AppBar>
-                    {this.state.tabActive === 0 && <GroupsSeeding year={this.props.year} round={1}
-                                                                  haveToSetUpTeams={this.props.stage === "ON_PREVIEW"}/>}
-                    {this.state.tabActive === 1 && <GroupsDisplay year={this.props.year} round={1}/>}
-                    {this.state.tabActive === 2 && <GroupsMatches year={this.props.year} round={1}/>}
-                </Box>
-            ) : (
-                <span></span>
-            )
-        );
+            <Box style={{margin: 10, marginTop: 10}}>
+                <AppBar position="static">
+                    <Tabs value={tabActive} onChange={handleChange}>
+                        <Tab label="Seeding"/>
+                        <Tab disabled={(stage === "ON_PREVIEW" || stage === "NOT_STARTED")} label="Groups"/>
+                        <Tab disabled={(stage === "ON_PREVIEW" || stage === "NOT_STARTED")} label="Matches"/>
+                    </Tabs>
+                </AppBar>
+                {tabActive === 0 && <GroupsSeeding year={year} round={1} haveToSetUpTeams={stage === "ON_PREVIEW"}/>}
+                {tabActive === 1 && <GroupsDisplay year={year} round={1}/>}
+                {tabActive === 2 && <GroupsMatches year={year} round={1}/>}
+            </Box>
+        )
     }
 }
-
-
-export default Groups1;
