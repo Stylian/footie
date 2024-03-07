@@ -10,37 +10,22 @@ import SeasonPostview from "./season_components/SeasonPostview";
 import NextGame from "./season_components/NextGame";
 import {useParams} from "react-router";
 import {useTab} from "../TabsPersistanceManager";
+import {useDataLoader} from "../DataLoaderManager";
 
 export default function Season() {
     const {seasonNum} = useParams();
 
     const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
+    const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
 
-    const [pageTitle] = useState("Season " + seasonNum);
-    const [stages, setStages] = useState({});
-    const [isLoaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-        fetch("/rest/seasons/" + seasonNum + "/status")
-            .then(res => res.json())
-            .then((result) => {
-                setStages(result);
-                setLoaded(true)
-            }, (error) => {
-                console.error('Error:', error);
-                setLoaded(true)
-            });
-
-    }, []);
-
-    if (!isLoaded) {
+    if (stages === null) {
         return (<div>Loading...</div>)
     } else {
         return (
             <Paper style={{margin: 10}} elevation={20}>
                 <Grid container spacing={1}>
                     <Grid item xs={9}>
-                        <LeagueToolbar pageTitle={pageTitle} seasonNum={seasonNum}/>
+                        <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum}/>
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChangeTab}>

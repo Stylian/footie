@@ -16,44 +16,21 @@ import {
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import plus from "../icons/plus.png";
+import {useDataLoader} from "../DataLoaderManager";
 
-function Players() {
-    const [pageTitle] = useState("Players");
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [isLoaded2, setIsLoaded2] = useState(false);
-    const [teams, setTeams] = useState([]);
-    const [players, setPlayers] = useState([]);
+/**
+ * not sure if this will run after refactoring
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function Players() {
+
+    const players = useDataLoader("/rest/players/")
+    const teams = useDataLoader("/rest/teams/")
+
     const [name, setName] = useState("");
     const [teamId, setTeamId] = useState(0);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetch("/rest/players/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setPlayers(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            );
-
-        fetch("/rest/teams/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded2(true);
-                    setTeams(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            );
-    }, []);
     const handleChange = (field) => (event) => {
         let value = event.target.value;
         if (value < 0) {
@@ -66,7 +43,6 @@ function Players() {
             setTeamId(value);
         }
     };
-
     const handleAdd = () => {
         fetch("/rest/players/", {
             method: 'POST',
@@ -75,36 +51,30 @@ function Players() {
         })
             .then(res => res.json())
             .then(
-                () => {
-                    window.location.reload();
-                },
+                () => window.location.reload(),
                 (error) => {
-                    setIsLoaded(true);
-                    setError(error);
+                    console.error('Error:', error);
                 }
             );
     };
-
     const goToTeam = (event) => {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     };
-
     const goToPlayer = (event) => {
         window.location.href = "/players/" + event.currentTarget.dataset.playerid;
     };
 
-    return (
-        (isLoaded && isLoaded2) ? (
-
+    if (teams === null || players === null) {
+        return (<div>Loading...</div>)
+    } else {
+        return (
             <Paper style={{margin: 20}} elevation={20}>
-                <LeagueToolbar pageTitle={pageTitle}/>
+                <LeagueToolbar pageTitle={"Players"}/>
                 <Box width={1200}>
                     <Grid container spacing={1}>
                         <Grid item sm={7}>
                             <Card style={{margin: 20}}>
-                                <CardHeader title={"Players"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
+                                <CardHeader title={"Players"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                                 <CardContent>
                                     <Grid container spacing={1}>
                                         <Grid item sm={6}>
@@ -179,10 +149,6 @@ function Players() {
                     </Grid>
                 </Box>
             </Paper>
-        ) : (
-            <span></span>
         )
-    );
+    }
 }
-
-export default Players;
