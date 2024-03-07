@@ -17,6 +17,7 @@ import {
 import IconButton from "@material-ui/core/IconButton"
 import plus from "../icons/plus.png"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 /**
  * not sure if this will run after refactoring
@@ -61,7 +62,7 @@ export default function Players() {
     const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
 
     if (teams === null || players === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Paper style={{margin: 20}} elevation={20}>

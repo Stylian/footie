@@ -2,6 +2,7 @@ import LeagueToolbar from "./LeagueToolbar"
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 /**
  * not sure if the operations will work, used let to assign them although they are coming from const
@@ -81,7 +82,7 @@ export default function Admin() {
     }
 
     if (seasonsStages === null || generalData == null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Paper style={{margin: 20}} elevation={20}>

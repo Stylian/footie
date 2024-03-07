@@ -14,6 +14,7 @@ import Numeral from "numeral"
 import {Doughnut, HorizontalBar} from "react-chartjs-2"
 import LeagueToolbar from "../LeagueToolbar"
 import {useDataLoader} from "../../DataLoaderManager"
+import PageLoader from "../PageLoader";
 
 const $ = require('jquery')
 $.DataTable = require('datatables.net')
@@ -29,7 +30,7 @@ export default function Stats() {
     const goToTeam = (event) =>  window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (teams === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Paper style={{margin: 20}} elevation={20}>

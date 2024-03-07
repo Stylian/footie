@@ -1,5 +1,6 @@
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
+import PageLoader from "../../PageLoader";
 
 export default function GroupsDisplay({year, round}) {
     const groups = useDataLoader("/rest/seasons/" + year + "/groups/" + round)
@@ -7,7 +8,7 @@ export default function GroupsDisplay({year, round}) {
     const goToGroup = (event) => window.location.href = "/groups/" + event.currentTarget.dataset.groupid
 
     if (groups === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Box width={1400}>

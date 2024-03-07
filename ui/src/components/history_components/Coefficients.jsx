@@ -15,6 +15,7 @@ import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import LeagueToolbar from "../LeagueToolbar"
 import {useDataLoader} from "../../DataLoaderManager"
+import PageLoader from "../PageLoader";
 export default function Coefficients() {
     const teams = useDataLoader("/rest/history/coefficients")
     const seasons = useDataLoader("/rest/history/past_winners")
@@ -23,7 +24,7 @@ export default function Coefficients() {
     const goToSeason = (event) => window.location.href = "/season/" + event.currentTarget.dataset.season
 
     if (teams === null || seasons === null || teamsWithTrophies === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         let teamsList = [...teams]
         let half_length = Math.ceil(teamsList.length / 2)

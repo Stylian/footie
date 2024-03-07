@@ -1,12 +1,13 @@
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
+import PageLoader from "../../PageLoader";
 
 export default function QualsMatches({year, round}) {
     const days = useDataLoader("/rest/seasons/" + year + "/quals/" + round + "/matches")
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (days === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Box width={1200}>

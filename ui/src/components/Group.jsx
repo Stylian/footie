@@ -13,6 +13,7 @@ import {
 import LeagueToolbar from "./LeagueToolbar"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 export default function Group() {
 
@@ -24,7 +25,7 @@ export default function Group() {
     const isOdd = n => !(isNaN(n) && ((n % 1) !== 0) && (n === 0)) && ((n % 2) !== 0) ? true : false
 
     if (group === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Paper style={{margin: 20}} elevation={20}>

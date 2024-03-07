@@ -1,5 +1,6 @@
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
+import PageLoader from "../../PageLoader";
 
 export default function Playoffs({year}) {
 
@@ -8,7 +9,7 @@ export default function Playoffs({year}) {
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (structure === null || games === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Box>

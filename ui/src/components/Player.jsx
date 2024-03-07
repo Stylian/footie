@@ -6,6 +6,7 @@ import silvermedal from "../icons/silvermedal.png"
 import goldmedal from "../icons/goldmedal.png"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 export default function Player() {
     const {playerId} = useParams()
@@ -13,7 +14,7 @@ export default function Player() {
     const player = useDataLoader("/rest/players/" + playerId)
 
     if (player === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Box>

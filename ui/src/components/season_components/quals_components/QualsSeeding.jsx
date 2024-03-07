@@ -13,6 +13,7 @@ import {
 import Button from "@material-ui/core/Button"
 import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
+import PageLoader from "../../PageLoader";
 
 export default function QualsSeeding({year, round, haveToSetUpTeams}) {
     const data = useDataLoader("/rest/seasons/" + year + "/quals/" + round + "/seeding")
@@ -30,7 +31,7 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (data === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         const teamsStrong = data["STRONG"]
         const teamsWeak = data["WEAK"]

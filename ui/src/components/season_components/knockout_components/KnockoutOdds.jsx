@@ -1,13 +1,14 @@
 import {Box, Card, CardContent, CardHeader, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
+import PageLoader from "../../PageLoader";
 
 export default function KnockoutOdds({year}) {
     const teams = useDataLoader("/rest/seasons/" + year + "/playoffs/odds")
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (teams === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Box style={{margin: 10, "margin-top": 10}}>

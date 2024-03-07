@@ -1,12 +1,13 @@
 import LeagueToolbar from "./LeagueToolbar"
 import {Redirect} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 export default function LandingPage() {
 
     const currentDisplayedSeason = useDataLoader("/rest/seasons/")
 
     if (currentDisplayedSeason === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         if(currentDisplayedSeason > 0) {
             return (

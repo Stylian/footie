@@ -10,6 +10,7 @@ import NextGame from "./season_components/NextGame"
 import {useParams} from "react-router"
 import {useTab} from "../TabsPersistanceManager"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 export default function Season() {
     const {seasonNum} = useParams()
@@ -18,7 +19,7 @@ export default function Season() {
     const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
 
     if (stages === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         return (
             <Paper style={{margin: 10}} elevation={20}>

@@ -21,6 +21,7 @@ import dreamteam from "../icons/dreamteam.png"
 import playeroftheyear from "../icons/playeroftheyear.png"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
+import PageLoader from "./PageLoader";
 
 export default function Team() {
     const {teamId} = useParams()
@@ -32,7 +33,7 @@ export default function Team() {
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (team === null || gameStats === null) {
-        return (<div>Loading...</div>)
+        return (<PageLoader />)
     } else {
         let elos = [1200]
         let elosSeasons = ["0"]
