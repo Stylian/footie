@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react";
-import LeagueToolbar from "./LeagueToolbar";
-import {AppBar, Box, Grid, Paper, Tab, Tabs} from "@material-ui/core";
-import Seeding from "./season_components/Seeding";
-import Groups1 from "./season_components/Groups1";
-import Quals from "./season_components/Quals";
-import Groups2 from "./season_components/Groups2";
-import Knockouts from "./season_components/Knockouts";
-import SeasonPostview from "./season_components/SeasonPostview";
-import NextGame from "./season_components/NextGame";
-import {useParams} from "react-router";
-import {useTab} from "../TabsPersistanceManager";
-import {useDataLoader} from "../DataLoaderManager";
+import React from "react"
+import LeagueToolbar from "./LeagueToolbar"
+import {AppBar, Box, Grid, Paper, Tab, Tabs} from "@material-ui/core"
+import Seeding from "./season_components/Seeding"
+import Groups1 from "./season_components/Groups1"
+import Quals from "./season_components/Quals"
+import Groups2 from "./season_components/Groups2"
+import Knockouts from "./season_components/Knockouts"
+import SeasonPostview from "./season_components/SeasonPostview"
+import NextGame from "./season_components/NextGame"
+import {useParams} from "react-router"
+import {useTab} from "../TabsPersistanceManager"
+import {useDataLoader} from "../DataLoaderManager"
 
 export default function Season() {
-    const {seasonNum} = useParams();
+    const {seasonNum} = useParams()
 
     const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
     const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
@@ -54,6 +54,6 @@ export default function Season() {
                     </Grid>
                 </Grid>
             </Paper>
-        );
+        )
     }
 }

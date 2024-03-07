@@ -1,47 +1,31 @@
-import React, {Component, useEffect, useState} from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import {Box, Grid, ListItemIcon, ListItemText} from "@material-ui/core";
-import list from "../icons/list.svg";
-import build from "../icons/build.svg";
-import up from "../icons/up.svg";
-import down from "../icons/down.svg";
-import players from "../icons/football-players.png";
-import analytics from "../icons/analytics.png";
-import barchart from "../icons/bar-chart.png";
-import medal1 from "../icons/medal1.png";
-import {useParams} from "react-router";
-import {useDataLoader} from "../DataLoaderManager";
+import React, {useState} from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
+import {Box, Grid, ListItemIcon, ListItemText} from "@material-ui/core"
+import list from "../icons/list.svg"
+import build from "../icons/build.svg"
+import up from "../icons/up.svg"
+import down from "../icons/down.svg"
+import players from "../icons/football-players.png"
+import analytics from "../icons/analytics.png"
+import barchart from "../icons/bar-chart.png"
+import medal1 from "../icons/medal1.png"
+import {useDataLoader} from "../DataLoaderManager"
 
 export default function LeagueToolbar({ pageTitle, seasonNum }) {
 
-    const [menuPosition, setMenuPosition] = useState(null);
+    const [menuPosition, setMenuPosition] = useState(null)
     const seasonsTotal = useDataLoader("/rest/seasons/")
-
-    const handleClick = (event) => {
-        setMenuPosition(event.currentTarget);
-    }
-
-    const handleButtonSelection = (e) => {
-        window.location = e.currentTarget.dataset.link;
-    }
-
-    const handleClose = () => {
-        setMenuPosition(null);
-    }
-
-    const handleUp = () => {
-        window.location.href = parseInt(seasonNum) + 1;
-    }
-
-    const handleDown = () => {
-        window.location.href = parseInt(seasonNum) - 1;
-    }
+    const handleClick = (event) => setMenuPosition(event.currentTarget)
+    const handleButtonSelection = (e) => window.location = e.currentTarget.dataset.link
+    const handleClose = () => setMenuPosition(null)
+    const handleUp = () => window.location.href = parseInt(seasonNum) + 1
+    const handleDown = () => window.location.href = parseInt(seasonNum) - 1
 
     return (
         <div>
@@ -120,5 +104,5 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                 </Grid>
             </AppBar>
         </div>
-    );
+    )
 }

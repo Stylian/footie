@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react"
 import {
     Box,
     Card,
@@ -10,19 +10,19 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import LeagueToolbar from "./LeagueToolbar";
-import {useParams} from "react-router";
-import {useDataLoader} from "../DataLoaderManager";
+} from "@material-ui/core"
+import LeagueToolbar from "./LeagueToolbar"
+import {useParams} from "react-router"
+import {useDataLoader} from "../DataLoaderManager"
 
 export default function Group() {
 
-    const {groupId} = useParams();
+    const {groupId} = useParams()
     const group = useDataLoader("/rest/groups/" + groupId)
     const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    };
-    const isOdd = n => !(isNaN(n) && ((n % 1) !== 0) && (n === 0)) && ((n % 2) !== 0) ? true : false;
+        window.location.href = "/teams/" + event.currentTarget.dataset.teamid
+    }
+    const isOdd = n => !(isNaN(n) && ((n % 1) !== 0) && (n === 0)) && ((n % 2) !== 0) ? true : false
 
     if (group === null) {
         return (<div>Loading...</div>)

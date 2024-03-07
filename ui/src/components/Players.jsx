@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import LeagueToolbar from "./LeagueToolbar";
+import React, {useState} from 'react'
+import LeagueToolbar from "./LeagueToolbar"
 import {
     Box,
     Card,
@@ -13,10 +13,10 @@ import {
     TableHead,
     TableRow,
     TextField
-} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import plus from "../icons/plus.png";
-import {useDataLoader} from "../DataLoaderManager";
+} from "@material-ui/core"
+import IconButton from "@material-ui/core/IconButton"
+import plus from "../icons/plus.png"
+import {useDataLoader} from "../DataLoaderManager"
 
 /**
  * not sure if this will run after refactoring
@@ -28,21 +28,21 @@ export default function Players() {
     const players = useDataLoader("/rest/players/")
     const teams = useDataLoader("/rest/teams/")
 
-    const [name, setName] = useState("");
-    const [teamId, setTeamId] = useState(0);
+    const [name, setName] = useState("")
+    const [teamId, setTeamId] = useState(0)
 
     const handleChange = (field) => (event) => {
-        let value = event.target.value;
+        let value = event.target.value
         if (value < 0) {
-            return;
+            return
         }
 
         if (field === "name") {
-            setName(value);
+            setName(value)
         } else {
-            setTeamId(value);
+            setTeamId(value)
         }
-    };
+    }
     const handleAdd = () => {
         fetch("/rest/players/", {
             method: 'POST',
@@ -53,16 +53,12 @@ export default function Players() {
             .then(
                 () => window.location.reload(),
                 (error) => {
-                    console.error('Error:', error);
+                    console.error('Error:', error)
                 }
-            );
-    };
-    const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    };
-    const goToPlayer = (event) => {
-        window.location.href = "/players/" + event.currentTarget.dataset.playerid;
-    };
+            )
+    }
+    const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
+    const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
 
     if (teams === null || players === null) {
         return (<div>Loading...</div>)

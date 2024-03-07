@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Box, Card, CardContent, CardHeader, Grid, Paper, TableCell, TableRow } from "@material-ui/core";
-import LeagueToolbar from "./LeagueToolbar";
-import playeroftheyear from "../icons/playeroftheyear.png";
-import dreamteam from "../icons/dreamteam.png";
-import silvermedal from "../icons/silvermedal.png";
-import goldmedal from "../icons/goldmedal.png";
-import {useParams} from "react-router";
-import {useDataLoader} from "../DataLoaderManager";
+import React from "react"
+import {Box, Card, CardContent, CardHeader, Grid, Paper, TableCell, TableRow} from "@material-ui/core"
+import LeagueToolbar from "./LeagueToolbar"
+import playeroftheyear from "../icons/playeroftheyear.png"
+import dreamteam from "../icons/dreamteam.png"
+import silvermedal from "../icons/silvermedal.png"
+import goldmedal from "../icons/goldmedal.png"
+import {useParams} from "react-router"
+import {useDataLoader} from "../DataLoaderManager"
 
 export default function Player() {
-    const {playerId} = useParams();
+    const {playerId} = useParams()
 
     const player = useDataLoader("/rest/players/" + playerId)
 

@@ -2,29 +2,13 @@ import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, T
 import LeagueToolbar from "../LeagueToolbar";
 import React, {Component, useEffect, useState} from "react";
 import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
+import {useDataLoader} from "../../DataLoaderManager";
 
 export default function Statistics() {
 
-    const [gameStats, setGameStats] = useState({});
-    const [isLoaded, setLoaded] = useState(false);
+    const gameStats = useDataLoader("/rest/history/statistics")
 
-    useEffect(() => {
-        fetch("/rest/history/statistics")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setGameStats(result);
-                    setLoaded(true);
-                },
-                (error) => {
-                    console.error('Error:', error);
-                    setLoaded(true);
-                }
-            );
-    }, []);
-
-
-    if (!isLoaded) {
+    if (gameStats === null) {
         return (<div>Loading...</div>)
     } else {
         return (

@@ -15,59 +15,23 @@ import {
 import goldmedal from "../../icons/goldmedal.png";
 import silvermedal from "../../icons/silvermedal.png";
 import LeagueToolbar from "../LeagueToolbar";
+import {useDataLoader} from "../../DataLoaderManager";
 
 export default function Coefficients() {
-    const [isLoaded, setLoaded] = useState(false);
-    const [teams, setTeams] = useState([]);
-    const [seasons, setSeasons] = useState([]);
-    const [teamsWithTrophies, setTeamsWithTrophies] = useState([]);
 
-    useEffect(() => {
-        fetch("/rest/history/coefficients")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setTeams(result);
-                }, (error) => {
-                    console.error('Error:', error);
-                });
+    const teams = useDataLoader("/rest/history/coefficients")
+    const seasons = useDataLoader("/rest/history/past_winners")
+    const teamsWithTrophies = useDataLoader("/rest/history/teams/trophies")
+    const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
+    const goToSeason = (event) => window.location.href = "/season/" + event.currentTarget.dataset.season
 
-        fetch("/rest/history/past_winners")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setSeasons(result);
-                }, (error) => {
-                    console.error('Error:', error);
-                });
-
-        fetch("/rest/history/teams/trophies")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setTeamsWithTrophies(result);
-                }, (error) => {
-                    console.error('Error:', error);
-                });
-        setLoaded(true)
-    }, []);
-
-    const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    }
-
-    const goToSeason = (event) => {
-        window.location.href = "/season/" + event.currentTarget.dataset.season;
-    }
-
-    let teamsList = [...teams];
-    let half_length = Math.ceil(teamsList.length / 2);
-    let leftSide = teamsList.splice(0, half_length);
-    let rightSide = teamsList;
-
-    if (!isLoaded) {
+    if (teams === null || seasons === null || teamsWithTrophies === null) {
         return (<div>Loading...</div>)
     } else {
+        let teamsList = [...teams];
+        let half_length = Math.ceil(teamsList.length / 2);
+        let leftSide = teamsList.splice(0, half_length);
+        let rightSide = teamsList;
         return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={"Awards & Coefficients"}/>

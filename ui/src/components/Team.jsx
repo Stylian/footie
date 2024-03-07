@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
     Box,
     Card,
@@ -10,46 +10,37 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import LeagueToolbar from "./LeagueToolbar";
+} from "@material-ui/core"
+import LeagueToolbar from "./LeagueToolbar"
 
-import silvermedal from "../icons/silvermedal.png";
-import goldmedal from "../icons/goldmedal.png";
-import greenup from "../icons/green_up.png";
-import reddown from "../icons/red_down.png";
-import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2";
-import dreamteam from "../icons/dreamteam.png";
-import playeroftheyear from "../icons/playeroftheyear.png";
-import {useParams} from "react-router";
-import {useDataLoader} from "../DataLoaderManager";
+import silvermedal from "../icons/silvermedal.png"
+import goldmedal from "../icons/goldmedal.png"
+import greenup from "../icons/green_up.png"
+import reddown from "../icons/red_down.png"
+import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2"
+import dreamteam from "../icons/dreamteam.png"
+import playeroftheyear from "../icons/playeroftheyear.png"
+import {useParams} from "react-router"
+import {useDataLoader} from "../DataLoaderManager"
 
 export default function Team() {
-    const {teamId} = useParams();
+    const {teamId} = useParams()
 
     const team = useDataLoader("/rest/teams/" + teamId)
     const gameStats = useDataLoader("/rest/history/statistics/teams/" + teamId)
-
-    const goToPlayer = (event) => {
-        window.location.href = "/players/" + event.currentTarget.dataset.playerid;
-    }
-
-    const goToSeason = (event) => {
-        window.location.href = "/season/" + event.currentTarget.dataset.season;
-    }
-
-    const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    }
+    const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
+    const goToSeason = (event) => window.location.href = "/season/" + event.currentTarget.dataset.season
+    const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (team === null || gameStats === null) {
         return (<div>Loading...</div>)
     } else {
-        let elos = [1200];
-        let elosSeasons = ["0"];
+        let elos = [1200]
+        let elosSeasons = ["0"]
         team.seasonsStats.map(function (v, k) {
-            elos[elos.length] = v.elo;
-            elosSeasons[elosSeasons.length] = "" + (k + 1);
-        });
+            elos[elos.length] = v.elo
+            elosSeasons[elosSeasons.length] = "" + (k + 1)
+        })
         return (
             <Box>
                 <Paper style={{margin: 10}} elevation={20}>
