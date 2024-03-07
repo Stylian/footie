@@ -9,12 +9,14 @@ import Knockouts from "./season_components/Knockouts";
 import SeasonPostview from "./season_components/SeasonPostview";
 import NextGame from "./season_components/NextGame";
 import {useParams} from "react-router";
+import {useTab} from "../TabsPersistanceManager";
 
 export default function Season() {
     const {seasonNum} = useParams();
 
+    const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
+
     const [pageTitle] = useState("Season " + seasonNum);
-    const [tabActive, setTabActive] = useState(0);
     const [stages, setStages] = useState({});
     const [isLoaded, setLoaded] = useState(false);
 
@@ -23,16 +25,6 @@ export default function Season() {
             .then(res => res.json())
             .then((result) => {
                 setStages(result);
-                setLoaded(true)
-            }, (error) => {
-                console.error('Error:', error);
-                setLoaded(true)
-            });
-
-        fetch("/rest/persist/tabs/season/" + seasonNum)
-            .then(res => res.json())
-            .then((result) => {
-                setTabActive(result);
                 setLoaded(true)
             }, (error) => {
                 console.error('Error:', error);
@@ -51,18 +43,6 @@ export default function Season() {
             });
     }, []);
 
-    const handleChange = (event, newValue) => {
-        fetch("/rest/persist/tabs/season/" + seasonNum, {
-            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(newValue)
-        })
-            .then(res => res.json())
-            .then(() => {
-                setTabActive(newValue);
-            }, (error) => {
-                console.error('Error:', error);
-            });
-    };
-
     if (!isLoaded) {
         return (<div>Loading...</div>)
     } else {
@@ -73,7 +53,7 @@ export default function Season() {
                         <LeagueToolbar pageTitle={pageTitle} seasonNum={seasonNum}/>
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
-                                <Tabs value={tabActive} onChange={handleChange}>
+                                <Tabs value={tabActive} onChange={handleChangeTab}>
                                     <Tab label="Seeding"/>
                                     <Tab disabled={seasonNum === 1} label="Preliminary round"/>
                                     <Tab label="Qualifying round"/>
