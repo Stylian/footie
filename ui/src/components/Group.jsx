@@ -13,37 +13,21 @@ import {
 } from "@material-ui/core";
 import LeagueToolbar from "./LeagueToolbar";
 import {useParams} from "react-router";
+import {useDataLoader} from "../DataLoaderManager";
 
 export default function Group() {
 
     const {groupId} = useParams();
-
-    const [group, setGroup] = useState({name: null});
-    const [isLoaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-        fetch("/rest/groups/" + groupId)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setGroup(result);
-                    setLoaded(true);
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error(error);
-                }
-            );
-    }, []);
-
+    const group = useDataLoader("/rest/groups/" + groupId)
     const goToTeam = (event) => {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     };
-
     const isOdd = n => !(isNaN(n) && ((n % 1) !== 0) && (n === 0)) && ((n % 2) !== 0) ? true : false;
 
-    return (
-        isLoaded ? (
+    if (group === null) {
+        return (<div>Loading...</div>)
+    } else {
+        return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={"Season " + group.seasonNum + " - " + group.name}/>
 
@@ -247,8 +231,6 @@ export default function Group() {
                     </Grid>
                 </Box>
             </Paper>
-        ) : (
-            <span></span>
         )
-    );
+    }
 }

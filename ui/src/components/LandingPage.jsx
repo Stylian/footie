@@ -1,45 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import LeagueToolbar from "./LeagueToolbar";
 import {Redirect} from "react-router";
+import {useDataLoader} from "../DataLoaderManager";
 
 
 export default function LandingPage() {
 
-    const [pageTitle] = useState("Landing Page")
-    const [currentDisplayedSeason, setCurrentDisplayedSeason] = useState(0)
-    const [isLoaded, setLoaded] = useState(false)
+    const currentDisplayedSeason = useDataLoader("/rest/seasons/")
 
-    useEffect(() => {
-        fetch("/rest/seasons/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setCurrentDisplayedSeason(result)
-                    setLoaded(true)
-                }, (error) => {
-                    console.error('Error:', error)
-                    setLoaded(true)
-                });
-    }, []);
-
-    if (!isLoaded) {
+    if (currentDisplayedSeason === null) {
         return (<div>Loading...</div>)
     } else {
         if(currentDisplayedSeason > 0) {
             return (
                 <div>
-                    <LeagueToolbar pageTitle={pageTitle}/>
+                    <LeagueToolbar pageTitle={"Landing Page"}/>
                     <Redirect to={"/season/" + currentDisplayedSeason}/>
                 </div>
             )
         }else {
             return (
                 <div>
-                    <LeagueToolbar pageTitle={pageTitle}/>
+                    <LeagueToolbar pageTitle={"Landing Page"}/>
                     <Redirect to={"/admin"}/>
                 </div>
             )
         }
     }
 }
-

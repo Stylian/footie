@@ -16,24 +16,12 @@ import analytics from "../icons/analytics.png";
 import barchart from "../icons/bar-chart.png";
 import medal1 from "../icons/medal1.png";
 import {useParams} from "react-router";
+import {useDataLoader} from "../DataLoaderManager";
 
-function LeagueToolbar({ pageTitle, seasonNum }) {
+export default function LeagueToolbar({ pageTitle, seasonNum }) {
 
     const [menuPosition, setMenuPosition] = useState(null);
-    const [seasonsTotal, setSeasonsTotal] = useState(0);
-
-    useEffect(() => {
-        fetch("/rest/seasons/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setSeasonsTotal(result);
-                },
-                (error) => {
-                    console.error('Error fetching seasons:', error);
-                }
-            );
-    }, []);
+    const seasonsTotal = useDataLoader("/rest/seasons/")
 
     const handleClick = (event) => {
         setMenuPosition(event.currentTarget);
@@ -134,5 +122,3 @@ function LeagueToolbar({ pageTitle, seasonNum }) {
         </div>
     );
 }
-
-export default LeagueToolbar;
