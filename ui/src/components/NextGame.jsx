@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import IconButton from '@material-ui/core/IconButton';
-import save from '../../icons/save.svg';
+import save from '../icons/save.svg';
 import {Card, CardContent, CardHeader, Grid, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {HorizontalBar, Radar} from "react-chartjs-2";
 
