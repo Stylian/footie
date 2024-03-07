@@ -4,6 +4,9 @@ import save from '../../icons/save.svg';
 import {Card, CardContent, CardHeader, Grid, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {HorizontalBar, Radar} from "react-chartjs-2";
 
+/**
+ * TODO later
+ */
 class NextGame extends Component {
 
     constructor(props) {

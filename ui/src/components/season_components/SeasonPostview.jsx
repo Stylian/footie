@@ -17,6 +17,9 @@ import playeroftheyear from "../../icons/playeroftheyear.png";
 import dreamteam from "../../icons/dreamteam.png";
 import Button from "@material-ui/core/Button";
 
+/**
+ * TODO later
+ */
 class SeasonPostview extends Component {
 
     constructor(props) {
