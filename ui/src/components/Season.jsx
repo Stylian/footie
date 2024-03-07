@@ -31,16 +31,6 @@ export default function Season() {
                 setLoaded(true)
             });
 
-        fetch("/rest/persist/property/season_year", {
-            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seasonNum)
-        })
-            .then(res => res.json())
-            .then((result) => {
-                setLoaded(true)
-            }, (error) => {
-                console.error('Error:', error);
-                setLoaded(true)
-            });
     }, []);
 
     if (!isLoaded) {

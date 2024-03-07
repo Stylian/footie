@@ -1,60 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {useDataLoader} from "../../DataLoaderManager";
 
 export default function Playoffs({year}) {
-    const [structure, setStructure] = useState({
-        gA1: {id: -1, name: ""},
-        gA2: {id: -1, name: ""},
-        gA3: {id: -1, name: ""},
-        gB1: {id: -1, name: ""},
-        gB2: {id: -1, name: ""},
-        gB3: {id: -1, name: ""},
-        S1: {id: -1, name: ""},
-        S2: {id: -1, name: ""},
-        F1: {id: -1, name: ""},
-        F2: {id: -1, name: ""},
-        W1: {id: -1, name: ""}
-    })
-    const [games, setGames] = useState({
-        "quarters": [],
-        "semis": [],
-        "finals": []
-    })
-    const [isLoaded, setLoaded] = useState(false)
 
-    useEffect(() => {
-        fetch("/rest/seasons/" + year + "/playoffs/structure")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setStructure(result)
-                    setLoaded(true)
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error('Error:', error);
-                }
-            )
-
-        fetch("/rest/seasons/" + year + "/playoffs/matches")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setGames(result)
-                    setLoaded(true)
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error('Error:', error);
-                }
-            )
-    }, [])
+    const structure = useDataLoader("/rest/seasons/" + year + "/playoffs/structure")
+    const games = useDataLoader("/rest/seasons/" + year + "/playoffs/matches")
 
     const goToTeam = (event) => {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     }
 
-    if (!isLoaded) {
+    if (structure === null || games === null) {
         return (<div>Loading...</div>)
     } else {
         return (
