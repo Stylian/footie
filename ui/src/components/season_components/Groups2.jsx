@@ -1,8 +1,8 @@
-import React from 'react';
-import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
-import GroupsMatches from "./groups_components/GroupsMatches";
-import GroupsDisplay from "./groups_components/GroupsDisplay";
-import {useTab} from "../../TabsPersistanceManager";
+import React from 'react'
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core"
+import GroupsMatches from "./groups_components/GroupsMatches"
+import GroupsDisplay from "./groups_components/GroupsDisplay"
+import {useTab} from "../../TabsPersistanceManager"
 
 export default function Groups2({year}) {
     const {tabActive, handleChangeTab} = useTab(year, "groups2")

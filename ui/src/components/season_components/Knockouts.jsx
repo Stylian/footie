@@ -1,9 +1,9 @@
-import React from 'react';
-import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
-import Rules from "./knockout_components/Rules";
-import Playoffs from "./Playoffs";
-import KnockoutOdds from "./knockout_components/KnockoutOdds";
-import {useTab} from "../../TabsPersistanceManager";
+import React from 'react'
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core"
+import Rules from "./knockout_components/Rules"
+import Playoffs from "./Playoffs"
+import KnockoutOdds from "./knockout_components/KnockoutOdds"
+import {useTab} from "../../TabsPersistanceManager"
 
 export default function Knockouts({year}) {
     const {tabActive, handleChangeTab} = useTab(year, "knockouts")

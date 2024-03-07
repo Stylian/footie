@@ -1,8 +1,8 @@
-import React from 'react';
-import {AppBar, Box, Tab, Tabs} from "@material-ui/core";
-import QualsSeeding from "./quals_components/QualsSeeding";
-import QualsMatches from "./quals_components/QualsMatches";
-import {useTab} from "../../TabsPersistanceManager";
+import React from 'react'
+import {AppBar, Box, Tab, Tabs} from "@material-ui/core"
+import QualsSeeding from "./quals_components/QualsSeeding"
+import QualsMatches from "./quals_components/QualsMatches"
+import {useTab} from "../../TabsPersistanceManager"
 
 export default function Quals({year, round, stage}) {
     const {tabActive, handleChangeTab} = useTab(year, "quals" + round)
@@ -16,7 +16,7 @@ export default function Quals({year, round, stage}) {
                 </Tabs>
             </AppBar>
             {tabActive === 0 && <QualsSeeding year={year} round={round} haveToSetUpTeams={stage === "ON_PREVIEW"}/>}
-            {tabActive === 1 && <QualsMatches year={year} round={round} />}
+            {tabActive === 1 && <QualsMatches year={year} round={round}/>}
         </Box>
     )
 }

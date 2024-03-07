@@ -1,15 +1,12 @@
-import React from 'react';
-import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import {useDataLoader} from "../../DataLoaderManager";
+import React from 'react'
+import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import {useDataLoader} from "../../DataLoaderManager"
 
 export default function Playoffs({year}) {
 
     const structure = useDataLoader("/rest/seasons/" + year + "/playoffs/structure")
     const games = useDataLoader("/rest/seasons/" + year + "/playoffs/matches")
-
-    const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    }
+    const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (structure === null || games === null) {
         return (<div>Loading...</div>)
@@ -182,9 +179,9 @@ export default function Playoffs({year}) {
                                         </TableHead>
                                         <TableBody>
                                             {games.quarters.map((game, index) => {
-                                                let winnerExists = game.winner != null;
-                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
-                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
+                                                let winnerExists = game.winner != null
+                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id
                                                 return (
                                                     <TableRow>
                                                         <TableCell align="right"
@@ -228,9 +225,9 @@ export default function Playoffs({year}) {
                                             </TableHead>
                                             <TableBody>
                                                 {games.semis.map((game, index) => {
-                                                    let winnerExists = game.winner != null;
-                                                    let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
-                                                    let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
+                                                    let winnerExists = game.winner != null
+                                                    let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                                    let awayWon = winnerExists && game.winner.id == game.awayTeam.id
                                                     return (
                                                         <TableRow>
                                                             <TableCell
@@ -277,9 +274,9 @@ export default function Playoffs({year}) {
                                         </TableHead>
                                         <TableBody>
                                             {games.finals.map((game, index) => {
-                                                let winnerExists = game.winner != null;
-                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id;
-                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id;
+                                                let winnerExists = game.winner != null
+                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id
                                                 return (
                                                     <TableRow>
                                                         <TableCell

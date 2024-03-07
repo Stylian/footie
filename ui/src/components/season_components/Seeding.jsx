@@ -1,39 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import goldmedal from "../../icons/goldmedal.png";
-import silvermedal from "../../icons/silvermedal.png";
-import Numeral from "numeral";
+import React, {useState, useEffect} from 'react'
+import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import goldmedal from "../../icons/goldmedal.png"
+import silvermedal from "../../icons/silvermedal.png"
+import Numeral from "numeral"
+import {useDataLoader} from "../../DataLoaderManager";
 
 export default function Seeding({year}) {
-    const [isLoaded, setLoaded] = useState(false);
-    const [teams, setTeams] = useState([]);
+    const teams = useDataLoader("/rest/seasons/" + year + "/seeding")
+    const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
-    useEffect(() => {
-        fetch("/rest/seasons/" + year + "/seeding")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setLoaded(true);
-                    setTeams(result);
-                },
-                (error) => {
-                    setLoaded(true);
-                    console.error('Error:', error);
-                }
-            )
-    }, []);
-
-    const goToTeam = (event) => {
-        window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
-    }
-
-
-    if (!isLoaded) {
+    if (teams === null) {
         return (<div>Loading...</div>)
     } else {
-        let half_length = Math.ceil(teams.length / 2);
-        let leftSide = teams.slice(0, half_length);
-        let rightSide = teams.slice(half_length);
+        let half_length = Math.ceil(teams.length / 2)
+        let leftSide = teams.slice(0, half_length)
+        let rightSide = teams.slice(half_length)
         return (
             <Box>
                 <Grid container spacing={1}>
