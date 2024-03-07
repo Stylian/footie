@@ -21,81 +21,36 @@ import {Bar, Doughnut, HorizontalBar, Line, Radar} from "react-chartjs-2";
 import dreamteam from "../icons/dreamteam.png";
 import playeroftheyear from "../icons/playeroftheyear.png";
 import {useParams} from "react-router";
+import {useDataLoader} from "../DataLoaderManager";
 
-function Team() {
-    const [gameStats, setGameStats] = useState({})
-    const [isLoaded, setLoaded] = useState(false)
-    const [isLoaded2, setLoaded2] = useState(false)
-    const [team, setTeam] = useState({
-        "id": -1,
-        "name": "",
-        "completeStats": {
-            "id": -1,
-            "points": 0,
-            "wins": 0,
-            "draws": 0,
-            "losses": 0,
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "matchesPlayed": 0,
-            "goalDifference": 0
-        },
-        "seasonsStats": [],
-        "trophies": []
-    })
-
+export default function Team() {
     const {teamId} = useParams();
 
-    useEffect(() => {
-        fetch("/rest/teams/" + teamId)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setTeam(result)
-                    setLoaded(true)
-                },
-                () => {
-                    setLoaded(true)
-                }
-            )
+    const team = useDataLoader("/rest/teams/" + teamId)
+    const gameStats = useDataLoader("/rest/history/statistics/teams/" + teamId)
 
-        fetch("/rest/history/statistics/teams/" + teamId)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setGameStats(result)
-                    setLoaded2(true)
-                },
-                () => {
-                    setLoaded2(true)
-                }
-            )
-    }, []);
-
-    const goToPlayer = (event, newValue) => {
+    const goToPlayer = (event) => {
         window.location.href = "/players/" + event.currentTarget.dataset.playerid;
     }
 
-    const goToSeason = (event, newValue) => {
+    const goToSeason = (event) => {
         window.location.href = "/season/" + event.currentTarget.dataset.season;
     }
 
-    const goToTeam = (event, newValue) => {
+    const goToTeam = (event) => {
         window.location.href = "/teams/" + event.currentTarget.dataset.teamid;
     }
 
-
-    let elos = [1200];
-    let elosSeasons = ["0"];
-    if (isLoaded && isLoaded2) {
+    if (team === null || gameStats === null) {
+        return (<div>Loading...</div>)
+    } else {
+        let elos = [1200];
+        let elosSeasons = ["0"];
         team.seasonsStats.map(function (v, k) {
             elos[elos.length] = v.elo;
             elosSeasons[elosSeasons.length] = "" + (k + 1);
         });
-    }
-
-    return (
-        isLoaded && isLoaded2 ? (
+        return (
             <Box>
                 <Paper style={{margin: 10}} elevation={20}>
                     <LeagueToolbar pageTitle={team.name}/>
@@ -446,7 +401,7 @@ function Team() {
                                                                         <TableCell align="left"
                                                                                    className={"teamClicker"}
                                                                                    data-teamid={game.awayTeam.id}
-                                                                                   onClick={this.goToTeam}>
+                                                                                   onClick={goToTeam}>
                                                                             {game.awayTeam.name}</TableCell>
                                                                     </TableRow>
                                                                 )
@@ -471,7 +426,7 @@ function Team() {
                                                                         <TableCell align="left"
                                                                                    className={"teamClicker"}
                                                                                    data-teamid={game.homeTeam.id}
-                                                                                   onClick={this.goToTeam}>
+                                                                                   onClick={goToTeam}>
                                                                             {game.homeTeam.name}</TableCell>
                                                                     </TableRow>
                                                                 )
@@ -509,7 +464,7 @@ function Team() {
                                                                             </TableCell>
                                                                             <TableCell
                                                                                 className={"teamClicker"}
-                                                                                onClick={this.goToSeason}
+                                                                                onClick={goToSeason}
                                                                                 data-season={trophy.seasonNum}
                                                                                 align="right">{"Season " + trophy.seasonNum}</TableCell>
                                                                         </TableRow>
@@ -600,7 +555,7 @@ function Team() {
                                                             {team.seasonsStats.map((seasonStats, index) => {
                                                                 return seasonStats.matchesPlayed > 0 ? (
                                                                     <TableRow className={"teamClicker"}
-                                                                              onClick={this.goToSeason}
+                                                                              onClick={goToSeason}
                                                                               data-season={index + 1}
                                                                     >
                                                                         <TableCell
@@ -626,7 +581,7 @@ function Team() {
                                                                     </TableRow>
                                                                 ) : (
                                                                     <TableRow className={"teamClicker"}
-                                                                              onClick={this.goToSeason}
+                                                                              onClick={goToSeason}
                                                                               data-season={index + 1}
                                                                     >
                                                                         <TableCell
@@ -692,7 +647,7 @@ function Team() {
                                                 {team.players.map((player, index) => {
                                                     return (
                                                         <TableRow className={"teamClicker"}
-                                                                  onClick={this.goToPlayer}
+                                                                  onClick={goToPlayer}
                                                                   data-playerid={player.id}
                                                         >
                                                             <TableCell
@@ -713,11 +668,6 @@ function Team() {
                     </Box>
                 </Paper>
             </Box>
-        ) : (
-            <span></span>
         )
-    );
-
+    }
 }
-
-export default Team;
