@@ -6,7 +6,7 @@ import silvermedal from "../icons/silvermedal.png"
 import goldmedal from "../icons/goldmedal.png"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
-import PageLoader from "./PageLoader";
+import PageLoader from "../PageLoader";
 
 export default function Player() {
     const {playerId} = useParams()

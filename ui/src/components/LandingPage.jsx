@@ -1,7 +1,7 @@
 import LeagueToolbar from "./LeagueToolbar"
 import {Redirect} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
-import PageLoader from "./PageLoader";
+import PageLoader from "../PageLoader";
 export default function LandingPage() {
 
     const currentDisplayedSeason = useDataLoader("/rest/seasons/")

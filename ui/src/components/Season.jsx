@@ -10,7 +10,7 @@ import NextGame from "./season_components/NextGame"
 import {useParams} from "react-router"
 import {useTab} from "../TabsPersistanceManager"
 import {useDataLoader} from "../DataLoaderManager"
-import PageLoader from "./PageLoader";
+import PageLoader from "../PageLoader";
 
 export default function Season() {
     const {seasonNum} = useParams()

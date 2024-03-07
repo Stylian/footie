@@ -1,6 +1,6 @@
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
-import PageLoader from "../../PageLoader";
+import PageLoader from "../../../PageLoader";
 
 export default function GroupsDisplay({year, round}) {
     const groups = useDataLoader("/rest/seasons/" + year + "/groups/" + round)

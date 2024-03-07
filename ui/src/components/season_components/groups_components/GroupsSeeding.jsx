@@ -2,7 +2,7 @@ import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHea
 import Button from "@material-ui/core/Button"
 import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
-import PageLoader from "../../PageLoader";
+import PageLoader from "../../../PageLoader";
 
 export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
     const data = useDataLoader("/rest/seasons/" + year + "/groups/" + round + "/seeding")

@@ -3,7 +3,7 @@ import LeagueToolbar from "../LeagueToolbar"
 import React from "react"
 import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2"
 import {useDataLoader} from "../../DataLoaderManager"
-import PageLoader from "../PageLoader";
+import PageLoader from "../../PageLoader";
 export default function Statistics() {
     const gameStats = useDataLoader("/rest/history/statistics")
 

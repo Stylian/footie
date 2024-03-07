@@ -13,7 +13,7 @@ import {
 import LeagueToolbar from "./LeagueToolbar"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
-import PageLoader from "./PageLoader";
+import PageLoader from "../PageLoader";
 
 export default function Group() {
 

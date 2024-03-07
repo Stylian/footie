@@ -14,7 +14,7 @@ import Numeral from "numeral"
 import {Doughnut, HorizontalBar} from "react-chartjs-2"
 import LeagueToolbar from "../LeagueToolbar"
 import {useDataLoader} from "../../DataLoaderManager"
-import PageLoader from "../PageLoader";
+import PageLoader from "../../PageLoader";
 
 const $ = require('jquery')
 $.DataTable = require('datatables.net')

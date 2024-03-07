@@ -3,7 +3,7 @@ import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import Numeral from "numeral"
 import {useDataLoader} from "../../DataLoaderManager";
-import PageLoader from "../PageLoader";
+import PageLoader from "../../PageLoader";
 export default function Seeding({year}) {
     const teams = useDataLoader("/rest/seasons/" + year + "/seeding")
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid

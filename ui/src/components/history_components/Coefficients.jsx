@@ -15,7 +15,7 @@ import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import LeagueToolbar from "../LeagueToolbar"
 import {useDataLoader} from "../../DataLoaderManager"
-import PageLoader from "../PageLoader";
+import PageLoader from "../../PageLoader";
 export default function Coefficients() {
     const teams = useDataLoader("/rest/history/coefficients")
     const seasons = useDataLoader("/rest/history/past_winners")

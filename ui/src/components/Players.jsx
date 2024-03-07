@@ -17,7 +17,7 @@ import {
 import IconButton from "@material-ui/core/IconButton"
 import plus from "../icons/plus.png"
 import {useDataLoader} from "../DataLoaderManager"
-import PageLoader from "./PageLoader";
+import PageLoader from "../PageLoader";
 
 /**
  * not sure if this will run after refactoring
