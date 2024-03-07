@@ -1,11 +1,9 @@
-import {Box, Card, CardContent, CardHeader, Grid, Paper, TableBody, TableCell, TableRow} from "@material-ui/core";
-import LeagueToolbar from "../LeagueToolbar";
-import React, {Component, useEffect, useState} from "react";
-import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2";
-import {useDataLoader} from "../../DataLoaderManager";
-
+import {Box, Card, CardContent, CardHeader, Grid, Paper} from "@material-ui/core"
+import LeagueToolbar from "../LeagueToolbar"
+import React from "react"
+import {Bar, Doughnut, HorizontalBar} from "react-chartjs-2"
+import {useDataLoader} from "../../DataLoaderManager"
 export default function Statistics() {
-
     const gameStats = useDataLoader("/rest/history/statistics")
 
     if (gameStats === null) {

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import Numeral from "numeral";
+import Numeral from "numeral"
 import {
     Box,
     Card,
@@ -11,14 +10,12 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import goldmedal from "../../icons/goldmedal.png";
-import silvermedal from "../../icons/silvermedal.png";
-import LeagueToolbar from "../LeagueToolbar";
-import {useDataLoader} from "../../DataLoaderManager";
-
+} from "@material-ui/core"
+import goldmedal from "../../icons/goldmedal.png"
+import silvermedal from "../../icons/silvermedal.png"
+import LeagueToolbar from "../LeagueToolbar"
+import {useDataLoader} from "../../DataLoaderManager"
 export default function Coefficients() {
-
     const teams = useDataLoader("/rest/history/coefficients")
     const seasons = useDataLoader("/rest/history/past_winners")
     const teamsWithTrophies = useDataLoader("/rest/history/teams/trophies")
@@ -28,10 +25,10 @@ export default function Coefficients() {
     if (teams === null || seasons === null || teamsWithTrophies === null) {
         return (<div>Loading...</div>)
     } else {
-        let teamsList = [...teams];
-        let half_length = Math.ceil(teamsList.length / 2);
-        let leftSide = teamsList.splice(0, half_length);
-        let rightSide = teamsList;
+        let teamsList = [...teams]
+        let half_length = Math.ceil(teamsList.length / 2)
+        let leftSide = teamsList.splice(0, half_length)
+        let rightSide = teamsList
         return (
             <Paper style={{margin: 20}} elevation={20}>
                 <LeagueToolbar pageTitle={"Awards & Coefficients"}/>

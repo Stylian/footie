@@ -1,4 +1,3 @@
-import React from "react"
 import {Box, Card, CardContent, CardHeader, Grid, Paper, TableCell, TableRow} from "@material-ui/core"
 import LeagueToolbar from "./LeagueToolbar"
 import playeroftheyear from "../icons/playeroftheyear.png"

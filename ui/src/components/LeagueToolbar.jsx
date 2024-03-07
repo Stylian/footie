@@ -16,7 +16,6 @@ import analytics from "../icons/analytics.png"
 import barchart from "../icons/bar-chart.png"
 import medal1 from "../icons/medal1.png"
 import {useDataLoader} from "../DataLoaderManager"
-
 export default function LeagueToolbar({ pageTitle, seasonNum }) {
 
     const [menuPosition, setMenuPosition] = useState(null)

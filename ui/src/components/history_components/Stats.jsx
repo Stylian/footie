@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Box,
     Card,
@@ -10,23 +9,22 @@ import {
     TableCell,
     TableHead,
     TableRow
-} from "@material-ui/core";
-import Numeral from "numeral";
-import {Doughnut, HorizontalBar} from "react-chartjs-2";
-import LeagueToolbar from "../LeagueToolbar";
-import {useDataLoader} from "../../DataLoaderManager";
+} from "@material-ui/core"
+import Numeral from "numeral"
+import {Doughnut, HorizontalBar} from "react-chartjs-2"
+import LeagueToolbar from "../LeagueToolbar"
+import {useDataLoader} from "../../DataLoaderManager"
 
-const $ = require('jquery');
-$.DataTable = require('datatables.net');
-const leftDivider = {"border-left": "1px solid #ddd"};
+const $ = require('jquery')
+$.DataTable = require('datatables.net')
+const leftDivider = {"border-left": "1px solid #ddd"}
 export default function Stats() {
-
     const teams = useDataLoader("/rest/history/stats", () => {
         $(".table").DataTable({
             "paging": false,
             "searching": false,
             "bInfo": false,
-        });
+        })
     })
     const goToTeam = (event) =>  window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
@@ -303,7 +301,7 @@ export default function Stats() {
                     </Grid>
                 </Box>
             </Paper>
-        );
+        )
     }
 }
 

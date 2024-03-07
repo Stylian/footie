@@ -1,6 +1,5 @@
-import React from 'react'
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
-import {useDataLoader} from "../../DataLoaderManager"
+import {useDataLoader} from "../../../DataLoaderManager"
 
 export default function Playoffs({year}) {
 
@@ -16,9 +15,7 @@ export default function Playoffs({year}) {
                 <Grid container spacing={1}>
                     <Grid item sm={6}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"tree view"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
+                            <CardHeader title={"tree view"} align={"center"} titleTypographyProps={{variant: 'h7'}} />
                             <CardContent>
                                 <table className="table tree_table" align={"center"}>
 

@@ -1,4 +1,3 @@
-import React from "react"
 import LeagueToolbar from "./LeagueToolbar"
 import {AppBar, Box, Grid, Paper, Tab, Tabs} from "@material-ui/core"
 import Seeding from "./season_components/Seeding"

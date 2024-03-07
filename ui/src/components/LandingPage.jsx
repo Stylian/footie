@@ -1,4 +1,3 @@
-import React from 'react'
 import LeagueToolbar from "./LeagueToolbar"
 import {Redirect} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"

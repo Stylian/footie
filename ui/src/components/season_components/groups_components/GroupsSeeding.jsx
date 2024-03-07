@@ -1,4 +1,3 @@
-import React from 'react'
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import Numeral from "numeral"

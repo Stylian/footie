@@ -1,9 +1,7 @@
-import React from 'react'
 import {AppBar, Box, Tab, Tabs} from "@material-ui/core"
 import QualsSeeding from "./quals_components/QualsSeeding"
 import QualsMatches from "./quals_components/QualsMatches"
 import {useTab} from "../../TabsPersistanceManager"
-
 export default function Quals({year, round, stage}) {
     const {tabActive, handleChangeTab} = useTab(year, "quals" + round)
 

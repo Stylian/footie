@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from 'react'
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import Numeral from "numeral"
 import {useDataLoader} from "../../DataLoaderManager";
-
 export default function Seeding({year}) {
     const teams = useDataLoader("/rest/seasons/" + year + "/seeding")
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
