@@ -10,7 +10,7 @@ export default function QualsMatches({year, round}) {
         return (<PageLoader />)
     } else {
         return (
-            <Box width={1200}>
+            <Box>
                 <Grid container spacing={1}>
                     {Object.keys(days).map((day, index) => {
                         return (
@@ -23,9 +23,9 @@ export default function QualsMatches({year, round}) {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell>Home</TableCell>
-                                                    <TableCell>score</TableCell>
-                                                    <TableCell>Away</TableCell>
+                                                    <TableCell style={{width: '45%'}}>Home</TableCell>
+                                                    <TableCell style={{width: '10%'}}>score</TableCell>
+                                                    <TableCell style={{width: '45%'}}>Away</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>

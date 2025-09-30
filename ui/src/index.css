@@ -30,9 +30,9 @@ code {
   background-color: #1f6d93 !important;
 }
 
-
 .MuiTableCell-root {
   padding: 5px 15px 5px 15px !important;
+  white-space: nowrap !important;   /* 👈 prevents wrapping */
 }
 
 .MuiTableCell-root > img {

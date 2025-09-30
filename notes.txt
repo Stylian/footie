@@ -1,5 +1,21 @@
 
+
+
+
 TODO
+
+check ui on ultrawide, probably need overflow anyway
+cannot create season 1
+
+
+
+
+teams stats horizontal bar chart not showing
+
+
+
+
+
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
 
