@@ -10,16 +10,8 @@ cannot create season 1
 
 
 
-teams stats horizontal bar chart not showing
-
-
-
-
-
 
 nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
-
-league odds?
 
 derby.log to move to logs folder
 stats page broken- on adding teams?

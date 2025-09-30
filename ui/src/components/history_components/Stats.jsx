@@ -47,10 +47,10 @@ export default function Stats() {
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell className={"reorder_tab"} colSpan={11}></TableCell>
-                                                        <TableCell className={"reorder_tab"} colSpan={4}
+                                                        <TableCell className={"reorder_tab"} colSpan={3}
                                                                    style={leftDivider}
                                                                    align={"center"}>home stats</TableCell>
-                                                        <TableCell className={"reorder_tab"} colSpan={4}
+                                                        <TableCell className={"reorder_tab"} colSpan={3}
                                                                    style={leftDivider}
                                                                    align={"center"}>away stats</TableCell>
                                                     </TableRow>
@@ -70,12 +70,12 @@ export default function Stats() {
                                                             ratio</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gs</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gc</TableCell>
-                                                        <TableCell className={"reorder_tab"}>goals per game</TableCell>
+{/*                                                         <TableCell className={"reorder_tab"}>goals per game</TableCell> */}
                                                         <TableCell className={"reorder_tab"} style={leftDivider}>results
                                                             ratio</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gs</TableCell>
                                                         <TableCell className={"reorder_tab"}>avg gc</TableCell>
-                                                        <TableCell className={"reorder_tab"}>goals per game</TableCell>
+{/*                                                         <TableCell className={"reorder_tab"}>goals per game</TableCell> */}
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -89,8 +89,8 @@ export default function Stats() {
                                                                 <TableCell align="right">{index + 1}</TableCell>
                                                                 <TableCell
                                                                     style={{
-                                                                        minWidth: 400,
-                                                                        maxWidth: 400
+                                                                        minWidth: 200,
+                                                                        maxWidth: 200
                                                                     }}>{key}</TableCell>
                                                                 <TableCell
                                                                     align="right">{teams[key]["number of games played"]}</TableCell>
@@ -153,53 +153,53 @@ export default function Stats() {
                                                                     align="right">{teams[key]["avg goals scored"]}</TableCell>
                                                                 <TableCell
                                                                     align="right">{teams[key]["avg goals conceded"]}</TableCell>
-                                                                <TableCell align="right" data-order={
-                                                                    teams[key]["avg goals scored"]
-                                                                }>
-                                                                    <div style={{height: "25px", width: "100px"}}>
-                                                                        <HorizontalBar
-                                                                            data={{
-                                                                                labels: ["", ""
-                                                                                ],
-                                                                                datasets: [{
-                                                                                    data: [
-                                                                                        teams[key]["avg goals scored"],
-                                                                                        teams[key]["avg goals conceded"]
-                                                                                    ],
-                                                                                    backgroundColor: [
-                                                                                        '#2d5cd2',
-                                                                                        '#da2525'
-                                                                                    ],
-                                                                                    hoverBackgroundColor: [
-                                                                                        '#2d5cd2',
-                                                                                        '#da2525'
-                                                                                    ]
-                                                                                }],
-                                                                            }}
-                                                                            options={{
-                                                                                tooltips: {enabled: false},
-                                                                                hover: {mode: null},
-                                                                                responsive: true,
-                                                                                maintainAspectRatio: false,
-                                                                                legend: {
-                                                                                    display: false,
-                                                                                },
-                                                                                scales: {
-                                                                                    yAxes: [{
-                                                                                        display: false
-                                                                                    }],
-                                                                                    xAxes: [{
-                                                                                        display: false,
-                                                                                        ticks: {
-                                                                                            min: 0,
-                                                                                            max: 6
-                                                                                        },
-                                                                                    }],
-                                                                                }
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                </TableCell>
+{/*                                                                 <TableCell align="right" data-order={ */}
+{/*                                                                     teams[key]["avg goals scored"] */}
+{/*                                                                 }> */}
+{/*                                                                     <div style={{height: "25px", width: "100px"}}> */}
+{/*                                                                         <HorizontalBar */}
+{/*                                                                             data={{ */}
+{/*                                                                                 labels: ["", "" */}
+{/*                                                                                 ], */}
+{/*                                                                                 datasets: [{ */}
+{/*                                                                                     data: [ */}
+{/*                                                                                         teams[key]["avg goals scored"], */}
+{/*                                                                                         teams[key]["avg goals conceded"] */}
+{/*                                                                                     ], */}
+{/*                                                                                     backgroundColor: [ */}
+{/*                                                                                         '#2d5cd2', */}
+{/*                                                                                         '#da2525' */}
+{/*                                                                                     ], */}
+{/*                                                                                     hoverBackgroundColor: [ */}
+{/*                                                                                         '#2d5cd2', */}
+{/*                                                                                         '#da2525' */}
+{/*                                                                                     ] */}
+{/*                                                                                 }], */}
+{/*                                                                             }} */}
+{/*                                                                             options={{ */}
+{/*                                                                                 tooltips: {enabled: false}, */}
+{/*                                                                                 hover: {mode: null}, */}
+{/*                                                                                 responsive: true, */}
+{/*                                                                                 maintainAspectRatio: false, */}
+{/*                                                                                 legend: { */}
+{/*                                                                                     display: false, */}
+{/*                                                                                 }, */}
+{/*                                                                                 scales: { */}
+{/*                                                                                     yAxes: [{ */}
+{/*                                                                                         display: false */}
+{/*                                                                                     }], */}
+{/*                                                                                     xAxes: [{ */}
+{/*                                                                                         display: false, */}
+{/*                                                                                         ticks: { */}
+{/*                                                                                             min: 0, */}
+{/*                                                                                             max: 6 */}
+{/*                                                                                         }, */}
+{/*                                                                                     }], */}
+{/*                                                                                 } */}
+{/*                                                                             }} */}
+{/*                                                                         /> */}
+{/*                                                                     </div> */}
+{/*                                                                 </TableCell> */}
                                                                 <TableCell style={leftDivider}
                                                                            align="right" data-order={
                                                                     teams[key]["wins_percent_away"]
@@ -243,53 +243,53 @@ export default function Stats() {
                                                                     align="right">{teams[key]["avg goals scored away"]}</TableCell>
                                                                 <TableCell
                                                                     align="right">{teams[key]["avg goals conceded away"]}</TableCell>
-                                                                <TableCell align="right" data-order={
-                                                                    teams[key]["avg goals scored away"]
-                                                                }>
-                                                                    <div style={{height: "25px", width: "100px"}}>
-                                                                        <HorizontalBar
-                                                                            data={{
-                                                                                labels: ["", ""
-                                                                                ],
-                                                                                datasets: [{
-                                                                                    data: [
-                                                                                        teams[key]["avg goals scored away"],
-                                                                                        teams[key]["avg goals conceded away"]
-                                                                                    ],
-                                                                                    backgroundColor: [
-                                                                                        '#abbeed',
-                                                                                        '#f0a8a8'
-                                                                                    ],
-                                                                                    hoverBackgroundColor: [
-                                                                                        '#abbeed',
-                                                                                        '#f0a8a8'
-                                                                                    ]
-                                                                                }],
-                                                                            }}
-                                                                            options={{
-                                                                                tooltips: {enabled: false},
-                                                                                hover: {mode: null},
-                                                                                responsive: true,
-                                                                                maintainAspectRatio: false,
-                                                                                legend: {
-                                                                                    display: false,
-                                                                                },
-                                                                                scales: {
-                                                                                    yAxes: [{
-                                                                                        display: false
-                                                                                    }],
-                                                                                    xAxes: [{
-                                                                                        display: false,
-                                                                                        ticks: {
-                                                                                            min: 0,
-                                                                                            max: 6
-                                                                                        },
-                                                                                    }],
-                                                                                }
-                                                                            }}
-                                                                        />
-                                                                    </div>
-                                                                </TableCell>
+{/*                                                                 <TableCell align="right" data-order={ */}
+{/*                                                                     teams[key]["avg goals scored away"] */}
+{/*                                                                 }> */}
+{/*                                                                     <div style={{height: "25px", width: "100px"}}> */}
+{/*                                                                         <HorizontalBar */}
+{/*                                                                             data={{ */}
+{/*                                                                                 labels: ["", "" */}
+{/*                                                                                 ], */}
+{/*                                                                                 datasets: [{ */}
+{/*                                                                                     data: [ */}
+{/*                                                                                         teams[key]["avg goals scored away"], */}
+{/*                                                                                         teams[key]["avg goals conceded away"] */}
+{/*                                                                                     ], */}
+{/*                                                                                     backgroundColor: [ */}
+{/*                                                                                         '#abbeed', */}
+{/*                                                                                         '#f0a8a8' */}
+{/*                                                                                     ], */}
+{/*                                                                                     hoverBackgroundColor: [ */}
+{/*                                                                                         '#abbeed', */}
+{/*                                                                                         '#f0a8a8' */}
+{/*                                                                                     ] */}
+{/*                                                                                 }], */}
+{/*                                                                             }} */}
+{/*                                                                             options={{ */}
+{/*                                                                                 tooltips: {enabled: false}, */}
+{/*                                                                                 hover: {mode: null}, */}
+{/*                                                                                 responsive: true, */}
+{/*                                                                                 maintainAspectRatio: false, */}
+{/*                                                                                 legend: { */}
+{/*                                                                                     display: false, */}
+{/*                                                                                 }, */}
+{/*                                                                                 scales: { */}
+{/*                                                                                     yAxes: [{ */}
+{/*                                                                                         display: false */}
+{/*                                                                                     }], */}
+{/*                                                                                     xAxes: [{ */}
+{/*                                                                                         display: false, */}
+{/*                                                                                         ticks: { */}
+{/*                                                                                             min: 0, */}
+{/*                                                                                             max: 6 */}
+{/*                                                                                         }, */}
+{/*                                                                                     }], */}
+{/*                                                                                 } */}
+{/*                                                                             }} */}
+{/*                                                                         /> */}
+{/*                                                                     </div> */}
+{/*                                                                 </TableCell> */}
                                                             </TableRow>)
                                                     })}
                                                 </TableBody>
