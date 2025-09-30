@@ -23,7 +23,7 @@ export default function QualsMatches({year, round}) {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell style={{width: '45%'}}>Home</TableCell>
+                                                    <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
                                                     <TableCell style={{width: '10%'}}>score</TableCell>
                                                     <TableCell style={{width: '45%'}}>Away</TableCell>
                                                 </TableRow>

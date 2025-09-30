@@ -14,7 +14,7 @@ export default function GroupsMatches({year, round}) {
                 <Grid container spacing={1}>
                     {Object.keys(days).map((day, index) => {
                         return (
-                            <Grid item sm={round == 1 ? 4 : 3}>
+                            <Grid item sm={round == 1 ? 4 : 6}>
                                 <Card style={{margin: 20}}>
                                     <CardHeader title={"Day " + day} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
@@ -23,9 +23,9 @@ export default function GroupsMatches({year, round}) {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell>Home</TableCell>
-                                                    <TableCell>score</TableCell>
-                                                    <TableCell>Away</TableCell>
+                                                    <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
+                                                    <TableCell style={{width: '10%'}}>score</TableCell>
+                                                    <TableCell style={{width: '45%'}}>Away</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>

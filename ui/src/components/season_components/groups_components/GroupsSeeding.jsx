@@ -31,7 +31,7 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
                 <Grid container spacing={1}>
-                    <Grid item sm={2.5}>
+                    <Grid item sm={4}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
@@ -61,7 +61,7 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={2.5}>
+                    <Grid item sm={4}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
@@ -92,7 +92,7 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={2.5}>
+                    <Grid item sm={4}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
@@ -123,56 +123,54 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={4.5}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table" style={{minWidth: 320, maxWidth: 320}}>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell align={"right"}>Teams</TableCell>
-                                            <TableCell>
-                                                <ul>
-                                                    <li>12</li>
-                                                </ul>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell align={"right"}>Participation</TableCell>
-                                            <TableCell>
-                                                <ul>
-                                                    <li>last season's 2 finalists</li>
-                                                    <li>1st team by coefficients</li>
-                                                    <li>9 winners from the play-off round</li>
-                                                </ul>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell align={"right"}>Format</TableCell>
-                                            <TableCell>
-                                                <ul>
-                                                    <li>4 groups, round robin</li>
-                                                </ul>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell align={"right"}>Coefficients granted</TableCell>
-                                            <TableCell>
-                                                <ul>
-                                                    <li>1st place: 0.600</li>
-                                                    <li>2nd place: 0.300</li>
-                                                    <li>win: 1.000</li>
-                                                    <li>draw: 0.500</li>
-                                                    <li>each goal scored: 0.100</li>
-                                                </ul>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+{/*                         <Card style={{margin: 20}}> */}
+{/*                             <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}} */}
+{/*                             /> */}
+{/*                             <CardContent> */}
+{/*                                 <table className="table" style={{minWidth: 320, maxWidth: 320}}> */}
+{/*                                     <TableBody> */}
+{/*                                         <TableRow> */}
+{/*                                             <TableCell align={"right"}>Teams</TableCell> */}
+{/*                                             <TableCell> */}
+{/*                                                 <ul> */}
+{/*                                                     <li>12</li> */}
+{/*                                                 </ul> */}
+{/*                                             </TableCell> */}
+{/*                                         </TableRow> */}
+{/*                                         <TableRow> */}
+{/*                                             <TableCell align={"right"}>Participation</TableCell> */}
+{/*                                             <TableCell> */}
+{/*                                                 <ul> */}
+{/*                                                     <li>last season's 2 finalists</li> */}
+{/*                                                     <li>1st team by coefficients</li> */}
+{/*                                                     <li>9 winners from the play-off round</li> */}
+{/*                                                 </ul> */}
+{/*                                             </TableCell> */}
+{/*                                         </TableRow> */}
+{/*                                         <TableRow> */}
+{/*                                             <TableCell align={"right"}>Format</TableCell> */}
+{/*                                             <TableCell> */}
+{/*                                                 <ul> */}
+{/*                                                     <li>4 groups, round robin</li> */}
+{/*                                                 </ul> */}
+{/*                                             </TableCell> */}
+{/*                                         </TableRow> */}
+{/*                                         <TableRow> */}
+{/*                                             <TableCell align={"right"}>Coefficients granted</TableCell> */}
+{/*                                             <TableCell> */}
+{/*                                                 <ul> */}
+{/*                                                     <li>1st place: 0.600</li> */}
+{/*                                                     <li>2nd place: 0.300</li> */}
+{/*                                                     <li>win: 1.000</li> */}
+{/*                                                     <li>draw: 0.500</li> */}
+{/*                                                     <li>each goal scored: 0.100</li> */}
+{/*                                                 </ul> */}
+{/*                                             </TableCell> */}
+{/*                                         </TableRow> */}
+{/*                                     </TableBody> */}
+{/*                                 </table> */}
+{/*                             </CardContent> */}
+{/*                         </Card> */}
 
                 </Grid>
             </Box>
