@@ -11,23 +11,23 @@ export default function GroupsDisplay({year, round}) {
         return (<PageLoader />)
     } else {
         return (
-            <Box width={1400}>
+            <Box>
                 <Grid container spacing={1}>
                     {groups.map((group, index) => {
 
                         return (
                             <Grid item sm={6}>
-                                <Card style={{margin: 20}}>
+                                <Card style={{margin: 10}}>
                                     <CardHeader title={group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
                                                 className={"groupClicker"} data-groupid={group.id}
                                                 onClick={goToGroup}
                                     />
                                     <CardContent>
-                                        <table className="table" align={"center"}>
+                                        <table className="table compact-table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell className={"reorder_tab"}>Pos</TableCell>
+                                                    <TableCell className={"reorder_tab"}></TableCell>
                                                     <TableCell className={"reorder_tab"}>Team</TableCell>
                                                     <TableCell className={"reorder_tab"}>Played</TableCell>
                                                     <TableCell className={"reorder_tab"}>Points</TableCell>

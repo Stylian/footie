@@ -16,14 +16,14 @@ export default function Knockouts({year}) {
                   TabIndicatorProps={{ style: { backgroundColor: "#1f6d93", height: 2 } }}
                 >
                     <Tab label="Brackets" style={{ color: "#1f6d93", textTransform: "none" }}/>
-                    <Tab label="Rules" style={{ color: "#1f6d93", textTransform: "none" }}/>
+{/*                     <Tab label="Rules" style={{ color: "#1f6d93", textTransform: "none" }}/> */}
                     <Tab label="Odds" style={{ color: "#1f6d93", textTransform: "none" }}/>
                 </Tabs>
             </AppBar>
 
             {tabActive === 0 && <Playoffs year={year}/>}
-            {tabActive === 1 && <Rules/>}
-            {tabActive === 2 && <KnockoutOdds year={year}/>}
+{/*             {tabActive === 1 && <Rules/>} */}
+            {tabActive === 1 && <KnockoutOdds year={year}/>}
         </Box>
     )
 }

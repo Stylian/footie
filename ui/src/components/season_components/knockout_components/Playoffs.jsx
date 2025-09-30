@@ -1,6 +1,9 @@
 import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {useDataLoader} from "../../../DataLoaderManager"
 import PageLoader from "../../../PageLoader";
+import Slider from "react-slick"
 
 export default function Playoffs({year}) {
 
@@ -11,10 +14,26 @@ export default function Playoffs({year}) {
     if (structure === null || games === null) {
         return (<PageLoader />)
     } else {
+        // slider settings
+        const settings = {
+          dots: true,
+          infinite: false,
+          speed: 500,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: true,
+          adaptiveHeight: true,
+          appendDots: dots => (
+            <div style={{ paddingTop: "30px" }}> {/* reserve space */}
+              <ul style={{ margin: 0 }}> {dots} </ul>
+            </div>
+          )
+        }
+
         return (
             <Box>
                 <Grid container spacing={1}>
-                    <Grid item sm={6}>
+                    <Grid item sm={8}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"tree view"} align={"center"} titleTypographyProps={{variant: 'h7'}} />
                             <CardContent>
@@ -160,146 +179,207 @@ export default function Playoffs({year}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={3}>
-                        <Card style={{margin: 20}}>
-                            <CardHeader title={"¼ Finals"} align={"center"}
-                                        titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
+                    <Grid item sm={4}>
+                        <Slider {...settings}>
+                          {/* ¼ Finals */}
+                          <div>
+                            <Card style={{ margin: 20 }}>
+                              <CardHeader
+                                title={"¼ Finals"}
+                                align={"center"}
+                                titleTypographyProps={{ variant: "h7" }}
+                              />
+                              <CardContent>
                                 <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
-                                            <TableCell style={{width: '10%'}}>score</TableCell>
-                                            <TableCell style={{width: '45%'}}>Away</TableCell>
+                                  <TableHead>
+                                    <TableRow>
+                                      <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                        Home
+                                      </TableCell>
+                                      <TableCell style={{ width: "10%" }}>score</TableCell>
+                                      <TableCell align="left" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                        Away
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableHead>
+                                  <TableBody>
+                                    {games.quarters.map((game, index) => {
+                                      let winnerExists = game.winner != null
+                                      let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                      let awayWon = winnerExists && game.winner.id == game.awayTeam.id
+                                      return (
+                                        <TableRow key={index}>
+                                          <TableCell
+                                            align="right"
+                                            className={"teamClicker" + (homeWon ? " winner" : "")}
+                                            data-teamid={game.homeTeam.id}
+                                            onClick={goToTeam}
+                                          >
+                                            {game.homeTeam.name}
+                                          </TableCell>
+                                          {game.result == null ? (
+                                            <TableCell></TableCell>
+                                          ) : (
+                                            <TableCell>
+                                              {game.result.goalsMadeByHomeTeam +
+                                                " - " +
+                                                game.result.goalsMadeByAwayTeam}
+                                            </TableCell>
+                                          )}
+                                          <TableCell
+                                            align="left"
+                                            className={"teamClicker" + (awayWon ? " winner" : "")}
+                                            data-teamid={game.awayTeam.id}
+                                            onClick={goToTeam}
+                                          >
+                                            {game.awayTeam.name}
+                                          </TableCell>
                                         </TableRow>
+                                      )
+                                    })}
+                                  </TableBody>
+                                </table>
+                              </CardContent>
+                            </Card>
+                          </div>
+
+                          {/* ½ Finals */}
+                          {games.semis.length > 0 && (
+                            <div>
+                              <Card style={{ margin: 20 }}>
+                                <CardHeader
+                                  title={"½ Finals"}
+                                  align={"center"}
+                                  titleTypographyProps={{ variant: "h7" }}
+                                />
+                                <CardContent>
+                                  <table className="table" align={"center"}>
+                                    <TableHead>
+                                      <TableRow>
+                                        <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                          Home
+                                        </TableCell>
+                                        <TableCell style={{ width: "10%" }}>score</TableCell>
+                                        <TableCell
+                                          align="left"
+                                          style={{ width: "45%", whiteSpace: "nowrap" }}
+                                        >
+                                          Away
+                                        </TableCell>
+                                      </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {games.quarters.map((game, index) => {
-                                            let winnerExists = game.winner != null
-                                            let homeWon = winnerExists && game.winner.id == game.homeTeam.id
-                                            let awayWon = winnerExists && game.winner.id == game.awayTeam.id
-                                            return (
-                                                <TableRow>
-                                                    <TableCell align="right"
-                                                               className={"teamClicker" + (homeWon ? " winner" : "")}
-                                                               data-teamid={game.homeTeam.id}
-                                                               onClick={goToTeam}>
-                                                        {game.homeTeam.name}</TableCell>
-                                                    {game.result == null ? (
-                                                        <TableCell></TableCell>
-                                                    ) : (
-                                                        <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                    )}
-                                                    <TableCell align="left"
-                                                               className={"teamClicker" + (awayWon ? " winner" : "")}
-                                                               data-teamid={game.awayTeam.id}
-                                                               onClick={goToTeam}>
-                                                        {game.awayTeam.name}</TableCell>
-                                                </TableRow>)
-                                        })}
+                                      {games.semis.map((game, index) => {
+                                        let winnerExists = game.winner != null
+                                        let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                        let awayWon = winnerExists && game.winner.id == game.awayTeam.id
+                                        return (
+                                          <TableRow key={index}>
+                                            <TableCell
+                                              align="right"
+                                              className={"teamClicker" + (homeWon ? " winner" : "")}
+                                              data-teamid={game.homeTeam.id}
+                                              onClick={goToTeam}
+                                            >
+                                              {game.homeTeam.name}
+                                            </TableCell>
+                                            {game.result == null ? (
+                                              <TableCell></TableCell>
+                                            ) : (
+                                              <TableCell>
+                                                {game.result.goalsMadeByHomeTeam +
+                                                  " - " +
+                                                  game.result.goalsMadeByAwayTeam}
+                                              </TableCell>
+                                            )}
+                                            <TableCell
+                                              align="left"
+                                              className={"teamClicker" + (awayWon ? " winner" : "")}
+                                              data-teamid={game.awayTeam.id}
+                                              onClick={goToTeam}
+                                            >
+                                              {game.awayTeam.name}
+                                            </TableCell>
+                                          </TableRow>
+                                        )
+                                      })}
                                     </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
+                                  </table>
+                                </CardContent>
+                              </Card>
+                            </div>
+                          )}
 
-                        {games.semis.length > 0 ? (
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"½ Finals"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
+                          {/* Finals */}
+                          {games.finals.length > 0 && (
+                            <div>
+                              <Card style={{ margin: 20 }}>
+                                <CardHeader
+                                  title={"Finals"}
+                                  align={"center"}
+                                  titleTypographyProps={{ variant: "h7" }}
                                 />
                                 <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
-                                                <TableCell style={{width: '10%'}}>score</TableCell>
-                                                <TableCell style={{width: '45%'}}>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {games.semis.map((game, index) => {
-                                                let winnerExists = game.winner != null
-                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id
-                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell
-                                                            align="right"
-                                                            className={"teamClicker" + (homeWon ? " winner" : "")}
-                                                            data-teamid={game.homeTeam.id}
-                                                            onClick={goToTeam}>
-                                                            {game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left"
-                                                                   className={"teamClicker" + (awayWon ? " winner" : "")}
-                                                                   data-teamid={game.awayTeam.id}
-                                                                   onClick={goToTeam}>
-                                                            {game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
+                                  <table className="table" align={"center"}>
+                                    <TableHead>
+                                      <TableRow>
+                                        <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                          Home
+                                        </TableCell>
+                                        <TableCell style={{ width: "10%" }}>score</TableCell>
+                                        <TableCell
+                                          align="left"
+                                          style={{ width: "45%", whiteSpace: "nowrap" }}
+                                        >
+                                          Away
+                                        </TableCell>
+                                      </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                      {games.finals.map((game, index) => {
+                                        let winnerExists = game.winner != null
+                                        let homeWon = winnerExists && game.winner.id == game.homeTeam.id
+                                        let awayWon = winnerExists && game.winner.id == game.awayTeam.id
+                                        return (
+                                          <TableRow key={index}>
+                                            <TableCell
+                                              align="right"
+                                              className={"teamClicker" + (homeWon ? " winner" : "")}
+                                              data-teamid={game.homeTeam.id}
+                                              onClick={goToTeam}
+                                            >
+                                              {game.homeTeam.name}
+                                            </TableCell>
+                                            {game.result == null ? (
+                                              <TableCell></TableCell>
+                                            ) : (
+                                              <TableCell>
+                                                {game.result.goalsMadeByHomeTeam +
+                                                  " - " +
+                                                  game.result.goalsMadeByAwayTeam}
+                                              </TableCell>
+                                            )}
+                                            <TableCell
+                                              align="left"
+                                              className={"teamClicker" + (awayWon ? " winner" : "")}
+                                              data-teamid={game.awayTeam.id}
+                                              onClick={goToTeam}
+                                            >
+                                              {game.awayTeam.name}
+                                            </TableCell>
+                                          </TableRow>
+                                        )
+                                      })}
+                                    </TableBody>
+                                  </table>
                                 </CardContent>
-                            </Card>
-                        ) : ''}
+                              </Card>
+                            </div>
+                          )}
+                        </Slider>
+                      </Grid>
                     </Grid>
-
-                    <Grid item sm={3}>
-                        {games.finals.length > 0 ? (
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Finals"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
-                                                <TableCell style={{width: '10%'}}>score</TableCell>
-                                                <TableCell style={{width: '45%'}}>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {games.finals.map((game, index) => {
-                                                let winnerExists = game.winner != null
-                                                let homeWon = winnerExists && game.winner.id == game.homeTeam.id
-                                                let awayWon = winnerExists && game.winner.id == game.awayTeam.id
-                                                return (
-                                                    <TableRow>
-                                                        <TableCell
-                                                            align="right"
-                                                            className={"teamClicker" + (homeWon ? " winner" : "")}
-                                                            data-teamid={game.homeTeam.id}
-                                                            onClick={goToTeam}>
-                                                            {game.homeTeam.name}</TableCell>
-                                                        {game.result == null ? (
-                                                            <TableCell></TableCell>
-                                                        ) : (
-                                                            <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                                + game.result.goalsMadeByAwayTeam}  </TableCell>
-                                                        )}
-                                                        <TableCell align="left"
-                                                                   className={"teamClicker" + (awayWon ? " winner" : "")}
-                                                                   data-teamid={game.awayTeam.id}
-                                                                   onClick={goToTeam}>
-                                                            {game.awayTeam.name}</TableCell>
-                                                    </TableRow>)
-                                            })}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        ) : ''}
-                    </Grid>
-                </Grid>
-            </Box>
-        )
-    }
-}
+                  </Box>
+                )
+              }
+            }

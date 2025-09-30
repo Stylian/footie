@@ -106,3 +106,17 @@ code {
 .reorder_tab {
   cursor: pointer;
 }
+
+.compact-table .MuiTableCell-root {
+  padding: 5px 8px !important;  /* less padding */
+  font-size: 0.9rem !important; /* smaller text */
+  white-space: nowrap !important; /* no wrapping */
+}
+
+/* Team name cell narrower */
+.compact-table .team-cell {
+  max-width: 80px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
