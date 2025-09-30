@@ -9,10 +9,10 @@ import PageLoader from "../PageLoader";
 export default function NextGame() {
 
     const data = useDataLoader("/rest/next_game")
-    const {homeScore, setHomeScore} = useState(0)
-    const {awayScore, setAwayScore} = useState(0)
-    const {editedHomeScore, setEditedHomeScore} = useState(false)
-    const {editedAwayScore, setEditedAwayScore} = useState(false)
+    const [homeScore, setHomeScore] = useState(0)
+    const [awayScore, setAwayScore] = useState(0)
+    const [editedHomeScore, setEditedHomeScore] = useState(false)
+    const [editedAwayScore, setEditedAwayScore] = useState(false)
 
     const handleChangeScore = field => (event) => {
         let value = event.target.value;

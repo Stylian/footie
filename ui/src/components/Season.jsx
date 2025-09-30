@@ -28,9 +28,9 @@ export default function Season() {
                         <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum}/>
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
-                                <Tabs value={tabActive} onChange={handleChangeTab}>
-                                    <Tab label="Seeding"/>
-                                    <Tab disabled={seasonNum === 1} label="Preliminary round"/>
+                                <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">
+                                    <Tab  label="Seeding"/>
+                                    <Tab disabled={seasonNum == 1} label="Preliminary round"/>
                                     <Tab label="Qualifying round"/>
                                     <Tab label="Play-off round"/>
                                     <Tab label="1st Group stage"/>

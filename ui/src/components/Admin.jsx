@@ -12,8 +12,8 @@ import PageLoader from "../PageLoader";
 export default function Admin() {
 
     const generalData = useDataLoader("/rest/seasons/")
-    const seasonsStages = useDataLoader("/rest/seasons/")
-    let canCreateLeague = useDataLoader("/rest/seasons/")
+    const seasonYear = useDataLoader("/rest/seasons/")
+    let canCreateLeague = useDataLoader("/rest/seasons/") == 0
     let lastRestorePoint = useDataLoader("/rest/seasons/")
     const handleButtonClick = () => {
         fetch("/rest/ops/season/create", {
@@ -81,7 +81,7 @@ export default function Admin() {
             )
     }
 
-    if (seasonsStages === null || generalData == null) {
+    if (seasonYear === null || generalData == null) {
         return (<PageLoader />)
     } else {
         return (
@@ -100,11 +100,7 @@ export default function Admin() {
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell>Season Year</TableCell>
-                                                <TableCell align="right">{seasonsStages.seasonYear}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>Stage</TableCell>
-                                                <TableCell align="right">{seasonsStages.stage}</TableCell>
+                                                <TableCell align="right">{seasonYear}</TableCell>
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell colSpan-={2}>

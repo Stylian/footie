@@ -23,6 +23,7 @@ code {
 
 .MuiTab-root {
   text-transform: none !important;
+  font-size: 0.9rem !important;
 }
 
 .MuiCardHeader-root {

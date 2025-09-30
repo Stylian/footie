@@ -90,7 +90,7 @@ export default function SeasonPostview({year}) {
             <Box>
                 {seasonData.haveToPublish ? (<Button onClick={handlePublish}>Publish</Button>) : ''}
                 <Grid container spacing={1}>
-                    <Grid item sm={6}>
+                    <Grid item sm={7}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"Team Awards"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                             <CardContent>
@@ -370,7 +370,7 @@ export default function SeasonPostview({year}) {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={4}>
+                    <Grid item sm={5}>
                         <Card style={{margin: 20}}>
                             <CardHeader title={"Player Awards"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
