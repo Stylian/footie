@@ -82,9 +82,9 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                                 </MenuItem>
                             </Menu>
 
-                            {seasonNum !== undefined && (
+                            {seasonNum && seasonsTotal && (
                                 <Box>
-                                    {seasonNum !== seasonsTotal && (
+                                    {seasonNum != seasonsTotal && (
                                         <IconButton onClick={handleUp}>
                                             <img src={up} title={"next season"} />
                                         </IconButton>

@@ -31,7 +31,8 @@ public class CoefficientsRangeOrdering implements Comparator<Team> {
             return p2 - p1;
         }
 
-        // alphabetical
-        return o1.getName().compareTo(o2.getName());
+        // elo
+        Season seasonLast = seasons.get(seasonUntil - 1);
+        return o2.getStatsForGroup(seasonLast).getElo() - o1.getStatsForGroup(seasonLast).getElo();
     }
 }
