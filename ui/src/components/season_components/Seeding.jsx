@@ -174,53 +174,6 @@ export default function Seeding({year}) {
                         </Grid>
                     </Grid>
                 </Card>
-
-{/*                 <Card style={{margin: 20}}> */}
-{/*                     <CardHeader title={"Rules"} align={"center"} titleTypographyProps={{variant: 'h7'}} */}
-{/*                     /> */}
-{/*                     <CardContent> */}
-{/*                         <table className="table"> */}
-{/*                             <TableBody> */}
-{/*                                 <TableRow> */}
-{/*                                     <TableCell align={"right"}>Teams</TableCell> */}
-{/*                                     <TableCell> */}
-{/*                                         <ul> */}
-{/*                                             <li>{teams.length}</li> */}
-{/*                                         </ul> */}
-{/*                                     </TableCell> */}
-{/*                                 </TableRow> */}
-{/*                                 <TableRow> */}
-{/*                                     <TableCell align={"right"}>Participation rules</TableCell> */}
-{/*                                     <TableCell> */}
-{/*                                         <ul> */}
-{/*                                             <li>3 teams to 1st group stage</li> */}
-{/*                                             <li>5 teams to the play-off round</li> */}
-{/*                                             <li>26 teams to the qualifying round</li> */}
-{/*                                             <li>remaining teams to the preliminary round</li> */}
-{/*                                         </ul> */}
-{/*                                     </TableCell> */}
-{/*                                 </TableRow> */}
-
-{/*                                 <TableRow> */}
-{/*                                     <TableCell align={"right"}>Participation breakout</TableCell> */}
-{/*                                     <TableCell> */}
-{/*                                         <ul> */}
-{/*                                             <li>2 last year's finalists start from 1st group stage</li> */}
-{/*                                             <li>1st team by coefficients starts from 1st group stage</li> */}
-{/*                                             <li>2 last year's semi-finalists start from at least the play-off */}
-{/*                                                 round */}
-{/*                                             </li> */}
-{/*                                             <li>3 following teams by coefficients start from the play-off */}
-{/*                                                 round */}
-{/*                                             </li> */}
-{/*                                             <li>bottom teams start from the preliminary round</li> */}
-{/*                                         </ul> */}
-{/*                                     </TableCell> */}
-{/*                                 </TableRow> */}
-{/*                             </TableBody> */}
-{/*                         </table> */}
-{/*                     </CardContent> */}
-{/*                 </Card> */}
             </Box>
         )
     }
