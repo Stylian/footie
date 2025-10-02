@@ -3,6 +3,7 @@ import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 import LandingPage from "./components/LandingPage";
 import Admin from "./components/Admin";
+import Rules from "./components/Rules";
 import Season from "./components/Season";
 import Team from "./components/Team";
 import Group from "./components/Group";
@@ -26,6 +27,7 @@ export default function App() {
             <Route path='/players_edit' component={Players}/>
             <Route path='/players/:playerId' component={Player}/>
             <Route path='/admin' component={Admin}/>
+            <Route path='/rules' component={Rules}/>
         </BrowserRouter>
     );
 

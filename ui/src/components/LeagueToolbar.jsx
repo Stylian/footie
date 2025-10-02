@@ -74,6 +74,12 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                                     </ListItemIcon>
                                     <ListItemText primary="Players"/>
                                 </MenuItem>
+                                <MenuItem data-link="/rules" onClick={handleButtonSelection}>
+                                    <ListItemIcon>
+                                        <img src={list} title={"rules"}/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Rules"/>
+                                </MenuItem>
                                 <MenuItem data-link="/admin" onClick={handleButtonSelection}>
                                     <ListItemIcon>
                                         <img src={build} title={"admin"}/>
