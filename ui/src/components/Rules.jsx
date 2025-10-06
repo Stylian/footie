@@ -9,7 +9,7 @@ export default function Rules() {
             <LeagueToolbar pageTitle={"Rules"}/>
             <Grid container>
 
-                <Grid item sm={8}>
+                <Grid item sm={6}>
                     <Card style={{margin: 20}}>
                         <CardHeader title={"Seeding"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
@@ -50,7 +50,7 @@ export default function Rules() {
                     </Card>
                 </Grid>
 
-                <Grid item sm={4}>
+                <Grid item sm={3}>
                     <Card style={{margin: 20}}>
                         <CardHeader title={"Preliminary Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
@@ -83,7 +83,7 @@ export default function Rules() {
                 </Grid>
 
 
-                <Grid item sm={4}>
+                <Grid item sm={3}>
                     <Card style={{margin: 20}}>
                         <CardHeader title={"Qualifying Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
@@ -151,7 +151,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                      <Card style={{margin: 20}}>
-                        <CardHeader title={"Groups Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader title={"1st Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table" style={{minWidth: 320, maxWidth: 320}}>
@@ -169,6 +169,41 @@ export default function Rules() {
                                         <TableCell>
                                             <ul>
                                                 <li>1st place: 0.600</li>
+                                                <li>2nd place: 0.300</li>
+                                                <li>win: 1.000</li>
+                                                <li>draw: 0.500</li>
+                                                <li>each goal scored: 0.100</li>
+                                            </ul>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid item sm={4}>
+                     <Card style={{margin: 20}}>
+                        <CardHeader title={"2nd Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent style={{ display: "flex", justifyContent: "center" }}>
+                            <table className="table" style={{minWidth: 320, maxWidth: 320}}>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell align={"right"}>Format</TableCell>
+                                        <TableCell>
+                                            <ul>
+                                                <li>2 groups, round robin</li>
+                                                <li>stats for 2st group round persist</li>
+                                            </ul>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell align={"right"}>Coeffs</TableCell>
+                                        <TableCell>
+                                            <ul>
+                                                <li>1st place: 2.000</li>
+                                                <li>2nd place: 0.600</li>
                                                 <li>2nd place: 0.300</li>
                                                 <li>win: 1.000</li>
                                                 <li>draw: 0.500</li>
