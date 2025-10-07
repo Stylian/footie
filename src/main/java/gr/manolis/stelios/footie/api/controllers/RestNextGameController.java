@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -138,6 +140,7 @@ public class RestNextGameController {
 
 
         DecimalFormat numberFormat = new DecimalFormat("0.00");
+        numberFormat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
         data.put("game", gameMapper.toDTO(game));
         if (game != null) {
             data.put("homeData", viewsService.gameStats(game.getHomeTeam()));

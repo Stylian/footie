@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.*;
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -159,6 +160,7 @@ public class ViewsService {
 		Map<String, Object> gamestats = new LinkedHashMap<>();
 
 		DecimalFormat numberFormat = new DecimalFormat("0.00");
+		numberFormat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
 
         List<Result> results = null;
         List<Result> resultsAway = null;
