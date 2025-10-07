@@ -27,87 +27,85 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
     const handleDown = () => window.location.href = parseInt(seasonNum) - 1
 
     return (
-        <div>
-            <AppBar position="static">
-                <Grid container spacing={10}>
-                    <Grid item xs={6}>
-                        <Toolbar>
-                            <IconButton edge="start" color="inherit" aria-label="Menu" onClick={handleClick}>
-                                <MenuIcon/>
-                            </IconButton>
-                            <Menu
-                                id="simple-menu"
-                                anchorEl={menuPosition}
-                                anchorOrigin={{vertical: "bottom", horizontal: "left"}}
-                                getContentAnchorEl={null}
-                                keepMounted
-                                open={Boolean(menuPosition)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem data-link="/" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={list} title={"Seasons"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Seasons"/>
-                                </MenuItem>
-                                <MenuItem data-link="/coefficients" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={medal1} title={"Awards & Coefficients"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Awards & Coefficients"/>
-                                </MenuItem>
-                                <MenuItem data-link="/league_stats" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={analytics} title={"League Stats"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="League Stats"/>
-                                </MenuItem>
-                                <MenuItem data-link="/teams_stats" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={barchart} title={"Teams' Stats"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Teams' Stats"/>
-                                </MenuItem>
-                                <MenuItem data-link="/players_edit" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={players} title={"players"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Players"/>
-                                </MenuItem>
-                                <MenuItem data-link="/rules" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={list} title={"rules"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Rules"/>
-                                </MenuItem>
-                                <MenuItem data-link="/admin" onClick={handleButtonSelection}>
-                                    <ListItemIcon>
-                                        <img src={build} title={"admin"}/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Admin"/>
-                                </MenuItem>
-                            </Menu>
+        <AppBar position="static">
+            <Grid container spacing={10}>
+                <Grid item xs={6}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" aria-label="Menu" onClick={handleClick}>
+                            <MenuIcon/>
+                        </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={menuPosition}
+                            anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+                            getContentAnchorEl={null}
+                            keepMounted
+                            open={Boolean(menuPosition)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem data-link="/" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={list} title={"Seasons"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Seasons"/>
+                            </MenuItem>
+                            <MenuItem data-link="/coefficients" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={medal1} title={"Awards & Coefficients"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Awards & Coefficients"/>
+                            </MenuItem>
+                            <MenuItem data-link="/league_stats" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={analytics} title={"League Stats"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="League Stats"/>
+                            </MenuItem>
+                            <MenuItem data-link="/teams_stats" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={barchart} title={"Teams' Stats"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Teams' Stats"/>
+                            </MenuItem>
+                            <MenuItem data-link="/players_edit" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={players} title={"players"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Players"/>
+                            </MenuItem>
+                            <MenuItem data-link="/rules" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={list} title={"rules"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Rules"/>
+                            </MenuItem>
+                            <MenuItem data-link="/admin" onClick={handleButtonSelection}>
+                                <ListItemIcon>
+                                    <img src={build} title={"admin"}/>
+                                </ListItemIcon>
+                                <ListItemText primary="Admin"/>
+                            </MenuItem>
+                        </Menu>
 
-                            {seasonNum && seasonsTotal && (
-                                <Box>
-                                    {seasonNum != seasonsTotal && (
-                                        <IconButton onClick={handleUp}>
-                                            <img src={up} title={"next season"} />
-                                        </IconButton>
-                                    )}
-                                    {seasonNum > 1 && (
-                                        <IconButton onClick={handleDown}>
-                                            <img src={down} title={"previous season"} />
-                                        </IconButton>
-                                    )}
-                                </Box>
-                            )}
+                        {seasonNum && seasonsTotal && (
+                            <Box>
+                                {seasonNum != seasonsTotal && (
+                                    <IconButton onClick={handleUp}>
+                                        <img src={up} title={"next season"} />
+                                    </IconButton>
+                                )}
+                                {seasonNum > 1 && (
+                                    <IconButton onClick={handleDown}>
+                                        <img src={down} title={"previous season"} />
+                                    </IconButton>
+                                )}
+                            </Box>
+                        )}
 
-                            <Typography variant="h6">{pageTitle}</Typography>
-                        </Toolbar>
-                    </Grid>
+                        <Typography variant="h6">{pageTitle}</Typography>
+                    </Toolbar>
                 </Grid>
-            </AppBar>
-        </div>
+            </Grid>
+        </AppBar>
     )
 }

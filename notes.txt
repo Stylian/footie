@@ -3,10 +3,5 @@
 
 
 TODO
-
-
-nulls hell with coeffs in playoffs/removed lazy from playoffs matchups, to see if works
-
-derby.log to move to logs folder
 stats page broken- on adding teams?
-remove teams func and greying out
+

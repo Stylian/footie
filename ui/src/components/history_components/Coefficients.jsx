@@ -31,12 +31,12 @@ export default function Coefficients() {
         let leftSide = teamsList.splice(0, half_length)
         let rightSide = teamsList
         return (
-            <Paper>
+            <Box>
                 <LeagueToolbar pageTitle={"Awards & Coefficients"}/>
-                <Box>
+                <Box style={{marginTop: 20, marginLeft: 10}}>
                     <Grid container spacing={1}>
-                        <Grid item sm={6}>
-                            <Card style={{marginTop: 20, marginLeft: 10}}>
+                        <Grid item sm={5}>
+                            <Card >
                                 <CardHeader title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}/>
                                 <CardContent>
@@ -112,8 +112,8 @@ export default function Coefficients() {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item sm={3.5}>
-                            <Card style={{marginTop: 20}}>
+                        <Grid item sm={4.5}>
+                            <Card>
                                 <CardHeader title={"Past Finals"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -121,7 +121,7 @@ export default function Coefficients() {
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell style={{fontSize: "0.8rem"}}>Season</TableCell>
+                                                <TableCell style={{fontSize: "0.8rem"}}>S</TableCell>
                                                 <TableCell align={"center"}><img src={goldmedal}
                                                                                  title={"1st place"}/></TableCell>
                                                 <TableCell align={"center"}><img src={silvermedal}
@@ -137,23 +137,39 @@ export default function Coefficients() {
                                                                data-season={item.seasonYear}>
                                                         {item.seasonYear}</TableCell>
                                                     <TableCell align="left" className={"teamClicker"}
-                                                               data-teamid={item.winner.id}
-                                                               onClick={goToTeam}>
+                                                        style={{
+                                                            minWidth: 100,
+                                                            maxWidth: 100
+                                                        }}
+                                                       data-teamid={item.winner.id}
+                                                       onClick={goToTeam}>
                                                         {item.winner != null ? item.winner.name : ""}
                                                     </TableCell>
                                                     <TableCell align="left" className={"teamClicker"}
-                                                               data-teamid={item.runnerUp.id}
-                                                               onClick={goToTeam}>
+                                                        style={{
+                                                            minWidth: 100,
+                                                            maxWidth: 100
+                                                        }}
+                                                       data-teamid={item.runnerUp.id}
+                                                       onClick={goToTeam}>
                                                         {item.runnerUp != null ? item.runnerUp.name : ""}
                                                     </TableCell>
                                                     <TableCell align="left" className={"teamClicker"}
-                                                               data-teamid={item.semifinalist1.id}
-                                                               onClick={goToTeam}>
+                                                        style={{
+                                                            minWidth: 100,
+                                                            maxWidth: 100
+                                                        }}
+                                                       data-teamid={item.semifinalist1.id}
+                                                       onClick={goToTeam}>
                                                         {item.semifinalist1 != null ? item.semifinalist1.name : ""}
                                                     </TableCell>
                                                     <TableCell align="left" className={"teamClicker"}
-                                                               data-teamid={item.semifinalist2.id}
-                                                               onClick={goToTeam}>
+                                                        style={{
+                                                            minWidth: 100,
+                                                            maxWidth: 100
+                                                        }}
+                                                       data-teamid={item.semifinalist2.id}
+                                                       onClick={goToTeam}>
                                                         {item.semifinalist2 != null ? item.semifinalist2.name : ""}
                                                     </TableCell>
                                                 </TableRow>
@@ -165,7 +181,7 @@ export default function Coefficients() {
                         </Grid>
 
                         <Grid item sm={2.5}>
-                            <Card style={{marginTop: 20}}>
+                            <Card>
                                 <CardHeader title={"Best Performers"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
@@ -196,7 +212,7 @@ export default function Coefficients() {
                         </Grid>
                     </Grid>
                 </Box>
-            </Paper>
+             </Box>
         )
     }
 }
