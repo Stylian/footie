@@ -165,6 +165,19 @@ export default function Rules() {
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
+                                        <TableCell align={"right"}>Ties rules</TableCell>
+                                        <TableCell>
+                                            <ol>
+                                                <li>most points</li>
+                                                <li>goal difference</li>
+                                                <li>goals scored</li>
+                                                <li>most wins</li>
+                                                <li>coefficients</li>
+                                                <li>elo</li>
+                                            </ol>
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
                                         <TableCell align={"right"}>Coeffs</TableCell>
                                         <TableCell>
                                             <ul>
@@ -194,10 +207,23 @@ export default function Rules() {
                                         <TableCell>
                                             <ul>
                                                 <li>2 groups, round robin</li>
-                                                <li>stats for 2st group round persist</li>
+                                                <li>stats for 2nd group round persist</li>
                                             </ul>
                                         </TableCell>
                                     </TableRow>
+                                    <TableRow>
+                                        <TableCell align={"right"}>Ties rules</TableCell>
+                                        <TableCell>
+                                            <ol>
+                                                <li>most points</li>
+                                                <li>goal difference</li>
+                                                <li>goals scored</li>
+                                                <li>most wins</li>
+                                                <li>coefficients</li>
+                                                <li>elo</li>
+                                            </ol>
+                                        </TableCell>
+                                </TableRow>
                                     <TableRow>
                                         <TableCell align={"right"}>Coeffs</TableCell>
                                         <TableCell>

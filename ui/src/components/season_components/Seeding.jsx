@@ -114,7 +114,7 @@ export default function Seeding({year}) {
                                                                                       '#f2dede'
                                                               }}
                                                     >
-                                                          <TableCell style={{width: '15%'}} align="right">{index + 1}</TableCell>
+                                                          <TableCell style={{width: '15%'}} align="right">{index + 1+ leftSide.length}</TableCell>
                                                            <TableCell style={{width: '60%'}}>
                                                              {team.trophies.map((trophy, trophyIndex) => {
                                                                if (trophy.seasonNum === (year - 1)) {

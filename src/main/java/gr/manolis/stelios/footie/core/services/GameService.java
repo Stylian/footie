@@ -249,6 +249,15 @@ public class GameService {
             matchup.setWinner(teamAway);
             return true;
         }
+
+        if (teamHomeStats.getElo() > teamAwayStats.getElo()) {
+            matchup.setWinner(teamHome);
+            return true;
+        } else if (teamHomeStats.getElo() < teamAwayStats.getElo()) {
+            matchup.setWinner(teamAway);
+            return true;
+        }
+
         return false;
     }
 

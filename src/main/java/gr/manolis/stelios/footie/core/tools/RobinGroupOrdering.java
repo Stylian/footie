@@ -56,7 +56,9 @@ public class RobinGroupOrdering extends Ordering {
 			return p2 - p1;
 		}
 
-		// RULE 6 Alphabetical
-		return o1.getName().compareTo(o2.getName());
+		// RULE 6 elo
+		Season seasonLast = seasons.get(seasonUntil - 1);
+		return o2.getStatsForGroup(seasonLast).getElo() - o1.getStatsForGroup(seasonLast).getElo();
+
 	}
 }

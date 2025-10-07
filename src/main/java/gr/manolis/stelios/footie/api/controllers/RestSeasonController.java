@@ -113,6 +113,11 @@ public class RestSeasonController {
 
         Season season = serviceUtils.loadSeason(year);
         List<Team> teams = season.getTeams();
+        if(season.getSeasonYear() > 1) {
+            teams.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
         logger.info("loaded teams: " + teams);
 
         Map<Seed, List<Team>> teamsInRounds = null;
@@ -150,12 +155,22 @@ public class RestSeasonController {
         QualsRound qr = serviceUtils.getQualRound(season, round);
 
         List<Team> teamsStrong = qr.getStrongTeams();
+        if(season.getSeasonYear() > 1) {
+            teamsStrong.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
         List<Team> teamsWeak = qr.getWeakTeams();
-
+        if(season.getSeasonYear() > 1) {
+            teamsWeak.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
-            Collections.sort(qr.getTeams(), new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
+            qr.getTeams().sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(),
                     season.getSeasonYear() - 1));
+
             if (round == 1) {
                 teamsStrong = qr.getTeams().subList(0, 13);
                 teamsWeak = qr.getTeams().subList(13, qr.getTeams().size());
@@ -238,8 +253,23 @@ public class RestSeasonController {
         GroupsRound qr = serviceUtils.getGroupsRound(season, round);
 
         List<Team> teamsStrong = qr.getStrongTeams();
+        if(season.getSeasonYear() > 1) {
+            teamsStrong.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
         List<Team> teamsMedium = qr.getMediumTeams();
+        if(season.getSeasonYear() > 1) {
+            teamsMedium.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
         List<Team> teamsWeak = qr.getWeakTeams();
+        if(season.getSeasonYear() > 1) {
+            teamsWeak.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), season.getSeasonYear() - 1));
+        }else {
+            logger.info("this is season 1");
+        }
 
         //put to strong teams for pre-previews
         if (qr.getStage() == Stage.NOT_STARTED) {
@@ -653,7 +683,6 @@ public class RestSeasonController {
             theTeams.add(teamDTO);
         }
 
-        Collections.sort(theTeams, new CoefficientsRangeOrderingDTO());
         return theTeams;
     }
 
@@ -675,7 +704,6 @@ public class RestSeasonController {
             theTeams.add(teamDTO);
         }
 
-        Collections.sort(theTeams, new CoefficientsRangeOrderingDTO());
         return theTeams;
     }
 
