@@ -132,7 +132,7 @@ export default function Coefficients() {
                                         <TableBody>
                                             {seasons.map((item, index) =>
                                                 <TableRow>
-                                                    <TableCell align="right" className={"teamClicker"}
+                                                    <TableCell align="right"
                                                                onClick={goToSeason}
                                                                data-season={item.seasonYear}>
                                                         {item.seasonYear}</TableCell>
@@ -180,7 +180,7 @@ export default function Coefficients() {
                             </Card>
                         </Grid>
 
-                        <Grid item sm={2.5}>
+                        <Grid item sm={2}>
                             <Card>
                                 <CardHeader title={"Best Performers"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
@@ -189,8 +189,8 @@ export default function Coefficients() {
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell><img src={goldmedal} title={"1st place"}/></TableCell>
-                                                <TableCell><img src={silvermedal} title={"2nd place"}/></TableCell>
+                                                <TableCell style={{ maxWidth: '20px'}}><img src={goldmedal} title={"1st place"}/></TableCell>
+                                                <TableCell style={{ maxWidth: '20px'}}><img src={silvermedal} title={"2nd place"}/></TableCell>
                                                 <TableCell style={{fontSize: "0.8rem"}} >Team</TableCell>
                                             </TableRow>
                                         </TableHead>

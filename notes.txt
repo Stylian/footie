@@ -3,5 +3,7 @@
 
 
 TODO
+make players editable
+
 stats page broken- on adding teams?
 

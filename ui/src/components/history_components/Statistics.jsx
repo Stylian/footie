@@ -11,7 +11,7 @@ export default function Statistics() {
         return (<PageLoader />)
     } else {
         return (
-            <Paper style={{margin: 20}} elevation={20}>
+            <Paper style={{margin: 10}} elevation={20}>
                 <LeagueToolbar pageTitle={"League Stats"}/>
                 <Box width={1200}>
                     <Grid container spacing={1}>
