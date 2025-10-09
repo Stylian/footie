@@ -218,6 +218,19 @@ export default function Team() {
                                                                     },
                                                                     barPercentage: 0.6
                                                                 }],
+                                                                yAxes: [
+                                                                    {
+                                                                      ticks: {
+                                                                        beginAtZero: true,
+                                                                        callback: function (value) {
+                                                                          // Only show integer tick values
+                                                                          if (Number.isInteger(value)) {
+                                                                            return value;
+                                                                          }
+                                                                        },
+                                                                      },
+                                                                    },
+                                                                  ],
                                                             }
                                                         }}
                                                     />
@@ -258,6 +271,19 @@ export default function Team() {
                                                                     },
                                                                     barPercentage: 0.6
                                                                 }],
+                                                            yAxes: [
+                                                                {
+                                                                  ticks: {
+                                                                    beginAtZero: true,
+                                                                    callback: function (value) {
+                                                                      // Only show integer tick values
+                                                                      if (Number.isInteger(value)) {
+                                                                        return value;
+                                                                      }
+                                                                    },
+                                                                  },
+                                                                },
+                                                              ],
                                                             }
                                                         }}
                                                     />
@@ -267,7 +293,7 @@ export default function Team() {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item sm={3}>
+                            <Grid item sm={4}>
                                 <Grid container>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
@@ -374,7 +400,7 @@ export default function Team() {
                                             />
                                             <CardContent style={{minHeight: 200, maxHeight: 200}}>
                                                 <Grid container spacing={1}>
-                                                    <Grid item sm={6}>
+                                                    <Grid item sm={5}>
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
@@ -390,6 +416,7 @@ export default function Team() {
                                                                         >{game.result.goalsMadeByHomeTeam + " - "
                                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                                         <TableCell align="left"
+                                                                         style={{minWidth: 100, maxWidth: 100}}
                                                                                    className={"teamClicker"}
                                                                                    data-teamid={game.awayTeam.id}
                                                                                    onClick={goToTeam}>
@@ -399,7 +426,9 @@ export default function Team() {
                                                             })}
                                                         </table>
                                                     </Grid>
-                                                    <Grid item sm={6}>
+                                                    <Grid item sm={2}>
+                                                    </Grid>
+                                                    <Grid item sm={5}>
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
@@ -415,6 +444,7 @@ export default function Team() {
                                                                         >{game.result.goalsMadeByAwayTeam + " - "
                                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                                         <TableCell align="left"
+                                                                         style={{minWidth: 100, maxWidth: 100}}
                                                                                    className={"teamClicker"}
                                                                                    data-teamid={game.homeTeam.id}
                                                                                    onClick={goToTeam}>
@@ -431,229 +461,232 @@ export default function Team() {
                                 </Grid>
 
                             </Grid>
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <Grid container spacing={1}>
                                     <Grid item sm={12}>
                                         <Grid container spacing={1}>
+                                             <Grid item sm={6}>
+                                                 <Grid container spacing={1}>
+                                                    <Grid item sm={12}>
+                                                        <Card style={{marginTop: 10}}>
+                                                            <CardHeader title={"team overview"} align={"center"}
+                                                                        titleTypographyProps={{variant: 'h7'}}
+                                                            />
+                                                            <CardContent>
+                                                                <Radar
+                                                                    data={{
+                                                                        labels: [
+                                                                            "Elo",
+                                                                            "Away Attack",
+                                                                            "Away Defence",
+                                                                            "Defence",
+                                                                            "Attack",
+                                                                        ],
+                                                                        datasets: [{
+                                                                            data: [
+                                                                                gameStats["radarElo"],
+                                                                                gameStats["radarGoalsScoredAway"],
+                                                                                gameStats["radarGoalsConcededAway"],
+                                                                                gameStats["radarGoalsConceded"],
+                                                                                gameStats["radarGoalsScored"],
+                                                                            ],
+                                                                            backgroundColor: '#2d5cd2',
+                                                                            hoverBackgroundColor: '#2d5cd2',
+                                                                        }],
+                                                                    }}
+                                                                    options={{
+                                                                        responsive: true,
+                                                                        maintainAspectRatio: false,
+                                                                        legend: {
+                                                                            display: false,
+                                                                        },
+                                                                        scale: {
+                                                                            ticks: {
+                                                                                beginAtZero: true,
+                                                                                max: 100,
+                                                                                min: 0,
+                                                                                display: false,
+                                                                                stepSize: 20
+                                                                            },
+                                                                        },
+                                                                        elements: {
+                                                                            point: {
+                                                                                radius: 0
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                />
+                                                            </CardContent>
+                                                        </Card>
+                                                    </Grid>
+                                                    <Grid item sm={12}>
+                                                        <Card style={{marginTop: 10}}>
+                                                            <CardHeader title={"trophies"} align={"center"}
+                                                                        titleTypographyProps={{variant: 'h7'}}
+                                                            />
+                                                            <CardContent>
+                                                                {team.trophies.length > 0 ? (
+                                                                    <table className="table" align={"center"}>
+                                                                        {team.trophies.map((trophy, index) => {
+                                                                            return (
+                                                                                <TableRow>
+                                                                                    <TableCell align="right">
+                                                                                        {trophy.type == "W" ?
+                                                                                            (<img src={goldmedal}
+                                                                                                  title={"1st place"}/>) :
+                                                                                            (<img src={silvermedal}
+                                                                                                  title={"2nd place"}/>)}
+                                                                                    </TableCell>
+                                                                                    <TableCell
+                                                                                        onClick={goToSeason}
+                                                                                        data-season={trophy.seasonNum}
+                                                                                        align="right">{"Season " + trophy.seasonNum}</TableCell>
+                                                                                </TableRow>
+                                                                            )
+                                                                        })}
+                                                                    </table>
+                                                                ) : (
+                                                                    <i>nothing in the trophies case</i>
+                                                                )}
+                                                            </CardContent>
+                                                        </Card>
+                                                    </Grid>
+                                                </Grid>
+                                             </Grid>
                                             <Grid item sm={6}>
-                                                <Card style={{margin: 10}}>
-                                                    <CardHeader title={"trophies"} align={"center"}
+                                                <Card style={{marginTop: 10}}>
+                                                    <CardHeader title={"players"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />
                                                     <CardContent>
-                                                        {team.trophies.length > 0 ? (
-                                                            <table className="table" align={"center"}>
-                                                                {team.trophies.map((trophy, index) => {
+                                                        <table className="table" align={"center"}>
+                                                            <TableHead>
+                                                                <TableRow>
+                                                                    <TableCell style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
+                                                                    <TableCell><img src={playeroftheyear} title={"player of the year"}/></TableCell>
+                                                                    <TableCell> <img src={dreamteam}
+                                                                                     title={"selected in a dream team"}/></TableCell>
+                                                                </TableRow>
+                                                            </TableHead>
+                                                            <TableBody>
+                                                                {team.players.map((player, index) => {
                                                                     return (
-                                                                        <TableRow>
-                                                                            <TableCell align="right">
-                                                                                {trophy.type == "W" ?
-                                                                                    (<img src={goldmedal}
-                                                                                          title={"1st place"}/>) :
-                                                                                    (<img src={silvermedal}
-                                                                                          title={"2nd place"}/>)}
-                                                                            </TableCell>
+                                                                        <TableRow className={"teamClicker"}
+                                                                                  onClick={goToPlayer}
+                                                                                  data-playerid={player.id}
+                                                                        >
                                                                             <TableCell
-                                                                                className={"teamClicker"}
-                                                                                onClick={goToSeason}
-                                                                                data-season={trophy.seasonNum}
-                                                                                align="right">{"Season " + trophy.seasonNum}</TableCell>
+                                                                                align="right">{player.name}</TableCell>
+                                                                            <TableCell
+                                                                                align={"center"}>{player.playerOfTheYearTrophies}</TableCell>
+                                                                            <TableCell
+                                                                                align={"center"}>{player.dreamTeamTrophies}</TableCell>
                                                                         </TableRow>
                                                                     )
                                                                 })}
-                                                            </table>
-                                                        ) : (
-                                                            <i>nothing in the trophies case</i>
-                                                        )}
+                                                            </TableBody>
+                                                        </table>
                                                     </CardContent>
                                                 </Card>
                                             </Grid>
-                                            <Grid item sm={6}>
-                                                <Card style={{margin: 10}}>
-                                                    <CardHeader title={"team overview"} align={"center"}
-                                                                titleTypographyProps={{variant: 'h7'}}
-                                                    />
-                                                    <CardContent>
-                                                        <Radar
-                                                            data={{
-                                                                labels: [
-                                                                    "Elo",
-                                                                    "Away Attack",
-                                                                    "Away Defence",
-                                                                    "Defence",
-                                                                    "Attack",
-                                                                ],
-                                                                datasets: [{
-                                                                    data: [
-                                                                        gameStats["radarElo"],
-                                                                        gameStats["radarGoalsScoredAway"],
-                                                                        gameStats["radarGoalsConcededAway"],
-                                                                        gameStats["radarGoalsConceded"],
-                                                                        gameStats["radarGoalsScored"],
-                                                                    ],
-                                                                    backgroundColor: '#2d5cd2',
-                                                                    hoverBackgroundColor: '#2d5cd2',
-                                                                }],
-                                                            }}
-                                                            options={{
-                                                                responsive: true,
-                                                                maintainAspectRatio: false,
-                                                                legend: {
-                                                                    display: false,
-                                                                },
-                                                                scale: {
-                                                                    ticks: {
-                                                                        beginAtZero: true,
-                                                                        max: 100,
-                                                                        min: 0,
-                                                                        display: false,
-                                                                        stepSize: 20
-                                                                    },
-                                                                },
-                                                                elements: {
-                                                                    point: {
-                                                                        radius: 0
-                                                                    }
-                                                                }
-                                                            }}
-                                                        />
-                                                    </CardContent>
-                                                </Card>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid item sm={12}>
-                                            <Card style={{margin: 10}}>
-                                                <CardHeader title={"season stats"} align={"center"}
-                                                            titleTypographyProps={{variant: 'h7'}}
-                                                />
-                                                <CardContent>
-                                                    <table className="table" align={"center"}>
-                                                        <TableHead>
-                                                            <TableRow>
-                                                                <TableCell>Season</TableCell>
-                                                                <TableCell>Coeffs</TableCell>
-                                                                <TableCell>Elo</TableCell>
-                                                                <TableCell>GP</TableCell>
-                                                                <TableCell>W</TableCell>
-                                                                <TableCell>D</TableCell>
-                                                                <TableCell>L</TableCell>
-                                                                <TableCell>GS</TableCell>
-                                                                <TableCell>GC</TableCell>
-                                                                <TableCell>+/-</TableCell>
-                                                            </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            {team.seasonsStats.map((seasonStats, index) => {
-                                                                return seasonStats.matchesPlayed > 0 ? (
-                                                                    <TableRow className={"teamClicker"}
-                                                                              onClick={goToSeason}
-                                                                              data-season={index + 1}
-                                                                    >
-                                                                        <TableCell
-                                                                            align="right">{"" + (index + 1)}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.points}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.elo}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.matchesPlayed}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.wins}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.draws}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.losses}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.goalsScored}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.goalsConceded}</TableCell>
-                                                                        <TableCell
-                                                                            align="right">{seasonStats.goalDifference}</TableCell>
-                                                                    </TableRow>
-                                                                ) : (
-                                                                    <TableRow className={"teamClicker"}
-                                                                              onClick={goToSeason}
-                                                                              data-season={index + 1}
-                                                                    >
-                                                                        <TableCell
-                                                                            align="right">{"" + (index + 1)}</TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                        <TableCell></TableCell>
-                                                                    </TableRow>
-                                                                )
-                                                            })}
-                                                            <TableRow>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>Total</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.points}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}></TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.matchesPlayed}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.wins}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.draws}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.losses}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.goalsScored}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.goalsConceded}</TableCell>
-                                                                <TableCell align="right"
-                                                                           className={"points_td"}>{team.completeStats.goalDifference}</TableCell>
-                                                            </TableRow>
-                                                        </TableBody>
-                                                    </table>
-                                                </CardContent>
-                                            </Card>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item sm={2}>
-                                <Card style={{margin: 10}}>
-                                    <CardHeader title={"players"} align={"center"}
-                                                titleTypographyProps={{variant: 'h7'}}
-                                    />
-                                    <CardContent>
-                                        <table className="table" align={"center"}>
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
-                                                    <TableCell><img src={playeroftheyear} title={"player of the year"}/></TableCell>
-                                                    <TableCell> <img src={dreamteam}
-                                                                     title={"selected in a dream team"}/></TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {team.players.map((player, index) => {
-                                                    return (
-                                                        <TableRow className={"teamClicker"}
-                                                                  onClick={goToPlayer}
-                                                                  data-playerid={player.id}
-                                                        >
-                                                            <TableCell
-                                                                align="right">{player.name}</TableCell>
-                                                            <TableCell
-                                                                align={"center"}>{player.playerOfTheYearTrophies}</TableCell>
-                                                            <TableCell
-                                                                align={"center"}>{player.dreamTeamTrophies}</TableCell>
+                                    <Grid item sm={12}>
+                                        <Card style={{margin: 10}}>
+                                            <CardHeader title={"season stats"} align={"center"}
+                                                        titleTypographyProps={{variant: 'h7'}}
+                                            />
+                                            <CardContent>
+                                                <table className="table" align={"center"}>
+                                                    <TableHead>
+                                                        <TableRow>
+                                                            <TableCell>Season</TableCell>
+                                                            <TableCell>Coeffs</TableCell>
+                                                            <TableCell>Elo</TableCell>
+                                                            <TableCell>GP</TableCell>
+                                                            <TableCell>W</TableCell>
+                                                            <TableCell>D</TableCell>
+                                                            <TableCell>L</TableCell>
+                                                            <TableCell>GS</TableCell>
+                                                            <TableCell>GC</TableCell>
+                                                            <TableCell>+/-</TableCell>
                                                         </TableRow>
-                                                    )
-                                                })}
-                                            </TableBody>
-                                        </table>
-                                    </CardContent>
-                                </Card>
+                                                    </TableHead>
+                                                    <TableBody>
+                                                        {team.seasonsStats.map((seasonStats, index) => {
+                                                            return seasonStats.matchesPlayed > 0 ? (
+                                                                <TableRow className={"teamClicker"}
+                                                                          onClick={goToSeason}
+                                                                          data-season={index + 1}
+                                                                >
+                                                                    <TableCell
+                                                                        align="right">{"" + (index + 1)}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.points}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.elo}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.matchesPlayed}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.wins}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.draws}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.losses}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.goalsScored}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.goalsConceded}</TableCell>
+                                                                    <TableCell
+                                                                        align="right">{seasonStats.goalDifference}</TableCell>
+                                                                </TableRow>
+                                                            ) : (
+                                                                <TableRow className={"teamClicker"}
+                                                                          onClick={goToSeason}
+                                                                          data-season={index + 1}
+                                                                >
+                                                                    <TableCell
+                                                                        align="right">{"" + (index + 1)}</TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                    <TableCell></TableCell>
+                                                                </TableRow>
+                                                            )
+                                                        })}
+                                                        <TableRow>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>Total</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.points}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}></TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.matchesPlayed}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.wins}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.draws}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.losses}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalsScored}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalsConceded}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalDifference}</TableCell>
+                                                        </TableRow>
+                                                    </TableBody>
+                                                </table>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Box>

@@ -90,6 +90,10 @@ code {
   color: #1f6d93 !important;
 }
 
+.teamClicker {
+    min-width: 100px !important;
+ }
+
 .teamClicker:hover,
 .playerClicker:hover {
   cursor: pointer;

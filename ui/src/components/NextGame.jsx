@@ -103,7 +103,7 @@ export default function NextGame() {
                         {data.winOdds < 0 ? null : (
                             <TableRow>
                                 <TableCell align={"right"}>{data.winOdds}%</TableCell>
-                                <TableCell align={"center"}>promotion chance</TableCell>
+                                <TableCell align={"center"}>chance</TableCell>
                                 <TableCell>{100 - data.winOdds}%</TableCell>
                             </TableRow>
                         )}
