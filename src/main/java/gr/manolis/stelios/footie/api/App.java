@@ -8,17 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 @EntityScan(basePackages= {
 		"gr.manolis.stelios.footie.core.peristence.dtos",
 		"gr.manolis.stelios.footie.api.entities"}
 		)
-@ComponentScan("gr.manolis.stelios.footie")
+@ComponentScan(basePackages = {"gr.manolis.stelios.footie.api", "gr.manolis.stelios.footie.core"})
 public class App {
 
 	@Value("${react-app.path}")
@@ -28,11 +26,6 @@ public class App {
 		SpringApplication.run(App.class, args);
 	}
 
-	@Bean
-	public HibernateJpaSessionFactoryBean sessionFactory() {
-		return new HibernateJpaSessionFactoryBean();
-	}
-
 	/**
 	 * this allows access from react-app, needed for developers only. set the following line in
 	 * application.properties accordingly if your react app is not on the default port and path
@@ -40,7 +33,7 @@ public class App {
 	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
+		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 

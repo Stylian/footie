@@ -4,19 +4,20 @@ import gr.manolis.stelios.footie.core.peristence.DataAccessObject;
 import gr.manolis.stelios.footie.core.peristence.dtos.Player;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Transactional
 public class PlayerService {
 
-    final static Logger logger = Logger.getLogger(PlayerService.class);
+    private final static Logger logger = LoggerFactory.getLogger(PlayerService.class);
 
     @Autowired
     private SessionFactory sessionFactory;

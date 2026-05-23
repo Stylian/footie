@@ -13,19 +13,20 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.*;
 
 @Service
 @Transactional
 public class SeasonService {
 
-    final static Logger logger = Logger.getLogger(SeasonService.class);
+    private final static Logger logger = LoggerFactory.getLogger(SeasonService.class);
 
     @Autowired
     private UIPersistService persistService;

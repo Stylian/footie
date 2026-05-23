@@ -5,12 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 @Transactional
 public class GameService {
 
-    final static Logger logger = Logger.getLogger(GameService.class);
+    private final static Logger logger = LoggerFactory.getLogger(GameService.class);
 
     @Autowired
     private SessionFactory sessionFactory;

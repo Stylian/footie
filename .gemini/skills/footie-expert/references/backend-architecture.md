@@ -1,14 +1,14 @@
 # Footie Backend Architecture
 
 ## Overview
-The backend is a **Spring Boot 1.5.1** application using **Java 8**. It manages football simulation logic, persistence, and exposes REST APIs.
+The backend is a **Spring Boot 3.4.0** application using **Java 25**. It manages football simulation logic, persistence, and exposes REST APIs.
 
 ## Key Technologies
-- **Java 1.8**: Essential for core logic, streams, and lambdas.
-- **Spring Boot 1.5.1**: Web, JPA, and dependency injection.
+- **Java 25**: Leverages modern Java features.
+- **Spring Boot 3.4.0**: Web, JPA, and dependency injection with Jakarta EE 10+.
 - **Apache Derby**: Embedded SQL database.
 - **MapStruct**: Used for DTO <-> Entity mapping.
-- **Maven**: Project management and build tool.
+- **Gradle**: Project management and build tool.
 
 ## Layered Architecture
 1. **API Layer (`gr.manolis.stelios.footie.api`)**:

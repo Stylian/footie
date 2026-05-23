@@ -22,12 +22,13 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrderingDTO;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.*;
 
 @RestController
@@ -35,7 +36,7 @@ import java.util.*;
 @RequestMapping("/rest/seasons")
 public class RestSeasonController {
 
-    final static Logger logger = Logger.getLogger(RestSeasonController.class);
+    private final static Logger logger = LoggerFactory.getLogger(RestSeasonController.class);
 
     @Autowired
     private SessionFactory sessionFactory;

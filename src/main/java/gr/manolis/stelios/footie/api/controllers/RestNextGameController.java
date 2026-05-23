@@ -11,14 +11,15 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.services.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/rest")
 public class RestNextGameController {
 
-    final static Logger logger = Logger.getLogger(RestNextGameController.class);
+    private final static Logger logger = LoggerFactory.getLogger(RestNextGameController.class);
 
     @Autowired
     private QualsService qualsService;

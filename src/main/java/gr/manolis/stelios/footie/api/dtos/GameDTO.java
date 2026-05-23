@@ -3,7 +3,7 @@ package gr.manolis.stelios.footie.api.dtos;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 public class GameDTO {
 

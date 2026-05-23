@@ -1,8 +1,8 @@
 # Footie Setup & Development Guide
 
 ## Prerequisites
-- **Java JDK 1.8**: The application will not build or run correctly on newer Java versions without modifications.
-- **Maven**: To build the backend and manage dependencies.
+- **Java JDK 25**: The application is now upgraded to Java 25.
+- **Gradle**: To build the backend and manage dependencies.
 - **Node.js (v20+) & npm**: To build and run the React UI.
 
 ## Initial Setup
@@ -15,13 +15,13 @@
 ## Build Commands
 - **Full Build (Backend + UI)**:
   ```bash
-  mvn clean install
+  ./gradlew build
   ```
   This will bundle the UI into the backend's static resources.
 
 - **Run Backend**:
   ```bash
-  mvn spring-boot:run
+  ./gradlew bootRun
   ```
   Accessible at `http://localhost:8080`.
 
@@ -34,5 +34,5 @@
   Accessible at `http://localhost:3000`.
 
 ## Testing
-- **Backend**: `mvn test`
+- **Backend**: `./gradlew test`
 - **Frontend**: `cd ui && npm test`

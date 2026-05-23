@@ -9,11 +9,12 @@ import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.Trophy;
 import gr.manolis.stelios.footie.core.services.PlayerService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping("/rest/players")
 public class RestPlayersController {
 
-    final static Logger logger = Logger.getLogger(RestPlayersController.class);
+    private final static Logger logger = LoggerFactory.getLogger(RestPlayersController.class);
 
     @Autowired
     private ServiceUtils serviceUtils;

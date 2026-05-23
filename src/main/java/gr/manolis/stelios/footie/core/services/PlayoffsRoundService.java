@@ -3,13 +3,14 @@ package gr.manolis.stelios.footie.core.services;
 import java.util.Collections;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 @Transactional
 public class PlayoffsRoundService {
 
-	final static Logger logger = Logger.getLogger(PlayoffsRoundService.class);
+	private final static Logger logger = LoggerFactory.getLogger(PlayoffsRoundService.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;

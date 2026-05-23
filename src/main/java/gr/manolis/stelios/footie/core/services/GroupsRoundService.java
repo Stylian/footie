@@ -12,12 +12,13 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 @Transactional
 public class GroupsRoundService {
 
-    final static Logger logger = Logger.getLogger(GroupsRoundService.class);
+    private final static Logger logger = LoggerFactory.getLogger(GroupsRoundService.class);
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -150,10 +151,10 @@ public class GroupsRoundService {
         groupsRoundOf12.addGroup(groupC);
         groupsRoundOf12.addGroup(groupD);
 
-        logger.info(groupA);
-        logger.info(groupB);
-        logger.info(groupC);
-        logger.info(groupD);
+        logger.info("{}", groupA);
+        logger.info("{}", groupB);
+        logger.info("{}", groupC);
+        logger.info("{}", groupD);
 
         groupsRoundOf12.setStage(Stage.PLAYING);
 
@@ -226,8 +227,8 @@ public class GroupsRoundService {
 
         }
 
-        logger.info(groupA);
-        logger.info(groupB);
+        logger.info("{}", groupA);
+        logger.info("{}", groupB);
 
         groupsRoundOf8.setStage(Stage.PLAYING);
         groupsRoundOf12.setStage(Stage.FINISHED);

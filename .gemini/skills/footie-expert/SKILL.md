@@ -35,6 +35,6 @@ Simulation logic is centralized in the `core.services` and `core.tools` packages
 
 ## Build & Test
 Always verify changes by running:
-- `mvn clean install` (Full integration check)
-- `mvn test` (Backend unit tests)
+- `./gradlew build` (Full integration check)
+- `./gradlew test` (Backend unit tests)
 - `cd ui && npm test` (Frontend tests)

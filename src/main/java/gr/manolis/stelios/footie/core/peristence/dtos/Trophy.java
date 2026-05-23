@@ -2,7 +2,7 @@ package gr.manolis.stelios.footie.core.peristence.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity(name = "TROPHIES")
 public class Trophy {

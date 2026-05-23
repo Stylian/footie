@@ -4,7 +4,7 @@ Footie is a comprehensive football (soccer) management application designed to s
 
 ## Architecture
 
-- **Backend:** Spring Boot (v1.5.1) application using Java 1.8. It employs a layered architecture:
+- **Backend:** Spring Boot (v3.4.0) application using Java 25. It employs a layered architecture:
     - **API Layer:** REST controllers (`gr.manolis.stelios.footie.api.controllers`) and DTOs.
     - **Core Logic:** Domain entities (`gr.manolis.stelios.footie.core.peristence.dtos`), services (`gr.manolis.stelios.footie.core.services`), and tools for simulation and ordering.
     - **Persistence:** Spring Data JPA with an embedded Apache Derby database.
@@ -14,28 +14,28 @@ Footie is a comprehensive football (soccer) management application designed to s
 ## Building and Running
 
 ### Prerequisites
-- Java 8 (JDK 1.8)
-- Maven
-- Node.js (v20.17.0) and npm (v10.8.2) - managed by Maven but can be run independently.
+- Java 25 (JDK 25)
+- Gradle
+- Node.js (v20.17.0) and npm (v10.8.2) - managed by Gradle but can be run independently.
 
 ### Standard Build & Run
 To build the entire project (including the UI) and run it:
 
 ```bash
 # From the project root (footie folder)
-mvn install
-java -jar target/footie-2.0.jar
+./gradlew build
+java -jar build/libs/footie-2.0.jar
 ```
 
 ### Development Mode
 
 #### Running the Backend
-You can run the Spring Boot application from your IDE or via Maven:
+You can run the Spring Boot application from your IDE or via Gradle:
 ```bash
-mvn spring-boot:run
+./gradlew bootRun
 ```
 The API will be accessible at `http://localhost:8080`.
-
+...
 #### Running the UI Independently
 For UI development with hot reloading:
 ```bash
@@ -45,12 +45,12 @@ npm start
 ```
 The UI will run at `http://localhost:3000`. 
 
-**Note:** When debugging the UI separately, you may want to comment out the `frontend-maven-plugin` in `pom.xml` to speed up backend builds.
+**Note:** When debugging the UI separately, you can skip the frontend build by using the `-x copyWebApp` flag.
 
 ## Setup Instructions
 
 1.  **Configuration:** Copy the `footie` configuration folder from `COPY_TO_USER_FOLDER` to your user home directory (`~/footie`).
-2.  **Database:** The first run of `mvn install` or starting the app will create a test database in `~/footie/data`.
+2.  **Database:** The first run of `./gradlew build` or starting the app will create a test database in `~/footie/data`.
 
 ## Development Conventions
 
@@ -63,7 +63,7 @@ The UI will run at `http://localhost:3000`.
 
 ## Key Files & Directories
 
-- `pom.xml`: Root Maven configuration.
+- `build.gradle`: Root Gradle configuration.
 - `ui/`: React frontend source code and configuration.
 - `src/main/java/`: Java backend source code.
 - `src/main/resources/application.properties`: Backend configuration (DB path, ports, etc.).

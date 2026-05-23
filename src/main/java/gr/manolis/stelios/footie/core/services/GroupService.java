@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import gr.manolis.stelios.footie.core.tools.Ordering;
 @Transactional
 public class GroupService {
 
-	final static Logger logger = Logger.getLogger(GroupService.class);
+	private final static Logger logger = LoggerFactory.getLogger(GroupService.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;

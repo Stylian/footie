@@ -6,16 +6,16 @@ set -e
 echo "=== Building Executable Fat JAR ==="
 
 echo "1. Cleaning previous builds..."
-#mvn clean
-#
-#echo "2. Building executable Fat JAR with Spring Boot Maven Plugin..."
-#mvn package -Dmaven.compiler.source=1.8 -Dmaven.compiler.target=1.8 -DskipTests
+./gradlew clean
+
+echo "2. Building executable Fat JAR with Spring Boot Gradle Plugin..."
+./gradlew build -x test
 
 echo "3. Finding built JAR..."
-JAR_FILE=$(ls -t target/*.jar | grep -v sources | grep -v original | head -1)
+JAR_FILE=$(ls -t build/libs/*.jar | grep -v sources | grep -v original | head -1)
 
 if [ -z "$JAR_FILE" ]; then
-    echo "ERROR: No JAR file found in target directory"
+    echo "ERROR: No JAR file found in build/libs directory"
     exit 1
 fi
 

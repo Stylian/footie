@@ -3,7 +3,7 @@ package gr.manolis.stelios.footie.core.peristence.dtos.groups;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.GroupGame;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
