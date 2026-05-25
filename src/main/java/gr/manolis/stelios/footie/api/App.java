@@ -33,20 +33,24 @@ public class App {
 	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
+		return new CorsConfiguration(reactAppPath);
+	}
 
-				if (StringUtils.isBlank(reactAppPath)) {
-					return; // provides no access to a front end tool if the property is not set
-				}
+	private static class CorsConfiguration implements WebMvcConfigurer {
+		private final String reactAppPath;
 
+		public CorsConfiguration(String reactAppPath) {
+			this.reactAppPath = reactAppPath;
+		}
+
+		@Override
+		public void addCorsMappings(CorsRegistry registry) {
+			if (StringUtils.isNotBlank(reactAppPath)) {
 				registry
 						.addMapping("/**")
-//						.allowedOrigins(reactAppPath)    // since I proxied react this breaks it
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
-		};
+		}
 	}
 
 
