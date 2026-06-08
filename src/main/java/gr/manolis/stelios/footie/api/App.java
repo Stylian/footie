@@ -28,8 +28,6 @@ public class App {
 	public void init() {
 		System.out.println("FOOTIEAPP_DEBUG: App initialized");
 	}
-		System.out.println("FOOTIEAPP_DEBUG: App initialized");
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
