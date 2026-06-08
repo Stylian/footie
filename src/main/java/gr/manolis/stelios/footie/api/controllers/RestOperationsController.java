@@ -29,6 +29,11 @@ public class RestOperationsController {
     @Autowired
     private ServiceUtils serviceUtils;
 
+    @jakarta.annotation.PostConstruct
+    public void init() {
+        System.out.println("FOOTIEAPP_DEBUG: RestOperationsController initialized");
+    }
+
     @GetMapping("/league/can_create_season")
     public Object[] canCreateLeague() {
 

@@ -11,16 +11,25 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @SpringBootApplication
 @EntityScan(basePackages= {
 		"gr.manolis.stelios.footie.core.peristence.dtos",
 		"gr.manolis.stelios.footie.api.entities"}
 		)
-@ComponentScan(basePackages = {"gr.manolis.stelios.footie.api", "gr.manolis.stelios.footie.core"})
 public class App {
 
 	@Value("${react-app.path}")
 	private String reactAppPath;
+
+	@jakarta.annotation.PostConstruct
+	public void init() {
+		System.out.println("FOOTIEAPP_DEBUG: App initialized");
+	}
+		System.out.println("FOOTIEAPP_DEBUG: App initialized");
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);

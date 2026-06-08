@@ -1,0 +1,115 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    configurations.all {
+        resolutionStrategy.force 'org.ow2.asm:asm:9.10.1'
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id "com.github.node-gradle.node" version "7.1.0"
+    id 'idea'
+}
+
+group = 'gr.manolis.steli.footie'
+version = '2.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+springBoot {
+    mainClass = 'gr.manolis.stelios.footie.api.App'
+}
+
+bootRun {
+    systemProperty 'spring.classformat.ignore', 'true'
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        resolutionStrategy.force 'org.ow2.asm:asm:9.10.1'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    
+    implementation 'org.apache.derby:derby:10.17.1.0'
+    implementation 'org.apache.derby:derbyshared:10.17.1.0'
+    implementation 'org.apache.derby:derbytools:10.17.1.0'
+    
+    implementation 'org.hibernate.orm:hibernate-core:6.6.1.Final'
+    implementation 'commons-io:commons-io:2.17.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'org.apache.commons:commons-math3:3.6.1'
+    
+    implementation 'org.webjars:jquery:3.7.1'
+    implementation 'org.webjars:bootstrap:5.3.3'
+    implementation 'org.webjars:webjars-locator-core:0.48'
+    implementation 'org.webjars:font-awesome:6.5.2'
+    
+    implementation 'org.mapstruct:mapstruct:1.6.2'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+    
+    implementation 'org.ow2.asm:asm:9.10.1'
+    implementation 'org.ow2.asm:asm-commons:9.10.1'
+    
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    runtimeOnly 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'spring.classformat.ignore', 'true'
+}
+
+// bootJar {
+//     launchScript()
+// }
+
+node {
+    version = '20.17.0'
+    npmVersion = '10.8.2'
+    download = true
+    workDir = layout.buildDirectory.dir("nodejs").get().asFile
+    npmWorkDir = layout.buildDirectory.dir("npm").get().asFile
+    nodeProjectDir = file("${project.projectDir}/ui")
+}
+
+task copyWebApp(type: Copy) {
+    from 'ui/build'
+    into layout.buildDirectory.dir("resources/main/public").get().asFile
+}
+
+// Ensure npm run build happens before copyWebApp
+npm_run_build {
+    dependsOn npm_install
+}
+
+copyWebApp.dependsOn npm_run_build
+processResources.dependsOn copyWebApp
+
+clean {
+    delete 'logs'
+    delete fileTree(dir: '.', include: '**/*.log')
+    delete 'ui/build'
+}
