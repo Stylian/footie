@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +33,10 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsOrdering;
 @Transactional
 public class QualsService {
 
-	private final static Logger logger = LoggerFactory.getLogger(QualsService.class);
+	final static Logger logger = LoggerFactory.getLogger(QualsService.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+    private EntityManager em;
 
 	@Autowired
 	private ServiceUtils serviceUtils;
@@ -45,7 +48,7 @@ public class QualsService {
 		QualsRound preliminary = (QualsRound) season.getRounds().get(0);
 		seedQualsRound(season, preliminary);
 		
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 		
 		return preliminary;
@@ -62,7 +65,7 @@ public class QualsService {
 		QualsRound preliminaries = (QualsRound) season.getRounds().get(0);
 		preliminaries.setStage(Stage.FINISHED);
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 
 		return roundQuals1;
@@ -79,7 +82,7 @@ public class QualsService {
 		QualsRound roundQuals1 = (QualsRound) season.getRounds().get(1);
 		roundQuals1.setStage(Stage.FINISHED);
 		
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 		
 		return roundQuals2;
@@ -95,7 +98,7 @@ public class QualsService {
 		}
 		setUpQualsRound(preliminary);
 		
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 		
 		return preliminary;
@@ -111,7 +114,7 @@ public class QualsService {
 		}
 		setUpQualsRound(roundQuals1);
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 
 		return roundQuals1;
@@ -127,7 +130,7 @@ public class QualsService {
 		}
 		setUpQualsRound(roundQuals2);
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 		
 		return roundQuals2;
@@ -223,9 +226,11 @@ public class QualsService {
 		}
 
 		//save
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
 		seasonDao.save(season);
 		Utils.autosave(roundQuals);
 	}
 
 }
+
+

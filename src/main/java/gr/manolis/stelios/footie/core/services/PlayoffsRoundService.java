@@ -3,14 +3,17 @@ package gr.manolis.stelios.footie.core.services;
 import java.util.Collections;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import gr.manolis.stelios.footie.core.Rules;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Group;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,10 +30,10 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 @Transactional
 public class PlayoffsRoundService {
 
-	private final static Logger logger = LoggerFactory.getLogger(PlayoffsRoundService.class);
+	final static Logger logger = LoggerFactory.getLogger(PlayoffsRoundService.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+    private EntityManager em;
 
 	@Autowired
 	private ServiceUtils serviceUtils;
@@ -68,7 +71,7 @@ public class PlayoffsRoundService {
 		playoffsRound.setStage(Stage.PLAYING);
 		groupsRoundOf8.setStage(Stage.FINISHED);
 		
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 
 		return playoffsRound;
@@ -82,7 +85,7 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		playoffsRound.buildSemisMatchups();
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 
 		return playoffsRound;
@@ -96,7 +99,7 @@ public class PlayoffsRoundService {
 		PlayoffsRound playoffsRound = (PlayoffsRound) season.getRounds().get(5);
 		playoffsRound.buildFinalsMatchup();
 
-		DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
 		dao.save(season);
 
 		return playoffsRound;
@@ -115,7 +118,7 @@ public class PlayoffsRoundService {
 		}
 
 		//save
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
 		seasonDao.save(season);
 		Utils.autosave(playoffsRound);
 	}
@@ -132,7 +135,7 @@ public class PlayoffsRoundService {
 		}
 
 		//save
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
 		seasonDao.save(season);
 		Utils.autosave(playoffsRound);
 	}
@@ -154,8 +157,10 @@ public class PlayoffsRoundService {
 		Utils.addGamePointsForMatchup(season, finalsMatchup, true);
 
 		//save
-		DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+		DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
 		seasonDao.save(season);
 	}
 
 }
+
+

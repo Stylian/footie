@@ -11,15 +11,18 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.services.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
@@ -33,7 +36,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/rest")
 public class RestNextGameController {
 
-    private final static Logger logger = LoggerFactory.getLogger(RestNextGameController.class);
+    final static Logger logger = LoggerFactory.getLogger(RestNextGameController.class);
 
     @Autowired
     private QualsService qualsService;
@@ -59,8 +62,8 @@ public class RestNextGameController {
     @Autowired
     private RestSeasonController restSeasonController;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     GameMapper gameMapper;
@@ -166,9 +169,9 @@ public class RestNextGameController {
             }
 
             // past encounters
-            List<Game> encounters = sessionFactory.getCurrentSession().createQuery(
-                    "from GAMES where HOME_TEAM_ID=" + game.getHomeTeam().getId() + " and " +
-                            " AWAY_TEAM_ID=" + game.getAwayTeam().getId()).list();
+            List<Game> encounters = em.unwrap(Session.class).createQuery(
+                    "from GAMES where homeTeam.id=" + game.getHomeTeam().getId() + " and " +
+                            " awayTeam.id=" + game.getAwayTeam().getId()).list();
 
             List<Game> pastEncounters = encounters.stream()
                     .filter(g -> g.getResult() != null)
@@ -181,3 +184,5 @@ public class RestNextGameController {
     }
 
 }
+
+

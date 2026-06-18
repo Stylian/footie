@@ -17,7 +17,7 @@ public class DerbyTestDbConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
-        dataSource.setUrl("jdbc:derby:" + System.getProperty("user.home") + "/footie/tests/data;create=true");
+        dataSource.setUrl("jdbc:derby:memory:footieTestDB_" + java.util.UUID.randomUUID().toString() + ";create=true");
         dataSource.setUsername("user");
         dataSource.setPassword("");
 

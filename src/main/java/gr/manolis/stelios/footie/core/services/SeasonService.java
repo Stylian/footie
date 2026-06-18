@@ -13,26 +13,29 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.PlayoffsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
 @Transactional
 public class SeasonService {
 
-    private final static Logger logger = LoggerFactory.getLogger(SeasonService.class);
+    final static Logger logger = LoggerFactory.getLogger(SeasonService.class);
 
     @Autowired
     private UIPersistService persistService;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private ServiceUtils serviceUtils;
@@ -61,7 +64,7 @@ public class SeasonService {
             }
         }
 
-        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return season;
@@ -104,7 +107,7 @@ public class SeasonService {
 
         season.setStage(Stage.PLAYING);
 
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
         seasonDao.save(season);
 
         return season;
@@ -230,7 +233,7 @@ public class SeasonService {
         season.getRounds().get(5).setStage(Stage.FINISHED);
         season.setStage(Stage.FINISHED);
 
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
         seasonDao.save(season);
         Utils.autosave(playoffsRound);
 
@@ -331,3 +334,5 @@ public class SeasonService {
         }
     }
 }
+
+

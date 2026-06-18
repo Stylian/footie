@@ -17,25 +17,8 @@ public class DataAccessObject<T> {
 	}
 
 	public int save(T t) {
-
-		Integer id = null;
-
-		Transaction tx = null;
-
-		try {
-			tx = session.beginTransaction();
-
-			id = (Integer) session.save(t);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		}
-
-		return id;
-
+		session.persist(t);
+		return 1;
 	}
 
 	public T getById(int id, Class<T> clazz) {
@@ -81,18 +64,9 @@ public class DataAccessObject<T> {
 
 	public void delete(T t) {
 
-		Transaction tx = null;
-
 		try {
-			tx = session.beginTransaction();
-
 			session.delete(t);
-
-			tx.commit();
 		} catch (HibernateException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
 			e.printStackTrace();
 		}
 

@@ -5,12 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,9 +25,8 @@ import gr.manolis.stelios.footie.api.App;
 				DerbyTestDbConfig.class
 		},
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = { "management.port=0", "spring.main.component-scan-enabled=false" })
+@TestPropertySource(properties = { "management.port=0", "spring.jpa.hibernate.ddl-auto=create-drop" })
 @ActiveProfiles("test")
-@Disabled("Disabled due to Java 25 compatibility issues with Spring classpath scanning")
 public class SpringAppTest {
 
 	@LocalServerPort
@@ -40,8 +38,8 @@ public class SpringAppTest {
 	@Test
 	public void testOps() throws Exception {
 
-//		for (int n = 1; n < 3; n++)
-//			runSeason(n);
+		for (int n = 1; n < 3; n++)
+			runSeason(n);
 
 	}
 
@@ -86,6 +84,10 @@ public class SpringAppTest {
 
 		ResponseEntity<Map> entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + path, parts,
 				Map.class);
+		if (entity.getStatusCode() != HttpStatus.OK) {
+			System.out.println("checkURL FAILED: " + path + " - Status: " + entity.getStatusCode() + " - Body: " + entity.getBody());
+		}
+		System.out.println("checkURL SUCCESS: " + path + " - Body: " + entity.getBody());
 		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
 		assertEquals(expected, entity.getBody().toString());

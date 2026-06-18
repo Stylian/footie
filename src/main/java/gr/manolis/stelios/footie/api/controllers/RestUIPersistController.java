@@ -6,7 +6,7 @@ import gr.manolis.stelios.footie.api.services.UIPersistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 @Transactional

@@ -7,14 +7,13 @@ import gr.manolis.stelios.footie.core.peristence.dtos.groups.RobinGroup;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @RestController
@@ -22,7 +21,7 @@ import java.util.Collections;
 @RequestMapping("/rest/groups")
 public class RestGroupsController {
 
-    private final static Logger logger = LoggerFactory.getLogger(RestGroupsController.class);
+    final static Logger logger = LoggerFactory.getLogger(RestTeamsController.class);
 
     @Autowired
     private RobinGroupMapper robinGroupMapper;

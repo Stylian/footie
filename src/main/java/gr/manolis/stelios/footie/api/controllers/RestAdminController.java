@@ -17,6 +17,10 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.GroupsRoundService;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import org.apache.commons.io.FileUtils;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -44,8 +48,8 @@ public class RestAdminController {
     @Autowired
     private ServiceUtils serviceUtils;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private UIPersistService persistService;
@@ -85,7 +89,7 @@ public class RestAdminController {
     // should be removed later? or keep
     @PostMapping("/recalculate_elo")
     public String recalculateElo() {
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
         List<Season> seasons = serviceUtils.loadAllSeasons();
 
         // reset elos
@@ -203,7 +207,7 @@ public class RestAdminController {
         }
 
         //save
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
         seasonDao.save(season);
 
         return "done";
@@ -231,3 +235,5 @@ public class RestAdminController {
     }
 
 }
+
+

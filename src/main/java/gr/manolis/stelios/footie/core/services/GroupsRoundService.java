@@ -12,13 +12,16 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.QualsRound;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +30,10 @@ import java.util.List;
 @Transactional
 public class GroupsRoundService {
 
-    private final static Logger logger = LoggerFactory.getLogger(GroupsRoundService.class);
+    final static Logger logger = LoggerFactory.getLogger(GroupsRoundService.class);
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private ServiceUtils serviceUtils;
@@ -96,7 +99,7 @@ public class GroupsRoundService {
 
         groupsRoundOf12.setStage(Stage.ON_PREVIEW);
 
-        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return groupsRoundOf12;
@@ -158,13 +161,13 @@ public class GroupsRoundService {
 
         groupsRoundOf12.setStage(Stage.PLAYING);
 
-        DataAccessObject<RobinGroup> dao1 = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<RobinGroup> dao1 = new DataAccessObject<>(em.unwrap(Session.class));
         dao1.save(groupA);
         dao1.save(groupB);
         dao1.save(groupC);
         dao1.save(groupD);
 
-        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return groupsRoundOf12;
@@ -233,7 +236,7 @@ public class GroupsRoundService {
         groupsRoundOf8.setStage(Stage.PLAYING);
         groupsRoundOf12.setStage(Stage.FINISHED);
 
-        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return groupsRoundOf8;
@@ -274,7 +277,7 @@ public class GroupsRoundService {
         Utils.calcEloForGroup(serviceUtils.loadAllSeasons(), season, groupsRound);
 
         //save
-        DataAccessObject<Season> seasonDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> seasonDao = new DataAccessObject<>(em.unwrap(Session.class));
         seasonDao.save(season);
         Utils.autosave(groupsRound);
     }
@@ -336,3 +339,5 @@ public class GroupsRoundService {
 
 
 }
+
+

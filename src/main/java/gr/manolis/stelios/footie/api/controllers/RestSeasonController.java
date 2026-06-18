@@ -22,13 +22,16 @@ import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrderingDTO;
 import gr.manolis.stelios.footie.core.tools.RobinGroupOrdering;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @RestController
@@ -36,10 +39,10 @@ import java.util.*;
 @RequestMapping("/rest/seasons")
 public class RestSeasonController {
 
-    private final static Logger logger = LoggerFactory.getLogger(RestSeasonController.class);
+    final static Logger logger = LoggerFactory.getLogger(RestSeasonController.class);
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private SeasonService seasonService;
@@ -642,7 +645,7 @@ public class RestSeasonController {
             season.setDreamTeamST(player);
         }
 
-        DataAccessObject<Season> dao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return new RestResponse(RestResponse.SUCCESS, "published season data");
@@ -710,3 +713,5 @@ public class RestSeasonController {
 
 
 }
+
+

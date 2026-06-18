@@ -8,30 +8,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.SessionFactory;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EntityScan(basePackages= {
 		"gr.manolis.stelios.footie.core.peristence.dtos",
 		"gr.manolis.stelios.footie.api.entities"}
 		)
+@ComponentScan("gr.manolis.stelios.footie")
 public class App {
 
 	@Value("${react-app.path}")
 	private String reactAppPath;
 
-	@jakarta.annotation.PostConstruct
-	public void init() {
-		System.out.println("FOOTIEAPP_DEBUG: App initialized");
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
+
 
 	/**
 	 * this allows access from react-app, needed for developers only. set the following line in
@@ -40,24 +37,20 @@ public class App {
 	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
-		return new CorsConfiguration(reactAppPath);
-	}
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
 
-	private static class CorsConfiguration implements WebMvcConfigurer {
-		private final String reactAppPath;
+				if (StringUtils.isBlank(reactAppPath)) {
+					return; // provides no access to a front end tool if the property is not set
+				}
 
-		public CorsConfiguration(String reactAppPath) {
-			this.reactAppPath = reactAppPath;
-		}
-
-		@Override
-		public void addCorsMappings(CorsRegistry registry) {
-			if (StringUtils.isNotBlank(reactAppPath)) {
 				registry
 						.addMapping("/**")
+//						.allowedOrigins(reactAppPath)    // since I proxied react this breaks it
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
-		}
+		};
 	}
 
 

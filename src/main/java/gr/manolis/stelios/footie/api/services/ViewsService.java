@@ -16,13 +16,17 @@ import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
 import gr.manolis.stelios.footie.core.tools.CoefficientsRangeOrdering;
 import org.apache.commons.math3.util.Precision;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.hibernate.SessionFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+import javax.swing.*;
+import org.springframework.transaction.annotation.Transactional;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
@@ -32,10 +36,10 @@ import java.util.stream.Collectors;
 @Transactional
 public class ViewsService {
 
-	private final static Logger logger = LoggerFactory.getLogger(ViewsService.class);
+	final static Logger logger = LoggerFactory.getLogger(ViewsService.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+    private EntityManager em;
 
 	@Autowired
 	private ServiceUtils serviceUtils;
@@ -170,11 +174,11 @@ public class ViewsService {
 
         if(teamId > 0) {
 
-            List<Game> games1 = sessionFactory.getCurrentSession().createQuery(
-                    "from GAMES where HOME_TEAM_ID=" + teamId).list();
+            List<Game> games1 = em.unwrap(Session.class).createQuery(
+                    "from GAMES where homeTeam.id=" + teamId).list();
 
-            List<Game> gamesAway1 = sessionFactory.getCurrentSession().createQuery(
-                    "from GAMES where AWAY_TEAM_ID=" + teamId).list();
+            List<Game> gamesAway1 = em.unwrap(Session.class).createQuery(
+                    "from GAMES where awayTeam.id=" + teamId).list();
 
             List<Game> games = games1.stream()
                     .filter( g -> g.getResult() != null)
@@ -205,8 +209,8 @@ public class ViewsService {
             }
 
         }else {
-            results = sessionFactory.getCurrentSession().createQuery("from RESULTS where HOME_GOALS IS " +
-                    "NOT NULL and AWAY_GOALS IS NOT NULL").list();
+            results = em.unwrap(Session.class).createQuery("from RESULTS where goalsMadeByHomeTeam IS " +
+                    "NOT NULL and goalsMadeByAwayTeam IS NOT NULL").list();
         }
 
 		int numOfGames = results.size();
@@ -346,8 +350,8 @@ public class ViewsService {
 			awayGoalsFrequency.put(strAwayGoals, awayGoalsFrequency.get(strAwayGoals) + 1);
 		}
 
-		gamestats.put("home_goals_frequency", homeGoalsFrequency);
-		gamestats.put("away_goals_frequency", awayGoalsFrequency);
+		gamestats.put("goalsMadeByHomeTeam_frequency", homeGoalsFrequency);
+		gamestats.put("goalsMadeByAwayTeam_frequency", awayGoalsFrequency);
 
 		return gamestats;
 	}
@@ -373,3 +377,5 @@ public class ViewsService {
 	}
 
 }
+
+

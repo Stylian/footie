@@ -13,7 +13,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 @Transactional
@@ -28,11 +28,6 @@ public class RestOperationsController {
 
     @Autowired
     private ServiceUtils serviceUtils;
-
-    @jakarta.annotation.PostConstruct
-    public void init() {
-        System.out.println("FOOTIEAPP_DEBUG: RestOperationsController initialized");
-    }
 
     @GetMapping("/league/can_create_season")
     public Object[] canCreateLeague() {

@@ -5,13 +5,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import gr.manolis.stelios.footie.core.Utils;
 import gr.manolis.stelios.footie.core.peristence.dtos.matchups.MatchupTieStrategy;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.Round;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +38,10 @@ import gr.manolis.stelios.footie.core.peristence.dtos.matchups.Matchup;
 @Transactional
 public class GameService {
 
-    private final static Logger logger = LoggerFactory.getLogger(GameService.class);
+    final static Logger logger = LoggerFactory.getLogger(GameService.class);
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private ServiceUtils serviceUtils;
@@ -46,7 +49,7 @@ public class GameService {
     public Game getNextGame() {
         logger.info("retrieving next game...");
 
-        List results = sessionFactory.getCurrentSession().createQuery("from GAMES").list();
+        List results = em.unwrap(Session.class).createQuery("from GAMES").list();
 
         List<Game> gamesRemaining = new ArrayList<>();
 
@@ -129,7 +132,7 @@ public class GameService {
         Stats seasonStats = team.getStatsForGroup(season);
         seasonStats.addStats(toAddToSeasonStats);
 
-        DataAccessObject<Game> gameDao = new DataAccessObject<>(sessionFactory.getCurrentSession());
+        DataAccessObject<Game> gameDao = new DataAccessObject<>(em.unwrap(Session.class));
         gameDao.save(game);
 
     }
@@ -263,3 +266,5 @@ public class GameService {
     }
 
 }
+
+
