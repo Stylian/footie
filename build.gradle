@@ -63,4 +63,5 @@ processResources {
 
 test {
     useJUnitPlatform()
+    systemProperty "teams.file.path", "Launcher/teams.txt"
 }

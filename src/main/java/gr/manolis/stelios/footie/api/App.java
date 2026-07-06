@@ -23,12 +23,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class App {
 
 	static {
-		String userHome = System.getProperty("user.home");
-		java.io.File logsDir = new java.io.File(userHome + "/footie/logs");
-		if (!logsDir.exists()) {
-			logsDir.mkdirs();
+		if (System.getProperty("derby.stream.error.file") == null) {
+			java.io.File logsDir = new java.io.File("logs");
+			if (!logsDir.exists()) {
+				logsDir.mkdirs();
+			}
+			System.setProperty("derby.stream.error.file", "logs/derby.log");
 		}
-		System.setProperty("derby.stream.error.file", userHome + "/footie/logs/derby.log");
 	}
 
 	@Value("${react-app.path}")

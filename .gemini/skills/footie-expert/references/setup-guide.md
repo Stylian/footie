@@ -6,8 +6,7 @@
 - **Node.js (v20+) & npm**: To build and run the React UI.
 
 ## Initial Setup
-1.  **Configuration**: The launcher (`launcher.bat` or `launcher.sh`) automatically creates the configuration folder at `~/footie` and copies `teams.txt` into it on first run.
-2.  **Database**: The database is created automatically in `~/footie/data` on the first run.
+1.  **Configuration & Database**: The application is fully portable. The launcher (`footie.bat` or `footie.sh`) starts the application, which reads the local `teams.txt` configuration and initializes the database (`data/`) and logs (`logs/`) directories directly inside the launcher folder on first run.
 
 ## Build Commands
 - **Full Build (Backend + UI)**:

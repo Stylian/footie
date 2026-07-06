@@ -9,7 +9,7 @@ Footie is a comprehensive football (soccer) management application designed to s
     - **Core Logic:** Domain entities (`gr.manolis.stelios.footie.core.peristence.dtos`), services (`gr.manolis.stelios.footie.core.services`), and tools for simulation and ordering.
     - **Persistence:** Spring Data JPA with an embedded Apache Derby database.
 - **Frontend:** React-based UI located in the `ui` directory. It communicates with the backend via REST APIs.
-- **Database:** Embedded Apache Derby. Data is stored in `${user.home}/footie/data`.
+- **Database:** Embedded Apache Derby. Data is stored in the relative `data/` directory inside the working folder.
 
 ## Building and Running
 
@@ -49,7 +49,7 @@ The UI will run at `http://localhost:3000`.
 
 ## Setup Instructions
 
-1.  **Configuration & Database:** The application automatically initializes the configuration directory (`~/footie`) and copies `teams.txt` on the first launch of `launcher.bat` or `launcher.sh`. The first run will also create the database in `~/footie/data`.
+1.  **Configuration & Database:** The application is fully portable. The database (`data/`), configuration (`teams.txt`), and logs (`logs/`) are initialized and stored entirely inside the application's working directory at launch.
 
 ## Development Conventions
 

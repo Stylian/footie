@@ -26,23 +26,23 @@ import java.util.stream.Collectors;
 public class Utils {
 
 	public static File getDatabaseFile() {
-		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
-		return new File(footieFolder + File.separator + "data");
+		return new File("data");
 	}
 
 	public static String getBackupsFolderPath() {
-		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
-		return footieFolder + File.separator + "backups"  + File.separator;
+		return "backups" + File.separator;
 	}
 
 	public static File getTeamsFile() {
-		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
-		return new File(footieFolder + File.separator + "teams.txt");
+		String teamsPath = System.getProperty("teams.file.path");
+		if (teamsPath != null && !teamsPath.trim().isEmpty()) {
+			return new File(teamsPath);
+		}
+		return new File("teams.txt");
 	}
 
 	public static File getRulesFile() {
-		String footieFolder = FileUtils.getUserDirectory()  + File.separator + "footie";
-		return new File(footieFolder + File.separator + "rules.txt");
+		return new File("rules.txt");
 	}
 
 	public static String toString(List<?> lsObj) {

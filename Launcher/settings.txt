@@ -1,0 +1,25 @@
+# ==========================================
+# Footie Application Settings
+# ==========================================
+# Adjust these values to customize the application runtime behavior.
+# Lines starting with '#' are comments and will be ignored.
+
+# 1. Ports Config
+# The port the Spring Boot server listens on (serving both backend API and bundled frontend).
+BACKEND_PORT=8080
+
+# The port for the React development server (only used when running the frontend independently).
+FRONTEND_PORT=3000
+
+# 2. Paths Config (Optional)
+# Directory where the database files should be stored.
+# If left empty, it defaults to: ~/footie/data
+DATABASE_PATH=
+
+# Directory where the application logs should be written.
+# If left empty, it defaults to: ~/footie/logs
+LOGS_PATH=
+
+# 3. Development / Debugging (Optional)
+# Toggle Hibernate SQL logging in the console/logs (true/false).
+SHOW_SQL=false

@@ -22,8 +22,8 @@ The backend is a **Spring Boot 3.4.0** application using **Java 21**. It manages
 
 ## Database Interaction
 - Uses Spring Data JPA.
-- Data is stored in `~/footie/data`.
-- First run automatically initializes configuration files (`teams.txt`) in `~/footie`.
+- Data is stored in the relative `data/` directory inside the working folder.
+- First run automatically loads the configuration file `teams.txt` from the working folder.
 
 ## Common Tasks
 - **Adding a REST Endpoint**: Create a new controller in `api.controllers` and a corresponding DTO if needed.

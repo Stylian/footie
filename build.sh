@@ -38,10 +38,10 @@ echo "7. Creating Launcher.zip..."
 rm -f Launcher.zip
 
 if command -v zip >/dev/null 2>&1; then
-    zip -r Launcher.zip Launcher >/dev/null
+    (cd Launcher && zip -r ../Launcher.zip ./* >/dev/null)
     echo "   Launcher.zip created using zip utility"
 else
-    powershell.exe -NoProfile -Command "Compress-Archive -Path Launcher -DestinationPath Launcher.zip -Force"
+    powershell.exe -NoProfile -Command "Get-ChildItem -Path Launcher | Compress-Archive -DestinationPath Launcher.zip -Force"
     echo "   Launcher.zip created using PowerShell"
 fi
 
