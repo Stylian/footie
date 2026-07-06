@@ -34,6 +34,5 @@
   Accessible at `http://localhost:3000`.
 
 ## Testing
-- **Backend (Default/In-memory)**: `./gradlew test`
-- **Backend (Dev Mode / Persistent DB)**: `./gradlew devTest` (Runs tests against a persistent database at `~/footie/dev-test-data` and leaves the data intact for inspection/debugging).
+- **Backend**: `./gradlew test`
 - **Frontend**: `cd ui && npm test`

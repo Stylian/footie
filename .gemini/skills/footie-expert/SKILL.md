@@ -36,6 +36,5 @@ Simulation logic is centralized in the `core.services` and `core.tools` packages
 ## Build & Test
 Always verify changes by running:
 - `./gradlew build` (Full integration check)
-- `./gradlew test` (Backend unit tests - clean, in-memory)
-- `./gradlew devTest` (Backend unit tests - runs on a persistent database at `~/footie/dev-test-data` without deleting it on shutdown)
+- `./gradlew test` (Backend unit tests)
 - `cd ui && npm test` (Frontend tests)

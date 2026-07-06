@@ -63,12 +63,4 @@ processResources {
 
 test {
     useJUnitPlatform()
-    exclude '**/SpringAppDevTest.class'
-}
-
-task devTest(type: Test) {
-    group = 'verification'
-    description = 'Runs the Spring App tests in development mode (persisting to a Derby database in the user home directory).'
-    useJUnitPlatform()
-    include '**/SpringAppDevTest.class'
 }
