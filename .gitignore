@@ -3,7 +3,10 @@
 /BD/
 /data/
 /backups/
+/build/
 /.idea/
 /bin
 *.log
 .springBeans
+.gradle
+.vscode

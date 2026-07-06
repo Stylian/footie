@@ -188,11 +188,11 @@ export default function Team() {
                                                     <Bar
                                                         data={{
                                                             labels: [
-                                                                ...Object.keys(gameStats["home_goals_frequency"]),
+                                                                ...Object.keys(gameStats["goalsMadeByHomeTeam_frequency"]),
                                                             ],
                                                             datasets: [{
                                                                 data: [
-                                                                    ...Object.values(gameStats["home_goals_frequency"])
+                                                                    ...Object.values(gameStats["goalsMadeByHomeTeam_frequency"])
                                                                 ],
                                                                 backgroundColor: '#2d5cd2',
                                                                 hoverBackgroundColor: '#2d5cd2',
@@ -241,11 +241,11 @@ export default function Team() {
                                                     <Bar
                                                         data={{
                                                             labels: [
-                                                                ...Object.keys(gameStats["away_goals_frequency"]),
+                                                                ...Object.keys(gameStats["goalsMadeByAwayTeam_frequency"]),
                                                             ],
                                                             datasets: [{
                                                                 data: [
-                                                                    ...Object.values(gameStats["away_goals_frequency"])
+                                                                    ...Object.values(gameStats["goalsMadeByAwayTeam_frequency"])
                                                                 ],
                                                                 backgroundColor: '#da2525',
                                                                 hoverBackgroundColor: '#da2525',
