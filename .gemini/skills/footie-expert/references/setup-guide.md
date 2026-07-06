@@ -35,3 +35,11 @@
 
 ## AI Assistant Guidelines
 - **No Packaging**: The AI coding assistant must NOT run the `build.sh` script or execute any packaging/release commands. Build/packaging execution is exclusively the user's task.
+
+## Stand-alone Deployment Verification Procedure
+If requested by the user to verify a deployment:
+1. **Build**: Run `./build.sh` (using Git Bash on Windows).
+2. **Extract**: Unzip `Launcher.zip` into a temporary folder inside the conversation's scratch directory: `<appDataDir>\brain\<conversation-id>\scratch\test_launcher`.
+3. **Execute**: Start the standalone application by executing `footie.bat` (on Windows) or `footie.sh` (on Unix) from inside the scratch folder.
+4. **Test**: Query the backend views (e.g. `http://localhost:8080/rest/admin/general_data`) to ensure that the database (`data/`) initializes locally inside the directory, and that `teams.txt` is resolved and loaded successfully.
+5. **Clean Up**: Terminate the launched background process and delete the temporary `test_launcher` directory from the scratch workspace.

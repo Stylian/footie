@@ -26,7 +26,7 @@ public class App {
 		boolean isDev = false;
 		try {
 			String path = App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			isDev = !path.endsWith(".jar");
+			isDev = !path.contains(".jar");
 		} catch (Exception e) {
 			isDev = true;
 		}

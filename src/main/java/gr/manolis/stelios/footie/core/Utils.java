@@ -28,7 +28,7 @@ public class Utils {
 	public static boolean isDevMode() {
 		try {
 			String path = Utils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			return !path.endsWith(".jar");
+			return !path.contains(".jar");
 		} catch (Exception e) {
 			return true;
 		}
