@@ -23,12 +23,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class App {
 
 	static {
-		if (System.getProperty("derby.stream.error.file") == null) {
-			java.io.File logsDir = new java.io.File("logs");
-			if (!logsDir.exists()) {
-				logsDir.mkdirs();
+		boolean isDev = false;
+		try {
+			String path = App.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			isDev = !path.endsWith(".jar");
+		} catch (Exception e) {
+			isDev = true;
+		}
+
+		if (isDev) {
+			if (System.getProperty("derby.stream.error.file") == null) {
+				java.io.File logsDir = new java.io.File(".apprun/logs");
+				if (!logsDir.exists()) {
+					logsDir.mkdirs();
+				}
+				System.setProperty("derby.stream.error.file", ".apprun/logs/derby.log");
 			}
-			System.setProperty("derby.stream.error.file", "logs/derby.log");
+			if (System.getProperty("spring.datasource.url") == null) {
+				System.setProperty("spring.datasource.url", "jdbc:derby:.apprun/data;create=true");
+			}
+		} else {
+			if (System.getProperty("derby.stream.error.file") == null) {
+				java.io.File logsDir = new java.io.File("logs");
+				if (!logsDir.exists()) {
+					logsDir.mkdirs();
+				}
+				System.setProperty("derby.stream.error.file", "logs/derby.log");
+			}
 		}
 	}
 

@@ -45,13 +45,13 @@ else
     echo "   Launcher.zip created using PowerShell"
 fi
 
+# Clean up the temporary footie.jar copy in the Launcher folder
+rm -f Launcher/footie.jar
+
 echo "8. Build successful!"
 echo ""
-echo "You can now double-click the JAR file to run the application!"
-echo "Location: Launcher/footie.jar"
-echo ""
-echo "Or run from terminal:"
-echo "  java -jar Launcher/footie.jar"
-echo ""
-echo "Or extract and distribute the package:"
+echo "The release package is ready:"
 echo "  Launcher.zip"
+echo ""
+echo "To run the application from the build output directory:"
+echo "  java -jar $JAR_FILE"

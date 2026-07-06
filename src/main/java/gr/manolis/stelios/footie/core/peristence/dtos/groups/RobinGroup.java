@@ -14,6 +14,7 @@ public abstract class RobinGroup extends Group {
     private List<GroupGame> games;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "season_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Season season;
 
     public RobinGroup() {

@@ -18,8 +18,6 @@ if %errorlevel% neq 0 (
 
 rem Default Settings
 set BACKEND_PORT=8080
-set DATABASE_PATH=
-set LOGS_PATH=
 set SHOW_SQL=false
 
 rem Read settings.txt
@@ -45,14 +43,7 @@ echo Starting FootieApp on port %BACKEND_PORT%...
 echo.
 
 rem Build JVM flags dynamically
-set JVM_OPTS=-Dserver.port=%BACKEND_PORT% -Dreact-app.path=http://localhost:%FRONTEND_PORT% -Dspring.main.allow-circular-references=true -Dspring.main.allow-bean-definition-overriding=true
-if not "%DATABASE_PATH%"=="" set JVM_OPTS=%JVM_OPTS% -Dspring.datasource.url=jdbc:derby:%DATABASE_PATH%;create=true
-if not "%LOGS_PATH%"=="" (
-    set JVM_OPTS=%JVM_OPTS% -Dderby.stream.error.file=%LOGS_PATH%\derby.log
-) else (
-    set JVM_OPTS=%JVM_OPTS% -Dderby.stream.error.file=logs\derby.log
-)
-set JVM_OPTS=%JVM_OPTS% -Dspring.jpa.show-sql=%SHOW_SQL%
+set JVM_OPTS=-Dserver.port=%BACKEND_PORT% -Dreact-app.path=http://localhost:%FRONTEND_PORT% -Dspring.main.allow-circular-references=true -Dspring.main.allow-bean-definition-overriding=true -Dderby.stream.error.file=logs\derby.log -Dspring.jpa.show-sql=%SHOW_SQL%
 
 java ^
 --add-opens java.base/java.lang=ALL-UNNAMED ^
@@ -77,7 +68,5 @@ rem trim whitespace
 for /f "tokens=* delims= " %%a in ("%k%") do set "k=%%a"
 for /f "tokens=* delims= " %%a in ("%v%") do set "v=%%a"
 if "%k%"=="BACKEND_PORT" set "BACKEND_PORT=%v%"
-if "%k%"=="DATABASE_PATH" set "DATABASE_PATH=%v%"
-if "%k%"=="LOGS_PATH" set "LOGS_PATH=%v%"
 if "%k%"=="SHOW_SQL" set "SHOW_SQL=%v%"
 goto :eof

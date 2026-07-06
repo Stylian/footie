@@ -32,3 +32,6 @@
 ## Testing
 - **Backend**: `./gradlew test`
 - **Frontend**: `cd ui && npm test`
+
+## AI Assistant Guidelines
+- **No Packaging**: The AI coding assistant must NOT run the `build.sh` script or execute any packaging/release commands. Build/packaging execution is exclusively the user's task.

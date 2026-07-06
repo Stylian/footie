@@ -59,6 +59,7 @@ The UI will run at `http://localhost:3000`.
 - **Testing:**
     - Backend: JUnit and Mockito (`src/test`).
     - Frontend: Jest and React Testing Library (`ui/src/App.test.js`).
+- **Packaging:** The AI coding assistant must NOT run the `build.sh` script or handle any packaging/distribution commands directly. Packaging and release builds are strictly managed by the user.
 
 ## Key Files & Directories
 

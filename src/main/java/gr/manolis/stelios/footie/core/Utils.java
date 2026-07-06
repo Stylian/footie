@@ -25,12 +25,28 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
+	public static boolean isDevMode() {
+		try {
+			String path = Utils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			return !path.endsWith(".jar");
+		} catch (Exception e) {
+			return true;
+		}
+	}
+
+	public static String getBaseDir() {
+		if (isDevMode()) {
+			return ".apprun" + File.separator;
+		}
+		return "";
+	}
+
 	public static File getDatabaseFile() {
-		return new File("data");
+		return new File(getBaseDir() + "data");
 	}
 
 	public static String getBackupsFolderPath() {
-		return "backups" + File.separator;
+		return getBaseDir() + "backups" + File.separator;
 	}
 
 	public static File getTeamsFile() {
@@ -38,11 +54,40 @@ public class Utils {
 		if (teamsPath != null && !teamsPath.trim().isEmpty()) {
 			return new File(teamsPath);
 		}
+		if (isDevMode()) {
+			return new File("Launcher/teams.txt");
+		}
+		try {
+			String urlStr = Utils.class.getProtectionDomain().getCodeSource().getLocation().toString();
+			int jarIdx = urlStr.indexOf(".jar");
+			if (jarIdx != -1) {
+				String jarPath = urlStr.substring(0, jarIdx + 4);
+				if (jarPath.startsWith("jar:")) {
+					jarPath = jarPath.substring(4);
+				}
+				if (jarPath.startsWith("nested:")) {
+					jarPath = jarPath.substring(7);
+				}
+				if (jarPath.startsWith("file:")) {
+					jarPath = jarPath.substring(5);
+				}
+				File jarFile = new File(jarPath);
+				File jarDir = jarFile.getParentFile();
+				if (jarDir != null && jarDir.exists()) {
+					File teamsFile = new File(jarDir, "teams.txt");
+					if (teamsFile.exists()) {
+						return teamsFile;
+					}
+				}
+			}
+		} catch (Exception e) {
+			// ignore and fallback
+		}
 		return new File("teams.txt");
 	}
 
 	public static File getRulesFile() {
-		return new File("rules.txt");
+		return new File(getBaseDir() + "rules.txt");
 	}
 
 	public static String toString(List<?> lsObj) {
