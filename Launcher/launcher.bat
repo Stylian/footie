@@ -16,6 +16,20 @@ if %errorlevel% neq 0 (
 )
 
 echo.
+echo Initializing configuration...
+if not exist "%USERPROFILE%\footie" (
+    mkdir "%USERPROFILE%\footie"
+)
+if not exist "%USERPROFILE%\footie\teams.txt" (
+    if exist "teams.txt" (
+        echo Copying teams.txt to %USERPROFILE%\footie\teams.txt...
+        copy "teams.txt" "%USERPROFILE%\footie\teams.txt" >nul
+    ) else (
+        echo Warning: teams.txt not found in current directory to copy.
+    )
+)
+
+echo.
 echo Starting FootieApp with compatibility flags...
 echo.
 

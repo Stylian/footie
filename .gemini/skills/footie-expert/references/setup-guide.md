@@ -6,10 +6,7 @@
 - **Node.js (v20+) & npm**: To build and run the React UI.
 
 ## Initial Setup
-1.  **Configuration**: Copy the `footie` folder from `COPY_TO_USER_FOLDER` to your user home directory:
-    ```bash
-    cp -r COPY_TO_USER_FOLDER/footie ~/
-    ```
+1.  **Configuration**: The launcher (`launcher.bat` or `launcher.sh`) automatically creates the configuration folder at `~/footie` and copies `teams.txt` into it on first run.
 2.  **Database**: The database is created automatically in `~/footie/data` on the first run.
 
 ## Build Commands

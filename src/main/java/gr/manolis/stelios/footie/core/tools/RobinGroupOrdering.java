@@ -57,6 +57,13 @@ public class RobinGroupOrdering extends Ordering {
 		}
 
 		// RULE 6 elo
+		if (seasonUntil <= 0) {
+			if (seasons != null && !seasons.isEmpty()) {
+				Season currentSeason = seasons.get(0);
+				return o2.getStatsForGroup(currentSeason).getElo() - o1.getStatsForGroup(currentSeason).getElo();
+			}
+			return 0;
+		}
 		Season seasonLast = seasons.get(seasonUntil - 1);
 		return o2.getStatsForGroup(seasonLast).getElo() - o1.getStatsForGroup(seasonLast).getElo();
 

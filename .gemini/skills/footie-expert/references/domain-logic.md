@@ -20,5 +20,5 @@ Simulation is handled by services in `core.services`:
 - `QualsService` / `GroupsRoundService` / `PlayoffsRoundService`: Handle specific tournament stages.
 
 ## Data Initialization
-- Initial teams are loaded from `teams.txt` (originally in `COPY_TO_USER_FOLDER/footie`).
+- Initial teams are loaded from `teams.txt` (which is copied to `~/footie/teams.txt` automatically by the launcher scripts).
 - The system supports "seeding" based on coefficients to ensure balanced groups.

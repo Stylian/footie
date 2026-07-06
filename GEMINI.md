@@ -49,8 +49,7 @@ The UI will run at `http://localhost:3000`.
 
 ## Setup Instructions
 
-1.  **Configuration:** Copy the `footie` configuration folder from `COPY_TO_USER_FOLDER` to your user home directory (`~/footie`).
-2.  **Database:** The first run of `./gradlew build` or starting the app will create a test database in `~/footie/data`.
+1.  **Configuration & Database:** The application automatically initializes the configuration directory (`~/footie`) and copies `teams.txt` on the first launch of `launcher.bat` or `launcher.sh`. The first run will also create the database in `~/footie/data`.
 
 ## Development Conventions
 
@@ -67,6 +66,4 @@ The UI will run at `http://localhost:3000`.
 - `ui/`: React frontend source code and configuration.
 - `src/main/java/`: Java backend source code.
 - `src/main/resources/application.properties`: Backend configuration (DB path, ports, etc.).
-- `COPY_TO_USER_FOLDER/`: Contains initial configuration files required in the user's home directory.
 - `build.sh`: A shell script for automated builds.
-- `docker-compose.yml` & `Dockerfile.react`: Support for containerized deployment.

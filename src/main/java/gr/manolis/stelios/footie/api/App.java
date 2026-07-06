@@ -22,6 +22,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan("gr.manolis.stelios.footie")
 public class App {
 
+	static {
+		String userHome = System.getProperty("user.home");
+		java.io.File logsDir = new java.io.File(userHome + "/footie/logs");
+		if (!logsDir.exists()) {
+			logsDir.mkdirs();
+		}
+		System.setProperty("derby.stream.error.file", userHome + "/footie/logs/derby.log");
+	}
+
 	@Value("${react-app.path}")
 	private String reactAppPath;
 
