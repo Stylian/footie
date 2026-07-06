@@ -2,8 +2,6 @@
 copy footie from COPY_TO_USER_FOLDER to user folder
 
 run ./gradlew build
-( this will create a test db in $USER_FOLDER.tests)
-
 run java -jar build/libs/footie-2.0.jar
 
 #for devs

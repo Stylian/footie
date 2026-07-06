@@ -1,6 +1,6 @@
 ---
 name: footie-expert
-description: Specialized expert for the Footie football management and simulation project. Use this skill for any tasks related to the Footie project, including backend development (Java 8, Spring Boot 1.5.1), frontend development (React), and domain-specific football simulation logic.
+description: Specialized expert for the Footie football management and simulation project. Use this skill for any tasks related to the Footie project, including backend development (Java 21, Spring Boot 3.4.0), frontend development (React), and domain-specific football simulation logic.
 ---
 
 # Footie Expert
@@ -16,7 +16,7 @@ This skill provides specialized assistance for the Footie project, a full-stack 
 ## Core Workflows
 
 ### Backend Development
-When modifying the backend, always ensure compatibility with **Java 8**. Use the layered architecture:
+When modifying the backend, always ensure compatibility with **Java 21**. Use the layered architecture:
 1.  Define/Update Entities in `core.peristence.dtos`.
 2.  Update/Create Services in `core.services` for business logic.
 3.  Expose functionality via Controllers in `api.controllers`.
@@ -36,5 +36,6 @@ Simulation logic is centralized in the `core.services` and `core.tools` packages
 ## Build & Test
 Always verify changes by running:
 - `./gradlew build` (Full integration check)
-- `./gradlew test` (Backend unit tests)
+- `./gradlew test` (Backend unit tests - clean, in-memory)
+- `./gradlew devTest` (Backend unit tests - runs on a persistent database at `~/footie/dev-test-data` without deleting it on shutdown)
 - `cd ui && npm test` (Frontend tests)

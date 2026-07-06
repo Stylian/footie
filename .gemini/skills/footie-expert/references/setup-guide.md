@@ -1,7 +1,7 @@
 # Footie Setup & Development Guide
 
 ## Prerequisites
-- **Java JDK 25**: The application is now upgraded to Java 25.
+- **Java JDK 21**: The application is now upgraded to Java 21.
 - **Gradle**: To build the backend and manage dependencies.
 - **Node.js (v20+) & npm**: To build and run the React UI.
 
@@ -34,5 +34,6 @@
   Accessible at `http://localhost:3000`.
 
 ## Testing
-- **Backend**: `./gradlew test`
+- **Backend (Default/In-memory)**: `./gradlew test`
+- **Backend (Dev Mode / Persistent DB)**: `./gradlew devTest` (Runs tests against a persistent database at `~/footie/dev-test-data` and leaves the data intact for inspection/debugging).
 - **Frontend**: `cd ui && npm test`

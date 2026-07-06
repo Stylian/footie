@@ -4,7 +4,7 @@ Footie is a comprehensive football (soccer) management application designed to s
 
 ## Architecture
 
-- **Backend:** Spring Boot (v3.4.0) application using Java 25. It employs a layered architecture:
+- **Backend:** Spring Boot (v3.4.0) application using Java 21. It employs a layered architecture:
     - **API Layer:** REST controllers (`gr.manolis.stelios.footie.api.controllers`) and DTOs.
     - **Core Logic:** Domain entities (`gr.manolis.stelios.footie.core.peristence.dtos`), services (`gr.manolis.stelios.footie.core.services`), and tools for simulation and ordering.
     - **Persistence:** Spring Data JPA with an embedded Apache Derby database.
@@ -14,7 +14,7 @@ Footie is a comprehensive football (soccer) management application designed to s
 ## Building and Running
 
 ### Prerequisites
-- Java 25 (JDK 25)
+- Java 21 (JDK 21)
 - Gradle
 - Node.js (v20.17.0) and npm (v10.8.2) - managed by Gradle but can be run independently.
 
