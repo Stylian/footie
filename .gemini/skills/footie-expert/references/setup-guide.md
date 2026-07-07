@@ -43,3 +43,20 @@ If requested by the user to verify a deployment:
 3. **Execute**: Start the standalone application by executing `footie.bat` (on Windows) or `footie.sh` (on Unix) from inside the scratch folder.
 4. **Test**: Query the backend views (e.g. `http://localhost:8080/rest/admin/general_data`) to ensure that the database (`data/`) initializes locally inside the directory, and that `teams.txt` is resolved and loaded successfully.
 5. **Clean Up**: Terminate the launched background process and delete the temporary `test_launcher` directory from the scratch workspace.
+
+## E2E Season Simulation & Coefficient Verification Procedure
+If requested by the user to simulate seasons and verify coefficients:
+1. **Start Backend**: Run the development backend using `.\gradlew bootRun` (or run the standalone launcher).
+2. **Simulate Seasons**: Programmatically run 2 complete seasons. For each season, simulate the stages sequentially:
+   - Create season: `POST /rest/ops/season/create`
+   - If season > 1, run Quals 0: `POST /rest/ops/quals/0/set` -> `GET /rest/ops/fill` -> `GET /rest/next_game`
+   - Run Quals 1: `POST /rest/ops/quals/1/set` -> `GET /rest/ops/fill` -> `GET /rest/next_game`
+   - Run Quals 2: `POST /rest/ops/quals/2/set` -> `GET /rest/ops/fill` -> `GET /rest/next_game`
+   - Run Groups 1: `POST /rest/ops/groups/1/set` -> `GET /rest/ops/fill` -> `GET /rest/next_game`
+   - Complete remaining rounds (Groups 2, Playoffs Quarters, Semis, Finals): Call `GET /rest/ops/fill` -> `GET /rest/next_game` exactly 4 more times.
+3. **Verify Coefficients**:
+   - Fetch the calculated coefficients list: `GET /rest/history/coefficients`
+   - Fetch the team stats history: `GET /rest/history/stats`
+   - For all teams, verify that the team's `coefficients` value from the coefficients list matches `stats.points` from the statistics history.
+4. **Clean Up**: Terminate the launched background process.
+
