@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 
 export default function Rules() {
     return (
-        <Paper  elevation={20}>
+        <Paper className="full-screen-paper" elevation={0}>
             <LeagueToolbar pageTitle={"Rules"}/>
             <Grid container>
 

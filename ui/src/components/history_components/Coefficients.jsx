@@ -45,7 +45,7 @@ export default function Coefficients() {
                                             <table className="table">
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                                        <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                                          <TableCell style={{width: '60%'}}>Team</TableCell>
                                                          <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                                     </TableRow>
@@ -78,7 +78,7 @@ export default function Coefficients() {
                                             <table className="table">
                                                <TableHead>
                                                    <TableRow>
-                                                       <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                                       <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                                         <TableCell style={{width: '60%'}}>Team</TableCell>
                                                         <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                                    </TableRow>

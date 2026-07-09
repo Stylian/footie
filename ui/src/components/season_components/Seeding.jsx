@@ -17,19 +17,21 @@ export default function Seeding({year}) {
         return (
             <Box>
                 <Card style={{margin: 20}}>
-                    <Typography
-                      variant="h5"
-                      align="center"
-                      sx={{
-                        fontWeight: 600,
-                        color: '#2c3e50',
-                        paddingBottom: 1,
-                        borderBottom: '2px solid #3498db',
-                        marginBottom: 2
-                      }}
-                    >
-                      Coefficients
-                    </Typography>
+                    <div style={{ textAlign: 'center', marginTop: 15 }}>
+                        <Typography
+                          variant="h5"
+                          style={{
+                            fontWeight: 600,
+                            color: '#2c3e50',
+                            paddingBottom: 5,
+                            borderBottom: '2px solid #3498db',
+                            marginBottom: 20,
+                            display: 'inline-block'
+                          }}
+                        >
+                          Coefficients
+                        </Typography>
+                    </div>
                     <Grid container>
                         <Grid item sm={10}>
                             <Grid container spacing={1}>
@@ -37,7 +39,7 @@ export default function Seeding({year}) {
                                     <table className="table" align={"center"}>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                                <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                                  <TableCell style={{width: '60%'}}>Team</TableCell>
                                                  <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                             </TableRow>
@@ -94,7 +96,7 @@ export default function Seeding({year}) {
                                     <table className="table" align={"center"}>
                                         <TableHead>
                                             <TableRow>
-                                               <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                               <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                                <TableCell style={{width: '60%'}}>Team</TableCell>
                                                <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                             </TableRow>

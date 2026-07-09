@@ -65,9 +65,9 @@ export default function Players() {
         return (<PageLoader />)
     } else {
         return (
-            <Paper style={{margin: 20}} elevation={20}>
+            <Paper className="full-screen-paper" elevation={0}>
                 <LeagueToolbar pageTitle={"Players"}/>
-                <Box width={1200}>
+                <Box>
                     <Grid container spacing={1}>
                         <Grid item sm={7}>
                             <Card style={{margin: 20}}>

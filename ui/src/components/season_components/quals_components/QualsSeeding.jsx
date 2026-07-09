@@ -40,15 +40,15 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                 {haveToSetUpTeams ? (
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
-                <Grid container spacing={1}>
-                    <Grid item sm={6}>
-                        <Card style={{margin: 20}}>
+                <Grid container spacing={1} justify="center" justifyContent="center">
+                    <Grid item sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{margin: 20, width: 'fit-content', minWidth: 320}}>
                             <CardHeader title={"Seeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                             <CardContent>
                                 <table className="table" align={"center"}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                            <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                             <TableCell style={{width: '60%'}}>Team</TableCell>
                                             <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                         </TableRow>
@@ -71,15 +71,15 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={6}>
-                        <Card style={{margin: 20}}>
+                    <Grid item sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{margin: 20, width: 'fit-content', minWidth: 320}}>
                             <CardHeader title={"Unseeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell style={{width: '15%'}}>Pos</TableCell>
+                                            <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                             <TableCell style={{width: '60%'}}>Team</TableCell>
                                             <TableCell style={{width: '25%'}}>Coefficients</TableCell>
                                         </TableRow>

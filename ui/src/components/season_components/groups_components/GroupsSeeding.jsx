@@ -30,16 +30,16 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                 {haveToSetUpTeams ? (
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
-                <Grid container spacing={1}>
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
+                <Grid container spacing={1} justify="center" justifyContent="center">
+                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
                             <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Pos</TableCell>
+                                            <TableCell align="right">Pos</TableCell>
                                             <TableCell>Team</TableCell>
                                             <TableCell>Coefficients</TableCell>
                                         </TableRow>
@@ -61,15 +61,15 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
+                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
                             <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Pos</TableCell>
+                                            <TableCell align="right">Pos</TableCell>
                                             <TableCell>Team</TableCell>
                                             <TableCell>Coefficients</TableCell>
                                         </TableRow>
@@ -92,15 +92,15 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={4}>
-                        <Card style={{margin: 20}}>
+                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
                             <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
                                 <table className="table" align={"center"}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Pos</TableCell>
+                                            <TableCell align="right">Pos</TableCell>
                                             <TableCell>Team</TableCell>
                                             <TableCell>Coefficients</TableCell>
                                         </TableRow>

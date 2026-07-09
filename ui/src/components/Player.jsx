@@ -18,10 +18,10 @@ export default function Player() {
     } else {
         return (
             <Box>
-                <Paper style={{margin: 20}} elevation={20}>
+                <Paper className="full-screen-paper" elevation={0}>
                     <LeagueToolbar pageTitle={player.name}/>
 
-                    <Box width={1700} style={{margin: 20}}>
+                    <Box style={{margin: 20}}>
                         <Grid container spacing={1}>
                             <Grid item sm={4}>
                                 <Card style={{margin: 20}}>

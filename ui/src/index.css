@@ -29,6 +29,12 @@ code {
 .MuiCardHeader-root {
   color: #fff !important;
   background-color: #1f6d93 !important;
+  padding: 6px 12px !important;
+}
+
+.MuiCardHeader-title {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
 }
 
 .MuiTableCell-root {
@@ -124,4 +130,20 @@ code {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+html, body, #root {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+.full-screen-paper {
+  margin: 0 !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }

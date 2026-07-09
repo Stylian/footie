@@ -104,7 +104,7 @@ export default function Admin() {
     }
 
     return (
-        <Paper style={{margin: 20}} elevation={20}>
+        <Paper className="full-screen-paper" elevation={0}>
             <LeagueToolbar pageTitle={pageTitle}/>
             <Box>
                 <Grid container spacing={1}>

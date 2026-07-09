@@ -17,14 +17,18 @@ export default function Season() {
 
     const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
     const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
+    const nextGameData = useDataLoader("/rest/next_game")
 
     if (stages === null) {
         return (<PageLoader />)
     } else {
+        const hasNextGame = nextGameData && nextGameData.game && nextGameData.game.id !== 0;
+        const leftColWidth = hasNextGame ? 9 : 12;
+
         return (
-            <Paper style={{margin: 10}} elevation={20}>
+            <Paper className="full-screen-paper" elevation={0}>
                 <Grid container spacing={1}>
-                    <Grid item xs={9}>
+                    <Grid item xs={leftColWidth}>
                         <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum}/>
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
@@ -49,9 +53,11 @@ export default function Season() {
                             {tabActive === 7 && <SeasonPostview year={seasonNum}/>}
                         </Box>
                     </Grid>
-                    <Grid item xs={3}>
-                        <NextGame/>
-                    </Grid>
+                    {hasNextGame && (
+                        <Grid item xs={3}>
+                            <NextGame/>
+                        </Grid>
+                    )}
                 </Grid>
             </Paper>
         )

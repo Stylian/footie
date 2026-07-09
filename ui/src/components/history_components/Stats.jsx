@@ -33,7 +33,7 @@ export default function Stats() {
         return (<PageLoader />)
     } else {
         return (
-            <Paper style={{margin: 10}} elevation={20}>
+            <Paper className="full-screen-paper" elevation={0}>
                 <LeagueToolbar pageTitle={"Teams' Stats"}/>
                 <Box style={{ margin: '20px', display: 'flex', justifyContent: 'center' }}>
                     <Grid container spacing={1}>

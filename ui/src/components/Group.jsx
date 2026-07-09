@@ -28,7 +28,7 @@ export default function Group() {
         return (<PageLoader />)
     } else {
         return (
-            <Paper style={{margin: 20}} elevation={20}>
+            <Paper className="full-screen-paper" elevation={0}>
                 <LeagueToolbar pageTitle={"Season " + group.seasonNum + " - " + group.name}/>
 
                 <Box style={{margin: 20}}>
