@@ -29,11 +29,11 @@ export default function Season() {
                         <Box style={{margin: 10}}>
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">
-                                    <Tab  label="Seeding"/>
+                                    <Tab label="Seeding"/>
                                     <Tab disabled={seasonNum == 1} label="Preliminary round"/>
-                                    <Tab label="Qualifying round"/>
-                                    <Tab label="Play-off round"/>
-                                    <Tab label="1st Group stage"/>
+                                    <Tab disabled={stages.quals1 === "NOT_STARTED"} label="Qualifying round"/>
+                                    <Tab disabled={stages.quals2 === "NOT_STARTED"} label="Play-off round"/>
+                                    <Tab disabled={stages.groups1 === "NOT_STARTED"} label="1st Group stage"/>
                                     <Tab disabled={(stages.groups2 === "NOT_STARTED")} label="2nd Group stage"/>
                                     <Tab disabled={(stages.playoffs === "NOT_STARTED")} label="Knockout phase"/>
                                     <Tab disabled={(stages.playoffs !== "FINISHED")} label="Overview"/>
