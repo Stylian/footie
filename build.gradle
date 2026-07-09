@@ -64,4 +64,11 @@ processResources {
 test {
     useJUnitPlatform()
     systemProperty "teams.file.path", "Launcher/teams.txt"
+    systemProperty "logging.file.name", ".apprun/logs/app.test.log"
+    systemProperty "derby.stream.error.file", ".apprun/logs/derby.test.log"
+}
+
+bootRun {
+    systemProperty "logging.file.name", ".apprun/logs/app.dev.log"
+    systemProperty "derby.stream.error.file", ".apprun/logs/derby.dev.log"
 }

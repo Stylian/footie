@@ -37,7 +37,20 @@ public class App {
 				if (!logsDir.exists()) {
 					logsDir.mkdirs();
 				}
-				System.setProperty("derby.stream.error.file", ".apprun/logs/derby.log");
+				boolean isTest = System.getProperty("teams.file.path") != null;
+				if (!isTest) {
+					for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+						if (element.getClassName().startsWith("org.junit.") || element.getClassName().startsWith("org.gradle.api.internal.tasks.testing.")) {
+							isTest = true;
+							break;
+						}
+					}
+				}
+				String logFilename = isTest ? "derby.test.log" : "derby.dev.log";
+				System.setProperty("derby.stream.error.file", ".apprun/logs/" + logFilename);
+
+				String appLogFilename = isTest ? "app.test.log" : "app.dev.log";
+				System.setProperty("logging.file.name", ".apprun/logs/" + appLogFilename);
 			}
 			if (System.getProperty("spring.datasource.url") == null) {
 				System.setProperty("spring.datasource.url", "jdbc:derby:.apprun/data;create=true");
@@ -49,6 +62,9 @@ public class App {
 					logsDir.mkdirs();
 				}
 				System.setProperty("derby.stream.error.file", "logs/derby.log");
+			}
+			if (System.getProperty("logging.file.name") == null) {
+				System.setProperty("logging.file.name", "logs/app.log");
 			}
 		}
 	}
