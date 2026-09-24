@@ -31,12 +31,12 @@ return (
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                        <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
+                        <CardHeader title={"Pot 1"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table" align={"center"}>
-                                <TableHead>
+                                <TableHead className="match-table-head">
                                     <TableRow>
                                         <TableCell align="right">Pos</TableCell>
                                         <TableCell>Team</TableCell>
@@ -59,12 +59,12 @@ return (
                         </CardContent>
                     </Card>
 
-                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                        <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
+                        <CardHeader title={"Pot 2"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table" align={"center"}>
-                                <TableHead>
+                                <TableHead className="match-table-head">
                                     <TableRow>
                                         <TableCell align="right">Pos</TableCell>
                                         <TableCell>Team</TableCell>
@@ -88,12 +88,12 @@ return (
                         </CardContent>
                     </Card>
 
-                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                        <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
+                        <CardHeader title={"Pot 3"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table" align={"center"}>
-                                <TableHead>
+                                <TableHead className="match-table-head">
                                     <TableRow>
                                         <TableCell align="right">Pos</TableCell>
                                         <TableCell>Team</TableCell>
@@ -121,3 +121,4 @@ return (
 )
     }
 }
+

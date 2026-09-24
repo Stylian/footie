@@ -32,6 +32,30 @@ code {
   padding: 6px 12px !important;
 }
 
+.match-card-header.MuiCardHeader-root {
+  color: #1f6d93 !important;
+  background-color: transparent !important;
+  border-bottom: 2px solid #1f6d93 !important;
+}
+
+.match-table-head .MuiTableCell-head {
+  color: #1f6d93 !important;
+  background-color: transparent !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+}
+
+.section-title {
+  color: #1f6d93 !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  border-bottom: 2px solid #1f6d93 !important;
+  padding: 6px 12px !important;
+  text-transform: none !important;
+}
+
 .MuiCardHeader-title {
   font-size: 0.95rem !important;
   font-weight: 600 !important;

@@ -1,4 +1,4 @@
-import {Box, Card, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core"
+import {Box, Card, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import Numeral from "numeral"
@@ -16,27 +16,14 @@ export default function Seeding({year}) {
         let rightSide = teams.slice(half_length)
         return (
             <Box>
-                <Card style={{margin: 20}}>
-                    <div style={{ textAlign: 'center', marginTop: 15 }}>
-                        <Typography
-                          variant="h5"
-                          style={{
-                            fontWeight: 600,
-                            color: '#2c3e50',
-                            paddingBottom: 5,
-                            borderBottom: '2px solid #3498db',
-                            marginBottom: 20,
-                            display: 'inline-block'
-                          }}
-                        >
-                          Coefficients
-                        </Typography>
-                    </div>
+                <Card style={{margin: 20, boxShadow: 'none'}} elevation={0}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 'max-content', marginTop: 10 }}>
+                            <div className="section-title" style={{alignSelf: 'stretch'}}>Coefficients</div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <div style={{ margin: 10 }}>
                                 <table className="table" align={"left"}>
-                                    <TableHead>
+                                    <TableHead className="match-table-head">
                                         <TableRow>
                                             <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                              <TableCell style={{width: '60%'}}>Team</TableCell>
@@ -93,7 +80,7 @@ export default function Seeding({year}) {
 
                             <div style={{ margin: 10 }}>
                                 <table className="table" align={"left"}>
-                                    <TableHead>
+                                    <TableHead className="match-table-head">
                                         <TableRow>
                                            <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                            <TableCell style={{width: '60%'}}>Team</TableCell>
@@ -144,16 +131,18 @@ export default function Seeding({year}) {
                                                        </TableCell>
                                                 </TableRow>)
                                         })}
-                                    </TableBody>
-                                </table>
-                            </div>
+</TableBody>
+                                 </table>
+                             </div>
+                         </div>
                         </div>
 
-                        <div style={{ margin: 10 }}>
-                            <table className="table" align={"left"}>
-                                <TableHead>
+<div style={{ margin: 10, width: 'fit-content' }}>
+                            <div className="section-title" style={{alignSelf: 'stretch'}}>Seeding</div>
+                            <table className="table" align={"left"} style={{marginTop: 10}}>
+                                <TableHead className="match-table-head">
                                     <TableRow>
-                                        <TableCell>Seeding</TableCell>
+                                        <TableCell>Phases</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

@@ -80,6 +80,7 @@ The UI will run at `http://localhost:3000`.
 - **RESTful API:** All backend interactions should follow REST principles.
 - **Mapping:** MapStruct is used for entity-to-DTO mapping (`gr.manolis.stelios.footie.api.mappers`).
 - **Styling:** The UI uses CSS and Bootstrap (via webjars in the backend, and likely standard imports in the frontend).
+- **Header naming:** Table column headers (e.g. Pos, Team, Coefficients) = **small headers**. Section/card titles (e.g. Seeded, Unseeded, Coefficients, Seeding, Pot 1) = **large headers**. Small headers use smaller underlined text; large headers are the section bars.
 - **Testing:**
   - Backend: JUnit and Mockito (`src/test`).
   - Frontend: Jest and React Testing Library (`ui/src/App.test.js`).

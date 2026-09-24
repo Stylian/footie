@@ -183,10 +183,11 @@ export default function Playoffs({year}) {
                         <Slider {...settings}>
                           {/* ¼ Finals */}
                           <div>
-                            <Card style={{ margin: 20 }}>
+                            <Card style={{ margin: 20, boxShadow: 'none' }} elevation={0}>
                               <CardHeader
                                 title={"¼ Finals"}
                                 align={"center"}
+                                className="match-card-header"
                                 titleTypographyProps={{ variant: "h7" }}
                               />
                               <CardContent>
@@ -246,10 +247,11 @@ export default function Playoffs({year}) {
                           {/* ½ Finals */}
                           {games.semis.length > 0 && (
                             <div>
-                              <Card style={{ margin: 20 }}>
+                              <Card style={{ margin: 20, boxShadow: 'none' }} elevation={0}>
                                 <CardHeader
                                   title={"½ Finals"}
                                   align={"center"}
+                                  className="match-card-header"
                                   titleTypographyProps={{ variant: "h7" }}
                                 />
                                 <CardContent>
@@ -313,10 +315,11 @@ export default function Playoffs({year}) {
                           {/* Finals */}
                           {games.finals.length > 0 && (
                             <div>
-                              <Card style={{ margin: 20 }}>
+                              <Card style={{ margin: 20, boxShadow: 'none' }} elevation={0}>
                                 <CardHeader
                                   title={"Finals"}
                                   align={"center"}
+                                  className="match-card-header"
                                   titleTypographyProps={{ variant: "h7" }}
                                 />
                                 <CardContent>

@@ -15,9 +15,10 @@ export default function QualsMatches({year, round}) {
                     {Object.keys(days).map((day, index) => {
                         return (
                             <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                                    <CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
-                                                titleTypographyProps={{variant: 'h7'}}
+                                <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
+<CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
+                                            className="match-card-header"
+                                            titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>
                                         <table className="table" align={"center"}>

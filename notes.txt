@@ -1,4 +1,4 @@
-1. on matches the boxes have borders, i dont want that
+1. apply that new headers style everywhere, like groups
 
 2. the group boxes , i want them smaller to the size of their interior beautiful tables
 

@@ -39,11 +39,11 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Card style={{margin: 20, width: 'fit-content', minWidth: 320}}>
-                        <CardHeader title={"Seeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 320, boxShadow: 'none'}} elevation={0}>
+                        <CardHeader title={"Seeded"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}/>
                         <CardContent>
                             <table className="table" align={"center"}>
-                                <TableHead>
+                                <TableHead className="match-table-head">
                                     <TableRow>
                                         <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                         <TableCell style={{width: '60%'}}>Team</TableCell>
@@ -67,12 +67,12 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                         </CardContent>
                     </Card>
 
-                    <Card style={{margin: 20, width: 'fit-content', minWidth: 320}}>
-                        <CardHeader title={"Unseeded"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 320, boxShadow: 'none'}} elevation={0}>
+                        <CardHeader title={"Unseeded"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table" align={"center"}>
-                                <TableHead>
+                                <TableHead className="match-table-head">
                                     <TableRow>
                                         <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
                                         <TableCell style={{width: '60%'}}>Team</TableCell>
@@ -101,3 +101,5 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
         )
     }
 }
+
+
