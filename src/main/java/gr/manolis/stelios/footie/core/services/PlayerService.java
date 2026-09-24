@@ -32,6 +32,25 @@ public class PlayerService {
         dao.save(player);
     }
 
+    public void updatePlayer(Player player) {
+        logger.info("updating player : " + player.getName());
+
+        DataAccessObject<Player> dao = new DataAccessObject<>(em.unwrap(Session.class));
+        dao.update(player);
+    }
+
+    public void deletePlayer(Player player) {
+        logger.info("deleting player : " + player.getName());
+
+        Session session = em.unwrap(Session.class);
+        session.createQuery("delete from TROPHIES where player.id = :playerId")
+                .setParameter("playerId", player.getId())
+                .executeUpdate();
+        session.createQuery("delete from PLAYERS where id = :playerId")
+                .setParameter("playerId", player.getId())
+                .executeUpdate();
+    }
+
 
     public List<Player> getAllPlayers() {
         DataAccessObject<Player> dao = new DataAccessObject<>(em.unwrap(Session.class));

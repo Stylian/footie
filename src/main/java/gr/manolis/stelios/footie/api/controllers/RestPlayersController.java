@@ -61,11 +61,51 @@ public class RestPlayersController {
     public RestResponse addPlayer(@RequestParam(name = "player_name", required = false) String playerName,
                                   @RequestParam(name = "team_id", required = false) int teamId ) {
 
+        if (playerName == null || playerName.trim().isEmpty()) {
+            return new RestResponse(RestResponse.ERROR, "player name cannot be empty");
+        }
+
         Team team = serviceUtils.loadTeam(teamId);
-        Player player = new Player(playerName, team);
+        Player player = new Player(playerName.trim(), team);
         playerService.addPlayer(player);
 
         return new RestResponse(RestResponse.SUCCESS, "player added ");
+    }
+
+    @ResponseBody
+    @PutMapping("/{player_id}")
+    public RestResponse updatePlayer(@PathVariable("player_id") String strPlayerId,
+                                    @RequestParam(name = "player_name", required = false) String playerName,
+                                    @RequestParam(name = "team_id", required = false) Integer teamId) {
+
+        int playerId = Integer.parseInt(strPlayerId);
+        Player player = serviceUtils.loadPlayer(playerId);
+
+        if (playerName != null) {
+            String trimmedName = playerName.trim();
+            if (!trimmedName.isEmpty()) {
+                player.setName(trimmedName);
+            }
+        }
+
+        if (teamId != null && teamId > 0) {
+            Team team = serviceUtils.loadTeam(teamId);
+            player.setTeam(team);
+        }
+
+        playerService.updatePlayer(player);
+
+        return new RestResponse(RestResponse.SUCCESS, "player updated");
+    }
+
+    @ResponseBody
+    @DeleteMapping("/{player_id}")
+    public RestResponse deletePlayer(@PathVariable("player_id") String strPlayerId) {
+        int playerId = Integer.parseInt(strPlayerId);
+        Player player = serviceUtils.loadPlayer(playerId);
+        playerService.deletePlayer(player);
+
+        return new RestResponse(RestResponse.SUCCESS, "player deleted");
     }
 
 }

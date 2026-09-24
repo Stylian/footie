@@ -166,7 +166,6 @@ When modifying the backend, ensure compatibility with **Java 21**. Use the layer
 ## Testing
 
 - **Backend**: `./gradlew test`
-- **Frontend**: `cd ui && npm test`
 
 ## Stand-alone Deployment Verification Procedure
 1. **Build**: Run `./build.sh` (using Git Bash on Windows)

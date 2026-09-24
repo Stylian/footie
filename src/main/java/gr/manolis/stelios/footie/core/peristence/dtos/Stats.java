@@ -74,6 +74,9 @@ public class Stats {
 	}
 
 	public void addStats(Stats stats) {
+		if (stats == null) {
+			return;
+		}
 
 		addPoints(stats.getPoints());
 		addWins(stats.getWins());

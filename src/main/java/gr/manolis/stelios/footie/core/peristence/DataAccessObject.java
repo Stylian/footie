@@ -62,6 +62,16 @@ public class DataAccessObject<T> {
 
 	}
 
+	public void update(T t) {
+
+		try {
+			session.merge(t);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void delete(T t) {
 
 		try {

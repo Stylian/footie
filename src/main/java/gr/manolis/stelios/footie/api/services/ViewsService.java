@@ -104,7 +104,12 @@ public class ViewsService {
 
 		for (Team team : teams) {
 			Stats completeStats = new Stats();
-			seasonsPast.forEach( (s) -> completeStats.addStats(s.getTeamsStats().get(team)));
+			seasonsPast.forEach((s) -> {
+				Map<Team, Stats> teamsStats = s.getTeamsStats();
+				if (teamsStats != null) {
+					completeStats.addStats(teamsStats.get(team));
+				}
+			});
 
 			int elo = team.getStatsForGroup(current).getElo();
 			completeStats.setElo(elo);
