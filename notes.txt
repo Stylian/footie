@@ -1,9 +1,12 @@
+1. on matches the boxes have borders, i dont want that
 
+2. the group boxes , i want them smaller to the size of their interior beautiful tables
 
+3. the wiinning odds box is also big, i want it just enough
 
+4. i want another idea instead of the carousel at the knockouts
 
-TODO
-make players editable
+5. on the final overview i want to be able to edit what i set, overachievers, players etc
+so, replace the publish button with local edit buttsons
 
-stats page broken- on adding teams?
-
+6. rework admin page later
