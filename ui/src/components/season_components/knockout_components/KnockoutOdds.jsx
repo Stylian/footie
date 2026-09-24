@@ -33,7 +33,7 @@ export default function KnockoutOdds({year}) {
                                                 {team.name}</TableCell>
                                             <TableCell
                                                 align={"right"}>{Numeral(team.chances * 100).format('0') + "%"}</TableCell>
-                                            <TableCell align={"right"}>{team.odds}</TableCell>
+                                            <TableCell align={"right"}>{Numeral(team.odds).format('0.00')}</TableCell>
                                         </TableRow>
                                     )
                                 })}
