@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import {Box, Card, CardContent, CardHeader, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
@@ -25,106 +25,99 @@ export default function GroupsSeeding({year, round, haveToSetUpTeams}) {
         const teamsStrong = data["STRONG"]
         const teamsMedium = data["MEDIUM"]
         const teamsWeak = data["WEAK"]
-        return (
+return (
             <Box>
                 {haveToSetUpTeams ? (
                     <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
                 ) : ''}
-                <Grid container spacing={1} justify="center" justifyContent="center">
-                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                            <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="right">Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {teamsStrong.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={goToTeam}>
-                                                    <TableCell align="right">{index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell
-                                                        align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
+                        <CardHeader title={"Pot 1"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent>
+                            <table className="table" align={"center"}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="right">Pos</TableCell>
+                                        <TableCell>Team</TableCell>
+                                        <TableCell>Coefficients</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {teamsStrong.map((team, index) => {
+                                        return (
+                                            <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                      onClick={goToTeam}>
+                                                <TableCell align="right">{index + 1}</TableCell>
+                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell
+                                                    align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
+                                            </TableRow>)
+                                    })}
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
 
-                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                            <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="right">Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {teamsMedium.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={goToTeam}>
-                                                    <TableCell
-                                                        align="right">{teamsStrong.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell
-                                                        align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
+                        <CardHeader title={"Pot 2"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent>
+                            <table className="table" align={"center"}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="right">Pos</TableCell>
+                                        <TableCell>Team</TableCell>
+                                        <TableCell>Coefficients</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {teamsMedium.map((team, index) => {
+                                        return (
+                                            <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                      onClick={goToTeam}>
+                                                <TableCell
+                                                    align="right">{teamsStrong.length + index + 1}</TableCell>
+                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell
+                                                    align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
+                                            </TableRow>)
+                                    })}
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
 
-                    <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
-                            <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
-                            />
-                            <CardContent>
-                                <table className="table" align={"center"}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="right">Pos</TableCell>
-                                            <TableCell>Team</TableCell>
-                                            <TableCell>Coefficients</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {teamsWeak.map((team, index) => {
-                                            return (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={goToTeam}>
-                                                    <TableCell
-                                                        align="right">{teamsStrong.length + teamsMedium.length + index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell
-                                                        align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
-                                                </TableRow>)
-                                        })}
-                                    </TableBody>
-                                </table>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                </Grid>
+                    <Card style={{margin: 20, width: 'fit-content', minWidth: 280}}>
+                        <CardHeader title={"Pot 3"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent>
+                            <table className="table" align={"center"}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="right">Pos</TableCell>
+                                        <TableCell>Team</TableCell>
+                                        <TableCell>Coefficients</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {teamsWeak.map((team, index) => {
+                                        return (
+                                            <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                      onClick={goToTeam}>
+                                                <TableCell
+                                                    align="right">{teamsStrong.length + teamsMedium.length + index + 1}</TableCell>
+                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell
+                                                    align="right">{Numeral(team.coefficients / 1000).format('0.000')}</TableCell>
+                                            </TableRow>)
+                                    })}
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
+                </div>
             </Box>
-        )
+)
     }
 }
