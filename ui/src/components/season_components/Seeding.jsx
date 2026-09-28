@@ -15,7 +15,7 @@ export default function Seeding({year}) {
         let columns = [0, 1, 2, 3].map(index => teams.slice(index * quarter_length, (index + 1) * quarter_length))
         return (
             <Box>
-                <Card style={{margin: 20, boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
+                <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 'max-content' }}>
                             <div className="big_header" style={{alignSelf: 'stretch'}}>Coefficients</div>

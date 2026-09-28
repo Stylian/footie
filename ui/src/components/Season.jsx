@@ -30,7 +30,7 @@ export default function Season() {
                 <Grid container spacing={1}>
                     <Grid item xs={leftColWidth}>
                         <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum}/>
-                        <Box style={{margin: 10}}>
+                        <Box className="page_box">
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">
                                     <Tab label="Seeding"/>

@@ -137,6 +137,10 @@ table {
   font-weight: bold !important;
 }
 
+.page_box {
+  margin: 10px !important;
+}
+
 .reorder_tab {
   cursor: pointer;
 }

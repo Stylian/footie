@@ -11,8 +11,8 @@ export default function KnockoutOdds({year}) {
         return (<PageLoader />)
     } else {
         return (
-            <Box style={{margin: 10, "margin-top": 10}}>
-                <Card style={{margin: 20}}>
+            <Box className="page_box">
+                <Card className="page_box" style={{width: 'fit-content'}}>
                     <CardHeader className="big_header" title={"winning odds"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                     <CardContent style={{padding: 0}}>
                         <table className="table tree_table" align={"center"}>
@@ -27,7 +27,7 @@ export default function KnockoutOdds({year}) {
                                 {teams.map((team) => {
                                     return (
                                         <TableRow>
-                                            <TableCell className={"teamClicker team_name"} align="center"
+                                            <TableCell className={"teamClicker team_name"} align="left"
                                                        data-teamid={team.id}
                                                        onClick={goToTeam}>
                                                 {team.name}</TableCell>

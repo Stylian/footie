@@ -14,7 +14,7 @@ export default function QualsMatches({year, round}) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     {Object.keys(days).map((day, index) => {
                         return (
-                            <div style={{ margin: 10 }}>
+                            <div className="page_box">
                                 <Card style={{width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
                                     <CardHeader className="big_header"
                                                 title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}

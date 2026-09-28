@@ -7,7 +7,7 @@ export default function Knockouts({year}) {
     const {tabActive, handleChangeTab} = useTab(year, "knockouts")
 
     return (
-        <Box style={{margin: 10, marginTop: 10}}>
+        <Box className="page_box">
               {/* avoid color="primary" so the global .MuiAppBar-colorPrimary rule won't apply */}
               <AppBar position="static" color="default" elevation={0} style={{ background: "transparent", boxShadow: "none" }}>
                 <Tabs
