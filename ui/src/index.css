@@ -27,8 +27,9 @@ code {
 }
 
 .MuiCardHeader-root {
-  color: #fff !important;
-  background-color: #1f6d93 !important;
+  color: #1f6d93 !important;
+  background-color: transparent !important;
+  border-bottom: 2px solid #1f6d93 !important;
   padding: 6px 12px !important;
 }
 
@@ -40,7 +41,7 @@ code {
 
 .match-table-head .MuiTableCell-head {
   color: #1f6d93 !important;
-  background-color: transparent !important;
+  background-color: #dbe9f1 !important;
   text-decoration: underline !important;
   font-weight: 600 !important;
   font-size: 0.8rem !important;
@@ -59,6 +60,10 @@ code {
 .MuiCardHeader-title {
   font-size: 0.95rem !important;
   font-weight: 600 !important;
+}
+
+table {
+  border-collapse: collapse !important;
 }
 
 .MuiTableCell-root {

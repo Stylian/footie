@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import {Box, Card, CardContent, CardHeader, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
 import PageLoader from "../../../PageLoader";
 
@@ -11,18 +11,18 @@ export default function QualsMatches({year, round}) {
     } else {
         return (
             <Box>
-                <Grid container spacing={1} justify="center" justifyContent="center">
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     {Object.keys(days).map((day, index) => {
                         return (
-                            <Grid item sm={4} style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
+                            <div style={{ margin: 10 }}>
+                                <Card style={{width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
 <CardHeader title={day > 0 ? "Main Matches" : "Match Replays"} align={"center"}
                                             className="match-card-header"
                                             titleTypographyProps={{variant: 'h7'}}
                                     />
                                     <CardContent>
                                         <table className="table" align={"center"}>
-                                            <TableHead>
+                                            <TableHead className="match-table-head">
                                                 <TableRow>
                                                     <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
                                                     <TableCell style={{width: '10%'}}>score</TableCell>
@@ -59,10 +59,10 @@ export default function QualsMatches({year, round}) {
                                         </table>
                                     </CardContent>
                                 </Card>
-                            </Grid>
+                            </div>
                         )
                     })}
-                </Grid>
+                </div>
             </Box>
         )
     }
