@@ -34,7 +34,7 @@ export default function Playoffs({year}) {
             <Box>
                 <Grid container spacing={1}>
                     <Grid item sm={8}>
-                        <Card className="page_box">
+                        <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                             <CardHeader className="big_header" title={"tree view"} align={"center"} titleTypographyProps={{variant: 'h7'}} />
                             <CardContent style={{padding: 0}}>
                                 <table className="table tree_table" align={"center"}>
@@ -183,7 +183,7 @@ export default function Playoffs({year}) {
                         <Slider {...settings}>
                           {/* Â¼ Finals */}
                           <div>
-                            <Card className="page_box" style={{ boxShadow: 'none' }} elevation={0}>
+                            <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                               <CardHeader
                                 title={"Â¼ Finals"}
                                 align={"center"}
@@ -246,7 +246,7 @@ export default function Playoffs({year}) {
                           {/* Â½ Finals */}
                           {games.semis.length > 0 && (
                             <div>
-                              <Card className="page_box" style={{ boxShadow: 'none' }} elevation={0}>
+                              <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                                 <CardHeader
                                   title={"Â½ Finals"}
                                   align={"center"}
@@ -312,7 +312,7 @@ export default function Playoffs({year}) {
                           {/* Finals */}
                           {games.finals.length > 0 && (
                             <div>
-                              <Card className="page_box" style={{ boxShadow: 'none' }} elevation={0}>
+                              <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                                 <CardHeader
                                   title={"Finals"}
                                   align={"center"}

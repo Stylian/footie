@@ -91,7 +91,7 @@ export default function SeasonPostview({year}) {
                 {seasonData.haveToPublish ? (<Button onClick={handlePublish}>Publish</Button>) : ''}
                 <Grid container spacing={1}>
                     <Grid item sm={7}>
-                        <Card style={{margin: 20}}>
+                        <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                             <CardHeader className="big_header" title={"Team Awards"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                             <CardContent>
                                 <Grid container spacing={1}>
@@ -365,7 +365,7 @@ export default function SeasonPostview({year}) {
                         </Card>
                     </Grid>
                     <Grid item sm={5}>
-                        <Card style={{margin: 20}}>
+                        <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
                             <CardHeader className="big_header" title={"Player Awards"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
