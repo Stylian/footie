@@ -79,13 +79,13 @@ export default function NextGame() {
                         </TableRow>
                         <TableRow>
                             <TableCell align="right"
-                                       className={"teamClicker"}
+                                       className={"teamClicker team_name"}
                                        data-teamid={data.game.homeTeam.id}
                                        onClick={goToTeam}>
                                 {data.game.homeTeam.name}</TableCell>
                             <TableCell></TableCell>
                             <TableCell align="left"
-                                       className={"teamClicker"}
+                                       className={"teamClicker team_name"}
                                        data-teamid={data.game.awayTeam.id}
                                        onClick={goToTeam}>
                                 {data.game.awayTeam.name}</TableCell>
@@ -361,7 +361,7 @@ export default function NextGame() {
                                                         >{game.result.goalsMadeByHomeTeam + " - "
                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                         <TableCell align="left"
-                                                                   className={"teamClicker"}
+                                                                   className={"teamClicker team_name"}
                                                                    data-teamid={game.awayTeam.id}
                                                                    onClick={goToTeam}>
                                                             {game.awayTeam.name}</TableCell>
@@ -385,7 +385,7 @@ export default function NextGame() {
                                                         >{game.result.goalsMadeByAwayTeam + " - "
                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                         <TableCell align="left"
-                                                                   className={"teamClicker"}
+                                                                   className={"teamClicker team_name"}
                                                                    data-teamid={game.homeTeam.id}
                                                                    onClick={goToTeam}>
                                                             {game.homeTeam.name}</TableCell>

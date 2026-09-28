@@ -56,7 +56,7 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                                             <TableRow className={"teamClicker"} data-teamid={team.id}
                                                       onClick={goToTeam}>
                                                 <TableCell align="right">{index + 1}</TableCell>
-                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell className="team_name">{team.name}</TableCell>
                                                 <TableCell
                                                     align="right">{Numeral(team.coefficients
                                                     / 1000).format('0.000')}</TableCell>
@@ -86,7 +86,7 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                                                       onClick={goToTeam}>
                                                 <TableCell
                                                     align="right">{teamsStrong.length + index + 1}</TableCell>
-                                                <TableCell>{team.name}</TableCell>
+                                                <TableCell className="team_name">{team.name}</TableCell>
                                                 <TableCell
                                                     align="right">{Numeral(team.coefficients
                                                     / 1000).format('0.000')}</TableCell>

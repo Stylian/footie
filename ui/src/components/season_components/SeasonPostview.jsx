@@ -109,7 +109,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.winner.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(179, 184, 255)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 <img src={goldmedal} title={"1st place"}/>
                                                                 {seasonData.winner.name}
                                                             </TableCell>
@@ -129,7 +129,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.runner_up.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(226, 228, 255)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 <img src={silvermedal} title={"2nd place"}/>
                                                                 {seasonData.runner_up.name}
                                                             </TableCell>
@@ -149,7 +149,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.semifinalist1.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 {seasonData.semifinalist1.name}
                                                             </TableCell>
                                                         </TableRow>
@@ -157,7 +157,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.semifinalist2.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 {seasonData.semifinalist2.name}
                                                             </TableCell>
                                                         </TableRow>
@@ -176,7 +176,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.quarterfinalist1.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(252, 248, 227)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 {seasonData.quarterfinalist1.name}
                                                             </TableCell>
                                                         </TableRow>
@@ -184,7 +184,7 @@ export default function SeasonPostview({year}) {
                                                                   data-teamid={seasonData.quarterfinalist2.id}
                                                                   onClick={goToTeam}
                                                                   style={{backgroundColor: 'rgb(252, 248, 227)'}}>
-                                                            <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                            <TableCell className="team_name">
                                                                 {seasonData.quarterfinalist2.name}
                                                             </TableCell>
                                                         </TableRow>
@@ -207,8 +207,7 @@ export default function SeasonPostview({year}) {
                                                         <TableRow
                                                             style={{backgroundColor: '#e6ffe6'}}>
                                                             <TableCell align="right"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.highestScoringGame.homeTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.highestScoringGame.homeTeam.name}</TableCell>
@@ -216,8 +215,7 @@ export default function SeasonPostview({year}) {
                                                                 {seasonData.highestScoringGame.result.goalsMadeByHomeTeam + " - "
                                                                     + seasonData.highestScoringGame.result.goalsMadeByAwayTeam}  </TableCell>
                                                             <TableCell align="left"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.highestScoringGame.awayTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.highestScoringGame.awayTeam.name}</TableCell>
@@ -236,8 +234,7 @@ export default function SeasonPostview({year}) {
                                                         <TableRow
                                                             style={{backgroundColor: '#e6ffe6'}}>
                                                             <TableCell align="right"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.bestWin.homeTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.bestWin.homeTeam.name}</TableCell>
@@ -245,8 +242,7 @@ export default function SeasonPostview({year}) {
                                                                 {seasonData.bestWin.result.goalsMadeByHomeTeam + " - "
                                                                     + seasonData.bestWin.result.goalsMadeByAwayTeam}  </TableCell>
                                                             <TableCell align="left"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.bestWin.awayTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.bestWin.awayTeam.name}</TableCell>
@@ -265,8 +261,7 @@ export default function SeasonPostview({year}) {
                                                         <TableRow
                                                             style={{backgroundColor: '#f2dede'}}>
                                                             <TableCell align="right"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.worstResult.homeTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.worstResult.homeTeam.name}</TableCell>
@@ -274,8 +269,7 @@ export default function SeasonPostview({year}) {
                                                                 {seasonData.worstResult.result.goalsMadeByHomeTeam + " - "
                                                                     + seasonData.worstResult.result.goalsMadeByAwayTeam}  </TableCell>
                                                             <TableCell align="left"
-                                                                       className={"teamClicker"}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
+                                                                       className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.worstResult.awayTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.worstResult.awayTeam.name}</TableCell>
@@ -316,7 +310,7 @@ export default function SeasonPostview({year}) {
                                                                       data-teamid={seasonData.overachievers.id}
                                                                       onClick={goToTeam}
                                                                       style={{backgroundColor: 'rgb(226, 228, 255)'}}>
-                                                                <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                                <TableCell className="team_name">
                                                                     {seasonData.overachievers.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -356,7 +350,7 @@ export default function SeasonPostview({year}) {
                                                                       data-teamid={seasonData.underperformers.id}
                                                                       onClick={goToTeam}
                                                                       style={{backgroundColor: '#f2dede'}}>
-                                                                <TableCell style={{minWidth: 120, maxWidth: 120}}>
+                                                                <TableCell className="team_name">
                                                                     {seasonData.underperformers.name}
                                                                 </TableCell>
                                                             </TableRow>)}
@@ -415,9 +409,8 @@ export default function SeasonPostview({year}) {
                                                                  title={"player of the year"}/>
                                                             {seasonData.player_of_the_year.name}
                                                         </TableCell>
-                                                        <TableCell className={"teamClicker"}
+                                                        <TableCell className={"teamClicker team_name"}
                                                                    data-teamid={seasonData.player_of_the_year.team.id}
-                                                                   style={{minWidth: 120, maxWidth: 120}}
                                                                    onClick={goToTeam}>
                                                             {seasonData.player_of_the_year.team.name}
                                                         </TableCell>
@@ -470,9 +463,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.gk.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.gk.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.gk.team.name}
                                                             </TableCell>
@@ -511,9 +503,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.dcl.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.dcl.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.dcl.team.name}
                                                             </TableCell>
@@ -552,9 +543,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.dcr.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.dcr.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.dcr.team.name}
                                                             </TableCell>
@@ -593,9 +583,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.dl.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.dl.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.dl.team.name}
                                                             </TableCell>
@@ -634,9 +623,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.dr.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.dr.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.dr.team.name}
                                                             </TableCell>
@@ -675,9 +663,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.cml.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.cml.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.cml.team.name}
                                                             </TableCell>
@@ -716,9 +703,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.cmr.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.cmr.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.cmr.team.name}
                                                             </TableCell>
@@ -758,9 +744,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.amc.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.amc.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.amc.team.name}
                                                             </TableCell>
@@ -799,9 +784,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.aml.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.aml.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.aml.team.name}
                                                             </TableCell>
@@ -840,9 +824,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.amr.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.amr.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.amr.team.name}
                                                             </TableCell>
@@ -881,9 +864,8 @@ export default function SeasonPostview({year}) {
                                                             >
                                                                 {seasonData.st.name}
                                                             </TableCell>
-                                                            <TableCell className={"teamClicker"}
+                                                            <TableCell className={"teamClicker team_name"}
                                                                        data-teamid={seasonData.st.team.id}
-                                                                       style={{minWidth: 120, maxWidth: 120}}
                                                                        onClick={goToTeam}>
                                                                 {seasonData.st.team.name}
                                                             </TableCell>

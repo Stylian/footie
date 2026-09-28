@@ -63,7 +63,7 @@ export default function Group() {
                                                   }}
                                         >
                                             <TableCell align="right">{index + 1}</TableCell>
-                                            <TableCell>{team.name}</TableCell>
+                                                                <TableCell className="team_name">{team.name}</TableCell>
                                             <TableCell align="right">{team.stats.matchesPlayed}</TableCell>
                                             <TableCell align="right"
                                                        className={"points_td"}>{team.stats.points}</TableCell>
@@ -100,7 +100,7 @@ export default function Group() {
                                             {isOdd(index + 1) && (
                                                 <TableCell rowspan={2}>{game.day}</TableCell>
                                             )}
-                                            <TableCell align="right" className={"teamClicker"}
+                                            <TableCell align="right" className={"teamClicker team_name"}
                                                        data-teamid={game.homeTeam.id}
                                                        onClick={goToTeam}>
                                                 {game.homeTeam.name}
@@ -111,7 +111,7 @@ export default function Group() {
                                                 <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                     + game.result.goalsMadeByAwayTeam}</TableCell>
                                             )}
-                                            <TableCell align="left" className={"teamClicker"}
+                                            <TableCell align="left" className={"teamClicker team_name"}
                                                        data-teamid={game.awayTeam.id}
                                                        onClick={goToTeam}>
                                                 {game.awayTeam.name}
@@ -184,8 +184,8 @@ export default function Group() {
 {/*                                                     <TableCell align={"right"}>Winners</TableCell> */}
 {/*                                                     <TableCell> */}
 {/*                                                         <ul> */}
-{/*                                                             <li>1st team promotes to ½ finals</li> */}
-{/*                                                             <li>2nd and 3rd teams promote to ¼ finals</li> */}
+{/*                                                             <li>1st team promotes to Â½ finals</li> */}
+{/*                                                             <li>2nd and 3rd teams promote to Â¼ finals</li> */}
 {/*                                                         </ul> */}
 {/*                                                     </TableCell> */}
 {/*                                                 </TableRow> */}

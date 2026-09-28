@@ -41,9 +41,9 @@ export default function Playoffs({year}) {
 
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell className="small_header">¼ Finals</TableCell>
+                                            <TableCell className="small_header">Â¼ Finals</TableCell>
                                             <TableCell className="small_header tree_vert_dist"></TableCell>
-                                            <TableCell className="small_header">½ Finals</TableCell>
+                                            <TableCell className="small_header">Â½ Finals</TableCell>
                                             <TableCell className="small_header tree_vert_dist"></TableCell>
                                             <TableCell className="small_header">Finals</TableCell>
                                             <TableCell className="small_header tree_vert_dist"></TableCell>
@@ -56,7 +56,7 @@ export default function Playoffs({year}) {
                                             <TableCell class={"tree_dist2"}></TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#fcf8e3'}}
                                                        data-teamid={structure.gA3.id}
                                                        onClick={goToTeam}>
@@ -65,14 +65,14 @@ export default function Playoffs({year}) {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#d9edf7'}}
                                                        data-teamid={structure.S1.id}
                                                        onClick={goToTeam}>
                                                 {structure.S1.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#fcf8e3'}}
                                                        data-teamid={structure.gB2.id}
                                                        onClick={goToTeam}>
@@ -83,7 +83,7 @@ export default function Playoffs({year}) {
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#e2e4ff'}}
                                                        data-teamid={structure.F1.id}
                                                        onClick={goToTeam}>
@@ -96,7 +96,7 @@ export default function Playoffs({year}) {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#d9edf7'}}
                                                        data-teamid={structure.gA1.id}
                                                        onClick={goToTeam}>
@@ -113,7 +113,7 @@ export default function Playoffs({year}) {
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#b3b8ff'}}
                                                        data-teamid={structure.W1.id}
                                                        onClick={goToTeam}>
@@ -127,7 +127,7 @@ export default function Playoffs({year}) {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#d9edf7'}}
                                                        data-teamid={structure.gB1.id}
                                                        onClick={goToTeam}>
@@ -141,14 +141,14 @@ export default function Playoffs({year}) {
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#e2e4ff'}}
                                                        data-teamid={structure.F2.id}
                                                        onClick={goToTeam}>
                                                 {structure.F2.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#fcf8e3'}}
                                                        data-teamid={structure.gB3.id}
                                                        onClick={goToTeam}>
@@ -158,14 +158,14 @@ export default function Playoffs({year}) {
                                         <TableRow>
                                             <TableCell class={"cancel"}></TableCell>
                                             <TableCell class={"cancel"}></TableCell>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#d9edf7'}}
                                                        data-teamid={structure.S2.id}
                                                        onClick={goToTeam}>
                                                 {structure.S2.name}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell className={"tree_team teamClicker"} align="center"
+                                            <TableCell className={"tree_team teamClicker team_name"} align="center"
                                                        style={{backgroundColor: '#fcf8e3'}}
                                                        data-teamid={structure.gA2.id}
                                                        onClick={goToTeam}>
@@ -181,11 +181,11 @@ export default function Playoffs({year}) {
 
                     <Grid item sm={4}>
                         <Slider {...settings}>
-                          {/* ¼ Finals */}
+                          {/* Â¼ Finals */}
                           <div>
                             <Card style={{ margin: 20, boxShadow: 'none' }} elevation={0}>
                               <CardHeader
-                                title={"¼ Finals"}
+                                title={"Â¼ Finals"}
                                 align={"center"}
                                 className="big_header" titleTypographyProps={{ variant: "h7" }}
                               />
@@ -211,7 +211,7 @@ export default function Playoffs({year}) {
                                         <TableRow key={index}>
                                           <TableCell
                                             align="right"
-                                            className={"teamClicker" + (homeWon ? " winner" : "")}
+                                            className={"teamClicker team_name" + (homeWon ? " winner" : "")}
                                             data-teamid={game.homeTeam.id}
                                             onClick={goToTeam}
                                           >
@@ -228,7 +228,7 @@ export default function Playoffs({year}) {
                                           )}
                                           <TableCell
                                             align="left"
-                                            className={"teamClicker" + (awayWon ? " winner" : "")}
+                                            className={"teamClicker team_name" + (awayWon ? " winner" : "")}
                                             data-teamid={game.awayTeam.id}
                                             onClick={goToTeam}
                                           >
@@ -243,12 +243,12 @@ export default function Playoffs({year}) {
                             </Card>
                           </div>
 
-                          {/* ½ Finals */}
+                          {/* Â½ Finals */}
                           {games.semis.length > 0 && (
                             <div>
                               <Card style={{ margin: 20, boxShadow: 'none' }} elevation={0}>
                                 <CardHeader
-                                  title={"½ Finals"}
+                                  title={"Â½ Finals"}
                                   align={"center"}
                                   className="big_header" titleTypographyProps={{ variant: "h7" }}
                                 />
@@ -276,7 +276,7 @@ export default function Playoffs({year}) {
                                           <TableRow key={index}>
                                             <TableCell
                                               align="right"
-                                              className={"teamClicker" + (homeWon ? " winner" : "")}
+                                              className={"teamClicker team_name" + (homeWon ? " winner" : "")}
                                               data-teamid={game.homeTeam.id}
                                               onClick={goToTeam}
                                             >
@@ -293,7 +293,7 @@ export default function Playoffs({year}) {
                                             )}
                                             <TableCell
                                               align="left"
-                                              className={"teamClicker" + (awayWon ? " winner" : "")}
+                                              className={"teamClicker team_name" + (awayWon ? " winner" : "")}
                                               data-teamid={game.awayTeam.id}
                                               onClick={goToTeam}
                                             >
@@ -342,7 +342,7 @@ export default function Playoffs({year}) {
                                           <TableRow key={index}>
                                             <TableCell
                                               align="right"
-                                              className={"teamClicker" + (homeWon ? " winner" : "")}
+                                              className={"teamClicker team_name" + (homeWon ? " winner" : "")}
                                               data-teamid={game.homeTeam.id}
                                               onClick={goToTeam}
                                             >
@@ -359,7 +359,7 @@ export default function Playoffs({year}) {
                                             )}
                                             <TableCell
                                               align="left"
-                                              className={"teamClicker" + (awayWon ? " winner" : "")}
+                                              className={"teamClicker team_name" + (awayWon ? " winner" : "")}
                                               data-teamid={game.awayTeam.id}
                                               onClick={goToTeam}
                                             >

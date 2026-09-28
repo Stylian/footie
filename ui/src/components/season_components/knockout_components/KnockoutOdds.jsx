@@ -27,7 +27,7 @@ export default function KnockoutOdds({year}) {
                                 {teams.map((team) => {
                                     return (
                                         <TableRow>
-                                            <TableCell className={"teamClicker"} align="center"
+                                            <TableCell className={"teamClicker team_name"} align="center"
                                                        data-teamid={team.id}
                                                        onClick={goToTeam}>
                                                 {team.name}</TableCell>

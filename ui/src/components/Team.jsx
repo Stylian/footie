@@ -416,8 +416,7 @@ export default function Team() {
                                                                         >{game.result.goalsMadeByHomeTeam + " - "
                                                                             + game.result.goalsMadeByAwayTeam} </TableCell>
                                                                         <TableCell align="left"
-                                                                         style={{minWidth: 100, maxWidth: 100}}
-                                                                                   className={"teamClicker"}
+                                                                                   className={"teamClicker team_name"}
                                                                                    data-teamid={game.awayTeam.id}
                                                                                    onClick={goToTeam}>
                                                                             {game.awayTeam.name}</TableCell>
@@ -444,8 +443,7 @@ export default function Team() {
                                                                         >{game.result.goalsMadeByAwayTeam + " - "
                                                                             + game.result.goalsMadeByHomeTeam} </TableCell>
                                                                         <TableCell align="left"
-                                                                         style={{minWidth: 100, maxWidth: 100}}
-                                                                                   className={"teamClicker"}
+                                                                                   className={"teamClicker team_name"}
                                                                                    data-teamid={game.homeTeam.id}
                                                                                    onClick={goToTeam}>
                                                                             {game.homeTeam.name}</TableCell>

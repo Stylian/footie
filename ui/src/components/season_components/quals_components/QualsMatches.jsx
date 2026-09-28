@@ -37,7 +37,7 @@ export default function QualsMatches({year, round}) {
                                                     return (
                                                         <TableRow>
                                                             <TableCell align="right"
-                                                                       className={"teamClicker" + (homeWon ? " winner" : "")}
+                                                                       className={"teamClicker team_name" + (homeWon ? " winner" : "")}
                                                                        data-teamid={game.homeTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {game.homeTeam.name}</TableCell>
@@ -49,7 +49,7 @@ export default function QualsMatches({year, round}) {
                                                                         + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
                                                             <TableCell align="left"
-                                                                       className={"teamClicker" + (awayWon ? " winner" : "")}
+                                                                       className={"teamClicker team_name" + (awayWon ? " winner" : "")}
                                                                        data-teamid={game.awayTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {game.awayTeam.name}</TableCell>

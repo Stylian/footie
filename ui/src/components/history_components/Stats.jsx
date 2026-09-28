@@ -84,7 +84,7 @@ export default function Stats() {
                                                         data-teamid={teams[key]["teamObject"].id}
                                                         onClick={goToTeam}>
                                                         <TableCell align="right">{index + 1}</TableCell>
-                                                        <TableCell className='teamClicker'>{key}</TableCell>
+                                                        <TableCell className='teamClicker team_name'>{key}</TableCell>
                                                         <TableCell
                                                             align="right">{teams[key]["number of games played"]}</TableCell>
                                                         <TableCell

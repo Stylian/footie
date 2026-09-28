@@ -114,7 +114,14 @@ table {
 
 .teamClicker {
     min-width: 100px !important;
- }
+}
+
+.team_name {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    white-space: nowrap;
+}
 
 .teamClicker:hover,
 .playerClicker:hover {
@@ -154,6 +161,7 @@ html, body, #root {
   margin: 0 !important;
   padding: 0 !important;
   overflow-x: hidden;
+  background-color: #f4f4f4 !important;
 }
 
 .full-screen-paper {
@@ -162,4 +170,5 @@ html, body, #root {
   width: 100% !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  background-color: #f4f4f4 !important;
 }

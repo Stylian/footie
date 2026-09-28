@@ -31,7 +31,7 @@ export default function GroupsMatches({year, round}) {
                                                 {days[day].map((game, index) => {
                                                     return (
                                                         <TableRow>
-                                                            <TableCell align="right" className={"teamClicker"}
+                                                            <TableCell align="right" className={"teamClicker team_name"}
                                                                        data-teamid={game.homeTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {game.homeTeam.name}</TableCell>
@@ -41,7 +41,7 @@ export default function GroupsMatches({year, round}) {
                                                                 <TableCell>{game.result.goalsMadeByHomeTeam + " - "
                                                                     + game.result.goalsMadeByAwayTeam}  </TableCell>
                                                             )}
-                                                            <TableCell align="left" className={"teamClicker"}
+                                                            <TableCell align="left" className={"teamClicker team_name"}
                                                                        data-teamid={game.awayTeam.id}
                                                                        onClick={goToTeam}>
                                                                 {game.awayTeam.name}</TableCell>

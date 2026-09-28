@@ -62,10 +62,7 @@ export default function Coefficients() {
                                                                                 '#f2dede'
                                                         }}>
                                                             <TableCell align="right">{index + 1}</TableCell>
-                                                            <TableCell style={{
-                                                                minWidth: 100,
-                                                                maxWidth: 100
-                                                            }}>{team.name}</TableCell>
+                                                            <TableCell className="team_name">{team.name}</TableCell>
                                                             <TableCell
                                                                 align="right">{Numeral(team.coefficients / 1000).format('0.000')}
                                                             </TableCell>
@@ -96,10 +93,7 @@ export default function Coefficients() {
                                                         }}>
                                                             <TableCell
                                                                 align="right">{leftSide.length + index + 1}</TableCell>
-                                                            <TableCell style={{
-                                                                minWidth: 100,
-                                                                maxWidth: 100
-                                                            }}>{team.name}</TableCell>
+                                                            <TableCell className="team_name">{team.name}</TableCell>
                                                             <TableCell
                                                                 align="right">{Numeral(team.coefficients / 1000).format('0.000')}
                                                             </TableCell>
@@ -136,38 +130,22 @@ export default function Coefficients() {
                                                                onClick={goToSeason}
                                                                data-season={item.seasonYear}>
                                                         {item.seasonYear}</TableCell>
-                                                    <TableCell align="left" className={"teamClicker"}
-                                                        style={{
-                                                            minWidth: 100,
-                                                            maxWidth: 100
-                                                        }}
+                                                    <TableCell align="left" className={"teamClicker team_name"}
                                                        data-teamid={item.winner.id}
                                                        onClick={goToTeam}>
                                                         {item.winner != null ? item.winner.name : ""}
                                                     </TableCell>
-                                                    <TableCell align="left" className={"teamClicker"}
-                                                        style={{
-                                                            minWidth: 100,
-                                                            maxWidth: 100
-                                                        }}
+                                                    <TableCell align="left" className={"teamClicker team_name"}
                                                        data-teamid={item.runnerUp.id}
                                                        onClick={goToTeam}>
                                                         {item.runnerUp != null ? item.runnerUp.name : ""}
                                                     </TableCell>
-                                                    <TableCell align="left" className={"teamClicker"}
-                                                        style={{
-                                                            minWidth: 100,
-                                                            maxWidth: 100
-                                                        }}
+                                                    <TableCell align="left" className={"teamClicker team_name"}
                                                        data-teamid={item.semifinalist1.id}
                                                        onClick={goToTeam}>
                                                         {item.semifinalist1 != null ? item.semifinalist1.name : ""}
                                                     </TableCell>
-                                                    <TableCell align="left" className={"teamClicker"}
-                                                        style={{
-                                                            minWidth: 100,
-                                                            maxWidth: 100
-                                                        }}
+                                                    <TableCell align="left" className={"teamClicker team_name"}
                                                        data-teamid={item.semifinalist2.id}
                                                        onClick={goToTeam}>
                                                         {item.semifinalist2 != null ? item.semifinalist2.name : ""}
@@ -199,7 +177,7 @@ export default function Coefficients() {
                                                 <TableRow>
                                                     <TableCell align="center">{team.gold}</TableCell>
                                                     <TableCell align="center">{team.silver}</TableCell>
-                                                    <TableCell align="left" className={"teamClicker"}
+                                                    <TableCell align="left" className={"teamClicker team_name"}
                                                                data-teamid={team.id}
                                                                onClick={goToTeam}>
                                                         {team.name}</TableCell>

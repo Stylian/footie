@@ -219,7 +219,7 @@ export default function Players() {
                                                                         onClick={goToPlayer}
                                                                     >{player.name}</TableCell>
                                                                     <TableCell
-                                                                        className={"teamClicker"}
+                                                                        className={"teamClicker team_name"}
                                                                         data-teamid={player.team.id}
                                                                         onClick={goToTeam}
                                                                     >{player.team.name}</TableCell>
