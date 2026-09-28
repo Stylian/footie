@@ -25,7 +25,7 @@ export default function Player() {
                         <Grid container spacing={1}>
                             <Grid item sm={4}>
                                 <Card style={{margin: 20}}>
-                                    <CardHeader title={"trophies"} align={"center"}
+                                    <CardHeader className="big_header" title={"trophies"} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}/>
                                     <CardContent>
                                         {player.trophies.length > 0 ? (

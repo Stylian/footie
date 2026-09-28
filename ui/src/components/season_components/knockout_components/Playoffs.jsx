@@ -35,19 +35,19 @@ export default function Playoffs({year}) {
                 <Grid container spacing={1}>
                     <Grid item sm={8}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"tree view"} align={"center"} titleTypographyProps={{variant: 'h7'}} />
-                            <CardContent>
+                            <CardHeader className="big_header" title={"tree view"} align={"center"} titleTypographyProps={{variant: 'h7'}} />
+                            <CardContent style={{padding: 0}}>
                                 <table className="table tree_table" align={"center"}>
 
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>¼ Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>½ Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>Finals</TableCell>
-                                            <TableCell class={"tree_vert_dist"}></TableCell>
-                                            <TableCell>Champion</TableCell>
+                                            <TableCell className="small_header">¼ Finals</TableCell>
+                                            <TableCell className="small_header tree_vert_dist"></TableCell>
+                                            <TableCell className="small_header">½ Finals</TableCell>
+                                            <TableCell className="small_header tree_vert_dist"></TableCell>
+                                            <TableCell className="small_header">Finals</TableCell>
+                                            <TableCell className="small_header tree_vert_dist"></TableCell>
+                                            <TableCell className="small_header">Champion</TableCell>
                                         </TableRow>
                                     </TableHead>
 
@@ -187,18 +187,17 @@ export default function Playoffs({year}) {
                               <CardHeader
                                 title={"¼ Finals"}
                                 align={"center"}
-                                className="match-card-header"
-                                titleTypographyProps={{ variant: "h7" }}
+                                className="big_header" titleTypographyProps={{ variant: "h7" }}
                               />
-                              <CardContent>
+                              <CardContent style={{padding: 0}}>
                                 <table className="table" align={"center"}>
                                   <TableHead>
                                     <TableRow>
-                                      <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                      <TableCell className="small_header" align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
                                         Home
                                       </TableCell>
-                                      <TableCell style={{ width: "10%" }}>score</TableCell>
-                                      <TableCell align="left" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                      <TableCell className="small_header" style={{ width: "10%" }}>score</TableCell>
+                                      <TableCell className="small_header" align="left" style={{ width: "45%", whiteSpace: "nowrap" }}>
                                         Away
                                       </TableCell>
                                     </TableRow>
@@ -251,19 +250,17 @@ export default function Playoffs({year}) {
                                 <CardHeader
                                   title={"½ Finals"}
                                   align={"center"}
-                                  className="match-card-header"
-                                  titleTypographyProps={{ variant: "h7" }}
+                                  className="big_header" titleTypographyProps={{ variant: "h7" }}
                                 />
-                                <CardContent>
+                                <CardContent style={{padding: 0}}>
                                   <table className="table" align={"center"}>
                                     <TableHead>
                                       <TableRow>
-                                        <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                        <TableCell className="small_header" align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
                                           Home
                                         </TableCell>
-                                        <TableCell style={{ width: "10%" }}>score</TableCell>
-                                        <TableCell
-                                          align="left"
+                                        <TableCell className="small_header" style={{ width: "10%" }}>score</TableCell>
+                                        <TableCell className="small_header" align="left"
                                           style={{ width: "45%", whiteSpace: "nowrap" }}
                                         >
                                           Away
@@ -319,19 +316,17 @@ export default function Playoffs({year}) {
                                 <CardHeader
                                   title={"Finals"}
                                   align={"center"}
-                                  className="match-card-header"
-                                  titleTypographyProps={{ variant: "h7" }}
+                                  className="big_header" titleTypographyProps={{ variant: "h7" }}
                                 />
-                                <CardContent>
+                                <CardContent style={{padding: 0}}>
                                   <table className="table" align={"center"}>
                                     <TableHead>
                                       <TableRow>
-                                        <TableCell align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
+                                        <TableCell className="small_header" align="right" style={{ width: "45%", whiteSpace: "nowrap" }}>
                                           Home
                                         </TableCell>
-                                        <TableCell style={{ width: "10%" }}>score</TableCell>
-                                        <TableCell
-                                          align="left"
+                                        <TableCell className="small_header" style={{ width: "10%" }}>score</TableCell>
+                                        <TableCell className="small_header" align="left"
                                           style={{ width: "45%", whiteSpace: "nowrap" }}
                                         >
                                           Away

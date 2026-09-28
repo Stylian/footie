@@ -32,15 +32,15 @@ return (
                 ) : ''}
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
-                        <CardHeader title={"Pot 1"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader title={"Pot 1"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}
                         />
-                        <CardContent>
+                        <CardContent style={{padding: 0}}>
                             <table className="table" align={"center"}>
-                                <TableHead className="match-table-head">
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell align="right">Pos</TableCell>
-                                        <TableCell>Team</TableCell>
-                                        <TableCell>Coefficients</TableCell>
+                                        <TableCell className="small_header" align="right">Pos</TableCell>
+                                        <TableCell className="small_header">Team</TableCell>
+                                        <TableCell className="small_header">Coefficients</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -60,15 +60,15 @@ return (
                     </Card>
 
                     <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
-                        <CardHeader title={"Pot 2"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader title={"Pot 2"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}
                         />
-                        <CardContent>
+                        <CardContent style={{padding: 0}}>
                             <table className="table" align={"center"}>
-                                <TableHead className="match-table-head">
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell align="right">Pos</TableCell>
-                                        <TableCell>Team</TableCell>
-                                        <TableCell>Coefficients</TableCell>
+                                        <TableCell className="small_header" align="right">Pos</TableCell>
+                                        <TableCell className="small_header">Team</TableCell>
+                                        <TableCell className="small_header">Coefficients</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -89,15 +89,15 @@ return (
                     </Card>
 
                     <Card style={{margin: 20, width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
-                        <CardHeader title={"Pot 3"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader title={"Pot 3"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}
                         />
-                        <CardContent>
+                        <CardContent style={{padding: 0}}>
                             <table className="table" align={"center"}>
-                                <TableHead className="match-table-head">
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell align="right">Pos</TableCell>
-                                        <TableCell>Team</TableCell>
-                                        <TableCell>Coefficients</TableCell>
+                                        <TableCell className="small_header" align="right">Pos</TableCell>
+                                        <TableCell className="small_header">Team</TableCell>
+                                        <TableCell className="small_header">Coefficients</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

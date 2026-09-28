@@ -17,7 +17,7 @@ export default function Statistics() {
                     <Grid container spacing={1}>
                         <Grid item sm={4}>
                             <Card style={{margin: 20}}>
-                                <CardHeader title={"league stats"} align={"center"} 
+                                <CardHeader className="big_header" title={"league stats"} align={"center"} 
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
@@ -197,7 +197,7 @@ export default function Statistics() {
                         </Grid>
                         <Grid item sm={4}>
                             <Card style={{margin: 20}}>
-                                <CardHeader title={"scores stats"} align={"center"}
+                                <CardHeader className="big_header" title={"scores stats"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>

@@ -16,16 +16,15 @@ export default function GroupsMatches({year, round}) {
                         return (
                             <div style={{ margin: 10 }}>
                                 <Card style={{width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
-<CardHeader title={"Day " + day} align={"center"} className="match-card-header"
-                                            titleTypographyProps={{variant: 'h7'}}
+<CardHeader title={"Day " + day} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}
                                     />
-                                    <CardContent>
+                                    <CardContent style={{padding: 0}}>
                                         <table className="table" align={"center"}>
-                                            <TableHead className="match-table-head">
+                                            <TableHead>
                                                 <TableRow>
-                                                    <TableCell align="right" style={{width: '45%'}}>Home</TableCell>
-                                                    <TableCell style={{width: '10%'}}>score</TableCell>
-                                                    <TableCell style={{width: '45%'}}>Away</TableCell>
+                                                    <TableCell className="small_header" align="right" style={{width: '45%'}}>Home</TableCell>
+                                                    <TableCell className="small_header" style={{width: '10%'}}>score</TableCell>
+                                                    <TableCell className="small_header" style={{width: '45%'}}>Away</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>

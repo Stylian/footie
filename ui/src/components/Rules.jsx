@@ -11,7 +11,7 @@ export default function Rules() {
 
                 <Grid item sm={6}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"Seeding"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"Seeding"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">
@@ -52,7 +52,7 @@ export default function Rules() {
 
                 <Grid item sm={3}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"Preliminary Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                        <CardHeader className="big_header" title={"Preliminary Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">
                                 <TableBody>
@@ -85,7 +85,7 @@ export default function Rules() {
 
                 <Grid item sm={3}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"Qualifying Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                        <CardHeader className="big_header" title={"Qualifying Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">
                                 <TableBody>
@@ -117,7 +117,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                    <Card style={{margin: 20}}>
-                       <CardHeader title={"Playoffs Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                       <CardHeader className="big_header" title={"Playoffs Round"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                        <CardContent style={{ display: "flex", justifyContent: "center" }}>
                            <table className="table">
                                 <TableBody>
@@ -151,7 +151,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                      <Card style={{margin: 20}}>
-                        <CardHeader title={"1st Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"1st Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table" style={{minWidth: 320, maxWidth: 320}}>
@@ -197,7 +197,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                      <Card style={{margin: 20}}>
-                        <CardHeader title={"2nd Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"2nd Groups Stage"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table" style={{minWidth: 320, maxWidth: 320}}>
@@ -245,7 +245,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"¼ Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"¼ Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">
@@ -293,7 +293,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"½ Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"½ Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">
@@ -334,7 +334,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"Finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{ display: "flex", justifyContent: "center" }}>
                             <table className="table">

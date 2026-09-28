@@ -1,9 +1,7 @@
 import {
-    Box,
     Card,
     CardContent,
     CardHeader,
-    Grid,
     Paper,
     TableBody,
     TableCell,
@@ -31,104 +29,100 @@ export default function Group() {
             <Paper className="full-screen-paper" elevation={0}>
                 <LeagueToolbar pageTitle={"Season " + group.seasonNum + " - " + group.name}/>
 
-                <Box style={{margin: 20}}>
-                    <Grid container spacing={1}>
-                        <Grid item sm={7}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={group.name} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell className={"reorder_tab"}>Pos</TableCell>
-                                                <TableCell className={"reorder_tab"}>Team</TableCell>
-                                                <TableCell className={"reorder_tab"}>Played</TableCell>
-                                                <TableCell className={"reorder_tab"}>Points</TableCell>
-                                                <TableCell className={"reorder_tab"}>W</TableCell>
-                                                <TableCell className={"reorder_tab"}>D</TableCell>
-                                                <TableCell className={"reorder_tab"}>L</TableCell>
-                                                <TableCell className={"reorder_tab"}>GS</TableCell>
-                                                <TableCell className={"reorder_tab"}>GC</TableCell>
-                                                <TableCell className={"reorder_tab"}>+/-</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {group.teams.map((team, index) => (
-                                                <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                          onClick={goToTeam}
-                                                          style={{
-                                                              backgroundColor:
-                                                                  (group.round === 1 && index < 2) ? '#d9edf7' :
-                                                                      (group.round === 2 && index < 1) ? '#d9edf7' :
-                                                                          (group.round === 2 && index < 3) ? '#fcf8e3' :
-                                                                              '#f2dede'
-                                                          }}
-                                                >
-                                                    <TableCell align="right">{index + 1}</TableCell>
-                                                    <TableCell>{team.name}</TableCell>
-                                                    <TableCell align="right">{team.stats.matchesPlayed}</TableCell>
-                                                    <TableCell align="right"
-                                                               className={"points_td"}>{team.stats.points}</TableCell>
-                                                    <TableCell align="right">{team.stats.wins}</TableCell>
-                                                    <TableCell align="right">{team.stats.draws}</TableCell>
-                                                    <TableCell align="right">{team.stats.losses}</TableCell>
-                                                    <TableCell align="right">{team.stats.goalsScored}</TableCell>
-                                                    <TableCell align="right">{team.stats.goalsConceded}</TableCell>
-                                                    <TableCell align="right">{team.stats.goalDifference}</TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10 }}>
+                    <Card style={{width: 'fit-content'}}>
+                        <CardHeader className="big_header" title={group.name} align={"center"}
+                                    titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent style={{padding: 0}}>
+                            <table className="table" align={"center"}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell className="small_header reorder_tab">Pos</TableCell>
+                                        <TableCell className="small_header reorder_tab">Team</TableCell>
+                                        <TableCell className="small_header reorder_tab">Played</TableCell>
+                                        <TableCell className="small_header reorder_tab">Points</TableCell>
+                                        <TableCell className="small_header reorder_tab">W</TableCell>
+                                        <TableCell className="small_header reorder_tab">D</TableCell>
+                                        <TableCell className="small_header reorder_tab">L</TableCell>
+                                        <TableCell className="small_header reorder_tab">GS</TableCell>
+                                        <TableCell className="small_header reorder_tab">GC</TableCell>
+                                        <TableCell className="small_header reorder_tab">+/-</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {group.teams.map((team, index) => (
+                                        <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                  onClick={goToTeam}
+                                                  style={{
+                                                      backgroundColor:
+                                                          (group.round === 1 && index < 2) ? '#d9edf7' :
+                                                              (group.round === 2 && index < 1) ? '#d9edf7' :
+                                                                  (group.round === 2 && index < 3) ? '#fcf8e3' :
+                                                                      '#f2dede'
+                                                  }}
+                                        >
+                                            <TableCell align="right">{index + 1}</TableCell>
+                                            <TableCell>{team.name}</TableCell>
+                                            <TableCell align="right">{team.stats.matchesPlayed}</TableCell>
+                                            <TableCell align="right"
+                                                       className={"points_td"}>{team.stats.points}</TableCell>
+                                            <TableCell align="right">{team.stats.wins}</TableCell>
+                                            <TableCell align="right">{team.stats.draws}</TableCell>
+                                            <TableCell align="right">{team.stats.losses}</TableCell>
+                                            <TableCell align="right">{team.stats.goalsScored}</TableCell>
+                                            <TableCell align="right">{team.stats.goalsConceded}</TableCell>
+                                            <TableCell align="right">{team.stats.goalDifference}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
 
-                        <Grid item sm={5}>
-                            <Card style={{margin: 20}}>
-                                <CardHeader title={"Games"} align={"center"}
-                                            titleTypographyProps={{variant: 'h7'}}
-                                />
-                                <CardContent>
-                                    <table className="table1" align={"center"}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Day</TableCell>
-                                                <TableCell>Home</TableCell>
-                                                <TableCell>score</TableCell>
-                                                <TableCell>Away</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {group.games.map((game, index) => (
-                                                <TableRow key={index}>
-                                                    {isOdd(index + 1) && (
-                                                        <TableCell rowspan={2}>{game.day}</TableCell>
-                                                    )}
-                                                    <TableCell align="right" className={"teamClicker"}
-                                                               data-teamid={game.homeTeam.id}
-                                                               onClick={goToTeam}>
-                                                        {game.homeTeam.name}
-                                                    </TableCell>
-                                                    {game.result === null ? (
-                                                        <TableCell></TableCell>
-                                                    ) : (
-                                                        <TableCell>{game.result.goalsMadeByHomeTeam + " - "
-                                                            + game.result.goalsMadeByAwayTeam}</TableCell>
-                                                    )}
-                                                    <TableCell align="left" className={"teamClicker"}
-                                                               data-teamid={game.awayTeam.id}
-                                                               onClick={goToTeam}>
-                                                        {game.awayTeam.name}
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </table>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                    <Card style={{width: 'fit-content'}}>
+                        <CardHeader className="big_header" title={"Games"} align={"center"}
+                                    titleTypographyProps={{variant: 'h7'}}
+                        />
+                        <CardContent style={{padding: 0}}>
+                            <table className="table1" align={"center"}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell className="small_header">Day</TableCell>
+                                        <TableCell className="small_header">Home</TableCell>
+                                        <TableCell className="small_header">score</TableCell>
+                                        <TableCell className="small_header">Away</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {group.games.map((game, index) => (
+                                        <TableRow key={index}>
+                                            {isOdd(index + 1) && (
+                                                <TableCell rowspan={2}>{game.day}</TableCell>
+                                            )}
+                                            <TableCell align="right" className={"teamClicker"}
+                                                       data-teamid={game.homeTeam.id}
+                                                       onClick={goToTeam}>
+                                                {game.homeTeam.name}
+                                            </TableCell>
+                                            {game.result === null ? (
+                                                <TableCell></TableCell>
+                                            ) : (
+                                                <TableCell>{game.result.goalsMadeByHomeTeam + " - "
+                                                    + game.result.goalsMadeByAwayTeam}</TableCell>
+                                            )}
+                                            <TableCell align="left" className={"teamClicker"}
+                                                       data-teamid={game.awayTeam.id}
+                                                       onClick={goToTeam}>
+                                                {game.awayTeam.name}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </table>
+                        </CardContent>
+                    </Card>
+
 
 {/*                         <Grid item sm={4}> */}
 {/*                             <Card style={{margin: 20}}> */}
@@ -228,8 +222,7 @@ export default function Group() {
 {/*                             </Card> */}
 {/*                         </Grid> */}
 
-                    </Grid>
-                </Box>
+                </div>
             </Paper>
         )
     }

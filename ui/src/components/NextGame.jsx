@@ -53,7 +53,7 @@ export default function NextGame() {
     } else {
         return (
             <Card style={{margin: 5}}>
-                <CardHeader title={"upcoming game"} align={"center"}
+                <CardHeader className="big_header" title={"upcoming game"} align={"center"}
                             titleTypographyProps={{variant: 'h7'}}
                 />
                 <CardContent>
@@ -61,8 +61,7 @@ export default function NextGame() {
                         <TableRow>
                             <TableCell align="right">
                                 <input type={'number'}
-                                       className="score_field"
-                                       value={editedHomeScore ? homeScore : ""}
+                                       className="score_field" value={editedHomeScore ? homeScore : ""}
                                        onChange={handleChangeScore('homeScore')}
                                 />
                             </TableCell>
@@ -73,8 +72,7 @@ export default function NextGame() {
                             </TableCell>
                             <TableCell align="left">
                                 <input type={'number'}
-                                       className="score_field"
-                                       value={editedAwayScore ? awayScore : ""}
+                                       className="score_field" value={editedAwayScore ? awayScore : ""}
                                        onChange={handleChangeScore('awayScore')}
                                 />
                             </TableCell>
@@ -331,8 +329,7 @@ export default function NextGame() {
                                     <table className="table" align={"center"}>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell
-                                                    align={"center"}>past encounters</TableCell>
+                                                <TableCell className="small_header" align={"center"}>past encounters</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableRow>
@@ -353,7 +350,7 @@ export default function NextGame() {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell colSpan={2}
+                                                    <TableCell className="small_header" colSpan={2}
                                                                align={"center"}>last 5 games home</TableCell>
                                                 </TableRow>
                                             </TableHead>
@@ -377,7 +374,7 @@ export default function NextGame() {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell colSpan={2}
+                                                    <TableCell className="small_header" colSpan={2}
                                                                align={"center"}>last 5 games away</TableCell>
                                                 </TableRow>
                                             </TableHead>

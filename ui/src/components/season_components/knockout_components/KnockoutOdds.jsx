@@ -13,14 +13,14 @@ export default function KnockoutOdds({year}) {
         return (
             <Box style={{margin: 10, "margin-top": 10}}>
                 <Card style={{margin: 20}}>
-                    <CardHeader title={"winning odds"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
-                    <CardContent>
+                    <CardHeader className="big_header" title={"winning odds"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                    <CardContent style={{padding: 0}}>
                         <table className="table tree_table" align={"center"}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>team</TableCell>
-                                    <TableCell>chances</TableCell>
-                                    <TableCell>odds</TableCell>
+                                    <TableCell className="small_header">team</TableCell>
+                                    <TableCell className="small_header">chances</TableCell>
+                                    <TableCell className="small_header">odds</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

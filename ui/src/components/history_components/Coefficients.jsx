@@ -37,7 +37,7 @@ export default function Coefficients() {
                     <Grid container spacing={1}>
                         <Grid item sm={5}>
                             <Card >
-                                <CardHeader title={"Coefficients"} align={"center"}
+                                <CardHeader className="big_header" title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}/>
                                 <CardContent>
                                     <Grid container spacing={1}  justifyContent="center" >
@@ -45,9 +45,9 @@ export default function Coefficients() {
                                             <table className="table">
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                                         <TableCell style={{width: '60%'}}>Team</TableCell>
-                                                         <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                                        <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                                         <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                                         <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -78,9 +78,9 @@ export default function Coefficients() {
                                             <table className="table">
                                                <TableHead>
                                                    <TableRow>
-                                                       <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                                        <TableCell style={{width: '60%'}}>Team</TableCell>
-                                                        <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                                       <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                                        <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                                        <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                                    </TableRow>
                                                </TableHead>
                                                 <TableBody>
@@ -114,19 +114,19 @@ export default function Coefficients() {
                         </Grid>
                         <Grid item sm={4.5}>
                             <Card>
-                                <CardHeader title={"Past Finals"} align={"center"}
+                                <CardHeader className="big_header" title={"Past Finals"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell style={{fontSize: "0.8rem"}}>S</TableCell>
-                                                <TableCell align={"center"}><img src={goldmedal}
+                                                <TableCell className="small_header" style={{fontSize: "0.8rem"}}>S</TableCell>
+                                                <TableCell className="small_header" align={"center"}><img src={goldmedal}
                                                                                  title={"1st place"}/></TableCell>
-                                                <TableCell align={"center"}><img src={silvermedal}
+                                                <TableCell className="small_header" align={"center"}><img src={silvermedal}
                                                                                  title={"2nd place"}/></TableCell>
-                                                <TableCell style={{fontSize: "0.8rem"}} align="center" colSpan={2}>Semifinalists</TableCell>
+                                                <TableCell className="small_header" style={{fontSize: "0.8rem"}} align="center" colSpan={2}>Semifinalists</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -182,16 +182,16 @@ export default function Coefficients() {
 
                         <Grid item sm={2}>
                             <Card>
-                                <CardHeader title={"Best Performers"} align={"center"}
+                                <CardHeader className="big_header" title={"Best Performers"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}
                                 />
                                 <CardContent>
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell style={{ maxWidth: '20px'}}><img src={goldmedal} title={"1st place"}/></TableCell>
-                                                <TableCell style={{ maxWidth: '20px'}}><img src={silvermedal} title={"2nd place"}/></TableCell>
-                                                <TableCell style={{fontSize: "0.8rem"}} >Team</TableCell>
+                                                <TableCell className="small_header" style={{ maxWidth: '20px'}}><img src={goldmedal} title={"1st place"}/></TableCell>
+                                                <TableCell className="small_header" style={{ maxWidth: '20px'}}><img src={silvermedal} title={"2nd place"}/></TableCell>
+                                                <TableCell className="small_header" style={{fontSize: "0.8rem"}} >Team</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>

@@ -43,36 +43,36 @@ export default function Stats() {
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell className={"reorder_tab"} colSpan={11}></TableCell>
-                                                <TableCell className={"reorder_tab"} colSpan={4}
+                                                <TableCell className="small_header reorder_tab" colSpan={11}></TableCell>
+                                                <TableCell className="small_header reorder_tab" colSpan={4}
                                                            style={leftDivider}
                                                            align={"center"}>home stats</TableCell>
-                                                <TableCell className={"reorder_tab"} colSpan={4}
+                                                <TableCell className="small_header reorder_tab" colSpan={4}
                                                            style={leftDivider}
                                                            align={"center"}>away stats</TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell className={"reorder_tab"}>Pos</TableCell>
-                                                <TableCell className={"reorder_tab"}>Team</TableCell>
-                                                <TableCell className={"reorder_tab"}>GP</TableCell>
-                                                <TableCell className={"reorder_tab"}>W</TableCell>
-                                                <TableCell className={"reorder_tab"}>D</TableCell>
-                                                <TableCell className={"reorder_tab"}>L</TableCell>
-                                                <TableCell className={"reorder_tab"}>GS</TableCell>
-                                                <TableCell className={"reorder_tab"}>GC</TableCell>
-                                                <TableCell className={"reorder_tab"}>+/-</TableCell>
-                                                <TableCell className={"reorder_tab"}>Coefficients</TableCell>
-                                                <TableCell className={"reorder_tab"}>Elo</TableCell>
-                                                <TableCell className={"reorder_tab"} style={leftDivider}>
+                                                <TableCell className="small_header reorder_tab">Pos</TableCell>
+                                                <TableCell className="small_header reorder_tab">Team</TableCell>
+                                                <TableCell className="small_header reorder_tab">GP</TableCell>
+                                                <TableCell className="small_header reorder_tab">W</TableCell>
+                                                <TableCell className="small_header reorder_tab">D</TableCell>
+                                                <TableCell className="small_header reorder_tab">L</TableCell>
+                                                <TableCell className="small_header reorder_tab">GS</TableCell>
+                                                <TableCell className="small_header reorder_tab">GC</TableCell>
+                                                <TableCell className="small_header reorder_tab">+/-</TableCell>
+                                                <TableCell className="small_header reorder_tab">Coefficients</TableCell>
+                                                <TableCell className="small_header reorder_tab">Elo</TableCell>
+                                                <TableCell className="small_header reorder_tab" style={leftDivider}>
                                                     ratio</TableCell>
-                                                <TableCell className={"reorder_tab"}>avg gs</TableCell>
-                                                <TableCell className={"reorder_tab"}>avg gc</TableCell>
-                                                <TableCell className={"reorder_tab"}>goals per game</TableCell>
-                                                <TableCell className={"reorder_tab"} style={leftDivider}>
+                                                <TableCell className="small_header reorder_tab">avg gs</TableCell>
+                                                <TableCell className="small_header reorder_tab">avg gc</TableCell>
+                                                <TableCell className="small_header reorder_tab">goals per game</TableCell>
+                                                <TableCell className="small_header reorder_tab" style={leftDivider}>
                                                     ratio</TableCell>
-                                                <TableCell className={"reorder_tab"}>avg gs</TableCell>
-                                                <TableCell className={"reorder_tab"}>avg gc</TableCell>
-                                                <TableCell className={"reorder_tab"}>goals per game</TableCell>
+                                                <TableCell className="small_header reorder_tab">avg gs</TableCell>
+                                                <TableCell className="small_header reorder_tab">avg gc</TableCell>
+                                                <TableCell className="small_header reorder_tab">goals per game</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>

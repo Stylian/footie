@@ -92,7 +92,7 @@ export default function SeasonPostview({year}) {
                 <Grid container spacing={1}>
                     <Grid item sm={7}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Team Awards"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                            <CardHeader className="big_header" title={"Team Awards"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                             <CardContent>
                                 <Grid container spacing={1}>
                                     <Grid item sm={4}>
@@ -101,7 +101,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"center"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>champion</TableCell>
+                                                            <TableCell className="small_header">champion</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -121,7 +121,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"center"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>runner-up</TableCell>
+                                                            <TableCell className="small_header">runner-up</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -141,7 +141,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"center"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>positions 3rd-4th</TableCell>
+                                                            <TableCell className="small_header">positions 3rd-4th</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -168,7 +168,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"center"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>positions 5th-6th</TableCell>
+                                                            <TableCell className="small_header">positions 5th-6th</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -200,7 +200,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"left"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell colSpan={3}>highest scoring game</TableCell>
+                                                            <TableCell className="small_header" colSpan={3}>highest scoring game</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -229,7 +229,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"left"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell colSpan={3}>best win</TableCell>
+                                                            <TableCell className="small_header" colSpan={3}>best win</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -258,7 +258,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"left"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell colSpan={3}>worst result</TableCell>
+                                                            <TableCell className="small_header" colSpan={3}>worst result</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -288,7 +288,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"left"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>overachievers</TableCell>
+                                                            <TableCell className="small_header">overachievers</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -328,7 +328,7 @@ export default function SeasonPostview({year}) {
                                                 <table className="table" align={"left"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>underperformers</TableCell>
+                                                            <TableCell className="small_header">underperformers</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
@@ -372,7 +372,7 @@ export default function SeasonPostview({year}) {
                     </Grid>
                     <Grid item sm={5}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Player Awards"} align={"center"}
+                            <CardHeader className="big_header" title={"Player Awards"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
@@ -381,7 +381,7 @@ export default function SeasonPostview({year}) {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell colSpan={2}>player of the year</TableCell>
+                                                    <TableCell className="small_header" colSpan={2}>player of the year</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -431,7 +431,7 @@ export default function SeasonPostview({year}) {
                                         <table className="table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell colSpan={3}>
+                                                    <TableCell className="small_header" colSpan={3}>
                                                         <img src={dreamteam} title={"selected in a dream team"}/>
                                                         dream team</TableCell>
                                                 </TableRow>

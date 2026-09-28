@@ -17,17 +17,17 @@ export default function Seeding({year}) {
         return (
             <Box>
                 <Card style={{margin: 20, boxShadow: 'none'}} elevation={0}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 'max-content', marginTop: 10 }}>
-                            <div className="section-title" style={{alignSelf: 'stretch'}}>Coefficients</div>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                            <div style={{ margin: 10 }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 'max-content' }}>
+                            <div className="big_header" style={{alignSelf: 'stretch'}}>Coefficients</div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10 }}>
+                            <div>
                                 <table className="table" align={"left"}>
-                                    <TableHead className="match-table-head">
+                                    <TableHead>
                                         <TableRow>
-                                            <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                             <TableCell style={{width: '60%'}}>Team</TableCell>
-                                             <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                            <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                             <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                             <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -78,13 +78,13 @@ export default function Seeding({year}) {
                                 </table>
                             </div>
 
-                            <div style={{ margin: 10 }}>
+                            <div>
                                 <table className="table" align={"left"}>
-                                    <TableHead className="match-table-head">
+                                    <TableHead>
                                         <TableRow>
-                                           <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                           <TableCell style={{width: '60%'}}>Team</TableCell>
-                                           <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                           <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                           <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                           <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -137,12 +137,12 @@ export default function Seeding({year}) {
                          </div>
                         </div>
 
-<div style={{ margin: 10, width: 'fit-content' }}>
-                            <div className="section-title" style={{alignSelf: 'stretch'}}>Seeding</div>
-                            <table className="table" align={"left"} style={{marginTop: 10}}>
-                                <TableHead className="match-table-head">
+                        <div style={{ width: 'fit-content' }}>
+                            <div className="big_header" style={{alignSelf: 'stretch'}}>Seeding</div>
+                            <table className="table" align={"left"}>
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell>Phases</TableCell>
+                                        <TableCell className="small_header">Phases</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardHeader, Grid, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
+import {Box, Card, CardContent, CardHeader, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core"
 import {useDataLoader} from "../../../DataLoaderManager"
 import PageLoader from "../../../PageLoader";
 
@@ -12,31 +12,31 @@ export default function GroupsDisplay({year, round}) {
     } else {
         return (
             <Box>
-                <Grid container spacing={1}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10 }}>
                     {groups.map((group, index) => {
 
                         return (
-                            <Grid item sm={6}>
-                                <Card style={{margin: 10}}>
+                            <div>
+                                <Card style={{width: 'fit-content'}}>
                                     <CardHeader title={group.name} align={"center"}
                                                 titleTypographyProps={{variant: 'h7'}}
-                                                className={"groupClicker"} data-groupid={group.id}
+                                                className="big_header groupClicker" data-groupid={group.id}
                                                 onClick={goToGroup}
                                     />
-                                    <CardContent>
+                                    <CardContent style={{padding: 0}}>
                                         <table className="table compact-table" align={"center"}>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell className={"reorder_tab"}></TableCell>
-                                                    <TableCell className={"reorder_tab"}>Team</TableCell>
-                                                    <TableCell className={"reorder_tab"}>Played</TableCell>
-                                                    <TableCell className={"reorder_tab"}>Points</TableCell>
-                                                    <TableCell className={"reorder_tab"}>W</TableCell>
-                                                    <TableCell className={"reorder_tab"}>D</TableCell>
-                                                    <TableCell className={"reorder_tab"}>L</TableCell>
-                                                    <TableCell className={"reorder_tab"}>GS</TableCell>
-                                                    <TableCell className={"reorder_tab"}>GC</TableCell>
-                                                    <TableCell className={"reorder_tab"}>+/-</TableCell>
+                                                    <TableCell className="small_header reorder_tab"></TableCell>
+                                                    <TableCell className="small_header reorder_tab">Team</TableCell>
+                                                    <TableCell className="small_header reorder_tab">Played</TableCell>
+                                                    <TableCell className="small_header reorder_tab">Points</TableCell>
+                                                    <TableCell className="small_header reorder_tab">W</TableCell>
+                                                    <TableCell className="small_header reorder_tab">D</TableCell>
+                                                    <TableCell className="small_header reorder_tab">L</TableCell>
+                                                    <TableCell className="small_header reorder_tab">GS</TableCell>
+                                                    <TableCell className="small_header reorder_tab">GC</TableCell>
+                                                    <TableCell className="small_header reorder_tab">+/-</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -77,10 +77,10 @@ export default function GroupsDisplay({year, round}) {
                                         </table>
                                     </CardContent>
                                 </Card>
-                            </Grid>
+                            </div>
                         )
                     })}
-                </Grid>
+                </div>
             </Box>
         )
     }

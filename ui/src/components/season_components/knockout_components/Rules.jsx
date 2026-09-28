@@ -7,7 +7,7 @@ export default function Rules() {
             <Grid container spacing={1}>
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"¼ finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"¼ finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table">
@@ -71,7 +71,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"½ finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"½ finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table">
@@ -137,7 +137,7 @@ export default function Rules() {
 
                 <Grid item sm={4}>
                     <Card style={{margin: 20}}>
-                        <CardHeader title={"finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader className="big_header" title={"finals"} align={"center"} titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent>
                             <table className="table">

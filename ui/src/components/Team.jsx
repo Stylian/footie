@@ -53,7 +53,7 @@ export default function Team() {
                                 <Grid container spacing={1}>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
-                                            <CardHeader title={"statistics"} align={"center"}
+                                            <CardHeader className="big_header" title={"statistics"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
                                             <CardContent>
@@ -297,7 +297,7 @@ export default function Team() {
                                 <Grid container>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
-                                            <CardHeader title={"scores stats"} align={"center"}
+                                            <CardHeader className="big_header" title={"scores stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
                                             <CardContent>
@@ -338,7 +338,7 @@ export default function Team() {
                                     </Grid>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
-                                            <CardHeader title={"elo progression"} align={"center"}
+                                            <CardHeader className="big_header" title={"elo progression"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
                                             <CardContent
@@ -395,7 +395,7 @@ export default function Team() {
                                     </Grid>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
-                                            <CardHeader title={"last 5 games"} align={"center"}
+                                            <CardHeader className="big_header" title={"last 5 games"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
                                             <CardContent style={{minHeight: 200, maxHeight: 200}}>
@@ -404,7 +404,7 @@ export default function Team() {
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
-                                                                    <TableCell colSpan={2}
+                                                                    <TableCell className="small_header" colSpan={2}
                                                                                align={"center"}>Home</TableCell>
                                                                 </TableRow>
                                                             </TableHead>
@@ -432,7 +432,7 @@ export default function Team() {
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
-                                                                    <TableCell colSpan={2}
+                                                                    <TableCell className="small_header" colSpan={2}
                                                                                align={"center"}>Away</TableCell>
                                                                 </TableRow>
                                                             </TableHead>
@@ -469,7 +469,7 @@ export default function Team() {
                                                  <Grid container spacing={1}>
                                                     <Grid item sm={12}>
                                                         <Card style={{marginTop: 10}}>
-                                                            <CardHeader title={"team overview"} align={"center"}
+                                                            <CardHeader className="big_header" title={"team overview"} align={"center"}
                                                                         titleTypographyProps={{variant: 'h7'}}
                                                             />
                                                             <CardContent>
@@ -521,7 +521,7 @@ export default function Team() {
                                                     </Grid>
                                                     <Grid item sm={12}>
                                                         <Card style={{marginTop: 10}}>
-                                                            <CardHeader title={"trophies"} align={"center"}
+                                                            <CardHeader className="big_header" title={"trophies"} align={"center"}
                                                                         titleTypographyProps={{variant: 'h7'}}
                                                             />
                                                             <CardContent>
@@ -555,16 +555,16 @@ export default function Team() {
                                              </Grid>
                                             <Grid item sm={6}>
                                                 <Card style={{marginTop: 10}}>
-                                                    <CardHeader title={"players"} align={"center"}
+                                                    <CardHeader className="big_header" title={"players"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />
                                                     <CardContent>
                                                         <table className="table" align={"center"}>
                                                             <TableHead>
                                                                 <TableRow>
-                                                                    <TableCell style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
-                                                                    <TableCell><img src={playeroftheyear} title={"player of the year"}/></TableCell>
-                                                                    <TableCell> <img src={dreamteam}
+                                                                    <TableCell className="small_header" style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
+                                                                    <TableCell className="small_header"><img src={playeroftheyear} title={"player of the year"}/></TableCell>
+                                                                    <TableCell className="small_header"> <img src={dreamteam}
                                                                                      title={"selected in a dream team"}/></TableCell>
                                                                 </TableRow>
                                                             </TableHead>
@@ -593,23 +593,23 @@ export default function Team() {
                                     </Grid>
                                     <Grid item sm={12}>
                                         <Card style={{margin: 10}}>
-                                            <CardHeader title={"season stats"} align={"center"}
+                                            <CardHeader className="big_header" title={"season stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
                                             <CardContent>
                                                 <table className="table" align={"center"}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell>Season</TableCell>
-                                                            <TableCell>Coeffs</TableCell>
-                                                            <TableCell>Elo</TableCell>
-                                                            <TableCell>GP</TableCell>
-                                                            <TableCell>W</TableCell>
-                                                            <TableCell>D</TableCell>
-                                                            <TableCell>L</TableCell>
-                                                            <TableCell>GS</TableCell>
-                                                            <TableCell>GC</TableCell>
-                                                            <TableCell>+/-</TableCell>
+                                                            <TableCell className="small_header">Season</TableCell>
+                                                            <TableCell className="small_header">Coeffs</TableCell>
+                                                            <TableCell className="small_header">Elo</TableCell>
+                                                            <TableCell className="small_header">GP</TableCell>
+                                                            <TableCell className="small_header">W</TableCell>
+                                                            <TableCell className="small_header">D</TableCell>
+                                                            <TableCell className="small_header">L</TableCell>
+                                                            <TableCell className="small_header">GS</TableCell>
+                                                            <TableCell className="small_header">GC</TableCell>
+                                                            <TableCell className="small_header">+/-</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>

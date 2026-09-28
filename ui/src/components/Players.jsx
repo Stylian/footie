@@ -121,17 +121,17 @@ export default function Players() {
                     <Grid container spacing={1}>
                         <Grid item sm={7}>
                             <Card style={{margin: 20}}>
-                                <CardHeader title={"Players"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
+                                <CardHeader className="big_header" title={"Players"} align={"center"} titleTypographyProps={{variant: 'h7'}}/>
                                 <CardContent>
                                     <Grid container spacing={1}>
                                         <Grid item sm={6}>
                                             <table className="table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell>id</TableCell>
-                                                        <TableCell>player</TableCell>
-                                                        <TableCell>team</TableCell>
-                                                        <TableCell></TableCell>
+                                                        <TableCell className="small_header">id</TableCell>
+                                                        <TableCell className="small_header">player</TableCell>
+                                                        <TableCell className="small_header">team</TableCell>
+                                                        <TableCell className="small_header"></TableCell>
                                                     </TableRow>
                                                 </TableHead>
 

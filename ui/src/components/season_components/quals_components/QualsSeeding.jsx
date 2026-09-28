@@ -40,14 +40,14 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                 ) : ''}
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Card style={{margin: 20, width: 'fit-content', minWidth: 320, boxShadow: 'none'}} elevation={0}>
-                        <CardHeader title={"Seeded"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}/>
-                        <CardContent>
+                        <CardHeader title={"Seeded"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}/>
+                        <CardContent style={{padding: 0}}>
                             <table className="table" align={"center"}>
-                                <TableHead className="match-table-head">
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                        <TableCell style={{width: '60%'}}>Team</TableCell>
-                                        <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                        <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                        <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                        <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -68,15 +68,15 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                     </Card>
 
                     <Card style={{margin: 20, width: 'fit-content', minWidth: 320, boxShadow: 'none'}} elevation={0}>
-                        <CardHeader title={"Unseeded"} align={"center"} className="match-card-header" titleTypographyProps={{variant: 'h7'}}
+                        <CardHeader title={"Unseeded"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}
                         />
-                        <CardContent>
+                        <CardContent style={{padding: 0}}>
                             <table className="table" align={"center"}>
-                                <TableHead className="match-table-head">
+                                <TableHead>
                                     <TableRow>
-                                        <TableCell align="right" style={{width: '15%'}}>Pos</TableCell>
-                                        <TableCell style={{width: '60%'}}>Team</TableCell>
-                                        <TableCell style={{width: '25%'}}>Coefficients</TableCell>
+                                        <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                        <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                        <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

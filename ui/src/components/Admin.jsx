@@ -111,7 +111,7 @@ export default function Admin() {
 
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Seasons Stage"} align={"center"}
+                            <CardHeader className="big_header" title={"Seasons Stage"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
@@ -134,7 +134,7 @@ export default function Admin() {
                     </Grid>
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Database"} align={"center"}
+                            <CardHeader className="big_header" title={"Database"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
@@ -165,7 +165,7 @@ export default function Admin() {
                     </Grid>
                     <Grid item sm={4}>
                         <Card style={{margin: 20}}>
-                            <CardHeader title={"Engine Tools"} align={"center"}
+                            <CardHeader className="big_header" title={"Engine Tools"} align={"center"}
                                         titleTypographyProps={{variant: 'h7'}}
                             />
                             <CardContent>
