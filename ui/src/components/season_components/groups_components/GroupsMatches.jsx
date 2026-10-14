@@ -9,8 +9,8 @@ export default function GroupsMatches({year, round}) {
     if (days === null) {
         return (<PageLoader />)
     } else {
-        const daysPerRow = 2
         const dayKeys = Object.keys(days)
+        const daysPerRow = round === 1 ? dayKeys.length : 2
         const rows = []
         for (let start = 0; start < dayKeys.length; start += daysPerRow) {
             rows.push(dayKeys.slice(start, start + daysPerRow))
@@ -20,7 +20,7 @@ export default function GroupsMatches({year, round}) {
             <Box>
                 {rows.map((row, rowIndex) => (
                     <div key={rowIndex} style={{
-                        display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start'
+                        display: 'flex', flexWrap: round === 1 ? 'nowrap' : 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start'
                     }}>
                         {row.map((day, index) => {
                             return (
