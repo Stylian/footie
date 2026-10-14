@@ -43,26 +43,25 @@ export default function Stats() {
                                     <table className="table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell className="small_header reorder_tab" colSpan={11}></TableCell>
-                                                <TableCell className="small_header reorder_tab" colSpan={4}
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>Pos</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>Team</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>GP</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>W</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>D</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>L</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>GS</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>GC</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>+/-</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>Coefficients</TableCell>
+                                                <TableCell className="small_header reorder_tab" rowSpan={2}>Elo</TableCell>
+                                                <TableCell className="small_header" colSpan={4}
                                                            style={leftDivider}
                                                            align={"center"}>home stats</TableCell>
-                                                <TableCell className="small_header reorder_tab" colSpan={4}
+                                                <TableCell className="small_header" colSpan={4}
                                                            style={leftDivider}
                                                            align={"center"}>away stats</TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell className="small_header reorder_tab">Pos</TableCell>
-                                                <TableCell className="small_header reorder_tab">Team</TableCell>
-                                                <TableCell className="small_header reorder_tab">GP</TableCell>
-                                                <TableCell className="small_header reorder_tab">W</TableCell>
-                                                <TableCell className="small_header reorder_tab">D</TableCell>
-                                                <TableCell className="small_header reorder_tab">L</TableCell>
-                                                <TableCell className="small_header reorder_tab">GS</TableCell>
-                                                <TableCell className="small_header reorder_tab">GC</TableCell>
-                                                <TableCell className="small_header reorder_tab">+/-</TableCell>
-                                                <TableCell className="small_header reorder_tab">Coefficients</TableCell>
-                                                <TableCell className="small_header reorder_tab">Elo</TableCell>
                                                 <TableCell className="small_header reorder_tab" style={leftDivider}>
                                                     ratio</TableCell>
                                                 <TableCell className="small_header reorder_tab">avg gs</TableCell>
