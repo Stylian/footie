@@ -26,83 +26,44 @@ export default function Coefficients() {
     if (teams === null || seasons === null || teamsWithTrophies === null) {
         return (<PageLoader />)
     } else {
-        let teamsList = [...teams]
-        let half_length = Math.ceil(teamsList.length / 2)
-        let leftSide = teamsList.splice(0, half_length)
-        let rightSide = teamsList
         return (
             <Box>
                 <LeagueToolbar pageTitle={"Awards & Coefficients"}/>
                 <Box style={{marginTop: 20, marginLeft: 10}}>
                     <Grid container spacing={1}>
-                        <Grid item sm={5}>
-                            <Card >
+                        <Grid item style={{width: 'fit-content'}}>
+                            <Card style={{width: 'fit-content'}}>
                                 <CardHeader className="big_header" title={"Coefficients"} align={"center"}
                                             titleTypographyProps={{variant: 'h7'}}/>
                                 <CardContent>
-                                    <Grid container spacing={1}  justifyContent="center" >
-                                        <Grid item sm={6}>
-                                            <table className="table">
-                                                <TableHead>
-                                                    <TableRow>
-                                                        <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
-                                                         <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
-                                                         <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
-                                                    </TableRow>
-                                                </TableHead>
-                                                <TableBody>
-                                                    {leftSide.map((team, index) => (
-                                                        <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                                  onClick={goToTeam} style={{
-                                                            backgroundColor:
-                                                                (team.seed === "CHAMPION") ? '#d9edf7' :
-                                                                    (team.seed === "TO_GROUPS") ? '#d9edf7' :
-                                                                        (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                            (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
-                                                                                '#f2dede'
-                                                        }}>
-                                                            <TableCell align="right">{index + 1}</TableCell>
-                                                            <TableCell className="team_name">{team.name}</TableCell>
-                                                            <TableCell
-                                                                align="right">{Numeral(team.coefficients / 1000).format('0.000')}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    ))}
-                                                </TableBody>
-                                            </table>
-                                        </Grid>
-                                        <Grid item sm={6}>
-                                            <table className="table">
-                                               <TableHead>
-                                                   <TableRow>
-                                                       <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
-                                                        <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
-                                                        <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
-                                                   </TableRow>
-                                               </TableHead>
-                                                <TableBody>
-                                                    {rightSide.map((team, index) => (
-                                                        <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                                  onClick={goToTeam} style={{
-                                                            backgroundColor:
-                                                                (team.seed === "CHAMPION") ? '#d9edf7' :
-                                                                    (team.seed === "TO_GROUPS") ? '#d9edf7' :
-                                                                        (team.seed === "TO_QUALS_2") ? '#dff0d8' :
-                                                                            (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
-                                                                                '#f2dede'
-                                                        }}>
-                                                            <TableCell
-                                                                align="right">{leftSide.length + index + 1}</TableCell>
-                                                            <TableCell className="team_name">{team.name}</TableCell>
-                                                            <TableCell
-                                                                align="right">{Numeral(team.coefficients / 1000).format('0.000')}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    ))}
-                                                </TableBody>
-                                            </table>
-                                        </Grid>
-                                    </Grid>
+                                    <table className="table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell className="small_header" align="right" style={{width: '15%'}}>Pos</TableCell>
+                                                 <TableCell className="small_header" style={{width: '60%'}}>Team</TableCell>
+                                                 <TableCell className="small_header" style={{width: '25%'}}>Coefficients</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {teams.map((team, index) => (
+                                                <TableRow className={"teamClicker"} data-teamid={team.id}
+                                                          onClick={goToTeam} style={{
+                                                    backgroundColor:
+                                                        (team.seed === "CHAMPION") ? '#d9edf7' :
+                                                            (team.seed === "TO_GROUPS") ? '#d9edf7' :
+                                                                (team.seed === "TO_QUALS_2") ? '#dff0d8' :
+                                                                    (team.seed === "TO_QUALS_1") ? '#fdf9e8' :
+                                                                        '#f2dede'
+                                                }}>
+                                                    <TableCell align="right">{index + 1}</TableCell>
+                                                    <TableCell className="team_name">{team.name}</TableCell>
+                                                    <TableCell
+                                                        align="right">{Numeral(team.coefficients / 1000).format('0.000')}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </table>
                                 </CardContent>
                             </Card>
                         </Grid>

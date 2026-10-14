@@ -9,6 +9,7 @@ public class TeamCoeffsDTO extends TeamSimpleDTO {
 
     private int coefficients;
     private Seed seed;
+    private Seed phaseSeed;
     private List<Trophy> trophies;
 
     public Seed getSeed() {
@@ -17,6 +18,14 @@ public class TeamCoeffsDTO extends TeamSimpleDTO {
 
     public void setSeed(Seed seed) {
         this.seed = seed;
+    }
+
+    public Seed getPhaseSeed() {
+        return phaseSeed;
+    }
+
+    public void setPhaseSeed(Seed phaseSeed) {
+        this.phaseSeed = phaseSeed;
     }
 
     public int getCoefficients() {

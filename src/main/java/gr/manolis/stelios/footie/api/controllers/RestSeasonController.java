@@ -197,8 +197,10 @@ public class RestSeasonController {
             }
         }
 
-        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
-        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK);
+        Map<Integer, Seed> phaseSeeds = getPhaseSeedsForSeason(season);
+
+        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG, phaseSeeds);
+        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK, phaseSeeds);
 
         Map<Seed, List<TeamCoeffsDTO>> qualsTeams = new HashMap<>();
         qualsTeams.put(Seed.STRONG, teamsStrongWithCoeffs);
@@ -294,9 +296,11 @@ public class RestSeasonController {
 
         }
 
-        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG);
-        List<TeamCoeffsDTO> teamsMediumWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsMedium, Seed.MEDIUM);
-        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK);
+        Map<Integer, Seed> phaseSeeds = getPhaseSeedsForSeason(season);
+
+        List<TeamCoeffsDTO> teamsStrongWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsStrong, Seed.STRONG, phaseSeeds);
+        List<TeamCoeffsDTO> teamsMediumWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsMedium, Seed.MEDIUM, phaseSeeds);
+        List<TeamCoeffsDTO> teamsWeakWithCoeffs = getTeamsWithCoeffsAndSeed(season, teamsWeak, Seed.WEAK, phaseSeeds);
 
         Map<Seed, List<TeamCoeffsDTO>> groupsTeams = new HashMap<>();
         groupsTeams.put(Seed.STRONG, teamsStrongWithCoeffs);
@@ -690,13 +694,17 @@ public class RestSeasonController {
         return theTeams;
     }
 
-    private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Seed seed) {
+    private List<TeamCoeffsDTO> getTeamsWithCoeffsAndSeed(Season season, List<Team> teams, Seed seed, Map<Integer, Seed> teamsInRounds) {
 
         List<TeamCoeffsDTO> theTeams = new ArrayList<>();
 
         for (Team team : teams) {
             TeamCoeffsDTO teamDTO = teamCoeffsMapper.toDTO(team);
             teamDTO.setSeed(seed);
+
+            if (teamsInRounds != null) {
+                teamDTO.setPhaseSeed(teamsInRounds.get(team.getId()));
+            }
 
             if (season.getSeasonYear() > 1) {
                 int p1 = serviceUtils.getCoefficientsUntilSeason(team, season.getSeasonYear() - 1);
@@ -709,6 +717,19 @@ public class RestSeasonController {
         }
 
         return theTeams;
+    }
+
+    private Map<Integer, Seed> getPhaseSeedsForSeason(Season season) {
+        if (season.getSeasonYear() <= 1) {
+            return null;
+        }
+        Map<Integer, Seed> phaseSeeds = new HashMap<>();
+        for (Map.Entry<Seed, List<Team>> entry : seasonService.checkWhereTeamsAreSeededForASeason(season).entrySet()) {
+            for (Team team : entry.getValue()) {
+                phaseSeeds.putIfAbsent(team.getId(), entry.getKey());
+            }
+        }
+        return phaseSeeds;
     }
 
 

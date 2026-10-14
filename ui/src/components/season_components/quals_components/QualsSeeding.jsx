@@ -13,6 +13,14 @@ import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
 import PageLoader from "../../../PageLoader";
 
+const phaseColor = (phaseSeed) => {
+    if (phaseSeed === "CHAMPION" || phaseSeed === "TO_GROUPS") return '#d9edf7';
+    if (phaseSeed === "TO_QUALS_2") return '#dff0d8';
+    if (phaseSeed === "TO_QUALS_1") return '#fdf9e8';
+    if (phaseSeed === "TO_PRELIMINARY") return '#f2dede';
+    return undefined;
+};
+
 export default function QualsSeeding({year, round, haveToSetUpTeams}) {
     const data = useDataLoader("/rest/seasons/" + year + "/quals/" + round + "/seeding")
     const handleSettingUpButtonClick = () => {
@@ -54,7 +62,8 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                                     {teamsStrong.map((team, index) => {
                                         return (
                                             <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                      onClick={goToTeam}>
+                                                      onClick={goToTeam}
+                                                      style={{backgroundColor: phaseColor(team.phaseSeed)}}>
                                                 <TableCell align="right">{index + 1}</TableCell>
                                                 <TableCell className="team_name">{team.name}</TableCell>
                                                 <TableCell
@@ -83,7 +92,8 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
                                     {teamsWeak.map((team, index) => {
                                         return (
                                             <TableRow className={"teamClicker"} data-teamid={team.id}
-                                                      onClick={goToTeam}>
+                                                      onClick={goToTeam}
+                                                      style={{backgroundColor: phaseColor(team.phaseSeed)}}>
                                                 <TableCell
                                                     align="right">{teamsStrong.length + index + 1}</TableCell>
                                                 <TableCell className="team_name">{team.name}</TableCell>
