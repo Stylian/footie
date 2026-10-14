@@ -151,6 +151,14 @@ table {
   white-space: nowrap !important; /* no wrapping */
 }
 
+.group_table {
+  min-width: 620px !important;
+}
+
+.group_table .MuiTableCell-root {
+  padding: 5px 14px !important;
+}
+
 /* Team name cell narrower */
 .compact-table .team-cell {
   max-width: 80px !important;

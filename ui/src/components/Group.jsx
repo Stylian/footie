@@ -35,7 +35,7 @@ export default function Group() {
                                     titleTypographyProps={{variant: 'h7'}}
                         />
                         <CardContent style={{padding: 0}}>
-                            <table className="table" align={"center"}>
+                            <table className="table group_table" align={"center"}>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell className="small_header reorder_tab">Pos</TableCell>

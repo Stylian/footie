@@ -33,7 +33,7 @@ export default function GroupsDisplay({year, round}) {
                                                     onClick={goToGroup}
                                         />
                                         <CardContent style={{padding: 0}}>
-                                            <table className="table compact-table" align={"center"}>
+                                            <table className="table compact-table group_table" align={"center"}>
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell className="small_header reorder_tab"></TableCell>
