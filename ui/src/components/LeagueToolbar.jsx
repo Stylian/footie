@@ -53,7 +53,8 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
     return (
         <AppBar position="static" style={{ borderBottom: '1px solid rgba(0,0,0,0.25)' }}>
             <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="Menu" onClick={handleClick}>
+                <IconButton edge="start" color="inherit" aria-label="Menu" onClick={handleClick}
+                            className="toolbar_button">
                     <MenuIcon/>
                 </IconButton>
                 <Menu
@@ -78,13 +79,14 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                 <Typography variant="h6" style={{ marginLeft: 15 }}>{pageTitle}</Typography>
             </Toolbar>
             <Toolbar style={{ minHeight: 44 }}>
-                {seasonNum && seasonsTotal && (
+                {seasonsTotal && (
                     <Box>
                         <Tooltip title="next season" arrow placement="top">
                             <span>
-                                <IconButton onClick={handleUp} disabled={seasonNum == seasonsTotal}
+                                <IconButton onClick={handleUp} disabled={!seasonNum || seasonNum == seasonsTotal}
+                                            className="toolbar_button"
                                             style={{...buttonStyle,
-                                                opacity: (seasonNum == seasonsTotal) ? 0.35 : 1}}>
+                                                opacity: (!seasonNum || seasonNum == seasonsTotal) ? 0.35 : 1}}>
                                     <img src={up} title={"next season"}
                                          style={{maxHeight: 24, width: 'auto',
                                              filter: 'brightness(0) invert(1)'}}/>
@@ -93,9 +95,10 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                         </Tooltip>
                         <Tooltip title="previous season" arrow placement="top">
                             <span>
-                                <IconButton onClick={handleDown} disabled={seasonNum <= 1}
+                                <IconButton onClick={handleDown} disabled={!seasonNum || seasonNum <= 1}
+                                            className="toolbar_button"
                                             style={{...buttonStyle,
-                                                opacity: (seasonNum <= 1) ? 0.35 : 1}}>
+                                                opacity: (!seasonNum || seasonNum <= 1) ? 0.35 : 1}}>
                                     <img src={down} title={"previous season"}
                                          style={{maxHeight: 24, width: 'auto',
                                              filter: 'brightness(0) invert(1)'}}/>
@@ -106,6 +109,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                 )}
                 <Tooltip title="Back" arrow placement="top">
                     <IconButton color="inherit" aria-label="Back" onClick={handleBack}
+                                className="toolbar_button"
                                 style={buttonStyle}>
                         <img src={arrowLeft} title="back"
                              style={{maxHeight: 24, width: 'auto', filter: 'brightness(0) invert(1)'}}/>
@@ -113,6 +117,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                 </Tooltip>
                 <Tooltip title="Forward" arrow placement="top">
                     <IconButton color="inherit" aria-label="Forward" onClick={handleForward}
+                                className="toolbar_button"
                                 style={buttonStyle}>
                         <img src={arrowRight} title="forward"
                              style={{maxHeight: 24, width: 'auto', filter: 'brightness(0) invert(1)'}}/>
@@ -124,6 +129,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                         <Tooltip key={item.link} title={item.label} arrow placement="top">
                             <IconButton data-link={item.link} onClick={handleButtonSelection}
                                         aria-label={item.label}
+                                        className="toolbar_button"
                                         style={buttonStyle}>
                                 <img src={item.icon} title={item.label}
                                      style={{maxHeight: 24, width: 'auto',

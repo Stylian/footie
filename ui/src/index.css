@@ -17,6 +17,10 @@ code {
   padding: 0 !important;
 }
 
+.toolbar_button {
+  padding: 6px !important;
+}
+
 .MuiAppBar-colorPrimary {
   background-color: #1f6d93 !important;
 }
