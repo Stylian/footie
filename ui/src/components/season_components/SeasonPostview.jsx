@@ -5,6 +5,7 @@ import {
     CardContent,
     CardHeader,
     Grid,
+    IconButton,
     MenuItem,
     TableBody,
     TableCell,
@@ -12,13 +13,29 @@ import {
     TableRow,
     TextField
 } from "@material-ui/core"
+import EditIcon from "@material-ui/icons/Edit"
+import SaveIcon from "@material-ui/icons/Save"
+import CloseIcon from "@material-ui/icons/Close"
 import goldmedal from "../../icons/goldmedal.png"
 import silvermedal from "../../icons/silvermedal.png"
 import playeroftheyear from "../../icons/playeroftheyear.png"
 import dreamteam from "../../icons/dreamteam.png"
-import Button from "@material-ui/core/Button"
 import {useDataLoader} from "../../DataLoaderManager"
 import PageLoader from "../../PageLoader"
+
+const dreamTeamSlots = [
+    {field: "gk", cell: "GK", label: "goalkeeper", bg: "#d2a679"},
+    {field: "dcl", cell: "DC", label: "central defender", bg: "rgb(217, 237, 247)"},
+    {field: "dcr", cell: "DC", label: "central defender", bg: "rgb(217, 237, 247)"},
+    {field: "dl", cell: "DL", label: "left defender", bg: "rgb(217, 237, 247)"},
+    {field: "dr", cell: "DR", label: "right defender", bg: "rgb(217, 237, 247)"},
+    {field: "cml", cell: "CM", label: "central midfielder", bg: "#dbf0db"},
+    {field: "cmr", cell: "CM", label: "central midfielder", bg: "#dbf0db"},
+    {field: "amc", cell: "AMC", label: "attacking midfielder centre", bg: "#dbf0db"},
+    {field: "aml", cell: "LW", label: "left winger", bg: "#e2b6b6"},
+    {field: "amr", cell: "LR", label: "right winger", bg: "#e2b6b6"},
+    {field: "st", cell: "ST", label: "striker", bg: "#e2b6b6"},
+]
 
 export default function SeasonPostview({year}) {
 
@@ -42,8 +59,9 @@ export default function SeasonPostview({year}) {
         amc: null,
         st: null,
     })
+    const [editingField, setEditingField] = useState(null)
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
-    const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.groupid
+    const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
 
     const handleChange = field => event => {
         let value = event.target.value;
@@ -57,24 +75,21 @@ export default function SeasonPostview({year}) {
         }));
     };
 
-    const handlePublish = () => {
+    const startEdit = (field, currentId) => {
+        setEditingField(field)
+        setPageData(prevPageData => ({
+            ...prevPageData,
+            [field]: currentId
+        }))
+    };
+
+    const cancelEdit = () => setEditingField(null)
+
+    const saveField = (field) => {
         fetch("/rest/seasons/" + year + "/publish", {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: "overachievers=" + pageData.overachievers
-                + "&underperformers=" + pageData.underperformers
-                + "&playerOfTheYear=" + pageData.playerOfTheYear
-                + "&gk=" + pageData.gk
-                + "&dl=" + pageData.dl
-                + "&dr=" + pageData.dr
-                + "&dcl=" + pageData.dcl
-                + "&dcr=" + pageData.dcr
-                + "&cml=" + pageData.cml
-                + "&cmr=" + pageData.cmr
-                + "&amr=" + pageData.amr
-                + "&aml=" + pageData.aml
-                + "&amc=" + pageData.amc
-                + "&st=" + pageData.st
+            body: field + "=" + pageData[field]
         })
             .then(res => res.json())
             .then(
@@ -85,10 +100,144 @@ export default function SeasonPostview({year}) {
 
     if (seasonData === null || teams === null || players === null) {
         return (<PageLoader/>)
-    } else {
+    }
+
+    const playerOptions = players.map(player => (
+        <MenuItem key={player.id} value={player.id}>{player.name}</MenuItem>
+    ))
+    const teamOptions = teams.map(team => (
+        <MenuItem key={team.id} value={team.id}>{team.name}</MenuItem>
+    ))
+
+    const renderTeamAward = (field, bg) => {
+        const current = seasonData[field]
+        const isEditing = current == null || editingField === field
         return (
+            <TableRow style={{backgroundColor: current != null ? bg : undefined}}>
+                <TableCell
+                    className={isEditing ? "" : "teamClicker team_name"}
+                    data-teamid={current == null ? undefined : current.id}
+                    onClick={isEditing ? undefined : goToTeam}>
+                    {isEditing ? (
+                        <Box display="flex" alignItems="center">
+                            <TextField style={{width: 200}} id={field} select label={field}
+                                       value={pageData[field]} onChange={handleChange(field)} margin="normal">
+                                {teamOptions}
+                            </TextField>
+                            {current != null && (
+                                <IconButton onClick={cancelEdit}><CloseIcon title={"cancel"}/></IconButton>
+                            )}
+                            <IconButton onClick={() => saveField(field)} disabled={pageData[field] == null}>
+                                <SaveIcon title={"save"}/>
+                            </IconButton>
+                        </Box>
+                    ) : (
+                        <Box display="flex" alignItems="center">
+                            {current.name}
+                            <IconButton onClick={() => startEdit(field, current.id)}>
+                                <EditIcon title={"edit"}/>
+                            </IconButton>
+                        </Box>
+                    )}
+                </TableCell>
+            </TableRow>
+        )
+    }
+
+    const renderPlayerOfTheYear = () => {
+        const field = "playerOfTheYear"
+        const current = seasonData.player_of_the_year
+        const isEditing = current == null || editingField === field
+        return (
+            <TableRow style={{backgroundColor: current != null ? 'rgb(179, 184, 255)' : undefined}}>
+                {isEditing ? (
+                    <>
+                        <TableCell>
+                            <TextField style={{width: 200}} id={field} select label="player of the year"
+                                       value={pageData[field]} onChange={handleChange(field)} margin="normal">
+                                {playerOptions}
+                            </TextField>
+                        </TableCell>
+                        <TableCell>
+                            {current != null && (
+                                <IconButton onClick={cancelEdit}><CloseIcon title={"cancel"}/></IconButton>
+                            )}
+                            <IconButton onClick={() => saveField(field)} disabled={pageData[field] == null}>
+                                <SaveIcon title={"save"}/>
+                            </IconButton>
+                        </TableCell>
+                    </>
+                ) : (
+                    <>
+                        <TableCell className={"playerClicker"} data-playerid={current.id}
+                                   style={{minWidth: 150, maxWidth: 150}} onClick={goToPlayer}>
+                            <img src={playeroftheyear} title={"player of the year"}/>
+                            {current.name}
+                        </TableCell>
+                        <TableCell className={"teamClicker team_name"} data-teamid={current.team.id}
+                                   onClick={goToTeam}>
+                            {current.team.name}
+                            <IconButton onClick={(e) => {
+                                e.stopPropagation();
+                                startEdit(field, current.id)
+                            }}>
+                                <EditIcon title={"edit"}/>
+                            </IconButton>
+                        </TableCell>
+                    </>
+                )}
+            </TableRow>
+        )
+    }
+
+    const renderDreamTeamRow = (slot) => {
+        const {field, cell, label, bg} = slot
+        const current = seasonData[field]
+        const isEditing = current == null || editingField === field
+        return (
+            <TableRow key={field} style={{backgroundColor: current != null ? bg : undefined}}>
+                <TableCell>{cell}</TableCell>
+                {isEditing ? (
+                    <>
+                        <TableCell>
+                            <TextField style={{width: 200}} id={field} select label={label}
+                                       value={pageData[field]} onChange={handleChange(field)} margin="normal">
+                                {playerOptions}
+                            </TextField>
+                        </TableCell>
+                        <TableCell>
+                            {current != null && (
+                                <IconButton onClick={cancelEdit}><CloseIcon title={"cancel"}/></IconButton>
+                            )}
+                            <IconButton onClick={() => saveField(field)} disabled={pageData[field] == null}>
+                                <SaveIcon title={"save"}/>
+                            </IconButton>
+                        </TableCell>
+                    </>
+                ) : (
+                    <>
+                        <TableCell className={"playerClicker"} data-playerid={current.id}
+                                   style={{minWidth: 150, maxWidth: 150}} onClick={goToPlayer}>
+                            {current.name}
+                        </TableCell>
+                        <TableCell className={"teamClicker team_name"} data-teamid={current.team.id}
+                                   onClick={goToTeam}>
+                            {current.team.name}
+                            <IconButton onClick={(e) => {
+                                e.stopPropagation();
+                                startEdit(field, current.id)
+                            }}>
+                                <EditIcon title={"edit"}/>
+                            </IconButton>
+                        </TableCell>
+                    </>
+                )}
+            </TableRow>
+        )
+    }
+
+    return (
             <Box>
-                {seasonData.haveToPublish ? (<Button onClick={handlePublish}>Publish</Button>) : ''}
                 <Grid container spacing={1}>
                     <Grid item sm={7}>
                         <Card className="page_box" style={{boxShadow: 'none', backgroundColor: 'transparent'}} elevation={0}>
@@ -286,35 +435,7 @@ export default function SeasonPostview({year}) {
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
-                                                        {seasonData.overachievers == null ? (
-                                                            <TableRow>
-                                                                <TableCell>
-                                                                    <TextField
-                                                                        style={{width: 200}}
-                                                                        id="overachievers"
-                                                                        select
-                                                                        label="overachievers"
-                                                                        value={pageData.overachievers}
-                                                                        onChange={handleChange("overachievers")}
-                                                                        margin="normal">
-                                                                        {teams.map(team => (
-                                                                            <MenuItem key={team.id} value={team.id}>
-                                                                                {team.name}
-                                                                            </MenuItem>
-                                                                        ))}
-                                                                    </TextField>
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        ) : (
-                                                            <TableRow className={"teamClicker"}
-                                                                      data-teamid={seasonData.overachievers.id}
-                                                                      onClick={goToTeam}
-                                                                      style={{backgroundColor: 'rgb(226, 228, 255)'}}>
-                                                                <TableCell className="team_name">
-                                                                    {seasonData.overachievers.name}
-                                                                </TableCell>
-                                                            </TableRow>)}
-
+                                                        {renderTeamAward("overachievers", 'rgb(226, 228, 255)')}
                                                     </TableBody>
                                                 </table>
                                             </Grid>
@@ -326,34 +447,7 @@ export default function SeasonPostview({year}) {
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
-                                                        {seasonData.underperformers == null ? (
-                                                            <TableRow>
-                                                                <TableCell>
-                                                                    <TextField
-                                                                        style={{width: 200}}
-                                                                        id="underperformers"
-                                                                        select
-                                                                        label="underperformers"
-                                                                        value={pageData.underperformers}
-                                                                        onChange={handleChange("underperformers")}
-                                                                        margin="normal">
-                                                                        {teams.map(team => (
-                                                                            <MenuItem key={team.id} value={team.id}>
-                                                                                {team.name}
-                                                                            </MenuItem>
-                                                                        ))}
-                                                                    </TextField>
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        ) : (
-                                                            <TableRow className={"teamClicker"}
-                                                                      data-teamid={seasonData.underperformers.id}
-                                                                      onClick={goToTeam}
-                                                                      style={{backgroundColor: '#f2dede'}}>
-                                                                <TableCell className="team_name">
-                                                                    {seasonData.underperformers.name}
-                                                                </TableCell>
-                                                            </TableRow>)}
+                                                        {renderTeamAward("underperformers", '#f2dede')}
                                                     </TableBody>
                                                 </table>
                                             </Grid>
@@ -379,43 +473,7 @@ export default function SeasonPostview({year}) {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {seasonData.player_of_the_year == null ? (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            <TextField
-                                                                style={{width: 200}}
-                                                                id="playerOfTheYear"
-                                                                select
-                                                                label="player of the year"
-                                                                value={pageData.playerOfTheYear}
-                                                                onChange={handleChange("playerOfTheYear")}
-                                                                margin="normal">
-                                                                {players.map(player => (
-                                                                    <MenuItem key={player.id} value={player.id}>
-                                                                        {player.name}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </TextField>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ) : (
-                                                    <TableRow
-                                                        style={{backgroundColor: 'rgb(179, 184, 255)'}}>
-                                                        <TableCell className={"playerClicker"}
-                                                                   data-playerid={seasonData.player_of_the_year.id}
-                                                                   style={{minWidth: 150, maxWidth: 150}}
-                                                                   onClick={goToPlayer}>
-                                                            <img src={playeroftheyear}
-                                                                 title={"player of the year"}/>
-                                                            {seasonData.player_of_the_year.name}
-                                                        </TableCell>
-                                                        <TableCell className={"teamClicker team_name"}
-                                                                   data-teamid={seasonData.player_of_the_year.team.id}
-                                                                   onClick={goToTeam}>
-                                                            {seasonData.player_of_the_year.team.name}
-                                                        </TableCell>
-                                                    </TableRow>)}
-
+                                                {renderPlayerOfTheYear()}
                                             </TableBody>
                                         </table>
                                     </Grid>
@@ -430,448 +488,7 @@ export default function SeasonPostview({year}) {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                <TableBody>
-                                                    {seasonData.gk == null ? (
-                                                        <TableRow>
-                                                            <TableCell>GK</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="gk"
-                                                                    select
-                                                                    label="goalkeeper"
-                                                                    value={pageData.gk}
-                                                                    onChange={handleChange("gk")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#d2a679'}}>
-                                                            <TableCell>GK</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.gk.id}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.gk.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.gk.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.gk.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.dcl == null ? (
-                                                        <TableRow>
-                                                            <TableCell>DC</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="dcl"
-                                                                    select
-                                                                    label="central defender"
-                                                                    value={pageData.dcl}
-                                                                    onChange={handleChange("dcl")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell>DC</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.dcl.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.dcl.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.dcl.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.dcl.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.dcr == null ? (
-                                                        <TableRow>
-                                                            <TableCell>DC</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="dcr"
-                                                                    select
-                                                                    label="central defender"
-                                                                    value={pageData.dcr}
-                                                                    onChange={handleChange("dcr")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell>DC</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.dcr.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.dcr.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.dcr.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.dcr.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.dl == null ? (
-                                                        <TableRow>
-                                                            <TableCell>DL</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="dl"
-                                                                    select
-                                                                    label="left defender"
-                                                                    value={pageData.dl}
-                                                                    onChange={handleChange("dl")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell>DL</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.dl.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.dl.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.dl.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.dl.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.dr == null ? (
-                                                        <TableRow>
-                                                            <TableCell>DR</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="dr"
-                                                                    select
-                                                                    label="right defender"
-                                                                    value={pageData.dr}
-                                                                    onChange={handleChange("dr")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: 'rgb(217, 237, 247)'}}>
-                                                            <TableCell>DR</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.dr.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.dr.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.dr.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.dr.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.cml == null ? (
-                                                        <TableRow>
-                                                            <TableCell>CM</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="cml"
-                                                                    select
-                                                                    label="central midfielder"
-                                                                    value={pageData.cml}
-                                                                    onChange={handleChange("cml")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#dbf0db'}}>
-                                                            <TableCell>CM</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.cml.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.cml.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.cml.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.cml.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.cmr == null ? (
-                                                        <TableRow>
-                                                            <TableCell>CM</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="cmr"
-                                                                    select
-                                                                    label="central midfielder"
-                                                                    value={pageData.cmr}
-                                                                    onChange={handleChange("cmr")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#dbf0db'}}>
-                                                            <TableCell>CM</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.cmr.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.cmr.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.cmr.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.cmr.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-
-                                                    {seasonData.amc == null ? (
-                                                        <TableRow>
-                                                            <TableCell>AMC</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="amc"
-                                                                    select
-                                                                    label="attacking midfielder centre"
-                                                                    value={pageData.amc}
-                                                                    onChange={handleChange("amc")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#dbf0db'}}>
-                                                            <TableCell>AMC</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.amc.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.amc.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.amc.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.amc.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.aml == null ? (
-                                                        <TableRow>
-                                                            <TableCell>LW</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="aml"
-                                                                    select
-                                                                    label="left winger"
-                                                                    value={pageData.aml}
-                                                                    onChange={handleChange("aml")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#e2b6b6'}}>
-                                                            <TableCell>LW</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.aml.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.aml.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.aml.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.aml.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.amr == null ? (
-                                                        <TableRow>
-                                                            <TableCell>RW</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="amr"
-                                                                    select
-                                                                    label="right winger"
-                                                                    value={pageData.amr}
-                                                                    onChange={handleChange("amr")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#e2b6b6'}}>
-                                                            <TableCell>LR</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.amr.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.amr.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.amr.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.amr.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                    {seasonData.st == null ? (
-                                                        <TableRow>
-                                                            <TableCell>ST</TableCell>
-                                                            <TableCell>
-                                                                <TextField
-                                                                    style={{width: 200}}
-                                                                    id="st"
-                                                                    select
-                                                                    label="striker"
-                                                                    value={pageData.st}
-                                                                    onChange={handleChange("st")}
-                                                                    margin="normal">
-                                                                    {players.map(player => (
-                                                                        <MenuItem key={player.id} value={player.id}>
-                                                                            {player.name}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                </TextField>
-                                                            </TableCell>
-                                                            <TableCell></TableCell>
-                                                        </TableRow>
-                                                    ) : (
-                                                        <TableRow
-                                                            style={{backgroundColor: '#e2b6b6'}}>
-                                                            <TableCell>ST</TableCell>
-                                                            <TableCell
-                                                                className={"playerClicker"}
-                                                                data-playerid={seasonData.st.id}
-                                                                style={{minWidth: 150, maxWidth: 150}}
-                                                                onClick={goToPlayer}
-                                                            >
-                                                                {seasonData.st.name}
-                                                            </TableCell>
-                                                            <TableCell className={"teamClicker team_name"}
-                                                                       data-teamid={seasonData.st.team.id}
-                                                                       onClick={goToTeam}>
-                                                                {seasonData.st.team.name}
-                                                            </TableCell>
-                                                        </TableRow>)}
-
-                                                </TableBody>
+                                                {dreamTeamSlots.map(renderDreamTeamRow)}
                                             </TableBody>
                                         </table>
                                     </Grid>
@@ -884,5 +501,4 @@ export default function SeasonPostview({year}) {
                 </Grid>
             </Box>
         )
-    }
 }

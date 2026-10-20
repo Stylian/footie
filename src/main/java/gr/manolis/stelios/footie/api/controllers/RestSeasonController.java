@@ -553,106 +553,62 @@ public class RestSeasonController {
         int year = NumberUtils.toInt(strYear);
         Season season = serviceUtils.loadSeason(year);
 
-        if (!"null".equals(overachieversId)) {
-            int id = Integer.parseInt(overachieversId);
-            Team team = serviceUtils.loadTeam(id);
-            season.setOverachiever(team);
+        if (isSet(overachieversId)) {
+            season.setOverachiever(serviceUtils.loadTeam(Integer.parseInt(overachieversId)));
         }
 
-        if (!"null".equals(underperformersId)) {
-            int id = Integer.parseInt(underperformersId);
-            Team team = serviceUtils.loadTeam(id);
-            season.setUnderperformer(team);
+        if (isSet(underperformersId)) {
+            season.setUnderperformer(serviceUtils.loadTeam(Integer.parseInt(underperformersId)));
         }
 
-        if (!"null".equals(playerOfTheYearId)) {
-            int id = Integer.parseInt(playerOfTheYearId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.PLAYER_OF_THE_YEAR, player));
-            season.setPlayerOfTheSeason(player);
-        }
-
-        if (!"null".equals(gkId)) {
-            int id = Integer.parseInt(gkId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamGK(player);
-        }
-
-        if (!"null".equals(dclId)) {
-            int id = Integer.parseInt(dclId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamDCL(player);
-        }
-
-        if (!"null".equals(dcrId)) {
-            int id = Integer.parseInt(dcrId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamDCR(player);
-        }
-
-        if (!"null".equals(dlId)) {
-            int id = Integer.parseInt(dlId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamDL(player);
-        }
-
-        if (!"null".equals(drId)) {
-            int id = Integer.parseInt(drId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamDR(player);
-        }
-
-        if (!"null".equals(cmlId)) {
-            int id = Integer.parseInt(cmlId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamCML(player);
-        }
-
-        if (!"null".equals(cmrId)) {
-            int id = Integer.parseInt(cmrId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamCMR(player);
-        }
-
-        if (!"null".equals(amlId)) {
-            int id = Integer.parseInt(amlId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamAML(player);
-        }
-
-        if (!"null".equals(amrId)) {
-            int id = Integer.parseInt(amrId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamAMR(player);
-        }
-
-        if (!"null".equals(amcId)) {
-            int id = Integer.parseInt(amcId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamAMC(player);
-        }
-
-        if (!"null".equals(stId)) {
-            int id = Integer.parseInt(stId);
-            Player player = serviceUtils.loadPlayer(id);
-            player.addTrophy(new Trophy(year, Trophy.DREAM_TEAM, player));
-            season.setDreamTeamST(player);
-        }
+        season.setPlayerOfTheSeason(applyPlayerAward(season.getPlayerOfTheSeason(), playerOfTheYearId, year, Trophy.PLAYER_OF_THE_YEAR));
+        season.setDreamTeamGK(applyPlayerAward(season.getDreamTeamGK(), gkId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamDCL(applyPlayerAward(season.getDreamTeamDCL(), dclId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamDCR(applyPlayerAward(season.getDreamTeamDCR(), dcrId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamDL(applyPlayerAward(season.getDreamTeamDL(), dlId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamDR(applyPlayerAward(season.getDreamTeamDR(), drId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamCML(applyPlayerAward(season.getDreamTeamCML(), cmlId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamCMR(applyPlayerAward(season.getDreamTeamCMR(), cmrId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamAML(applyPlayerAward(season.getDreamTeamAML(), amlId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamAMR(applyPlayerAward(season.getDreamTeamAMR(), amrId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamAMC(applyPlayerAward(season.getDreamTeamAMC(), amcId, year, Trophy.DREAM_TEAM));
+        season.setDreamTeamST(applyPlayerAward(season.getDreamTeamST(), stId, year, Trophy.DREAM_TEAM));
 
         DataAccessObject<Season> dao = new DataAccessObject<>(em.unwrap(Session.class));
         dao.save(season);
 
         return new RestResponse(RestResponse.SUCCESS, "published season data");
+    }
+
+    private boolean isSet(String id) {
+        return id != null && !id.isBlank() && !"null".equals(id);
+    }
+
+    private Player applyPlayerAward(Player oldPlayer, String newId, int year, String type) {
+        if (!isSet(newId)) {
+            return oldPlayer;
+        }
+        Player newPlayer = serviceUtils.loadPlayer(Integer.parseInt(newId));
+        removeSeasonTrophies(oldPlayer, year, type);
+        newPlayer.addTrophy(new Trophy(year, type, newPlayer));
+        return newPlayer;
+    }
+
+    private void removeSeasonTrophies(Player player, int year, String type) {
+        if (player == null) {
+            return;
+        }
+        DataAccessObject<Trophy> dao = new DataAccessObject<>(em.unwrap(Session.class));
+        List<Trophy> toRemove = new ArrayList<>();
+        for (Trophy trophy : player.getTrophies()) {
+            if (trophy.getSeasonNum() == year && type.equals(trophy.getType())) {
+                toRemove.add(trophy);
+            }
+        }
+        for (Trophy trophy : toRemove) {
+            player.getTrophies().remove(trophy);
+            dao.delete(trophy);
+        }
     }
 
     // -------------------------------------------------------------------------------------------------
