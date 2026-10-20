@@ -39,7 +39,11 @@ public class OperationsService {
 	private ServiceUtils serviceUtils;
 
 	public Season createSeason() {
-		return seasonService.createSeason();
+		return seasonService.createSeason(null);
+	}
+
+	public Season createSeason(java.util.List<Integer> teamIds) {
+		return seasonService.createSeason(teamIds);
 	}
 
 	public Season setUpSeason() {

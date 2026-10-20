@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-export function useDataLoader(url, runAfter) {
+export function useDataLoader(url, runAfter, deps = []) {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -7,7 +7,7 @@ export function useDataLoader(url, runAfter) {
             .then(res => res.json())
             .then(setData)
             .then(runAfter)
-    }, []);
+    }, deps);
 
     return data
 }

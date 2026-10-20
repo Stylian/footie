@@ -3,6 +3,7 @@ package gr.manolis.stelios.footie.api.controllers;
 import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.services.OperationsService;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stage;
+import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.peristence.dtos.games.Result;
 import gr.manolis.stelios.footie.core.peristence.dtos.groups.Season;
 import gr.manolis.stelios.footie.core.peristence.dtos.rounds.GroupsRound;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Transactional
@@ -42,8 +45,8 @@ public class RestOperationsController {
     }
 
     @PostMapping("/season/create")
-    public RestResponse createSeason() {
-        Season season = operationsService.createSeason();
+    public RestResponse createSeason(@RequestBody(required = false) List<Integer> teamIds) {
+        Season season = operationsService.createSeason(teamIds);
         operationsService.setUpSeason();
 
         if(season.getSeasonYear() == 1) {
@@ -53,6 +56,22 @@ public class RestOperationsController {
         }
 
         return new RestResponse(RestResponse.SUCCESS, "created " + season.getName());
+    }
+
+    @GetMapping("/season/previous_teams")
+    public List<Integer> getPreviousSeasonTeams() {
+
+        int numberOfSeasons = serviceUtils.getNumberOfSeasons();
+        if (numberOfSeasons == 0) {
+            return new ArrayList<>();
+        }
+
+        Season previousSeason = serviceUtils.loadSeason(numberOfSeasons);
+        List<Integer> teamIds = new ArrayList<>();
+        for (Team team : previousSeason.getTeams()) {
+            teamIds.add(team.getId());
+        }
+        return teamIds;
     }
 
     // to remove

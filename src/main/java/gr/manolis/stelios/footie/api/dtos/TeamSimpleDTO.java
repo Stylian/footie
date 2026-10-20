@@ -20,4 +20,14 @@ public class TeamSimpleDTO {
     }
 
     private String name;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    private boolean active = true;
 }

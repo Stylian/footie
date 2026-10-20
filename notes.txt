@@ -4,7 +4,7 @@
 
 6. rework admin page later
 
-i want to be able to add and remove teams
+
 
 
 

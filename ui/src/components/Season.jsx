@@ -10,12 +10,20 @@ import {useParams} from "react-router"
 import {useTab} from "../TabsPersistanceManager"
 import {useDataLoader} from "../DataLoaderManager"
 import PageLoader from "../PageLoader";
+import {useEffect, useState} from "react";
 
 export default function Season() {
     const {seasonNum} = useParams()
 
     const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
-    const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
+    const [refreshKey, setRefreshKey] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => setRefreshKey(key => key + 1), 5000)
+        return () => clearInterval(interval)
+    }, [])
+
+    const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status", null, [refreshKey])
 
     if (stages === null) {
         return (<PageLoader />)
@@ -41,9 +49,9 @@ export default function Season() {
                                 <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">
                                     <Tab label="Seeding"/>
                                     <Tab disabled={seasonNum == 1} label="Preliminary round"/>
-                                    <Tab disabled={stages.quals0 === "NOT_STARTED"} label="Qualifying round"/>
-                                    <Tab disabled={stages.quals1 === "NOT_STARTED"} label="Play-off round"/>
-                                    <Tab disabled={stages.quals2 === "NOT_STARTED"} label="1st Group stage"/>
+                                    <Tab disabled={stages.season === "NOT_STARTED"} label="Qualifying round"/>
+                                    <Tab disabled={stages.season === "NOT_STARTED"} label="Play-off round"/>
+                                    <Tab disabled={stages.season === "NOT_STARTED"} label="1st Group stage"/>
                                     <Tab disabled={stages.groups2 === "NOT_STARTED"} label="2nd Group stage"/>
                                     <Tab disabled={stages.playoffs === "NOT_STARTED"} label="Knockout phase"/>
                                     <Tab disabled={stages.playoffs !== "FINISHED"} label="Overview"/>

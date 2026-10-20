@@ -41,6 +41,10 @@ public class SeasonService {
     private ServiceUtils serviceUtils;
 
     public Season createSeason() {
+        return createSeason(null);
+    }
+
+    public Season createSeason(List<Integer> teamIds) {
         logger.info("creating season");
 
         int numberOfSeasons = serviceUtils.getNumberOfSeasons();
@@ -51,7 +55,18 @@ public class SeasonService {
         Season season = new Season( numberOfSeasons + 1);
         season.setStage(Stage.NOT_STARTED);
 
-        List<Team> teams = Utils.getTeamsFromFile(logger, serviceUtils.loadTeams());
+        List<Team> teams;
+        if (teamIds != null && !teamIds.isEmpty()) {
+            logger.info("creating season with a selected set of teams");
+            teams = new ArrayList<>();
+            for (Team team : serviceUtils.loadTeams()) {
+                if (teamIds.contains(team.getId())) {
+                    teams.add(team);
+                }
+            }
+        } else {
+            teams = Utils.getTeamsFromFile(logger, serviceUtils.loadTeams());
+        }
 
         for (Team team : teams) {
             season.addTeam(team);

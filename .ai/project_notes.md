@@ -57,9 +57,11 @@ java -jar build/libs/footie-2.0.jar
 
 #### Running the Backend
 ```bash
-./gradlew bootRun
+./gradlew bootRun -x buildUi
 ```
 The API will be accessible at `http://localhost:8080`.
+
+**Note:** There is NO `copyWebApp` task. The frontend build runs via `processResources` -> `buildUi` (see `build.gradle`), so the correct skip flag is `-x buildUi`. This skips both `buildUi` and its dependency `installNpm`, keeping backend launches fast (~8-15s boot).
 
 #### Running the UI Independently
 ```bash
@@ -69,7 +71,13 @@ npm start
 ```
 The UI will run at `http://localhost:3000`.
 
-**Note:** When debugging the UI separately, you can skip the frontend build by using the `-x copyWebApp` flag.
+#### Running the App (AI assistant convention)
+When the user asks to "run the app", ALWAYS launch in dev mode:
+- Backend: `.\gradlew bootRun -x buildUi` (skips the slow UI build)
+- UI: run separately in `ui/` via `npm start` (accessible at `http://localhost:3000`)
+
+This keeps both hot-reload paths open so backend and frontend hotfixes are possible without a full rebuild.
+Do NOT use a full `bootRun` (which rebuilds the UI) unless the user explicitly asks for a production/packaged run.
 
 ## Setup Instructions
 

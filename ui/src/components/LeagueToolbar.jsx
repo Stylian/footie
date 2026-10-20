@@ -20,7 +20,9 @@ import barchart from "../icons/bar-chart.png"
 import medal1 from "../icons/medal1.png"
 import exchange from "../icons/exchange.png"
 import calendar from "../icons/calendar.png"
+import trophy from "../icons/trophy.png"
 import NextGame from "./NextGame"
+import NewSeasonDialog from "./NewSeasonDialog"
 import {useDataLoader} from "../DataLoaderManager"
 
 const buttonStyle = {
@@ -46,6 +48,11 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
     const [menuPosition, setMenuPosition] = useState(null)
     const seasonsTotal = useDataLoader("/rest/seasons/")
     const nextGameData = useDataLoader("/rest/next_game")
+    const canCreateData = useDataLoader("/rest/ops/league/can_create_season")
+    const [showNewSeason, setShowNewSeason] = useState(false)
+    const canCreateSeason = canCreateData && canCreateData[0] === true;
+    const handleOpenNewSeason = () => setShowNewSeason(true)
+    const handleCloseNewSeason = () => setShowNewSeason(false)
     const [showNextGame, setShowNextGame] = useState(
         () => localStorage.getItem("showNextGame") !== "false"
     )
@@ -177,20 +184,32 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
                             </IconButton>
                         </Tooltip>
                     )}
+                    {setUpTeams && (
+                        <Tooltip title="Set up Teams" arrow placement="top">
+                            <IconButton onClick={handleSetUpTeams}
+                                        aria-label="Set up Teams"
+                                        className="toolbar_button"
+                                        style={buttonStyle}>
+                                <img src={calendar} title="Set up Teams"
+                                     style={{maxHeight: 24, width: 'auto',
+                                         filter: 'brightness(0) invert(1)'}}/>
+                            </IconButton>
+                        </Tooltip>
+                    )}
+                    {canCreateSeason && (
+                        <Tooltip title="Start new season" arrow placement="top">
+                            <IconButton onClick={handleOpenNewSeason}
+                                        aria-label="Start new season"
+                                        className="toolbar_button"
+                                        style={buttonStyle}>
+                                <img src={trophy} title="Start new season"
+                                     style={{maxHeight: 24, width: 'auto',
+                                         filter: 'brightness(0) invert(1)'}}/>
+                            </IconButton>
+                        </Tooltip>
+                    )}
                 </Box>
 
-                {setUpTeams && (
-                    <Tooltip title="Set up Teams" arrow placement="top">
-                        <IconButton onClick={handleSetUpTeams}
-                                    aria-label="Set up Teams"
-                                    className="toolbar_button"
-                                    style={{...buttonStyle, marginLeft: 'auto'}}>
-                            <img src={calendar} title="Set up Teams"
-                                 style={{maxHeight: 24, width: 'auto',
-                                     filter: 'brightness(0) invert(1)'}}/>
-                        </IconButton>
-                    </Tooltip>
-                )}
             </Toolbar>
         </AppBar>
         <div style={{visibility: (hasNextGame && showNextGame) ? 'visible' : 'hidden', position: 'fixed',
@@ -198,6 +217,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
             display: 'flex', flexDirection: 'column'}}>
             <NextGame/>
         </div>
+        <NewSeasonDialog open={showNewSeason} onClose={handleCloseNewSeason}/>
         </React.Fragment>
     )
 }

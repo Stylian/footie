@@ -7,10 +7,19 @@ public class RestResponse {
 
 	private String status;
 	private String message;
+	private Integer teamId;
 
 	public RestResponse(String status, String message) {
 		this.status = status;
 		this.message = message;
+	}
+
+	public Integer getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(Integer teamId) {
+		this.teamId = teamId;
 	}
 
 	public String getStatus() {

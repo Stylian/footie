@@ -23,6 +23,9 @@ public class Team {
 	@Column(name = "NAME", unique = true)
 	private String name;
 
+	@Column(name = "ACTIVE", nullable = false, columnDefinition = "boolean default true")
+	private boolean active = true;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Stats> stats = new ArrayList<>();
 
@@ -55,6 +58,14 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public Stats getStatsForGroup(Group group) {

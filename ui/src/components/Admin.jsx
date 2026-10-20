@@ -37,20 +37,6 @@ export default function Admin() {
             )
     }, []);
 
-    const handleButtonClick = () => {
-        fetch("/rest/ops/season/create", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-        })
-            .then(res => res.json())
-            .then(
-                () => {
-                    window.location.reload();
-                    setCanCreateLeague(false)
-                },
-            )
-    }
-
     const handleRestorePointClick = () => {
         fetch("/rest/admin/restore_point", {
             method: 'POST',
@@ -120,8 +106,7 @@ export default function Admin() {
                                         <TableRow>
                                             <TableCell colSpan-={2}>
                                                 {canCreateLeague ? (
-                                                    <Button onClick={handleButtonClick}>Create new
-                                                        Season</Button>
+                                                    <span>a new season can be started from the toolbar</span>
                                                 ) : (
                                                     <span>a league is currently running</span>
                                                 )}

@@ -1,6 +1,7 @@
 package gr.manolis.stelios.footie.api.controllers;
 
 
+import gr.manolis.stelios.footie.api.RestResponse;
 import gr.manolis.stelios.footie.api.dtos.PlayerDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamPageDTO;
 import gr.manolis.stelios.footie.api.dtos.TeamSimpleDTO;
@@ -11,13 +12,11 @@ import gr.manolis.stelios.footie.api.tools.PlayersWithTrophiesOrdering;
 import gr.manolis.stelios.footie.core.peristence.dtos.Stats;
 import gr.manolis.stelios.footie.core.peristence.dtos.Team;
 import gr.manolis.stelios.footie.core.services.ServiceUtils;
+import gr.manolis.stelios.footie.core.services.TeamService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
@@ -40,6 +39,9 @@ public class RestTeamsController {
 
     @Autowired
     private TeamSimpleMapper teamSimpleMapper;
+
+    @Autowired
+    private TeamService teamService;
 
     @GetMapping("/")
     public List<TeamSimpleDTO> getTeams() {
@@ -70,6 +72,33 @@ public class RestTeamsController {
         dto.setCompleteStats(completeStats);
 
         return dto;
+    }
+
+    @ResponseBody
+    @PostMapping("/")
+    public RestResponse addTeam(@RequestParam(name = "team_name", required = false) String teamName) {
+        if (teamName == null || teamName.trim().isEmpty()) {
+            return new RestResponse(RestResponse.ERROR, "team name cannot be empty");
+        }
+
+        Team team = teamService.addTeam(teamName);
+        if (team == null) {
+            return new RestResponse(RestResponse.ERROR, "team name cannot be empty");
+        }
+
+        RestResponse response = new RestResponse(RestResponse.SUCCESS, "team added " + team.getName());
+        response.setTeamId(team.getId());
+        return response;
+    }
+
+    @ResponseBody
+    @DeleteMapping("/{team_id}")
+    public RestResponse deleteTeam(@PathVariable("team_id") String strTeamId) {
+        int teamId = NumberUtils.toInt(strTeamId);
+        Team team = serviceUtils.loadTeam(teamId);
+        teamService.removeTeam(team);
+
+        return new RestResponse(RestResponse.SUCCESS, "team removed " + team.getName());
     }
 
 }
