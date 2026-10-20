@@ -109,7 +109,10 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
                     ))}
                 </Menu>
 
-                <Typography variant="h6" style={{ marginLeft: 15 }}>{pageTitle}</Typography>
+                <Typography variant="h6" style={{ marginLeft: 15, cursor: 'pointer' }}
+                            onClick={() => window.location = "/"}>
+                    {pageTitle}
+                </Typography>
             </Toolbar>
             <Toolbar style={{ minHeight: 44 }}>
                 {seasonsTotal && (

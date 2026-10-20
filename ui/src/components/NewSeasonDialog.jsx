@@ -14,6 +14,9 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from "@material-ui/icons/Close"
 import plus from "../icons/plus.png"
 
+const MIN_TEAMS = 24
+const MAX_TEAMS = 48
+
 export default function NewSeasonDialog({open, onClose}) {
 
     const [teams, setTeams] = useState([])
@@ -22,7 +25,7 @@ export default function NewSeasonDialog({open, onClose}) {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
 
-    const loadData = (preselectId) => {
+    const loadData = (preselectId, preserveSelections = false) => {
         Promise.all([
             fetch("/rest/teams/").then(res => res.json()),
             fetch("/rest/ops/season/previous_teams").then(res => res.json()),
@@ -30,13 +33,18 @@ export default function NewSeasonDialog({open, onClose}) {
             const allTeams = result[0]
             const previousIds = result[1]
 
-            const sel = {}
-            allTeams.forEach(team => {
-                sel[team.id] = previousIds.includes(team.id) || team.id === preselectId
-            })
-
             setTeams(allTeams)
-            setSelected(sel)
+            setSelected(prev => {
+                const sel = {}
+                allTeams.forEach(team => {
+                    if (preserveSelections && Object.prototype.hasOwnProperty.call(prev, team.id)) {
+                        sel[team.id] = prev[team.id] && team.active
+                    } else {
+                        sel[team.id] = team.active && (previousIds.includes(team.id) || team.id === preselectId)
+                    }
+                })
+                return sel
+            })
             setLoading(false)
         })
     }
@@ -66,7 +74,7 @@ export default function NewSeasonDialog({open, onClose}) {
             .then((result) => {
                 setNewTeamName("")
                 const newTeamId = result && result.teamId ? result.teamId : null
-                loadData(newTeamId)
+                loadData(newTeamId, true)
             })
     }
 
@@ -76,7 +84,7 @@ export default function NewSeasonDialog({open, onClose}) {
         }
         fetch("/rest/teams/" + team.id, {method: 'DELETE'})
             .then(res => res.json())
-            .then(() => loadData())
+            .then(() => loadData(null, true))
     }
 
     const handleStartSeason = () => {
@@ -84,8 +92,8 @@ export default function NewSeasonDialog({open, onClose}) {
             .filter(team => selected[team.id] && team.active)
             .map(team => team.id)
 
-        if (teamIds.length === 0) {
-            alert("select at least one team")
+        if (teamIds.length < MIN_TEAMS || teamIds.length > MAX_TEAMS) {
+            alert("select between " + MIN_TEAMS + " and " + MAX_TEAMS + " teams")
             return
         }
 
@@ -104,6 +112,26 @@ export default function NewSeasonDialog({open, onClose}) {
     }
 
     const selectedCount = teams.filter(team => selected[team.id] && team.active).length
+    const activeTeams = teams.filter(team => team.active)
+    const allSelected = activeTeams.length > 0 && activeTeams.every(team => selected[team.id])
+    const someSelected = !allSelected && activeTeams.some(team => selected[team.id])
+    const canSelectMore = selectedCount < MAX_TEAMS
+    const selectionValid = selectedCount >= MIN_TEAMS && selectedCount <= MAX_TEAMS
+
+    const toggleAll = () => {
+        setSelected(prev => {
+            const next = {...prev}
+            let count = 0
+            activeTeams.forEach(team => {
+                const check = !allSelected && count < MAX_TEAMS
+                next[team.id] = check
+                if (check) {
+                    count++
+                }
+            })
+            return next
+        })
+    }
 
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
@@ -113,9 +141,28 @@ export default function NewSeasonDialog({open, onClose}) {
                     <div>Loading...</div>
                 ) : (
                     <div>
-                        <div style={{marginBottom: 8}}>
-                            choose the teams for the new season ({selectedCount} selected)
+                        <div style={{marginBottom: 8, display: 'flex', alignItems: 'center',
+                            justifyContent: 'space-between'}}>
+                            <span>choose between {MIN_TEAMS} and {MAX_TEAMS} teams ({selectedCount} selected)</span>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={allSelected}
+                                        indeterminate={someSelected}
+                                        onChange={toggleAll}
+                                    />
+                                }
+                                label="choose all"
+                            />
                         </div>
+
+                        {!selectionValid && (
+                            <div style={{color: '#c62828', marginBottom: 8}}>
+                                {selectedCount < MIN_TEAMS
+                                    ? "select at least " + MIN_TEAMS + " teams"
+                                    : "select at most " + MAX_TEAMS + " teams"}
+                            </div>
+                        )}
 
                         <div style={{maxHeight: 320, overflowY: 'auto', border: '1px solid rgba(0,0,0,0.15)',
                             borderRadius: 4, padding: 8, marginBottom: 12}}>
@@ -126,7 +173,7 @@ export default function NewSeasonDialog({open, onClose}) {
                                         control={
                                             <Checkbox
                                                 checked={!!selected[team.id]}
-                                                disabled={!team.active}
+                                                disabled={!team.active || (!selected[team.id] && !canSelectMore)}
                                                 onChange={() => toggleTeam(team.id)}
                                             />
                                         }
@@ -155,7 +202,8 @@ export default function NewSeasonDialog({open, onClose}) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} startIcon={<CloseIcon/>}>Cancel</Button>
-                <Button onClick={handleStartSeason} color="primary" variant="contained" disabled={saving || loading}>
+                <Button onClick={handleStartSeason} color="primary" variant="contained"
+                    disabled={saving || loading || !selectionValid}>
                     Start new season
                 </Button>
             </DialogActions>

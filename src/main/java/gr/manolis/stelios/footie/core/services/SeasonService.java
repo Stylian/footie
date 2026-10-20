@@ -68,6 +68,11 @@ public class SeasonService {
             teams = Utils.getTeamsFromFile(logger, serviceUtils.loadTeams());
         }
 
+        if (teams == null || teams.size() < 24 || teams.size() > 48) {
+            throw new IllegalArgumentException("A season requires between 24 and 48 teams (got "
+                    + (teams == null ? 0 : teams.size()) + ")");
+        }
+
         for (Team team : teams) {
             season.addTeam(team);
             // set elo
@@ -200,14 +205,24 @@ public class SeasonService {
             quals2Teams.add(teamsClone.remove(0));
             quals2Teams.add(teamsClone.remove(0));
 
-            int diff = teamsClone.size() - 26;
+            if (teamsClone.size() < 26) {
+                // smaller season: skip the preliminary round and send the extra teams
+                // straight to quals2 so that 12 teams still reach the groups round
+                int extraToQuals2 = 26 - teamsClone.size();
+                for (int index = 0; index < extraToQuals2; index++) {
+                    quals2Teams.add(teamsClone.remove(0));
+                }
+                quals1Teams = teamsClone;
+            } else {
+                int diff = teamsClone.size() - 26;
 
-            // so bottom 2*diff go to preliminiaries, others directly to 1st quals
-            for (int index = 0; index < 2 * diff; index++) {
-                preliminaries.add(teamsClone.remove(teamsClone.size() - 1));
+                // so bottom 2*diff go to preliminiaries, others directly to 1st quals
+                for (int index = 0; index < 2 * diff; index++) {
+                    preliminaries.add(teamsClone.remove(teamsClone.size() - 1));
+                }
+
+                quals1Teams = teamsClone;
             }
-
-            quals1Teams = teamsClone;
         }
 
         map.put(Seed.CHAMPION, formerChampion == null ? Collections.emptyList() : Arrays.asList(formerChampion));
