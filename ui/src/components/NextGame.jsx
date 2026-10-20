@@ -52,7 +52,7 @@ export default function NextGame() {
         return (<div></div>)
     } else {
         return (
-            <Card style={{margin: 5}}>
+            <Card style={{margin: 0, border: '1px solid rgba(0,0,0,0.25)', borderRadius: 12, overflow: 'hidden'}}>
                 <CardHeader className="big_header" title={"upcoming game"} align={"center"}
                             titleTypographyProps={{variant: 'h7'}}
                 />

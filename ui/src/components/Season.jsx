@@ -10,6 +10,7 @@ import NextGame from "./NextGame"
 import {useParams} from "react-router"
 import {useTab} from "../TabsPersistanceManager"
 import {useDataLoader} from "../DataLoaderManager"
+import {useState} from "react"
 import PageLoader from "../PageLoader";
 
 export default function Season() {
@@ -18,12 +19,20 @@ export default function Season() {
     const {tabActive, handleChangeTab} = useTab(seasonNum, "season")
     const stages = useDataLoader("/rest/seasons/" + seasonNum + "/status")
     const nextGameData = useDataLoader("/rest/next_game")
+    const [showNextGame, setShowNextGame] = useState(
+        () => localStorage.getItem("showNextGame") !== "false"
+    )
+    const handleToggleNextGame = () => {
+        setShowNextGame((prev) => {
+            localStorage.setItem("showNextGame", (!prev).toString())
+            return !prev
+        })
+    }
 
     if (stages === null) {
         return (<PageLoader />)
     } else {
         const hasNextGame = nextGameData && nextGameData.game && nextGameData.game.id !== 0;
-        const leftColWidth = hasNextGame ? 9 : 12;
 
         const setUpRounds = {
             1: {kind: "quals", round: 0, stage: stages.quals0},
@@ -39,8 +48,10 @@ export default function Season() {
         return (
             <Paper className="full-screen-paper" elevation={0}>
                 <Grid container spacing={1}>
-                    <Grid item xs={leftColWidth}>
-                        <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum} setUpTeams={setUpTeams}/>
+                    <Grid item xs={12}>
+                        <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum} setUpTeams={setUpTeams}
+                                       showNextGame={hasNextGame && showNextGame}
+                                       onToggleNextGame={hasNextGame ? handleToggleNextGame : null}/>
                         <Box className="page_box">
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">
@@ -64,11 +75,10 @@ export default function Season() {
                             {tabActive === 7 && <SeasonPostview year={seasonNum}/>}
                         </Box>
                     </Grid>
-                    {hasNextGame && (
-                        <Grid item xs={3}>
-                            <NextGame/>
-                        </Grid>
-                    )}
+                    <div style={{display: showNextGame ? 'block' : 'none', position: 'fixed', top: 8, right: 8,
+                        zIndex: 1300, width: 420, maxWidth: '90vw'}}>
+                        <NextGame/>
+                    </div>
                 </Grid>
             </Paper>
         )

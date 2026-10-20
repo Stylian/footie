@@ -19,6 +19,7 @@ import analytics from "../icons/analytics.png"
 import barchart from "../icons/bar-chart.png"
 import medal1 from "../icons/medal1.png"
 import exchange from "../icons/exchange.png"
+import calendar from "../icons/calendar.png"
 import {useDataLoader} from "../DataLoaderManager"
 
 const buttonStyle = {
@@ -39,7 +40,7 @@ const menuItems = [
     {link: "/admin", icon: build, label: "Admin"},
 ]
 
-export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
+export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams, showNextGame, onToggleNextGame }) {
 
     const [menuPosition, setMenuPosition] = useState(null)
     const seasonsTotal = useDataLoader("/rest/seasons/")
@@ -149,6 +150,20 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
                             </IconButton>
                         </Tooltip>
                     ))}
+                    {onToggleNextGame && (
+                        <Tooltip title={showNextGame ? "Hide upcoming game" : "Show upcoming game"}
+                                 arrow placement="top">
+                            <IconButton onClick={onToggleNextGame}
+                                        aria-label="Toggle upcoming game"
+                                        className="toolbar_button"
+                                        style={buttonStyle}>
+                                <img src={exchange}
+                                     title={showNextGame ? "Hide upcoming game" : "Show upcoming game"}
+                                     style={{maxHeight: 24, width: 'auto',
+                                         filter: 'brightness(0) invert(1)'}}/>
+                            </IconButton>
+                        </Tooltip>
+                    )}
                 </Box>
 
                 {setUpTeams && (
@@ -157,7 +172,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
                                     aria-label="Set up Teams"
                                     className="toolbar_button"
                                     style={{...buttonStyle, marginLeft: 'auto'}}>
-                            <img src={exchange} title="Set up Teams"
+                            <img src={calendar} title="Set up Teams"
                                  style={{maxHeight: 24, width: 'auto',
                                      filter: 'brightness(0) invert(1)'}}/>
                         </IconButton>
