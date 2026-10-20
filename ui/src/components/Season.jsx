@@ -25,11 +25,22 @@ export default function Season() {
         const hasNextGame = nextGameData && nextGameData.game && nextGameData.game.id !== 0;
         const leftColWidth = hasNextGame ? 9 : 12;
 
+        const setUpRounds = {
+            1: {kind: "quals", round: 0, stage: stages.quals0},
+            2: {kind: "quals", round: 1, stage: stages.quals1},
+            3: {kind: "quals", round: 2, stage: stages.quals2},
+            4: {kind: "groups", round: 1, stage: stages.groups1},
+        }
+        const setUpRound = setUpRounds[tabActive]
+        const setUpTeams = setUpRound && setUpRound.stage === "ON_PREVIEW"
+            ? {kind: setUpRound.kind, round: setUpRound.round}
+            : null;
+
         return (
             <Paper className="full-screen-paper" elevation={0}>
                 <Grid container spacing={1}>
                     <Grid item xs={leftColWidth}>
-                        <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum}/>
+                        <LeagueToolbar pageTitle={"Season " + seasonNum} seasonNum={seasonNum} setUpTeams={setUpTeams}/>
                         <Box className="page_box">
                             <AppBar position="static">
                                 <Tabs value={tabActive} onChange={handleChangeTab} variant="scrollable">

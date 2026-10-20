@@ -8,7 +8,6 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core"
-import Button from "@material-ui/core/Button"
 import Numeral from "numeral"
 import {useDataLoader} from "../../../DataLoaderManager"
 import PageLoader from "../../../PageLoader";
@@ -23,17 +22,6 @@ const phaseColor = (phaseSeed) => {
 
 export default function QualsSeeding({year, round, haveToSetUpTeams}) {
     const data = useDataLoader("/rest/seasons/" + year + "/quals/" + round + "/seeding")
-    const handleSettingUpButtonClick = () => {
-        fetch("/rest/ops/quals/" + round + "/set", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-        })
-            .then(res => res.json())
-            .then(
-                () => window.location.reload(),
-                (error) => console.error('Error:', error)
-            )
-    }
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     if (data === null) {
@@ -43,9 +31,6 @@ export default function QualsSeeding({year, round, haveToSetUpTeams}) {
         const teamsWeak = data["WEAK"]
         return (
             <Box>
-                {haveToSetUpTeams ? (
-                    <Button onClick={handleSettingUpButtonClick}>Set up Teams</Button>
-                ) : ''}
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Card className="page_box" style={{width: 'fit-content', minWidth: 320, boxShadow: 'none'}} elevation={0}>
                         <CardHeader title={"Seeded"} align={"center"} className="big_header" titleTypographyProps={{variant: 'h7'}}/>

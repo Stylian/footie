@@ -18,6 +18,7 @@ import players from "../icons/football-players.png"
 import analytics from "../icons/analytics.png"
 import barchart from "../icons/bar-chart.png"
 import medal1 from "../icons/medal1.png"
+import exchange from "../icons/exchange.png"
 import {useDataLoader} from "../DataLoaderManager"
 
 const buttonStyle = {
@@ -38,13 +39,24 @@ const menuItems = [
     {link: "/admin", icon: build, label: "Admin"},
 ]
 
-export default function LeagueToolbar({ pageTitle, seasonNum }) {
+export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
 
     const [menuPosition, setMenuPosition] = useState(null)
     const seasonsTotal = useDataLoader("/rest/seasons/")
     const handleClick = (event) => setMenuPosition(event.currentTarget)
     const handleButtonSelection = (e) => window.location = e.currentTarget.dataset.link
     const handleClose = () => setMenuPosition(null)
+    const handleSetUpTeams = () => {
+        fetch("/rest/ops/" + setUpTeams.kind + "/" + setUpTeams.round + "/set", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        })
+            .then(res => res.json())
+            .then(
+                () => window.location.reload(),
+                (error) => console.error('Error:', error)
+            )
+    }
     const handleUp = () => window.location.href = parseInt(seasonNum) + 1
     const handleDown = () => window.location.href = parseInt(seasonNum) - 1
     const handleBack = () => window.history.back()
@@ -138,6 +150,19 @@ export default function LeagueToolbar({ pageTitle, seasonNum }) {
                         </Tooltip>
                     ))}
                 </Box>
+
+                {setUpTeams && (
+                    <Tooltip title="Set up Teams" arrow placement="top">
+                        <IconButton onClick={handleSetUpTeams}
+                                    aria-label="Set up Teams"
+                                    className="toolbar_button"
+                                    style={{...buttonStyle, marginLeft: 'auto'}}>
+                            <img src={exchange} title="Set up Teams"
+                                 style={{maxHeight: 24, width: 'auto',
+                                     filter: 'brightness(0) invert(1)'}}/>
+                        </IconButton>
+                    </Tooltip>
+                )}
             </Toolbar>
         </AppBar>
     )
