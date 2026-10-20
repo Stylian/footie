@@ -9,10 +9,16 @@ export default function QualsMatches({year, round}) {
     if (days === null) {
         return (<PageLoader />)
     } else {
+        const dayEntries = Object.keys(days)
+            .filter((day) => Array.isArray(days[day]))
+            .map((day) => [day, days[day]])
+        if (dayEntries.length === 0) {
+            return (<div></div>)
+        }
         return (
             <Box>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    {Object.keys(days).map((day, index) => {
+                    {dayEntries.map(([day, games]) => {
                         return (
                             <div className="page_box">
                                 <Card style={{width: 'fit-content', minWidth: 280, boxShadow: 'none'}} elevation={0}>
@@ -30,7 +36,7 @@ export default function QualsMatches({year, round}) {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {days[day].map((game, index) => {
+                                                {games.map((game, index) => {
                                                     let winnerExists = game.winner != null
                                                     let homeWon = winnerExists && game.winner.id == game.homeTeam.id
                                                     let awayWon = winnerExists && game.winner.id == game.awayTeam.id

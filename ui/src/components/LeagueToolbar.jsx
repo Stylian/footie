@@ -20,6 +20,7 @@ import barchart from "../icons/bar-chart.png"
 import medal1 from "../icons/medal1.png"
 import exchange from "../icons/exchange.png"
 import calendar from "../icons/calendar.png"
+import NextGame from "./NextGame"
 import {useDataLoader} from "../DataLoaderManager"
 
 const buttonStyle = {
@@ -40,10 +41,21 @@ const menuItems = [
     {link: "/admin", icon: build, label: "Admin"},
 ]
 
-export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams, showNextGame, onToggleNextGame }) {
+export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams }) {
 
     const [menuPosition, setMenuPosition] = useState(null)
     const seasonsTotal = useDataLoader("/rest/seasons/")
+    const nextGameData = useDataLoader("/rest/next_game")
+    const [showNextGame, setShowNextGame] = useState(
+        () => localStorage.getItem("showNextGame") !== "false"
+    )
+    const hasNextGame = nextGameData && nextGameData.game && nextGameData.game.id !== 0;
+    const handleToggleNextGame = () => {
+        setShowNextGame((prev) => {
+            localStorage.setItem("showNextGame", (!prev).toString())
+            return !prev
+        })
+    }
     const handleClick = (event) => setMenuPosition(event.currentTarget)
     const handleButtonSelection = (e) => window.location = e.currentTarget.dataset.link
     const handleClose = () => setMenuPosition(null)
@@ -64,6 +76,7 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams, showNe
     const handleForward = () => window.history.forward()
 
     return (
+        <React.Fragment>
         <AppBar position="static" style={{ borderBottom: '1px solid rgba(0,0,0,0.25)' }}>
             <Toolbar>
                 <IconButton edge="start" color="inherit" aria-label="Menu" onClick={handleClick}
@@ -150,10 +163,10 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams, showNe
                             </IconButton>
                         </Tooltip>
                     ))}
-                    {onToggleNextGame && (
+                    {hasNextGame && (
                         <Tooltip title={showNextGame ? "Hide upcoming game" : "Show upcoming game"}
                                  arrow placement="top">
-                            <IconButton onClick={onToggleNextGame}
+                            <IconButton onClick={handleToggleNextGame}
                                         aria-label="Toggle upcoming game"
                                         className="toolbar_button"
                                         style={buttonStyle}>
@@ -180,5 +193,11 @@ export default function LeagueToolbar({ pageTitle, seasonNum, setUpTeams, showNe
                 )}
             </Toolbar>
         </AppBar>
+        <div style={{visibility: (hasNextGame && showNextGame) ? 'visible' : 'hidden', position: 'fixed',
+            top: 8, right: 8, bottom: 8, zIndex: 1300, width: 420, maxWidth: '90vw',
+            display: 'flex', flexDirection: 'column'}}>
+            <NextGame/>
+        </div>
+        </React.Fragment>
     )
 }

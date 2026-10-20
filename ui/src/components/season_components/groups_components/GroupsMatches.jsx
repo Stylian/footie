@@ -9,7 +9,10 @@ export default function GroupsMatches({year, round}) {
     if (days === null) {
         return (<PageLoader />)
     } else {
-        const dayKeys = Object.keys(days)
+        const dayKeys = Object.keys(days).filter((day) => Array.isArray(days[day]))
+        if (dayKeys.length === 0) {
+            return (<div></div>)
+        }
         const daysPerRow = round === 1 ? dayKeys.length : 2
         const rows = []
         for (let start = 0; start < dayKeys.length; start += daysPerRow) {

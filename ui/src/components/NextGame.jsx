@@ -52,11 +52,11 @@ export default function NextGame() {
         return (<div></div>)
     } else {
         return (
-            <Card style={{margin: 0, border: '1px solid rgba(0,0,0,0.25)', borderRadius: 12, overflow: 'hidden'}}>
+            <Card style={{margin: 0, border: '1px solid rgba(0,0,0,0.25)', flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0}}>
                 <CardHeader className="big_header" title={"upcoming game"} align={"center"}
                             titleTypographyProps={{variant: 'h7'}}
                 />
-                <CardContent>
+                <CardContent style={{flex: 1, minHeight: 0}}>
                     <table className="table" align={"center"}>
                         <TableRow>
                             <TableCell align="right">
@@ -108,7 +108,7 @@ export default function NextGame() {
                         <TableRow>
                             <TableCell colSpan={3}>
                                 <Grid container spacing={1}>
-                                    <Grid item sm={6}>
+                                    <Grid item sm={6} style={{minHeight: 160, maxHeight: 160}}>
                                         <Radar
                                             data={{
                                                 labels: [
@@ -156,7 +156,7 @@ export default function NextGame() {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item sm={6}>
+                                    <Grid item sm={6} style={{minHeight: 160, maxHeight: 160}}>
                                         <Radar
                                             data={{
                                                 labels: [
