@@ -398,7 +398,7 @@ export default function Team() {
                                             <CardHeader className="big_header" title={"last 5 games"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
-                                            <CardContent style={{minHeight: 200, maxHeight: 200, paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
+                                            <CardContent style={{minHeight: 200, maxHeight: 200, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0}}>
                                                 <Grid container spacing={1}>
                                                     <Grid item sm={5}>
                                                         <table className="table" align={"center"}>
@@ -590,7 +590,7 @@ export default function Team() {
                                         </Grid>
                                     </Grid>
                                     <Grid item sm={12}>
-                                        <Card style={{margin: 10}}>
+                                        <Card style={{marginTop: 10}}>
                                             <CardHeader className="big_header" title={"season stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
@@ -598,16 +598,16 @@ export default function Team() {
                                                 <table className="table" align={"center"} style={{width: '100%'}}>
                                                     <TableHead>
                                                         <TableRow>
-                                                            <TableCell className="small_header">Season</TableCell>
-                                                            <TableCell className="small_header">Coeffs</TableCell>
-                                                            <TableCell className="small_header">Elo</TableCell>
-                                                            <TableCell className="small_header">GP</TableCell>
-                                                            <TableCell className="small_header">W</TableCell>
-                                                            <TableCell className="small_header">D</TableCell>
-                                                            <TableCell className="small_header">L</TableCell>
-                                                            <TableCell className="small_header">GS</TableCell>
-                                                            <TableCell className="small_header">GC</TableCell>
-                                                            <TableCell className="small_header">+/-</TableCell>
+                                                            <TableCell className="small_header" align="right">Season</TableCell>
+                                                            <TableCell className="small_header" align="right">Coeffs</TableCell>
+                                                            <TableCell className="small_header" align="right">Elo</TableCell>
+                                                            <TableCell className="small_header" align="right">GP</TableCell>
+                                                            <TableCell className="small_header" align="right">W</TableCell>
+                                                            <TableCell className="small_header" align="right">D</TableCell>
+                                                            <TableCell className="small_header" align="right">L</TableCell>
+                                                            <TableCell className="small_header" align="right">GS</TableCell>
+                                                            <TableCell className="small_header" align="right">GC</TableCell>
+                                                            <TableCell className="small_header" align="right">+/-</TableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
