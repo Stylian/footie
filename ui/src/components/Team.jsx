@@ -8,7 +8,8 @@ import {
     TableBody,
     TableCell,
     TableHead,
-    TableRow
+    TableRow,
+    Tooltip
 } from "@material-ui/core"
 import LeagueToolbar from "./LeagueToolbar"
 
@@ -22,15 +23,41 @@ import playeroftheyear from "../icons/playeroftheyear.png"
 import {useParams} from "react-router"
 import {useDataLoader} from "../DataLoaderManager"
 import PageLoader from "../PageLoader";
+import {useLayoutEffect, useRef, useState} from "react";
 
 export default function Team() {
     const {teamId} = useParams()
 
     const team = useDataLoader("/rest/teams/" + teamId)
     const gameStats = useDataLoader("/rest/history/statistics/teams/" + teamId)
+    const overviewCardRef = useRef(null)
+    const trophiesCardRef = useRef(null)
+    const [playersHeight, setPlayersHeight] = useState(null)
     const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
     const goToSeason = (event) => window.location.href = "/season/" + event.currentTarget.dataset.season
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
+
+    useLayoutEffect(() => {
+        const updatePlayersHeight = () => {
+            if (overviewCardRef.current && trophiesCardRef.current) {
+                const top = overviewCardRef.current.getBoundingClientRect().top
+                const bottom = trophiesCardRef.current.getBoundingClientRect().bottom
+                setPlayersHeight(bottom - top)
+            }
+        }
+        updatePlayersHeight()
+        window.addEventListener("resize", updatePlayersHeight)
+        let observer
+        if (typeof ResizeObserver !== "undefined") {
+            observer = new ResizeObserver(updatePlayersHeight)
+            if (overviewCardRef.current) observer.observe(overviewCardRef.current)
+            if (trophiesCardRef.current) observer.observe(trophiesCardRef.current)
+        }
+        return () => {
+            window.removeEventListener("resize", updatePlayersHeight)
+            if (observer) observer.disconnect()
+        }
+    }, [team, gameStats])
 
     if (team === null || gameStats === null) {
         return (<PageLoader />)
@@ -466,7 +493,7 @@ export default function Team() {
                                              <Grid item sm={6}>
                                                  <Grid container spacing={1}>
                                                     <Grid item sm={12}>
-                                                        <Card style={{marginTop: 10}}>
+                                                        <Card ref={overviewCardRef} style={{marginTop: 10}}>
                                                             <CardHeader className="big_header" title={"team overview"} align={"center"}
                                                                         titleTypographyProps={{variant: 'h7'}}
                                                             />
@@ -518,31 +545,24 @@ export default function Team() {
                                                         </Card>
                                                     </Grid>
                                                     <Grid item sm={12}>
-                                                        <Card style={{marginTop: 10}}>
+                                                        <Card ref={trophiesCardRef} style={{marginTop: 10}}>
                                                             <CardHeader className="big_header" title={"trophies"} align={"center"}
                                                                         titleTypographyProps={{variant: 'h7'}}
                                                             />
                                                             <CardContent>
                                                                 {team.trophies.length > 0 ? (
-                                                                    <table className="table" align={"center"}>
+                                                                    <Box style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10}}>
                                                                         {team.trophies.map((trophy, index) => {
                                                                             return (
-                                                                                <TableRow>
-                                                                                    <TableCell align="right">
-                                                                                        {trophy.type == "W" ?
-                                                                                            (<img src={goldmedal}
-                                                                                                  title={"1st place"}/>) :
-                                                                                            (<img src={silvermedal}
-                                                                                                  title={"2nd place"}/>)}
-                                                                                    </TableCell>
-                                                                                    <TableCell
-                                                                                        onClick={goToSeason}
-                                                                                        data-season={trophy.seasonNum}
-                                                                                        align="right">{"Season " + trophy.seasonNum}</TableCell>
-                                                                                </TableRow>
+                                                                                <Tooltip key={index} title={"Season " + trophy.seasonNum} arrow placement="top">
+                                                                                    <img src={trophy.type == "W" ? goldmedal : silvermedal}
+                                                                                         onClick={goToSeason}
+                                                                                         data-season={trophy.seasonNum}
+                                                                                         style={{cursor: 'pointer', width: 24, height: 24}}/>
+                                                                                </Tooltip>
                                                                             )
                                                                         })}
-                                                                    </table>
+                                                                    </Box>
                                                                 ) : (
                                                                     <i>nothing in the trophies case</i>
                                                                 )}
@@ -552,17 +572,17 @@ export default function Team() {
                                                 </Grid>
                                              </Grid>
                                             <Grid item sm={6}>
-                                                <Card style={{marginTop: 10}}>
+                                                <Card style={{marginTop: 10, height: playersHeight || '50vh', display: 'flex', flexDirection: 'column'}}>
                                                     <CardHeader className="big_header" title={"players"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />
-                                                    <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
+                                                    <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'auto'}}>
                                                         <table className="table" align={"center"} style={{width: '100%'}}>
-                                                            <TableHead>
+                                                            <TableHead style={{position: 'sticky', top: 0, zIndex: 1}}>
                                                                 <TableRow>
-                                                                    <TableCell className="small_header" style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
-                                                                    <TableCell className="small_header"><img src={playeroftheyear} title={"player of the year"}/></TableCell>
-                                                                    <TableCell className="small_header"> <img src={dreamteam}
+                                                                    <TableCell className="small_header" align="right" style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
+                                                                    <TableCell className="small_header" align="right"><img src={playeroftheyear} title={"player of the year"}/></TableCell>
+                                                                    <TableCell className="small_header" align="right"> <img src={dreamteam}
                                                                                      title={"selected in a dream team"}/></TableCell>
                                                                 </TableRow>
                                                             </TableHead>
@@ -590,13 +610,13 @@ export default function Team() {
                                         </Grid>
                                     </Grid>
                                     <Grid item sm={12}>
-                                        <Card style={{marginTop: 10}}>
+                                        <Card style={{marginTop: 10, height: '50vh', display: 'flex', flexDirection: 'column'}}>
                                             <CardHeader className="big_header" title={"season stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
-                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
+                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'auto'}}>
                                                 <table className="table" align={"center"} style={{width: '100%'}}>
-                                                    <TableHead>
+                                                    <TableHead style={{position: 'sticky', top: 0, zIndex: 1}}>
                                                         <TableRow>
                                                             <TableCell className="small_header" align="right">Season</TableCell>
                                                             <TableCell className="small_header" align="right">Coeffs</TableCell>
