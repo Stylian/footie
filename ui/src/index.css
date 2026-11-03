@@ -78,6 +78,10 @@ table {
   font-weight: bold !important;
 }
 
+.total_row .MuiTableCell-root {
+  border-bottom: 2px solid #1f6d93 !important;
+}
+
 .tree_team {
   min-width: 100px !important;
   height: 20px !important;

@@ -32,32 +32,41 @@ export default function Team() {
     const gameStats = useDataLoader("/rest/history/statistics/teams/" + teamId)
     const overviewCardRef = useRef(null)
     const trophiesCardRef = useRef(null)
+    const statisticsCardRef = useRef(null)
+    const seasonStatsCardRef = useRef(null)
     const [playersHeight, setPlayersHeight] = useState(null)
+    const [seasonStatsHeight, setSeasonStatsHeight] = useState(null)
     const goToPlayer = (event) => window.location.href = "/players/" + event.currentTarget.dataset.playerid
     const goToSeason = (event) => window.location.href = "/season/" + event.currentTarget.dataset.season
     const goToTeam = (event) => window.location.href = "/teams/" + event.currentTarget.dataset.teamid
 
     useLayoutEffect(() => {
-        const updatePlayersHeight = () => {
+        const updateHeights = () => {
             if (overviewCardRef.current && trophiesCardRef.current) {
                 const top = overviewCardRef.current.getBoundingClientRect().top
                 const bottom = trophiesCardRef.current.getBoundingClientRect().bottom
                 setPlayersHeight(bottom - top)
             }
+            if (statisticsCardRef.current && seasonStatsCardRef.current) {
+                const bottom = statisticsCardRef.current.getBoundingClientRect().bottom
+                const top = seasonStatsCardRef.current.getBoundingClientRect().top
+                setSeasonStatsHeight(Math.max(0, bottom - top))
+            }
         }
-        updatePlayersHeight()
-        window.addEventListener("resize", updatePlayersHeight)
+        updateHeights()
+        window.addEventListener("resize", updateHeights)
         let observer
         if (typeof ResizeObserver !== "undefined") {
-            observer = new ResizeObserver(updatePlayersHeight)
+            observer = new ResizeObserver(updateHeights)
             if (overviewCardRef.current) observer.observe(overviewCardRef.current)
             if (trophiesCardRef.current) observer.observe(trophiesCardRef.current)
+            if (statisticsCardRef.current) observer.observe(statisticsCardRef.current)
         }
         return () => {
-            window.removeEventListener("resize", updatePlayersHeight)
+            window.removeEventListener("resize", updateHeights)
             if (observer) observer.disconnect()
         }
-    }, [team, gameStats])
+    }, [team, gameStats, playersHeight])
 
     if (team === null || gameStats === null) {
         return (<PageLoader />)
@@ -79,7 +88,7 @@ export default function Team() {
                             <Grid item sm={3}>
                                 <Grid container spacing={1}>
                                     <Grid item sm={12}>
-                                        <Card style={{margin: 10}}>
+                                        <Card ref={statisticsCardRef} style={{margin: 10}}>
                                             <CardHeader className="big_header" title={"statistics"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
@@ -561,7 +570,7 @@ export default function Team() {
                                                                                          style={{cursor: 'pointer', width: 24, height: 24}}/>
                                                                                 </Tooltip>
                                                                             )
-                                                                        })}
+                                                        })}
                                                                     </Box>
                                                                 ) : (
                                                                     <i>nothing in the trophies case</i>
@@ -576,7 +585,7 @@ export default function Team() {
                                                     <CardHeader className="big_header" title={"players"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />
-                                                    <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'auto'}}>
+                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'auto'}}>
                                                         <table className="table" align={"center"} style={{width: '100%'}}>
                                                             <TableHead style={{position: 'sticky', top: 0, zIndex: 1}}>
                                                                 <TableRow>
@@ -610,11 +619,11 @@ export default function Team() {
                                         </Grid>
                                     </Grid>
                                     <Grid item sm={12}>
-                                        <Card style={{marginTop: 10, height: '50vh', display: 'flex', flexDirection: 'column'}}>
+                                        <Card ref={seasonStatsCardRef} style={{marginTop: 10, height: seasonStatsHeight || '50vh', display: 'flex', flexDirection: 'column'}}>
                                             <CardHeader className="big_header" title={"season stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
-                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'auto'}}>
+                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0, flex: 1, minHeight: 0, overflowY: 'scroll', overflowX: 'hidden', overscrollBehavior: 'contain'}}>
                                                 <table className="table" align={"center"} style={{width: '100%'}}>
                                                     <TableHead style={{position: 'sticky', top: 0, zIndex: 1}}>
                                                         <TableRow>
@@ -631,6 +640,28 @@ export default function Team() {
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
+                                                        <TableRow className={"total_row"}>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>Total</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.points}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}></TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.matchesPlayed}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.wins}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.draws}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.losses}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalsScored}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalsConceded}</TableCell>
+                                                            <TableCell align="right"
+                                                                       className={"points_td"}>{team.completeStats.goalDifference}</TableCell>
+                                                        </TableRow>
                                                         {team.seasonsStats.map((seasonStats, index) => {
                                                             return seasonStats.matchesPlayed > 0 ? (
                                                                 <TableRow className={"teamClicker"}
@@ -676,29 +707,7 @@ export default function Team() {
                                                                     <TableCell></TableCell>
                                                                 </TableRow>
                                                             )
-                                                        })}
-                                                        <TableRow>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>Total</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.points}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}></TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.matchesPlayed}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.wins}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.draws}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.losses}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.goalsScored}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.goalsConceded}</TableCell>
-                                                            <TableCell align="right"
-                                                                       className={"points_td"}>{team.completeStats.goalDifference}</TableCell>
-                                                        </TableRow>
+                                                        }).reverse()}
                                                     </TableBody>
                                                 </table>
                                             </CardContent>
