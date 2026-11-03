@@ -398,7 +398,7 @@ export default function Team() {
                                             <CardHeader className="big_header" title={"last 5 games"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
-                                            <CardContent style={{minHeight: 200, maxHeight: 200}}>
+                                            <CardContent style={{minHeight: 200, maxHeight: 200, paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
                                                 <Grid container spacing={1}>
                                                     <Grid item sm={5}>
                                                         <table className="table" align={"center"}>
@@ -556,8 +556,8 @@ export default function Team() {
                                                     <CardHeader className="big_header" title={"players"} align={"center"}
                                                                 titleTypographyProps={{variant: 'h7'}}
                                                     />
-                                                    <CardContent>
-                                                        <table className="table" align={"center"}>
+                                                    <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
+                                                        <table className="table" align={"center"} style={{width: '100%'}}>
                                                             <TableHead>
                                                                 <TableRow>
                                                                     <TableCell className="small_header" style={{minWidth: 100, maxWidth: 100}}>Player</TableCell>
@@ -594,8 +594,8 @@ export default function Team() {
                                             <CardHeader className="big_header" title={"season stats"} align={"center"}
                                                         titleTypographyProps={{variant: 'h7'}}
                                             />
-                                            <CardContent>
-                                                <table className="table" align={"center"}>
+                                            <CardContent style={{paddingTop: 0, paddingLeft: 0, paddingRight: 0}}>
+                                                <table className="table" align={"center"} style={{width: '100%'}}>
                                                     <TableHead>
                                                         <TableRow>
                                                             <TableCell className="small_header">Season</TableCell>
