@@ -24,6 +24,7 @@ export default function NewSeasonDialog({open, onClose}) {
     const [newTeamName, setNewTeamName] = useState("")
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [locked, setLocked] = useState({})
 
     const loadData = (preselectId, preserveSelections = false) => {
         Promise.all([
@@ -56,7 +57,55 @@ export default function NewSeasonDialog({open, onClose}) {
         }
     }, [open])
 
+    useEffect(() => {
+        if (!open || loading) {
+            return
+        }
+
+        const teamIds = teams
+            .filter(team => team.active && selected[team.id])
+            .map(team => team.id)
+
+        if (teamIds.length < MIN_TEAMS) {
+            setLocked({})
+            return
+        }
+
+        let active = true
+        fetch("/rest/ops/season/direct_teams", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(teamIds)
+        })
+            .then(res => res.json())
+            .then((directIds) => {
+                if (!active) {
+                    return
+                }
+                const selectedIds = new Set(teamIds)
+                const next = {}
+                directIds.forEach(id => {
+                    if (selectedIds.has(id)) {
+                        next[id] = true
+                    }
+                })
+                setLocked(next)
+            })
+            .catch(() => {
+                if (active) {
+                    setLocked({})
+                }
+            })
+
+        return () => {
+            active = false
+        }
+    }, [open, loading, teams, selected])
+
     const toggleTeam = (teamId) => {
+        if (locked[teamId]) {
+            return
+        }
         setSelected(prev => ({...prev, [teamId]: !prev[teamId]}))
     }
 
@@ -79,6 +128,9 @@ export default function NewSeasonDialog({open, onClose}) {
     }
 
     const handleRemoveTeam = (team) => {
+        if (locked[team.id]) {
+            return
+        }
         if (!window.confirm("remove team '" + team.name + "' ?")) {
             return
         }
@@ -121,9 +173,17 @@ export default function NewSeasonDialog({open, onClose}) {
     const toggleAll = () => {
         setSelected(prev => {
             const next = {...prev}
-            let count = 0
+            let count = activeTeams.filter(team => prev[team.id]).length
             activeTeams.forEach(team => {
-                const check = !allSelected && count < MAX_TEAMS
+                if (locked[team.id]) {
+                    next[team.id] = true
+                    return
+                }
+                if (allSelected) {
+                    next[team.id] = false
+                    return
+                }
+                const check = count < MAX_TEAMS
                 next[team.id] = check
                 if (check) {
                     count++
@@ -173,13 +233,19 @@ export default function NewSeasonDialog({open, onClose}) {
                                         control={
                                             <Checkbox
                                                 checked={!!selected[team.id]}
-                                                disabled={!team.active || (!selected[team.id] && !canSelectMore)}
+                                                disabled={!team.active || locked[team.id] || (!selected[team.id] && !canSelectMore)}
                                                 onChange={() => toggleTeam(team.id)}
                                             />
                                         }
-                                        label={team.active ? team.name : team.name + " (removed)"}
+                                        label={
+                                            <span style={{color: locked[team.id] ? '#9e9e9e' : undefined}}>
+                                                {team.active ? team.name : team.name + " (removed)"}
+                                            </span>
+                                        }
                                     />
-                                    <IconButton size="small" onClick={() => handleRemoveTeam(team)} title="remove team">
+                                    <IconButton size="small" onClick={() => handleRemoveTeam(team)}
+                                        disabled={!!locked[team.id]}
+                                        title={locked[team.id] ? "team advances directly to a later round" : "remove team"}>
                                         <DeleteIcon fontSize="small"/>
                                     </IconButton>
                                 </div>

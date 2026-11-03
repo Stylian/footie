@@ -60,7 +60,6 @@ public class RestOperationsController {
 
     @GetMapping("/season/previous_teams")
     public List<Integer> getPreviousSeasonTeams() {
-
         int numberOfSeasons = serviceUtils.getNumberOfSeasons();
         if (numberOfSeasons == 0) {
             return new ArrayList<>();
@@ -72,6 +71,11 @@ public class RestOperationsController {
             teamIds.add(team.getId());
         }
         return teamIds;
+    }
+
+    @PostMapping("/season/direct_teams")
+    public List<Integer> getTeamsAdvancingDirectly(@RequestBody(required = false) List<Integer> teamIds) {
+        return operationsService.previewTeamsAdvancingDirectly(teamIds);
     }
 
     // to remove

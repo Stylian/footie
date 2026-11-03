@@ -138,8 +138,10 @@ public class SeasonService {
      * returns a map with lists of teams seeded per phase
      */
     public Map<Seed, List<Team>> checkWhereTeamsAreSeededForASeason(Season season) {
+        return checkWhereTeamsAreSeededForASeason(season.getSeasonYear(), season.getTeams());
+    }
 
-        List<Team> teams = season.getTeams();
+    public Map<Seed, List<Team>> checkWhereTeamsAreSeededForASeason(int seasonYear, List<Team> teams) {
 
         Map<Seed, List<Team>> map = new HashMap<>();
 
@@ -151,7 +153,7 @@ public class SeasonService {
         List<Team> quals2Teams = new ArrayList<>();
         List<Team> preliminaries = new ArrayList<>();
 
-        if (season.getSeasonYear() == 1) {
+        if (seasonYear == 1) {
 
             // 2nd round needs 24 teams so
             int diff = teamsClone.size() - 24;
@@ -168,9 +170,9 @@ public class SeasonService {
 
         } else {
 
-            Season previousSeason = serviceUtils.loadSeason(season.getSeasonYear() - 1);
+            Season previousSeason = serviceUtils.loadSeason(seasonYear - 1);
 
-            if (season.getSeasonYear() > 1) {
+            if (seasonYear > 1) {
                 teamsClone.sort(new CoefficientsRangeOrdering(serviceUtils.loadAllSeasons(), previousSeason.getSeasonYear()));
             }
 
@@ -232,6 +234,42 @@ public class SeasonService {
         map.put(Seed.TO_PRELIMINARY, preliminaries);
 
         return map;
+    }
+
+    /**
+     * returns the ids of the selected teams that would advance directly to a round after
+     * the preliminary (quals 1, quals 2 or the groups round). those teams cannot be
+     * unselected when starting a new season.
+     */
+    public List<Integer> previewTeamsAdvancingDirectly(List<Integer> teamIds) {
+        if (teamIds == null || teamIds.size() < 24 || teamIds.size() > 48) {
+            return Collections.emptyList();
+        }
+
+        Set<Integer> selectedIds = new HashSet<>(teamIds);
+        List<Team> teams = new ArrayList<>();
+        for (Team team : serviceUtils.loadTeams()) {
+            if (selectedIds.contains(team.getId())) {
+                teams.add(team);
+            }
+        }
+
+        Map<Seed, List<Team>> seeded = checkWhereTeamsAreSeededForASeason(
+                serviceUtils.getNumberOfSeasons() + 1, teams);
+
+        Set<Integer> directIds = new LinkedHashSet<>();
+        for (Map.Entry<Seed, List<Team>> entry : seeded.entrySet()) {
+            if (entry.getKey() == Seed.TO_PRELIMINARY) {
+                continue;
+            }
+            for (Team team : entry.getValue()) {
+                if (team != null) {
+                    directIds.add(team.getId());
+                }
+            }
+        }
+
+        return new ArrayList<>(directIds);
     }
 
     public Season endCurrentSeason() {

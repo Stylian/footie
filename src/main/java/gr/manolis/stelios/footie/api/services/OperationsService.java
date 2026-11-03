@@ -50,6 +50,10 @@ public class OperationsService {
 		return seasonService.setUpSeason();
 	}
 
+	public java.util.List<Integer> previewTeamsAdvancingDirectly(java.util.List<Integer> teamIds) {
+		return seasonService.previewTeamsAdvancingDirectly(teamIds);
+	}
+
 	public QualsRound seedQualsRound0() {
 		return qualsService.seedPreliminary();
 	}
